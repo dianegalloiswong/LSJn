@@ -143,7 +143,7 @@ let nth_imp_d k = List.nth (List.sort compare (all_imp_d ())) k
 
 
 let var_g () = 
-  if !details then
+  if !details || !aff_cmods then
     List.fold_left (fun l (i,a) ->
       if i<=s.n then match !sf.(a) with
 	| CVar x -> x::l
