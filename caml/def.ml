@@ -23,4 +23,9 @@ let classe = ref [|0|]
 let priorite = ref [|0|]
 
 
+(* affichage *)
+let details = ref false
+let aff_preuves = ref false
+let aff_cmods = ref false
+
 type logique = IL | CL

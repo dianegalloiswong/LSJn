@@ -1,0 +1,13 @@
+
+
+
+tiroirs :
+4 3, 4 4, 4 5 ok
+4 6 : IL long (~10s), CL trop long
+5 5 : trop long
+
+
+eq_boucle :
+20 : CL ~7s
+21 : CL trop long
+26 : IL ~10s

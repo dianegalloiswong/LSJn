@@ -122,9 +122,9 @@ let main logique formule =
 let test f =
   Format.printf "@.%s@." (Utilities.formule_to_string f);
   Format.printf "IL: ";
-  print_rep_details (main IL f);
+  print_rep (main IL f);
   Format.printf "CL: ";
-  print_rep_details (main CL f);
+  print_rep (main CL f);
   Format.printf "@."
 
 

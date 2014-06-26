@@ -142,12 +142,15 @@ let nth_imp_d k = List.nth (List.sort compare (all_imp_d ())) k
 
 
 
-let var_g () = List.fold_left (fun l (i,a) ->
-  if i<=s.n then match !sf.(a) with
-    | CVar x -> x::l
-    | _ -> l
-  else l
-) [] s.g.(6)
+let var_g () = 
+  if !details then
+    List.fold_left (fun l (i,a) ->
+      if i<=s.n then match !sf.(a) with
+	| CVar x -> x::l
+	| _ -> l
+      else l
+    ) [] s.g.(6)
+  else []
 
 
 

@@ -56,17 +56,18 @@ let print_modele_arbre a =
   in aux [] a
 
 
-let print_rep_details rep =
+let print_rep rep =
   if vrai rep then
     (Format.printf "vrai@.";
-     print_preuve (preuve rep))
+     if !details || !aff_preuves then print_preuve (preuve rep))
   else
     (Format.printf "faux@.";
-     print_modele_arbre (cmod rep))
+     if !details || !aff_cmods then print_modele_arbre (cmod rep))
 
-
+(*
 let print_rep rep =
   if vrai rep then
     Format.printf "vrai@."
   else
     Format.printf "faux@."
+*)
