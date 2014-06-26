@@ -1,5 +1,6 @@
 type t = (int*int) list
 
+let empty = []
 
 let rec add c = function
   | [] -> [c]
@@ -35,3 +36,16 @@ let rec filter_eq n = function
   | h::t when (fst h)<n -> []
   | h::t when (fst h)=n -> h::(filter_eq n t)
   | _::t -> filter_eq n t
+
+
+let rec fold_inf n f init = function
+  | [] -> init
+  | h::t when (fst h)<=n -> fold_inf n f (f init h) t
+  | _::t -> fold_inf n f init t
+(*
+let rec fold_eq n f init = function
+  | [] -> init
+  | h::t when (fst h)<n -> init
+  | h::t when (fst h)=n -> fold_eq n f (f init h) t
+  | _::t -> fold_eq n f init t
+*)
