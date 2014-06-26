@@ -1,0 +1,12 @@
+*.cm[io]
+caml/_build/
+*.aux
+*.log
+*.toc
+*.byte
+*.native
+*~
+*.synctex.gz
+*.DS_store
+*.bbl
+*.blg

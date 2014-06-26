@@ -1,0 +1,559 @@
+\documentclass[11pt, openany]{article}
+%\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
+\usepackage[frenchb]{babel}
+%\usepackage{slashbox}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage[latin1]{inputenc}
+\usepackage[OT1]{fontenc}
+%\usepackage{fancybox}
+\usepackage{a4wide}
+%\usepackage{fancyvrb}
+%\usepackage{pgf,tikz}
+%\usetikzlibrary{arrows}
+\usepackage{amsthm} %pour les théorèmes sans numéro
+
+
+\newcounter{moncompteur}
+\newtheorem{q}[moncompteur]{ \textbf{Question}}{}
+\newtheorem{prop}[moncompteur]{ \textbf{Proposition}}{}
+\newtheorem{df}[moncompteur]{ \textbf{Définition}}{}
+\newtheorem{rem}[moncompteur]{ \textbf{Remarque}}{}
+\newtheorem{theo}[moncompteur]{ \textbf{Théorème}}{}
+\newtheorem*{theo*}{ \textbf{Théorème}}{}
+\newtheorem{conj}[moncompteur]{ \textbf{Conjecture}}{}
+\newtheorem{cor}[moncompteur]{ \textbf{Corollaire}}{}
+\newtheorem{lm}[moncompteur]{ \textbf{Lemme}}{}
+\newtheorem*{lm*}{ \textbf{Lemme}}{}
+%\newtheorem{nota}[moncompteur]{ \textbf{Notation}}{}
+%\newtheorem{conv}[moncompteur]{ \textbf{Convention}}{}
+\newtheorem{exa}[moncompteur]{ \textbf{Exemple}}{}
+\newtheorem{ex}[moncompteur]{ \textbf{Exercice}}{}
+%\newtheorem{app}[moncompteur]{ \textbf{Application}}{}
+%\newtheorem{prog}[moncompteur]{ \textbf{Algorithme}}{}
+%\newtheorem{hyp}[moncompteur]{ \textbf{Hypothèse}}{}
+\newenvironment{dem}{\noindent\textbf{Preuve}\\}{\flushright$\blacksquare$\\}
+%\newcommand{\cg }{[\kern-0.15em [}
+%\newcommand{\cd}{]\kern-0.15em]}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\card}{\mathrm{card}}
+
+%TIPE
+%\usepackage{multicol}
+%\usepackage[cm]{fullpage}
+%\usepackage{xcolor}
+%\newcommand{\A}{A^*}
+%\newcommand{\Aa}{A^+}
+%\newcommand{\ouv}{( \thickspace}
+%\newcommand{\fer}{\thickspace )}
+%\newcommand{\KAp}{K \langle A \rangle}
+%\newcommand{\KAs}{K \langle \langle A \rangle \rangle}
+%\newcommand{\sig}{\boldsymbol\sigma}
+%\newcommand{\pig}{\boldsymbol\pi}
+%\newcommand{\Sig}{\boldsymbol\sigma^{*}}
+%\newcommand{\1}{\boldsymbol\varepsilon}
+%\newcommand{\epsi}{\varepsilon}
+%\newcommand{\lie}{\mathfrak{L}}
+%\newcommand{\bwt}{\textnormal{bwt}}
+%\newcommand{\bwts}{\textnormal{bwts}}
+%\newcommand{\esp}{\textvisiblespace}
+%\newcommand{\demo}{\noindent\textit{Démonstration} }
+
+
+%stage
+\newcommand{\s}{\sigma}
+\newcommand{\Sig}{\mathfrak S}
+\newcommand{\G}{\Gamma}
+\newcommand{\D}{\Delta}
+\newcommand{\Th}{\Theta}
+\newcommand{\Gp}{\Gamma}
+\newcommand{\Dp}{\Delta}
+\newcommand{\Gt}{\widetilde\Gamma}
+\newcommand{\Dt}{\widetilde\Delta}
+\newcommand{\LSJ}{$\mathbf{LSJ}$}
+\newcommand{\LSJn}{$\mathbf{LSJ'}$}
+\newcommand{\surj}{
+%\mathrm{surj}
+%\boldsymbol
+\Phi
+}
+\newcommand{\To}{\Rightarrow}
+\newcommand{\forget}{\mathsf{forget}}
+
+\usepackage{bussproofs}
+\EnableBpAbbreviations
+%\newcommand{\ze}{\AxiomC}
+%\newcommand{\rien}{\AxiomC{}}
+%\newcommand{\un}{\UnaryInfC}
+%\newcommand{\bi}{\BinaryInfC}
+%\newcommand{\tr}{\TrinaryInfC}
+%\newcommand{\lab}{\RightLabel}
+%\newcommand{\fin}{\DisplayProof}
+
+
+\usepackage{mathrsfs}
+
+
+%\AxiomC{form } \UnaryInfC{form } \BinaryInfC{form } \TrinaryInfC{form }
+
+\begin{document}
+\renewcommand{\labelitemi}{$\diamond$}
+\vspace{2cm}~~\\
+
+\section*{}
+
+
+On utilise les définitions et notations de l'article% \cite{LSJ}
+.
+
+\
+
+Le système \LSJn\ a pour objectif de faire les mêmes calculs que \LSJ, mais en manipulant des séquents qui contiennent un peu plus d'information, afin de pouvoir faire le ``back-tracking'' nécessaire à l'algorithme de \LSJ\ en n'ayant à tout moment en mémoire qu'un seul séquent.
+
+Pour cela, on veut que les séquents de \LSJn\ représentent de manière exhaustive et pertinente ceux de \LSJ\ : on montre qu'il existe une surjection de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ, telle qu'un séquent de \LSJn\ est prouvable dans \LSJn\ si, et seulement si, son image est prouvable dans \LSJ.
+
+%Pour cela, on définit des séquents de \LSJn, une application de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ dont on montrera qu'elle est surjective, et des règles de calcul.
+%Pour cela, en plus des séquents et règles du calcul \LSJn, on définit une application \emph{surj} de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ, dont on montrera qu'elle est surjective.
+
+
+
+
+\subsection*{Le calcul \LSJn}
+
+
+Un séquent de \LSJn\ est la donnée de deux multiensembles $\Gp$ et $\Dp$ de couples $entier : formule$, et d'un entier naturel $n$, tels que tous les entiers présents dans $\Gp$ sont $\leq n+1$ et tous ceux présents dans $\Dp$ sont $\leq n$ ; on écrit $\Gp \Rightarrow_{n} \Dp$.
+
+\
+
+Les règles du calcul \LSJn\ sont les suivantes (chacune correspond à une règle de \LSJ) :
+
+\
+
+\def\botL{
+	\AXC	{}
+	\RightLabel{$\bot L'$}
+	\UIC{$i:\bot, \Gp \To_{n} \Dp$}
+	\DP
+}
+\def\Id{
+	\AXC	{}
+	\RightLabel{$\mathrm{Id}'$}
+	\UIC{$i:A,\Gp \To_{n} n:A,\Dp$}
+	\DP
+}
+\def\etL{
+	\AXC{$i:A,i:B,\Gp \To_{n} \Dp$}
+	\RightLabel{$\land L'$}
+	\UIC{$i:A\land B,\Gp \To_{n} \Dp$}
+	\DP
+}
+\def\etR{
+	\AXC{$\Gp \To_{n} n:A,\Dp$}
+	\AXC{$\Gp \To_{n} n:B,\Dp$}
+	\RightLabel{$\land R'$}
+	\BIC{$\Gp \To_{n} n:A\land B,\Dp$}
+	\DP
+}
+\def\ouL{
+	\AXC{$i:A,\Gp \To_{n} \Dp$}
+	\AXC{$i:B,\Gp \To_{n} \Dp$}
+	\RightLabel{$\lor L'$}
+	\BIC{$i:A\lor B,\Gp \To_{n} \Dp$}
+	\DP
+}
+\def\ouR{
+	\AXC{$\Gp \To_{n} n:A,n:B,\Dp$}
+	\RightLabel{$\lor R'$}
+	\UIC{$\Gp \To_{n} n:A\lor B,\Dp$}
+	\DP
+}
+\def\impL{
+	\AXC{$i:B,\Gp \To_{n} \Dp$}
+	\AXC{$n+1:B,\Gp \To_{n} n:A,\Dp$}
+	\AXC{$n+2:B,\Gp \To_{n+1} n+1:A, \Dp$}
+	\RightLabel{$\to L'$}
+	\TIC{$i:A\to B,\Gp \To_{n} \Dp$}
+	\DP
+}
+\def\impR{
+	\AXC{$0:A,\Gp \To_{n} n:B,\Dp$}
+	\AXC{$0:A,\Gp \To_{n+1} n+1:B, \Dp$}
+	\RightLabel{$\to R'$}
+	\BIC{$\Gp \To_{n} n:A\to B,\Dp$}
+	\DP
+}
+
+\noindent \emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
+$$\begin{array}{cc}
+	\botL & \Id \\\\
+	\etL & \etR \\\\
+	\ouL & \ouR \\\\
+	\multicolumn{2}{c}{\impL}\\\\
+	\multicolumn{2}{c}{\impR}
+\end{array}$$
+
+
+
+
+
+\subsection*{\'Equivalence avec \LSJ}
+
+
+On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquents de \LSJn.
+
+Soit $\sigma\in\Sig$, on note $\vdash\sigma$ si $\sigma$ est prouvable dans \LSJ\ ; soit $\sigma'\in\Sig'$, on note $\vdash'\sigma'$ si $\sigma'$ est prouvable dans \LSJn.
+
+\
+
+Soit $M$ un multiensemble de couples $entier:formule$, l'entier d'un couple étant appelé son indice. On note $M_{k}$ le multiensemble obtenu à partir de $M$ en ne gardant que les couples d'indice $k$, et $M_{\leq k}$ celui obtenu en ne gardant que les couples d'indice inférieur à $k$. On note $\forget(M)$ le multiensemble de formules obtenu en oubliant l'indice et ne gardant que la formule de chaque couple de $M$.
+
+On définit l'application $\surj$ de %l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ,
+$\Sig'$ dans $\Sig$, qui à $\G' \To_{n} \D'$ associe $\Th\, ;\G \To \D$ %\quad 
+
+\noindent
+où :\;
+$\left\{
+\begin{array}{l}
+%	\Th = \{ A \:|\: n+1:A \in \G'\} \\
+%	\G = \{ A \:|\: \exists i\leq n,\ i:A \in \G'\} \\
+%	\D = \{ A \:|\: n:A \in \D'\}
+	\Th = \forget (\G'_{n+1}) \\
+	\G = \forget (\G'_{\leq n}) \\
+	\D = \forget (\D'_{n})
+\end{array}
+\right.$.
+
+C'est une application surjective : en effet tout séquent $\Th \,;\G\To\D$ de \LSJ\ a au moins pour antécédent le séquent $\G' \To_{0} \D'$, 
+%avec $\G' = \{ 0:A \:|\: A \in \G\} \cup \{ 1:A \:|\: A \in \Th\}$ et $\D' = \{ 0:A \:|\: A \in \D\}$.
+où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de $\G$ en rempla\c cant chaque occurrence d'une formule $A$ par une occurrence du couple $0:A$) avec $1:\Th$, et où $\D'=0:\D$.
+
+\
+
+
+
+\def\instance{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+}
+\def\instancep{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s'_{1}$}
+	\AXC	{...}
+	\AXC	{$\s'_{p}$}
+	\RightLabel{$(\mathcal R')$}
+	\TIC{$\s'$}
+	\DP
+}
+\def\instanceAx{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{$(\mathcal A)$}
+	\UIC{$\s$}
+	\DP
+}
+\def\instanceAxp{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{$(\mathcal A')$}
+	\UIC{$\s'$}
+	\DP
+}
+\def\instanceId{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{(Id)}
+	\UIC{$\s$}
+	\DP
+}
+\def\instanceIdp{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{(Id$'$)}
+	\UIC{$\s'$}
+	\DP
+}
+\def\instanceetR{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{$\s_{2}$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\s$}
+	\DP
+}
+\def\instanceetRp{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s'_{1}$}
+	\AXC	{$\s'_{2}$}
+	\RightLabel{($\land R'$)}
+	\BIC{$\s'$}
+	\DP
+}
+\def\instanceimpL{
+\def\defaultHypSeparation{\hskip .in}
+	\AXC	{$\s_{1}$}
+	\AXC	{$\s_{2}$}
+	\AXC	{$\s_{3}$}
+	\RightLabel{($\to L$)}
+	\TIC{$\s$}
+	\DP
+}
+\def\instanceimpLp{
+\def\defaultHypSeparation{\hskip .in}
+	\AXC	{$\s'_{1}$}
+	\AXC	{$\s'_{2}$}
+	\AXC	{$\s'_{3}$}
+	\RightLabel{($\to L'$)}
+	\TIC{$\s'$}
+	\DP
+}
+
+
+Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instance\ et \instancep\ des instances de ces règles.
+
+
+\begin{lm*}
+Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$ et soit $\mathcal R$ une règle de \LSJ.
+
+1) Si \instance alors il existe $\s'_{1}$, ... , $\s'_{p}$ tels que pour tout $k$, $\s_{k} = \surj (\s'_{k})$, et \instancep.
+
+2) Si \instancep, posons pour tout $k$, $\s_{k} = \surj (\s'_{k})$, alors \instance.
+
+\noindent
+Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulement si \instanceAxp.
+\end{lm*}
+
+\begin{dem}
+On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id, $\land R$ et $\to L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
+
+\
+
+%\noindent-\quad 
+\noindent Id :\quad On a\instanceId\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceIdp.
+
+\
+
+\noindent $\land R$ :	\quad
+
+1) Si \instanceetR\ alors il existe des formules $A$ et $B$ et un multiensemble $\Dt$ tels que $\D = A \land B, \Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$.
+ Posons $\Dt' = \D' - n:A \land B$ le multiensemble obtenu en retirant une seule occurrence de $n:A\land B$ à $\D'$ (qui contient cet élément parce que $\D$ contient $A\land B$ et par définition de $\surj$),
+ et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$.
+ Alors on a bien $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ (en remarquant que 
+ %$\Dt = \{ C \:|\: n:C \in \Dt'\}$
+$\Dt = \forget (\Dt'_{n})$
+), et \instanceetRp (en remarquant que $\s' = \G' \To_{n} n:A \land B,\Dt'$).
+
+2) Si \instanceetRp\ alors il existe $A$, $B$ et $\Dt'$ tels que $\D' = n:A \land B, \Dt'$ et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$ ; 
+ on pose $\Dt = \D - A \land B$ le multiensemble obtenu en retirant une seule occurrence de $A\land B$ à $\D$,
+ et $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ ; on obtient $\s = \Th\, ;\G \To A\land B,\Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$\; d'où\instanceetR.
+
+\
+
+\noindent $\to L$ :	\quad
+
+1) Si \instanceimpL\ alors il existe $A$, $B$ et $\Gt$ tels que $\G=A\to B,\Gt$ et $\s_{1} = \Th\, ;B,\Gt \To \D$ et $\s_{2} = B,\Th\, ;\Gt \To A,\D$ et $\s_{3} = B \,; \Th,\Gt \To A$ ; et il existe $i\leq n$ tel que $i:A\to B\in\G'$ ;
+ on pose $\Gt' = \G' - i:A\to B$ (on retire une seule occurrence de $i:A\to B$ de $\G'$) et $\s'_{1} = i:B,\Gt' \To_{n} \D'$ et $\s'_{2} = n+1:B,\Gt' \To_{n} n:A,\D'$ et $\s'_{3} = n+2:B,\Gt' \To_{n+1} n+1:A, \D'$ et on vérifie que cela convient.
+
+2) Si \instanceimpLp\ alors il existe $i$, $A$, $B$ et $\Gt'$ tels que $\G'=i:A\to B,\Gt'$ et $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ ont la forme donnée ci-dessus ; on pose $\Gt = \G - A\to B$ (on retire une seule occurrence de $A\to B$ de $\G$), alors les images $\s_{1}$, $\s_{2}$ et $\s_{3}$ par $\surj$ de $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ respectivement s'écrivent comme ci-dessus et donc \instanceimpL.
+\end{dem}
+
+
+
+\begin{theo*}
+Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$, alors $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
+%Soit $\sigma$ un séquent de \LSJ\ et $\sigma'$ un séquent de \LSJn\ tels que $\sigma=\surj(\sigma')$, alors $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
+\end{theo*}
+
+\begin{dem}
+Par récurrence sur la \emph{taille} de $\s\in\Sig$, c'est-à-dire la somme des tailles des formules des trois multiensembles apparaissant dans $\s$.
+
+\
+
+\noindent
+On initialise pour tout $\sigma = \Th\, ;\G \To \D$ tel que toutes les formules dans $\G$ et dans $\D$ sont atomiques : soit $\sigma' = \G' \To_{n} \D' \in\Sig'$ tel que $\sigma=\surj(\sigma')$. Alors toutes les formules associées à un $i \leq n$ dans $\G'$ et toutes les formules associées à $n$ dans $\D'$ sont aussi atomiques. En étudiant la forme des conclusions des règles non axiomatiques de \LSJ\ comme de \LSJn,
+on remarque que si $\s$ (resp. $\s'$) est la conclusion d'une règle de \LSJ\ (resp. \LSJn), alors la règle est un axiome. L'initialisation est donc un cas particulier de ce qui suit avec $p=0$ (ce qui entraîne qu'on n'utilise en fait pas l'hypothèse de récurrence).
+
+% on obtient que : $\vdash \s$ si et seulement si $\s$ est une conséquence directe d'un axiome de \LSJ, et $\vdash' \s'$ si et seulement si $\s'$ est une conséquence directe d'un axiome de \LSJn. Or d'après le lemme, pour $\mathcal A$ axiome de \LSJ, \instanceAx si et seulement si \instanceAxp. On en déduit $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
+
+\
+
+\noindent
+Soit $\s = \Th\, ;\G \To \D \in\Sig$. Soit $\sigma' = \G' \To_{n} \D' \in\Sig'$ tel que $\sigma=\surj(\sigma')$.
+
+On suppose $\vdash \s$. Alors il existe une règle $\mathcal R$ de \LSJ\ et $\s_{1}$, ... , $\s_{p} \in\Sig$ (avec éventuellement $p$ nul) tels que $\vdash \s_{k}$ pour tout $k$ et\instance. D'après le lemme, il existe $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\s_{k}=\surj(\s'_{k})$ pour tout $k$ et\instancep. Pour tout $k$, on applique l'hypothèse de récurrence à $\s_{k}$ qui a une \emph{taille} strictement inférieure à celle de $\s$, et on obtient $\vdash' \s'_{k}$. On en déduit $\vdash' \s'$.
+
+On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\vdash' \s'_{k}$ pour tout $k$ et\instancep. On pose $\s_{k}=\surj(\s'_{k})$ pour tout $k$. D'après le lemme on a \instance, en particulier on peut appliquer l'hypothèse de récurrence aux $\s_{k}$ donc $\vdash \s_{k}$ pour tout $k$, d'où $\vdash \s$.
+
+
+
+%Par récurrence sur la somme des tailles des formules des trois ensembles apparaissant dans $\sigma\in\Sig$, l'hypothèse de récurrence sur $\sigma$ étant : pour tout $\sigma'\in\Sig'$ tel que $\sigma=\surj(\sigma')$, on a $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
+%
+%\
+%
+%On initialise pour tout $\sigma = \Th\, ;\G \To \D$ tel que toutes les formules dans $\G$ et dans $\D$ sont atomiques : soit $\sigma' = \G' \To_{n} \D' \in\Sig'$ tel que $\sigma=\surj(\sigma')$.
+%
+%On suppose $\vdash \s$. Alors $\s$ est une conséquence directe d'un axiome $\bot L$ ou Id. Donc $\bot\in\G$, auquel cas il existe $i\leq n$ tel que $i:\bot\in\G'$ (par définition de \emph{surj}) et donc $\vdash' \s'$ par $\bot L'$, ou bien il existe une formule $A$ commune à $\G$ et $\D$, auquel cas $i:A\in\G'$ et $n:A\in\D'$ donc $\vdash' \s'$ par Id$'$.
+%
+%On suppose $\vdash' \s'$. Comme $\sigma=\surj(\sigma')$, toutes les formules associées à un $i \leq n$ dans $\G'$ et toutes les formules associées à $n$ dans $\D'$ sont atomiques. Or, on remarque que pour toute conclusion $G' \To_{m} D'$ de règle de \LSJn\ n'étant pas un axiome, il existe une formule composée $F$ telle que $\exists i\leq m,i:F\in G'$ ou bien $m:F\in D'$. Donc, $\s'$ est une conclusion de $\bot L'$ ou de Id$'$. Comme précédemment, on en déduit des propriétés sur $\G'$ et $\D'$, et donc sur $\G$ et $\D$, permettant d'affirmer que $\sigma$ est une conséquence de $\bot L$ ou Id.
+%
+%
+%\
+%
+%Soit maintenant $\s = \Th\, ;\G \To \D$ tel que $\G$ ou $\D$ contient une formule non atomique, et $\sigma' = \G' \To_{n} \D'$ tel que $\sigma=\surj(\sigma')$.
+%
+%On suppose $\vdash \s$. Si $\s$ est une conséquence directe d'un axiome, on a déjà vu qu'on en déduit $\vdash' \s'$. Sinon, il existe 
+
+
+
+
+\end{dem}
+
+
+
+
+
+\end{document}
+
+%%%%%%%%%%
+\
+
+\
+
+\
+
+\
+
+Un séquent de \LSJn\ est la donnée de deux ensembles $\G'$ et $\D'$ de couples ``entier : formule'', et d'un entier naturel $n$, tels que tous les entiers présents dans $\G'$ sont $\leq n+1$ et tous ceux présents dans $\D'$ sont $\leq n$ ; on écrit $\G' \Rightarrow_{n} \D'$.
+
+\
+
+On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquents de \LSJn.
+
+%On définit l'application suivante :
+%
+%$\surj:
+%\left\{
+%\begin{array}{cccl}
+%	\Sig'     & \to & \Sig & \\
+%	\G' \Rightarrow_{n} \D' & \mapsto & \Th\, ;\G \To \D&
+%		\text{tel que}
+%		\left\{
+%		\begin{array}{l}
+%			\Th = \{ A \:|\: n+1:A \in \G'\} \\
+%			\G = \{ A \:|\: \exists i\leq n,\ i:A \in \G'\} \\
+%			\D = \{ A \:|\: n:A \in \D'\}
+%		\end{array}
+%		\right.
+%\end{array}
+%\right.$
+%
+%\
+
+On définit l'application $\surj:\Sig'\to\Sig$, 
+
+\noindent qui à $\G' \To_{n} \D'$ associe $\Th\, ;\G \To \D$ \quad où \;
+$\left\{
+\begin{array}{l}
+	\Th = \{ A \:|\: n+1:A \in \G'\} \\
+	\G = \{ A \:|\: \exists i\leq n,\ i:A \in \G'\} \\
+	\D = \{ A \:|\: n:A \in \D'\}
+\end{array}
+\right.$.
+
+\noindent C'est une application surjective : en effet tout séquent $\Th \,;\G\To\D$ de \LSJ\ a au moins pour antécédent le séquent $\G' \To_{0} \D'$ avec $\G' = \{ 0:A \:|\: A \in \G\} \cup \{ 1:A \:|\: A \in \Th\}$ et $\D' = \{ 0:A \:|\: A \in \D\}$.
+
+Ainsi, les séquents de \LSJn\ représentent de fa\c con exhaustive ceux de \LSJ ; et pour que cette représentation soit pertinente on voudrait que les séquents prouvables de \LSJn\ soient exactement les $\sigma'$ tels que $\surj(\sigma')$ est prouvable dans \LSJ.
+
+\
+
+
+\end{document}
+
+
+\begin{prooftree}
+	\rien
+	\lab{$\bot L \quad (i\leq n)$}
+	\un{$\G,i:\bot \Rightarrow_{n} \D$}
+\end{prooftree}
+
+
+\begin{prooftree}
+	\rien
+	\lab{Id}
+	\un{$\G,i:A \Rightarrow_{n} n:A,\D$}
+\end{prooftree}
+
+
+\begin{prooftree}
+	\ze{$\G,i:A,i:B \Rightarrow_{n} \D$}
+	\lab{$\land L$}
+	\un{$\G,i:A\land B \Rightarrow_{n} \D$}
+\end{prooftree}
+
+
+\begin{prooftree}
+	\ze{$\G,i:A,i:B \Rightarrow_{n} \D$}
+	\lab{$\land L$}
+	\un{$\G,i:A\land B \Rightarrow_{n} \D$}
+\end{prooftree}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+ \AxiomC{}
+     \UnaryInfC{D}
+     \DisplayProof
+
+
+\begin{prooftree}
+     \ax{A}
+     \AxiomC{B}
+%\RightLabel{ici}
+     \BinaryInfC{D}
+     \end{prooftree}
+
+ \begin{prooftree}
+          \AxiomC{A}
+ \RightLabel{1}
+          \AxiomC{B}
+          \AxiomC{C}
+ \RightLabel{2}
+          \BinaryInfC{D}
+ \RightLabel{3}
+          \BinaryInfC{E}
+ \RightLabel{4}
+     \end{prooftree}
+
+
+
+
+
+
