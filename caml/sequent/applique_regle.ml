@@ -1,17 +1,19 @@
 open Def
-
+open Global_ref
 
 
 
   let etL_prem (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Et,a,b) ->
+    let n = Seq.n () in
     Seq.rm_g (i,h);
-    Seq.add_g (i,a);
-    Seq.add_g (i,b)
+    Seq.add_g (n,a);
+    Seq.add_g (n,b)
     | _ -> assert false
 
   let etL_rev (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Et,a,b) ->
-    Seq.rm_g (i,a);
-    Seq.rm_g (i,b);
+    let n = Seq.n () in
+    Seq.rm_g (n,a);
+    Seq.rm_g (n,b);
     Seq.add_g (i,h);
     Seq.rm_ax ()
     | _ -> assert false
@@ -30,23 +32,27 @@ open Def
     | _ -> assert false
 
   let ouL1_prem (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Ou,a,_) ->
+    let n = Seq.n () in
     Seq.rm_g (i,h);
-    Seq.add_g (i,a)
+    Seq.add_g (n,a)
     | _ -> assert false
  
   let ouL1_rev (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Ou,a,_) ->
-    Seq.rm_g (i,a);
+    let n = Seq.n () in
+    Seq.rm_g (n,a);
     Seq.add_g (i,h);
     Seq.rm_ax ()
     | _ -> assert false
 
   let ouL2_prem (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Ou,_,b) ->
+    let n = Seq.n () in
     Seq.rm_g (i,h);
-    Seq.add_g (i,b)
+    Seq.add_g (n,b)
     | _ -> assert false
  
   let ouL2_rev (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Ou,_,b) ->
-    Seq.rm_g (i,b);
+    let n = Seq.n () in
+    Seq.rm_g (n,b);
     Seq.add_g (i,h);
     Seq.rm_ax ()
     | _ -> assert false
@@ -75,12 +81,14 @@ open Def
 
 
   let impL1_prem (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Imp,_,b) ->
+    let n = Seq.n () in
     Seq.rm_g (i,h);
-    Seq.add_g (i,b)
+    Seq.add_g (n,b)
     | _ -> assert false
   
   let impL1_rev (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Imp,_,b) ->
-    Seq.rm_g (i,b);
+    let n = Seq.n () in
+    Seq.rm_g (n,b);
     Seq.add_g (i,h);
     Seq.rm_ax ()
     | _ -> assert false

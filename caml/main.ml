@@ -7,6 +7,8 @@ let a = FVar "a"
 let b = FVar "b"
 let c = FVar "c"
 
+let non f = F (Imp,f,FFaux)
+
 let f0 = FFaux
 let f1 = non f0
 
@@ -24,10 +26,10 @@ let f6 = F(Imp, F(Imp, F(Imp,non(non p),p), F(Ou,non p,p) ), F(Ou,non(non p),non
 
 let f7 = F(Ou, F(Imp,a,b), F(Imp,b,a))
 
-let f8 = Tiroirs.eq_boucle 2
-let f9 = Tiroirs.eq_boucle 5
-let f10 = Tiroirs.tiroirs 3 2
-let f11 = Tiroirs.tiroirs 2 2
+let f8 = Eq_boucle.main 2
+let f9 = Eq_boucle.main 5
+let f10 = Tiroirs.main 3 2
+let f11 = Tiroirs.main 2 2
 
 
 let l = [f0;f1;f2;f2bis;f3;f4;f5;f6;f7;f8;f9;f10;f11]
@@ -50,7 +52,9 @@ let l1 = [f0;f1;f2;f2bis;f3;f7]
 
 
 
+
 (*****)
+
 
 
 
@@ -62,9 +66,9 @@ let compare = ref false
 let courts = ref false
 
 let options = [
-  "-details", Arg.Set details, "affiche les preuves et contre-modèles";
-  "-preuves", Arg.Set aff_preuves, "affiche les preuves";
-  "-cmods", Arg.Set aff_cmods, "affiche les contre-modèles";
+  "-details", Arg.Unit (fun()->Affichage.preuves:=true;Affichage.cmods:=true), "affiche les preuves et contre-modèles";
+  "-preuves", Arg.Set Affichage.preuves, "affiche les preuves";
+  "-cmods", Arg.Set Affichage.cmods, "affiche les contre-modèles";
   "-compare", Arg.Set compare, "compare avec les réponses attendues";
   "-tiroirs", Arg.Tuple [Arg.Set_int arg1_tir; Arg.Set_int arg2_tir], "principe des tiroirs avec les arguments donnés";
   "-tir", Arg.Tuple [Arg.Set_int arg1_tir; Arg.Set_int arg2_tir], "principe des tiroirs avec les arguments donnés";
@@ -77,9 +81,9 @@ let () = Arg.parse options (fun _ -> ()) ""
 
 let f =
   if !arg_eqb > 0 then
-    Some (Tiroirs.eq_boucle !arg_eqb)
+    Some (Eq_boucle.main !arg_eqb)
   else if !arg1_tir > 0 then
-    Some (Tiroirs.tiroirs !arg1_tir !arg2_tir)
+    Some (Tiroirs.main !arg1_tir !arg2_tir)
   else
     None
 

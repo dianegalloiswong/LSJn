@@ -1,4 +1,5 @@
 open Def
+open Global_ref
 
 module G = Structs.G
 module D = Structs.D
@@ -20,7 +21,7 @@ let clear () =
   s.g <- G.empty();
   s.d <- D.empty();
   s.n <- 0;
-  let ncl = Array.length !Def.classe in 
+  let ncl = Array.length !classe in 
   s.cl_g <- Cl_g.empty ncl;
   s.cl_d <- Cl_d.empty ncl;
   s.fauxL <- false; s.id <- false; s.id_sf <- 0
@@ -123,7 +124,7 @@ let nth_imp_d k = List.nth (List.sort compare (all_imp_d ())) k
 
 
 let var_g () =
-  if !details || !aff_cmods then
+  if !Affichage.cmods then
     G.fold_vars s.n (fun l (i,a) -> match !sf.(a) with
       | CVar x -> x::l
       | _ -> l

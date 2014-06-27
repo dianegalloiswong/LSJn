@@ -1,17 +1,13 @@
 open Def
+open Global_ref
 
-open Transforme_seq
+open Applique_regle
+open Preuve
+open Contre_modele
 open Rep
 
+type logique = IL | CL
 
-
-
-let main logique formule =
-  Sous_formules.main formule;
-  Choix_formule.init_priorite ();
-  let m = (Array.length !sf) - 1 in
- 
-  (match logique with IL -> Seq.of_sous_formule m | CL -> Seq.of_sous_formule_CL m);
 
 
 
@@ -106,7 +102,16 @@ let main logique formule =
 	try impR c with Continuer rep -> aux_d (k+1) (rep::acc)
     in
     aux_g 0 []
-  in
+  
+
+
+
+let main logique formule =
+  Init_sf_classe.main formule;
+  Init_priorite.main ();
+
+  let m = (Array.length !sf) - 1 in
+  (match logique with IL -> Seq.of_sous_formule m | CL -> Seq.of_sous_formule_CL m);
 
   prouvable ()
 
@@ -120,7 +125,7 @@ let main logique formule =
 
 
 let test f =
-  Format.printf "@.%s@." (Utilities.formule_to_string f);
+  Format.printf "@.%s@." (To_string.formule f);
   Format.printf "IL: ";
   print_rep (main IL f);
   Format.printf "CL: ";
@@ -133,7 +138,7 @@ let test_attendu (f,b1,b2) =
   if resIL=b1 && resCL=b2 then
     Format.printf "OK. "
   else 
-    Format.printf "@.@.%s@.Résultats obtenus :    IL : %b   CL : %b@.Résultats attendus :   IL : %b   CL : %b@.@." (Utilities.formule_to_string f) resIL resCL b1 b2
+    Format.printf "@.@.%s@.Résultats obtenus :    IL : %b   CL : %b@.Résultats attendus :   IL : %b   CL : %b@.@." (To_string.formule f) resIL resCL b1 b2
 
 
 (*  Format.printf "  IL: %s@." (if vrai(main IL f) then "vrai" else "faux");

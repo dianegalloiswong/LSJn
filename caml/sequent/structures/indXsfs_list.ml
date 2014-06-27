@@ -8,9 +8,13 @@ let rec add (i,a) = function
   | (j,l)::t when j>i -> (j,l)::(add (i,a) t)
   | l -> (i,[a])::l
 
+let rec enleve x = function
+  | [] -> raise Not_found
+  | h::t when h=x -> t
+  | h::t -> h::(enleve x t)
 let rec rm (i,a) = function
   | (j,l)::t when j=i ->
-    let l = Utilities.enleve a l in
+    let l = enleve a l in
     if l=[] then t else (j,l)::t
   | (j,l)::t when j>i -> (j,l)::(rm (i,a) t)
   | _ -> raise Not_found

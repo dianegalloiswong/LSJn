@@ -1,11 +1,10 @@
 open Def
+open Global_ref
 
 
 let rec nombre_noeuds = function
   | FFaux | FVar _ -> 1
   | F (_,f1,f2) -> 1 + (nombre_noeuds f1) + (nombre_noeuds f2)
-
-
 
 let main formule =
   let m = nombre_noeuds formule in
@@ -48,14 +47,19 @@ let main formule =
   in
   let i,len_cd = remplir 1 1 formule in
   assert (i = m);
-  Def.sf := sf;
-  Def.classe := classe
+  Global_ref.sf := sf;
+  Global_ref.classe := classe
+
+
 
 
 let test f =
   main f;
-  Format.printf "@.%s :@." (Utilities.formule_to_string f);
-  Utilities.print_sous_formules !sf !classe
+  Format.printf "@.%s :@." (To_string.formule f);
+  (*Print.sous_formules !sf !classe*)
+  for i=0 to (Array.length !sf)-1 do
+    Format.printf "  %d %d %s@." i !classe.(i) (To_string.case_sf !sf.(i))
+  done
 
 
 

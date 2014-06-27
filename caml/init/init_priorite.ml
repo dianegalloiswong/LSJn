@@ -1,9 +1,7 @@
 open Def
+open Global_ref
 
-
-
-
-let init_priorite () =
+let main () =
   let m = Array.length !sf in
   let prio = Array.make m 0 in
   prio.(0) <- 0;
