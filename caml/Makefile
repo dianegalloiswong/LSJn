@@ -1,7 +1,7 @@
 OCAMLBUILD=ocamlbuild -classic-display \
 		-tags annot,debug,thread \
 		-libs unix \
-                -Is aux,foo
+                -Is aux,aux/structures_dans_seq
 TARGET=native
 
 
@@ -15,5 +15,6 @@ clean:
 realclean: clean
 	rm -f *~
 	rm -f aux/*~
+	rm -f aux/structures_dans_seq/*~
 
 cleanall: realclean
