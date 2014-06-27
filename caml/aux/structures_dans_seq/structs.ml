@@ -2,7 +2,7 @@ open Def
 
 
 
-module type CASES =
+module type CASE =
 sig
   type t
   val empty : t
@@ -11,9 +11,9 @@ sig
   val filter_n : int -> t -> (couple list)
   val trouve_n : int -> t -> couple
   val fold_n : int -> ('a -> couple -> 'a) -> 'a -> t -> 'a
-end;;
-
-module Gcases : CASES =
+end
+(*
+module Gcases : CASE =
 struct
   type t = Lcord.t
   let empty = Lcord.empty
@@ -23,7 +23,9 @@ struct
   let trouve_n = Lcord.trouve_inf
   let fold_n = Lcord.fold_inf
 end
-module Dcases : CASES =
+*)
+(*
+module Dcases : CASE =
 struct
   type t = Lcord.t
   let empty = Lcord.empty
@@ -33,10 +35,10 @@ struct
   let trouve_n = Lcord.trouve_eq
   let fold_n _ = assert false
 end
-
+*)
 
 module Tab_prio =
-  functor (Case:CASES) ->
+  functor (Case:CASE) ->
 struct
   type t = Case.t array
   let empty () = Array.make 7 Case.empty
@@ -54,8 +56,8 @@ struct
 
 end
 
-module G = Tab_prio(Gcases)
-module D = Tab_prio(Dcases)
+module G = Tab_prio(IndXsfs_list)
+module D = Tab_prio(Couple_list)
 
 
 
@@ -64,6 +66,60 @@ module D = Tab_prio(Dcases)
 
 
 
+(*
+module Case_cl =
+struct
+  type t = int list
+  let empty = []
+  let mem_g n t = List.exists (fun i -> i<=n) t
+  let mem_d n t = List.mem n t
+  let add i t = i::t
+  let rm i t = Utilities.enleve i t
+end
+*)
+module Case_cl = IndXnb_list
+module Case_cl_g =
+struct
+  type t = Case_cl.t
+  let empty = Case_cl.empty
+  let mem = Case_cl.mem_g
+  let add = Case_cl.add
+  let rm = Case_cl.rm
+end
+module Case_cl_d =
+struct
+  type t = Case_cl.t
+  let empty = Case_cl.empty
+  let mem = Case_cl.mem_d
+  let add = Case_cl.add
+  let rm = Case_cl.rm
+end
+
+
+
+
+module type CASE_cl =
+sig
+  type t
+  val empty : t
+  val mem : int -> t -> bool
+  val add : int -> t -> t
+  val rm : int -> t -> t
+end
+module Tab_cl =
+  functor (Case : CASE_cl) ->
+struct
+  type t = Case.t array
+  let empty ncl = Array.make ncl Case.empty
+  let mem cl n t = Case.mem n t.(cl)
+  let add i cl t = t.(cl) <- Case.add i t.(cl) 
+  let rm i cl t = t.(cl) <- Case.rm i t.(cl)
+end
+module Cl_g = Tab_cl(Case_cl_g)
+module Cl_d = Tab_cl(Case_cl_d)
+
+
+(*
 module Cl =
 struct
   type t = (int list) array
@@ -95,3 +151,4 @@ struct
   let add = Cl.add
   let rm = Cl.rm
 end
+*)
