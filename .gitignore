@@ -10,3 +10,4 @@ caml/_build/
 *.DS_store
 *.bbl
 *.blg
+ILTP*

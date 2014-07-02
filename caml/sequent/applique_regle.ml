@@ -3,7 +3,10 @@ open Global_ref
 
 
 
-  let etL_prem (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Et,a,b) ->
+  let etL_prem (i,h) = assert (Seq.inf_n i);
+(*if not (Seq.eq_n i) then Format.printf " i:%d, n:%d, h:%s " i (Seq.n()) (To_string.sous_formule h); *)
+    assert (Seq.eq_n i); (* pas nécesssaire pour que l'algo soit juste mais probablement vrai -> test *)
+    match !sf.(h) with C(Et,a,b) ->
     let n = Seq.n () in
     Seq.rm_g (i,h);
     Seq.add_g (n,a);
@@ -31,7 +34,7 @@ open Global_ref
     Seq.rm_ax ()
     | _ -> assert false
 
-  let ouL1_prem (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Ou,a,_) ->
+  let ouL1_prem (i,h) = assert (Seq.inf_n i);assert (Seq.eq_n i); match !sf.(h) with C(Ou,a,_) ->
     let n = Seq.n () in
     Seq.rm_g (i,h);
     Seq.add_g (n,a)
@@ -44,7 +47,7 @@ open Global_ref
     Seq.rm_ax ()
     | _ -> assert false
 
-  let ouL2_prem (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Ou,_,b) ->
+  let ouL2_prem (i,h) = assert (Seq.inf_n i);assert (Seq.eq_n i); match !sf.(h) with C(Ou,_,b) ->
     let n = Seq.n () in
     Seq.rm_g (i,h);
     Seq.add_g (n,b)
@@ -128,12 +131,12 @@ open Global_ref
 
   let impR1_prem (n,h) = assert (Seq.eq_n n); match !sf.(h) with C(Imp,a,b) ->
     Seq.rm_d (n,h);
-    Seq.add_g (0,a);
+    Seq.add_g (n,a);
     Seq.add_d (n,b)
     | _ -> assert false
 
   let impR1_rev (n,h) = assert (Seq.eq_n n); match !sf.(h) with C(Imp,a,b) ->
-    Seq.rm_g (0,a);
+    Seq.rm_g (n,a);
     Seq.rm_d (n,b);
     Seq.add_d (n,h);
     Seq.rm_ax ()
@@ -142,12 +145,12 @@ open Global_ref
   let impR2_prem (n,h) = assert (Seq.eq_n n); match !sf.(h) with C(Imp,a,b) ->
     Seq.incr_n ();
     Seq.rm_d (n,h);
-    Seq.add_g (0,a);
+    Seq.add_g (n+1,a);
     Seq.add_d (n+1,b)
     | _ -> assert false
 
   let impR2_rev (n,h) = assert (Seq.eq_n (n+1)); match !sf.(h) with C(Imp,a,b) ->
-    Seq.rm_g (0,a);
+    Seq.rm_g (n+1,a);
     Seq.rm_d (n+1,b);
     Seq.add_d (n,h);
     Seq.decr_n ();
