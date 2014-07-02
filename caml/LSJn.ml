@@ -11,97 +11,98 @@ type logique = IL | CL
 
 
 
-  let rec prouvable () = Thread.yield ();
-    match Seq.check_id () with Some a -> Preuve(P (R_Id,a,[])) | None ->
-    let qf,c = Seq.choix_formule () in
-    match qf with
-      | QF_fauxL -> Preuve(P (R_fauxL,snd c,[]))
-      | QF_etL -> etL c
-      | QF_ouR -> ouR c
-      | QF_ouL -> ouL c
-      | QF_etR -> etR c
-      | QF_imp -> imp ()
-      | QF_aucun -> CMod(M (Seq.var_g(),[]))
-  and inversible1prem r_prem r_rev regle c =
-    r_prem c;
-    let rep = prouvable () in
-    r_rev c;
-    if vrai rep then Preuve(P (regle,snd c,preuves[rep])) else rep
-  and etL c = inversible1prem etL_prem etL_rev R_etL c
-  and ouR c = inversible1prem ouR_prem ouR_rev R_ouR c
-  and inversible2prem r1_prem r1_rev r2_prem r2_rev regle c =
-    r1_prem c;
-    let rep1 = prouvable () in
-    r1_rev c;
-    if vrai rep1 then
-      begin
-      r2_prem c;
-      let rep2 = prouvable () in
-      r2_rev c;
-      if vrai rep2 then
-	Preuve(P (regle,snd c,preuves[rep1;rep2]))
-      else rep2
-      end
-    else rep1
-  and ouL c = inversible2prem ouL1_prem ouL1_rev ouL2_prem ouL2_rev R_ouL c
-  and etR c = inversible2prem etR1_prem etR1_rev etR2_prem etR2_rev R_etR c
+let rec prouvable () = Thread.yield ();
+  match Seq.check_id () with Some a -> Preuve(P (R_Id,a,[])) | None ->
+  let qf,c = Seq.choix_formule () in
+  match qf with
+    | QF_fauxL -> Preuve(P (R_fauxL,snd c,[]))
+    | QF_etL -> etL c
+    | QF_ouR -> ouR c
+    | QF_ouL -> ouL c
+    | QF_etR -> etR c
+    | QF_imp -> imp ()
+    | QF_aucun -> CMod(M (Seq.var_g(),[]))
+
+and inversible1prem r_prem r_rev regle c =
+  r_prem c;
+  let rep = prouvable () in
+  r_rev c;
+  if vrai rep then Preuve(P (regle,snd c,preuves[rep])) else rep
+and etL c = inversible1prem etL_prem etL_rev R_etL c
+and ouR c = inversible1prem ouR_prem ouR_rev R_ouR c
+
+and inversible2prem r1_prem r1_rev r2_prem r2_rev regle c =
+  r1_prem c;
+  let rep1 = prouvable () in
+  r1_rev c;
+  if vrai rep1 then
+    begin
+    r2_prem c;
+    let rep2 = prouvable () in
+    r2_rev c;
+    if vrai rep2 then
+      Preuve(P (regle,snd c,preuves[rep1;rep2]))
+    else rep2
+    end
+  else rep1
+and ouL c = inversible2prem ouL1_prem ouL1_rev ouL2_prem ouL2_rev R_ouL c
+and etR c = inversible2prem etR1_prem etR1_rev etR2_prem etR2_rev R_etR c
   
-
-  and impL c =
-    impL1_prem c;
-    let rep1 = prouvable () in
-    impL1_rev c;
-    if vrai rep1 then 
+and impL c =
+  impL1_prem c;
+  let rep1 = prouvable () in
+  impL1_rev c;
+  if vrai rep1 then 
+    begin
+    impL2_prem c;
+    let rep2 = prouvable () in
+    impL2_rev c;
+    if vrai rep2 then 
       begin
-      impL2_prem c;
-      let rep2 = prouvable () in
-      impL2_rev c;
-      if vrai rep2 then 
-	begin
-	impL3_prem c;
-	let rep3 = prouvable () in
-	impL3_rev c;
-	if vrai rep3 then 
-	  Preuve(P (R_impL,snd c,preuves[rep1;rep2;rep3]))
-	else
-	  raise (Continuer rep3)
-	end
-      else rep2
-      end
-    else rep1
-  and impR c =
-    impR1_prem c;
-    let rep1 = prouvable () in
-    impR1_rev c;
-    if vrai rep1 then 
-      begin
-      impR2_prem c;
-      let rep2 = prouvable () in
-      impR2_rev c;
-      if vrai rep2 then 
-	Preuve(P (R_impR,snd c,preuves[rep1;rep2]))
+      impL3_prem c;
+      let rep3 = prouvable () in
+      impL3_rev c;
+      if vrai rep3 then 
+	Preuve(P (R_impL,snd c,preuves[rep1;rep2;rep3]))
       else
-	raise (Continuer rep2)
+	raise (Continuer rep3)
       end
-    else rep1
+    else rep2
+    end
+  else rep1
+and impR c =
+  impR1_prem c;
+  let rep1 = prouvable () in
+  impR1_rev c;
+  if vrai rep1 then 
+    begin
+    impR2_prem c;
+    let rep2 = prouvable () in
+    impR2_rev c;
+    if vrai rep2 then 
+      Preuve(P (R_impR,snd c,preuves[rep1;rep2]))
+    else
+      raise (Continuer rep2)
+    end
+  else rep1
 
-  and imp () =
-    let nb_g = Seq.nombre_imp_g ()
-    and nb_d = Seq.nombre_imp_d () in
-    let rec aux_g k acc =
-      if k = nb_g then 
-	aux_d 0 acc
-      else
-	let c = Seq.nth_imp_g k in (*Format.printf " G:h=%d" (snd c);*)
-	try impL c with Continuer rep -> aux_g (k+1) (rep::acc)
-    and aux_d k acc =
-      if k = nb_d then 
-	CMod(M (Seq.var_g(),cmods acc))
-      else
-	let c = Seq.nth_imp_d k in 
-	try impR c with Continuer rep -> aux_d (k+1) (rep::acc)
-    in
-    aux_g 0 []
+and imp () =
+  let nb_g = Seq.nombre_imp_g ()
+  and nb_d = Seq.nombre_imp_d () in
+  let rec aux_g k acc =
+    if k = nb_g then 
+      aux_d 0 acc
+    else
+      let c = Seq.nth_imp_g k in
+      try impL c with Continuer rep -> aux_g (k+1) (rep::acc)
+  and aux_d k acc =
+    if k = nb_d then 
+      CMod(M (Seq.var_g(),cmods acc))
+    else
+      let c = Seq.nth_imp_d k in 
+      try impR c with Continuer rep -> aux_d (k+1) (rep::acc)
+  in
+  aux_g 0 []
   
 
 
@@ -119,27 +120,48 @@ let main logique formule =
 
 
 
-
-
-
-
-
 let test f =
-  Format.printf "@.%s@." (To_string.formule f);
+  Format.printf "%s@." (To_string.formule f);
   Format.printf "IL: ";
   print_rep (main IL f);
-  Format.printf "CL: ";
-  print_rep (main CL f);
+  if !Options.classique then
+    (Format.printf "CL: ";
+     print_rep (main CL f));
   Format.printf "@."
 
 
 let test_attendu (f,b1,b2) =
-  let resIL = vrai (main IL f) and resCL = vrai (main CL f) in
+  if !Options.classique then
+  begin
+  let repIL = main IL f and repCL = main CL f in
+  let resIL = vrai repIL and resCL = vrai repCL in
   if resIL=b1 && resCL=b2 then
-    Format.printf "OK. "
+    if !Options.compare_seul then Format.printf "OK.@."
+    else
+      (Format.printf "%s@." (To_string.formule f);
+       Format.printf "IL: ";
+       print_rep repIL;
+       Format.printf "CL: ";
+       print_rep repCL;
+       Format.printf "OK.@.@.")
   else 
-    Format.printf "@.@.%s@.Résultats obtenus :    IL : %b   CL : %b@.Résultats attendus :   IL : %b   CL : %b@.@." (To_string.formule f) resIL resCL b1 b2
+    Format.printf "%s@.Résultats obtenus :    IL : %b   CL : %b@.Résultats attendus :   IL : %b   CL : %b@.@." (To_string.formule f) resIL resCL b1 b2
+  end
 
+  else
+  begin
+  let repIL = main IL f in
+  let resIL = vrai repIL in
+  if resIL=b1 then
+    if !Options.compare_seul then Format.printf "OK.@."
+    else
+      (Format.printf "%s@." (To_string.formule f);
+       Format.printf "IL: ";
+       print_rep repIL;
+       Format.printf "OK.@.@.")
+  else 
+    Format.printf "%s@.Résultats obtenus :    IL : %b@.Résultats attendus :   IL : %b   CL : %b@.@." (To_string.formule f) resIL b1 b2
+  end
 
 (*  Format.printf "  IL: %s@." (if vrai(main IL f) then "vrai" else "faux");
   Format.printf "  CL: %s@." (if vrai(main CL f) then "vrai" else "faux")*)

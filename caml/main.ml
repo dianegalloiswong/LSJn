@@ -1,83 +1,62 @@
-open Def
 
 
-let p = FVar "p"
-let q = FVar "q"
-let a = FVar "a"
-let b = FVar "b"
-let c = FVar "c"
-
-let non f = F (Imp,f,FFaux)
-
-let f0 = FFaux
-let f1 = non f0
-
-let f2 = F(Imp,p,p)
-let f2bis = F(Imp,FFaux,p)
-
-let f3 = F(Ou,p,non p)
-let f4 = non (non f3)
-
-let f5 = F(Imp, F(Imp, F(Ou,p,F(Imp,p,q)), q), q)
-
-let f6 = F(Imp, F(Imp, F(Imp,non(non p),p), F(Ou,non p,p) ), F(Ou,non(non p),non p) )
+let formule = ref None
+let ma_liste = ref false
+let ma_liste_courte = ref false
+let arg1 = ref 0
 
 
 
-let f7 = F(Ou, F(Imp,a,b), F(Imp,b,a))
+let details () = Options.preuves := true; Options.cmods := true
+let compare_seul () = Options.compare := true; Options.compare_seul := true
 
-let f8 = Eq_boucle.main 2
-let f9 = Eq_boucle.main 5
-let f10 = Tiroirs.main 3 2
-let f11 = Tiroirs.main 2 2
+let tiroirs_spec = Arg.Tuple [ Arg.Set_int arg1;
+  Arg.Int (fun arg2 -> formule := Some (Tiroirs.main !arg1 arg2)) ]
 
-
-let l = [f0;f1;f2;f2bis;f3;f4;f5;f6;f7;f8;f9;f10;f11]
-
-let l_att = [f0,false,false;
-	     f1,true,true;
-	     f2,true,true;
-	     f2bis,true,true;
-	     f3,false,true;
-	     f4,true,true;
-	     f5,true,true;
-	     f6,false,true;
-	     f7,false,true;
-	     f8,false,false;
-	     f9,false,true;
-	     f10,true,true;
-	     f11,false,false]
-
-let l1 = [f0;f1;f2;f2bis;f3;f7]
-
-
-
-
-(*****)
-
-
-
-
-let arg_eqb = ref 0
-let arg1_tir = ref 0
-let arg2_tir = ref 0
-
-let compare = ref false
-let courts = ref false
+let eq_boucle n = formule := Some (Eq_boucle.main n)
 
 let options = [
-  "-details", Arg.Unit (fun()->Affichage.preuves:=true;Affichage.cmods:=true), "affiche les preuves et contre-modèles";
-  "-preuves", Arg.Set Affichage.preuves, "affiche les preuves";
-  "-cmods", Arg.Set Affichage.cmods, "affiche les contre-modèles";
-  "-compare", Arg.Set compare, "compare avec les réponses attendues";
-  "-tiroirs", Arg.Tuple [Arg.Set_int arg1_tir; Arg.Set_int arg2_tir], "principe des tiroirs avec les arguments donnés";
-  "-tir", Arg.Tuple [Arg.Set_int arg1_tir; Arg.Set_int arg2_tir], "principe des tiroirs avec les arguments donnés";
-  "-eqb", Arg.Set_int arg_eqb, "eq_boucle avec les arguments donnés";
-  "-courts", Arg.Set courts, "seulement les premières formules";
+  (* général *)
+  "-CL", Arg.Set Options.classique, "décide aussi en logique classique";
+  "-details", Arg.Unit details, "affiche les preuves et contre-modèles";
+  "-preuves", Arg.Set Options.preuves, "affiche les preuves";
+  "-cmods", Arg.Set Options.cmods, "affiche les contre-modèles";
+  "-compare", Arg.Set Options.compare, "compare avec les réponses attendues";
+  "-compare-seul", Arg.Unit compare_seul, "compare sans afficher les formules et réponses si c'est bon";
+
+  (* formule(s) à traiter *)
+  "-ph", tiroirs_spec, "principe des tiroirs avec les arguments donnés";
+  "-eqb", Arg.Int eq_boucle, "eq_boucle avec les arguments donnés";
+  "-liste", Arg.Set ma_liste, "une liste de quelques formules courtes";
+  "-liste-courte", Arg.Set ma_liste_courte, "une liste de quelques formules très courtes";
+
+  (* ou un nom de fichier/répertoire sans flag *)
 ]
 
-let () = Arg.parse options (fun _ -> ()) ""
 
+
+let () = Arg.parse options Analyseur.main ""
+
+
+
+let () = match !formule with Some f -> LSJn.test f | None -> ()
+
+let () =
+  if !ma_liste then
+    if !Options.compare then 
+      List.iter (fun f ->LSJn.test_attendu f) Quelques_formules.l_att
+    else
+      List.iter (fun f ->LSJn.test f) Quelques_formules.l
+let () =
+  if !ma_liste_courte then
+    if !Options.compare then 
+      List.iter (fun f ->LSJn.test_attendu f) Quelques_formules.l1_att
+    else
+      List.iter (fun f ->LSJn.test f) Quelques_formules.l1
+  
+
+
+(*
 
 let f =
   if !arg_eqb > 0 then
@@ -87,15 +66,28 @@ let f =
   else
     None
 
-let () = 
-  (match f with
-    | Some f -> LSJn.test f
-    | None ->
-      if !compare then 
-	List.iter (fun f ->LSJn.test_attendu f) l_att
-      else if !courts then
-	List.iter (fun f ->LSJn.test f) l1
-      else
-	List.iter (fun f ->LSJn.test f) l
-  );
+let () =
+(*  if !fichier <> "" then
+    Analyseur.main !fichier
+  else*)
+  if not !fichier then
+    (match f with
+      | Some f -> LSJn.test f
+      | None ->
+	if !Options.compare then 
+	  List.iter (fun f ->LSJn.test_attendu f) l_att
+	else if !courts then
+	  List.iter (fun f ->LSJn.test f) l1
+	else
+	  List.iter (fun f ->LSJn.test f) l
+    );
   Format.printf "@."
+
+*)
+
+
+(*
+  "-tiroirs", tiroirs_spec, "principe des tiroirs avec les arguments donnés";
+  "-tir", tiroirs_spec, "principe des tiroirs avec les arguments donnés";
+  "-pigeonhole", tiroirs_spec, "principe des tiroirs avec les arguments donnés";
+*)

@@ -124,7 +124,7 @@ let nth_imp_d k = List.nth (List.sort compare (all_imp_d ())) k
 
 
 let var_g () =
-  if !Affichage.cmods then
+  if !Options.cmods then
     G.fold_vars s.n (fun l (i,a) -> match !sf.(a) with
       | CVar x -> x::l
       | _ -> l

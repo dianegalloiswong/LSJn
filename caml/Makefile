@@ -1,7 +1,8 @@
 OCAMLBUILD=ocamlbuild -classic-display \
 		-tags annot,debug,thread \
 		-libs unix \
-                -Is global,init,sequent,sequent/structures,reponse,exemples
+                -Is global,init,sequent,sequent/structures,reponse,exemples,analyseur \
+                -use-menhir
 TARGET=native
 
 

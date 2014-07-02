@@ -16,10 +16,10 @@ open Def
 let print_rep rep =
   if vrai rep then
     (Format.printf "vrai@.";
-     if (*!details ||*) !Affichage.preuves then Preuve.print (preuve rep))
+     if (*!details ||*) !Options.preuves then Preuve.print (preuve rep))
   else
     (Format.printf "faux@.";
-     if (*!details ||*) !Affichage.cmods then Contre_modele.print (cmod rep))
+     if (*!details ||*) !Options.cmods then Contre_modele.print (cmod rep))
 
 (*
 let print_rep rep =
