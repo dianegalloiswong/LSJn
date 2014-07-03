@@ -31,7 +31,7 @@ val rm_d : couple -> unit
 val incr_n : unit -> unit
 val decr_n : unit -> unit
 
-
+val check_fauxL: unit -> bool
 val check_id : unit -> sous_formule option
 
 
@@ -39,6 +39,8 @@ val nombre_imp_g : unit -> int
 val nombre_imp_d : unit -> int
 val nth_imp_g : int -> couple
 val nth_imp_d : int -> couple
+val reord_imp_g : int -> int -> unit
+val reord_imp_d : int -> int -> unit
 
 val var_g : unit -> string list
 

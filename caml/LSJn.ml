@@ -13,10 +13,11 @@ exception Continuer of t
 
 let rec prouvable () = (*Thread.yield ();*)
   Time.verif ();
+  if Seq.check_fauxL () then Preuve(P (R_fauxL,0,[])) else
   match Seq.check_id () with Some a -> Preuve(P (R_Id,a,[])) | None ->
   let qf,c = Seq.choix_formule () in
   match qf with
-    | QF_fauxL -> Preuve(P (R_fauxL,snd c,[]))
+    | QF_fauxL -> (*Preuve(P (R_fauxL,snd c,[]))*) assert false
     | QF_etL -> etL c
     | QF_ouR -> ouR c
     | QF_ouL -> ouL c
@@ -111,13 +112,21 @@ and imp () =
       aux_d 0 acc
     else
       let c = Seq.nth_imp_g k in
-      try impL c with Continuer rep -> aux_g (k+1) (rep::acc)
+      try 
+	let rep = impL c in
+	Seq.reord_imp_g (k+1) nb_g;
+	rep
+      with Continuer rep -> aux_g (k+1) (rep::acc)
   and aux_d k acc =
     if k = nb_d then 
       CMod(M (Seq.var_g(),cmods acc))
     else
       let c = Seq.nth_imp_d k in 
-      try impR c with Continuer rep -> aux_d (k+1) (rep::acc)
+      try 
+	let rep = impR c in
+	Seq.reord_imp_d (k+1) nb_d;
+	rep
+      with Continuer rep -> aux_d (k+1) (rep::acc)
   in
   aux_g 0 []
   

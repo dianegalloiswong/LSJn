@@ -94,11 +94,11 @@ let inf_n i = i<=s.n
 let eq_n n = n=s.n
 
 
-let incr_n () = s.n <- s.n + 1; rm_ax ()
+let incr_n () = s.n <- s.n + 1; rm_ax (); if mem_cl_g 0 then s.fauxL <- true
 let decr_n () = s.n <- s.n - 1; rm_ax ()
 
 
-
+let check_fauxL () = s.fauxL
 let check_id () = if s.id then Some s.id_sf else None
 
 
@@ -109,6 +109,8 @@ let check_id () = if s.id then Some s.id_sf else None
 let all_imp_g () = G.filter_n s.n s.g.(5)
 let all_imp_d () = D.filter_n s.n s.d.(5)
 *)
+
+(*
 let all_imp_g () = G.all_imp s.n s.g
 let all_imp_d () = D.all_imp s.n s.d
 
@@ -117,7 +119,16 @@ let nombre_imp_d () = List.length (all_imp_d ())
 
 let nth_imp_g k = List.nth (List.sort compare (all_imp_g ())) k
 let nth_imp_d k = List.nth (List.sort compare (all_imp_d ())) k
+*)
 
+let nombre_imp_g () = G.nombre_imp s.n s.g
+let nth_imp_g k = G.nth_imp s.n k s.g
+let rec reord_imp_g k nb = G.reord_imp s.n k s.g
+(*if k<nb then (ignore (nth_imp_g k); reord_imp_g (k+1) nb)*)
+
+let nombre_imp_d () = D.nombre_imp s.n s.d
+let nth_imp_d k = D.nth_imp s.n k s.d
+let rec reord_imp_d k nb = D.reord_imp s.n k s.d
 
 
 let var_g () =

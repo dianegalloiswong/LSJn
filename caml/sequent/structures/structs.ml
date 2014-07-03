@@ -11,31 +11,45 @@ sig
   val filter_n : int -> t -> (couple list)
   val trouve_n : int -> t -> couple
   val fold_n : int -> ('a -> couple -> 'a) -> 'a -> t -> 'a
+
+  val nombre_n : int -> t -> int
+  val nth_n : int -> int -> t -> (couple * t)
+  val reord_n : int -> int -> t -> t
 end
-(*
-module Gcases : CASE =
+
+module Case = IndXsfs_list
+
+module Case_g : CASE =
 struct
-  type t = Lcord.t
-  let empty = Lcord.empty
-  let add = Lcord.add
-  let rm = Lcord.rm
-  let filter_n = Lcord.filter_inf
-  let trouve_n = Lcord.trouve_inf
-  let fold_n = Lcord.fold_inf
+  type t = Case.t
+  let empty = Case.empty
+  let add = Case.add
+  let rm = Case.rm
+  let filter_n = Case.filter_inf
+  let trouve_n = Case.trouve_inf
+  let fold_n = Case.fold_inf
+
+  let nombre_n = Case.nombre_inf
+  let nth_n = Case.nth_inf
+  let reord_n = Case.reord_inf
 end
-*)
-(*
-module Dcases : CASE =
+
+module Case_d : CASE =
 struct
-  type t = Lcord.t
-  let empty = Lcord.empty
-  let add = Lcord.add
-  let rm = Lcord.rm
-  let filter_n = Lcord.filter_eq
-  let trouve_n = Lcord.trouve_eq
+  type t = Case.t
+  let empty = Case.empty
+  let add = Case.add
+  let rm = Case.rm
+  let filter_n = Case.filter_eq
+  let trouve_n = Case.trouve_eq
   let fold_n _ = assert false
+
+  let nombre_n = Case.nombre_eq
+  let nth_n = Case.nth_eq
+  let reord_n = Case.reord_eq
 end
-*)
+
+
 
 module Tab_prio =
   functor (Case:CASE) ->
@@ -48,16 +62,23 @@ struct
   let fold_vars n f init t = Case.fold_n n f init t.(6)
   let priorite_plus_forte n t =
     let rec aux p =
-      if p = 7 then 7,(0,0)
+      if p = 6 then 6,(0,0)
       else
 	try p,(Case.trouve_n n t.(p))
 	with Not_found -> aux (p+1)
-    in aux 0
+    in aux 1
+
+  let nombre_imp n t = Case.nombre_n n t.(5)
+  let nth_imp n k t = 
+    let (c,case) = Case.nth_n n k t.(5) in
+    t.(5) <- case;
+    c
+  let reord_imp n k t = t.(5) <- Case.reord_n n k t.(5)
 
 end
 
-module G = Tab_prio(IndXsfs_list)
-module D = Tab_prio(Couple_list)
+module G = Tab_prio(Case_g)
+module D = Tab_prio(Case_d)
 
 
 
