@@ -8,8 +8,6 @@ let cmod = function Preuve _ -> assert false | CMod m -> m
 let cmods = List.map cmod
 
 
-exception Continuer of t
-(* quand on trouve une réfutation d'un prémice non inversible (impL et impR) *)
 
 open Def
 
@@ -19,8 +17,10 @@ let print_rep rep =
      if (*!details ||*) !Options.preuves then Preuve.print (preuve rep))
   else
     (Format.printf "faux@.";
-     if (*!details ||*) !Options.cmods then Contre_modele.print (cmod rep))
+     if (*!details ||*) !Options.cmods then Contre_modele.print (cmod rep));
+  Format.printf "@."
 
+let print = print_rep
 (*
 let print_rep rep =
   if vrai rep then

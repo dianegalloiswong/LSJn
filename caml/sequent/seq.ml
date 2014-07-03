@@ -53,11 +53,12 @@ let rm_cl_g (i,a) =
 let rm_cl_d (i,a) = 
   let cl = !classe.(a) in 
   Cl_d.rm i cl s.cl_d
-
+(*
 let cl_post_incr_n () =
 (*  List.iter (fun (i,a) -> if i=s.n then let cl = !classe.(a) in (if cl=0 then s.fauxL <- true; if mem_cl_d cl then (s.id <- true; s.id_sf <- a))) s.g;
   List.iter (fun (i,a) -> if (i=s.n) && (mem_cl_g !classe.(a)) then (s.id <- true; s.id_sf <- a)) s.d*)
   ()
+*)
 
 (* fin cl *)
 
@@ -81,12 +82,11 @@ let rm_d c =
 
 let of_sous_formule a =
   clear ();
-  add_d (0,a)
+  match !sf.(a) with
+    | C (Imp,b,c) -> add_g (0,b); add_d (0,c)
+    | _ -> add_d (0,a)
 
-let of_sous_formule_CL a = 
-  clear ();
-  add_d (0,a);
-  add_g (1,0)
+let of_sous_formule_CL a = of_sous_formule a; add_g (1,0)
 
 let n () = s.n
 
@@ -94,7 +94,7 @@ let inf_n i = i<=s.n
 let eq_n n = n=s.n
 
 
-let incr_n () = s.n <- s.n + 1; cl_post_incr_n ()
+let incr_n () = s.n <- s.n + 1; rm_ax ()
 let decr_n () = s.n <- s.n - 1; rm_ax ()
 
 
@@ -117,9 +117,6 @@ let nombre_imp_d () = List.length (all_imp_d ())
 
 let nth_imp_g k = List.nth (List.sort compare (all_imp_g ())) k
 let nth_imp_d k = List.nth (List.sort compare (all_imp_d ())) k
-
-
-
 
 
 

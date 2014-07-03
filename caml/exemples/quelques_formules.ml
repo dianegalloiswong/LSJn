@@ -35,6 +35,36 @@ let f11 = Tiroirs.main 2 2
 
 let l = [f0;f1;f2;f2bis;f3;f4;f5;f6;f7;f8;f9;f10;f11]
 
+let l_att = [(*f0,*)false,false;
+	     (*f1,*)true,true;
+	     (*f2,*)true,true;
+	     (*f2bis,*)true,true;
+	     (*f3,*)false,true;
+	     (*f4,*)true,true;
+	     (*f5,*)true,true;
+	     (*f6,*)false,true;
+	     (*f7,*)false,true;
+	     (*f8,*)false,false;
+	     (*f9,*)false,true;
+	     (*f10,*)true,true;
+	     (*f11,*)false,false
+            ]
+let l_att = List.map (fun x -> Some x) l_att
+
+let l1 = [f0;f1;f2;f2bis;f3;f4;f7]
+
+let l1_att = [(*f0,*)false,false;
+	      (*f1,*)true,true;
+	      (*f2,*)true,true;
+	      (*f2bis,*)true,true;
+	      (*f3,*)false,true;  
+	      (*f4,*)true,true;
+	      (*f7,*)false,true;
+	     ]
+let l1_att = List.map (fun x -> Some x) l1_att
+
+
+(*
 let l_att = [f0,false,false;
 	     f1,true,true;
 	     f2,true,true;
@@ -49,15 +79,12 @@ let l_att = [f0,false,false;
 	     f10,true,true;
 	     f11,false,false
 	    ]
-
-let l1 = [f0;f1;f2;f2bis;f3;f4;f7]
-
 let l1_att = [f0,false,false;
-	     f1,true,true;
-	     f2,true,true;
-	     f2bis,true,true;
-	     f3,false,true;  
-	     f4,true,true;
-	     f7,false,true;
-	    ]
-
+	      f1,true,true;
+	      f2,true,true;
+	      f2bis,true,true;
+	      f3,false,true;  
+	      f4,true,true;
+	      f7,false,true;
+	     ]
+*)

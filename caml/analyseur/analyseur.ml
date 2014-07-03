@@ -31,13 +31,14 @@ let traite_fact fopt = function
     Format.printf "%s inconnu : fichier non traite@." s;
     raise Exit
 
-let traite_facts (b1,b2) l =
+let traite_facts att l =
   let fopt = try List.fold_left traite_fact None l with Exit -> None in
   match fopt with None -> () | Some f ->
-  if !Options.compare then 
+    LSJn.test (if !Options.compare then Some att else None) f
+ (* if !Options.compare then 
     LSJn.test_attendu (f,b1,b2)
   else
-    LSJn.test f
+    LSJn.test f*)
 
 let localisation nom pos =
   let l = pos.Lexing.pos_lnum in
@@ -67,11 +68,12 @@ let parse nom =
 
 
 let main_f nom =
-  Format.printf "%s@." nom;
+  if Options.print_fichier() then Format.printf "%s@." nom;
   try
     let attendus,facts = parse nom in
     let att = traite_attendus attendus in
-    traite_facts att facts
+    traite_facts att facts;
+    if not !Options.compare_seul then Format.printf "@."
   with Exit -> ()
 
 

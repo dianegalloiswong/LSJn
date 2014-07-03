@@ -17,12 +17,15 @@ let eq_boucle n = formule := Some (Eq_boucle.main n)
 
 let options = [
   (* général *)
-  "-CL", Arg.Set Options.classique, "décide aussi en logique classique";
+  (*"-CL", Arg.Set Options.classique, "décide aussi en logique classique";*)
   "-details", Arg.Unit details, "affiche les preuves et contre-modèles";
   "-preuves", Arg.Set Options.preuves, "affiche les preuves";
   "-cmods", Arg.Set Options.cmods, "affiche les contre-modèles";
   "-compare", Arg.Set Options.compare, "compare avec les réponses attendues";
   "-compare-seul", Arg.Unit compare_seul, "compare sans afficher les formules et réponses si c'est bon";
+  "-rien-afficher", Arg.Set Options.rien_afficher, "n'affiche rien sauf si on trouve un résultat faux";
+  "-notime", Arg.Set Options.notime, "ne chronomètre pas";
+  "-stop", Arg.Set_float Options.temps_max, "arrête si pas fini pendant une durée donnée";
 
   (* formule(s) à traiter *)
   "-ph", tiroirs_spec, "principe des tiroirs avec les arguments donnés";
@@ -39,22 +42,28 @@ let () = Arg.parse options Analyseur.main ""
 
 
 
-let () = match !formule with Some f -> LSJn.test f | None -> ()
+let () = match !formule with Some f -> LSJn.test None f | None -> ()
+
+
 
 let () =
   if !ma_liste then
     if !Options.compare then 
-      List.iter (fun f ->LSJn.test_attendu f) Quelques_formules.l_att
+      List.iter2 LSJn.test Quelques_formules.l_att Quelques_formules.l
     else
-      List.iter (fun f ->LSJn.test f) Quelques_formules.l
+      List.iter (LSJn.test None) Quelques_formules.l
 let () =
   if !ma_liste_courte then
     if !Options.compare then 
-      List.iter (fun f ->LSJn.test_attendu f) Quelques_formules.l1_att
+      List.iter2 LSJn.test Quelques_formules.l1_att Quelques_formules.l1
     else
-      List.iter (fun f ->LSJn.test f) Quelques_formules.l1
+      List.iter (LSJn.test None) Quelques_formules.l1
   
 
+
+
+
+let () = if Options.time_on() then Format.printf "temps total : %fs@." !Time.temps_total
 
 (*
 
