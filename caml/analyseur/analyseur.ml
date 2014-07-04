@@ -68,14 +68,16 @@ let parse nom =
 
 
 let main_f nom =
-  if Options.print_fichier() then Format.printf "%s@." nom;
-  try
-    let attendus,facts = parse nom in
-    let att = traite_attendus attendus in
-    traite_facts att facts;
-    if not !Options.compare_seul then Format.printf "@."
-  with Exit -> ()
-
+  if (not (Options.stop_on())) || (Time.faire_fichier nom) then
+    begin
+    if Options.print_fichier() then Format.printf "%s@." nom;
+    try
+      let attendus,facts = parse nom in
+      let att = traite_attendus attendus in
+      traite_facts att facts;
+      if not !Options.compare_seul then Format.printf "@."
+    with Exit -> ()
+    end
 
 let rec main_d dnom =
   let dh = Unix.opendir dnom in

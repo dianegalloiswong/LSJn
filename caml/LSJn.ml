@@ -6,15 +6,13 @@ open Contre_modele
 open Rep
 
 
-exception Continuer of t
-(* quand on trouve une réfutation d'un prémice non inversible (impL et impR) *)
 
 
 
 let rec prouvable () = (*Thread.yield ();*)
-  Time.verif ();
-  if Seq.check_fauxL () then Preuve(P (R_fauxL,0,[])) else
-  match Seq.check_id () with Some a -> Preuve(P (R_Id,a,[])) | None ->
+  Time.verif_timeout ();
+  if Seq.check_fauxL () then preuve R_fauxL 0 [] else
+  match Seq.check_id () with Some a -> preuve R_Id a [] | None ->
   let qf,c = Seq.choix_formule () in
   match qf with
     | QF_fauxL -> (*Preuve(P (R_fauxL,snd c,[]))*) assert false
@@ -23,13 +21,13 @@ let rec prouvable () = (*Thread.yield ();*)
     | QF_ouL -> ouL c
     | QF_etR -> etR c
     | QF_imp -> imp ()
-    | QF_aucun -> CMod(M (Seq.var_g(),[]))
+    | QF_aucun -> cmod (Seq.var_g()) []
 
 and inversible1prem r_prem r_rev regle c =
   r_prem c;
   let rep = prouvable () in
   r_rev c;
-  if vrai rep then Preuve(P (regle,snd c,preuves[rep])) else rep
+  if vrai rep then preuve regle (snd c) [rep] else rep
 and etL c = inversible1prem 
   Applique_regle.etL_prem 
   Applique_regle.etL_rev 
@@ -49,7 +47,8 @@ and inversible2prem r1_prem r1_rev r2_prem r2_rev regle c =
     let rep2 = prouvable () in
     r2_rev c;
     if vrai rep2 then
-      Preuve(P (regle,snd c,preuves[rep1;rep2]))
+      (*Preuve(P (regle,snd c,preuves[rep1;rep2]))*)
+      preuve regle (snd c) [rep1;rep2]
     else rep2
     end
   else rep1
@@ -81,7 +80,7 @@ and impL c =
       let rep3 = prouvable () in
       Applique_regle.impL3_rev c;
       if vrai rep3 then 
-	Preuve(P (R_impL,snd c,preuves[rep1;rep2;rep3]))
+	preuve R_impL (snd c) [rep1;rep2;rep3]
       else
 	raise (Continuer rep3)
       end
@@ -98,7 +97,7 @@ and impR c =
     let rep2 = prouvable () in
     Applique_regle.impR2_rev c;
     if vrai rep2 then 
-      Preuve(P (R_impR,snd c,preuves[rep1;rep2]))
+      preuve R_impR (snd c) [rep1;rep2]
     else
       raise (Continuer rep2)
     end
@@ -119,7 +118,7 @@ and imp () =
       with Continuer rep -> aux_g (k+1) (rep::acc)
   and aux_d k acc =
     if k = nb_d then 
-      CMod(M (Seq.var_g(),cmods acc))
+      cmod (Seq.var_g()) acc
     else
       let c = Seq.nth_imp_d k in 
       try 
@@ -158,7 +157,7 @@ let test attopt f =
       let b = vrai rep in
       if b <> batt then
 	Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %b    attendu : %b@." b batt
-  with Time.Temps_ecoule -> Format.printf "temps écoulé (%fs)@." !Options.temps_max
+  with Time.Temps_ecoule -> () (*Format.printf "temps écoulé (%fs)@." !Options.temps_max*)
 
 (*
 let test f =
