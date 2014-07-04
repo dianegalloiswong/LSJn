@@ -8,7 +8,7 @@ sig
   val empty : t
   val add : couple -> t -> t
   val rm : couple -> t -> t
-  val filter_n : int -> t -> (couple list)
+  (*val filter_n : int -> t -> (couple list)*)
   val trouve_n : int -> t -> couple
   val fold_n : int -> ('a -> couple -> 'a) -> 'a -> t -> 'a
 
@@ -25,13 +25,16 @@ struct
   let empty = Case.empty
   let add = Case.add
   let rm = Case.rm
-  let filter_n = Case.filter_inf
+  (*let filter_n = Case.filter_inf*)
   let trouve_n = Case.trouve_inf
   let fold_n = Case.fold_inf
 
   let nombre_n = Case.nombre_inf
   let nth_n = Case.nth_inf
   let reord_n = Case.reord_inf
+
+  (*let add x = Format.printf "G  "; add x
+  let rm x = Format.printf "G  "; rm x*)
 end
 
 module Case_d : CASE =
@@ -40,13 +43,16 @@ struct
   let empty = Case.empty
   let add = Case.add
   let rm = Case.rm
-  let filter_n = Case.filter_eq
+  (*let filter_n = Case.filter_eq*)
   let trouve_n = Case.trouve_eq
   let fold_n _ = assert false
 
   let nombre_n = Case.nombre_eq
   let nth_n = Case.nth_eq
   let reord_n = Case.reord_eq
+
+  (*let add x = Format.printf "D  "; add x
+  let rm x = Format.printf "D  "; rm x*)
 end
 
 
@@ -58,7 +64,7 @@ struct
   let empty () = Array.make 7 Case.empty
   let add c t = let p = !priorite.(snd c) in t.(p) <- Case.add c t.(p)
   let rm c t = let p = !priorite.(snd c) in t.(p) <- Case.rm c t.(p)
-  let all_imp n t = Case.filter_n n t.(5)
+  (*let all_imp n t = Case.filter_n n t.(5)*)
   let fold_vars n f init t = Case.fold_n n f init t.(6)
   let priorite_plus_forte n t =
     let rec aux p =
@@ -75,6 +81,14 @@ struct
     c
   let reord_imp n k t = t.(5) <- Case.reord_n n k t.(5)
 
+(*
+  let add c t = let p = !priorite.(snd c) in
+		Format.printf "add prio=%d  " p;
+		t.(p) <- Case.add c t.(p)
+  let rm c t = let p = !priorite.(snd c) in 
+	       Format.printf "rm prio=%d  " p;
+	       t.(p) <- Case.rm c t.(p)
+*)
 end
 
 module G = Tab_prio(Case_g)

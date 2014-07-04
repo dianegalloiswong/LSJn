@@ -15,8 +15,8 @@ open Global_ref
 
   let etL_rev (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Et,a,b) ->
     let n = Seq.n () in
-    Seq.rm_g (n,a);
     Seq.rm_g (n,b);
+    Seq.rm_g (n,a);
     Seq.add_g (i,h);
     Seq.rm_ax ()
     | _ -> assert false
@@ -28,8 +28,8 @@ open Global_ref
     | _ -> assert false
 
   let ouR_rev (n,h) = assert (Seq.eq_n n); match !sf.(h) with C(Ou,a,b) ->
-    Seq.rm_d (n,a);
     Seq.rm_d (n,b);
+    Seq.rm_d (n,a);
     Seq.add_d (n,h);
     Seq.rm_ax ()
     | _ -> assert false
@@ -105,9 +105,9 @@ open Global_ref
  
   let impL2_rev (i,h) = assert (Seq.inf_n i); match !sf.(h) with C(Imp,a,b) ->
     let n = Seq.n () in
+    Seq.rm_d (n,a);
     Seq.rm_g (n+1,b);
     Seq.add_g (i,h);
-    Seq.rm_d (n,a);
     Seq.rm_ax ()
     | _ -> assert false
   
@@ -121,9 +121,9 @@ open Global_ref
   
   let impL3_rev (i,h) = assert (Seq.inf_n (i+1)); match !sf.(h) with C(Imp,a,b) ->
     let n = (Seq.n ())-1 in
+    Seq.rm_d (n+1,a);
     Seq.rm_g (n+2,b);
     Seq.add_g (i,h);
-    Seq.rm_d (n+1,a);
     Seq.decr_n ();
     Seq.rm_ax ()
     | _ -> assert false
@@ -136,8 +136,8 @@ open Global_ref
     | _ -> assert false
 
   let impR1_rev (n,h) = assert (Seq.eq_n n); match !sf.(h) with C(Imp,a,b) ->
-    Seq.rm_g (n,a);
     Seq.rm_d (n,b);
+    Seq.rm_g (n,a);
     Seq.add_d (n,h);
     Seq.rm_ax ()
     | _ -> assert false
@@ -150,8 +150,8 @@ open Global_ref
     | _ -> assert false
 
   let impR2_rev (n,h) = assert (Seq.eq_n (n+1)); match !sf.(h) with C(Imp,a,b) ->
-    Seq.rm_g (n+1,a);
     Seq.rm_d (n+1,b);
+    Seq.rm_g (n+1,a);
     Seq.add_d (n,h);
     Seq.decr_n ();
     Seq.rm_ax ()

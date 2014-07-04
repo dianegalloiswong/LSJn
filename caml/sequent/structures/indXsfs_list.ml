@@ -8,34 +8,50 @@ let rec add (i,a) = function
   | (j,l)::t when j>i -> (j,l)::(add (i,a) t)
   | l -> (i,[a])::l
 
+(* debug
 let rec mem (i,a) = function
   | (j,l)::t when j=i -> List.mem a l
   | (j,l)::t when j>i -> mem (i,a) t
   | _ -> false
-
+*)
+let print_int_list l = 
+  Format.printf "[ ";
+  List.iter (fun a -> Format.printf "%d; " a) l;
+  Format.printf "]"
+(*
 let rec print = function
-  | (i,l)::t -> Format.printf "( %d , [ " i; List.iter (fun a -> Format.printf "%d; " a) l;
-Format.printf "] ); "; print t
+  | (i,l)::t -> Format.printf "( %d , " i; print_int_list l;
+Format.printf " ); "; print t
   | [] -> ()
+*)
 
 let rec enleve x = function
   | [] -> assert false
   | h::t when h=x -> t
-  | h::t -> h::(enleve x t)
+  (*| h::t -> h::(enleve x t)*)
+  | h::t as l ->
+    Format.printf "enleve %d " x; print_int_list l; Format.printf "@.";
+    h::(enleve x t)
 let rec rm (i,a) = function
   | (j,l)::t when j=i ->
     let l = enleve a l in
     if l=[] then t else (j,l)::t
   | (j,l)::t when j>i -> (j,l)::(rm (i,a) t)
-  | [] -> assert false
-  | (j,_)::_ as t -> Format.printf "i=%d, j=%d, a=%d, %d appels@." i j a !Time.appels;
-print t; assert false
+  | _ -> assert false
 
+(* debug
 let c = (1,5)
 let add2 (i,a) t = Format.printf "add (%d,%d) (%b);  " i a (mem c t);let r= add (i,a) t in
 Format.printf "%b@." (mem c r);r
 let rm2 (i,a) t = Format.printf "rm (%d,%d) (%b);  " i a (mem c t); let r=rm (i,a) t in
 Format.printf "%b@." (mem c r);r
+
+let add (i,a) t = Format.printf "(%d,%d)   " i a; print t;let r= add (i,a) t in
+Format.printf "@." ;r
+let rm (i,a) t = Format.printf "(%d,%d)   " i a; print t; let r=rm (i,a) t in
+Format.printf "@.";r
+*)
+
 
 let rec trouve_inf n = function
   | [] -> raise Not_found
@@ -46,7 +62,7 @@ let trouve_eq n = function
   | (i,_)::_ when i>n -> assert false
   | _ -> raise Not_found
 
-
+(*
 let rec filter_inf n = function
   | [] -> []
   | (i,l)::t when i<=n ->
@@ -57,6 +73,7 @@ let filter_eq n = function
   | (i,l)::_ when i=n -> List.map (fun a -> (n,a)) l
   | (i,_)::_ when i>n -> assert false
   | _ -> []
+*)
 
 let rec fold_inf n f init = function
   | [] -> init
@@ -93,7 +110,7 @@ let rec concat_fin l = function
   | h::t -> h::(concat_fin l t)
 let rec separe_k k = function
   | [] -> assert false
-  | h::t -> if k=1 then [h],t else if k=0 then [],t
+  | h::t -> if k=1 then [h],t else if k=0 then [],h::t
     else let (l1,l2) = separe_k (k-1) t in (h::l1,l2)
 let rotat_k k l = let (l1,l2) = separe_k k l in concat_fin l1 l2
 let rotat l = rotat_k 1 l
@@ -133,11 +150,9 @@ let rec reord_inf n k = function
 
 let reord_eq n k = function
   | (i,l)::t when i=n ->
-    if k = List.length l then
-      (i,l)::t
-    else
-      let l = rotat_k k l in
-      (i,l)::t
+    let p = List.length l in
+    let l = if k=p then l else rotat_k (p-k) l in
+    (i,l)::t
   | _ -> assert false
 
 (*
