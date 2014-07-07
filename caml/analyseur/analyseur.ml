@@ -5,27 +5,13 @@ open Ast
 
 let traite_attendus l = List.fold_left (fun (b1,b2) -> function IL b -> (b,b||b2) | CL b -> (b1,b)) (false,false) l
 
-(*
-let traite_fact (b1,b2) = function
-  | Conj (s,f) ->
-    if not !Options.compare_seul then Format.printf "Conjecture %s :" s;
-    if !Options.compare then 
-      LSJn.test_attendu (f,b1,b2)
-    else
-      LSJn.test f
-  | Autre (s,s2,_) ->
-    Format.printf "%s pas conjecture mais %s : fichier non traite@." s s2;
-    raise Exit
-
-let traite_facts att l = try List.iter (traite_fact att) l with Exit -> ()
-*)
 
 let traite_fact fopt = function
   | Conj (s,f) ->
-    if not !Options.compare_seul then Format.printf "Conjecture %s : %s@." s (To_string.formule f);
+    if Options.print_ax_et_conj() then Format.printf "Conjecture %s : %s@." s (To_string.formule f);
     (match fopt with None -> Some f | Some ax -> Some (F(Imp,ax,f)))
   | Ax (s,f) ->
-    if not !Options.compare_seul then Format.printf "Axiome %s : %s@." s (To_string.formule f);
+    if Options.print_ax_et_conj() then Format.printf "Axiome %s : %s@." s (To_string.formule f);
     (match fopt with None -> Some f | Some ax -> Some (F(Et,ax,f)))
   | Autre (_,s,_) ->
     Format.printf "%s inconnu : fichier non traite@." s;
@@ -35,10 +21,6 @@ let traite_facts att l =
   let fopt = try List.fold_left traite_fact None l with Exit -> None in
   match fopt with None -> () | Some f ->
     LSJn.test (if !Options.compare then Some att else None) f
- (* if !Options.compare then 
-    LSJn.test_attendu (f,b1,b2)
-  else
-    LSJn.test f*)
 
 let localisation nom pos =
   let l = pos.Lexing.pos_lnum in
@@ -64,32 +46,14 @@ let parse nom =
     | _ ->
       Format.eprintf "Erreur dans Analyseur.parse@.";
       raise Exit
-       
 
-
-let main_f nom =
-  if (not (Options.stop_on())) || (Time.faire_fichier nom) then
-    begin
-    if Options.print_fichier() then Format.printf "%s@." nom;
-    try
-      let attendus,facts = parse nom in
-      let att = traite_attendus attendus in
-      traite_facts att facts;
-      if not !Options.compare_seul then Format.printf "@."
-    with Exit -> ()
-    end
-
-let rec main_d dnom =
-  let dh = Unix.opendir dnom in
+let main nom =
+  if Options.print_fichier() then Format.printf "%s@." nom;
   try
-    while true do
-      let s = Unix.readdir dh in
-      if s.[0] <> '.' then main (dnom^"/"^s)
-    done;
-  with End_of_file -> ()
+    let attendus,facts = parse nom in
+    let att = traite_attendus attendus in
+    traite_facts att facts;
+    if Options.print_fichier() then Format.printf "@."
+  with Exit -> ()
 
-and main nom =
-    match (Unix.stat nom).Unix.st_kind with
-      | Unix.S_REG -> main_f nom
-      | Unix.S_DIR -> main_d nom
-      | _ -> ()
+

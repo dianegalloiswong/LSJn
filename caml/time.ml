@@ -59,11 +59,11 @@ let rec mem_inf (s,n) = function
   | _::t -> mem_inf (s,n) t
 
 let faire_fichier nom =
-  (*if Options.stop_on() then*)
+  if Options.stop_on() then
     let descr = parse nom in
     if mem_inf descr !trop_longs then false
     else (courant:=descr; true)
-  (*else true*)
+  else true
 
 let verif_timeout () = 
   if Options.stop_on() then

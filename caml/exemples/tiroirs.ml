@@ -27,6 +27,7 @@ let d p h =
 
 let main p h = F (Imp,g p h,d p h)
 
+let attendu p h = let b = p > h in (b,b)
 
 
 

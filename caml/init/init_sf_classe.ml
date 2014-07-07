@@ -52,13 +52,14 @@ let main formule =
 
 
 
+let aligne n = if n<10 then " " else ""
 
 let test f =
   main f;
-  Format.printf "@.%s :@." (To_string.formule f);
-  (*Print.sous_formules !sf !classe*)
-  for i=0 to (Array.length !sf)-1 do
-    Format.printf "  %d %d %s@." i !classe.(i) (To_string.case_sf !sf.(i))
+  (*Format.printf "%s@." (To_string.formule f);*)
+  Format.printf "  sf   classe   description@.";
+  for i=1 to (Array.length !sf)-1 do
+    Format.printf "  %s%d     %s%d      %s@." (aligne i) i (aligne !classe.(i)) !classe.(i) (To_string.case_sf !sf.(i))
   done
 
 

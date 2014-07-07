@@ -145,19 +145,23 @@ let main formule =
 
 
 
-
+let bts b = if b then "vrai" else "faux"
 
 let test attopt f =
   if Options.print_formule() then Format.printf "%s@." (To_string.formule f);
+  if !Options.indexation then Init_sf_classe.test f;
+  Time.time (fun () ->
   try
-  let rep = Time.time main f in
+  let rep = main f in
+  if Options.print_rep() then Rep.print rep;
   match attopt with
-    | None -> Rep.print rep
+    | None -> ()
     | Some (batt,_) ->
       let b = vrai rep in
       if b <> batt then
-	Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %b    attendu : %b@." b batt
+	Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %s    attendu : %s@." (bts b) (bts batt)
   with Time.Temps_ecoule -> () (*Format.printf "temps écoulé (%fs)@." !Options.temps_max*)
+  ) ()
 
 (*
 let test f =
