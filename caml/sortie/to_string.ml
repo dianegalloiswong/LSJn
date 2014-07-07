@@ -1,7 +1,7 @@
 open Def
 open Global_ref
 
-let connecteur = function Et -> " & " | Ou -> " v " | Imp -> " -> "
+let connecteur = function Et -> " & " | Ou -> " | " | Imp -> " -> "
 let rec formule = function
   | FFaux -> "faux"
   | FVar v -> v

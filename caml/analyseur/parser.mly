@@ -19,7 +19,8 @@
 
 %right EQ
 %right IMP
-%left OU ET
+%left OU
+%left ET
 %right NON
 /*%left LPAREN POINT VIR*/
 

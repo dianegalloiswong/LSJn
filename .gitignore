@@ -12,3 +12,4 @@ caml/_build/
 *.blg
 ILTP*
 caml/testsILTP/
+caml/stats*

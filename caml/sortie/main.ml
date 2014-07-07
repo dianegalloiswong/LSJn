@@ -68,7 +68,20 @@ let () = Arg.parse options (fun nom -> noms := nom:: !noms) ""
 let () = List.iter faire (List.rev !noms)
 
 
-let () = match !formule with Some f -> LSJn.test !attendu f | None -> ()
+let () = match !formule with Some f -> Exec_formule.main !attendu f | None -> ()
+
+let () =
+  if !ma_liste then
+    List.iter2 Exec_formule.main Quelques_formules.l_att Quelques_formules.l
+
+let () =
+  if !ma_liste_courte then
+    List.iter2 Exec_formule.main Quelques_formules.l1_att Quelques_formules.l1
+
+  
+let () = if Options.print_temps_total() then Format.printf "temps total : %fs@." !Time.temps_total
+
+(*
 
 let () =
   if !ma_liste then
@@ -76,20 +89,6 @@ let () =
       List.iter2 LSJn.test Quelques_formules.l_att Quelques_formules.l
     else
       List.iter (Init_sf_classe.test ) Quelques_formules.l
-let () =
-  if !ma_liste_courte then
-    if !Options.compare then 
-      List.iter2 LSJn.test Quelques_formules.l1_att Quelques_formules.l1
-    else
-      List.iter (LSJn.test None) Quelques_formules.l1
-  
-
-
-
-
-let () = if Options.time_on() then Format.printf "temps total : %fs@." !Time.temps_total
-
-(*
 
 let f =
   if !arg_eqb > 0 then

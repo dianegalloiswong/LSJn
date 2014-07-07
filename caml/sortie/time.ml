@@ -60,15 +60,17 @@ let rec mem_inf (s,n) = function
 
 let faire_fichier nom =
   if Options.stop_on() then
-    let descr = parse nom in
-    if mem_inf descr !trop_longs then false
-    else (courant:=descr; true)
+    try
+      let descr = parse nom in
+      if mem_inf descr !trop_longs then false
+      else (courant:=descr; true)
+    with Exit -> true
   else true
 
 let verif_timeout () = 
   if Options.stop_on() then
     try verif_timeout () with Temps_ecoule ->
-      trop_longs := !courant:: !trop_longs;
+      trop_longs := !courant :: !trop_longs;
       raise Temps_ecoule
   else
     verif_timeout ()

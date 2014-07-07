@@ -20,7 +20,7 @@ let traite_fact fopt = function
 let traite_facts att l =
   let fopt = try List.fold_left traite_fact None l with Exit -> None in
   match fopt with None -> () | Some f ->
-    LSJn.test (if !Options.compare then Some att else None) f
+    Exec_formule.main (if !Options.compare then Some att else None) f
 
 let localisation nom pos =
   let l = pos.Lexing.pos_lnum in
@@ -53,7 +53,7 @@ let main nom =
     let attendus,facts = parse nom in
     let att = traite_attendus attendus in
     traite_facts att facts;
-    if Options.print_fichier() then Format.printf "@."
+    (*if Options.print_fichier() then Format.printf "@."*)
   with Exit -> ()
 
 
