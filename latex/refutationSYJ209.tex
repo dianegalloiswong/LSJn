@@ -1,0 +1,158 @@
+\documentclass[11pt, openany]{article}
+%\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
+\usepackage[frenchb]{babel}
+%\usepackage{slashbox}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage[latin1]{inputenc}
+\usepackage[OT1]{fontenc}
+%\usepackage{fancybox}
+\usepackage{a4wide}
+%\usepackage{fancyvrb}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+
+
+\newcounter{moncompteur}
+\newtheorem{q}[moncompteur]{ \textbf{Question}}{}
+\newtheorem{prop}[moncompteur]{ \textbf{Proposition}}{}
+\newtheorem{df}[moncompteur]{ \textbf{Définition}}{}
+\newtheorem{rem}[moncompteur]{ \textbf{Remarque}}{}
+\newtheorem{theo}[moncompteur]{ \textbf{Théorème}}{}
+\newtheorem{conj}[moncompteur]{ \textbf{Conjecture}}{}
+\newtheorem{cor}[moncompteur]{ \textbf{Corollaire}}{}
+\newtheorem{lm}[moncompteur]{ \textbf{Lemme}}{}
+%\newtheorem{nota}[moncompteur]{ \textbf{Notation}}{}
+%\newtheorem{conv}[moncompteur]{ \textbf{Convention}}{}
+\newtheorem{exa}[moncompteur]{ \textbf{Exemple}}{}
+\newtheorem{ex}[moncompteur]{ \textbf{Exercice}}{}
+%\newtheorem{app}[moncompteur]{ \textbf{Application}}{}
+%\newtheorem{prog}[moncompteur]{ \textbf{Algorithme}}{}
+%\newtheorem{hyp}[moncompteur]{ \textbf{Hypothèse}}{}
+\newenvironment{dem}{\noindent\textbf{Preuve}\\}{\flushright$\blacksquare$\\}
+\newcommand{\cg }{[\kern-0.15em [}
+\newcommand{\cd}{]\kern-0.15em]}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\card}{\mathrm{card}}
+
+
+%stage
+\newcommand{\G}{\Gamma}
+\newcommand{\D}{\Delta}
+\newcommand{\Th}{\Theta}
+
+\newcommand{\To}{\Rightarrow}
+
+\usepackage{bussproofs}
+\newcommand{\ze}{\AxiomC}
+\newcommand{\rien}{\AxiomC{}}
+\newcommand{\un}{\UnaryInfC}
+\newcommand{\bi}{\BinaryInfC}
+\newcommand{\tr}{\TrinaryInfC}
+\newcommand{\lab}{\RightLabel}
+
+\EnableBpAbbreviations
+
+%\AxiomC{form } \UnaryInfC{form } \BinaryInfC{form } \TrinaryInfC{form }
+
+\begin{document}
+\renewcommand{\labelitemi}{$\diamond$}
+\vspace{2cm}~~\\
+
+%fof(axiom1,axiom,(
+%( ( ( p1 & ( p2 & p3 ) ) | ( ( ~(~(p1)) => f)  | ( ( p2 => f)  | ( p3 => f)  ) ) ) => f) )).
+%
+%fof(con,conjecture,(
+%f
+%)).
+
+
+\begin{prooftree}
+	\AXC	{}
+	
+	\RightLabel{Irr}
+	\UIC{$1:f \;,\; 0: p2 \;,\; 0: p3 \;,\; 2: \bot \;,\; 1: p1 \quad\To_{1}\quad 0:  p1  \;,\; 0: f  \;,\;  0: f  \;,\;  0: f  \;,\; 0: f \;,\; 1: \bot $}
+
+	\RightLabel{$\to R$}
+	\UIC{$1:f \;,\; 0: p2 \;,\; 0: p3 \;,\; 2: \bot \quad\To_{1}\quad 0:  p1  \;,\; 0: f  \;,\;  0: f  \;,\;  0: f  \;,\; 0: f \;,\; 1: \lnot p1$}
+
+	\RightLabel{Succ}
+	\UIC{$1:f \;,\; 0: p2 \;,\; 0: p3 \;,\; 0: \lnot\lnot p1 \quad\To_{0}\quad 0:  p1  \;,\; 0: f  \;,\;  0: f  \;,\;  0: f  \;,\; 0: f$}
+
+	\RightLabel{$\to R$}
+	\UIC{$1:f \;,\; 0: p2 \;,\; 0: p3 \quad\To_{0}\quad 0:  p1  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: f  \;,\;  0: f  \;,\; 0: f$}
+
+	\RightLabel{$\to R$}
+	\UIC{$1:f \;,\; 0: p2 \quad\To_{0}\quad 0:  p1  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: f  \;,\;  0: p3 \to f  \;,\; 0: f$}
+
+	\RightLabel{$\to R$}
+	\UIC{$1:f \quad\To_{0}\quad 0:  p1  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f  \;,\;  0: p3 \to f  \;,\; 0: f$}
+
+	\RightLabel{$\land R1$}	
+	\UIC{$1:f \quad\To_{0}\quad 0:  p1 \land ( p2 \land p3 )  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f  \;,\;  0: p3 \to f  \;,\; 0: f$}
+
+	\RightLabel{$\lor R \,(\times3)$}	
+	\UIC{$1:f \quad\To_{0}\quad 0: (\;( p1 \land ( p2 \land p3 ) ) \lor (\;( \lnot\lnot p1 \to f)  \lor (\; ( p2 \to f)  \lor ( p3 \to f)  \;) ) )\;,\; 0: f$}
+
+	\RightLabel{$\to L2$}	
+	\UIC{$0:[ \; (\;( p1 \land ( p2 \land p3 ) ) \lor (\;( \lnot\lnot p1 \to f)  \lor (\; ( p2 \to f)  \lor ( p3 \to f)  \;) ) ) \; ] \to f  \quad\To_{0}\quad 0: f$}
+
+	\RightLabel{$\to R$}	
+	\UIC{$\To_{0}\quad 0:( \;[ \; (\;( p1 \land ( p2 \land p3 ) ) \lor (\;( \lnot\lnot p1 \to f)  \lor (\; ( p2 \to f)  \lor ( p3 \to f)  \;) ) ) \; ] \to f \; ) \to f$}
+	
+\end{prooftree}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
+
+ \AxiomC{}
+     \UnaryInfC{D}
+     \DisplayProof
+
+
+\begin{prooftree}
+     \ax{A}
+     \AxiomC{B}
+%\RightLabel{ici}
+     \BinaryInfC{D}
+     \end{prooftree}
+
+ \begin{prooftree}
+          \AxiomC{A}
+ \RightLabel{1}
+          \AxiomC{B}
+          \AxiomC{C}
+ \RightLabel{2}
+          \BinaryInfC{D}
+ \RightLabel{3}
+          \BinaryInfC{E}
+ \RightLabel{4}
+     \end{prooftree}
+
+
+
+
+
+

@@ -21,3 +21,5 @@ let print_temps_un () = (not !notime) && (not !rien_afficher)
 let print_ax_et_conj () = (* not !compare_seul *) false
 let print_temps_total () = time_on ()
 
+
+let irr = ref false

@@ -37,6 +37,9 @@ let options = [
   "-liste", Arg.Set ma_liste, "une liste de quelques formules courtes";
   "-liste-courte", Arg.Set ma_liste_courte, "une liste de quelques formules très courtes";
 
+  (* debug *)
+  "-irr", Arg.Set Options.irr, "affiche les utilisations de Irr";
+
 ]
 
 
