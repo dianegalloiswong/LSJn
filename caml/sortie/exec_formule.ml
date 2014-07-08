@@ -8,37 +8,17 @@ let main att_opt f =
     (try
        Time.time (fun () ->
 	 let rep = Prouveur.main f in
-	 if Options.print_rep() then Rep.print rep;
+	 if Options.print_rep() then (*Rep.print rep*) Format.printf "%s" (bool_to_string_fr rep);
 	 match att_opt with
 	   | None -> ()
 	   | Some (batt,_) ->
-	     let b = Rep.vrai rep in
+	     let b = (*Rep.vrai*) rep in
 	     if b <> batt then
 	       Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %s    attendu : %s@." (bool_to_string_fr b) (bool_to_string_fr batt)
-      (*with Time.Temps_ecoule -> ()*) (*Format.printf "temps écoulé (%fs)@." !Options.temps_max*)
        ) ()
      with Time.Temps_ecoule -> () )
   ; Format.printf "@."
 
-
-let main_CL att_opt f =
-  if Options.print_formule() then Format.printf "%s@." (To_string.formule f);
-  if !Options.indexation then (Init_sf_classe.test f)
-  else 
-    (try
-       Time.time (fun () ->
-	 let rep = Prouveur.main_CL f in
-	 if Options.print_rep() then Rep.print rep;
-	 match att_opt with
-	   | None -> ()
-	   | Some (_,batt) ->
-	     let b = Rep.vrai rep in
-	     if b <> batt then
-	       Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %s    attendu : %s@." (bool_to_string_fr b) (bool_to_string_fr batt)
-      (*with Time.Temps_ecoule -> ()*) (*Format.printf "temps écoulé (%fs)@." !Options.temps_max*)
-       ) ()
-     with Time.Temps_ecoule -> () )
-  ; Format.printf "@."
 
 
 

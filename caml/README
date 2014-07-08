@@ -1,0 +1,104 @@
+08/07
+Changements depuis hier : quand on affiche l'indexation, on ne fait pas la recherche de preuve ensuite. Réorganisation des fichiers. Ajout d'une ébauche de readme.
+
+Je ne sais pas comment appeler le dossier "sortie" où se trouvent tous les fichiers qui servent à imprimer et gérer les options. Il faudra aussi complètement revoir le dossier prouveur/sequent/structures : découper structs.ml et changer les noms, même si je n'ai pas d'idées pour les nouveaux noms.
+Je ne sais pas non plus quoi mettre dans "Description des fichiers". Je voulais expliquer rapidement le rôle de chacun, mais ça devient long...
+Il faudra que je rédige à un moment une explication de l'indexation.
+
+
+
+
+
+--------
+
+Usage
+
+Les arguments déterminent des formules et résultas attendus correspondants.
+Par défaut : pour chaque formule on l'imprime, puis on imprime si elle est prouvable.
+Dans tous les cas, si on a déterminé si une formule est prouvable, on compare le résultat obtenu avec celui attendu et s'ils sont différents on le signal.
+
+arguments :
+	nom de fichier en .p avec la syntaxe des tests d'ILTP : en extrait directement une formule et le résultat attendu
+	nom de répertoire : cherche récursivement les fichier en .p et fait la même chose
+	-liste-courtes : les formules à traiter sont quelques formules très courtes écrites à la main
+	-liste : de même avec en plus des formules un tout petit peu plus longues
+	-ph <int> <int> : la formule à traiter est le principe du pigeonnier avec les arguments donnés
+	-eqb <int> : la formule à traiter est (x1 <-> x2) | ... | (x(n-1) <-> xn) | (xn <-> x1)
+
+options :
+	-indexation : affiche l'indexation (et c'est tout, pas de recherche de preuve)
+	-rien-afficher : ne rien afficher sauf le temps total (mais comme toujours, si on obtient un résultat faux, on le signale quand même)
+	-notime : ne pas chronométrer
+	-stop <flottant> : arrête de chercher une preuve si le temps donné par l'argument en secondes est écoulé (coûteux en appels système)
+	-compare-seul : n'affiche que nom de fichier et temps mis (à renommer)
+Il manque les options pour afficher preuve ou contre-modèle. Et j'aimerais à un moment en remettre une pour traiter la logique classique : ce n'est pas intéressant niveau efficacité mais ça m'a plusieurs fois permis de repérer des bugs.
+
+
+
+--------
+
+Description des fichiers
+
+
+Lorsqu'on dit que nom.ml fait quelque chose, cela sous-entend le cas échéant la fonction Nom.main
+
+
+analyseur :
+
+	lexer.mll, parser.mly, ast.mli : ce à quoi on s'attend
+
+	analyseur.ml : prend un nom de fichier, parse le fichier et lance Exec_formule.main sur la formule obtenue (en précisant aussi les résultats attendus)
+
+
+
+
+prouveur :
+
+	def.mli : la structure des formules (et le type quoi_faire qui permet de dire à prouveur.ml quelle règle appliquer, mais je vais sans doute le déplacer)
+
+	global_ref.ml : les références de tableau sf (le graphe des sous-formules), classe et priorite, remplies par les fichier du dossier "indexation" et utilisées à divers endroits
+
+	indexation :
+		init_sf_classe : initialise Global_ref.sf et Global_ref.classe à partir de la formule donnée en argument
+		init_priorite : initialise Global_ref.priorite
+
+	prouveur.ml : décide si une formule est prouvable. C'est ici qu'on appelle les fonctions d'initialisation, puis qu'on exécute l'algorithme de recherche de preuve en utilisant les fonctions d'applique_regle.ml.
+
+	reponse :
+		les structures de preuve et contre-modèle et un type Rep.t qui peut être l'une ou l'autre, avec des fonctions pour les manipuler destinées à prouveur.ml. Ne contient que des fichiers inutilisés pour le moment, car retenir toutes ces informations était trop coûteux. Il faudra que j'essaie de retenir un minimum d'information pour pouvoir les reconstruire à la demande.
+
+	sequent :
+
+		seq.ml : définit le séquent et contient les fonctions qui agissent dessus. Plusieurs champs du séquents contiennent des structures définies dans dans structures.
+
+		applique_regle.ml : pour chaque prémisse de chaque règle, contient une fonction qui transforme la conclusion en cette prémisse, et une qui fait la transformation inverse, en utilisant seq.ml
+
+		structures :
+			Il faudra que je réorganise ça. Définit et manipule les structures utilisées dans les champs du séquent. Pour l'instant :
+
+			structs.ml : contient deux foncteurs : 1) fabrique un tableau de 7 cases contenant la structure donnée en argument, destiné à représenter les ensembles "gamma" et "delta" du séquent en classant les formules par priorité. 2) fabrique un tableau de la structure donnée en argument, avec autant de cases que de classes, destiné à retenir quelles classes sont présentes dans le séquent avec quels indices, afin de tester rapidement si on peut appliquer l'axiome "Id". C'est aussi dans structs.ml que je distingue les modules destinés à représenter la partie gauche ou droite du séquent : je garde les fonctions en "_inf" (comme : je m'intéresse aux indices inférieurs à l'indice n du séquent lui-même, qu'on me donne en argument) pour la partie gauche, et en "_eq" (idem pour les indices égaux à n) pour la partie droite. Il faudra que je découpe tout ça.
+
+			couple_list.ml : n'est plus utilisé. Représentait un ensemble de couples indice * (numéro de sous-formule) par une liste triés par indices décroissants.
+
+			indXsfs_liste.ml : représente un ensemble de couples indice * (numéro de sous-formule) par une liste, triée par indices décroissants, de couples indice * (liste des numéros de sous-formule apparaissant avec cet indice), telle qu'il y a maximum un tel couple par indice et que s'il y en a un, la liste dedans est non vide. Utilisé pour "gamma" et "delta" (dans les cases du tableau indexé par les priorités).
+
+			indXnb_list.ml : représente un multiensemble d'indices par une liste de couples indice * (nombre d'occurrences de cet indice), triée par indices décroissants. Il y a maximum un couple par indice et s'il y en a un, le nombre d'occurrences est strictement positif. Utilisé pour retenir quelles classes sont présentes avec quels indices (dans les cases du tableau indexé par les classes).
+
+
+
+
+sortie : contient les fichiers d'impression et de choix de ce qu'on imprime (je ne sais pas comment l'appeler...)
+
+	exec_formule.ml : prend une formule et appliquent ce qui est indiqué par les options : l'imprime ou imprime les tableaux d'indexation ou applique Prouveur.main et imprime le résultat...
+	main.ml : le fichier lancé à l'exécution. Parse les options et lance Analyseur.main sur des noms de fichiers ou directement Exec_formule.main sur des formules
+	options.ml : contient les références correspondant aux options
+	time.ml : contient tout ce qui permet de chronométrer
+	to_string.ml : convertit différents type de données en chaînes de caractères
+
+
+
+
+
+
+
+

@@ -23,7 +23,7 @@ let options = [
   "-details", Arg.Unit details, "affiche les preuves et contre-modèles";
   "-preuves", Arg.Set Options.preuves, "affiche les preuves";
   "-cmods", Arg.Set Options.cmods, "affiche les contre-modèles";
-  "-compare", Arg.Set Options.compare, "compare avec les réponses attendues";
+  (*"-compare", Arg.Set Options.compare, "compare avec les réponses attendues"; par défaut maintenant*)
   "-compare-seul", Arg.Unit compare_seul, "compare sans afficher les formules et réponses si c'est bon";
   "-rien-afficher", Arg.Set Options.rien_afficher, "n'affiche rien sauf si on trouve un résultat faux";
   "-notime", Arg.Set Options.notime, "ne chronomètre pas";
