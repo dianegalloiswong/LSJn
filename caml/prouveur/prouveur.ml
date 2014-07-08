@@ -26,7 +26,9 @@ let rec prouvable () =
     | QF_ouL -> ouL c
     | QF_etR -> etR c
     | QF_imp -> imp ()
-    | QF_aucun -> cmod (Seq.var_g()) []
+    | QF_aucun -> 
+(*Format.printf "Irr: "; Seq.print (); Format.printf "@.";*)
+cmod (Seq.var_g()) []
 
 and inversible1prem r_prem r_rev regle c =
   r_prem c;

@@ -18,12 +18,12 @@ let print_int_list l =
   Format.printf "[ ";
   List.iter (fun a -> Format.printf "%d; " a) l;
   Format.printf "]"
-(*
-let rec print = function
+
+let rec print_t = function
   | (i,l)::t -> Format.printf "( %d , " i; print_int_list l;
-Format.printf " ); "; print t
+Format.printf " ); "; print_t t
   | [] -> ()
-*)
+
 
 let rec enleve x = function
   | [] -> assert false
@@ -46,9 +46,9 @@ Format.printf "%b@." (mem c r);r
 let rm2 (i,a) t = Format.printf "rm (%d,%d) (%b);  " i a (mem c t); let r=rm (i,a) t in
 Format.printf "%b@." (mem c r);r
 
-let add (i,a) t = Format.printf "(%d,%d)   " i a; print t;let r= add (i,a) t in
+let add (i,a) t = Format.printf "(%d,%d)   " i a; print_t t;let r= add (i,a) t in
 Format.printf "@." ;r
-let rm (i,a) t = Format.printf "(%d,%d)   " i a; print t; let r=rm (i,a) t in
+let rm (i,a) t = Format.printf "(%d,%d)   " i a; print_t t; let r=rm (i,a) t in
 Format.printf "@.";r
 *)
 
@@ -162,6 +162,18 @@ let nombre_inf n t = Format.printf "nombre_inf, n=%d, t: " n; print t; Format.pr
 
 let nth_inf n k t = Format.printf "  nth_inf n=%d k=%d " n k; print t;
   let c,t = nth_inf n k t in
-  Format.printf "  :  (%d,%d),   " (fst c) (snd c); print t; Format.printf "@.";
+  Format.printf "  :  (%d,%d),   " (fst c) (snd c); print t; Format.printnf "@.";
   c,t
 *)
+
+
+
+(* pour chaque couple :   "i : formule ;   " *)
+let rec print = function
+  | [] -> ()
+  | (i,l)::t -> List.iter (fun a -> Format.printf "%s ,   " (To_string.couple (i,a))) l; print t
+
+
+
+
+

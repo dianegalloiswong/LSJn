@@ -47,3 +47,6 @@ val var_g : unit -> string list
 
 
 val choix_formule : unit -> quoi_faire * couple
+
+
+val print : unit -> unit

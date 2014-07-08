@@ -29,4 +29,4 @@ let rec to_real_formule a = match !sf.(a) with
 
 let sous_formule a = formule (to_real_formule a)
 
-
+let couple (i,a) = (string_of_int i)^" : "^(sous_formule a)

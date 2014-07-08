@@ -15,6 +15,8 @@ sig
   val nombre_n : int -> t -> int
   val nth_n : int -> int -> t -> (couple * t)
   val reord_n : int -> int -> t -> t
+
+  val print : t -> unit
 end
 
 module Case = IndXsfs_list
@@ -33,6 +35,8 @@ struct
   let nth_n = Case.nth_inf
   let reord_n = Case.reord_inf
 
+  let print = Case.print
+
   (*let add x = Format.printf "G  "; add x
   let rm x = Format.printf "G  "; rm x*)
 end
@@ -50,6 +54,8 @@ struct
   let nombre_n = Case.nombre_eq
   let nth_n = Case.nth_eq
   let reord_n = Case.reord_eq
+
+  let print = Case.print
 
   (*let add x = Format.printf "D  "; add x
   let rm x = Format.printf "D  "; rm x*)
@@ -89,6 +95,8 @@ struct
 	       Format.printf "rm prio=%d  " p;
 	       t.(p) <- Case.rm c t.(p)
 *)
+
+  let print t = for p=0 to 6 do Case.print t.(p) done
 end
 
 module G = Tab_prio(Case_g)

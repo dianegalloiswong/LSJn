@@ -163,3 +163,11 @@ let choix_formule () =
   in
   qf,h
 
+
+
+let print () =
+  Format.printf "{   ";
+  G.print s.g;
+  Format.printf "}  =>(%d)  {   " s.n;
+  D.print s.d;
+  Format.printf "}"
