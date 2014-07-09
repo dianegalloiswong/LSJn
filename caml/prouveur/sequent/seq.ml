@@ -132,12 +132,12 @@ let rec reord_imp_d k nb = D.reord_imp s.n k s.d
 
 
 let var_g () =
-  if !Options.cmods then
+  (*if !Options.cmods then*)
     G.fold_vars s.n (fun l (i,a) -> match !sf.(a) with
       | CVar x -> x::l
       | _ -> l
     ) [] s.g
-  else []
+  (*else []*)
 
 
 let prio_g () =
@@ -151,14 +151,12 @@ let choix_formule () =
   let p = min pg pd in
   let h = if p=pg then hg else hd in
   let qf = match p with
-    | 0 -> QF_fauxL
     | 1 -> QF_etL
     | 2 -> QF_ouR
     | 3 -> QF_ouL
     | 4 -> QF_etR
     | 5 -> QF_imp
     | 6 -> QF_aucun
-    | 7 -> assert false
     | _ -> assert false
   in
   qf,h

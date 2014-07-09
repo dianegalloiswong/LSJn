@@ -1,3 +1,7 @@
+09/07
+Déplacement de la fonction prouvable de prouveur.ml dans stratégie/prouvable.ml : maintenant prouveur.ml est vraiment court et se contente d'appeler divers fichiers dans le bon ordre.
+Quelques modifications de rep.ml et prouvable.ml en vue de rajouter de quoi chercher en détails une preuve ou un contre-modèle en fonction d'indications récoltées lors de la première recherche. Ajouts de refutation.ml et indications.ml qui sont incomplets et pas encore utilisés.
+
 08/07
 Changements depuis hier : quand on affiche l'indexation, on ne fait pas la recherche de preuve ensuite. Réorganisation des fichiers. Ajout d'une ébauche de readme.
 

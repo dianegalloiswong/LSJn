@@ -1,4 +1,5 @@
 type regle = R_fauxL | R_Id | R_etL | R_etR | R_ouL | R_ouR | R_impL | R_impR
+open Def
 type t = P of regle*int*(t list) (* int : sous-formule *)
 
 let regle_to_string = function | R_fauxL -> "fauxL" | R_Id -> "Id" | R_etL -> "etL" | R_etR -> "etR" | R_ouL -> "ouL" | R_ouR -> "ouR" | R_impL -> "impL" | R_impR -> "impR"
