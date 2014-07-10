@@ -21,29 +21,31 @@ let print_rep rep =
     (Format.printf "faux@.";
      if (*!details ||*) !Options.cmods then Contre_modele.print (to_cmod rep));
   Format.printf "@."
+*)
 
-(*
 (***)
-(* pour ne pas encombrer la mémoire avec les arbres de preuve/contre-modèle *)
-type t' = bool
-let vrai rep = rep
-let preuve _ _ _ = true
-let cmod _ _ = false
-exception Continuer of t'
-let print_rep rep =
-  if vrai rep then
+
+type t = bool
+let est_vrai rep = rep
+let vrai _ _ _ = true
+let irr () = false
+let cmod _ = false
+let print rep =
+  if rep then
     Format.printf "vrai@."
   else
     Format.printf "faux@."
+
+let of_bool b = b (* pour prouveur_test.ml *)
 (***)
-*)
-
-let print = print_rep
-
-*)
 
 
 
+
+
+
+
+(*
 
 
 
@@ -94,6 +96,7 @@ let faux regle sf rep = match !objectif with
   | R -> Refut(Refutation.R (regle,sf,[to_refut rep]))
   | _ -> rep
 
+let of_bool b = Bool b
 
 let print = function
   | Bool b -> Format.printf "%s@." (if b then "vrai" else "faux")
@@ -101,3 +104,9 @@ let print = function
   | C_M m -> Format.printf "faux@."; Contre_modele.print m
   | Refut _ -> assert false
 let print_rep = print
+
+
+*)
+
+
+

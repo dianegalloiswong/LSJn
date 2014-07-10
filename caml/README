@@ -1,3 +1,7 @@
+10/07
+Ajout de test_recherche_compilee (flag -comp) : simulation où je précalcule les fonctions de transformation du sequent pour l'application d'une règle à une formule principale, et les stocke dans un tableau. Ce n'est pas toujours facile de comparer à l'autre implémentation car je ne traite pas les "implique" dans le même ordre donc il y a parfois des écarts violents dans les deux sens dus à la chance de tomber rapidement sur le bon. Néanmoins dans certains cas où le nombre d'appels à "prouvable" est similaire, c'est 1,5 à 2 fois plus long.
+Les modifications de rep.ml d'hier sont actuellement commentée, mais fonctionnent si on enlève juste les commentaires.
+
 09/07
 Déplacement de la fonction prouvable de prouveur.ml dans stratégie/prouvable.ml : maintenant prouveur.ml est vraiment court et se contente d'appeler divers fichiers dans le bon ordre.
 Quelques modifications de rep.ml et prouvable.ml en vue de rajouter de quoi chercher en détails une preuve ou un contre-modèle en fonction d'indications récoltées lors de la première recherche. Ajouts de refutation.ml et indications.ml qui sont incomplets et pas encore utilisés.

@@ -135,5 +135,5 @@ let main formule =
     | _ -> { g=[]; n=0; d=[(0,m)]; fauxL=false; id=false }
   in
   let b = prouvable seq in
-  Rep.Bool b
+  Rep.of_bool b
 
