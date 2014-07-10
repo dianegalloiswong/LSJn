@@ -40,6 +40,7 @@ let options = [
   (* debug *)
   "-irr", Arg.Set Options.irr, "affiche les utilisations de Irr";
 
+  "-comp", Arg.Set Options.compile_test, "avec la simulation de recherche compilée";
 ]
 
 

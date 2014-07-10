@@ -23,3 +23,7 @@ let print_temps_total () = time_on ()
 
 
 let irr = ref false
+
+
+
+let compile_test = ref false

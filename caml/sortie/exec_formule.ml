@@ -7,7 +7,12 @@ let main att_opt f =
   else 
     (try
        Time.time (fun () ->
-	 let rep = Prouveur.main f in
+	 let rep = 
+	   if !Options.compile_test then 
+	     Prouveur_test.main f
+	   else
+	     Prouveur.main f
+	 in
 	 if Options.print_rep() then Rep.print rep (*Format.printf "%s@." (bool_to_string_fr rep)*);
 	 match att_opt with
 	   | None -> ()
