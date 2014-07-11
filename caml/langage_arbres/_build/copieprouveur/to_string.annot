@@ -1,0 +1,896 @@
+"copieprouveur/to_string.ml" 4 26 30 "copieprouveur/to_string.ml" 4 26 40
+type(
+  Def.connecteur -> string
+)
+ident(
+  def connecteur "copieprouveur/to_string.ml" 5 94 94 "copieprouveur/to_string.ml" 1 0 -1
+)
+"copieprouveur/to_string.ml" 4 26 52 "copieprouveur/to_string.ml" 4 26 54
+type(
+  Def.connecteur
+)
+"copieprouveur/to_string.ml" 4 26 58 "copieprouveur/to_string.ml" 4 26 63
+type(
+  string
+)
+"copieprouveur/to_string.ml" 4 26 66 "copieprouveur/to_string.ml" 4 26 68
+type(
+  Def.connecteur
+)
+"copieprouveur/to_string.ml" 4 26 72 "copieprouveur/to_string.ml" 4 26 77
+type(
+  string
+)
+"copieprouveur/to_string.ml" 4 26 80 "copieprouveur/to_string.ml" 4 26 83
+type(
+  Def.connecteur
+)
+"copieprouveur/to_string.ml" 4 26 87 "copieprouveur/to_string.ml" 4 26 93
+type(
+  string
+)
+"copieprouveur/to_string.ml" 4 26 43 "copieprouveur/to_string.ml" 4 26 93
+type(
+  Def.connecteur -> string
+)
+"copieprouveur/to_string.ml" 5 94 102 "copieprouveur/to_string.ml" 5 94 109
+type(
+  Def.formule -> Def.variable
+)
+ident(
+  def formule "copieprouveur/to_string.ml" 5 94 94 "copieprouveur/to_string.ml" 1 0 -1
+)
+"copieprouveur/to_string.ml" 6 121 125 "copieprouveur/to_string.ml" 6 121 130
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 6 121 134 "copieprouveur/to_string.ml" 6 121 140
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 7 141 150 "copieprouveur/to_string.ml" 7 141 151
+type(
+  Def.variable
+)
+ident(
+  def v "copieprouveur/to_string.ml" 7 141 155 "copieprouveur/to_string.ml" 7 141 156
+)
+"copieprouveur/to_string.ml" 7 141 145 "copieprouveur/to_string.ml" 7 141 151
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 7 141 155 "copieprouveur/to_string.ml" 7 141 156
+type(
+  Def.variable
+)
+ident(
+  int_ref v "copieprouveur/to_string.ml" 7 141 150 "copieprouveur/to_string.ml" 7 141 151
+)
+"copieprouveur/to_string.ml" 8 157 164 "copieprouveur/to_string.ml" 8 157 167
+type(
+  Def.connecteur
+)
+"copieprouveur/to_string.ml" 8 157 168 "copieprouveur/to_string.ml" 8 157 169
+type(
+  Def.formule
+)
+ident(
+  def f "copieprouveur/to_string.ml" 8 157 180 "copieprouveur/to_string.ml" 8 157 214
+)
+"copieprouveur/to_string.ml" 8 157 170 "copieprouveur/to_string.ml" 8 157 175
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 8 157 161 "copieprouveur/to_string.ml" 8 157 176
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 8 157 184 "copieprouveur/to_string.ml" 8 157 185
+type(
+  Def.variable
+)
+ident(
+  def s "copieprouveur/to_string.ml" 8 157 201 "copieprouveur/to_string.ml" 8 157 214
+)
+"copieprouveur/to_string.ml" 8 157 188 "copieprouveur/to_string.ml" 8 157 195
+type(
+  Def.formule -> Def.variable
+)
+ident(
+  int_ref formule "copieprouveur/to_string.ml" 5 94 102 "copieprouveur/to_string.ml" 5 94 109
+)
+"copieprouveur/to_string.ml" 8 157 196 "copieprouveur/to_string.ml" 8 157 197
+type(
+  Def.formule
+)
+ident(
+  int_ref f "copieprouveur/to_string.ml" 8 157 168 "copieprouveur/to_string.ml" 8 157 169
+)
+"copieprouveur/to_string.ml" 8 157 188 "copieprouveur/to_string.ml" 8 157 197
+call(
+  stack
+)
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 8 157 201 "copieprouveur/to_string.ml" 8 157 208
+type(
+  string
+)
+"copieprouveur/to_string.ml" 8 157 208 "copieprouveur/to_string.ml" 8 157 209
+type(
+  string -> string -> Def.variable
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 8 157 209 "copieprouveur/to_string.ml" 8 157 210
+type(
+  Def.variable
+)
+ident(
+  int_ref s "copieprouveur/to_string.ml" 8 157 184 "copieprouveur/to_string.ml" 8 157 185
+)
+"copieprouveur/to_string.ml" 8 157 210 "copieprouveur/to_string.ml" 8 157 211
+type(
+  Def.variable -> string -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 8 157 211 "copieprouveur/to_string.ml" 8 157 214
+type(
+  string
+)
+"copieprouveur/to_string.ml" 8 157 209 "copieprouveur/to_string.ml" 8 157 214
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 8 157 201 "copieprouveur/to_string.ml" 8 157 214
+call(
+  tail
+)
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 8 157 180 "copieprouveur/to_string.ml" 8 157 214
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 9 215 222 "copieprouveur/to_string.ml" 9 215 223
+type(
+  Def.connecteur
+)
+ident(
+  def c "copieprouveur/to_string.ml" 10 232 236 "copieprouveur/to_string.ml" 12 306 326
+)
+"copieprouveur/to_string.ml" 9 215 224 "copieprouveur/to_string.ml" 9 215 225
+type(
+  Def.formule
+)
+ident(
+  def a "copieprouveur/to_string.ml" 10 232 236 "copieprouveur/to_string.ml" 12 306 326
+)
+"copieprouveur/to_string.ml" 9 215 226 "copieprouveur/to_string.ml" 9 215 227
+type(
+  Def.formule
+)
+ident(
+  def b "copieprouveur/to_string.ml" 10 232 236 "copieprouveur/to_string.ml" 12 306 326
+)
+"copieprouveur/to_string.ml" 9 215 219 "copieprouveur/to_string.ml" 9 215 228
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 10 232 240 "copieprouveur/to_string.ml" 10 232 242
+type(
+  Def.variable
+)
+ident(
+  def sa "copieprouveur/to_string.ml" 11 277 281 "copieprouveur/to_string.ml" 12 306 326
+)
+"copieprouveur/to_string.ml" 10 232 245 "copieprouveur/to_string.ml" 10 232 252
+type(
+  Def.formule -> Def.variable
+)
+ident(
+  int_ref formule "copieprouveur/to_string.ml" 5 94 102 "copieprouveur/to_string.ml" 5 94 109
+)
+"copieprouveur/to_string.ml" 10 232 253 "copieprouveur/to_string.ml" 10 232 254
+type(
+  Def.formule
+)
+ident(
+  int_ref a "copieprouveur/to_string.ml" 9 215 224 "copieprouveur/to_string.ml" 9 215 225
+)
+"copieprouveur/to_string.ml" 10 232 245 "copieprouveur/to_string.ml" 10 232 254
+call(
+  stack
+)
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 10 232 259 "copieprouveur/to_string.ml" 10 232 261
+type(
+  Def.variable
+)
+ident(
+  def sb "copieprouveur/to_string.ml" 11 277 281 "copieprouveur/to_string.ml" 12 306 326
+)
+"copieprouveur/to_string.ml" 10 232 264 "copieprouveur/to_string.ml" 10 232 271
+type(
+  Def.formule -> Def.variable
+)
+ident(
+  int_ref formule "copieprouveur/to_string.ml" 5 94 102 "copieprouveur/to_string.ml" 5 94 109
+)
+"copieprouveur/to_string.ml" 10 232 272 "copieprouveur/to_string.ml" 10 232 273
+type(
+  Def.formule
+)
+ident(
+  int_ref b "copieprouveur/to_string.ml" 9 215 226 "copieprouveur/to_string.ml" 9 215 227
+)
+"copieprouveur/to_string.ml" 10 232 264 "copieprouveur/to_string.ml" 10 232 273
+call(
+  stack
+)
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 11 277 285 "copieprouveur/to_string.ml" 11 277 287
+type(
+  string
+)
+ident(
+  def sc "copieprouveur/to_string.ml" 12 306 310 "copieprouveur/to_string.ml" 12 306 326
+)
+"copieprouveur/to_string.ml" 11 277 290 "copieprouveur/to_string.ml" 11 277 300
+type(
+  Def.connecteur -> string
+)
+ident(
+  int_ref connecteur "copieprouveur/to_string.ml" 4 26 30 "copieprouveur/to_string.ml" 4 26 40
+)
+"copieprouveur/to_string.ml" 11 277 301 "copieprouveur/to_string.ml" 11 277 302
+type(
+  Def.connecteur
+)
+ident(
+  int_ref c "copieprouveur/to_string.ml" 9 215 222 "copieprouveur/to_string.ml" 9 215 223
+)
+"copieprouveur/to_string.ml" 11 277 290 "copieprouveur/to_string.ml" 11 277 302
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 12 306 310 "copieprouveur/to_string.ml" 12 306 313
+type(
+  string
+)
+"copieprouveur/to_string.ml" 12 306 313 "copieprouveur/to_string.ml" 12 306 314
+type(
+  string -> string -> Def.variable
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 12 306 314 "copieprouveur/to_string.ml" 12 306 316
+type(
+  Def.variable
+)
+ident(
+  int_ref sa "copieprouveur/to_string.ml" 10 232 240 "copieprouveur/to_string.ml" 10 232 242
+)
+"copieprouveur/to_string.ml" 12 306 316 "copieprouveur/to_string.ml" 12 306 317
+type(
+  Def.variable -> string -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 12 306 317 "copieprouveur/to_string.ml" 12 306 319
+type(
+  string
+)
+ident(
+  int_ref sc "copieprouveur/to_string.ml" 11 277 285 "copieprouveur/to_string.ml" 11 277 287
+)
+"copieprouveur/to_string.ml" 12 306 319 "copieprouveur/to_string.ml" 12 306 320
+type(
+  string -> string -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 12 306 320 "copieprouveur/to_string.ml" 12 306 322
+type(
+  Def.variable
+)
+ident(
+  int_ref sb "copieprouveur/to_string.ml" 10 232 259 "copieprouveur/to_string.ml" 10 232 261
+)
+"copieprouveur/to_string.ml" 12 306 322 "copieprouveur/to_string.ml" 12 306 323
+type(
+  Def.variable -> string -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 12 306 323 "copieprouveur/to_string.ml" 12 306 326
+type(
+  string
+)
+"copieprouveur/to_string.ml" 12 306 320 "copieprouveur/to_string.ml" 12 306 326
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 12 306 317 "copieprouveur/to_string.ml" 12 306 326
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 12 306 314 "copieprouveur/to_string.ml" 12 306 326
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 12 306 310 "copieprouveur/to_string.ml" 12 306 326
+call(
+  tail
+)
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 11 277 281 "copieprouveur/to_string.ml" 12 306 326
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 10 232 236 "copieprouveur/to_string.ml" 12 306 326
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 5 94 112 "copieprouveur/to_string.ml" 12 306 326
+type(
+  Def.formule -> Def.variable
+)
+"copieprouveur/to_string.ml" 15 329 333 "copieprouveur/to_string.ml" 15 329 340
+type(
+  Global_ref.case_sf -> string
+)
+ident(
+  def case_sf "copieprouveur/to_string.ml" 25 525 525 "copieprouveur/to_string.ml" 1 0 -1
+)
+"copieprouveur/to_string.ml" 16 352 356 "copieprouveur/to_string.ml" 16 352 361
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/to_string.ml" 16 352 365 "copieprouveur/to_string.ml" 16 352 371
+type(
+  string
+)
+"copieprouveur/to_string.ml" 17 372 381 "copieprouveur/to_string.ml" 17 372 382
+type(
+  Def.variable
+)
+ident(
+  def x "copieprouveur/to_string.ml" 17 372 386 "copieprouveur/to_string.ml" 17 372 394
+)
+"copieprouveur/to_string.ml" 17 372 376 "copieprouveur/to_string.ml" 17 372 382
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/to_string.ml" 17 372 386 "copieprouveur/to_string.ml" 17 372 392
+type(
+  string
+)
+"copieprouveur/to_string.ml" 17 372 392 "copieprouveur/to_string.ml" 17 372 393
+type(
+  string -> Def.variable -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 17 372 393 "copieprouveur/to_string.ml" 17 372 394
+type(
+  Def.variable
+)
+ident(
+  int_ref x "copieprouveur/to_string.ml" 17 372 381 "copieprouveur/to_string.ml" 17 372 382
+)
+"copieprouveur/to_string.ml" 17 372 386 "copieprouveur/to_string.ml" 17 372 394
+call(
+  tail
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 18 395 402 "copieprouveur/to_string.ml" 18 395 406
+type(
+  Def.connecteur
+)
+ident(
+  def conn "copieprouveur/to_string.ml" 19 418 422 "copieprouveur/to_string.ml" 22 510 522
+)
+"copieprouveur/to_string.ml" 18 395 407 "copieprouveur/to_string.ml" 18 395 409
+type(
+  int
+)
+ident(
+  def i1 "copieprouveur/to_string.ml" 19 418 422 "copieprouveur/to_string.ml" 22 510 522
+)
+"copieprouveur/to_string.ml" 18 395 410 "copieprouveur/to_string.ml" 18 395 412
+type(
+  int
+)
+ident(
+  def i2 "copieprouveur/to_string.ml" 19 418 422 "copieprouveur/to_string.ml" 22 510 522
+)
+"copieprouveur/to_string.ml" 18 395 401 "copieprouveur/to_string.ml" 18 395 413
+type(
+  Def.connecteur * int * int
+)
+"copieprouveur/to_string.ml" 18 395 399 "copieprouveur/to_string.ml" 18 395 413
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/to_string.ml" 19 418 426 "copieprouveur/to_string.ml" 19 418 428
+type(
+  string
+)
+ident(
+  def s1 "copieprouveur/to_string.ml" 22 510 514 "copieprouveur/to_string.ml" 22 510 522
+)
+"copieprouveur/to_string.ml" 19 418 431 "copieprouveur/to_string.ml" 19 418 444
+type(
+  int -> string
+)
+ident(
+  ext_ref Pervasives.string_of_int
+)
+"copieprouveur/to_string.ml" 19 418 445 "copieprouveur/to_string.ml" 19 418 447
+type(
+  int
+)
+ident(
+  int_ref i1 "copieprouveur/to_string.ml" 18 395 407 "copieprouveur/to_string.ml" 18 395 409
+)
+"copieprouveur/to_string.ml" 19 418 431 "copieprouveur/to_string.ml" 19 418 447
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 20 448 456 "copieprouveur/to_string.ml" 20 448 458
+type(
+  string
+)
+ident(
+  def sc "copieprouveur/to_string.ml" 22 510 514 "copieprouveur/to_string.ml" 22 510 522
+)
+"copieprouveur/to_string.ml" 20 448 461 "copieprouveur/to_string.ml" 20 448 471
+type(
+  Def.connecteur -> string
+)
+ident(
+  int_ref connecteur "copieprouveur/to_string.ml" 4 26 30 "copieprouveur/to_string.ml" 4 26 40
+)
+"copieprouveur/to_string.ml" 20 448 472 "copieprouveur/to_string.ml" 20 448 476
+type(
+  Def.connecteur
+)
+ident(
+  int_ref conn "copieprouveur/to_string.ml" 18 395 402 "copieprouveur/to_string.ml" 18 395 406
+)
+"copieprouveur/to_string.ml" 20 448 461 "copieprouveur/to_string.ml" 20 448 476
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 21 477 485 "copieprouveur/to_string.ml" 21 477 487
+type(
+  string
+)
+ident(
+  def s2 "copieprouveur/to_string.ml" 22 510 514 "copieprouveur/to_string.ml" 22 510 522
+)
+"copieprouveur/to_string.ml" 21 477 490 "copieprouveur/to_string.ml" 21 477 503
+type(
+  int -> string
+)
+ident(
+  ext_ref Pervasives.string_of_int
+)
+"copieprouveur/to_string.ml" 21 477 504 "copieprouveur/to_string.ml" 21 477 506
+type(
+  int
+)
+ident(
+  int_ref i2 "copieprouveur/to_string.ml" 18 395 410 "copieprouveur/to_string.ml" 18 395 412
+)
+"copieprouveur/to_string.ml" 21 477 490 "copieprouveur/to_string.ml" 21 477 506
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 22 510 514 "copieprouveur/to_string.ml" 22 510 516
+type(
+  string
+)
+ident(
+  int_ref s1 "copieprouveur/to_string.ml" 19 418 426 "copieprouveur/to_string.ml" 19 418 428
+)
+"copieprouveur/to_string.ml" 22 510 516 "copieprouveur/to_string.ml" 22 510 517
+type(
+  string -> string -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 22 510 517 "copieprouveur/to_string.ml" 22 510 519
+type(
+  string
+)
+ident(
+  int_ref sc "copieprouveur/to_string.ml" 20 448 456 "copieprouveur/to_string.ml" 20 448 458
+)
+"copieprouveur/to_string.ml" 22 510 519 "copieprouveur/to_string.ml" 22 510 520
+type(
+  string -> string -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 22 510 520 "copieprouveur/to_string.ml" 22 510 522
+type(
+  string
+)
+ident(
+  int_ref s2 "copieprouveur/to_string.ml" 21 477 485 "copieprouveur/to_string.ml" 21 477 487
+)
+"copieprouveur/to_string.ml" 22 510 517 "copieprouveur/to_string.ml" 22 510 522
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 22 510 514 "copieprouveur/to_string.ml" 22 510 522
+call(
+  tail
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 19 418 422 "copieprouveur/to_string.ml" 22 510 522
+type(
+  string
+)
+"copieprouveur/to_string.ml" 15 329 343 "copieprouveur/to_string.ml" 22 510 522
+type(
+  Global_ref.case_sf -> string
+)
+"copieprouveur/to_string.ml" 25 525 533 "copieprouveur/to_string.ml" 25 525 548
+type(
+  int -> Def.formule
+)
+ident(
+  def to_real_formule "copieprouveur/to_string.ml" 25 525 525 "copieprouveur/to_string.ml" 1 0 -1
+)
+"copieprouveur/to_string.ml" 25 525 549 "copieprouveur/to_string.ml" 25 525 550
+type(
+  int
+)
+ident(
+  def a "copieprouveur/to_string.ml" 25 525 553 "copieprouveur/to_string.ml" 28 612 680
+)
+"copieprouveur/to_string.ml" 25 525 559 "copieprouveur/to_string.ml" 25 525 560
+type(
+  Global_ref.case_sf array ref -> Global_ref.case_sf array
+)
+ident(
+  ext_ref Pervasives.( ! )
+)
+"copieprouveur/to_string.ml" 25 525 560 "copieprouveur/to_string.ml" 25 525 562
+type(
+  Global_ref.case_sf array ref
+)
+ident(
+  ext_ref Global_ref.sf
+)
+"copieprouveur/to_string.ml" 25 525 559 "copieprouveur/to_string.ml" 25 525 562
+type(
+  Global_ref.case_sf array
+)
+"copieprouveur/to_string.ml" 25 525 564 "copieprouveur/to_string.ml" 25 525 565
+type(
+  int
+)
+ident(
+  int_ref a "copieprouveur/to_string.ml" 25 525 549 "copieprouveur/to_string.ml" 25 525 550
+)
+"copieprouveur/to_string.ml" 25 525 559 "copieprouveur/to_string.ml" 25 525 566
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/to_string.ml" 26 572 576 "copieprouveur/to_string.ml" 26 572 581
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/to_string.ml" 26 572 585 "copieprouveur/to_string.ml" 26 572 590
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 27 591 600 "copieprouveur/to_string.ml" 27 591 601
+type(
+  Def.variable
+)
+ident(
+  def s "copieprouveur/to_string.ml" 27 591 605 "copieprouveur/to_string.ml" 27 591 611
+)
+"copieprouveur/to_string.ml" 27 591 595 "copieprouveur/to_string.ml" 27 591 601
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/to_string.ml" 27 591 610 "copieprouveur/to_string.ml" 27 591 611
+type(
+  Def.variable
+)
+ident(
+  int_ref s "copieprouveur/to_string.ml" 27 591 600 "copieprouveur/to_string.ml" 27 591 601
+)
+"copieprouveur/to_string.ml" 27 591 605 "copieprouveur/to_string.ml" 27 591 611
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 28 612 619 "copieprouveur/to_string.ml" 28 612 623
+type(
+  Def.connecteur
+)
+ident(
+  def conn "copieprouveur/to_string.ml" 28 612 634 "copieprouveur/to_string.ml" 28 612 680
+)
+"copieprouveur/to_string.ml" 28 612 624 "copieprouveur/to_string.ml" 28 612 626
+type(
+  int
+)
+ident(
+  def a1 "copieprouveur/to_string.ml" 28 612 634 "copieprouveur/to_string.ml" 28 612 680
+)
+"copieprouveur/to_string.ml" 28 612 627 "copieprouveur/to_string.ml" 28 612 629
+type(
+  int
+)
+ident(
+  def a2 "copieprouveur/to_string.ml" 28 612 634 "copieprouveur/to_string.ml" 28 612 680
+)
+"copieprouveur/to_string.ml" 28 612 618 "copieprouveur/to_string.ml" 28 612 630
+type(
+  Def.connecteur * int * int
+)
+"copieprouveur/to_string.ml" 28 612 616 "copieprouveur/to_string.ml" 28 612 630
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/to_string.ml" 28 612 637 "copieprouveur/to_string.ml" 28 612 641
+type(
+  Def.connecteur
+)
+ident(
+  int_ref conn "copieprouveur/to_string.ml" 28 612 619 "copieprouveur/to_string.ml" 28 612 623
+)
+"copieprouveur/to_string.ml" 28 612 642 "copieprouveur/to_string.ml" 28 612 657
+type(
+  int -> Def.formule
+)
+ident(
+  int_ref to_real_formule "copieprouveur/to_string.ml" 25 525 533 "copieprouveur/to_string.ml" 25 525 548
+)
+"copieprouveur/to_string.ml" 28 612 658 "copieprouveur/to_string.ml" 28 612 660
+type(
+  int
+)
+ident(
+  int_ref a1 "copieprouveur/to_string.ml" 28 612 624 "copieprouveur/to_string.ml" 28 612 626
+)
+"copieprouveur/to_string.ml" 28 612 642 "copieprouveur/to_string.ml" 28 612 660
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 28 612 661 "copieprouveur/to_string.ml" 28 612 676
+type(
+  int -> Def.formule
+)
+ident(
+  int_ref to_real_formule "copieprouveur/to_string.ml" 25 525 533 "copieprouveur/to_string.ml" 25 525 548
+)
+"copieprouveur/to_string.ml" 28 612 677 "copieprouveur/to_string.ml" 28 612 679
+type(
+  int
+)
+ident(
+  int_ref a2 "copieprouveur/to_string.ml" 28 612 627 "copieprouveur/to_string.ml" 28 612 629
+)
+"copieprouveur/to_string.ml" 28 612 661 "copieprouveur/to_string.ml" 28 612 679
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 28 612 634 "copieprouveur/to_string.ml" 28 612 680
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 25 525 553 "copieprouveur/to_string.ml" 28 612 680
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 30 682 686 "copieprouveur/to_string.ml" 30 682 698
+type(
+  int -> Def.variable
+)
+ident(
+  def sous_formule "copieprouveur/to_string.ml" 32 732 732 "copieprouveur/to_string.ml" 1 0 -1
+)
+"copieprouveur/to_string.ml" 30 682 699 "copieprouveur/to_string.ml" 30 682 700
+type(
+  int
+)
+ident(
+  def a "copieprouveur/to_string.ml" 30 682 703 "copieprouveur/to_string.ml" 30 682 730
+)
+"copieprouveur/to_string.ml" 30 682 703 "copieprouveur/to_string.ml" 30 682 710
+type(
+  Def.formule -> Def.variable
+)
+ident(
+  int_ref formule "copieprouveur/to_string.ml" 5 94 102 "copieprouveur/to_string.ml" 5 94 109
+)
+"copieprouveur/to_string.ml" 30 682 712 "copieprouveur/to_string.ml" 30 682 727
+type(
+  int -> Def.formule
+)
+ident(
+  int_ref to_real_formule "copieprouveur/to_string.ml" 25 525 533 "copieprouveur/to_string.ml" 25 525 548
+)
+"copieprouveur/to_string.ml" 30 682 728 "copieprouveur/to_string.ml" 30 682 729
+type(
+  int
+)
+ident(
+  int_ref a "copieprouveur/to_string.ml" 30 682 699 "copieprouveur/to_string.ml" 30 682 700
+)
+"copieprouveur/to_string.ml" 30 682 711 "copieprouveur/to_string.ml" 30 682 730
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/to_string.ml" 30 682 703 "copieprouveur/to_string.ml" 30 682 730
+call(
+  tail
+)
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 32 732 736 "copieprouveur/to_string.ml" 32 732 742
+type(
+  int * int -> string
+)
+ident(
+  def couple "copieprouveur/to_string.ml" 32 732 791 "copieprouveur/to_string.ml" 1 0 -1
+)
+"copieprouveur/to_string.ml" 32 732 744 "copieprouveur/to_string.ml" 32 732 745
+type(
+  int
+)
+ident(
+  def i "copieprouveur/to_string.ml" 32 732 751 "copieprouveur/to_string.ml" 32 732 791
+)
+"copieprouveur/to_string.ml" 32 732 746 "copieprouveur/to_string.ml" 32 732 747
+type(
+  int
+)
+ident(
+  def a "copieprouveur/to_string.ml" 32 732 751 "copieprouveur/to_string.ml" 32 732 791
+)
+"copieprouveur/to_string.ml" 32 732 743 "copieprouveur/to_string.ml" 32 732 748
+type(
+  int * int
+)
+"copieprouveur/to_string.ml" 32 732 752 "copieprouveur/to_string.ml" 32 732 765
+type(
+  int -> string
+)
+ident(
+  ext_ref Pervasives.string_of_int
+)
+"copieprouveur/to_string.ml" 32 732 766 "copieprouveur/to_string.ml" 32 732 767
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/to_string.ml" 32 732 744 "copieprouveur/to_string.ml" 32 732 745
+)
+"copieprouveur/to_string.ml" 32 732 751 "copieprouveur/to_string.ml" 32 732 768
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 32 732 768 "copieprouveur/to_string.ml" 32 732 769
+type(
+  string -> string -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 32 732 769 "copieprouveur/to_string.ml" 32 732 774
+type(
+  string
+)
+"copieprouveur/to_string.ml" 32 732 774 "copieprouveur/to_string.ml" 32 732 775
+type(
+  string -> Def.variable -> string
+)
+ident(
+  ext_ref Pervasives.( ^ )
+)
+"copieprouveur/to_string.ml" 32 732 776 "copieprouveur/to_string.ml" 32 732 788
+type(
+  int -> Def.variable
+)
+ident(
+  int_ref sous_formule "copieprouveur/to_string.ml" 30 682 686 "copieprouveur/to_string.ml" 30 682 698
+)
+"copieprouveur/to_string.ml" 32 732 789 "copieprouveur/to_string.ml" 32 732 790
+type(
+  int
+)
+ident(
+  int_ref a "copieprouveur/to_string.ml" 32 732 746 "copieprouveur/to_string.ml" 32 732 747
+)
+"copieprouveur/to_string.ml" 32 732 775 "copieprouveur/to_string.ml" 32 732 791
+call(
+  stack
+)
+type(
+  Def.variable
+)
+"copieprouveur/to_string.ml" 32 732 769 "copieprouveur/to_string.ml" 32 732 791
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/to_string.ml" 32 732 751 "copieprouveur/to_string.ml" 32 732 791
+call(
+  tail
+)
+type(
+  string
+)

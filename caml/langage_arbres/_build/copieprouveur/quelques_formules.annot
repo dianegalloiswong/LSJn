@@ -1,0 +1,593 @@
+"copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+type(
+  Def.formule
+)
+ident(
+  def p "copieprouveur/quelques_formules.ml" 6 29 29 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 5 12 25 "copieprouveur/quelques_formules.ml" 5 12 28
+type(
+  Def.variable
+)
+"copieprouveur/quelques_formules.ml" 5 12 20 "copieprouveur/quelques_formules.ml" 5 12 28
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 6 29 33 "copieprouveur/quelques_formules.ml" 6 29 34
+type(
+  Def.formule
+)
+ident(
+  def q "copieprouveur/quelques_formules.ml" 7 46 46 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 6 29 42 "copieprouveur/quelques_formules.ml" 6 29 45
+type(
+  Def.variable
+)
+"copieprouveur/quelques_formules.ml" 6 29 37 "copieprouveur/quelques_formules.ml" 6 29 45
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 7 46 50 "copieprouveur/quelques_formules.ml" 7 46 51
+type(
+  Def.formule
+)
+ident(
+  def a "copieprouveur/quelques_formules.ml" 8 63 63 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 7 46 59 "copieprouveur/quelques_formules.ml" 7 46 62
+type(
+  Def.variable
+)
+"copieprouveur/quelques_formules.ml" 7 46 54 "copieprouveur/quelques_formules.ml" 7 46 62
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 8 63 67 "copieprouveur/quelques_formules.ml" 8 63 68
+type(
+  Def.formule
+)
+ident(
+  def b "copieprouveur/quelques_formules.ml" 9 80 80 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 8 63 76 "copieprouveur/quelques_formules.ml" 8 63 79
+type(
+  Def.variable
+)
+"copieprouveur/quelques_formules.ml" 8 63 71 "copieprouveur/quelques_formules.ml" 8 63 79
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 9 80 84 "copieprouveur/quelques_formules.ml" 9 80 85
+type(
+  Def.formule
+)
+ident(
+  def c "copieprouveur/quelques_formules.ml" 11 98 98 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 9 80 93 "copieprouveur/quelques_formules.ml" 9 80 96
+type(
+  Def.variable
+)
+"copieprouveur/quelques_formules.ml" 9 80 88 "copieprouveur/quelques_formules.ml" 9 80 96
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  def non "copieprouveur/quelques_formules.ml" 13 127 127 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 11 98 106 "copieprouveur/quelques_formules.ml" 11 98 107
+type(
+  Def.formule
+)
+ident(
+  def f "copieprouveur/quelques_formules.ml" 11 98 110 "copieprouveur/quelques_formules.ml" 11 98 125
+)
+"copieprouveur/quelques_formules.ml" 11 98 113 "copieprouveur/quelques_formules.ml" 11 98 116
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 11 98 117 "copieprouveur/quelques_formules.ml" 11 98 118
+type(
+  Def.formule
+)
+ident(
+  int_ref f "copieprouveur/quelques_formules.ml" 11 98 106 "copieprouveur/quelques_formules.ml" 11 98 107
+)
+"copieprouveur/quelques_formules.ml" 11 98 119 "copieprouveur/quelques_formules.ml" 11 98 124
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 11 98 110 "copieprouveur/quelques_formules.ml" 11 98 125
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 13 127 131 "copieprouveur/quelques_formules.ml" 13 127 133
+type(
+  Def.formule
+)
+ident(
+  def f0 "copieprouveur/quelques_formules.ml" 14 142 142 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 13 127 136 "copieprouveur/quelques_formules.ml" 13 127 141
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 14 142 146 "copieprouveur/quelques_formules.ml" 14 142 148
+type(
+  Def.formule
+)
+ident(
+  def f1 "copieprouveur/quelques_formules.ml" 16 159 159 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 14 142 151 "copieprouveur/quelques_formules.ml" 14 142 154
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 14 142 155 "copieprouveur/quelques_formules.ml" 14 142 157
+type(
+  Def.formule
+)
+ident(
+  int_ref f0 "copieprouveur/quelques_formules.ml" 13 127 131 "copieprouveur/quelques_formules.ml" 13 127 133
+)
+"copieprouveur/quelques_formules.ml" 14 142 151 "copieprouveur/quelques_formules.ml" 14 142 157
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 16 159 163 "copieprouveur/quelques_formules.ml" 16 159 165
+type(
+  Def.formule
+)
+ident(
+  def f2 "copieprouveur/quelques_formules.ml" 17 179 179 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 16 159 170 "copieprouveur/quelques_formules.ml" 16 159 173
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 16 159 174 "copieprouveur/quelques_formules.ml" 16 159 175
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 16 159 176 "copieprouveur/quelques_formules.ml" 16 159 177
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 16 159 168 "copieprouveur/quelques_formules.ml" 16 159 178
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 17 179 183 "copieprouveur/quelques_formules.ml" 17 179 188
+type(
+  Def.formule
+)
+ident(
+  def f2bis "copieprouveur/quelques_formules.ml" 19 207 207 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 17 179 193 "copieprouveur/quelques_formules.ml" 17 179 196
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 17 179 197 "copieprouveur/quelques_formules.ml" 17 179 202
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 17 179 203 "copieprouveur/quelques_formules.ml" 17 179 204
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 17 179 191 "copieprouveur/quelques_formules.ml" 17 179 205
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 19 207 211 "copieprouveur/quelques_formules.ml" 19 207 213
+type(
+  Def.formule
+)
+ident(
+  def f3 "copieprouveur/quelques_formules.ml" 20 230 230 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 19 207 218 "copieprouveur/quelques_formules.ml" 19 207 220
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 19 207 221 "copieprouveur/quelques_formules.ml" 19 207 222
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 19 207 223 "copieprouveur/quelques_formules.ml" 19 207 226
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 19 207 227 "copieprouveur/quelques_formules.ml" 19 207 228
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 19 207 223 "copieprouveur/quelques_formules.ml" 19 207 228
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 19 207 216 "copieprouveur/quelques_formules.ml" 19 207 229
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 20 230 234 "copieprouveur/quelques_formules.ml" 20 230 236
+type(
+  Def.formule
+)
+ident(
+  def f4 "copieprouveur/quelques_formules.ml" 22 253 253 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 20 230 239 "copieprouveur/quelques_formules.ml" 20 230 242
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 20 230 244 "copieprouveur/quelques_formules.ml" 20 230 247
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 20 230 248 "copieprouveur/quelques_formules.ml" 20 230 250
+type(
+  Def.formule
+)
+ident(
+  int_ref f3 "copieprouveur/quelques_formules.ml" 19 207 211 "copieprouveur/quelques_formules.ml" 19 207 213
+)
+"copieprouveur/quelques_formules.ml" 20 230 243 "copieprouveur/quelques_formules.ml" 20 230 251
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 20 230 239 "copieprouveur/quelques_formules.ml" 20 230 251
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 22 253 257 "copieprouveur/quelques_formules.ml" 22 253 259
+type(
+  Def.formule
+)
+ident(
+  def f5 "copieprouveur/quelques_formules.ml" 24 304 304 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 22 253 264 "copieprouveur/quelques_formules.ml" 22 253 267
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 22 253 271 "copieprouveur/quelques_formules.ml" 22 253 274
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 22 253 278 "copieprouveur/quelques_formules.ml" 22 253 280
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 22 253 281 "copieprouveur/quelques_formules.ml" 22 253 282
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 22 253 285 "copieprouveur/quelques_formules.ml" 22 253 288
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 22 253 289 "copieprouveur/quelques_formules.ml" 22 253 290
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 22 253 291 "copieprouveur/quelques_formules.ml" 22 253 292
+type(
+  Def.formule
+)
+ident(
+  int_ref q "copieprouveur/quelques_formules.ml" 6 29 33 "copieprouveur/quelques_formules.ml" 6 29 34
+)
+"copieprouveur/quelques_formules.ml" 22 253 283 "copieprouveur/quelques_formules.ml" 22 253 293
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 22 253 276 "copieprouveur/quelques_formules.ml" 22 253 294
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 22 253 296 "copieprouveur/quelques_formules.ml" 22 253 297
+type(
+  Def.formule
+)
+ident(
+  int_ref q "copieprouveur/quelques_formules.ml" 6 29 33 "copieprouveur/quelques_formules.ml" 6 29 34
+)
+"copieprouveur/quelques_formules.ml" 22 253 269 "copieprouveur/quelques_formules.ml" 22 253 298
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 22 253 300 "copieprouveur/quelques_formules.ml" 22 253 301
+type(
+  Def.formule
+)
+ident(
+  int_ref q "copieprouveur/quelques_formules.ml" 6 29 33 "copieprouveur/quelques_formules.ml" 6 29 34
+)
+"copieprouveur/quelques_formules.ml" 22 253 262 "copieprouveur/quelques_formules.ml" 22 253 302
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 308 "copieprouveur/quelques_formules.ml" 24 304 310
+type(
+  Def.formule
+)
+ident(
+  def f6 "copieprouveur/quelques_formules.ml" 28 393 393 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 24 304 315 "copieprouveur/quelques_formules.ml" 24 304 318
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 24 304 322 "copieprouveur/quelques_formules.ml" 24 304 325
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 24 304 329 "copieprouveur/quelques_formules.ml" 24 304 332
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 24 304 333 "copieprouveur/quelques_formules.ml" 24 304 336
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 24 304 337 "copieprouveur/quelques_formules.ml" 24 304 340
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 24 304 341 "copieprouveur/quelques_formules.ml" 24 304 342
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 24 304 336 "copieprouveur/quelques_formules.ml" 24 304 343
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 333 "copieprouveur/quelques_formules.ml" 24 304 343
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 344 "copieprouveur/quelques_formules.ml" 24 304 345
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 24 304 327 "copieprouveur/quelques_formules.ml" 24 304 346
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 350 "copieprouveur/quelques_formules.ml" 24 304 352
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 24 304 353 "copieprouveur/quelques_formules.ml" 24 304 356
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 24 304 357 "copieprouveur/quelques_formules.ml" 24 304 358
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 24 304 353 "copieprouveur/quelques_formules.ml" 24 304 358
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 359 "copieprouveur/quelques_formules.ml" 24 304 360
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 24 304 348 "copieprouveur/quelques_formules.ml" 24 304 361
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 320 "copieprouveur/quelques_formules.ml" 24 304 363
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 367 "copieprouveur/quelques_formules.ml" 24 304 369
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 24 304 370 "copieprouveur/quelques_formules.ml" 24 304 373
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 24 304 374 "copieprouveur/quelques_formules.ml" 24 304 377
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 24 304 378 "copieprouveur/quelques_formules.ml" 24 304 379
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 24 304 373 "copieprouveur/quelques_formules.ml" 24 304 380
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 370 "copieprouveur/quelques_formules.ml" 24 304 380
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 381 "copieprouveur/quelques_formules.ml" 24 304 384
+type(
+  Def.formule -> Def.formule
+)
+ident(
+  int_ref non "copieprouveur/quelques_formules.ml" 11 98 102 "copieprouveur/quelques_formules.ml" 11 98 105
+)
+"copieprouveur/quelques_formules.ml" 24 304 385 "copieprouveur/quelques_formules.ml" 24 304 386
+type(
+  Def.formule
+)
+ident(
+  int_ref p "copieprouveur/quelques_formules.ml" 5 12 16 "copieprouveur/quelques_formules.ml" 5 12 17
+)
+"copieprouveur/quelques_formules.ml" 24 304 381 "copieprouveur/quelques_formules.ml" 24 304 386
+call(
+  stack
+)
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 365 "copieprouveur/quelques_formules.ml" 24 304 387
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 24 304 313 "copieprouveur/quelques_formules.ml" 24 304 389
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 28 393 397 "copieprouveur/quelques_formules.ml" 28 393 399
+type(
+  Def.formule
+)
+ident(
+  def f7 "copieprouveur/quelques_formules.ml" 28 393 431 "copieprouveur/quelques_formules.ml" 1 0 -1
+)
+"copieprouveur/quelques_formules.ml" 28 393 404 "copieprouveur/quelques_formules.ml" 28 393 406
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 28 393 410 "copieprouveur/quelques_formules.ml" 28 393 413
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 28 393 414 "copieprouveur/quelques_formules.ml" 28 393 415
+type(
+  Def.formule
+)
+ident(
+  int_ref a "copieprouveur/quelques_formules.ml" 7 46 50 "copieprouveur/quelques_formules.ml" 7 46 51
+)
+"copieprouveur/quelques_formules.ml" 28 393 416 "copieprouveur/quelques_formules.ml" 28 393 417
+type(
+  Def.formule
+)
+ident(
+  int_ref b "copieprouveur/quelques_formules.ml" 8 63 67 "copieprouveur/quelques_formules.ml" 8 63 68
+)
+"copieprouveur/quelques_formules.ml" 28 393 408 "copieprouveur/quelques_formules.ml" 28 393 418
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 28 393 422 "copieprouveur/quelques_formules.ml" 28 393 425
+type(
+  Def.connecteur
+)
+"copieprouveur/quelques_formules.ml" 28 393 426 "copieprouveur/quelques_formules.ml" 28 393 427
+type(
+  Def.formule
+)
+ident(
+  int_ref b "copieprouveur/quelques_formules.ml" 8 63 67 "copieprouveur/quelques_formules.ml" 8 63 68
+)
+"copieprouveur/quelques_formules.ml" 28 393 428 "copieprouveur/quelques_formules.ml" 28 393 429
+type(
+  Def.formule
+)
+ident(
+  int_ref a "copieprouveur/quelques_formules.ml" 7 46 50 "copieprouveur/quelques_formules.ml" 7 46 51
+)
+"copieprouveur/quelques_formules.ml" 28 393 420 "copieprouveur/quelques_formules.ml" 28 393 430
+type(
+  Def.formule
+)
+"copieprouveur/quelques_formules.ml" 28 393 402 "copieprouveur/quelques_formules.ml" 28 393 431
+type(
+  Def.formule
+)

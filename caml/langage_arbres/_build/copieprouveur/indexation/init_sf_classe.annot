@@ -1,0 +1,1726 @@
+"copieprouveur/indexation/init_sf_classe.ml" 5 27 35 "copieprouveur/indexation/init_sf_classe.ml" 5 27 48
+type(
+  Def.formule -> int
+)
+ident(
+  def nombre_noeuds "copieprouveur/indexation/init_sf_classe.ml" 5 27 27 "copieprouveur/indexation/init_sf_classe.ml" 1 0 -1
+)
+"copieprouveur/indexation/init_sf_classe.ml" 6 60 64 "copieprouveur/indexation/init_sf_classe.ml" 6 60 69
+type(
+  Def.formule
+)
+"copieprouveur/indexation/init_sf_classe.ml" 6 60 77 "copieprouveur/indexation/init_sf_classe.ml" 6 60 78
+type(
+  Def.variable
+)
+"copieprouveur/indexation/init_sf_classe.ml" 6 60 72 "copieprouveur/indexation/init_sf_classe.ml" 6 60 78
+type(
+  Def.formule
+)
+"copieprouveur/indexation/init_sf_classe.ml" 6 60 64 "copieprouveur/indexation/init_sf_classe.ml" 6 60 78
+type(
+  Def.formule
+)
+"copieprouveur/indexation/init_sf_classe.ml" 6 60 82 "copieprouveur/indexation/init_sf_classe.ml" 6 60 83
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 91 "copieprouveur/indexation/init_sf_classe.ml" 7 84 92
+type(
+  Def.connecteur
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 93 "copieprouveur/indexation/init_sf_classe.ml" 7 84 95
+type(
+  Def.formule
+)
+ident(
+  def f1 "copieprouveur/indexation/init_sf_classe.ml" 7 84 103 "copieprouveur/indexation/init_sf_classe.ml" 7 84 146
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 96 "copieprouveur/indexation/init_sf_classe.ml" 7 84 98
+type(
+  Def.formule
+)
+ident(
+  def f2 "copieprouveur/indexation/init_sf_classe.ml" 7 84 103 "copieprouveur/indexation/init_sf_classe.ml" 7 84 146
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 88 "copieprouveur/indexation/init_sf_classe.ml" 7 84 99
+type(
+  Def.formule
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 103 "copieprouveur/indexation/init_sf_classe.ml" 7 84 104
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 105 "copieprouveur/indexation/init_sf_classe.ml" 7 84 106
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 108 "copieprouveur/indexation/init_sf_classe.ml" 7 84 121
+type(
+  Def.formule -> int
+)
+ident(
+  int_ref nombre_noeuds "copieprouveur/indexation/init_sf_classe.ml" 5 27 35 "copieprouveur/indexation/init_sf_classe.ml" 5 27 48
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 122 "copieprouveur/indexation/init_sf_classe.ml" 7 84 124
+type(
+  Def.formule
+)
+ident(
+  int_ref f1 "copieprouveur/indexation/init_sf_classe.ml" 7 84 93 "copieprouveur/indexation/init_sf_classe.ml" 7 84 95
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 107 "copieprouveur/indexation/init_sf_classe.ml" 7 84 125
+call(
+  stack
+)
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 103 "copieprouveur/indexation/init_sf_classe.ml" 7 84 125
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 126 "copieprouveur/indexation/init_sf_classe.ml" 7 84 127
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 129 "copieprouveur/indexation/init_sf_classe.ml" 7 84 142
+type(
+  Def.formule -> int
+)
+ident(
+  int_ref nombre_noeuds "copieprouveur/indexation/init_sf_classe.ml" 5 27 35 "copieprouveur/indexation/init_sf_classe.ml" 5 27 48
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 143 "copieprouveur/indexation/init_sf_classe.ml" 7 84 145
+type(
+  Def.formule
+)
+ident(
+  int_ref f2 "copieprouveur/indexation/init_sf_classe.ml" 7 84 96 "copieprouveur/indexation/init_sf_classe.ml" 7 84 98
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 128 "copieprouveur/indexation/init_sf_classe.ml" 7 84 146
+call(
+  stack
+)
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 7 84 103 "copieprouveur/indexation/init_sf_classe.ml" 7 84 146
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 5 27 51 "copieprouveur/indexation/init_sf_classe.ml" 7 84 146
+type(
+  Def.formule -> int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 9 148 152 "copieprouveur/indexation/init_sf_classe.ml" 9 148 156
+type(
+  Def.formule -> unit
+)
+ident(
+  def main "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1366 "copieprouveur/indexation/init_sf_classe.ml" 1 0 -1
+)
+"copieprouveur/indexation/init_sf_classe.ml" 9 148 157 "copieprouveur/indexation/init_sf_classe.ml" 9 148 164
+type(
+  Def.formule
+)
+ident(
+  def formule "copieprouveur/indexation/init_sf_classe.ml" 10 167 169 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 10 167 173 "copieprouveur/indexation/init_sf_classe.ml" 10 167 174
+type(
+  int
+)
+ident(
+  def m "copieprouveur/indexation/init_sf_classe.ml" 11 202 204 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 10 167 177 "copieprouveur/indexation/init_sf_classe.ml" 10 167 190
+type(
+  Def.formule -> int
+)
+ident(
+  int_ref nombre_noeuds "copieprouveur/indexation/init_sf_classe.ml" 5 27 35 "copieprouveur/indexation/init_sf_classe.ml" 5 27 48
+)
+"copieprouveur/indexation/init_sf_classe.ml" 10 167 191 "copieprouveur/indexation/init_sf_classe.ml" 10 167 198
+type(
+  Def.formule
+)
+ident(
+  int_ref formule "copieprouveur/indexation/init_sf_classe.ml" 9 148 157 "copieprouveur/indexation/init_sf_classe.ml" 9 148 164
+)
+"copieprouveur/indexation/init_sf_classe.ml" 10 167 177 "copieprouveur/indexation/init_sf_classe.ml" 10 167 198
+call(
+  stack
+)
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 208 "copieprouveur/indexation/init_sf_classe.ml" 11 202 210
+type(
+  Global_ref.case_sf array
+)
+ident(
+  def sf "copieprouveur/indexation/init_sf_classe.ml" 12 239 241 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 213 "copieprouveur/indexation/init_sf_classe.ml" 11 202 223
+type(
+  int -> Global_ref.case_sf -> Global_ref.case_sf array
+)
+ident(
+  ext_ref Array.make
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 225 "copieprouveur/indexation/init_sf_classe.ml" 11 202 226
+type(
+  int
+)
+ident(
+  int_ref m "copieprouveur/indexation/init_sf_classe.ml" 10 167 173 "copieprouveur/indexation/init_sf_classe.ml" 10 167 174
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 226 "copieprouveur/indexation/init_sf_classe.ml" 11 202 227
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 227 "copieprouveur/indexation/init_sf_classe.ml" 11 202 228
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 224 "copieprouveur/indexation/init_sf_classe.ml" 11 202 229
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 230 "copieprouveur/indexation/init_sf_classe.ml" 11 202 235
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 213 "copieprouveur/indexation/init_sf_classe.ml" 11 202 235
+type(
+  Global_ref.case_sf array
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 245 "copieprouveur/indexation/init_sf_classe.ml" 12 239 251
+type(
+  int array
+)
+ident(
+  def classe "copieprouveur/indexation/init_sf_classe.ml" 13 276 278 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 254 "copieprouveur/indexation/init_sf_classe.ml" 12 239 264
+type(
+  int -> int -> int array
+)
+ident(
+  ext_ref Array.make
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 266 "copieprouveur/indexation/init_sf_classe.ml" 12 239 267
+type(
+  int
+)
+ident(
+  int_ref m "copieprouveur/indexation/init_sf_classe.ml" 10 167 173 "copieprouveur/indexation/init_sf_classe.ml" 10 167 174
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 267 "copieprouveur/indexation/init_sf_classe.ml" 12 239 268
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 268 "copieprouveur/indexation/init_sf_classe.ml" 12 239 269
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 265 "copieprouveur/indexation/init_sf_classe.ml" 12 239 270
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 271 "copieprouveur/indexation/init_sf_classe.ml" 12 239 272
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 254 "copieprouveur/indexation/init_sf_classe.ml" 12 239 272
+type(
+  int array
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 282 "copieprouveur/indexation/init_sf_classe.ml" 13 276 289
+type(
+  Global_ref.case_sf array
+)
+ident(
+  def cl_desc "copieprouveur/indexation/init_sf_classe.ml" 14 318 320 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 292 "copieprouveur/indexation/init_sf_classe.ml" 13 276 302
+type(
+  int -> Global_ref.case_sf -> Global_ref.case_sf array
+)
+ident(
+  ext_ref Array.make
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 304 "copieprouveur/indexation/init_sf_classe.ml" 13 276 305
+type(
+  int
+)
+ident(
+  int_ref m "copieprouveur/indexation/init_sf_classe.ml" 10 167 173 "copieprouveur/indexation/init_sf_classe.ml" 10 167 174
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 305 "copieprouveur/indexation/init_sf_classe.ml" 13 276 306
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 306 "copieprouveur/indexation/init_sf_classe.ml" 13 276 307
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 303 "copieprouveur/indexation/init_sf_classe.ml" 13 276 308
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 309 "copieprouveur/indexation/init_sf_classe.ml" 13 276 314
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 292 "copieprouveur/indexation/init_sf_classe.ml" 13 276 314
+type(
+  Global_ref.case_sf array
+)
+"copieprouveur/indexation/init_sf_classe.ml" 14 318 324 "copieprouveur/indexation/init_sf_classe.ml" 14 318 332
+type(
+  Global_ref.case_sf -> int -> int * int
+)
+ident(
+  def ajout_cd "copieprouveur/indexation/init_sf_classe.ml" 27 624 626 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 14 318 333 "copieprouveur/indexation/init_sf_classe.ml" 14 318 334
+type(
+  Global_ref.case_sf
+)
+ident(
+  def c "copieprouveur/indexation/init_sf_classe.ml" 14 318 335 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+)
+"copieprouveur/indexation/init_sf_classe.ml" 14 318 335 "copieprouveur/indexation/init_sf_classe.ml" 14 318 346
+type(
+  int
+)
+ident(
+  def prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 15 350 354 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+)
+"copieprouveur/indexation/init_sf_classe.ml" 15 350 362 "copieprouveur/indexation/init_sf_classe.ml" 15 350 369
+type(
+  int -> int
+)
+ident(
+  def cherche "copieprouveur/indexation/init_sf_classe.ml" 15 350 354 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+)
+"copieprouveur/indexation/init_sf_classe.ml" 15 350 370 "copieprouveur/indexation/init_sf_classe.ml" 15 350 371
+type(
+  int
+)
+ident(
+  def i "copieprouveur/indexation/init_sf_classe.ml" 16 375 381 "copieprouveur/indexation/init_sf_classe.ml" 18 445 469
+)
+"copieprouveur/indexation/init_sf_classe.ml" 16 375 384 "copieprouveur/indexation/init_sf_classe.ml" 16 375 385
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 15 350 370 "copieprouveur/indexation/init_sf_classe.ml" 15 350 371
+)
+"copieprouveur/indexation/init_sf_classe.ml" 16 375 386 "copieprouveur/indexation/init_sf_classe.ml" 16 375 387
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( = )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 16 375 388 "copieprouveur/indexation/init_sf_classe.ml" 16 375 399
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 14 318 335 "copieprouveur/indexation/init_sf_classe.ml" 14 318 346
+)
+"copieprouveur/indexation/init_sf_classe.ml" 16 375 384 "copieprouveur/indexation/init_sf_classe.ml" 16 375 399
+type(
+  bool
+)
+"copieprouveur/indexation/init_sf_classe.ml" 16 375 405 "copieprouveur/indexation/init_sf_classe.ml" 16 375 407
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 422 "copieprouveur/indexation/init_sf_classe.ml" 17 408 429
+type(
+  Global_ref.case_sf array
+)
+ident(
+  int_ref cl_desc "copieprouveur/indexation/init_sf_classe.ml" 13 276 282 "copieprouveur/indexation/init_sf_classe.ml" 13 276 289
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 431 "copieprouveur/indexation/init_sf_classe.ml" 17 408 432
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 15 350 370 "copieprouveur/indexation/init_sf_classe.ml" 15 350 371
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 422 "copieprouveur/indexation/init_sf_classe.ml" 17 408 433
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 434 "copieprouveur/indexation/init_sf_classe.ml" 17 408 435
+type(
+  Global_ref.case_sf -> Global_ref.case_sf -> bool
+)
+ident(
+  ext_ref Pervasives.( = )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 436 "copieprouveur/indexation/init_sf_classe.ml" 17 408 437
+type(
+  Global_ref.case_sf
+)
+ident(
+  int_ref c "copieprouveur/indexation/init_sf_classe.ml" 14 318 333 "copieprouveur/indexation/init_sf_classe.ml" 14 318 334
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 422 "copieprouveur/indexation/init_sf_classe.ml" 17 408 437
+type(
+  bool
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 443 "copieprouveur/indexation/init_sf_classe.ml" 17 408 444
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 15 350 370 "copieprouveur/indexation/init_sf_classe.ml" 15 350 371
+)
+"copieprouveur/indexation/init_sf_classe.ml" 18 445 456 "copieprouveur/indexation/init_sf_classe.ml" 18 445 463
+type(
+  int -> int
+)
+ident(
+  int_ref cherche "copieprouveur/indexation/init_sf_classe.ml" 15 350 362 "copieprouveur/indexation/init_sf_classe.ml" 15 350 369
+)
+"copieprouveur/indexation/init_sf_classe.ml" 18 445 465 "copieprouveur/indexation/init_sf_classe.ml" 18 445 466
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 15 350 370 "copieprouveur/indexation/init_sf_classe.ml" 15 350 371
+)
+"copieprouveur/indexation/init_sf_classe.ml" 18 445 466 "copieprouveur/indexation/init_sf_classe.ml" 18 445 467
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 18 445 467 "copieprouveur/indexation/init_sf_classe.ml" 18 445 468
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 18 445 464 "copieprouveur/indexation/init_sf_classe.ml" 18 445 469
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 18 445 456 "copieprouveur/indexation/init_sf_classe.ml" 18 445 469
+call(
+  tail
+)
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 17 408 419 "copieprouveur/indexation/init_sf_classe.ml" 18 445 469
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 16 375 381 "copieprouveur/indexation/init_sf_classe.ml" 18 445 469
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 20 477 485 "copieprouveur/indexation/init_sf_classe.ml" 20 477 486
+type(
+  int
+)
+ident(
+  def i "copieprouveur/indexation/init_sf_classe.ml" 21 502 506 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+)
+"copieprouveur/indexation/init_sf_classe.ml" 20 477 489 "copieprouveur/indexation/init_sf_classe.ml" 20 477 496
+type(
+  int -> int
+)
+ident(
+  int_ref cherche "copieprouveur/indexation/init_sf_classe.ml" 15 350 362 "copieprouveur/indexation/init_sf_classe.ml" 15 350 369
+)
+"copieprouveur/indexation/init_sf_classe.ml" 20 477 497 "copieprouveur/indexation/init_sf_classe.ml" 20 477 498
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 20 477 489 "copieprouveur/indexation/init_sf_classe.ml" 20 477 498
+call(
+  stack
+)
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 21 502 509 "copieprouveur/indexation/init_sf_classe.ml" 21 502 510
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 20 477 485 "copieprouveur/indexation/init_sf_classe.ml" 20 477 486
+)
+"copieprouveur/indexation/init_sf_classe.ml" 21 502 511 "copieprouveur/indexation/init_sf_classe.ml" 21 502 512
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( = )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 21 502 513 "copieprouveur/indexation/init_sf_classe.ml" 21 502 515
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 21 502 509 "copieprouveur/indexation/init_sf_classe.ml" 21 502 515
+type(
+  bool
+)
+"copieprouveur/indexation/init_sf_classe.ml" 22 521 528 "copieprouveur/indexation/init_sf_classe.ml" 22 521 535
+type(
+  Global_ref.case_sf array
+)
+ident(
+  int_ref cl_desc "copieprouveur/indexation/init_sf_classe.ml" 13 276 282 "copieprouveur/indexation/init_sf_classe.ml" 13 276 289
+)
+"copieprouveur/indexation/init_sf_classe.ml" 22 521 537 "copieprouveur/indexation/init_sf_classe.ml" 22 521 548
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 14 318 335 "copieprouveur/indexation/init_sf_classe.ml" 14 318 346
+)
+"copieprouveur/indexation/init_sf_classe.ml" 22 521 553 "copieprouveur/indexation/init_sf_classe.ml" 22 521 554
+type(
+  Global_ref.case_sf
+)
+ident(
+  int_ref c "copieprouveur/indexation/init_sf_classe.ml" 14 318 333 "copieprouveur/indexation/init_sf_classe.ml" 14 318 334
+)
+"copieprouveur/indexation/init_sf_classe.ml" 22 521 528 "copieprouveur/indexation/init_sf_classe.ml" 22 521 554
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 23 556 563 "copieprouveur/indexation/init_sf_classe.ml" 23 556 574
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 14 318 335 "copieprouveur/indexation/init_sf_classe.ml" 14 318 346
+)
+"copieprouveur/indexation/init_sf_classe.ml" 23 556 575 "copieprouveur/indexation/init_sf_classe.ml" 23 556 586
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 14 318 335 "copieprouveur/indexation/init_sf_classe.ml" 14 318 346
+)
+"copieprouveur/indexation/init_sf_classe.ml" 23 556 586 "copieprouveur/indexation/init_sf_classe.ml" 23 556 587
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 23 556 587 "copieprouveur/indexation/init_sf_classe.ml" 23 556 588
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 23 556 575 "copieprouveur/indexation/init_sf_classe.ml" 23 556 588
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 23 556 563 "copieprouveur/indexation/init_sf_classe.ml" 23 556 588
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 22 521 527 "copieprouveur/indexation/init_sf_classe.ml" 23 556 589
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 25 599 605 "copieprouveur/indexation/init_sf_classe.ml" 25 599 606
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 20 477 485 "copieprouveur/indexation/init_sf_classe.ml" 20 477 486
+)
+"copieprouveur/indexation/init_sf_classe.ml" 25 599 607 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 14 318 335 "copieprouveur/indexation/init_sf_classe.ml" 14 318 346
+)
+"copieprouveur/indexation/init_sf_classe.ml" 25 599 605 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 21 502 506 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 20 477 481 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 15 350 354 "copieprouveur/indexation/init_sf_classe.ml" 25 599 618
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 27 624 634 "copieprouveur/indexation/init_sf_classe.ml" 27 624 641
+type(
+  int -> int -> Def.formule -> int * int
+)
+ident(
+  def remplir "copieprouveur/indexation/init_sf_classe.ml" 27 624 626 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+type(
+  int
+)
+ident(
+  def prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 651 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 27 624 651 "copieprouveur/indexation/init_sf_classe.ml" 27 624 662
+type(
+  int
+)
+ident(
+  def prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 27 624 665 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 28 674 680 "copieprouveur/indexation/init_sf_classe.ml" 28 674 685
+type(
+  Def.formule
+)
+"copieprouveur/indexation/init_sf_classe.ml" 29 690 696 "copieprouveur/indexation/init_sf_classe.ml" 29 690 698
+type(
+  Global_ref.case_sf array
+)
+ident(
+  int_ref sf "copieprouveur/indexation/init_sf_classe.ml" 11 202 208 "copieprouveur/indexation/init_sf_classe.ml" 11 202 210
+)
+"copieprouveur/indexation/init_sf_classe.ml" 29 690 700 "copieprouveur/indexation/init_sf_classe.ml" 29 690 708
+type(
+  int
+)
+ident(
+  int_ref prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+)
+"copieprouveur/indexation/init_sf_classe.ml" 29 690 713 "copieprouveur/indexation/init_sf_classe.ml" 29 690 718
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 29 690 696 "copieprouveur/indexation/init_sf_classe.ml" 29 690 718
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 30 720 726 "copieprouveur/indexation/init_sf_classe.ml" 30 720 732
+type(
+  int array
+)
+ident(
+  int_ref classe "copieprouveur/indexation/init_sf_classe.ml" 12 239 245 "copieprouveur/indexation/init_sf_classe.ml" 12 239 251
+)
+"copieprouveur/indexation/init_sf_classe.ml" 30 720 734 "copieprouveur/indexation/init_sf_classe.ml" 30 720 742
+type(
+  int
+)
+ident(
+  int_ref prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+)
+"copieprouveur/indexation/init_sf_classe.ml" 30 720 747 "copieprouveur/indexation/init_sf_classe.ml" 30 720 748
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 30 720 726 "copieprouveur/indexation/init_sf_classe.ml" 30 720 748
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 31 750 756 "copieprouveur/indexation/init_sf_classe.ml" 31 750 764
+type(
+  int
+)
+ident(
+  int_ref prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+)
+"copieprouveur/indexation/init_sf_classe.ml" 31 750 765 "copieprouveur/indexation/init_sf_classe.ml" 31 750 776
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 27 624 651 "copieprouveur/indexation/init_sf_classe.ml" 27 624 662
+)
+"copieprouveur/indexation/init_sf_classe.ml" 31 750 756 "copieprouveur/indexation/init_sf_classe.ml" 31 750 776
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 30 720 726 "copieprouveur/indexation/init_sf_classe.ml" 31 750 776
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 29 690 696 "copieprouveur/indexation/init_sf_classe.ml" 31 750 776
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 32 777 788 "copieprouveur/indexation/init_sf_classe.ml" 32 777 789
+type(
+  Def.variable
+)
+ident(
+  def x "copieprouveur/indexation/init_sf_classe.ml" 33 793 799 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+)
+"copieprouveur/indexation/init_sf_classe.ml" 32 777 783 "copieprouveur/indexation/init_sf_classe.ml" 32 777 789
+type(
+  Def.formule
+)
+"copieprouveur/indexation/init_sf_classe.ml" 33 793 803 "copieprouveur/indexation/init_sf_classe.ml" 33 793 804
+type(
+  Global_ref.case_sf
+)
+ident(
+  def c "copieprouveur/indexation/init_sf_classe.ml" 34 817 823 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+)
+"copieprouveur/indexation/init_sf_classe.ml" 33 793 812 "copieprouveur/indexation/init_sf_classe.ml" 33 793 813
+type(
+  Def.variable
+)
+ident(
+  int_ref x "copieprouveur/indexation/init_sf_classe.ml" 32 777 788 "copieprouveur/indexation/init_sf_classe.ml" 32 777 789
+)
+"copieprouveur/indexation/init_sf_classe.ml" 33 793 807 "copieprouveur/indexation/init_sf_classe.ml" 33 793 813
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 827 "copieprouveur/indexation/init_sf_classe.ml" 34 817 829
+type(
+  int
+)
+ident(
+  def cl "copieprouveur/indexation/init_sf_classe.ml" 35 862 868 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 830 "copieprouveur/indexation/init_sf_classe.ml" 34 817 833
+type(
+  int
+)
+ident(
+  def pcd "copieprouveur/indexation/init_sf_classe.ml" 35 862 868 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 827 "copieprouveur/indexation/init_sf_classe.ml" 34 817 833
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 836 "copieprouveur/indexation/init_sf_classe.ml" 34 817 844
+type(
+  Global_ref.case_sf -> int -> int * int
+)
+ident(
+  int_ref ajout_cd "copieprouveur/indexation/init_sf_classe.ml" 14 318 324 "copieprouveur/indexation/init_sf_classe.ml" 14 318 332
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 845 "copieprouveur/indexation/init_sf_classe.ml" 34 817 846
+type(
+  Global_ref.case_sf
+)
+ident(
+  int_ref c "copieprouveur/indexation/init_sf_classe.ml" 33 793 803 "copieprouveur/indexation/init_sf_classe.ml" 33 793 804
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 847 "copieprouveur/indexation/init_sf_classe.ml" 34 817 858
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 27 624 651 "copieprouveur/indexation/init_sf_classe.ml" 27 624 662
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 836 "copieprouveur/indexation/init_sf_classe.ml" 34 817 858
+call(
+  stack
+)
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 35 862 868 "copieprouveur/indexation/init_sf_classe.ml" 35 862 870
+type(
+  Global_ref.case_sf array
+)
+ident(
+  int_ref sf "copieprouveur/indexation/init_sf_classe.ml" 11 202 208 "copieprouveur/indexation/init_sf_classe.ml" 11 202 210
+)
+"copieprouveur/indexation/init_sf_classe.ml" 35 862 872 "copieprouveur/indexation/init_sf_classe.ml" 35 862 880
+type(
+  int
+)
+ident(
+  int_ref prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+)
+"copieprouveur/indexation/init_sf_classe.ml" 35 862 885 "copieprouveur/indexation/init_sf_classe.ml" 35 862 886
+type(
+  Global_ref.case_sf
+)
+ident(
+  int_ref c "copieprouveur/indexation/init_sf_classe.ml" 33 793 803 "copieprouveur/indexation/init_sf_classe.ml" 33 793 804
+)
+"copieprouveur/indexation/init_sf_classe.ml" 35 862 868 "copieprouveur/indexation/init_sf_classe.ml" 35 862 886
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 36 888 894 "copieprouveur/indexation/init_sf_classe.ml" 36 888 900
+type(
+  int array
+)
+ident(
+  int_ref classe "copieprouveur/indexation/init_sf_classe.ml" 12 239 245 "copieprouveur/indexation/init_sf_classe.ml" 12 239 251
+)
+"copieprouveur/indexation/init_sf_classe.ml" 36 888 902 "copieprouveur/indexation/init_sf_classe.ml" 36 888 910
+type(
+  int
+)
+ident(
+  int_ref prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+)
+"copieprouveur/indexation/init_sf_classe.ml" 36 888 915 "copieprouveur/indexation/init_sf_classe.ml" 36 888 917
+type(
+  int
+)
+ident(
+  int_ref cl "copieprouveur/indexation/init_sf_classe.ml" 34 817 827 "copieprouveur/indexation/init_sf_classe.ml" 34 817 829
+)
+"copieprouveur/indexation/init_sf_classe.ml" 36 888 894 "copieprouveur/indexation/init_sf_classe.ml" 36 888 917
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 37 919 925 "copieprouveur/indexation/init_sf_classe.ml" 37 919 933
+type(
+  int
+)
+ident(
+  int_ref prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+)
+"copieprouveur/indexation/init_sf_classe.ml" 37 919 934 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+type(
+  int
+)
+ident(
+  int_ref pcd "copieprouveur/indexation/init_sf_classe.ml" 34 817 830 "copieprouveur/indexation/init_sf_classe.ml" 34 817 833
+)
+"copieprouveur/indexation/init_sf_classe.ml" 37 919 925 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 36 888 894 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 35 862 868 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 34 817 823 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 33 793 799 "copieprouveur/indexation/init_sf_classe.ml" 37 919 937
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 38 938 947 "copieprouveur/indexation/init_sf_classe.ml" 38 938 951
+type(
+  Def.connecteur
+)
+ident(
+  def conn "copieprouveur/indexation/init_sf_classe.ml" 39 962 968 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 38 938 952 "copieprouveur/indexation/init_sf_classe.ml" 38 938 954
+type(
+  Def.formule
+)
+ident(
+  def f1 "copieprouveur/indexation/init_sf_classe.ml" 39 962 968 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 38 938 955 "copieprouveur/indexation/init_sf_classe.ml" 38 938 957
+type(
+  Def.formule
+)
+ident(
+  def f2 "copieprouveur/indexation/init_sf_classe.ml" 39 962 968 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 38 938 944 "copieprouveur/indexation/init_sf_classe.ml" 38 938 958
+type(
+  Def.formule
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 972 "copieprouveur/indexation/init_sf_classe.ml" 39 962 974
+type(
+  int
+)
+ident(
+  def i1 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1023 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 975 "copieprouveur/indexation/init_sf_classe.ml" 39 962 979
+type(
+  int
+)
+ident(
+  def pcd1 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1023 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 972 "copieprouveur/indexation/init_sf_classe.ml" 39 962 979
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 982 "copieprouveur/indexation/init_sf_classe.ml" 39 962 989
+type(
+  int -> int -> Def.formule -> int * int
+)
+ident(
+  int_ref remplir "copieprouveur/indexation/init_sf_classe.ml" 27 624 634 "copieprouveur/indexation/init_sf_classe.ml" 27 624 641
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 990 "copieprouveur/indexation/init_sf_classe.ml" 39 962 998
+type(
+  int
+)
+ident(
+  int_ref prochain "copieprouveur/indexation/init_sf_classe.ml" 27 624 642 "copieprouveur/indexation/init_sf_classe.ml" 27 624 650
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 999 "copieprouveur/indexation/init_sf_classe.ml" 39 962 1010
+type(
+  int
+)
+ident(
+  int_ref prochain_cd "copieprouveur/indexation/init_sf_classe.ml" 27 624 651 "copieprouveur/indexation/init_sf_classe.ml" 27 624 662
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 1011 "copieprouveur/indexation/init_sf_classe.ml" 39 962 1013
+type(
+  Def.formule
+)
+ident(
+  int_ref f1 "copieprouveur/indexation/init_sf_classe.ml" 38 938 952 "copieprouveur/indexation/init_sf_classe.ml" 38 938 954
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 982 "copieprouveur/indexation/init_sf_classe.ml" 39 962 1013
+call(
+  stack
+)
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1027 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1029
+type(
+  int
+)
+ident(
+  def i2 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1069 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1030 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1034
+type(
+  int
+)
+ident(
+  def pcd2 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1069 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1027 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1034
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1037 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1044
+type(
+  int -> int -> Def.formule -> int * int
+)
+ident(
+  int_ref remplir "copieprouveur/indexation/init_sf_classe.ml" 27 624 634 "copieprouveur/indexation/init_sf_classe.ml" 27 624 641
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1046 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1048
+type(
+  int
+)
+ident(
+  int_ref i1 "copieprouveur/indexation/init_sf_classe.ml" 39 962 972 "copieprouveur/indexation/init_sf_classe.ml" 39 962 974
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1048 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1049
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1049 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1050
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1045 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1051
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1052 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1056
+type(
+  int
+)
+ident(
+  int_ref pcd1 "copieprouveur/indexation/init_sf_classe.ml" 39 962 975 "copieprouveur/indexation/init_sf_classe.ml" 39 962 979
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1057 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1059
+type(
+  Def.formule
+)
+ident(
+  int_ref f2 "copieprouveur/indexation/init_sf_classe.ml" 38 938 955 "copieprouveur/indexation/init_sf_classe.ml" 38 938 957
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1037 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1059
+call(
+  stack
+)
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1073 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1077
+type(
+  Global_ref.case_sf
+)
+ident(
+  def c_cl "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1122 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1083 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1087
+type(
+  Def.connecteur
+)
+ident(
+  int_ref conn "copieprouveur/indexation/init_sf_classe.ml" 38 938 947 "copieprouveur/indexation/init_sf_classe.ml" 38 938 951
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1088 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1094
+type(
+  int array
+)
+ident(
+  int_ref classe "copieprouveur/indexation/init_sf_classe.ml" 12 239 245 "copieprouveur/indexation/init_sf_classe.ml" 12 239 251
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1096 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1098
+type(
+  int
+)
+ident(
+  int_ref i1 "copieprouveur/indexation/init_sf_classe.ml" 39 962 972 "copieprouveur/indexation/init_sf_classe.ml" 39 962 974
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1088 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1099
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1100 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1106
+type(
+  int array
+)
+ident(
+  int_ref classe "copieprouveur/indexation/init_sf_classe.ml" 12 239 245 "copieprouveur/indexation/init_sf_classe.ml" 12 239 251
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1108 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1110
+type(
+  int
+)
+ident(
+  int_ref i2 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1027 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1029
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1100 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1111
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1082 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1112
+type(
+  Def.connecteur * int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1080 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1112
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1126 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1128
+type(
+  int
+)
+ident(
+  def cl "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1163 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1129 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1132
+type(
+  int
+)
+ident(
+  def pcd "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1163 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1126 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1132
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1135 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1143
+type(
+  Global_ref.case_sf -> int -> int * int
+)
+ident(
+  int_ref ajout_cd "copieprouveur/indexation/init_sf_classe.ml" 14 318 324 "copieprouveur/indexation/init_sf_classe.ml" 14 318 332
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1144 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1148
+type(
+  Global_ref.case_sf
+)
+ident(
+  int_ref c_cl "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1073 "copieprouveur/indexation/init_sf_classe.ml" 41 1063 1077
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1149 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1153
+type(
+  int
+)
+ident(
+  int_ref pcd2 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1030 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1034
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1135 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1153
+call(
+  stack
+)
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 43 1157 1167 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1168
+type(
+  int
+)
+ident(
+  def i "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1185 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+)
+"copieprouveur/indexation/init_sf_classe.ml" 43 1157 1171 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1173
+type(
+  int
+)
+ident(
+  int_ref i2 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1027 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1029
+)
+"copieprouveur/indexation/init_sf_classe.ml" 43 1157 1173 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1174
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( + )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 43 1157 1174 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1175
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 43 1157 1171 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1175
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1185 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1187
+type(
+  Global_ref.case_sf array
+)
+ident(
+  int_ref sf "copieprouveur/indexation/init_sf_classe.ml" 11 202 208 "copieprouveur/indexation/init_sf_classe.ml" 11 202 210
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1189 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1190
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1167 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1168
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1198 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1202
+type(
+  Def.connecteur
+)
+ident(
+  int_ref conn "copieprouveur/indexation/init_sf_classe.ml" 38 938 947 "copieprouveur/indexation/init_sf_classe.ml" 38 938 951
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1203 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1205
+type(
+  int
+)
+ident(
+  int_ref i1 "copieprouveur/indexation/init_sf_classe.ml" 39 962 972 "copieprouveur/indexation/init_sf_classe.ml" 39 962 974
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1206 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1208
+type(
+  int
+)
+ident(
+  int_ref i2 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1027 "copieprouveur/indexation/init_sf_classe.ml" 40 1017 1029
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1197 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1209
+type(
+  Def.connecteur * int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1195 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1209
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1185 "copieprouveur/indexation/init_sf_classe.ml" 44 1179 1209
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 45 1211 1217 "copieprouveur/indexation/init_sf_classe.ml" 45 1211 1223
+type(
+  int array
+)
+ident(
+  int_ref classe "copieprouveur/indexation/init_sf_classe.ml" 12 239 245 "copieprouveur/indexation/init_sf_classe.ml" 12 239 251
+)
+"copieprouveur/indexation/init_sf_classe.ml" 45 1211 1225 "copieprouveur/indexation/init_sf_classe.ml" 45 1211 1226
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1167 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1168
+)
+"copieprouveur/indexation/init_sf_classe.ml" 45 1211 1231 "copieprouveur/indexation/init_sf_classe.ml" 45 1211 1233
+type(
+  int
+)
+ident(
+  int_ref cl "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1126 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1128
+)
+"copieprouveur/indexation/init_sf_classe.ml" 45 1211 1217 "copieprouveur/indexation/init_sf_classe.ml" 45 1211 1233
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 46 1235 1241 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1242
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1167 "copieprouveur/indexation/init_sf_classe.ml" 43 1157 1168
+)
+"copieprouveur/indexation/init_sf_classe.ml" 46 1235 1243 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int
+)
+ident(
+  int_ref pcd "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1129 "copieprouveur/indexation/init_sf_classe.ml" 42 1116 1132
+)
+"copieprouveur/indexation/init_sf_classe.ml" 46 1235 1241 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 45 1211 1217 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 44 1179 1185 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 43 1157 1163 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 42 1116 1122 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 41 1063 1069 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 40 1017 1023 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 39 962 968 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 27 624 665 "copieprouveur/indexation/init_sf_classe.ml" 46 1235 1246
+type(
+  Def.formule -> int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1258 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1259
+type(
+  int
+)
+ident(
+  def i "copieprouveur/indexation/init_sf_classe.ml" 49 1292 1294 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1260 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1266
+type(
+  int
+)
+ident(
+  def len_cd "copieprouveur/indexation/init_sf_classe.ml" 49 1292 1294 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1258 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1266
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1269 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1276
+type(
+  int -> int -> Def.formule -> int * int
+)
+ident(
+  int_ref remplir "copieprouveur/indexation/init_sf_classe.ml" 27 624 634 "copieprouveur/indexation/init_sf_classe.ml" 27 624 641
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1277 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1278
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1279 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1280
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1281 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1288
+type(
+  Def.formule
+)
+ident(
+  int_ref formule "copieprouveur/indexation/init_sf_classe.ml" 9 148 157 "copieprouveur/indexation/init_sf_classe.ml" 9 148 164
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1269 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1288
+call(
+  stack
+)
+type(
+  int * int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 49 1292 1302 "copieprouveur/indexation/init_sf_classe.ml" 49 1292 1303
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1258 "copieprouveur/indexation/init_sf_classe.ml" 48 1252 1259
+)
+"copieprouveur/indexation/init_sf_classe.ml" 49 1292 1304 "copieprouveur/indexation/init_sf_classe.ml" 49 1292 1305
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( = )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 49 1292 1306 "copieprouveur/indexation/init_sf_classe.ml" 49 1292 1307
+type(
+  int
+)
+ident(
+  int_ref m "copieprouveur/indexation/init_sf_classe.ml" 10 167 173 "copieprouveur/indexation/init_sf_classe.ml" 10 167 174
+)
+"copieprouveur/indexation/init_sf_classe.ml" 49 1292 1301 "copieprouveur/indexation/init_sf_classe.ml" 49 1292 1308
+type(
+  bool
+)
+"copieprouveur/indexation/init_sf_classe.ml" 49 1292 1294 "copieprouveur/indexation/init_sf_classe.ml" 49 1292 1308
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 50 1310 1312 "copieprouveur/indexation/init_sf_classe.ml" 50 1310 1325
+type(
+  Global_ref.case_sf array ref
+)
+ident(
+  ext_ref Global_ref.sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 50 1310 1326 "copieprouveur/indexation/init_sf_classe.ml" 50 1310 1328
+type(
+  Global_ref.case_sf array ref -> Global_ref.case_sf array -> unit
+)
+ident(
+  ext_ref Pervasives.( := )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 50 1310 1329 "copieprouveur/indexation/init_sf_classe.ml" 50 1310 1331
+type(
+  Global_ref.case_sf array
+)
+ident(
+  int_ref sf "copieprouveur/indexation/init_sf_classe.ml" 11 202 208 "copieprouveur/indexation/init_sf_classe.ml" 11 202 210
+)
+"copieprouveur/indexation/init_sf_classe.ml" 50 1310 1312 "copieprouveur/indexation/init_sf_classe.ml" 50 1310 1331
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 51 1333 1335 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1352
+type(
+  int array ref
+)
+ident(
+  ext_ref Global_ref.classe
+)
+"copieprouveur/indexation/init_sf_classe.ml" 51 1333 1353 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1355
+type(
+  int array ref -> int array -> unit
+)
+ident(
+  ext_ref Pervasives.( := )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 51 1333 1356 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  int array
+)
+ident(
+  int_ref classe "copieprouveur/indexation/init_sf_classe.ml" 12 239 245 "copieprouveur/indexation/init_sf_classe.ml" 12 239 251
+)
+"copieprouveur/indexation/init_sf_classe.ml" 51 1333 1335 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 50 1310 1312 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 49 1292 1294 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 48 1252 1254 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 27 624 626 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 14 318 320 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 13 276 278 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 12 239 241 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 11 202 204 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 10 167 169 "copieprouveur/indexation/init_sf_classe.ml" 51 1333 1362
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1370 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1376
+type(
+  int -> string
+)
+ident(
+  def aligne "copieprouveur/indexation/init_sf_classe.ml" 57 1407 1407 "copieprouveur/indexation/init_sf_classe.ml" 1 0 -1
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1377 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1378
+type(
+  int
+)
+ident(
+  def n "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1381 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1405
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1384 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1385
+type(
+  int
+)
+ident(
+  int_ref n "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1377 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1378
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1385 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1386
+type(
+  int -> int -> bool
+)
+ident(
+  ext_ref Pervasives.( < )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1386 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1388
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1384 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1388
+type(
+  bool
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1394 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1397
+type(
+  string
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1403 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1405
+type(
+  string
+)
+"copieprouveur/indexation/init_sf_classe.ml" 55 1366 1381 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1405
+type(
+  string
+)
+"copieprouveur/indexation/init_sf_classe.ml" 57 1407 1411 "copieprouveur/indexation/init_sf_classe.ml" 57 1407 1415
+type(
+  Def.formule -> unit
+)
+ident(
+  def test "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692 "copieprouveur/indexation/init_sf_classe.ml" 1 0 -1
+)
+"copieprouveur/indexation/init_sf_classe.ml" 57 1407 1416 "copieprouveur/indexation/init_sf_classe.ml" 57 1407 1417
+type(
+  Def.formule
+)
+ident(
+  def f "copieprouveur/indexation/init_sf_classe.ml" 58 1420 1422 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+)
+"copieprouveur/indexation/init_sf_classe.ml" 58 1420 1422 "copieprouveur/indexation/init_sf_classe.ml" 58 1420 1426
+type(
+  Def.formule -> unit
+)
+ident(
+  int_ref main "copieprouveur/indexation/init_sf_classe.ml" 9 148 152 "copieprouveur/indexation/init_sf_classe.ml" 9 148 156
+)
+"copieprouveur/indexation/init_sf_classe.ml" 58 1420 1427 "copieprouveur/indexation/init_sf_classe.ml" 58 1420 1428
+type(
+  Def.formule
+)
+ident(
+  int_ref f "copieprouveur/indexation/init_sf_classe.ml" 57 1407 1416 "copieprouveur/indexation/init_sf_classe.ml" 57 1407 1417
+)
+"copieprouveur/indexation/init_sf_classe.ml" 58 1420 1422 "copieprouveur/indexation/init_sf_classe.ml" 58 1420 1428
+call(
+  stack
+)
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 60 1480 1482 "copieprouveur/indexation/init_sf_classe.ml" 60 1480 1495
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 60 1480 1496 "copieprouveur/indexation/init_sf_classe.ml" 60 1480 1527
+type(
+  (unit, Format.formatter, unit) format
+)
+"copieprouveur/indexation/init_sf_classe.ml" 60 1480 1482 "copieprouveur/indexation/init_sf_classe.ml" 60 1480 1527
+call(
+  stack
+)
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1537 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1538
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1543 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1555
+type(
+  Global_ref.case_sf array -> int
+)
+ident(
+  ext_ref Array.length
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1556 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1557
+type(
+  Global_ref.case_sf array ref -> Global_ref.case_sf array
+)
+ident(
+  ext_ref Pervasives.( ! )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1557 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1559
+type(
+  Global_ref.case_sf array ref
+)
+ident(
+  ext_ref Global_ref.sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1556 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1559
+type(
+  Global_ref.case_sf array
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1542 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1560
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1560 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1561
+type(
+  int -> int -> int
+)
+ident(
+  ext_ref Pervasives.( - )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1561 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1562
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1542 "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1562
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1570 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1583
+type(
+  (string -> int -> string -> int -> string -> unit, Format.formatter, unit)
+  format -> string -> int -> string -> int -> string -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1584 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1611
+type(
+  (string -> int -> string -> int -> string -> unit, Format.formatter, unit)
+  format
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1613 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1619
+type(
+  int -> string
+)
+ident(
+  int_ref aligne "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1370 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1376
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1620 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1621
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1531 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1612 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1622
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1623 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1624
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1531 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1626 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1632
+type(
+  int -> string
+)
+ident(
+  int_ref aligne "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1370 "copieprouveur/indexation/init_sf_classe.ml" 55 1366 1376
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1633 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1634
+type(
+  int array ref -> int array
+)
+ident(
+  ext_ref Pervasives.( ! )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1634 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1640
+type(
+  int array ref
+)
+ident(
+  ext_ref Global_ref.classe
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1633 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1640
+type(
+  int array
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1642 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1643
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1531 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1633 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1644
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1625 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1645
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1646 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1647
+type(
+  int array ref -> int array
+)
+ident(
+  ext_ref Pervasives.( ! )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1647 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1653
+type(
+  int array ref
+)
+ident(
+  ext_ref Global_ref.classe
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1646 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1653
+type(
+  int array
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1655 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1656
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1531 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1646 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1657
+type(
+  int
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1659 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1676
+type(
+  Global_ref.case_sf -> string
+)
+ident(
+  ext_ref To_string.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1677 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1678
+type(
+  Global_ref.case_sf array ref -> Global_ref.case_sf array
+)
+ident(
+  ext_ref Pervasives.( ! )
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1678 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1680
+type(
+  Global_ref.case_sf array ref
+)
+ident(
+  ext_ref Global_ref.sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1677 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1680
+type(
+  Global_ref.case_sf array
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1682 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1683
+type(
+  int
+)
+ident(
+  int_ref i "copieprouveur/indexation/init_sf_classe.ml" 61 1529 1531 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1677 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1684
+type(
+  Global_ref.case_sf
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1658 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1685
+call(
+  stack
+)
+type(
+  string
+)
+"copieprouveur/indexation/init_sf_classe.ml" 62 1566 1570 "copieprouveur/indexation/init_sf_classe.ml" 62 1566 1685
+call(
+  stack
+)
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 61 1529 1531 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 60 1480 1482 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+type(
+  unit
+)
+"copieprouveur/indexation/init_sf_classe.ml" 58 1420 1422 "copieprouveur/indexation/init_sf_classe.ml" 63 1686 1692
+type(
+  unit
+)

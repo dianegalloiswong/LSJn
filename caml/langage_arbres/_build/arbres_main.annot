@@ -1,0 +1,256 @@
+"arbres_main.ml" 7 29 33 "arbres_main.ml" 7 29 34
+type(
+  Def.formule
+)
+ident(
+  def f "arbres_main.ml" 12 62 62 "arbres_main.ml" 1 0 -1
+)
+"arbres_main.ml" 7 29 37 "arbres_main.ml" 7 29 57
+type(
+  Def.formule
+)
+ident(
+  ext_ref Quelques_formules.f4
+)
+"arbres_main.ml" 12 62 66 "arbres_main.ml" 12 62 68
+type(
+  unit
+)
+"arbres_main.ml" 12 62 71 "arbres_main.ml" 12 62 84
+type(
+  (Def.variable -> unit, Format.formatter, unit) format ->
+  Def.variable -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_main.ml" 12 62 85 "arbres_main.ml" 12 62 91
+type(
+  (Def.variable -> unit, Format.formatter, unit) format
+)
+"arbres_main.ml" 12 62 93 "arbres_main.ml" 12 62 110
+type(
+  Def.formule -> Def.variable
+)
+ident(
+  ext_ref To_string.formule
+)
+"arbres_main.ml" 12 62 111 "arbres_main.ml" 12 62 112
+type(
+  Def.formule
+)
+ident(
+  int_ref f "arbres_main.ml" 7 29 33 "arbres_main.ml" 7 29 34
+)
+"arbres_main.ml" 12 62 92 "arbres_main.ml" 12 62 113
+call(
+  stack
+)
+type(
+  Def.variable
+)
+"arbres_main.ml" 12 62 71 "arbres_main.ml" 12 62 113
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_main.ml" 14 115 119 "arbres_main.ml" 14 115 121
+type(
+  unit
+)
+"arbres_main.ml" 15 124 126 "arbres_main.ml" 15 124 145
+type(
+  Def.formule -> unit
+)
+ident(
+  ext_ref Init_sf_classe.test
+)
+"arbres_main.ml" 15 124 146 "arbres_main.ml" 15 124 147
+type(
+  Def.formule
+)
+ident(
+  int_ref f "arbres_main.ml" 7 29 33 "arbres_main.ml" 7 29 34
+)
+"arbres_main.ml" 15 124 126 "arbres_main.ml" 15 124 147
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_main.ml" 16 149 151 "arbres_main.ml" 16 149 169
+type(
+  unit -> unit
+)
+ident(
+  ext_ref Init_priorite.main
+)
+"arbres_main.ml" 16 149 170 "arbres_main.ml" 16 149 172
+type(
+  unit
+)
+"arbres_main.ml" 16 149 151 "arbres_main.ml" 16 149 172
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_main.ml" 17 174 176 "arbres_main.ml" 17 174 199
+type(
+  unit -> unit
+)
+ident(
+  ext_ref Precalculs.remplir_cote
+)
+"arbres_main.ml" 17 174 200 "arbres_main.ml" 17 174 202
+type(
+  unit
+)
+"arbres_main.ml" 17 174 176 "arbres_main.ml" 17 174 202
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_main.ml" 18 204 206 "arbres_main.ml" 18 204 234
+type(
+  unit -> unit
+)
+ident(
+  ext_ref Precalculs.remplir_fonctions
+)
+"arbres_main.ml" 18 204 235 "arbres_main.ml" 18 204 237
+type(
+  unit
+)
+"arbres_main.ml" 18 204 206 "arbres_main.ml" 18 204 237
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_main.ml" 17 174 176 "arbres_main.ml" 18 204 237
+type(
+  unit
+)
+"arbres_main.ml" 16 149 151 "arbres_main.ml" 18 204 237
+type(
+  unit
+)
+"arbres_main.ml" 15 124 126 "arbres_main.ml" 18 204 237
+type(
+  unit
+)
+"arbres_main.ml" 21 240 244 "arbres_main.ml" 21 240 246
+type(
+  unit
+)
+"arbres_main.ml" 21 240 249 "arbres_main.ml" 21 240 258
+type(
+  (string * string * Arbres_ast.expr -> unit) ->
+  (string * string * Arbres_ast.expr) list -> unit
+)
+ident(
+  ext_ref List.iter
+)
+"arbres_main.ml" 21 240 264 "arbres_main.ml" 21 240 266
+type(
+  string * string * Arbres_ast.expr
+)
+ident(
+  def df "arbres_main.ml" 21 240 270 "arbres_main.ml" 21 240 313
+)
+"arbres_main.ml" 21 240 270 "arbres_main.ml" 21 240 292
+type(
+  string * string * Arbres_ast.expr -> unit
+)
+ident(
+  ext_ref Arbres_print.decl_func
+)
+"arbres_main.ml" 21 240 293 "arbres_main.ml" 21 240 295
+type(
+  string * string * Arbres_ast.expr
+)
+ident(
+  int_ref df "arbres_main.ml" 21 240 264 "arbres_main.ml" 21 240 266
+)
+"arbres_main.ml" 21 240 270 "arbres_main.ml" 21 240 295
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_main.ml" 21 240 296 "arbres_main.ml" 21 240 309
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_main.ml" 21 240 309 "arbres_main.ml" 21 240 313
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_main.ml" 21 240 296 "arbres_main.ml" 21 240 313
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_main.ml" 21 240 270 "arbres_main.ml" 21 240 313
+type(
+  unit
+)
+"arbres_main.ml" 21 240 259 "arbres_main.ml" 21 240 314
+type(
+  string * string * Arbres_ast.expr -> unit
+)
+"arbres_main.ml" 21 240 316 "arbres_main.ml" 21 240 324
+type(
+  (string * string * Arbres_ast.expr) list ->
+  (string * string * Arbres_ast.expr) list
+)
+ident(
+  ext_ref List.rev
+)
+"arbres_main.ml" 21 240 325 "arbres_main.ml" 21 240 326
+type(
+  (string * string * Arbres_ast.expr) list ref ->
+  (string * string * Arbres_ast.expr) list
+)
+ident(
+  ext_ref Pervasives.( ! )
+)
+"arbres_main.ml" 21 240 326 "arbres_main.ml" 21 240 351
+type(
+  (string * string * Arbres_ast.expr) list ref
+)
+ident(
+  ext_ref Fonctions_de_sf.fonctions
+)
+"arbres_main.ml" 21 240 325 "arbres_main.ml" 21 240 351
+type(
+  (string * string * Arbres_ast.expr) list
+)
+"arbres_main.ml" 21 240 315 "arbres_main.ml" 21 240 352
+call(
+  stack
+)
+type(
+  (string * string * Arbres_ast.expr) list
+)
+"arbres_main.ml" 21 240 249 "arbres_main.ml" 21 240 352
+call(
+  stack
+)
+type(
+  unit
+)

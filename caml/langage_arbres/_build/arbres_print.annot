@@ -1,0 +1,1769 @@
+"arbres_print.ml" 5 19 27 "arbres_print.ml" 5 19 31
+type(
+  Arbres_ast.tree -> unit
+)
+ident(
+  def tree "arbres_print.ml" 5 19 19 "arbres_print.ml" 1 0 -1
+)
+"arbres_print.ml" 6 43 47 "arbres_print.ml" 6 43 51
+type(
+  Arbres_ast.tree
+)
+"arbres_print.ml" 6 43 55 "arbres_print.ml" 6 43 68
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 6 43 69 "arbres_print.ml" 6 43 75
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 6 43 55 "arbres_print.ml" 6 43 75
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 7 76 84 "arbres_print.ml" 7 76 85
+type(
+  int
+)
+ident(
+  def n "arbres_print.ml" 7 76 89 "arbres_print.ml" 7 76 109
+)
+"arbres_print.ml" 7 76 80 "arbres_print.ml" 7 76 85
+type(
+  Arbres_ast.tree
+)
+"arbres_print.ml" 7 76 89 "arbres_print.ml" 7 76 102
+type(
+  (int -> unit, Format.formatter, unit) format -> int -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 7 76 103 "arbres_print.ml" 7 76 107
+type(
+  (int -> unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 7 76 108 "arbres_print.ml" 7 76 109
+type(
+  int
+)
+ident(
+  int_ref n "arbres_print.ml" 7 76 84 "arbres_print.ml" 7 76 85
+)
+"arbres_print.ml" 7 76 89 "arbres_print.ml" 7 76 109
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 8 110 120 "arbres_print.ml" 8 110 122
+type(
+  Arbres_ast.tree
+)
+ident(
+  def t1 "arbres_print.ml" 9 130 134 "arbres_print.ml" 13 205 227
+)
+"arbres_print.ml" 8 110 123 "arbres_print.ml" 8 110 125
+type(
+  Arbres_ast.tree
+)
+ident(
+  def t2 "arbres_print.ml" 9 130 134 "arbres_print.ml" 13 205 227
+)
+"arbres_print.ml" 8 110 114 "arbres_print.ml" 8 110 126
+type(
+  Arbres_ast.tree
+)
+"arbres_print.ml" 9 130 134 "arbres_print.ml" 9 130 147
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 9 130 148 "arbres_print.ml" 9 130 152
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 9 130 134 "arbres_print.ml" 9 130 152
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 10 154 158 "arbres_print.ml" 10 154 162
+type(
+  Arbres_ast.tree -> unit
+)
+ident(
+  int_ref tree "arbres_print.ml" 5 19 27 "arbres_print.ml" 5 19 31
+)
+"arbres_print.ml" 10 154 163 "arbres_print.ml" 10 154 165
+type(
+  Arbres_ast.tree
+)
+ident(
+  int_ref t1 "arbres_print.ml" 8 110 120 "arbres_print.ml" 8 110 122
+)
+"arbres_print.ml" 10 154 158 "arbres_print.ml" 10 154 165
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 11 167 171 "arbres_print.ml" 11 167 184
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 11 167 185 "arbres_print.ml" 11 167 190
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 11 167 171 "arbres_print.ml" 11 167 190
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 12 192 196 "arbres_print.ml" 12 192 200
+type(
+  Arbres_ast.tree -> unit
+)
+ident(
+  int_ref tree "arbres_print.ml" 5 19 27 "arbres_print.ml" 5 19 31
+)
+"arbres_print.ml" 12 192 201 "arbres_print.ml" 12 192 203
+type(
+  Arbres_ast.tree
+)
+ident(
+  int_ref t2 "arbres_print.ml" 8 110 123 "arbres_print.ml" 8 110 125
+)
+"arbres_print.ml" 12 192 196 "arbres_print.ml" 12 192 203
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 13 205 209 "arbres_print.ml" 13 205 222
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 13 205 223 "arbres_print.ml" 13 205 227
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 13 205 209 "arbres_print.ml" 13 205 227
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 12 192 196 "arbres_print.ml" 13 205 227
+type(
+  unit
+)
+"arbres_print.ml" 11 167 171 "arbres_print.ml" 13 205 227
+type(
+  unit
+)
+"arbres_print.ml" 10 154 158 "arbres_print.ml" 13 205 227
+type(
+  unit
+)
+"arbres_print.ml" 9 130 134 "arbres_print.ml" 13 205 227
+type(
+  unit
+)
+"arbres_print.ml" 5 19 34 "arbres_print.ml" 13 205 227
+type(
+  Arbres_ast.tree -> unit
+)
+"arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  def expr "arbres_print.ml" 16 230 230 "arbres_print.ml" 1 0 -1
+)
+"arbres_print.ml" 17 254 263 "arbres_print.ml" 17 254 264
+type(
+  Arbres_ast.var
+)
+ident(
+  def s "arbres_print.ml" 17 254 268 "arbres_print.ml" 17 254 288
+)
+"arbres_print.ml" 17 254 258 "arbres_print.ml" 17 254 264
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 17 254 268 "arbres_print.ml" 17 254 281
+type(
+  (Arbres_ast.var -> unit, Format.formatter, unit) format ->
+  Arbres_ast.var -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 17 254 282 "arbres_print.ml" 17 254 286
+type(
+  (Arbres_ast.var -> unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 17 254 287 "arbres_print.ml" 17 254 288
+type(
+  Arbres_ast.var
+)
+ident(
+  int_ref s "arbres_print.ml" 17 254 263 "arbres_print.ml" 17 254 264
+)
+"arbres_print.ml" 17 254 268 "arbres_print.ml" 17 254 288
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 18 289 293 "arbres_print.ml" 18 289 298
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 18 289 302 "arbres_print.ml" 18 289 315
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 18 289 316 "arbres_print.ml" 18 289 322
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 18 289 302 "arbres_print.ml" 18 289 322
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 19 323 332 "arbres_print.ml" 19 323 333
+type(
+  int
+)
+ident(
+  def n "arbres_print.ml" 19 323 337 "arbres_print.ml" 19 323 357
+)
+"arbres_print.ml" 19 323 327 "arbres_print.ml" 19 323 333
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 19 323 337 "arbres_print.ml" 19 323 350
+type(
+  (int -> unit, Format.formatter, unit) format -> int -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 19 323 351 "arbres_print.ml" 19 323 355
+type(
+  (int -> unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 19 323 356 "arbres_print.ml" 19 323 357
+type(
+  int
+)
+ident(
+  int_ref n "arbres_print.ml" 19 323 332 "arbres_print.ml" 19 323 333
+)
+"arbres_print.ml" 19 323 337 "arbres_print.ml" 19 323 357
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 20 358 369 "arbres_print.ml" 20 358 371
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e1 "arbres_print.ml" 21 379 383 "arbres_print.ml" 25 454 476
+)
+"arbres_print.ml" 20 358 372 "arbres_print.ml" 20 358 374
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e2 "arbres_print.ml" 21 379 383 "arbres_print.ml" 25 454 476
+)
+"arbres_print.ml" 20 358 362 "arbres_print.ml" 20 358 375
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 21 379 383 "arbres_print.ml" 21 379 396
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 21 379 397 "arbres_print.ml" 21 379 401
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 21 379 383 "arbres_print.ml" 21 379 401
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 22 403 407 "arbres_print.ml" 22 403 411
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 22 403 412 "arbres_print.ml" 22 403 414
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e1 "arbres_print.ml" 20 358 369 "arbres_print.ml" 20 358 371
+)
+"arbres_print.ml" 22 403 407 "arbres_print.ml" 22 403 414
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 23 416 420 "arbres_print.ml" 23 416 433
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 23 416 434 "arbres_print.ml" 23 416 439
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 23 416 420 "arbres_print.ml" 23 416 439
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 24 441 445 "arbres_print.ml" 24 441 449
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 24 441 450 "arbres_print.ml" 24 441 452
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e2 "arbres_print.ml" 20 358 372 "arbres_print.ml" 20 358 374
+)
+"arbres_print.ml" 24 441 445 "arbres_print.ml" 24 441 452
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 25 454 458 "arbres_print.ml" 25 454 471
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 25 454 472 "arbres_print.ml" 25 454 476
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 25 454 458 "arbres_print.ml" 25 454 476
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 24 441 445 "arbres_print.ml" 25 454 476
+type(
+  unit
+)
+"arbres_print.ml" 23 416 420 "arbres_print.ml" 25 454 476
+type(
+  unit
+)
+"arbres_print.ml" 22 403 407 "arbres_print.ml" 25 454 476
+type(
+  unit
+)
+"arbres_print.ml" 21 379 383 "arbres_print.ml" 25 454 476
+type(
+  unit
+)
+"arbres_print.ml" 26 477 489 "arbres_print.ml" 26 477 491
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e1 "arbres_print.ml" 27 503 507 "arbres_print.ml" 31 603 624
+)
+"arbres_print.ml" 26 477 492 "arbres_print.ml" 26 477 493
+type(
+  Arbres_ast.var
+)
+ident(
+  def x "arbres_print.ml" 27 503 507 "arbres_print.ml" 31 603 624
+)
+"arbres_print.ml" 26 477 494 "arbres_print.ml" 26 477 495
+type(
+  Arbres_ast.var
+)
+ident(
+  def y "arbres_print.ml" 27 503 507 "arbres_print.ml" 31 603 624
+)
+"arbres_print.ml" 26 477 496 "arbres_print.ml" 26 477 498
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e2 "arbres_print.ml" 27 503 507 "arbres_print.ml" 31 603 624
+)
+"arbres_print.ml" 26 477 481 "arbres_print.ml" 26 477 499
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 27 503 507 "arbres_print.ml" 27 503 520
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 27 503 521 "arbres_print.ml" 27 503 530
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 27 503 507 "arbres_print.ml" 27 503 530
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 28 532 536 "arbres_print.ml" 28 532 540
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 28 532 541 "arbres_print.ml" 28 532 543
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e1 "arbres_print.ml" 26 477 489 "arbres_print.ml" 26 477 491
+)
+"arbres_print.ml" 28 532 536 "arbres_print.ml" 28 532 543
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 29 545 549 "arbres_print.ml" 29 545 562
+type(
+  (Arbres_ast.var -> Arbres_ast.var -> unit, Format.formatter, unit) format ->
+  Arbres_ast.var -> Arbres_ast.var -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 29 545 563 "arbres_print.ml" 29 545 584
+type(
+  (Arbres_ast.var -> Arbres_ast.var -> unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 29 545 585 "arbres_print.ml" 29 545 586
+type(
+  Arbres_ast.var
+)
+ident(
+  int_ref x "arbres_print.ml" 26 477 492 "arbres_print.ml" 26 477 493
+)
+"arbres_print.ml" 29 545 587 "arbres_print.ml" 29 545 588
+type(
+  Arbres_ast.var
+)
+ident(
+  int_ref y "arbres_print.ml" 26 477 494 "arbres_print.ml" 26 477 495
+)
+"arbres_print.ml" 29 545 549 "arbres_print.ml" 29 545 588
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 30 590 594 "arbres_print.ml" 30 590 598
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 30 590 599 "arbres_print.ml" 30 590 601
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e2 "arbres_print.ml" 26 477 496 "arbres_print.ml" 26 477 498
+)
+"arbres_print.ml" 30 590 594 "arbres_print.ml" 30 590 601
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 31 603 607 "arbres_print.ml" 31 603 620
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 31 603 621 "arbres_print.ml" 31 603 624
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 31 603 607 "arbres_print.ml" 31 603 624
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 30 590 594 "arbres_print.ml" 31 603 624
+type(
+  unit
+)
+"arbres_print.ml" 29 545 549 "arbres_print.ml" 31 603 624
+type(
+  unit
+)
+"arbres_print.ml" 28 532 536 "arbres_print.ml" 31 603 624
+type(
+  unit
+)
+"arbres_print.ml" 27 503 507 "arbres_print.ml" 31 603 624
+type(
+  unit
+)
+"arbres_print.ml" 32 625 637 "arbres_print.ml" 32 625 638
+type(
+  Arbres_ast.var
+)
+ident(
+  def x "arbres_print.ml" 33 649 653 "arbres_print.ml" 37 737 758
+)
+"arbres_print.ml" 32 625 639 "arbres_print.ml" 32 625 641
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e1 "arbres_print.ml" 33 649 653 "arbres_print.ml" 37 737 758
+)
+"arbres_print.ml" 32 625 642 "arbres_print.ml" 32 625 644
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e2 "arbres_print.ml" 33 649 653 "arbres_print.ml" 37 737 758
+)
+"arbres_print.ml" 32 625 629 "arbres_print.ml" 32 625 645
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 33 649 653 "arbres_print.ml" 33 649 666
+type(
+  (Arbres_ast.var -> unit, Format.formatter, unit) format ->
+  Arbres_ast.var -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 33 649 667 "arbres_print.ml" 33 649 679
+type(
+  (Arbres_ast.var -> unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 33 649 680 "arbres_print.ml" 33 649 681
+type(
+  Arbres_ast.var
+)
+ident(
+  int_ref x "arbres_print.ml" 32 625 637 "arbres_print.ml" 32 625 638
+)
+"arbres_print.ml" 33 649 653 "arbres_print.ml" 33 649 681
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 34 683 687 "arbres_print.ml" 34 683 691
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 34 683 692 "arbres_print.ml" 34 683 694
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e1 "arbres_print.ml" 32 625 639 "arbres_print.ml" 32 625 641
+)
+"arbres_print.ml" 34 683 687 "arbres_print.ml" 34 683 694
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 35 696 700 "arbres_print.ml" 35 696 713
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 35 696 714 "arbres_print.ml" 35 696 722
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 35 696 700 "arbres_print.ml" 35 696 722
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 36 724 728 "arbres_print.ml" 36 724 732
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 36 724 733 "arbres_print.ml" 36 724 735
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e2 "arbres_print.ml" 32 625 642 "arbres_print.ml" 32 625 644
+)
+"arbres_print.ml" 36 724 728 "arbres_print.ml" 36 724 735
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 37 737 741 "arbres_print.ml" 37 737 754
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 37 737 755 "arbres_print.ml" 37 737 758
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 37 737 741 "arbres_print.ml" 37 737 758
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 36 724 728 "arbres_print.ml" 37 737 758
+type(
+  unit
+)
+"arbres_print.ml" 35 696 700 "arbres_print.ml" 37 737 758
+type(
+  unit
+)
+"arbres_print.ml" 34 683 687 "arbres_print.ml" 37 737 758
+type(
+  unit
+)
+"arbres_print.ml" 33 649 653 "arbres_print.ml" 37 737 758
+type(
+  unit
+)
+"arbres_print.ml" 38 759 770 "arbres_print.ml" 38 759 771
+type(
+  Arbres_ast.func
+)
+ident(
+  def f "arbres_print.ml" 39 778 782 "arbres_print.ml" 41 823 844
+)
+"arbres_print.ml" 38 759 772 "arbres_print.ml" 38 759 773
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e "arbres_print.ml" 39 778 782 "arbres_print.ml" 41 823 844
+)
+"arbres_print.ml" 38 759 763 "arbres_print.ml" 38 759 774
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 39 778 782 "arbres_print.ml" 39 778 795
+type(
+  (Arbres_ast.func -> unit, Format.formatter, unit) format ->
+  Arbres_ast.func -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 39 778 796 "arbres_print.ml" 39 778 807
+type(
+  (Arbres_ast.func -> unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 39 778 808 "arbres_print.ml" 39 778 809
+type(
+  Arbres_ast.func
+)
+ident(
+  int_ref f "arbres_print.ml" 38 759 770 "arbres_print.ml" 38 759 771
+)
+"arbres_print.ml" 39 778 782 "arbres_print.ml" 39 778 809
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 40 811 815 "arbres_print.ml" 40 811 819
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 40 811 820 "arbres_print.ml" 40 811 821
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e "arbres_print.ml" 38 759 772 "arbres_print.ml" 38 759 773
+)
+"arbres_print.ml" 40 811 815 "arbres_print.ml" 40 811 821
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 41 823 827 "arbres_print.ml" 41 823 840
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 41 823 841 "arbres_print.ml" 41 823 844
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 41 823 827 "arbres_print.ml" 41 823 844
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 40 811 815 "arbres_print.ml" 41 823 844
+type(
+  unit
+)
+"arbres_print.ml" 39 778 782 "arbres_print.ml" 41 823 844
+type(
+  unit
+)
+"arbres_print.ml" 42 845 857 "arbres_print.ml" 42 845 858
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e "arbres_print.ml" 43 862 866 "arbres_print.ml" 45 904 925
+)
+"arbres_print.ml" 42 845 849 "arbres_print.ml" 42 845 858
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 43 862 866 "arbres_print.ml" 43 862 879
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 43 862 880 "arbres_print.ml" 43 862 890
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 43 862 866 "arbres_print.ml" 43 862 890
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 44 892 896 "arbres_print.ml" 44 892 900
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 44 892 901 "arbres_print.ml" 44 892 902
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e "arbres_print.ml" 42 845 857 "arbres_print.ml" 42 845 858
+)
+"arbres_print.ml" 44 892 896 "arbres_print.ml" 44 892 902
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 45 904 908 "arbres_print.ml" 45 904 921
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 45 904 922 "arbres_print.ml" 45 904 925
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 45 904 908 "arbres_print.ml" 45 904 925
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 44 892 896 "arbres_print.ml" 45 904 925
+type(
+  unit
+)
+"arbres_print.ml" 43 862 866 "arbres_print.ml" 45 904 925
+type(
+  unit
+)
+"arbres_print.ml" 46 926 936 "arbres_print.ml" 46 926 938
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e1 "arbres_print.ml" 47 946 950 "arbres_print.ml" 51 1020 1041
+)
+"arbres_print.ml" 46 926 939 "arbres_print.ml" 46 926 941
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e2 "arbres_print.ml" 47 946 950 "arbres_print.ml" 51 1020 1041
+)
+"arbres_print.ml" 46 926 930 "arbres_print.ml" 46 926 942
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 47 946 950 "arbres_print.ml" 47 946 963
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 47 946 964 "arbres_print.ml" 47 946 967
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 47 946 950 "arbres_print.ml" 47 946 967
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 48 970 974 "arbres_print.ml" 48 970 978
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 48 970 979 "arbres_print.ml" 48 970 981
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e1 "arbres_print.ml" 46 926 936 "arbres_print.ml" 46 926 938
+)
+"arbres_print.ml" 48 970 974 "arbres_print.ml" 48 970 981
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 49 983 987 "arbres_print.ml" 49 983 1000
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 49 983 1001 "arbres_print.ml" 49 983 1005
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 49 983 987 "arbres_print.ml" 49 983 1005
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 50 1007 1011 "arbres_print.ml" 50 1007 1015
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 50 1007 1016 "arbres_print.ml" 50 1007 1018
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e2 "arbres_print.ml" 46 926 939 "arbres_print.ml" 46 926 941
+)
+"arbres_print.ml" 50 1007 1011 "arbres_print.ml" 50 1007 1018
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 51 1020 1024 "arbres_print.ml" 51 1020 1037
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 51 1020 1038 "arbres_print.ml" 51 1020 1041
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 51 1020 1024 "arbres_print.ml" 51 1020 1041
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 50 1007 1011 "arbres_print.ml" 51 1020 1041
+type(
+  unit
+)
+"arbres_print.ml" 49 983 987 "arbres_print.ml" 51 1020 1041
+type(
+  unit
+)
+"arbres_print.ml" 48 970 974 "arbres_print.ml" 51 1020 1041
+type(
+  unit
+)
+"arbres_print.ml" 47 946 950 "arbres_print.ml" 51 1020 1041
+type(
+  unit
+)
+"arbres_print.ml" 52 1042 1051 "arbres_print.ml" 52 1042 1052
+type(
+  Arbres_ast.expr
+)
+ident(
+  def b "arbres_print.ml" 53 1063 1067 "arbres_print.ml" 59 1183 1204
+)
+"arbres_print.ml" 52 1042 1053 "arbres_print.ml" 52 1042 1055
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e1 "arbres_print.ml" 53 1063 1067 "arbres_print.ml" 59 1183 1204
+)
+"arbres_print.ml" 52 1042 1056 "arbres_print.ml" 52 1042 1058
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e2 "arbres_print.ml" 53 1063 1067 "arbres_print.ml" 59 1183 1204
+)
+"arbres_print.ml" 52 1042 1046 "arbres_print.ml" 52 1042 1059
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 53 1063 1067 "arbres_print.ml" 53 1063 1080
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 53 1063 1081 "arbres_print.ml" 53 1063 1087
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 53 1063 1067 "arbres_print.ml" 53 1063 1087
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 54 1089 1093 "arbres_print.ml" 54 1089 1097
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 54 1089 1098 "arbres_print.ml" 54 1089 1099
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref b "arbres_print.ml" 52 1042 1051 "arbres_print.ml" 52 1042 1052
+)
+"arbres_print.ml" 54 1089 1093 "arbres_print.ml" 54 1089 1099
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 55 1101 1105 "arbres_print.ml" 55 1101 1118
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 55 1101 1119 "arbres_print.ml" 55 1101 1127
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 55 1101 1105 "arbres_print.ml" 55 1101 1127
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 56 1129 1133 "arbres_print.ml" 56 1129 1137
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 56 1129 1138 "arbres_print.ml" 56 1129 1140
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e1 "arbres_print.ml" 52 1042 1053 "arbres_print.ml" 52 1042 1055
+)
+"arbres_print.ml" 56 1129 1133 "arbres_print.ml" 56 1129 1140
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 57 1142 1146 "arbres_print.ml" 57 1142 1159
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 57 1142 1160 "arbres_print.ml" 57 1142 1168
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 57 1142 1146 "arbres_print.ml" 57 1142 1168
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 58 1170 1174 "arbres_print.ml" 58 1170 1178
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 58 1170 1179 "arbres_print.ml" 58 1170 1181
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e2 "arbres_print.ml" 52 1042 1056 "arbres_print.ml" 52 1042 1058
+)
+"arbres_print.ml" 58 1170 1174 "arbres_print.ml" 58 1170 1181
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 59 1183 1187 "arbres_print.ml" 59 1183 1200
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 59 1183 1201 "arbres_print.ml" 59 1183 1204
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 59 1183 1187 "arbres_print.ml" 59 1183 1204
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 58 1170 1174 "arbres_print.ml" 59 1183 1204
+type(
+  unit
+)
+"arbres_print.ml" 57 1142 1146 "arbres_print.ml" 59 1183 1204
+type(
+  unit
+)
+"arbres_print.ml" 56 1129 1133 "arbres_print.ml" 59 1183 1204
+type(
+  unit
+)
+"arbres_print.ml" 55 1101 1105 "arbres_print.ml" 59 1183 1204
+type(
+  unit
+)
+"arbres_print.ml" 54 1089 1093 "arbres_print.ml" 59 1183 1204
+type(
+  unit
+)
+"arbres_print.ml" 53 1063 1067 "arbres_print.ml" 59 1183 1204
+type(
+  unit
+)
+"arbres_print.ml" 61 1206 1215 "arbres_print.ml" 61 1206 1217
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e1 "arbres_print.ml" 62 1225 1229 "arbres_print.ml" 66 1298 1319
+)
+"arbres_print.ml" 61 1206 1218 "arbres_print.ml" 61 1206 1220
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e2 "arbres_print.ml" 62 1225 1229 "arbres_print.ml" 66 1298 1319
+)
+"arbres_print.ml" 61 1206 1210 "arbres_print.ml" 61 1206 1221
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 62 1225 1229 "arbres_print.ml" 62 1225 1242
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 62 1225 1243 "arbres_print.ml" 62 1225 1246
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 62 1225 1229 "arbres_print.ml" 62 1225 1246
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 63 1249 1253 "arbres_print.ml" 63 1249 1257
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 63 1249 1258 "arbres_print.ml" 63 1249 1260
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e1 "arbres_print.ml" 61 1206 1215 "arbres_print.ml" 61 1206 1217
+)
+"arbres_print.ml" 63 1249 1253 "arbres_print.ml" 63 1249 1260
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 64 1262 1266 "arbres_print.ml" 64 1262 1279
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 64 1262 1280 "arbres_print.ml" 64 1262 1283
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 64 1262 1266 "arbres_print.ml" 64 1262 1283
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 65 1285 1289 "arbres_print.ml" 65 1285 1293
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 65 1285 1294 "arbres_print.ml" 65 1285 1296
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e2 "arbres_print.ml" 61 1206 1218 "arbres_print.ml" 61 1206 1220
+)
+"arbres_print.ml" 65 1285 1289 "arbres_print.ml" 65 1285 1296
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 66 1298 1302 "arbres_print.ml" 66 1298 1315
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 66 1298 1316 "arbres_print.ml" 66 1298 1319
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 66 1298 1302 "arbres_print.ml" 66 1298 1319
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 65 1285 1289 "arbres_print.ml" 66 1298 1319
+type(
+  unit
+)
+"arbres_print.ml" 64 1262 1266 "arbres_print.ml" 66 1298 1319
+type(
+  unit
+)
+"arbres_print.ml" 63 1249 1253 "arbres_print.ml" 66 1298 1319
+type(
+  unit
+)
+"arbres_print.ml" 62 1225 1229 "arbres_print.ml" 66 1298 1319
+type(
+  unit
+)
+"arbres_print.ml" 67 1320 1330 "arbres_print.ml" 67 1320 1331
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e "arbres_print.ml" 68 1335 1339 "arbres_print.ml" 70 1370 1394
+)
+"arbres_print.ml" 67 1320 1324 "arbres_print.ml" 67 1320 1331
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 68 1335 1339 "arbres_print.ml" 68 1335 1352
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 68 1335 1353 "arbres_print.ml" 68 1335 1356
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 68 1335 1339 "arbres_print.ml" 68 1335 1356
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 69 1358 1362 "arbres_print.ml" 69 1358 1366
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 69 1358 1367 "arbres_print.ml" 69 1358 1368
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e "arbres_print.ml" 67 1320 1330 "arbres_print.ml" 67 1320 1331
+)
+"arbres_print.ml" 69 1358 1362 "arbres_print.ml" 69 1358 1368
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 70 1370 1374 "arbres_print.ml" 70 1370 1387
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 70 1370 1388 "arbres_print.ml" 70 1370 1394
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 70 1370 1374 "arbres_print.ml" 70 1370 1394
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 69 1358 1362 "arbres_print.ml" 70 1370 1394
+type(
+  unit
+)
+"arbres_print.ml" 68 1335 1339 "arbres_print.ml" 70 1370 1394
+type(
+  unit
+)
+"arbres_print.ml" 71 1395 1405 "arbres_print.ml" 71 1395 1407
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e1 "arbres_print.ml" 72 1415 1419 "arbres_print.ml" 76 1489 1510
+)
+"arbres_print.ml" 71 1395 1408 "arbres_print.ml" 71 1395 1410
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e2 "arbres_print.ml" 72 1415 1419 "arbres_print.ml" 76 1489 1510
+)
+"arbres_print.ml" 71 1395 1399 "arbres_print.ml" 71 1395 1411
+type(
+  Arbres_ast.expr
+)
+"arbres_print.ml" 72 1415 1419 "arbres_print.ml" 72 1415 1432
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 72 1415 1433 "arbres_print.ml" 72 1415 1436
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 72 1415 1419 "arbres_print.ml" 72 1415 1436
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 73 1439 1443 "arbres_print.ml" 73 1439 1447
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 73 1439 1448 "arbres_print.ml" 73 1439 1450
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e1 "arbres_print.ml" 71 1395 1405 "arbres_print.ml" 71 1395 1407
+)
+"arbres_print.ml" 73 1439 1443 "arbres_print.ml" 73 1439 1450
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 74 1452 1456 "arbres_print.ml" 74 1452 1469
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 74 1452 1470 "arbres_print.ml" 74 1452 1474
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 74 1452 1456 "arbres_print.ml" 74 1452 1474
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 75 1476 1480 "arbres_print.ml" 75 1476 1484
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 75 1476 1485 "arbres_print.ml" 75 1476 1487
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e2 "arbres_print.ml" 71 1395 1408 "arbres_print.ml" 71 1395 1410
+)
+"arbres_print.ml" 75 1476 1480 "arbres_print.ml" 75 1476 1487
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 76 1489 1493 "arbres_print.ml" 76 1489 1506
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 76 1489 1507 "arbres_print.ml" 76 1489 1510
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 76 1489 1493 "arbres_print.ml" 76 1489 1510
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 75 1476 1480 "arbres_print.ml" 76 1489 1510
+type(
+  unit
+)
+"arbres_print.ml" 74 1452 1456 "arbres_print.ml" 76 1489 1510
+type(
+  unit
+)
+"arbres_print.ml" 73 1439 1443 "arbres_print.ml" 76 1489 1510
+type(
+  unit
+)
+"arbres_print.ml" 72 1415 1419 "arbres_print.ml" 76 1489 1510
+type(
+  unit
+)
+"arbres_print.ml" 16 230 245 "arbres_print.ml" 76 1489 1510
+type(
+  Arbres_ast.expr -> unit
+)
+"arbres_print.ml" 79 1513 1517 "arbres_print.ml" 79 1513 1526
+type(
+  string * string * Arbres_ast.expr -> unit
+)
+ident(
+  def decl_func "arbres_print.ml" 85 1608 1608 "arbres_print.ml" 1 0 -1
+)
+"arbres_print.ml" 79 1513 1528 "arbres_print.ml" 79 1513 1529
+type(
+  string
+)
+ident(
+  def f "arbres_print.ml" 80 1537 1539 "arbres_print.ml" 82 1585 1605
+)
+"arbres_print.ml" 79 1513 1530 "arbres_print.ml" 79 1513 1531
+type(
+  string
+)
+ident(
+  def x "arbres_print.ml" 80 1537 1539 "arbres_print.ml" 82 1585 1605
+)
+"arbres_print.ml" 79 1513 1532 "arbres_print.ml" 79 1513 1533
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e "arbres_print.ml" 80 1537 1539 "arbres_print.ml" 82 1585 1605
+)
+"arbres_print.ml" 79 1513 1527 "arbres_print.ml" 79 1513 1534
+type(
+  string * string * Arbres_ast.expr
+)
+"arbres_print.ml" 80 1537 1539 "arbres_print.ml" 80 1537 1552
+type(
+  (string -> string -> unit, Format.formatter, unit) format ->
+  string -> string -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 80 1537 1553 "arbres_print.ml" 80 1537 1569
+type(
+  (string -> string -> unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 80 1537 1570 "arbres_print.ml" 80 1537 1571
+type(
+  string
+)
+ident(
+  int_ref f "arbres_print.ml" 79 1513 1528 "arbres_print.ml" 79 1513 1529
+)
+"arbres_print.ml" 80 1537 1572 "arbres_print.ml" 80 1537 1573
+type(
+  string
+)
+ident(
+  int_ref x "arbres_print.ml" 79 1513 1530 "arbres_print.ml" 79 1513 1531
+)
+"arbres_print.ml" 80 1537 1539 "arbres_print.ml" 80 1537 1573
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 81 1575 1577 "arbres_print.ml" 81 1575 1581
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 81 1575 1582 "arbres_print.ml" 81 1575 1583
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e "arbres_print.ml" 79 1513 1532 "arbres_print.ml" 79 1513 1533
+)
+"arbres_print.ml" 81 1575 1577 "arbres_print.ml" 81 1575 1583
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 82 1585 1587 "arbres_print.ml" 82 1585 1600
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 82 1585 1601 "arbres_print.ml" 82 1585 1605
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 82 1585 1587 "arbres_print.ml" 82 1585 1605
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 81 1575 1577 "arbres_print.ml" 82 1585 1605
+type(
+  unit
+)
+"arbres_print.ml" 80 1537 1539 "arbres_print.ml" 82 1585 1605
+type(
+  unit
+)
+"arbres_print.ml" 85 1608 1612 "arbres_print.ml" 85 1608 1616
+type(
+  (string * string * Arbres_ast.expr) list * Arbres_ast.expr -> unit
+)
+ident(
+  def prog "arbres_print.ml" 88 1674 1682 "arbres_print.ml" 1 0 -1
+)
+"arbres_print.ml" 85 1608 1618 "arbres_print.ml" 85 1608 1619
+type(
+  (string * string * Arbres_ast.expr) list
+)
+ident(
+  def l "arbres_print.ml" 86 1625 1627 "arbres_print.ml" 88 1674 1682
+)
+"arbres_print.ml" 85 1608 1620 "arbres_print.ml" 85 1608 1621
+type(
+  Arbres_ast.expr
+)
+ident(
+  def e "arbres_print.ml" 86 1625 1627 "arbres_print.ml" 88 1674 1682
+)
+"arbres_print.ml" 85 1608 1617 "arbres_print.ml" 85 1608 1622
+type(
+  (string * string * Arbres_ast.expr) list * Arbres_ast.expr
+)
+"arbres_print.ml" 86 1625 1627 "arbres_print.ml" 86 1625 1636
+type(
+  (string * string * Arbres_ast.expr -> unit) ->
+  (string * string * Arbres_ast.expr) list -> unit
+)
+ident(
+  ext_ref List.iter
+)
+"arbres_print.ml" 86 1625 1637 "arbres_print.ml" 86 1625 1646
+type(
+  string * string * Arbres_ast.expr -> unit
+)
+ident(
+  int_ref decl_func "arbres_print.ml" 79 1513 1517 "arbres_print.ml" 79 1513 1526
+)
+"arbres_print.ml" 86 1625 1647 "arbres_print.ml" 86 1625 1648
+type(
+  (string * string * Arbres_ast.expr) list
+)
+ident(
+  int_ref l "arbres_print.ml" 85 1608 1618 "arbres_print.ml" 85 1608 1619
+)
+"arbres_print.ml" 86 1625 1627 "arbres_print.ml" 86 1625 1648
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 87 1650 1652 "arbres_print.ml" 87 1650 1665
+type(
+  (unit, Format.formatter, unit) format -> unit
+)
+ident(
+  ext_ref Format.printf
+)
+"arbres_print.ml" 87 1650 1666 "arbres_print.ml" 87 1650 1672
+type(
+  (unit, Format.formatter, unit) format
+)
+"arbres_print.ml" 87 1650 1652 "arbres_print.ml" 87 1650 1672
+call(
+  stack
+)
+type(
+  unit
+)
+"arbres_print.ml" 88 1674 1676 "arbres_print.ml" 88 1674 1680
+type(
+  Arbres_ast.expr -> unit
+)
+ident(
+  int_ref expr "arbres_print.ml" 16 230 238 "arbres_print.ml" 16 230 242
+)
+"arbres_print.ml" 88 1674 1681 "arbres_print.ml" 88 1674 1682
+type(
+  Arbres_ast.expr
+)
+ident(
+  int_ref e "arbres_print.ml" 85 1608 1620 "arbres_print.ml" 85 1608 1621
+)
+"arbres_print.ml" 88 1674 1676 "arbres_print.ml" 88 1674 1682
+call(
+  tail
+)
+type(
+  unit
+)
+"arbres_print.ml" 87 1650 1652 "arbres_print.ml" 88 1674 1682
+type(
+  unit
+)
+"arbres_print.ml" 86 1625 1627 "arbres_print.ml" 88 1674 1682
+type(
+  unit
+)
