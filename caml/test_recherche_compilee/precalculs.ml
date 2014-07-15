@@ -2,6 +2,8 @@ open Def
 open Global_ref
 
 
+type couple = int*int
+
 type sequent = { mutable g : couple list; mutable n : int; mutable d : couple list; mutable fauxL : bool; mutable id : bool }
 
 

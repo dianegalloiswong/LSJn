@@ -1,5 +1,5 @@
 *.cm[io]
-caml/_build/
+*_build/
 *.aux
 *.log
 *.toc

@@ -23,12 +23,12 @@ let rec prouvable () =
   match Seq.check_id () with Some a -> id a | None ->
   let qf,c = Seq.choix_formule () in
   match qf with
-    | QF_etL -> etL c
-    | QF_ouR -> ouR c
-    | QF_ouL -> ouL c
-    | QF_etR -> etR c
-    | QF_imp -> imp ()
-    | QF_aucun -> irr ()
+    | Seq.QF_etL -> etL c
+    | Seq.QF_ouR -> ouR c
+    | Seq.QF_ouL -> ouL c
+    | Seq.QF_etR -> etR c
+    | Seq.QF_imp -> imp ()
+    | Seq.QF_aucun -> irr ()
 
 and inversible1prem r_prem r_rev regle c =
   r_prem c;

@@ -1,11 +1,14 @@
 open Def
 open Global_ref
 
-module G = Structs.G
-module D = Structs.D
+type sous_formule = int
+type couple = int*sous_formule
 
-module Cl_g = Structs.Cl_g
-module Cl_d = Structs.Cl_d
+module G = Tableau_priorite.Main(Case_priorite.G)
+module D = Tableau_priorite.Main(Case_priorite.D)
+
+module Cl_g = Tableau_classe.Main(Case_classe.G)
+module Cl_d = Tableau_classe.Main(Case_classe.D)
 
 type t = { mutable g : G.t ; mutable n : int ; mutable d : D.t ;
 	   mutable cl_g : Cl_g.t ; mutable cl_d : Cl_d.t ;
@@ -145,6 +148,8 @@ let prio_g () =
 
 let prio_d () =
   D.priorite_plus_forte s.n s.d
+
+type quoi_faire = QF_aucun | QF_imp | QF_etR | QF_ouL | QF_ouR | QF_etL
 
 let choix_formule () =
   let pg,hg = prio_g () and pd,hd = prio_d () in

@@ -1,7 +1,7 @@
 OCAMLBUILD=ocamlbuild -classic-display \
 		-tags annot,debug,thread \
 		-libs unix \
-                -Is prouveur,prouveur/indexation,prouveur/sequent,prouveur/sequent/structures,prouveur/strategie,prouveur/reponse,analyseur,sortie,exemples,test_recherche_compilee \
+                -Is prouveur,prouveur/indexation,prouveur/sequent,prouveur/sequent/structures,prouveur/strategie,prouveur/preuve_contre_modele,analyseur,sortie,exemples,test_recherche_compilee \
                 -use-menhir
 TARGET=native
 
@@ -14,6 +14,6 @@ clean:
 	$(OCAMLBUILD) -clean
 
 realclean: clean
-	rm -f *~ **/*~
+	rm -f *~ **/*~ **/**/*~ **/**/**/*~
 
 cleanall: realclean

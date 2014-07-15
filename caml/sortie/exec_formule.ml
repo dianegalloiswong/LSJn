@@ -2,7 +2,7 @@
 let bool_to_string_fr b = if b then "vrai" else "faux"
 
 let main att_opt f =
-  if Options.print_formule() then Format.printf "%s@." (To_string.formule f);
+  if Options.affiche_formule() then Format.printf "%s@." (To_string.formule f);
   if !Options.indexation then (Init_sf_classe.test f)
   else 
     (try
@@ -13,7 +13,7 @@ let main att_opt f =
 	   else
 	     Prouveur.main f
 	 in
-	 if Options.print_rep() then Rep.print rep (*Format.printf "%s@." (bool_to_string_fr rep)*);
+	 if Options.affiche_rep() then Rep.print rep (*Format.printf "%s@." (bool_to_string_fr rep)*);
 	 match att_opt with
 	   | None -> ()
 	   | Some (batt,_) ->

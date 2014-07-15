@@ -16,7 +16,7 @@ if Options.time_on() then
     let stop = Unix.gettimeofday () in
     let temps = (stop -. start) in
     temps_total := !temps_total +. temps;
-    if Options.print_temps_un() then Format.printf "%fs, %d appels à prouvable@." temps !appels;
+    if Options.affiche_temps_un() then Format.printf "%fs, %d appels à prouvable@." temps !appels;
     res
  with Temps_ecoule -> Format.printf "temps écoulé (%fs), %d appels à prouvable vus@." !Options.temps_max !appels; raise Temps_ecoule
 else f x

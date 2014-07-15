@@ -13,6 +13,6 @@ clean:
 	$(OCAMLBUILD) -clean
 
 realclean: clean
-	rm -f *~ **/*~
+	rm -f *~ **/*~ **/**/*~
 
 cleanall: realclean

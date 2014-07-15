@@ -1,4 +1,3 @@
-
 type attendu = IL of bool | CL of bool
 
 type fact = 

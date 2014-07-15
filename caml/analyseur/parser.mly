@@ -2,9 +2,7 @@
 %{
 
   open Def
-  open Ast
-
-
+  open Syntaxe_fichier
 
 %}
 
@@ -28,7 +26,7 @@
 
 %start fichier
 
-%type <Ast.fichier> fichier
+%type <Syntaxe_fichier.fichier> fichier
 
 
 %%

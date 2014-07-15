@@ -1,4 +1,5 @@
-open Def
+type sous_formule = int
+type couple = int*sous_formule
 
 
 (* choix_formule *)
@@ -45,7 +46,7 @@ val reord_imp_d : int -> int -> unit
 val var_g : unit -> string list
 
 
-
+type quoi_faire = QF_aucun | QF_imp | QF_etR | QF_ouL | QF_ouR | QF_etL
 val choix_formule : unit -> quoi_faire * couple
 
 
