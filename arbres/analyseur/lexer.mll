@@ -67,6 +67,7 @@ and token = parse
   | ','     { COMMA }
 
   | "&&"    { AND }
+  | "||"    { OR }
   | "+1"    { PLUSUN }
 
   | "null"    { NULL }

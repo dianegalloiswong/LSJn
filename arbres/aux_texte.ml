@@ -20,17 +20,23 @@
 
 
 equal : <x,y> -> x=y égalité structurelle
+pred : n -> n-1
 
 rm : <x,l> -> liste l privée de l'élément x
 mem : <x,l> -> booléen : x appartient à l
 mem_inf <<n,x>,l> -> booléen : l contient un couple <i,x> avec i<=n
 
 n_of_seq : seq -> n
+set_n : <n,seq> -> seq où l'indice vaut n; ne s'occupe pas des axiomes
 
 rm_ax : seq -> seq où les axiomes sont mis à faux
 set_fauxL : seq -> seq où fauxL=vrai
 set_id : seq -> seq où id=vrai
 
+is_ax : seq -> booléen au moins un axiome est vrai
+
+incr_n (s'occupe de fauxL)
+decr_n (ne s'occupe pas des axiomes)
 
 add_cl_g <c,seq> -> seq : ajoute c=(i,cl) à CG, et si axiomes, met à jour
 add_cl_d
@@ -43,8 +49,7 @@ add_d
 rm_g
 rm_d
 
-incr_n
-decr_n
+
 
 empty_seq : _ -> sequent vide
 
@@ -61,6 +66,15 @@ let equal arg =
     match x with <x1,x2> => match y with <y1,y2> =>
     (call equal <x1,y1>) && (call equal <x2,y2>)
   else 0
+
+let pred_aux arg =
+  match arg with <n,arg2> =>
+  match arg2 with <i,j> =>
+  if j=n then i
+  else call pred_aux <n,<i+1,j+1>>
+let pred n =
+  if n<=0 then 0 else
+  call pred_aux <n,<0,1>>
 
 let rm arg =
   match arg with <x,l> =>
@@ -81,11 +95,20 @@ let mem_inf arg =
     match hd with <i,y> =>
     if (i<=n && call equal <y,x>) then 1 else call mem_inf <arg1,tl>
 
+(***)
+
 let n_of_seq seq =
   match seq with <formules,reste> =>
   match reste with <classes,infos> =>
   match infos with <n,axiomes> =>
   n
+
+let set_n arg =
+  match arg with <n,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n1,axiomes> =>
+  <formules, <classes, <n, axiomes > > >
 
 let rm_ax seq =
   match seq with <formules,reste> =>
@@ -107,7 +130,26 @@ let set_id seq =
   match axiomes with <fauxL,id> =>
   <formules, <classes, <n, <fauxL,1> > > >
 
+(***)
 
+let incr_n seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  let seq = <formules, <classes, <n+1, axiomes > > > in
+  match classes with <CG,CD> =>
+  if call mem <<n+1,0>,CG> then call set_fauxL seq
+  else seq
+
+let decr_n seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  let nmoins1 = call pred n in
+  let seq = <formules, <classes, <nmoins1, axiomes > > > in
+  seq
+
+(***)
 
 let add_cl_g arg =
   match arg with <c,seq> =>
@@ -204,6 +246,12 @@ let rm_d arg =
   call rm_cl_d <<i,cl>,seq>
 
 
+
+
+
+
+
+
 let empty_seq arg =
   <  <null,null>  ,  < <null,null> , <0,<0,0>> >  >
 
@@ -221,7 +269,7 @@ let empty_seq arg =
 in
 
 (*call rm <2,  <1,<2,<3,null>>> >*)
-
+(*
 let l = null in
 let l = < <1,2>, l > in
 let l = < <3,2>, l > in
@@ -232,9 +280,9 @@ let l = < <4,4>, l > in
 let l = < <6,5>, l > in
 
 (*call rm < <1,1>, l >*)
-(*call mem_inf < <2,4>, l >*)
+call mem_inf < <2,4>, l >*)
 
-
+(*
 let seq = call empty_seq null in
 
 let seq = call add_g < <<0,2>,1> , seq > in
@@ -244,3 +292,7 @@ let seq = call rm_g < <<0,1>,2> , seq > in
 let seq = call rm_d < <<0,3>,2> , seq > in
 let seq = call rm_g < <<0,2>,1> , seq > in
 seq
+*)
+
+
+null

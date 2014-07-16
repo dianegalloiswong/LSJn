@@ -22,7 +22,7 @@ type expr =
   | ELess of expr*expr
   | ESucc of expr
   | EAnd of expr*expr
-
+  | EOr of expr*expr
 
 type decl_func = func*var*expr
 

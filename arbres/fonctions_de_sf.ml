@@ -24,6 +24,8 @@ let eletin_seq func var a =
   eletin "seq" (ecall func (enode (enode (enode (evar var) (eint a)) (eint !classe.(a))) (evar "seq")))
 (* func : rm_g ou add_d ou etc., var : "i" ou "n"... *)
 
+let eletin_seq_rm_ax = eletin "seq" (ecall "rm_ax" (evar"seq"))
+
 let body_of_list l =
   ematch (evar "arg") "i" "seq" (
     List.fold_right (fun f x -> f x) l (evar "seq")
@@ -43,6 +45,7 @@ let etL_ouR is_etL h a b =
     eletin_seq rm "i" b;
     eletin_seq rm "i" a;
     eletin_seq add "i" h;
+    eletin_seq_rm_ax;
   ] in
   ajout_fonctions h [body_prem;body_rev]
 
@@ -60,6 +63,7 @@ let ouL_etR is_ouL h a b =
   let body_rev1 = body_of_list [
     eletin_seq rm "i" a;
     eletin_seq add "i" h;
+    eletin_seq_rm_ax;
   ] in
   let body_prem2 = body_of_list [
     eletin_seq rm "i" h;
@@ -68,6 +72,7 @@ let ouL_etR is_ouL h a b =
   let body_rev2 = body_of_list [
     eletin_seq rm "i" b;
     eletin_seq add "i" h;
+    eletin_seq_rm_ax;
   ] in
   ajout_fonctions h [body_prem1;body_rev1;body_prem2;body_rev2]
 
@@ -80,7 +85,7 @@ let etR = ouL_etR false
 let eletin_n_of_seq = eletin "n" (ecall "n_of_seq" (evar"seq"))
 let eletin_seq_incr_n = eletin "seq" (ecall "incr_n" (evar"seq"))
 let eletin_seq_decr_n = eletin "seq" (ecall "decr_n" (evar"seq"))
-
+let eletin_seq_set_n = eletin "seq" (ecall "set_n" (enode (evar"n") (evar"seq")))
 
 let impL h a b =
 
@@ -91,6 +96,7 @@ let impL h a b =
   let body_rev1 = body_of_list [
     eletin_seq "rm_g" "i" b;
     eletin_seq "add_g" "i" h;
+    eletin_seq_rm_ax;
   ] in
 
   let list_prem2 = [
@@ -109,6 +115,7 @@ let impL h a b =
     eletin_seq "rm_d" "n" a;
     eletin_seq "rm_g" "nplus1" b;
     eletin_seq "add_g" "i" h;
+    eletin_seq_rm_ax;
   ] in
   let body_rev2 = body_of_list list_rev2 in
   let body_rev3 = body_of_list (list_rev2@[eletin_seq_decr_n]) in
@@ -129,12 +136,13 @@ let impR h a b =
     eletin_seq "rm_g" "i" a;
     eletin_seq "rm_d" "i" b;
     eletin_seq "add_d" "i" h;
+    eletin_seq_rm_ax;
   ] in
   let body_rev1 = body_of_list list_rev1 in
 
   let list_prem2 = eletin_seq_incr_n :: (eletin "i" (esucc(evar "i"))) :: list_prem1 in
   let body_prem2 = body_of_list list_prem2 in
-  let list_rev2 = ( (eletin "i" (esucc(evar "i"))) :: list_prem1 ) @ [eletin_seq_decr_n] in
+  let list_rev2 = ( (eletin "i" (esucc(evar "i"))) :: list_rev1 ) @ [eletin_seq_decr_n] in
   let body_rev2 = body_of_list list_rev2 in
 
   ajout_fonctions h [body_prem1;body_rev1;body_prem2;body_rev2]

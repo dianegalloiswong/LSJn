@@ -109,7 +109,17 @@ let rec interp_expr env (expr,pos) = match expr with
 	  | _ -> raise (Error ("should be a boolean (argument of &&)", snd e2)) )
       | _ -> raise (Error ("should be a boolean (argument of &&)", snd e1))
     end
-
+  | EOr (e1,e2) ->
+    let t1 = interp_expr env e1 in
+    begin
+    match t1 with
+      | Int 0 -> 
+	let t2 = interp_expr env e2 in
+	(match t2 with Int _ -> t2 
+	  | _ -> raise (Error ("should be a boolean (argument of ||)", snd e2)) )
+      | Int _ -> t1
+      | _ -> raise (Error ("should be a boolean (argument of ||)", snd e1))
+    end
 
 
 
