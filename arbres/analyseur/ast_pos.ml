@@ -1,9 +1,13 @@
-(*type tree = Null | Int of int | Node of tree*tree*)
+type position = Lexing.position
+type positions = position*position
+type 'a pos = 'a * positions
 
-type var = string
-type func = string
 
-type expr =
+
+type var = string pos
+type func = string pos
+
+type expr0 =
   | EVar of var
   | ENull
   | EInt of int
@@ -23,6 +27,7 @@ type expr =
   | ESucc of expr
   | EAnd of expr*expr
 
+and expr = expr0 pos
 
 type decl_func = func*var*expr
 
@@ -30,7 +35,7 @@ type prog = (decl_func list)*expr
 
 
 
-
+(*
 let evar s = EVar s
 let eint n = EInt n
 let efalse = EInt 0
@@ -47,3 +52,4 @@ let eless e1 e2 = ELess (e1,e2)
 let eif b e1 e2 = EIf (b,e1,e2)
 let eeq e1 e2 = EEq (e1,e2)
 let esucc e = ESucc e
+*)

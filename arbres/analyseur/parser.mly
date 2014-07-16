@@ -1,7 +1,7 @@
 
 %{
 
-  open Ast
+  open Ast_pos
 
 %}
 
@@ -18,7 +18,7 @@
 
 %nonassoc ARROW IN ELSE
 %left AND
-%left LT /*GT*/ LEQ //GEQ
+%left EQ LT /*GT*/ LEQ //GEQ
 %nonassoc PLUSUN
 %nonassoc call
 %nonassoc ISNULL ISINT ISNODE
@@ -32,7 +32,7 @@
 
 %start prog
 
-%type <Ast.prog> prog
+%type <Ast_pos.prog> prog
 
 
 %%
@@ -43,25 +43,28 @@ prog:
   | decls=decl_func* IN e=expr EOF  { (decls,e) }
 
 decl_func:
-  | LET nom=IDENT arg=IDENT EQ body=expr  { (nom,arg,body) }
+  | LET nom=ident arg=ident EQ body=expr  { (nom,arg,body) }
 
 expr:
   | LPAREN e=expr RPAREN  { e }
-  | x=IDENT  { EVar x }
-  | NULL  { ENull }
-  | n=INT  { EInt n }
-  | LT e1=expr COMMA e2=expr GT  { ENode (e1,e2) }
-  | MATCH e1=expr WITH LT x=IDENT COMMA y=IDENT GT ARROW e2=expr  { EMatch (e1,x,y,e2) }
-  | LET x=IDENT EQ e1=expr IN e2=expr  { ELetin (x,e1,e2) } 
-  | CALL f=IDENT e=expr  { ECall (f,e) }               %prec call
-  | ISNULL e=expr  { EIsnull e }
-  | ISINT e=expr  { EIsint e }
-  | ISNODE e=expr  { EIsnode e }
-  | e1=expr LEQ e2=expr  { ELeq (e1,e2) }
-  | IF b=expr THEN e1=expr ELSE e2=expr  { EIf (b,e1,e2) }
+  | x=ident  {( EVar x ,($startpos,$endpos))}
+  | NULL  {( ENull ,($startpos,$endpos))}
+  | n=INT  {( EInt n ,($startpos,$endpos))}
+  | LT e1=expr COMMA e2=expr GT  {( ENode (e1,e2) ,($startpos,$endpos))}
+  | MATCH e1=expr WITH LT x=ident COMMA y=ident GT ARROW e2=expr  {( EMatch (e1,x,y,e2) ,($startpos,$endpos))}
+  | LET x=ident EQ e1=expr IN e2=expr  {( ELetin (x,e1,e2) ,($startpos,$endpos))} 
+  | CALL f=ident e=expr  {( ECall (f,e) ,($startpos,$endpos))}               %prec call
+  | ISNULL e=expr  {( EIsnull e ,($startpos,$endpos))}
+  | ISINT e=expr  {( EIsint e ,($startpos,$endpos))}
+  | ISNODE e=expr  {( EIsnode e ,($startpos,$endpos))}
+  | e1=expr LEQ e2=expr  {( ELeq (e1,e2) ,($startpos,$endpos))}
+  | IF b=expr THEN e1=expr ELSE e2=expr  {( EIf (b,e1,e2) ,($startpos,$endpos))}
 
-  | e1=expr EQ e2=expr  { EEq (e1,e2) }
-  | e1=expr LT e2=expr  { ELess (e1,e2) }
-  | e=expr PLUSUN  { ESucc e }
-  | e1=expr AND e2=expr  { EAnd (e1,e2) }
+  | e1=expr EQ e2=expr  {( EEq (e1,e2) ,($startpos,$endpos))}
+  | e1=expr LT e2=expr  {( ELess (e1,e2) ,($startpos,$endpos))}
+  | e=expr PLUSUN  {( ESucc e ,($startpos,$endpos))}
+  | e1=expr AND e2=expr  {( EAnd (e1,e2) ,($startpos,$endpos))}
 
+
+ident:
+  | s=IDENT  {( s ,($startpos,$endpos))}

@@ -39,7 +39,9 @@ rm_cl_d
 
 add_g < <<i,a>,cl> , seq > ajoute (i,a) à G et appelle add_cl_g avec (i,cl)
   ( ajoute (i,cl) à CG, et fauxL:=vrai si cl=0 et i<=n, et id:=vrai si i<=n et (n,cl) présent dans CD )
-
+add_d
+rm_g
+rm_d
 
 incr_n
 decr_n
@@ -128,6 +130,39 @@ let add_cl_g arg =
   seq
 *)
 
+let add_cl_d arg =
+  match arg with <c,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match classes with <CG,CD> =>
+  let CD = <c,CD> in
+  let seq = <formules, < <CG,CD>, infos> > in
+
+  match c with <i,cl> =>
+  match infos with <n,axiomes> =>
+  if i=n && call mem_inf <<n,cl>,CG> then call set_id seq 
+  else seq
+
+let rm_cl_g arg =
+  match arg with <c,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match classes with <CG,CD> =>
+  let CG = call rm <c,CG> in
+  let seq = <formules, < <CG,CD>, infos> > in
+  seq
+
+let rm_cl_d arg =
+  match arg with <c,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match classes with <CG,CD> =>
+  let CD = call rm <c,CD> in
+  let seq = <formules, < <CG,CD>, infos> > in
+  seq
+
+(***)
+
 let add_g arg =
   match arg with <arg1,seq> =>
   match arg1 with <c,cl> =>
@@ -138,7 +173,35 @@ let add_g arg =
   let seq = <<G,D>,reste> in
   call add_cl_g <<i,cl>,seq>
 
+let add_d arg =
+  match arg with <arg1,seq> =>
+  match arg1 with <c,cl> =>
+  match c with <i,a> =>
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  let D = <c,D> in
+  let seq = <<G,D>,reste> in
+  call add_cl_d <<i,cl>,seq>
 
+let rm_g arg =
+  match arg with <arg1,seq> =>
+  match arg1 with <c,cl> =>
+  match c with <i,a> =>
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  let G = call rm <c,G> in
+  let seq = <<G,D>,reste> in
+  call rm_cl_g <<i,cl>,seq>
+
+let rm_d arg =
+  match arg with <arg1,seq> =>
+  match arg1 with <c,cl> =>
+  match c with <i,a> =>
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  let D = call rm <c,D> in
+  let seq = <<G,D>,reste> in
+  call rm_cl_d <<i,cl>,seq>
 
 
 let empty_seq arg =
@@ -174,6 +237,10 @@ let l = < <6,5>, l > in
 
 let seq = call empty_seq null in
 
-let seq = call add_g < <<0,2>,0> , seq > in
-
+let seq = call add_g < <<0,2>,1> , seq > in
+let seq = call add_g < <<0,1>,2> , seq > in
+let seq = call add_d < <<0,3>,2> , seq > in
+let seq = call rm_g < <<0,1>,2> , seq > in
+let seq = call rm_d < <<0,3>,2> , seq > in
+let seq = call rm_g < <<0,2>,1> , seq > in
 seq

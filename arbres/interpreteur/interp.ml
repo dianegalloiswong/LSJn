@@ -1,8 +1,8 @@
-open Ast
+open Ast_pos
 open Tree
 
 
-exception Error of string
+exception Error of (string*positions)
 
 
 module Smap = Map.Make (String)
@@ -25,10 +25,10 @@ let fonctions = Hashtbl.create 17 (* func -> var*expr *)
 
 let tree_of_bool b = Int (if b then 1 else 0)
 
-let rec interp_expr env = function
-  | EVar x -> (try Smap.find x env with Not_found -> raise (Error ("unbound variable "^x)))
+let rec interp_expr env (expr,pos) = match expr with
+  | EVar x -> (try Smap.find (fst x) env with Not_found -> raise (Error ("unbound variable "^(fst x), snd x)))
   | ENull -> Null
-  | EInt n -> Int n
+  | EInt n -> Int  n
   | ENode (e1,e2) ->
     let t1 = interp_expr env e1 in
     let t2 = interp_expr env e2 in
@@ -38,19 +38,19 @@ let rec interp_expr env = function
     begin
     match t1 with
       | Node (tx,ty) ->
-	let env' = Smap.add x tx env in
-	let env' = Smap.add y ty env' in
+	let env' = Smap.add (fst x) tx env in
+	let env' = Smap.add (fst y) ty env' in
 	interp_expr env' e2
-      | _ -> raise (Error "match : not a node")
+      | _ -> raise (Error ("should be a node (get matched)", snd e1))
     end
   | ELetin (x,e1,e2) ->
     let t1 = interp_expr env e1 in
-    let env' = Smap.add x t1 env in
+    let env' = Smap.add (fst x) t1 env in
     interp_expr env' e2
   | ECall (f,e) -> 
     let t = interp_expr env e in 
-    let (arg,body) = try Hashtbl.find fonctions f 
-      with Not_found -> raise (Error ("unknown function "^f))
+    let (arg,body) = try Hashtbl.find fonctions (fst f) 
+      with Not_found -> raise (Error ("unknown function "^(fst f), snd f))
     in
     let env' = Smap.add arg t env in
     interp_expr env' body
@@ -63,19 +63,24 @@ let rec interp_expr env = function
   | EIsnode e -> 
     let t = interp_expr env e in 
     tree_of_bool (match t with Node _->true|_->false)
-  | ELeq (e1,e2) | EEq (e1,e2) | ELess (e1,e2) as e ->
+  | ELeq (e1,e2) | EEq (e1,e2) | ELess (e1,e2) ->
     let t1 = interp_expr env e1 in
     let t2 = interp_expr env e2 in
     begin
-    match t1,t2 with
-      | Int n1,Int n2 ->
-	let b = match e with
-	  | ELeq _ -> n1<=n2
-	  | EEq _ -> n1=n2
-	  | ELess _ -> n1<n2
-	  | _ -> assert false
-	in tree_of_bool b
-      | _ -> raise (Error "comparison : not two integers")
+    match t1 with
+      | Int n1 ->
+	begin
+	match t2 with
+	  | Int n2 ->
+	    let b = match expr with
+	      | ELeq _ -> n1<=n2
+	      | EEq _ -> n1=n2
+	      | ELess _ -> n1<n2
+	      | _ -> assert false
+	    in tree_of_bool b
+	  | _ -> raise (Error ("should be an integer (comparison)", snd e2))
+	end
+      | _ -> raise (Error ("should be an integer (comparison)", snd e1))
     end
   | EIf (b,e1,e2) ->
     let t = interp_expr env b in
@@ -83,7 +88,7 @@ let rec interp_expr env = function
     match t with
       | Int 0 -> interp_expr env e2
       | Int _ -> interp_expr env e1
-      | _ -> raise (Error "condition : not a boolean")
+      | _ -> raise (Error ("should be a boolean (condition)", snd b))
     end
 
   | ESucc e ->
@@ -91,7 +96,7 @@ let rec interp_expr env = function
     begin
     match t with
       | Int n -> Int (n+1)
-      | _ -> raise (Error "succ : not an integer")
+      | _ -> raise (Error ("should be an integer (succ)", snd e))
     end
   | EAnd (e1,e2) ->
     let t1 = interp_expr env e1 in
@@ -101,8 +106,8 @@ let rec interp_expr env = function
       | Int _ -> 
 	let t2 = interp_expr env e2 in
 	(match t2 with Int _ -> t2 
-	  | _ -> raise (Error "and : the second argument is not a boolean"))
-      | _ -> raise (Error "and : the first argument is not a boolean")
+	  | _ -> raise (Error ("should be a boolean (argument of &&)", snd e2)) )
+      | _ -> raise (Error ("should be a boolean (argument of &&)", snd e1))
     end
 
 
@@ -110,7 +115,7 @@ let rec interp_expr env = function
 
 
 let interp_decl_func (f,arg,e) =
-  Hashtbl.add fonctions f (arg,e)
+  Hashtbl.add fonctions (fst f) (fst arg,e)
 
 
 let interp_prog (dflist,e) =
