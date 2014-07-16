@@ -1,5 +1,5 @@
-open Arbres_ast
-
+open Ast
+open Tree
 
 
 let rec tree = function
@@ -43,20 +43,37 @@ let rec expr = function
     Format.printf "(isnull ";
     expr e;
     Format.printf ")"
+  | EIsint e ->
+    Format.printf "(isint ";
+    expr e;
+    Format.printf ")"
+  | EIsnode e ->
+    Format.printf "(isnode ";
+    expr e;
+    Format.printf ")"
   | ELeq (e1,e2) ->
     Format.printf "(" ;
     expr e1;
     Format.printf "<=";
     expr e2;
     Format.printf ")"
+  | ELess (e1,e2) ->
+    Format.printf "(" ;
+    expr e1;
+    Format.printf "<";
+    expr e2;
+    Format.printf ")"
   | EIf (b,e1,e2) ->
     Format.printf "(if ";
     expr b;
-    Format.printf " then ";
+    Format.printf " then @.";
     expr e1;
-    Format.printf " else ";
+    Format.printf " else @.";
     expr e2;
     Format.printf ")"
+
+
+
 
   | EEq (e1,e2) ->
     Format.printf "(" ;

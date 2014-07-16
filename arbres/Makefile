@@ -1,12 +1,13 @@
 OCAMLBUILD=ocamlbuild -classic-display \
 		-tags annot,debug,thread \
 		-libs unix \
-                -Is copieprouveur,copieprouveur/indexation
+                -Is copieprouveur,copieprouveur/indexation,analyseur,interpreteur \
+		-use-menhir
 TARGET=native
 
 
 main:
-	$(OCAMLBUILD) arbres_main.$(TARGET)
+	$(OCAMLBUILD) main.$(TARGET)
 
 
 clean:
