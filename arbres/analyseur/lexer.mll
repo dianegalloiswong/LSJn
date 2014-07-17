@@ -66,6 +66,7 @@ and token = parse
   | ')'     { RPAREN }
   | ','     { COMMA }
 
+  | "not"   { NOT }
   | "&&"    { AND }
   | "||"    { OR }
   | "+1"    { PLUSUN }

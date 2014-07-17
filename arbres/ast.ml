@@ -21,6 +21,7 @@ type expr =
   | EEq of expr*expr (* égalité structurelle *)
   | ELess of expr*expr
   | ESucc of expr
+  | ENot of expr
   | EAnd of expr*expr
   | EOr of expr*expr
 

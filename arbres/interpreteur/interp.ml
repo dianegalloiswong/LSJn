@@ -2,7 +2,8 @@ open Ast_pos
 open Tree
 
 
-exception Error of (string*positions)
+exception Error of (string*positions*(tree option))
+
 
 
 module Smap = Map.Make (String)
@@ -26,7 +27,7 @@ let fonctions = Hashtbl.create 17 (* func -> var*expr *)
 let tree_of_bool b = Int (if b then 1 else 0)
 
 let rec interp_expr env (expr,pos) = match expr with
-  | EVar x -> (try Smap.find (fst x) env with Not_found -> raise (Error ("unbound variable "^(fst x), snd x)))
+  | EVar x -> (try Smap.find (fst x) env with Not_found -> raise (Error ("unbound variable "^(fst x), snd x,None)))
   | ENull -> Null
   | EInt n -> Int  n
   | ENode (e1,e2) ->
@@ -41,7 +42,7 @@ let rec interp_expr env (expr,pos) = match expr with
 	let env' = Smap.add (fst x) tx env in
 	let env' = Smap.add (fst y) ty env' in
 	interp_expr env' e2
-      | _ -> raise (Error ("should be a node (get matched)", snd e1))
+      | _ -> raise (Error ("should be a node (get matched)", snd e1,Some t1))
     end
   | ELetin (x,e1,e2) ->
     let t1 = interp_expr env e1 in
@@ -50,7 +51,7 @@ let rec interp_expr env (expr,pos) = match expr with
   | ECall (f,e) -> 
     let t = interp_expr env e in 
     let (arg,body) = try Hashtbl.find fonctions (fst f) 
-      with Not_found -> raise (Error ("unknown function "^(fst f), snd f))
+      with Not_found -> raise (Error ("unknown function "^(fst f), snd f,None))
     in
     let env' = Smap.add arg t env in
     interp_expr env' body
@@ -78,9 +79,9 @@ let rec interp_expr env (expr,pos) = match expr with
 	      | ELess _ -> n1<n2
 	      | _ -> assert false
 	    in tree_of_bool b
-	  | _ -> raise (Error ("should be an integer (comparison)", snd e2))
+	  | _ -> raise (Error ("should be an integer (comparison)", snd e2,Some t2))
 	end
-      | _ -> raise (Error ("should be an integer (comparison)", snd e1))
+      | _ -> raise (Error ("should be an integer (comparison)", snd e1,Some t1))
     end
   | EIf (b,e1,e2) ->
     let t = interp_expr env b in
@@ -88,7 +89,7 @@ let rec interp_expr env (expr,pos) = match expr with
     match t with
       | Int 0 -> interp_expr env e2
       | Int _ -> interp_expr env e1
-      | _ -> raise (Error ("should be a boolean (condition)", snd b))
+      | _ -> raise (Error ("should be a boolean (condition)", snd b,Some t))
     end
 
   | ESucc e ->
@@ -96,7 +97,15 @@ let rec interp_expr env (expr,pos) = match expr with
     begin
     match t with
       | Int n -> Int (n+1)
-      | _ -> raise (Error ("should be an integer (succ)", snd e))
+      | _ -> raise (Error ("should be an integer (succ)", snd e,Some t))
+    end
+  | ENot e ->
+    let t = interp_expr env e in
+    begin
+    match t with
+      | Int 0 -> Int 1
+      | Int _ -> Int 0
+      | _ -> raise (Error ("should be a boolean (not)", snd e,Some t))
     end
   | EAnd (e1,e2) ->
     let t1 = interp_expr env e1 in
@@ -106,8 +115,8 @@ let rec interp_expr env (expr,pos) = match expr with
       | Int _ -> 
 	let t2 = interp_expr env e2 in
 	(match t2 with Int _ -> t2 
-	  | _ -> raise (Error ("should be a boolean (argument of &&)", snd e2)) )
-      | _ -> raise (Error ("should be a boolean (argument of &&)", snd e1))
+	  | _ -> raise (Error ("should be a boolean (argument of &&)", snd e2,Some t2)) )
+      | _ -> raise (Error ("should be a boolean (argument of &&)", snd e1,Some t1))
     end
   | EOr (e1,e2) ->
     let t1 = interp_expr env e1 in
@@ -116,9 +125,9 @@ let rec interp_expr env (expr,pos) = match expr with
       | Int 0 -> 
 	let t2 = interp_expr env e2 in
 	(match t2 with Int _ -> t2 
-	  | _ -> raise (Error ("should be a boolean (argument of ||)", snd e2)) )
+	  | _ -> raise (Error ("should be a boolean (argument of ||)", snd e2,Some t2)) )
       | Int _ -> t1
-      | _ -> raise (Error ("should be a boolean (argument of ||)", snd e1))
+      | _ -> raise (Error ("should be a boolean (argument of ||)", snd e1,Some t1))
     end
 
 

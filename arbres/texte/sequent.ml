@@ -1,0 +1,206 @@
+(*
+operations_sequent.ml
+
+   sequent : <formules,reste>
+   formules : <G,D>
+   G/D : liste de <indice,a> où a : <priorite,sf>
+   reste : <classes,infos>
+   classes : <CG,CD>
+   CG/CD : liste de <indice,cl>
+   infos : <n,axiomes>
+   n : indice du sequent
+   axiomes : <fauxL,id>
+
+n_of_seq : seq -> n
+G_of_seq : seq -> G
+D_of_seq : seq -> D
+
+set_n : <n,seq> -> seq où l'indice vaut n; ne s'occupe pas des axiomes
+
+rm_ax : seq -> seq où les axiomes sont mis à faux
+set_fauxL : seq -> seq où fauxL=vrai
+set_id : seq -> seq où id=vrai
+
+there_is_ax : seq -> booléen au moins un axiome est vrai
+
+incr_n (s'occupe de fauxL)
+decr_n (ne s'occupe pas des axiomes)
+
+add_cl_g <c,seq> -> seq : ajoute c=(i,cl) à CG, et si axiomes, met à jour
+add_cl_d
+rm_cl_g
+rm_cl_d
+
+add_g < <<i,a>,cl> , seq > ajoute (i,a) à G et appelle add_cl_g avec (i,cl)
+  ( ajoute (i,cl) à CG, et fauxL:=vrai si cl=0 et i<=n, et id:=vrai si i<=n et (n,cl) présent dans CD )
+add_d
+rm_g
+rm_d
+
+empty_seq : _ -> sequent vide
+*)
+
+
+let n_of_seq seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  n
+let G_of_seq seq =
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  G
+let D_of_seq seq =
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  D
+
+let set_n arg =
+  match arg with <n,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n1,axiomes> =>
+  <formules, <classes, <n, axiomes > > >
+
+let rm_ax seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  <formules, <classes, <n, <0,0> > > >
+
+let set_fauxL seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  match axiomes with <fauxL,id> =>
+  <formules, <classes, <n, <1,id> > > >
+
+let set_id seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  match axiomes with <fauxL,id> =>
+  <formules, <classes, <n, <fauxL,1> > > >
+
+let there_is_ax seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  match axiomes with <fauxL,id> =>
+  fauxL || id
+
+(***)
+
+let incr_n seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  let seq = <formules, <classes, <n+1, axiomes > > > in
+  match classes with <CG,CD> =>
+  if call mem <<n+1,0>,CG> then call set_fauxL seq
+  else seq
+
+let decr_n seq =
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match infos with <n,axiomes> =>
+  let nmoins1 = call pred n in
+  let seq = <formules, <classes, <nmoins1, axiomes > > > in
+  seq
+
+(***)
+
+let add_cl_g arg =
+  match arg with <c,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match classes with <CG,CD> =>
+  let CG = <c,CG> in
+  let seq = <formules, < <CG,CD>, infos> > in
+
+  match c with <i,cl> =>
+  match infos with <n,axiomes> =>
+  if i<=n then
+    if cl=0 then call set_fauxL seq 
+    else if call mem <<n,cl>,CD> then call set_id seq 
+    else seq
+  else seq
+
+let add_cl_d arg =
+  match arg with <c,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match classes with <CG,CD> =>
+  let CD = <c,CD> in
+  let seq = <formules, < <CG,CD>, infos> > in
+
+  match c with <i,cl> =>
+  match infos with <n,axiomes> =>
+  if i=n && call mem_inf <<n,cl>,CG> then call set_id seq 
+  else seq
+
+let rm_cl_g arg =
+  match arg with <c,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match classes with <CG,CD> =>
+  let CG = call rm <c,CG> in
+  let seq = <formules, < <CG,CD>, infos> > in
+  seq
+
+let rm_cl_d arg =
+  match arg with <c,seq> =>
+  match seq with <formules,reste> =>
+  match reste with <classes,infos> =>
+  match classes with <CG,CD> =>
+  let CD = call rm <c,CD> in
+  let seq = <formules, < <CG,CD>, infos> > in
+  seq
+
+(***)
+
+let add_g arg =
+  match arg with <arg1,seq> =>
+  match arg1 with <c,cl> =>
+  match c with <i,a> =>
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  let G = <c,G> in
+  let seq = <<G,D>,reste> in
+  call add_cl_g <<i,cl>,seq>
+
+let add_d arg =
+  match arg with <arg1,seq> =>
+  match arg1 with <c,cl> =>
+  match c with <i,a> =>
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  let D = <c,D> in
+  let seq = <<G,D>,reste> in
+  call add_cl_d <<i,cl>,seq>
+
+let rm_g arg =
+  match arg with <arg1,seq> =>
+  match arg1 with <c,cl> =>
+  match c with <i,a> =>
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  let G = call rm <c,G> in
+  let seq = <<G,D>,reste> in
+  call rm_cl_g <<i,cl>,seq>
+
+let rm_d arg =
+  match arg with <arg1,seq> =>
+  match arg1 with <c,cl> =>
+  match c with <i,a> =>
+  match seq with <formules,reste> =>
+  match formules with <G,D> =>
+  let D = call rm <c,D> in
+  let seq = <<G,D>,reste> in
+  call rm_cl_d <<i,cl>,seq>
+
+(***)
+
+let empty_seq arg =
+  <  <null,null>  ,  < <null,null> , <0,<0,0>> >  >
+

@@ -10,7 +10,7 @@
 %token <string> IDENT
 %token MATCH WITH ARROW LET EQ IN CALL ISNULL ISINT ISNODE IF THEN ELSE
 %token LT GT
-%token AND OR LEQ //GEQ
+%token NOT AND OR LEQ //GEQ
 %token PLUSUN
 %token LPAREN RPAREN
 %token COMMA
@@ -19,6 +19,7 @@
 %nonassoc ARROW IN ELSE
 %left OR
 %left AND
+%nonassoc NOT
 %left EQ LT /*GT*/ LEQ //GEQ
 %nonassoc PLUSUN
 %nonassoc call
@@ -64,6 +65,7 @@ expr:
   | e1=expr EQ e2=expr  {( EEq (e1,e2) ,($startpos,$endpos))}
   | e1=expr LT e2=expr  {( ELess (e1,e2) ,($startpos,$endpos))}
   | e=expr PLUSUN  {( ESucc e ,($startpos,$endpos))}
+  | NOT e=expr  {( ENot e ,($startpos,$endpos))}
   | e1=expr AND e2=expr  {( EAnd (e1,e2) ,($startpos,$endpos))}
   | e1=expr OR e2=expr  {( EOr (e1,e2) ,($startpos,$endpos))}
 

@@ -39,9 +39,13 @@ let parse nom =
 let main nom =
   let prog = parse nom in
   let t = try Interp.interp_prog prog 
-    with Interp.Error (s,pos) ->
+    with Interp.Error (s,pos,treeopt) ->
       loc2 nom pos;
       Format.eprintf "%s@." s;
+      (match treeopt with
+	| None -> ()
+	| Some t -> Format.printf "(evaluated as "; Print.tree t; Format.printf ")@."
+      );
       raise Exit
   in
   Print.tree t;

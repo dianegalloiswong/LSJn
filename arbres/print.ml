@@ -85,10 +85,20 @@ let rec expr = function
     Format.printf "(";
     expr e;
     Format.printf " +1)"
+  | ENot e ->
+    Format.printf "not (";
+    expr e;
+    Format.printf ")"
   | EAnd (e1,e2) ->
     Format.printf "(" ;
     expr e1;
     Format.printf "&&";
+    expr e2;
+    Format.printf ")"
+  | EOr (e1,e2) ->
+    Format.printf "(" ;
+    expr e1;
+    Format.printf "||";
     expr e2;
     Format.printf ")"
 

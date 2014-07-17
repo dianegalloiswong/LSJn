@@ -1,6 +1,6 @@
 open Def
 open Global_ref
-open Fonctions_de_sf
+open Make_fonctions_sf
 
 type cote = L | R
 let autre = function L -> R | R -> L
@@ -36,5 +36,6 @@ let remplir_fonctions () =
 	  | Imp,L -> impL
 	  | Imp,R -> impR
 	in f h a b
-  done
+  done;
+  ajout_formule_initiale m
 

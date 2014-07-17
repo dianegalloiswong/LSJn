@@ -5,23 +5,28 @@ open Ast
 
 
 let fonctions = ref []
-let prefixe h = "fonction_sf"^(string_of_int h)^"_"
+let prefixe h = if h>=0 then "sf"^(string_of_int h)^"_" else "call_"
 let prem j h = (prefixe h)^"prem"^(string_of_int j)
 let rev j h = (prefixe h)^"rev"^(string_of_int j)
+let nom k = match k with
+  0->prem 1 |1->rev 1 |2->prem 2 |3->rev 2 |4->prem 3 |5->rev 3 |_->assert false
+
 
 let rec ajout_fonctions_aux h k = function
   | [] -> ()
-  | body::tl ->
-    let nom = match k with
-      0->prem 1 |1->rev 1 |2->prem 2 |3->rev 2 |4->prem 3 |5->rev 3 |_->assert false
-    in fonctions := (nom h,"arg",body):: !fonctions;
+  | body::tl -> fonctions := (nom k h,"arg",body):: !fonctions;
     ajout_fonctions_aux h (k+1) tl
 let ajout_fonctions h l = ajout_fonctions_aux h 0 l
 
 
 
-let eletin_seq func var a =
-  eletin "seq" (ecall func (enode (enode (enode (evar var) (eint a)) (eint !classe.(a))) (evar "seq")))
+let eletin_seq func var sf =
+  let a = enode (eint !priorite.(sf)) (eint sf) in
+  let c = enode (evar var) a in
+  let arg1 = enode c (eint !classe.(sf)) in
+  let arg = enode arg1 (evar "seq") in
+  eletin "seq" (ecall func arg)
+(*(enode (enode (enode (evar var) (eint a)) (eint !classe.(a))) (evar "seq"))*)
 (* func : rm_g ou add_d ou etc., var : "i" ou "n"... *)
 
 let eletin_seq_rm_ax = eletin "seq" (ecall "rm_ax" (evar"seq"))
@@ -149,12 +154,15 @@ let impR h a b =
 
 
 
-
-
-
-
-
-
+let ajout_formule_initiale m =
+  let body =
+    let a = enode (eint !priorite.(m)) (eint m) in
+    let c = enode (eint 0) a in
+    let arg1 = enode c (eint !classe.(m)) in
+    let arg = enode arg1 (evar "seq") in
+    ecall "add_d" arg
+  in
+  fonctions := ("ajout_formule_initiale","seq",body):: !fonctions
 
 
 

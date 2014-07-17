@@ -97,15 +97,22 @@ let rec ifs nom a b =
       (ifs nom a m)
       (ifs nom m b)
 
-let main nom_fonction nom n =
+let main nom n =
   let body = ematch (evar"arg") "k" "x" (ifs nom 0 n) in
-  (nom_fonction, "arg", body)
+  (nom(-1), "arg", body)
 
-let test n = main "appel_fk" nom n
+let test n = main nom n
+
+let fonctions_call () =
+  let mplus1 = Array.length !Global_ref.sf in
+  let rec aux k acc =
+    if k=6 then acc else 
+      let decl_func = main (Make_fonctions_sf.nom k) mplus1 in
+      aux (k+1) (decl_func::acc)
+  in aux 0 []
 
 
-
-
+(*call_prem1*)
 
 
 

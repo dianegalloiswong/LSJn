@@ -4,7 +4,9 @@ open Ast
 
 let fonctions_de_f () =
   let f = Quelques_formules.f4 in
-  let () = Format.printf "%s@." (To_string.formule f) in
+  let f = Def.FFaux in
+  let f = Quelques_formules.f1 in
+  let () = Format.printf "(*\nfichier fonctions_sf\n\n%s@." (To_string.formule f) in
 
   let () =
     Init_sf_classe.test f;
@@ -12,15 +14,18 @@ let fonctions_de_f () =
     Precalculs.remplir_cote ();
     Precalculs.remplir_fonctions ()
   in
+  Format.printf "\n*)@.";
 
-  let () = List.iter (fun df -> Print.decl_func df;Format.printf"@.") (List.rev !Fonctions_de_sf.fonctions) in
+  List.iter (fun df -> Print.decl_func df;Format.printf"@.") (List.rev !Make_fonctions_sf.fonctions);
+
+  List.iter (fun df -> Print.decl_func df;Format.printf"@.") (Make_call_num.fonctions_call ());
 
   ()
 
 
-let appel_numero () = Print.decl_func (Appel_fonction_numero.test 13)
+let appel_numero () = Print.decl_func (Make_call_num.test 10)
 
-let aux_texte () = Exec.main "aux_texte.ml"
+let aux_texte () = Exec.main "texte.ml"
 
 
 
