@@ -3,10 +3,13 @@ open Ast_trees
 
 
 let compile () =
-  let f = Quelques_formules.f7 in
+  let f = Quelques_formules.f8 in
   Compile.main f
 
-let exec_code () = Exec_trees.main "code_trees_genere/code.ml"
+let exec_code () =
+  let t = Exec_trees.main Compile.code in
+  Print.tree t;
+  Format.printf "@."
 
 
 let ref_compile = ref false

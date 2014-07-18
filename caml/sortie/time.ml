@@ -5,6 +5,9 @@ let appels = ref 0 (* à prouvable *)
 
 exception Temps_ecoule
 
+let echoues = ref 0
+let non_traites = ref 0
+
 
 let time f x =
 if Options.time_on() then
@@ -16,7 +19,8 @@ if Options.time_on() then
     let stop = Unix.gettimeofday () in
     let temps = (stop -. start) in
     temps_total := !temps_total +. temps;
-    if Options.affiche_temps_un() then Format.printf "%fs, %d appels à prouvable@." temps !appels;
+    if Options.affiche_temps_un() then
+      Format.printf "%fs, %d appels à prouvable@." temps !appels;
     res
  with Temps_ecoule -> Format.printf "temps écoulé (%fs), %d appels à prouvable vus@." !Options.temps_max !appels; raise Temps_ecoule
 else f x
@@ -26,7 +30,7 @@ else f x
 let verif_timeout () =
   incr appels;
   if Options.stop_on() && (Unix.gettimeofday () -. !start_actuel > !Options.temps_max) then
-    raise Temps_ecoule
+    (incr echoues; raise Temps_ecoule)
 
 
 
@@ -62,7 +66,7 @@ let faire_fichier nom =
   if Options.stop_on() then
     try
       let descr = parse nom in
-      if mem_inf descr !trop_longs then false
+      if mem_inf descr !trop_longs then (incr non_traites; false)
       else (courant:=descr; true)
     with Exit -> true
   else true

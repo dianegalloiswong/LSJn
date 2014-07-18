@@ -1,3 +1,4 @@
+let prouveur () = if !Options.trees then Prouveur_trees.main else Prouveur_caml.main
 
 let bool_to_string_fr b = if b then "vrai" else "faux"
 
@@ -7,11 +8,7 @@ let main att_opt f =
   else 
     (try
        Time.time (fun () ->
-	 let rep = 
-	   if !Options.compile_test then 
-	     Prouveur_test.main f
-	   else
-	     Prouveur.main f
+	 let rep = (prouveur ()) f
 	 in
 	 if Options.affiche_rep() then Rep.print rep (*Format.printf "%s@." (bool_to_string_fr rep)*);
 	 match att_opt with

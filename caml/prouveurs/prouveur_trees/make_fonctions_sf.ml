@@ -19,11 +19,14 @@ let rec ajout_fonctions_aux h k = function
 let ajout_fonctions h l = ajout_fonctions_aux h 0 l
 
 
+let arg1_add_ou_rm expr_i sf =
+  let a = enode (eint !priorite.(sf)) (eint sf) in
+  let c = enode expr_i a in
+  enode c (eint !classe.(sf))
+
 
 let eletin_seq func var sf =
-  let a = enode (eint !priorite.(sf)) (eint sf) in
-  let c = enode (evar var) a in
-  let arg1 = enode c (eint !classe.(sf)) in
+  let arg1 = arg1_add_ou_rm (evar var) sf in
   let arg = enode arg1 (evar "seq") in
   eletin "seq" (ecall func arg)
 (*(enode (enode (enode (evar var) (eint a)) (eint !classe.(a))) (evar "seq"))*)
@@ -165,17 +168,42 @@ let impR h a b =
 
 let ajout_formule_initiale m =
   let body =
-    let a = enode (eint !priorite.(m)) (eint m) in
-    let c = enode (eint 0) a in
-    let arg1 = enode c (eint !classe.(m)) in
-    let arg = enode arg1 (evar "seq") in
-    ecall "add_d" arg
+    let expr_i = eint 0 in
+    match !sf.(m) with
+      | C(Imp,a,b) ->
+	let arg1 = arg1_add_ou_rm expr_i b in
+	let arg = enode arg1 (evar "seq") in
+	eletin "seq" (ecall "add_d" arg)
+	  ( let arg1 = arg1_add_ou_rm expr_i a in
+	    let arg = enode arg1 (evar "seq") in
+	    ecall "add_g" arg
+	  )
+      | _ ->
+	let arg1 = arg1_add_ou_rm expr_i m in
+	let arg = enode arg1 (evar "seq") in
+	ecall "add_d" arg
   in
   fonctions := ("ajout_formule_initiale","seq",body):: !fonctions
 
 
 
-
+let remplir_fonctions () =     (* remplit fonctions *)
+  fonctions := [];
+  let m = Array.length !sf -1 in
+  ajout_formule_initiale m;
+  for h=1 to m do
+    match !sf.(h) with
+      | CFaux | CVar _ -> ()
+      | C (conn,a,b) ->
+	let f = match conn,!Cote.cote.(h) with
+	  | Et,L -> etL
+	  | Et,R -> etR
+	  | Ou,L -> ouL
+	  | Ou,R -> ouR
+	  | Imp,L -> impL
+	  | Imp,R -> impR
+	in f h a b
+  done
 
 
 (*

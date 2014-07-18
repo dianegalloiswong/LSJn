@@ -48,5 +48,4 @@ let main nom =
       );
       raise Exit
   in
-  Print.tree t;
-  Format.printf "@."
+  t

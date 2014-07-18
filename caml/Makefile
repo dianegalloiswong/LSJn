@@ -1,14 +1,28 @@
 OCAMLBUILD=ocamlbuild -classic-display \
-		-tags annot,debug,thread \
-		-libs unix \
-                -Is prouveurs/commun,prouveurs/commun/indexation,prouveurs/caml,prouveurs/caml/sequent,prouveurs/caml/sequent/structures,prouveurs/caml/strategie,prouveurs/caml/preuve_contre_modele,analyseur_ILTP,sortie,exemples,test_recherche_compilee \
-                -use-menhir
+	-tags annot,debug,thread \
+	-libs unix \
+	-I analyseur_ILTP \
+	-I sortie \
+	-I exemples \
+	-I prouveurs/commun \
+		-I prouveurs/commun/indexation \
+	-I prouveurs/prouveur_caml \
+		-I prouveurs/prouveur_caml/sequent \
+		-I prouveurs/prouveur_caml/sequent/structures \
+		-I prouveurs/prouveur_caml/strategie \
+		-I prouveurs/prouveur_caml/preuve_contre_modele \
+	-I test_recherche_compilee \
+	-I prouveurs/prouveur_trees \
+		-I prouveurs/prouveur_trees/interpreteur_trees \
+	-use-menhir
 TARGET=native
 
 
 main:
 	$(OCAMLBUILD) main.$(TARGET)
 
+trees:
+	$(OCAMLBUILD) main_trees.$(TARGET)
 
 clean:
 	$(OCAMLBUILD) -clean

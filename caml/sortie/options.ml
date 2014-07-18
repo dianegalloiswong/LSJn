@@ -3,6 +3,8 @@ let affiche_formule_ref = ref false
 let affiche_rep_ref = ref false
 let rien_afficher = ref false
 
+let trees = ref false
+
 let preuves = ref false
 let cmods = ref false
 
@@ -26,3 +28,5 @@ let affiche_temps_total () = time_on ()
 let irr = ref false
 
 let compile_test = ref false
+
+

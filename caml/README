@@ -1,5 +1,18 @@
-15/07 : encore réorganisation des fichiers et des options (le README en tient normalement compte).
+ajout d'un prouveur utilisant le langage "trees" terminé. On l'utilise en donnant le flag -trees
+(les fichiers dans ce langage ont pour l'instant l'extension .ml pour la coloration, mais sont situés exclusivement dans code_trees_fixe et code_trees_genere)
+La partie "Description des fichiers" du README n'est pas à jour.
 
+				caml		trees
+
+SYN				.005s		1.2s
+Problems/SYJ/SYJ201+1.002.p	.04s		14s
+Problems/SYJ/SYJ201+1.003.p	1.7s		>1min
+	caml : 2971326 appels à prouvable. trees en voit 102980 en 30s.
+Problems/temoin_se_trompe.p	10E-5s		.008s
+Problems/SYJ/SYJ204+1.009.p	.04s		>2min
+Problems/SYJ/SYJ204+1.006.p	.01s		6.6s
+pigeonhole 3 2			.02s		.0002s
+	(dans les 2 cas 78 appels prouvable)
 
 --------
 
@@ -8,6 +21,10 @@ Usage
 Les arguments déterminent des formules et résultas attendus correspondants.
 Par défaut : pour chaque formule on imprime le nom de fichier éventuel, puis le temps mis à décider si elle est prouvable.
 Dans tous les cas, si on a déterminé si une formule est prouvable, on compare le résultat obtenu avec celui attendu et s'ils sont différents on le signale.
+
+-indexation : affiche la formule et l'indexation (ne lance pas de recherche de preuve)
+-trees : utilise le prouveur "trees"
+Par défaut : utilise le prouveur intégralement en caml
 
 arguments :
 	nom de fichier en .p avec la syntaxe des tests d'ILTP : en extrait directement une formule et le résultat attendu
@@ -18,7 +35,6 @@ arguments :
 	-eqb <int> : la formule à traiter est (x1 <-> x2) | ... | (x(n-1) <-> xn) | (xn <-> x1)
 
 options :
-	-indexation : affiche la formule et l'indexation (ne lance pas la recherche de preuve)
 	-f : affiche la formule
 	-rep : affiche le résultat obtenu ("vrai" ou "faux")
 	-rien-afficher : ne rien afficher sauf le temps total (mais comme toujours, si on obtient un résultat faux, on le signale quand même)

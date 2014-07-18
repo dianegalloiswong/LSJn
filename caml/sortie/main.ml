@@ -14,6 +14,8 @@ let tiroirs_spec = Arg.Tuple [ Arg.Set_int arg1;
 let eq_boucle n = formule := Some (Eq_boucle.main n); attendu := Some (Eq_boucle.attendu n)
 
 let options = [
+  "-trees", Arg.Set Options.trees, ": utilise le prouveur \"trees\" au lieu du prouveur caml";
+
   (* général *)
   "-indexation", Arg.Set Options.indexation, ": affiche formules et contenu des tableaux sf et classe ; ne lance pas la recherche de preuve";
   "-f", Arg.Set Options.affiche_formule_ref, ": affiche la formule";
@@ -80,7 +82,10 @@ let () =
     List.iter2 Exec_formule.main Quelques_formules.l1_att Quelques_formules.l1
 
   
-let () = if Options.affiche_temps_total() then Format.printf "temps total : %fs@." !Time.temps_total
+let () = 
+  if Options.affiche_temps_total() then Format.printf "temps total : %fs@." !Time.temps_total;
+  if !Time.echoues > 0 then Format.printf "non terminés en moins de %fs : %d@." !Options.temps_max !Time.echoues;
+  if !Time.non_traites > 0 then Format.printf "non traités (car problème plus facile non terminé) : %d@." !Time.non_traites
 
 
 

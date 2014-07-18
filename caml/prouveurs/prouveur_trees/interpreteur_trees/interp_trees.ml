@@ -27,7 +27,7 @@ let fonctions = Hashtbl.create 17 (* func -> var*expr *)
 let tree_of_bool b = Int (if b then 1 else 0)
 
 let rec interp_expr env (expr,pos) = match expr with
-  | EVar x -> (try Smap.find (fst x) env with Not_found -> raise (Error ("unbound variable "^(fst x), snd x,None)))
+  | EVar var -> let x = fst var in (try Smap.find x env with Not_found -> raise (Error ("unbound variable "^x, snd var,None)))
   | ENull -> Null
   | EInt n -> Int  n
   | ENode (e1,e2) ->
@@ -49,9 +49,11 @@ let rec interp_expr env (expr,pos) = match expr with
     let env' = Smap.add (fst x) t1 env in
     interp_expr env' e2
   | ECall (f,e) -> 
+    let func = fst f in
+    if func="prouvable" then Time.verif_timeout(); (* pour le nombre d'appels à prouvable et l'arrêt si trop long *)
     let t = interp_expr env e in 
-    let (arg,body) = try Hashtbl.find fonctions (fst f) 
-      with Not_found -> raise (Error ("unknown function "^(fst f), snd f,None))
+    let (arg,body) = try Hashtbl.find fonctions func 
+      with Not_found -> raise (Error ("unknown function "^func, snd f,None))
     in
     let env' = Smap.add arg t env in
     interp_expr env' body
