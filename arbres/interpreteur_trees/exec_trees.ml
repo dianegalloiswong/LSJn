@@ -17,15 +17,15 @@ let parse nom =
   let f = open_in nom in 
   let buf = Lexing.from_channel f in
   try
-    let prog = Parser.prog Lexer.token buf in
+    let prog = Parser_trees.prog Lexer_trees.token buf in
     close_in f;
     prog
   with
-    | Lexer.Lexing_error c -> 
+    | Lexer_trees.Lexing_error c -> 
       localisation nom (Lexing.lexeme_start_p buf);
       Format.eprintf "Erreur dans l'analyse lexicale: %c@." c;
       raise Exit
-    | Parser.Error -> 
+    | Parser_trees.Error -> 
       localisation nom (Lexing.lexeme_start_p buf);
       Format.eprintf "Erreur dans l'analyse syntaxique@.";
       raise Exit
@@ -38,8 +38,8 @@ let parse nom =
 
 let main nom =
   let prog = parse nom in
-  let t = try Interp.interp_prog prog 
-    with Interp.Error (s,pos,treeopt) ->
+  let t = try Interp_trees.interp_prog prog 
+    with Interp_trees.Error (s,pos,treeopt) ->
       loc2 nom pos;
       Format.eprintf "%s@." s;
       (match treeopt with

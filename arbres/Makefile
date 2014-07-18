@@ -1,7 +1,7 @@
 OCAMLBUILD=ocamlbuild -classic-display \
 		-tags annot,debug,thread \
 		-libs unix \
-		-Is copieprouveur,copieprouveur/indexation,analyseur,interpreteur \
+		-Is copieprouveur,copieprouveur/indexation,interpreteur_trees,interpreteur \
 		-use-menhir
 TARGET=native
 

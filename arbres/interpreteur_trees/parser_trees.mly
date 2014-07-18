@@ -1,7 +1,7 @@
 
 %{
 
-  open Ast_pos
+  open Ast_pos_trees
 
 %}
 
@@ -34,7 +34,7 @@
 
 %start prog
 
-%type <Ast_pos.prog> prog
+%type <Ast_pos_trees.prog> prog
 
 
 %%

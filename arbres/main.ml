@@ -1,4 +1,4 @@
-open Ast
+open Ast_trees
 
 
 
@@ -6,7 +6,7 @@ let compile () =
   let f = Quelques_formules.f7 in
   Compile.main f
 
-let exec_code () = Exec.main "code_genere/code.ml"
+let exec_code () = Exec_trees.main "code_trees_genere/code.ml"
 
 
 let ref_compile = ref false

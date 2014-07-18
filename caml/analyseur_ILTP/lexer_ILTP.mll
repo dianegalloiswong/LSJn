@@ -1,7 +1,7 @@
 
 {
   open Lexing
-  open Parser
+  open Parser_ILTP
   
   exception Lexing_error of char
 

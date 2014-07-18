@@ -2,7 +2,7 @@
 %{
 
   open Def
-  open Syntaxe_fichier
+  open Ast_ILTP
 
 %}
 
@@ -26,7 +26,7 @@
 
 %start fichier
 
-%type <Syntaxe_fichier.fichier> fichier
+%type <Ast_ILTP.fichier> fichier
 
 
 %%

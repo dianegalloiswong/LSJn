@@ -2,7 +2,7 @@
 {
 
   open Lexing
-  open Parser
+  open Parser_trees
   
   exception Lexing_error of char
 

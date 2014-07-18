@@ -1,7 +1,7 @@
 open Def
 open Global_ref
 
-open Ast
+open Ast_trees
 
 
 let fonctions = ref []

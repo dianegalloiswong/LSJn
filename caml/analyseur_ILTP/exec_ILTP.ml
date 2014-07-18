@@ -1,5 +1,5 @@
 open Def
-open Syntaxe_fichier
+open Ast_ILTP
 
 
 
@@ -31,15 +31,15 @@ let parse nom =
   let f = open_in nom in 
   let buf = Lexing.from_channel f in
   try
-    let fichier = Parser.fichier Lexer.token buf in
+    let fichier = Parser_ILTP.fichier Lexer_ILTP.token buf in
     close_in f;
     fichier
   with
-    | Lexer.Lexing_error c -> 
+    | Lexer_ILTP.Lexing_error c -> 
       localisation nom (Lexing.lexeme_start_p buf);
       Format.eprintf "Erreur dans l'analyse lexicale: %c@." c;
       raise Exit
-    | Parser.Error -> 
+    | Parser_ILTP.Error -> 
       localisation nom (Lexing.lexeme_start_p buf);
       Format.eprintf "Erreur dans l'analyse syntaxique@.";
       raise Exit

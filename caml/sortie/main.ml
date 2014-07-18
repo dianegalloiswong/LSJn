@@ -57,7 +57,7 @@ let rec faire_d dnom =
 
 and faire nom =
     match (Unix.stat nom).Unix.st_kind with
-      | Unix.S_REG when (pointp nom) && (Time.faire_fichier nom) -> Exec_fichier.main nom
+      | Unix.S_REG when (pointp nom) && (Time.faire_fichier nom) -> Exec_ILTP.main nom
       | Unix.S_DIR -> faire_d nom
       | _ -> ()
 
