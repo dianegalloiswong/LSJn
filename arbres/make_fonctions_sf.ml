@@ -131,24 +131,33 @@ let impL h a b =
 
 let impR h a b =
 
-  let list_prem1 = [ (* i=n *)
+  let body_prem1 = body_of_list [ (* i=n *)
     eletin_seq "rm_d" "i" h;
     eletin_seq "add_d" "i" b;
     eletin_seq "add_g" "i" a;
   ] in
-  let body_prem1 = body_of_list list_prem1 in
-  let list_rev1 = [
+  let body_rev1 = body_of_list [
     eletin_seq "rm_g" "i" a;
     eletin_seq "rm_d" "i" b;
     eletin_seq "add_d" "i" h;
     eletin_seq_rm_ax;
   ] in
-  let body_rev1 = body_of_list list_rev1 in
-
-  let list_prem2 = eletin_seq_incr_n :: (eletin "i" (esucc(evar "i"))) :: list_prem1 in
-  let body_prem2 = body_of_list list_prem2 in
-  let list_rev2 = ( (eletin "i" (esucc(evar "i"))) :: list_rev1 ) @ [eletin_seq_decr_n] in
-  let body_rev2 = body_of_list list_rev2 in
+ 
+  let body_prem2 = body_of_list [ (* i=n *)
+    eletin_seq "rm_d" "i" h;
+    eletin_seq_incr_n;
+    eletin "nplus1" (esucc(evar "i"));
+    eletin_seq "add_d" "nplus1" b;
+    eletin_seq "add_g" "nplus1" a;
+  ] in
+  let body_rev2 = body_of_list [
+    eletin "nplus1" (esucc(evar "i"));
+    eletin_seq "rm_g" "nplus1" a;
+    eletin_seq "rm_d" "nplus1" b;
+    eletin_seq_decr_n;
+    eletin_seq "add_d" "i" h;
+    eletin_seq_rm_ax;
+  ] in
 
   ajout_fonctions h [body_prem1;body_rev1;body_prem2;body_rev2]
 
