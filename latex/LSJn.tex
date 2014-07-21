@@ -106,7 +106,72 @@
 \renewcommand{\labelitemi}{$\diamond$}
 \vspace{2cm}~~\\
 
+
+
+
+définition formule
+
+\section*{Le calcul \LSJ}
+
+L'article [] définit un calcul de séquent qu'il appelle \LSJ. Les séquents ont une sémantique naturelle (?) définie à l'aide des modèles de Kripke. Nous ne referons pas les démonstrations de l'article.
+
+\
+
+Un séquent est la donnée de trois multiensembles $\Th$, $\G$ et $\D$ de formules ; on le note $\Th\;;\;\G\;\To\;\D$.
+
+Une définition d'un séquent \textbf{réfutable} est donnée dans l'article à l'aide des modèles de Kripke. Nous ne la détaillons pas ici, car ce qui nous intéresse est la propriété suivante qui en découle, démontrée dans l'article.
+
+Soit $\G$, $\D$ des multiensembles de formules. Le séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{prouvable}, c'est-à-dire non réfutable, si et seulement si la formule
+
+
+
 \section*{}
+
+
+
+définitions de l'article, pseudo-code
+
+définitions : instance, formule principale
+
+
+\
+
+\
+
+
+\def\instance{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\TIC{$\s$}
+	\DP
+}
+
+\def\instancedeux{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{$\s_{2}$}
+	\BIC{$\s$}
+	\DP
+}
+
+
+On voit immédiatement que l'algorithme nécessite de pouvoir déduire d'un séquent, d'une règle et d'une formule principale contenue dans le séquent et sur laquelle la règle peut agir, les séquents correspondant aux différentes prémisses. Ce n'est pas difficile : pour les axiomes il n'y a rien à faire ; pour les autres règles, la formule principale $H$ étant de la forme $A \text{ 'connecteur' } B$, il suffit d'enlever $H$ du séquent et, selon le connecteur et le côté où se trouvait $H$, d'ajouter $A$ ou $B$ à $\Th$, $\G$, $\D$ ou nulle part.
+
+Mais ce n'est pas tout. Lorsqu'on essaie d'appliquer une règle\instancedeux\ au séquent $\s$, on lance une recherche de preuve sur $\s_{1}$ qu'on a obtenu comme décrit ci-dessus. Si on obtient que $\s_{1}$ est prouvable, on lance alors la recherche de preuve sur $\s_{2}$. On doit donc déterminer $\s_{2}$. On a vu qu'on sait le faire à partir de $\s$. Une solution consiste donc à retenir $\s$ pendant qu'on effectue la recherche de preuve sur $\s_{1}$, mais cela peut être coûteux en mémoire. Une autre solution, que nous avons privilégiée, consiste à être capable de retrouver $\s$ à partir de $\s_{1}$ ainsi que de la formule principale, de la règle et du numéro de la prémisse (ici $1$). On a dans ce cas besoin de pouvoir retrouver la conclusion à partir de n'importe laquelle des prémisses, pas seulement par exemple de la première prémisse pour une règle qui n'en a que deux. En effet, utiliser $\s_{1}$ pour retrouver $\s$ suppose qu'à la fin de la recherche de preuve pour $\s_{1}$, on connaît $\s_{1}$. Or, l'idée ici est de n'avoir vraiment qu'un seul séquent en mémoire à tout moment. Ainsi, à la fin de la recherche de preuve pour $\s$, on doit connaître $\s$, donc on doit aussi pouvoir déduire $\s$ de $\s_{2}$ en connaissant la formule principale et le fait qu'on est en train de s'intéresser à la deuxième prémisse.
+
+En résumé, on aimerait (bien que ce ne soit pas nécessaire) que toutes les règles soient \textbf{locales}, avec la définition suivante.
+
+\begin{df}
+Une règle est \textbf{locale} si pour toute instance\instance\ de cette règle et pour tout $i$ entre $1$ et $p$, on peut déduire $\s$ à partir de $\s_{i}$ et de la formule principale et de $i$.
+\end{df}
+
+On remarque que $\land L$, $\land R$, $\lor L$ et $\lor R$ sont locales. Les axiomes sont également locaux, la définition n'ayant pas grand intérêt pour eux. En revanche, les règles $\to L$ et $\to R$ ne sont pas locales : pour chacune, les formules représentées par $\D$ dans la conclusion n'apparaissent nulle part dans la dernière prémisse, il n'est donc pas possible de retrouver la conclusion en connaissant uniquement cette prémisse, la formule principale et le numéro de la prémisse, puisqu'il n'y a aucun moyen d'en déduire ce qui se trouve dans $\D$.
+
+C'est pour cette raison qu'on introduit le calcul \LSJn, dans lequel toutes les règles sont locales.
+
+\section*{Présentation de \LSJn\ et équivalence avec \LSJ}
 
 
 On utilise les définitions et notations de l'article% \cite{LSJ}
@@ -237,7 +302,7 @@ où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de
 
 
 
-\def\instance{
+\def\instanceR{
 \def\defaultHypSeparation{\hskip .05in}
 	\AXC	{$\s_{1}$}
 	\AXC	{...}
@@ -246,7 +311,7 @@ où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de
 	\TIC{$\s$}
 	\DP
 }
-\def\instancep{
+\def\instanceRp{
 \def\defaultHypSeparation{\hskip .05in}
 	\AXC	{$\s'_{1}$}
 	\AXC	{...}
@@ -319,15 +384,15 @@ où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de
 }
 
 
-Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instance\ et \instancep\ des instances de ces règles.
+Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
 
 
 \begin{lm*}
 Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$ et soit $\mathcal R$ une règle de \LSJ.
 
-1) Si \instance alors il existe $\s'_{1}$, ... , $\s'_{p}$ tels que pour tout $k$, $\s_{k} = \surj (\s'_{k})$, et \instancep.
+1) Si \instanceR alors il existe $\s'_{1}$, ... , $\s'_{p}$ tels que pour tout $k$, $\s_{k} = \surj (\s'_{k})$, et \instanceRp.
 
-2) Si \instancep, posons pour tout $k$, $\s_{k} = \surj (\s'_{k})$, alors \instance.
+2) Si \instanceRp, posons pour tout $k$, $\s_{k} = \surj (\s'_{k})$, alors \instanceR.
 
 \noindent
 Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulement si \instanceAxp.
@@ -390,9 +455,9 @@ on remarque que si $\s$ (resp. $\s'$) est la conclusion d'une règle de \LSJ\ (re
 \noindent
 Soit $\s = \Th\, ;\G \To \D \in\Sig$. Soit $\sigma' = \G' \To_{n} \D' \in\Sig'$ tel que $\sigma=\surj(\sigma')$.
 
-On suppose $\vdash \s$. Alors il existe une règle $\mathcal R$ de \LSJ\ et $\s_{1}$, ... , $\s_{p} \in\Sig$ (avec éventuellement $p$ nul) tels que $\vdash \s_{k}$ pour tout $k$ et\instance. D'après le lemme, il existe $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\s_{k}=\surj(\s'_{k})$ pour tout $k$ et\instancep. Pour tout $k$, on applique l'hypothèse de récurrence à $\s_{k}$ qui a une \emph{taille} strictement inférieure à celle de $\s$, et on obtient $\vdash' \s'_{k}$. On en déduit $\vdash' \s'$.
+On suppose $\vdash \s$. Alors il existe une règle $\mathcal R$ de \LSJ\ et $\s_{1}$, ... , $\s_{p} \in\Sig$ (avec éventuellement $p$ nul) tels que $\vdash \s_{k}$ pour tout $k$ et\instanceR. D'après le lemme, il existe $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\s_{k}=\surj(\s'_{k})$ pour tout $k$ et\instanceRp. Pour tout $k$, on applique l'hypothèse de récurrence à $\s_{k}$ qui a une \emph{taille} strictement inférieure à celle de $\s$, et on obtient $\vdash' \s'_{k}$. On en déduit $\vdash' \s'$.
 
-On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\vdash' \s'_{k}$ pour tout $k$ et\instancep. On pose $\s_{k}=\surj(\s'_{k})$ pour tout $k$. D'après le lemme on a \instance, en particulier on peut appliquer l'hypothèse de récurrence aux $\s_{k}$ donc $\vdash \s_{k}$ pour tout $k$, d'où $\vdash \s$.
+On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\vdash' \s'_{k}$ pour tout $k$ et\instanceRp. On pose $\s_{k}=\surj(\s'_{k})$ pour tout $k$. D'après le lemme on a \instanceR, en particulier on peut appliquer l'hypothèse de récurrence aux $\s_{k}$ donc $\vdash \s_{k}$ pour tout $k$, d'où $\vdash \s$.
 
 
 

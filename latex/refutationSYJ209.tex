@@ -113,6 +113,45 @@
 
 
 
+% 2
+\begin{prooftree}
+	\AXC	{}
+	
+	\RightLabel{Irr}
+	\UIC{$1:f \;,\; 0: p2 \;,\; 2: \bot \;,\; 1: p1 \quad\To_{1}\quad 0:  p1  \;,\; 0: f  \;,\;  0: f  \;,\; 0: f \;,\; 1: \bot $}
+
+	\RightLabel{$\to R$}
+	\UIC{$1:f \;,\; 0: p2 \;,\; 2: \bot \quad\To_{1}\quad 0:  p1  \;,\; 0: f  \;,\;  0: f  \;,\;  0: f \;,\; 1: \lnot p1$}
+
+	\RightLabel{Succ}
+	\UIC{$1:f \;,\; 0: p2 \;,\; 0: \lnot\lnot p1 \quad\To_{0}\quad 0:  p1  \;,\; 0: f  \;,\;  0: f \;,\; 0: f$}
+
+%	\RightLabel{$\to R$}
+%	\UIC{$1:f \;,\; 0: p2 \;,\; 0: p3 \quad\To_{0}\quad 0:  p1  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: f  \;,\;  0: f  \;,\; 0: f$}
+%
+	\RightLabel{$\to R$}
+	\UIC{$1:f \;,\; 0: p2 \quad\To_{0}\quad 0:  p1  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: f   \;,\; 0: f$}
+
+	\RightLabel{$\to R$}
+	\UIC{$1:f \quad\To_{0}\quad 0:  p1  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f    \;,\; 0: f$}
+
+	\RightLabel{$\land R1$}	
+	\UIC{$1:f \quad\To_{0}\quad 0:  p1 \land p2  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f  \;,\;  0: f$}
+
+	\RightLabel{$\lor R \,(\times2)$}	
+	\UIC{$1:f \quad\To_{0}\quad 0: (\;( p1 \land p2 ) \lor (\;( \lnot\lnot p1 \to f)  \lor ( p2 \to f)  \; ) )\;,\; 0: f$}
+
+	\RightLabel{$\to L2$}	
+	\UIC{$0:[ \; (\;( p1 \land p2 ) \lor (\;( \lnot\lnot p1 \to f)  \lor  ( p2 \to f)    \;) ) \; ] \to f  \quad\To_{0}\quad 0: f$}
+
+	\RightLabel{$\to R$}	
+	\UIC{$\To_{0}\quad 0:( \;[ \; (\;( p1 \land p2 ) \lor (\;( \lnot\lnot p1 \to f)  \lor ( p2 \to f) \;) ) \; ] \to f \; ) \to f$}
+	
+\end{prooftree}
+
+
+
+
 
 
 
