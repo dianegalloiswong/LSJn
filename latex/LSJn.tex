@@ -88,19 +88,12 @@
 
 \usepackage{bussproofs}
 \EnableBpAbbreviations
-%\newcommand{\ze}{\AxiomC}
-%\newcommand{\rien}{\AxiomC{}}
-%\newcommand{\un}{\UnaryInfC}
-%\newcommand{\bi}{\BinaryInfC}
-%\newcommand{\tr}{\TrinaryInfC}
-%\newcommand{\lab}{\RightLabel}
-%\newcommand{\fin}{\DisplayProof}
+
 
 
 \usepackage{mathrsfs}
 
-
-%\AxiomC{form } \UnaryInfC{form } \BinaryInfC{form } \TrinaryInfC{form }
+\bibliographystyle{ieeetr}  
 
 \begin{document}
 \renewcommand{\labelitemi}{$\diamond$}
@@ -113,7 +106,7 @@ définition formule
 
 \section{Le calcul \LSJ}
 
-L'article [] définit un calcul de séquent qu'il appelle \LSJ. Les séquents ont une sémantique naturelle (?) définie à l'aide des modèles de Kripke. Nous ne referons pas les démonstrations de l'article.
+L'article \cite{LSJ} définit un calcul de séquents \LSJ. Une sémantique naturelle des séquents est définie à l'aide des modèles de Kripke, mais nous ne la présentons pas. En effet, ce qui nous intéresse est l'existence, pour toute formule, d'un séquent qui est prouvable dans le calcul \LSJ\ si, et seulement si, la formule est prouvable en logique intuitionniste. Nous renvoyons à l'article pour les démonstrations, notamment celle de la complétude du calcul.
 
 \subsection{Les séquents}
 
@@ -157,25 +150,88 @@ Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \te
 	\TIC{$\s$}
 	\DP
 }
-\def\etL{
-	\AXC{$\Th;A,B,\Gp \To \Dp$}
-	\RightLabel{$\land L$}
-	\UIC{$\Th;A\land B,\Gp \To \Dp$}
+
+\def\botL{
+	\AXC	{}
+	\RightLabel{$\bot L$}
+	\UIC{$\Th\,; \bot, \G \To \D$}
 	\DP
 }
-
+\def\Id{
+	\AXC	{}
+	\RightLabel{$\mathrm{Id}$}
+	\UIC{$\Th\,; A,\G \To A,\D$}
+	\DP
+}
+\def\etL{
+	\AXC{$\Th\,; A, B,\G \To \D$}
+	\RightLabel{$\land L$}
+	\UIC{$\Th\,; A\land B,\G \To  \D$}
+	\DP
+}
+\def\etR{
+	\AXC{$\Th\,; \G \To A,\D$}
+	\AXC{$\Th\,; \G \To B,\D$}
+	\RightLabel{$\land R$}
+	\BIC{$\Th\,; \G \To A\land B,\D$}
+	\DP
+}
+\def\ouL{
+	\AXC{$\Th\,; A,\G \To \D$}
+	\AXC{$\Th\,; B,\G \To \D$}
+	\RightLabel{$\lor L$}
+	\BIC{$\Th\,; A\lor B,\G \To \D$}
+	\DP
+}
+\def\ouR{
+	\AXC{$\Th\,; \G \To A,B,\D$}
+	\RightLabel{$\lor R$}
+	\UIC{$\Th\,; \G \To A\lor B,\D$}
+	\DP
+}
+\def\impL{
+	\AXC{$\Th\,; B,\G \To \D$}
+	\AXC{$B,\Th\,; \G \To A,\D$}
+	\AXC{$B\,; \Th,\G \To A$}
+	\RightLabel{$\to L$}
+	\TIC{$\Th\,; A\to B,\G \To \D$}
+	\DP
+}
+\def\impR{
+	\AXC{$\Th\,; A,\G \To B,\D$}
+	\AXC{$\emptyset\,; A,\Th,\G \To B$}
+	\RightLabel{$\to R$}
+	\BIC{$\Th\,; \G \To A\to B,\D$}
+	\DP
+}
 
 %Une règle est de la forme\regle où $\mathcal R$ est le nom de la règle, et $prem_{1}$, ... , $prem_{p}$, $concl$ décrivent des séquents d'une certaine forme. Par exemple $\Th\;;\;A\lor B,\G\;\To\;\D$ représente n'importe quel séquent où au moins une des formules de gauche est une disjonction, et si $\Th\;;\;A,\G\;\To\;\D$ se trouve dans la même règle, cela représente un séquent obtenu à partir du précédent en rempla\c cant une disjonction de gauche $A\lor B$ par son premier terme $A$.
 
 
 
-Les règles du calcul \LSJ\ sont données dans la figure \ref{reglesLSJ}. La notation $A,\G$ représente le multiensemble obtenu à partir de $\G$ en ajoutant une occurrence de $A$. Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les (resp. première, ... , $p$-ième) \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les \textbf{axiomes} sont les règles sans prémisse. Pour toutes les autres règles, une unique formule apparaît de manière explicite dans la conclusion : c'est la \textbf{formule principale}. Les règles dites de gauche, ou d'introduction à gauche, contenant un $L$ dans leur nom, sont celles où la formule principale se trouve à gauche dans la conclusion, de même pour les règles de droite.
+Les règles du calcul \LSJ\ sont données dans la figure~\ref{reglesLSJ}. La notation $A,\G$ représente le multiensemble obtenu à partir de $\G$ en ajoutant une occurrence de $A$. Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les (resp. première, ... , $p$-ième) \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les \textbf{axiomes} sont les règles sans prémisse. Pour toutes les autres règles, une unique formule apparaît de manière explicite dans la conclusion : c'est la \textbf{formule principale}. Les règles dites de gauche, ou d'introduction à gauche, contenant un $L$ dans leur nom, sont celles où la formule principale se trouve à gauche dans la conclusion, de même pour les règles de droite.
+
+\begin{figure}
+\centering
+
+$$\begin{array}{cc}
+	\botL & \Id \\\\
+	\etL & \etR \\\\
+	\ouL & \ouR \\\\
+	\multicolumn{2}{c}{\impL}\\\\
+	\multicolumn{2}{c}{\impR}
+\end{array}$$
+
+\caption{Les règles du calcul \LSJ}
+\label{reglesLSJ}
+\end{figure}
+
 
 Une \textbf{instance} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui ont bien la forme donnée par la définition de la règle. Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
 
-%Une \textbf{preuve} est un arbre
+Une \textbf{preuve} est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors \instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
-
+Un séquent est \textbf{prouvable} s'il existe une preuve à la racine de laquelle il est associé.
 
 
 
@@ -225,7 +281,7 @@ On remarque que $\land L$, $\land R$, $\lor L$ et $\lor R$ sont locales. Les axi
 
 C'est pour cette raison qu'on introduit le calcul \LSJn, dans lequel toutes les règles sont locales.
 
-\section*{Présentation de \LSJn\ et équivalence avec \LSJ}
+\section{Présentation de \LSJn\ et équivalence avec \LSJ}
 
 
 On utilise les définitions et notations de l'article% \cite{LSJ}
@@ -250,7 +306,7 @@ Un séquent de \LSJn\ est la donnée de deux multiensembles $\Gp$ et $\Dp$ de coup
 
 \
 
-Les règles du calcul \LSJn\ sont les suivantes (chacune correspond à une règle de \LSJ) :
+Les règles du calcul \LSJn\ sont décrite dans la figure~\ref{reglesLSJn}. Chacune correspond à une règle de \LSJ.
 
 \
 
@@ -308,7 +364,12 @@ Les règles du calcul \LSJn\ sont les suivantes (chacune correspond à une règle d
 	\DP
 }
 
-\noindent \emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
+
+
+\begin{figure}
+\centering
+
+\emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
 $$\begin{array}{cc}
 	\botL & \Id \\\\
 	\etL & \etR \\\\
@@ -317,6 +378,9 @@ $$\begin{array}{cc}
 	\multicolumn{2}{c}{\impR}
 \end{array}$$
 
+\caption{Les règles du calcul \LSJn}
+\label{reglesLSJn}
+\end{figure}
 
 
 
@@ -513,163 +577,46 @@ On suppose $\vdash \s$. Alors il existe une règle $\mathcal R$ de \LSJ\ et $\s_{
 
 On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\vdash' \s'_{k}$ pour tout $k$ et\instanceRp. On pose $\s_{k}=\surj(\s'_{k})$ pour tout $k$. D'après le lemme on a \instanceR, en particulier on peut appliquer l'hypothèse de récurrence aux $\s_{k}$ donc $\vdash \s_{k}$ pour tout $k$, d'où $\vdash \s$.
 
-
-
-%Par récurrence sur la somme des tailles des formules des trois ensembles apparaissant dans $\sigma\in\Sig$, l'hypothèse de récurrence sur $\sigma$ étant : pour tout $\sigma'\in\Sig'$ tel que $\sigma=\surj(\sigma')$, on a $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
-%
-%\
-%
-%On initialise pour tout $\sigma = \Th\, ;\G \To \D$ tel que toutes les formules dans $\G$ et dans $\D$ sont atomiques : soit $\sigma' = \G' \To_{n} \D' \in\Sig'$ tel que $\sigma=\surj(\sigma')$.
-%
-%On suppose $\vdash \s$. Alors $\s$ est une conséquence directe d'un axiome $\bot L$ ou Id. Donc $\bot\in\G$, auquel cas il existe $i\leq n$ tel que $i:\bot\in\G'$ (par définition de \emph{surj}) et donc $\vdash' \s'$ par $\bot L'$, ou bien il existe une formule $A$ commune à $\G$ et $\D$, auquel cas $i:A\in\G'$ et $n:A\in\D'$ donc $\vdash' \s'$ par Id$'$.
-%
-%On suppose $\vdash' \s'$. Comme $\sigma=\surj(\sigma')$, toutes les formules associées à un $i \leq n$ dans $\G'$ et toutes les formules associées à $n$ dans $\D'$ sont atomiques. Or, on remarque que pour toute conclusion $G' \To_{m} D'$ de règle de \LSJn\ n'étant pas un axiome, il existe une formule composée $F$ telle que $\exists i\leq m,i:F\in G'$ ou bien $m:F\in D'$. Donc, $\s'$ est une conclusion de $\bot L'$ ou de Id$'$. Comme précédemment, on en déduit des propriétés sur $\G'$ et $\D'$, et donc sur $\G$ et $\D$, permettant d'affirmer que $\sigma$ est une conséquence de $\bot L$ ou Id.
-%
-%
-%\
-%
-%Soit maintenant $\s = \Th\, ;\G \To \D$ tel que $\G$ ou $\D$ contient une formule non atomique, et $\sigma' = \G' \To_{n} \D'$ tel que $\sigma=\surj(\sigma')$.
-%
-%On suppose $\vdash \s$. Si $\s$ est une conséquence directe d'un axiome, on a déjà vu qu'on en déduit $\vdash' \s'$. Sinon, il existe 
-
-
-
-
 \end{dem}
 
 
 
 
 
-\end{document}
 
-%%%%%%%%%%
-\
+\section{Efficacité de \LSJ}
 
-\
 
-\
+$((\bigwedge_{i=1}^{n}p_{i} \lor (\lnot\lnot p_{1}\to f) \lor \bigvee_{i=2}^{n}(p_{i}\to f))\to f)\to f$
 
 \
 
-Un séquent de \LSJn\ est la donnée de deux ensembles $\G'$ et $\D'$ de couples ``entier : formule'', et d'un entier naturel $n$, tels que tous les entiers présents dans $\G'$ sont $\leq n+1$ et tous ceux présents dans $\D'$ sont $\leq n$ ; on écrit $\G' \Rightarrow_{n} \D'$.
+$(\;[ \;(p_{1}\land p_{2} \land ... \land p_{n}) \lor (\lnot\lnot p_{1}\to f) \lor (p_{2}\to f) \lor ... \lor (p_{n}\to f)\;]\to f\;)\to f$
 
-\
 
-On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquents de \LSJn.
 
-%On définit l'application suivante :
-%
-%$\surj:
-%\left\{
-%\begin{array}{cccl}
-%	\Sig'     & \to & \Sig & \\
-%	\G' \Rightarrow_{n} \D' & \mapsto & \Th\, ;\G \To \D&
-%		\text{tel que}
-%		\left\{
-%		\begin{array}{l}
-%			\Th = \{ A \:|\: n+1:A \in \G'\} \\
-%			\G = \{ A \:|\: \exists i\leq n,\ i:A \in \G'\} \\
-%			\D = \{ A \:|\: n:A \in \D'\}
-%		\end{array}
-%		\right.
-%\end{array}
-%\right.$
-%
-%\
 
-On définit l'application $\surj:\Sig'\to\Sig$, 
 
-\noindent qui à $\G' \To_{n} \D'$ associe $\Th\, ;\G \To \D$ \quad où \;
-$\left\{
-\begin{array}{l}
-	\Th = \{ A \:|\: n+1:A \in \G'\} \\
-	\G = \{ A \:|\: \exists i\leq n,\ i:A \in \G'\} \\
-	\D = \{ A \:|\: n:A \in \D'\}
-\end{array}
-\right.$.
 
-\noindent C'est une application surjective : en effet tout séquent $\Th \,;\G\To\D$ de \LSJ\ a au moins pour antécédent le séquent $\G' \To_{0} \D'$ avec $\G' = \{ 0:A \:|\: A \in \G\} \cup \{ 1:A \:|\: A \in \Th\}$ et $\D' = \{ 0:A \:|\: A \in \D\}$.
 
-Ainsi, les séquents de \LSJn\ représentent de fa\c con exhaustive ceux de \LSJ ; et pour que cette représentation soit pertinente on voudrait que les séquents prouvables de \LSJn\ soient exactement les $\sigma'$ tels que $\surj(\sigma')$ est prouvable dans \LSJ.
 
-\
 
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{LSJn}
 
 \end{document}
 
 
-\begin{prooftree}
-	\rien
-	\lab{$\bot L \quad (i\leq n)$}
-	\un{$\G,i:\bot \Rightarrow_{n} \D$}
-\end{prooftree}
-
-
-\begin{prooftree}
-	\rien
-	\lab{Id}
-	\un{$\G,i:A \Rightarrow_{n} n:A,\D$}
-\end{prooftree}
-
-
-\begin{prooftree}
-	\ze{$\G,i:A,i:B \Rightarrow_{n} \D$}
-	\lab{$\land L$}
-	\un{$\G,i:A\land B \Rightarrow_{n} \D$}
-\end{prooftree}
-
-
-\begin{prooftree}
-	\ze{$\G,i:A,i:B \Rightarrow_{n} \D$}
-	\lab{$\land L$}
-	\un{$\G,i:A\land B \Rightarrow_{n} \D$}
-\end{prooftree}
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\end{document}
-
-
- \AxiomC{}
-     \UnaryInfC{D}
-     \DisplayProof
-
-
-\begin{prooftree}
-     \ax{A}
-     \AxiomC{B}
-%\RightLabel{ici}
-     \BinaryInfC{D}
-     \end{prooftree}
-
- \begin{prooftree}
-          \AxiomC{A}
- \RightLabel{1}
-          \AxiomC{B}
-          \AxiomC{C}
- \RightLabel{2}
-          \BinaryInfC{D}
- \RightLabel{3}
-          \BinaryInfC{E}
- \RightLabel{4}
-     \end{prooftree}
 
 
 
