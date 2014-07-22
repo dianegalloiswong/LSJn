@@ -111,17 +111,71 @@
 
 définition formule
 
-\section*{Le calcul \LSJ}
+\section{Le calcul \LSJ}
 
 L'article [] définit un calcul de séquent qu'il appelle \LSJ. Les séquents ont une sémantique naturelle (?) définie à l'aide des modèles de Kripke. Nous ne referons pas les démonstrations de l'article.
 
-\
+\subsection{Les séquents}
 
-Un séquent est la donnée de trois multiensembles $\Th$, $\G$ et $\D$ de formules ; on le note $\Th\;;\;\G\;\To\;\D$.
+On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrence est pris en compte, mais non l'ordre des éléments. Cela permettra de ne pas avoir besoin de règles explicites d'échange.
 
-Une définition d'un séquent \textbf{réfutable} est donnée dans l'article à l'aide des modèles de Kripke. Nous ne la détaillons pas ici, car ce qui nous intéresse est la propriété suivante qui en découle, démontrée dans l'article.
+Un \textbf{séquent} est la donnée de trois multiensembles $\Th$, $\G$ et $\D$ de formules ; on écrit alors $\Th\;;\;\G\;\To\;\D$.
 
-Soit $\G$, $\D$ des multiensembles de formules. Le séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{prouvable}, c'est-à-dire non réfutable, si et seulement si la formule
+Une définition d'un séquent \textbf{réfutable} est donnée dans l'article à l'aide des modèles de Kripke. Nous ne la détaillons pas ici, car ce qui nous intéresse surtout est la propriété suivante qui en découle, démontrée dans l'article. La définition de \textbf{prouvable} sera donnée plus tard car elle est liée aux règles du calcul, mais ceci illustre son intérêt.
+\begin{prop}\label{propSignificationSequent}
+%Soit $\G$, $\D$ des multiensembles de formules. Le séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{prouvable} dans \LSJ, c'est-à-dire non réfutable, si et seulement si la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ est valide en logique intuitionniste.
+Un séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{réfutable} si, et seulement si, la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ n'est pas valide en logique intuitionniste. Un séquent est \textbf{prouvable} dans \LSJ\ si, et seulement si, il n'est pas réfutable.
+
+\end{prop}
+\begin{cor}
+Soit $A$ une formule, elle est valide en logique intuitionniste si et seulement si le séquent $\emptyset;\emptyset\To A$ est  prouvable dans \LSJ.
+\end{cor}
+
+Les multiensembles $\G$ et $\D$, et leur signification dans la propriété \ref{propSignificationSequent} sont des éléments habituels en calcul des séquents. En revanche, $\Th$ est propre à \LSJ, et est difficile à interpréter car contrairement au cas où $\Th$ est vide, un séquent avec $\Th$ quelconque ne peut pas être représenté par une formule. Ce qu'on peut dire est que $\Th$ représente des formules gardées en réserve, non visibles directement dans le séquent (les formules de $\Th$ ne peuvent pas être formule principale), mais qui peuvent être transférées dans $\G$ et devenir visibles. On verra que les seules règles qui agissent sur $\Th$ sont celles qui concernent le connecteur $\to$.
+
+Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \textbf{formules de gauche}, celles de $\D$ les \textbf{formules de droite}, et celles de $\Th$ les \textbf{formules de réserve} du séquent (appellations non conventionnelles).
+
+%
+
+\subsection{Les règles}
+
+\def\regle{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$prem_{1}$}
+	\AXC	{...}
+	\AXC	{$prem_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$concl$}
+	\DP
+}
+\def\instance{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+}
+\def\etL{
+	\AXC{$\Th;A,B,\Gp \To \Dp$}
+	\RightLabel{$\land L$}
+	\UIC{$\Th;A\land B,\Gp \To \Dp$}
+	\DP
+}
+
+
+%Une règle est de la forme\regle où $\mathcal R$ est le nom de la règle, et $prem_{1}$, ... , $prem_{p}$, $concl$ décrivent des séquents d'une certaine forme. Par exemple $\Th\;;\;A\lor B,\G\;\To\;\D$ représente n'importe quel séquent où au moins une des formules de gauche est une disjonction, et si $\Th\;;\;A,\G\;\To\;\D$ se trouve dans la même règle, cela représente un séquent obtenu à partir du précédent en rempla\c cant une disjonction de gauche $A\lor B$ par son premier terme $A$.
+
+
+
+Les règles du calcul \LSJ\ sont données dans la figure \ref{reglesLSJ}. La notation $A,\G$ représente le multiensemble obtenu à partir de $\G$ en ajoutant une occurrence de $A$. Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les (resp. première, ... , $p$-ième) \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les \textbf{axiomes} sont les règles sans prémisse. Pour toutes les autres règles, une unique formule apparaît de manière explicite dans la conclusion : c'est la \textbf{formule principale}. Les règles dites de gauche, ou d'introduction à gauche, contenant un $L$ dans leur nom, sont celles où la formule principale se trouve à gauche dans la conclusion, de même pour les règles de droite.
+
+Une \textbf{instance} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui ont bien la forme donnée par la définition de la règle. Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
+
+%Une \textbf{preuve} est un arbre
+
+
 
 
 
