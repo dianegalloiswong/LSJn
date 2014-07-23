@@ -150,6 +150,14 @@ Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \te
 	\TIC{$\s$}
 	\DP
 }
+\def\instanceAx{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{$(\mathcal A)$}
+	\UIC{$\s$}
+	\DP
+}
+
 
 \def\botL{
 	\AXC	{}
@@ -209,7 +217,7 @@ Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \te
 
 
 
-Les règles du calcul \LSJ\ sont données dans la figure~\ref{reglesLSJ}. La notation $A,\G$ représente le multiensemble obtenu à partir de $\G$ en ajoutant une occurrence de $A$. Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les (resp. première, ... , $p$-ième) \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les \textbf{axiomes} sont les règles sans prémisse. Pour toutes les autres règles, une unique formule apparaît de manière explicite dans la conclusion : c'est la \textbf{formule principale}. Les règles dites de gauche, ou d'introduction à gauche, contenant un $L$ dans leur nom, sont celles où la formule principale se trouve à gauche dans la conclusion, de même pour les règles de droite.
+Les règles du calcul \LSJ\ sont données dans la figure~\ref{fig:reglesLSJ}. La notation $A,\G$ représente le multiensemble obtenu à partir de $\G$ en ajoutant une occurrence de $A$. Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les (resp. première, ... , $p$-ième) \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les \textbf{axiomes} sont les règles sans prémisse. Pour toutes les autres règles, une unique formule apparaît de manière explicite dans la conclusion : c'est la \textbf{formule principale}. Les règles dites de gauche, ou d'introduction à gauche, contenant un $L$ dans leur nom, sont celles où la formule principale se trouve à gauche dans la conclusion, de même pour les règles de droite.
 
 \begin{figure}
 \centering
@@ -223,7 +231,7 @@ $$\begin{array}{cc}
 \end{array}$$
 
 \caption{Les règles du calcul \LSJ}
-\label{reglesLSJ}
+\label{fig:reglesLSJ}
 \end{figure}
 
 
@@ -233,9 +241,75 @@ Une \textbf{preuve} est un arbre dont les n\oe uds sont étiquetés par un séquent
 
 Un séquent est \textbf{prouvable} s'il existe une preuve à la racine de laquelle il est associé.
 
+De manière équivalente, on peut définir l'ensemble des formules prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle de \LSJ, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
 
 
-\section*{}
+
+\subsection{Conditions de non-prouvabilité}
+
+Pour montrer qu'un séquent est prouvable, il suffit d'en exhiber une preuve. Comment montrer le contraire ? D'après la définition précédente, un séquent n'est pas prouvable s'il n'existe aucune instance de règle\instance telle que tous les $\s_{i}$ sont prouvables. Or les $\s_{i}$ ne dépendent que de $\s$, $\mathcal R$ et du choix de la formule principale : il est donc possible de tester toutes les instances possibles. Cela fournit un premier algorithme de recherche de preuve : récursivement, pour chercher si un séquent $\s$ est prouvable, on considère toutes les instances de règles dont $\s$ est la conclusion et pour chacune on détermine récursivement si chaque prémisse est prouvable. Si on trouve une instance telle que toutes les prémisses sont prouvables, alors $\s$ est prouvable (et on obtient une preuve de $\s$ si on connaît une preuve de chacune de ces prémisses), sinon $\s$ n'est pas prouvable. Cet algorithme est très long. En fait, c'est à peu près ce qu'on se retrouve à faire dans les cas extrêmement défavorables. Mais heureusement, on a un procédé bien plus économe en moyenne grâce à la notion de règle ou prémisse inversible.
+
+Une prémisse $prem_{i}$ d'une règle\regle(aussi appelée $i$-ème prémisse de $\mathcal R$) est \textbf{inversible} si on a : si $prem_{i}$ est non prouvable, alors $concl$ est non prouvable. Une règle est \textbf{inversible} si toutes ses prémisses sont inversibles.
+
+On admet, une démonstration se trouvant dans l'article \cite{LSJ} :
+
+\noindent- les règles $\land L$, $\land R$, $\lor L$ et $\lor R$ sont inversibles~;
+
+\noindent- les deux premières prémisses de $\to L$ et la première prémisse de $\to R$ sont inversibles~;
+
+\noindent- la troisième prémisse de $\to L$ et la deuxième prémisse de $\to R$ ne sont pas inversibles.
+
+
+
+\subsection{Algorithme}
+
+\begin{figure}[!h]
+%\centering
+\def\true{\emph{vrai}}
+\def\false{\emph{faux}}
+\def\lett{\textbf{soit }}
+\def\if{\textbf{si} }
+\def\then{\textbf{alors} }
+\def\return{\textbf{retourner} }
+\def\select{\textbf{sélectionner} }
+\def\from{\textbf{dans} }
+
+\textbf{fonction} estProuvable ($\s$)
+
+\quad \lett $\s=\Th;\G\To\D$
+
+\quad \if ($\bot\in\G$) \then \return \true
+
+\quad \if ($\G\cap\D\neq\emptyset$) \then \return \true
+
+\quad \if ($\G$ et $\D$ ne contiennent que des formules \emph{atomiques}) \then \return \false
+
+
+\quad \if (il existe $A\land B\in\G$) \then $\{$
+
+\quad \quad \select $H=A\land B$ \from $\G$
+
+\quad \quad \return estProuvable($prem(\land L, \s, H)$)
+
+\quad $\}$
+
+
+\quad \if (il existe $A\lor B\in\D$) \then $\{$
+
+\quad \quad \select $H=A\lor B$ \from $\D$
+
+\quad \quad \return estProuvable($prem(\lor R, \s, H)$)
+
+\quad $\}$
+
+
+\caption{Algorithme}
+\label{fig:algo}
+\end{figure}
+
+
+
+\subsection{?}
 
 
 
@@ -281,32 +355,35 @@ On remarque que $\land L$, $\land R$, $\lor L$ et $\lor R$ sont locales. Les axi
 
 C'est pour cette raison qu'on introduit le calcul \LSJn, dans lequel toutes les règles sont locales.
 
-\section{Présentation de \LSJn\ et équivalence avec \LSJ}
+\section{Le calcul \LSJn}
 
 
-On utilise les définitions et notations de l'article% \cite{LSJ}
-.
+%On utilise les définitions et notations de l'article~\cite{LSJ}.
+%.
+%
+%\
+%
+%Le système \LSJn\ a pour objectif de faire les mêmes calculs que \LSJ, mais en manipulant des séquents qui contiennent un peu plus d'information, afin de pouvoir faire le ``back-tracking'' nécessaire à l'algorithme de \LSJ\ en n'ayant à tout moment en mémoire qu'un seul séquent.
+%
+%Pour cela, on veut que les séquents de \LSJn\ représentent de manière exhaustive et pertinente ceux de \LSJ\ : on montre qu'il existe une surjection de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ, telle qu'un séquent de \LSJn\ est prouvable dans \LSJn\ si, et seulement si, son image est prouvable dans \LSJ.
+%
+%\
+%
+%Le calcul \LSJn, très proche du calcul \LSJ, manipule des séquents contenant un peu plus d'information afin de n'avoir que des règles locales. 
+%Plus précisément, chaque séquent de \LSJn\ a un indice (un entier naturel), et chaque formule du séquent a également un indice.
+%Plus précisément, chaque séquent a un indice $n$, qui détermine lesquelles de ses formules, qui ont aussi chacune un indice $i$, sont \emph{actives}, c'est-à-dire peuvent être la formule principale lors d'une application de règle : pour les formules de gauche, la condition est $i\leq n$, et pour celles de droite $i=n$. Ainsi, pour la dernière prémisse des deux règles liées à $\to$ par exemple, les formules de droite de la conclusion peuvent être conservée dans le séquent sans être actives. Il suffit de modifier l'indice du séquent pour changer les formules actives.
+
+Le calcul \LSJn\ est très proche du calcul \LSJ\ : chaque règle de \LSJn\ correspond à une règle de \LSJ, et des arbres de preuve dans les deux systèmes pour la même formule sont fortement liés. Mais contrairement à \LSJ, les règles de \LSJn\ sont toutes locales. Pour cela, les séquents de \LSJn\ représentent chacun un séquent de \LSJ, avec un peu plus d'informations : celles qui sont parfois nécessaire pour retrouver la conclusion à partir d'une prémisse. Cette représentation est exhaustive et correcte. On montre en effet qu'il existe une surjection de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ, telle qu'un séquent de \LSJn\ est prouvable dans \LSJn\ si, et seulement si, son image est prouvable dans \LSJ.
+
+
+\subsection{Formalisme de \LSJn}
+
+
+Un séquent de \LSJn\ est la donnée de deux multiensembles $\Gp$ et $\Dp$ de couples $entier~:~formule$, et d'un entier naturel $n$, tels que tous les entiers présents dans $\Gp$ sont $\leq n+1$ et tous ceux présents dans $\Dp$ sont $\leq n$ ; on écrit $\Gp \Rightarrow_{n} \Dp$.
 
 \
 
-Le système \LSJn\ a pour objectif de faire les mêmes calculs que \LSJ, mais en manipulant des séquents qui contiennent un peu plus d'information, afin de pouvoir faire le ``back-tracking'' nécessaire à l'algorithme de \LSJ\ en n'ayant à tout moment en mémoire qu'un seul séquent.
-
-Pour cela, on veut que les séquents de \LSJn\ représentent de manière exhaustive et pertinente ceux de \LSJ\ : on montre qu'il existe une surjection de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ, telle qu'un séquent de \LSJn\ est prouvable dans \LSJn\ si, et seulement si, son image est prouvable dans \LSJ.
-
-%Pour cela, on définit des séquents de \LSJn, une application de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ dont on montrera qu'elle est surjective, et des règles de calcul.
-%Pour cela, en plus des séquents et règles du calcul \LSJn, on définit une application \emph{surj} de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ, dont on montrera qu'elle est surjective.
-
-
-
-
-\subsection*{Le calcul \LSJn}
-
-
-Un séquent de \LSJn\ est la donnée de deux multiensembles $\Gp$ et $\Dp$ de couples $entier : formule$, et d'un entier naturel $n$, tels que tous les entiers présents dans $\Gp$ sont $\leq n+1$ et tous ceux présents dans $\Dp$ sont $\leq n$ ; on écrit $\Gp \Rightarrow_{n} \Dp$.
-
-\
-
-Les règles du calcul \LSJn\ sont décrite dans la figure~\ref{reglesLSJn}. Chacune correspond à une règle de \LSJ.
+Les règles du calcul \LSJn\ sont décrite dans la figure~\ref{fig:reglesLSJn}. Chacune correspond à une règle de \LSJ.
 
 \
 
@@ -379,13 +456,13 @@ $$\begin{array}{cc}
 \end{array}$$
 
 \caption{Les règles du calcul \LSJn}
-\label{reglesLSJn}
+\label{fig:reglesLSJn}
 \end{figure}
 
 
 
 
-\subsection*{\'Equivalence avec \LSJ}
+\subsection{\'Equivalence avec \LSJ}
 
 
 On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquents de \LSJn.
@@ -505,7 +582,7 @@ où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de
 Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
 
 
-\begin{lm*}
+\begin{lm}
 Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$ et soit $\mathcal R$ une règle de \LSJ.
 
 1) Si \instanceR alors il existe $\s'_{1}$, ... , $\s'_{p}$ tels que pour tout $k$, $\s_{k} = \surj (\s'_{k})$, et \instanceRp.
@@ -514,7 +591,7 @@ Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$ et so
 
 \noindent
 Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulement si \instanceAxp.
-\end{lm*}
+\end{lm}
 
 \begin{dem}
 On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id, $\land R$ et $\to L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
@@ -552,10 +629,10 @@ $\Dt = \forget (\Dt'_{n})$
 
 
 
-\begin{theo*}
+\begin{theo}
 Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$, alors $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
 %Soit $\sigma$ un séquent de \LSJ\ et $\sigma'$ un séquent de \LSJn\ tels que $\sigma=\surj(\sigma')$, alors $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
-\end{theo*}
+\end{theo}
 
 \begin{dem}
 Par récurrence sur la \emph{taille} de $\s\in\Sig$, c'est-à-dire la somme des tailles des formules des trois multiensembles apparaissant dans $\s$.
@@ -587,14 +664,48 @@ On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $
 \section{Efficacité de \LSJ}
 
 
+L'étude qui suit porte sur le calcul \LSJ. En effet, \LSJn\ hérite de toutes les propriétés intéressantes de \LSJ, en apportant une localité des règles qui facilite une implémentation économe en mémoire.
+
+
+\subsection{Propriété de la sous-formule et indexation}
+
+$B$ est une \textbf{sous-formule} de $A$ si $B=A$ ou si $A$ est de la forme $A_{1}$`connecteur'$A_{2}$ et ($B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formules de $A_{2}$). Un calcul de séquents vérifie la \textbf{propriété de la sous-formule} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) la preuve est une sous-formule d'une formule de $\s$. En particulier, le séquent $\To A$ a une preuve dans laquelle toute formule est une sous-formule de $A$.
+
+Le calcul \LSJ vérifie la propriété de la sous-formule : on le constate aisément en observant chaque règle.
+
+La propriété de la sous-formule est très recherchée en calcul des séquents. D'une part, elle donne une borne sur les formules qu'il faudra manipuler au cours d'une recherche de preuve, qui sont évidemment toutes plus petites que la formule qu'on essaie de prouver. Mais surtout, elle permet de connaître à l'avance la liste exhaustive des formules qu'on pourra rencontrer. On peut donc à l'avance les numéroter : ainsi, les formules d'un séquents sont simplement représentées par un entier. Il faut quelques informations sur ces numéros : par exemple pour une formule $A\land B$, il faut savoir qu'il s'agit d'un ``et'', et pouvoir déterminer $A$ et $B$. Il faut aussi pouvoir reconnaître quand l'axiome Id (une même formule apparaît des deux côtés du séquent) s'applique : pour cela on associe à chaque formule une classe, qui correspond à une classe d'équivalence de la relation d'égalité structurelle. La taille de toutes ces informations réunies est linéaire en la taille de la formule de départ (c'est-à-dire le nombre de n\oe uds de l'arbre qui la représente, qui est aussi le nombre de sous-formules avec multiplicité). Un exemple est donné par la figure~\ref{fig:indexation}.
+
+La propriété de la sous-formule est encore plus intéressante dans le cadre de la recherche de preuve compilée : connaître à l'avance les formules qui apparaîtront permet d'écrire pour chacune des fonctions agissant sur le séquent, au lieu de les calculer au cours de la recherche de preuve (voir ??).
+
+\begin{figure}
+%\centering
+\includegraphics[width=0.3\linewidth]{indexation} %Quelques_formules.f12
+\caption{Indexation de la formule $(a\land b)\land(\lnot c \lor (a\land b))$}
+\label{fig:indexation}
+\end{figure}
+
+\subsection{Absence de duplication}
+
+
+\
+
+\
+\subsection{Inversibilité de certaines prémisses de $\to L$ et $\to R$}
+
+
 $((\bigwedge_{i=1}^{n}p_{i} \lor (\lnot\lnot p_{1}\to f) \lor \bigvee_{i=2}^{n}(p_{i}\to f))\to f)\to f$
 
 \
 
 $(\;[ \;(p_{1}\land p_{2} \land ... \land p_{n}) \lor (\lnot\lnot p_{1}\to f) \lor (p_{2}\to f) \lor ... \lor (p_{n}\to f)\;]\to f\;)\to f$
 
+\
 
+$1:f \quad\To_{0}\quad 0:  p1 \land ( p2 \land p3 )  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f  \;,\;  0: p3 \to f  \;,\; 0: f$
 
+\
+
+$f\;;\;\emptyset \quad\To\quad p_{1} \land p_{2} \land ... \land p_{n} \;,\; \lnot\lnot p_{1}\to f \;,\; p_{2}\to f \;,\; ...  \;,\; p_{n}\to f \;,\; f$
 
 
 
