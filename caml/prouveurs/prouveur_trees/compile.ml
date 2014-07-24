@@ -1,17 +1,5 @@
-let path_trees = "prouveurs/prouveur_trees/"
-let ext = ".ml"
+open Path
 
-let fonctions_sf = path_trees^"code_trees_genere/fonctions_sf"^ext
-let code = path_trees^"code_trees_genere/code"^ext
-
-let liste_code_trees_fixe = [
-  "utilities";
-  "sequent";
-  "plus_forte_priorite";
-  "all_imp";
-  "prouvable";
-  "expr";
-]
 (*
 let liste_cat = fonctions_sf ::
   (List.map (fun s -> path_trees^"code_trees_fixe/"^s^ext) liste_code_trees_fixe)
@@ -20,15 +8,17 @@ let string_cat =
   (List.fold_left (fun s s1 -> s^" "^s1) "cat" liste_cat)
     ^" > "^code
 *)
-let liste_cat = List.map (fun s -> path_trees^"code_trees_fixe/"^s^ext) liste_code_trees_fixe
+
 
 let string_cat =
-  (List.fold_left (fun s s1 -> s^" "^s1) "cat" liste_cat)
-    ^" >> "^code
+  (List.fold_left (fun s s1 -> s^" "^s1) "cat" liste_code_trees_fixe)
+    ^" >> "^code_trees
+
+
 
 
 let main f =
-  let fd = Unix.openfile (*fonctions_sf*)code [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
+  let fd = Unix.openfile (*fonctions_sf*)code_trees [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
   let out = Unix.out_channel_of_descr fd in
   Format.set_formatter_out_channel out;
 

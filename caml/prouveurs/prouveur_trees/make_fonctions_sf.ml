@@ -3,6 +3,8 @@ open Global_ref
 
 open Ast_trees
 
+open Cote
+
 
 let fonctions = ref []
 let prefixe h = if h>=0 then "sf"^(string_of_int h)^"_" else "call_"

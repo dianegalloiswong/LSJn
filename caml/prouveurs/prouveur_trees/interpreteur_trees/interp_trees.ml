@@ -139,6 +139,8 @@ let interp_decl_func (f,arg,e) =
   Hashtbl.add fonctions (fst f) (fst arg,e)
 
 
-let interp_prog (dflist,e) =
+let interp_prog ((dflist,e),_) =
   List.iter interp_decl_func dflist;
   interp_expr Smap.empty e
+
+let main = interp_prog

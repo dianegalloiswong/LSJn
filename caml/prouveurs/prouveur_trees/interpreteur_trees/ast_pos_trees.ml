@@ -1,11 +1,11 @@
 type position = Lexing.position
 type positions = position*position
-type 'a pos = 'a * positions
 
 
 
-type var = string pos
-type func = string pos
+
+type var = string *positions
+type func = string *positions
 
 type expr0 =
   | EVar of var
@@ -17,20 +17,22 @@ type expr0 =
   | ECall of func*expr
   | EIsnull of expr
   | EIsint of expr
-  | EIsnode of  expr
+
   | ELeq of expr*expr
   | EIf of expr*expr*expr
 
   (*nouveaux*)
-  | EEq of expr*expr (* égalité structurelle *)
+  | EIsnode of  expr
+  | EEq of expr*expr (* égalité de deux entiers *)
   | ELess of expr*expr
   | ESucc of expr
   | ENot of expr
   | EAnd of expr*expr
   | EOr of expr*expr
 
-and expr = expr0 pos
+and expr = expr0 *positions
 
 type decl_func = func*var*expr
 
-type prog = (decl_func list)*expr
+type prog0 = (decl_func list)*expr
+type prog = prog0 *string (*nom du fichier*)

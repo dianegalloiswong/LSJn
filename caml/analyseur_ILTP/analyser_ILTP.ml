@@ -17,23 +17,23 @@ let traite_fact fopt = function
     Format.printf "%s inconnu : fichier non traite@." s;
     raise Exit
 
-let traite_facts attopt l =
-  let fopt = try List.fold_left traite_fact None l with Exit -> None in
-  match fopt with None -> () | Some f ->
-    Exec_formule.main attopt f
+let traite_facts l =
+  match List.fold_left traite_fact None l with
+    | None -> raise Exit
+    | Some f -> f
 
 let localisation nom pos =
   let l = pos.Lexing.pos_lnum in
   let c = pos.Lexing.pos_cnum - pos.Lexing.pos_bol + 1 in
   Format.eprintf "File \"%s\", line %d, characters %d-%d:@." nom l (c-1) c
 
-let parse nom =
+let main nom =
   let f = open_in nom in 
   let buf = Lexing.from_channel f in
   try
-    let fichier = Parser_ILTP.fichier Lexer_ILTP.token buf in
+    let attendus,facts = Parser_ILTP.fichier Lexer_ILTP.token buf in
     close_in f;
-    fichier
+    traite_attendus attendus, traite_facts facts
   with
     | Lexer_ILTP.Lexing_error c -> 
       localisation nom (Lexing.lexeme_start_p buf);
@@ -46,14 +46,4 @@ let parse nom =
     | _ ->
       Format.eprintf "Erreur dans Analyseur.parse@.";
       raise Exit
-
-let main nom =
-  if Options.affiche_nom_fichier() then Format.printf "%s@." nom;
-  try
-    let attendus,facts = parse nom in
-    let attopt = traite_attendus attendus in
-    traite_facts attopt facts;
-    (*if Options.print_fichier() then Format.printf "@."*)
-  with Exit -> ()
-
 

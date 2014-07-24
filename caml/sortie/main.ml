@@ -46,6 +46,15 @@ let options = [
 let usage = "Par défaut : affiche nom de fichier éventuel, temps mis pour décider si la formule est prouvable, et résultat obtenu seulement s'il est différent de celui attendu.\n  <nom de fichier en .p> (syntaxe des problèmes d'ILTP) : exécute sur la formule décrite par le fichier, en comparant avec le résultat attendu donné dans les commentaires\n  <nom de répertoire> : cherche récursivement les fichiers en .p"
 
 
+
+let faire_fichier nom =
+  if Options.affiche_nom_fichier() then Format.printf "%s@." nom;
+  try
+    let att,f = Analyser_ILTP.main nom in
+    Exec_formule.main att f
+  with Exit -> Format.printf "Exit.@."
+
+
 let pointp nom = let n = String.length nom in nom.[n-2]='.' && nom.[n-1]='p'
 
 let rec faire_d dnom =
@@ -59,7 +68,9 @@ let rec faire_d dnom =
 
 and faire nom =
     match (Unix.stat nom).Unix.st_kind with
-      | Unix.S_REG when (pointp nom) && (Time.faire_fichier nom) -> Exec_ILTP.main nom
+      | Unix.S_REG when (pointp nom) && (Time.faire_fichier nom) -> 
+	(*Exec_ILTP.main nom*)
+	faire_fichier nom
       | Unix.S_DIR -> faire_d nom
       | _ -> ()
 

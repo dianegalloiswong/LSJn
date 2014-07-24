@@ -20,7 +20,12 @@ if Options.time_on() then
     let temps = (stop -. start) in
     temps_total := !temps_total +. temps;
     if Options.affiche_temps_un() then
-      Format.printf "%fs, %d appels à prouvable@." temps !appels;
+      begin
+      if !appels > 0 then
+	Format.printf "%fs, %d appels à prouvable@." temps !appels
+      else
+	Format.printf "%fs@." temps
+      end;
     res
  with Temps_ecoule -> Format.printf "temps écoulé (%fs), %d appels à prouvable vus@." !Options.temps_max !appels; raise Temps_ecoule
 else f x

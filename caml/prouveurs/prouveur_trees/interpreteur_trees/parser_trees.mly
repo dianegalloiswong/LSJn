@@ -32,16 +32,16 @@
 
 
 
-%start prog
+%start prog0
 
-%type <Ast_pos_trees.prog> prog
+%type <Ast_pos_trees.prog0> prog0
 
 
 %%
 
 
 
-prog:
+prog0:
   | decls=decl_func* IN e=expr EOF  { (decls,e) }
 
 decl_func:
