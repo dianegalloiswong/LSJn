@@ -33,9 +33,9 @@ let main f =
 
   Format.printf "*)\n@.";
 
-  List.iter (fun df -> Print.decl_func df;Format.printf"@.") (List.rev !Make_fonctions_sf.fonctions);
+  List.iter (fun df -> Print_ast_trees.decl_func df;Format.printf"@.") (List.rev !Make_fonctions_sf.fonctions);
 
-  List.iter (fun df -> Print.decl_func df;Format.printf"@.") (List.rev (Make_call_num.fonctions_call ()));
+  List.iter (fun df -> Print_ast_trees.decl_func df;Format.printf"@.") (List.rev (Make_call_num.fonctions_call ()));
 
   Format.printf "\n(****************************************)\n\n(* code fixe *)\n@.";
 

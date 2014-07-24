@@ -1,3 +1,4 @@
+(* à enlever *)
 let localisation nom pos =
   let l = pos.Lexing.pos_lnum in
   let c = pos.Lexing.pos_cnum - pos.Lexing.pos_bol in
@@ -19,7 +20,7 @@ let main prog =
       Format.eprintf "%s@." s;
       (match treeopt with
 	| None -> ()
-	| Some t -> Format.printf "(evaluated as "; Print.tree t; Format.printf ")@."
+	| Some t -> Format.printf "(evaluated as "; Print_ast_trees.tree t; Format.printf ")@."
       );
       raise Exit
   in

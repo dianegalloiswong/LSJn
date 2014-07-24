@@ -24,3 +24,7 @@ let code_caml_executable = path_tmp_trees^"code_caml"
 let code_caml_sortie = path_tmp_trees^"code_caml_sortie.txt"
 let code_caml_errors = path_tmp_trees^"code_caml_errors.txt"
 let entete_caml = path_prouveur_trees^"code_trees_fixe/entete_caml.ml"
+
+
+(* vers coq *)
+let code_coq = path_tmp_trees^"code_coq.txt"

@@ -13,6 +13,9 @@ OCAMLBUILD=ocamlbuild -classic-display \
 		-I prouveurs/prouveur_caml/preuve_contre_modele \
 	-I test_recherche_compilee \
 	-I prouveurs/prouveur_trees \
+		-I prouveurs/prouveur_trees/analyseur_trees \
+		-I prouveurs/prouveur_trees/compilation_vers_trees \
+		-I prouveurs/prouveur_trees/compilation_trees_via_caml \
 		-I prouveurs/prouveur_trees/interpreteur_trees \
 	-use-menhir
 TARGET=native

@@ -5,7 +5,7 @@ let exec_maison prog =
   match t with
     | Int 0 -> false
     | Int _ -> true
-    | _ -> Format.eprintf "Le résultat de l'exécution n'est pas un booléen@."; Print.tree t; raise Exit
+    | _ -> Format.eprintf "Le résultat de l'exécution n'est pas un booléen@."; Print_ast_trees.tree t; raise Exit
 
 
 let main f =
