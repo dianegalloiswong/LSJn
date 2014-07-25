@@ -58,13 +58,13 @@ let nb_imp_d seq =
 
 let nth_imp_g arg =
   match arg with <k,seq> =>
-  let x = call nth <k, call all_imp_g seq> in
+  let x = call nth <k, call sort (call all_imp_g seq)> in
   match x with <i,a> =>
   match a with <p,sf> =>
   <i,sf>
 let nth_imp_d arg =
   match arg with <k,seq> =>
-  let x = call nth <k, call all_imp_d seq> in
+  let x = call nth <k, call sort (call all_imp_d seq)> in
   match x with <i,a> =>
   match a with <p,sf> =>
   <i,sf>

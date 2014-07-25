@@ -4,6 +4,8 @@ let affiche_rep_ref = ref false
 let rien_afficher = ref false
 
 let trees = ref false
+let trees_via_caml = ref false
+let prouveur_trees () = !trees || !trees_via_caml
 
 let preuves = ref false
 let cmods = ref false

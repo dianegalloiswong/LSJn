@@ -20,7 +20,7 @@ struct
   let all_imp n t =
     List.filter (fun (i,sf) -> i<=n && !Global_ref.priorite.(sf)=5) !t
   let nombre_imp n t = List.length (all_imp n t)
-  let nth_imp n k t = List.nth (all_imp n t) k
+  let nth_imp n k t = List.nth (List.sort compare (all_imp n t)) k
   let reord_imp n k t = ()
   let print t = assert false
 end
@@ -42,7 +42,7 @@ struct
   let all_imp n t =
     List.filter (fun (i,sf) -> i=n && !Global_ref.priorite.(sf)=5) !t
   let nombre_imp n t = List.length (all_imp n t)
-  let nth_imp n k t = List.nth (all_imp n t) k
+  let nth_imp n k t = List.nth (List.sort compare (all_imp n t)) k
   let reord_imp n k t = ()
   let print t = assert false
 end

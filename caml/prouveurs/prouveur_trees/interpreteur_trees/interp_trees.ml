@@ -29,7 +29,7 @@ let tree_of_bool b = Int (if b then 1 else 0)
 let rec interp_expr env (expr,pos) = match expr with
   | EVar var -> let x = fst var in (try Smap.find x env with Not_found -> raise (Error ("unbound variable "^x, snd var,None)))
   | ENull -> Null
-  | EInt n -> Int  n
+  | EInt n -> if n>=0 then Int  n else raise (Error ("entier str. négatif : "^(string_of_int n), pos,None))
   | ENode (e1,e2) ->
     let t1 = interp_expr env e1 in
     let t2 = interp_expr env e2 in

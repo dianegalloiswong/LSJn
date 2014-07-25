@@ -15,6 +15,7 @@ let eq_boucle n = formule := Some (Eq_boucle.main n); attendu := Some (Eq_boucle
 
 let options = [
   "-trees", Arg.Set Options.trees, ": utilise le prouveur \"trees\" au lieu du prouveur caml";
+  "-trees-via-caml", Arg.Set Options.trees_via_caml, ": génère le code \"trees\", le compile en caml et l'exécute avec ocamlc";
 
   (* général *)
   "-indexation", Arg.Set Options.indexation, ": affiche formules et contenu des tableaux sf et classe ; ne lance pas la recherche de preuve";

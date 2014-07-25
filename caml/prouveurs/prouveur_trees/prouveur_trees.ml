@@ -12,7 +12,10 @@ let main f =
   Format.printf "compilation vers trees : %!";
   Time.time Compile.main f;
   let prog = Analyser_trees.main Path.code_trees in
-  if false then
-    exec_maison prog
-  else
+
+  Compile_trees_vers_coq.main prog;
+
+  if !Options.trees_via_caml then
     Exec_trees_via_ocamlc.main prog
+  else
+    exec_maison prog

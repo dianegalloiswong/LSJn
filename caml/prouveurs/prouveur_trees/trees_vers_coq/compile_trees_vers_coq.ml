@@ -1,11 +1,56 @@
 open Ast_pos_trees
 open Tree
 
-let variables = Hashtbl.create 17
+
+
+let variables_liste = [
+  "arg"; "arg1"; "arg2";
+  "a"; "b"; "c"; "h"; "i"; "j"; "k"; "l"; "n"; "p"; "t"; "x"; "y";
+  "x1"; "x2"; "y1"; "y2"; "n1";
+  "hd"; "tl";
+  "nplus1"; "nmoins1";
+  "seq"; "formules"; "G"; "D"; "reste"; "classes"; "CG"; "CD"; "infos"; "axiomes"; "fauxL"; "id";
+  "sf"; "cl"; "i_sf";
+  "ac"; "ic"; "sfc"; "pc"; "courant";
+  "rep"; "rep1"; "rep2"; "rep3"; "fini";
+  "nb_g"; "nb_d"; "nbs";
+]
+(*
+let variables = Hashtbl.create 7
+let () = ignore (List.fold_left (fun i x ->
+  Hashtbl.add variables x i; i+1
+) 0 variables_liste)
+*)
+let print_decl_variables () = 
+  ignore (List.fold_left (fun i x ->
+    Format.printf "Let var_%s := in_Var %d.\n" x i; i+1
+  ) 0 variables_liste)
+
+
 let fonctions = Hashtbl.create 17
 
-let var (x,_) = Format.printf "variable_%s" x
-let func (f,_) = Format.print_string (if Hashtbl.mem fonctions f then "fonctions"^f else "inexistant")
+let print_decl_noms_func () =
+  ignore (Hashtbl.fold (fun f () i ->
+    Format.printf "Definition func_%s := in_Fun %d.\n" f i; i+1
+  ) fonctions 1) (* 0 réservé pour fonction inexistante *)
+
+
+let var (x,_) = 
+if not (List.mem x variables_liste) then Format.eprintf "trees vers coq : variable %s non répertoriée@." x;
+Format.printf "var_%s" x
+let func (f,_) = Format.print_string (if Hashtbl.mem fonctions f then "func_"^f else "in_Fun 0")
+
+
+
+
+let pos = Lexing.dummy_pos,Lexing.dummy_pos
+let eint n = (EInt n,pos)
+let eisnull e = (EIsnull e,pos)
+let eisint e = (EIsint e,pos)
+let eleq (e1,e2) = (ELeq(e1,e2),pos)
+let eif (b,e1,e2) = (EIf(b,e1,e2),pos)
+let eand (e1,e2) = (EAnd(e1,e2),pos)
+let ecall (s,e) = (ECall((s,pos),e),pos)
 
 let rec expr e = match (fst e) with
   | EVar x -> Format.printf "expr_var tt "; var x
@@ -65,62 +110,70 @@ let rec expr e = match (fst e) with
 
   | EIsnode e ->
     expr (
-      EIf(EIsnull e,EInt 0,EIf(EIsint e,EInt 0,EInt 1))
-    ,snd e)
+      eif(eisnull e,eint 0,eif(eisint e,eint 0,eint 1))
+    )
   | ELess (e1,e2) ->
     expr (
-      EIf(ELeq(e1,e2),EIf(ELeq(e2,e1),EInt 0,EInt 1),EInt 0)
-    ,snd e)
+      eif(eleq(e1,e2),eif(eleq(e2,e1),eint 0,eint 1),eint 0)
+    )
   | EEq (e1,e2) ->
     expr (
-      EAnd(ELeq(e1,e2),ELeq(e2,e1))
-    ,snd e)
+      eand(eleq(e1,e2),eleq(e2,e1))
+    )
   | ESucc e ->
-    Format.printf "(Int (to_int ";
-    expr e;
-    Format.printf "+1))"
+    expr (
+      ecall ("succ",e)
+    )
   | ENot e ->
     expr (
-      EIf(e,EInt 0,EInt 1)
-    ,snd e)
+      eif(e,eint 0,eint 1)
+    )
   | EAnd (e1,e2) ->
     expr (
-      EIf(e1,e2,EInt 0)
-    ,snd e)
+      eif(e1,e2,eint 0)
+    )
   | EOr (e1,e2) ->
      expr (
-      EIf(e1,EInt 1,e2)
-     ,snd e)
+      eif(e1,eint 1,e2)
+     )
+
+let decl_func_body (f,x,e) =
+  Format.printf "Let body_"; func f; Format.printf " : expr unit :=\n"; expr e; Format.printf ".\n@."
 
 let decl_func (f,x,e) =
-  Format.printf "and ";
-  func f;
-  Format.printf " ";
-  var x;
-  Format.printf " = \n";
-  expr e;
-  Format.printf "@."
+  Format.printf "("; func f; Format.printf ", ("; var x; Format.printf ",body_"; func f;
+  Format.printf ",tt))::\n"
+
 
 let prog ((l,e),nom) =
-  Format.printf "\n(* compilé à partir du fichier %s *)@." nom;
+  Format.printf "\n(* compilé à partir du fichier %s *)\n@." nom;
   Hashtbl.clear fonctions;
   List.iter (fun ((f,_),_,_) -> Hashtbl.add fonctions f ()) l;
+
+  Format.printf "
+Definition recfun := Fun*(Var*expr X*X).\n
+Definition program := list recfun.\n
+";
+  print_decl_noms_func ();
+  print_decl_variables ();
+
+  List.iter decl_func_body l;
+
+  Format.printf "Definition prouveur_prog : program unit :=\n";
   List.iter decl_func l;
-  Format.printf "\n let expr =";
-  expr e;
-  Format.printf "\nlet () = Format.printf \"%%s@@.\" (match expr with Int 0 -> \"0\" | Int _ -> \"1\" | _ -> \"E\")";
-  Format.print_flush ()
+  Format.printf "nil.@."
+
+  (* et e ?? *)
 
 
 
-let cat_entete = "cat "^Path.entete_caml^" > "^Path.code_caml
+
+
+
 
 let main (p : Ast_pos_trees.prog) =
 
-  ignore (Unix.system cat_entete);
-
-  let fd = Unix.openfile Path.code_coq [Unix.O_WRONLY;Unix.O_CREAT] 0o640 in
-  ignore (Unix.lseek fd 0 Unix.SEEK_END);
+  let fd = Unix.openfile Path.code_coq [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
   let out = Unix.out_channel_of_descr fd in
   Format.set_formatter_out_channel out;
 

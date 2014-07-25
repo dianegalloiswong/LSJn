@@ -1,4 +1,4 @@
-let prouveur () = if !Options.trees then Prouveur_trees.main else Prouveur_caml.main
+let prouveur () = if Options.prouveur_trees() then Prouveur_trees.main else Prouveur_caml.main
 
 let bool_to_string_fr b = if b then "vrai" else "faux"
 
