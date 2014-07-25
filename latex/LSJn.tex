@@ -100,9 +100,15 @@
 \vspace{2cm}~~\\
 
 
+\tableofcontents
 
+\
 
-définition formule
+\
+
+\
+
+définition formule ?
 
 \section{Le calcul \LSJ}
 
@@ -124,7 +130,7 @@ Un séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{réfutable} si, et seulement s
 Soit $A$ une formule, elle est valide en logique intuitionniste si et seulement si le séquent $\emptyset;\emptyset\To A$ est  prouvable dans \LSJ.
 \end{cor}
 
-Les multiensembles $\G$ et $\D$, et leur signification dans la propriété \ref{propSignificationSequent} sont des éléments habituels en calcul des séquents. En revanche, $\Th$ est propre à \LSJ, et est difficile à interpréter car contrairement au cas où $\Th$ est vide, un séquent avec $\Th$ quelconque ne peut pas être représenté par une formule. Ce qu'on peut dire est que $\Th$ représente des formules gardées en réserve, non visibles directement dans le séquent (les formules de $\Th$ ne peuvent pas être formule principale), mais qui peuvent être transférées dans $\G$ et devenir visibles. On verra que les seules règles qui agissent sur $\Th$ sont celles qui concernent le connecteur $\to$.
+Les multiensembles $\G$ et $\D$, et leur signification dans la propriété \ref{propSignificationSequent} sont des éléments habituels en calcul des séquents. En revanche, $\Th$ est propre à \LSJ, et est difficile à interpréter car contrairement au cas où $\Th$ est vide, un séquent avec $\Th$ quelconque ne peut pas être représenté par une formule. On peut dire est que $\Th$ contient des formules gardées en réserve, non visibles directement dans le séquent (une formule de $\Th$ ne peut pas être \emph{formule principale}), mais qui peuvent être transférées dans $\G$ et ainsi devenir visibles. On verra que les seules règles qui agissent sur $\Th$ sont celles qui concernent le connecteur $\to$.
 
 Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \textbf{formules de gauche}, celles de $\D$ les \textbf{formules de droite}, et celles de $\Th$ les \textbf{formules de réserve} du séquent (appellations non conventionnelles).
 
@@ -263,49 +269,58 @@ On admet, une démonstration se trouvant dans l'article \cite{LSJ} :
 
 \subsection{Algorithme}
 
-\begin{figure}[!h]
-%\centering
-\def\true{\emph{vrai}}
-\def\false{\emph{faux}}
-\def\lett{\textbf{soit }}
-\def\if{\textbf{si} }
-\def\then{\textbf{alors} }
-\def\return{\textbf{retourner} }
-\def\select{\textbf{sélectionner} }
-\def\from{\textbf{dans} }
 
-\textbf{fonction} estProuvable ($\s$)
+On en déduit le procédé suivant pour essayer d'appliquer une règle à un séquent avec un formule principale donnée : on essaie de prouver les prémisses inversibles, puis l'éventuelle prémisse non inversible (dans \LSJ\ il y en a au plus une). Dès qu'on trouve qu'une prémisse inversible est non prouvable, on s'arrête : le séquent initial n'est pas prouvable non plus. Si toutes les prémisses sont prouvables, le séquent initial est également prouvable. Dans le dernier cas (seule la prémisse non inversible est non prouvable), on essaie une application de règle avec une autre formule principale.
 
-\quad \lett $\s=\Th;\G\To\D$
+Il ne reste plus qu'à décider dans quel ordre les formules qui peuvent l'être sont choisies comme formule principale pour essayer d'appliquer une règle. On choisit de traiter en premier les règles inversibles, car on sait alors qu'il n'y aura pas besoin d'essayer d'autre application de règle sur le même séquent. 
+% : après avoir examiné au pire toutes les prémisses, on sait si le séquent est prouvable.
+Parmi celles-ci, on privilégie celles qui n'ont qu'une prémisse ($\land L$ et $\lor R$) sur les autres, qui en ont deux ($\lor L$ et $\land R$).
 
-\quad \if ($\bot\in\G$) \then \return \true
+%L'algorithme est le suivant.
 
-\quad \if ($\G\cap\D\neq\emptyset$) \then \return \true
-
-\quad \if ($\G$ et $\D$ ne contiennent que des formules \emph{atomiques}) \then \return \false
-
-
-\quad \if (il existe $A\land B\in\G$) \then $\{$
-
-\quad \quad \select $H=A\land B$ \from $\G$
-
-\quad \quad \return estProuvable($prem(\land L, \s, H)$)
-
-\quad $\}$
-
-
-\quad \if (il existe $A\lor B\in\D$) \then $\{$
-
-\quad \quad \select $H=A\lor B$ \from $\D$
-
-\quad \quad \return estProuvable($prem(\lor R, \s, H)$)
-
-\quad $\}$
-
-
-\caption{Algorithme}
-\label{fig:algo}
-\end{figure}
+%\begin{figure}[!h]
+%%\centering
+%\def\true{\emph{vrai}}
+%\def\false{\emph{faux}}
+%\def\lett{\textbf{soit }}
+%\def\if{\textbf{si} }
+%\def\then{\textbf{alors} }
+%\def\return{\textbf{retourner} }
+%\def\select{\textbf{sélectionner} }
+%\def\from{\textbf{dans} }
+%
+%\textbf{fonction} estProuvable ($\s$)
+%
+%\quad \lett $\s=\Th;\G\To\D$
+%
+%\quad \if ($\bot\in\G$) \then \return \true
+%
+%\quad \if ($\G\cap\D\neq\emptyset$) \then \return \true
+%
+%\quad \if ($\G$ et $\D$ ne contiennent que des formules \emph{atomiques}) \then \return \false
+%
+%
+%\quad \if (il existe $A\land B\in\G$) \then $\{$
+%
+%\quad \quad \select $H=A\land B$ \from $\G$
+%
+%\quad \quad \return estProuvable($prem(\land L, \s, H)$)
+%
+%\quad $\}$
+%
+%
+%\quad \if (il existe $A\lor B\in\D$) \then $\{$
+%
+%\quad \quad \select $H=A\lor B$ \from $\D$
+%
+%\quad \quad \return estProuvable($prem(\lor R, \s, H)$)
+%
+%\quad $\}$
+%
+%
+%\caption{Algorithme}
+%\label{fig:algo}
+%\end{figure}
 
 
 
@@ -709,10 +724,19 @@ $f\;;\;\emptyset \quad\To\quad p_{1} \land p_{2} \land ... \land p_{n} \;,\; \ln
 
 
 
+\section{Quelques explications sur l'implémentation}
+
+\subsection{Précalculs : indexation, classes, priorités}
+
+\subsection{Gestion efficace des formules du séquent : insertion et suppression, choix de la formule principale}
 
 
 
+\section{Vers une recherche de preuve compilée et certifiée}
 
+\subsection{Un langage simple pour la certification}
+
+\subsection{Compilation : des fonctions pour chaque sous-formule}
 
 
 
