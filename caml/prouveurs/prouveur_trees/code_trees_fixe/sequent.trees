@@ -204,3 +204,7 @@ let rm_d arg =
 let empty_seq arg =
   <  <null,null>  ,  < <null,null> , <0,<0,0>> >  >
 
+let programme arg =
+  let seq = call empty_seq null in
+  let seq = call ajout_formule_initiale seq in
+  call prouvable seq

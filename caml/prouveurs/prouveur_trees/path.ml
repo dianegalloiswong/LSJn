@@ -19,12 +19,18 @@ let liste_code_trees_fixe = List.map (fun s -> path_prouveur_trees^"code_trees_f
 
 
 (* compilateur vers caml *)
+let entete_caml = path_prouveur_trees^"code_trees_fixe/entete_caml.ml"
 let code_caml = path_tmp_trees^"code_caml.ml"
 let code_caml_executable = path_tmp_trees^"code_caml"
 let code_caml_sortie = path_tmp_trees^"code_caml_sortie.txt"
 let code_caml_errors = path_tmp_trees^"code_caml_errors.txt"
-let entete_caml = path_prouveur_trees^"code_trees_fixe/entete_caml.ml"
+
 
 
 (* vers coq *)
 let code_coq = path_tmp_trees^"code_coq.txt"
+
+
+(* directement en caml *)
+let entete_caml_direct = path_prouveur_trees^"code_trees_fixe/entete_caml_direct.ml"
+let code_caml_direct = path_tmp_trees^"code_caml_direct.ml"

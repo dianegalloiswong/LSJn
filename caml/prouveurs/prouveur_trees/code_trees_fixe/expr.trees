@@ -5,6 +5,10 @@ in
 (*call nth <5,l>*)
 (*call length l*)
 
+(*
 let seq = call empty_seq null in
 let seq = call ajout_formule_initiale seq in
 call prouvable seq
+*)
+call programme null
+(*programme se trouve a la fin de sequent.trees*)

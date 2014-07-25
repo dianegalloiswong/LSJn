@@ -29,13 +29,14 @@ let main f =
   Init_sf_classe.test f;
   Init_priorite.main ();
   Cote.remplir ();
-  Make_fonctions_sf.remplir_fonctions ();
+  Make_fonctions_sf.main ();
+  Make_call_num.main ();
 
   Format.printf "*)\n@.";
 
-  List.iter (fun df -> Print_ast_trees.decl_func df;Format.printf"@.") (List.rev !Make_fonctions_sf.fonctions);
+  List.iter (fun df -> Print_ast_trees.decl_func df;Format.printf"@.") (List.rev !Fonctions_compilees.fonctions);
 
-  List.iter (fun df -> Print_ast_trees.decl_func df;Format.printf"@.") (List.rev (Make_call_num.fonctions_call ()));
+ (* List.iter (fun df -> Print_ast_trees.decl_func df;Format.printf"@.") (List.rev (Make_call_num.fonctions_call ()));*)
 
   Format.printf "\n(****************************************)\n\n(* code fixe *)\n@.";
 

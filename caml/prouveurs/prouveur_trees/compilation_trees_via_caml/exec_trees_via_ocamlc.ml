@@ -1,8 +1,8 @@
 open Path
-
+(*
 let compile_et_execute = "ocamlc -w -26 -o "^code_caml_executable^" "^code_caml
   ^"; ./"^code_caml_executable^" > "^code_caml_sortie^" 2> "^code_caml_errors
-
+*)
 let sys_compile = "ocamlc -w -26 -o "^code_caml_executable^" "^code_caml
 let sys_exec = "./"^code_caml_executable^" > "^code_caml_sortie(*^" 2> "^code_caml_errors*)
 
