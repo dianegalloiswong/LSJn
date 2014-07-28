@@ -30,6 +30,7 @@ let print_decl_variables () =
 let fonctions = Hashtbl.create 17
 
 let print_decl_noms_func () =
+  Format.printf "Definition fonction_inexistante := in_Fun 0.\n";
   ignore (Hashtbl.fold (fun f () i ->
     Format.printf "Definition func_%s := in_Fun %d.\n" f i; i+1
   ) fonctions 1) (* 0 réservé pour fonction inexistante *)
@@ -38,7 +39,7 @@ let print_decl_noms_func () =
 let var (x,_) = 
 if not (List.mem x variables_liste) then Format.eprintf "trees vers coq : variable %s non répertoriée@." x;
 Format.printf "var_%s" x
-let func (f,_) = Format.print_string (if Hashtbl.mem fonctions f then "func_"^f else "in_Fun 0")
+let func (f,_) = Format.print_string (if Hashtbl.mem fonctions f then "func_"^f else "fonction_inexistante")
 
 
 
@@ -105,6 +106,10 @@ let rec expr e = match (fst e) with
     Format.printf ") (\n";
     expr e2;
     Format.printf ")"
+ | ESucc e ->
+   Format.printf "expr_succ tt (";
+   expr e;
+   Format.printf ")"
 
   (***)
 
@@ -120,10 +125,7 @@ let rec expr e = match (fst e) with
     expr (
       eand(eleq(e1,e2),eleq(e2,e1))
     )
-  | ESucc e ->
-    expr (
-      ecall ("succ",e)
-    )
+
   | ENot e ->
     expr (
       eif(e,eint 0,eint 1)
@@ -150,10 +152,10 @@ let prog ((l,e),nom) =
   Hashtbl.clear fonctions;
   List.iter (fun ((f,_),_,_) -> Hashtbl.add fonctions f ()) l;
 
-  Format.printf "
+(*  Format.printf "
 Definition recfun := Fun*(Var*expr X*X).\n
 Definition program := list recfun.\n
-";
+";*)
   print_decl_noms_func ();
   print_decl_variables ();
 
@@ -173,7 +175,7 @@ Definition program := list recfun.\n
 
 let main (p : Ast_pos_trees.prog) =
 
-  let fd = Unix.openfile Path.code_coq [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
+  let fd = Unix.openfile (Path.code_coq()) [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
   let out = Unix.out_channel_of_descr fd in
   Format.set_formatter_out_channel out;
 

@@ -1,6 +1,6 @@
-(*
-operations_sequent.ml
+(* fichier sequent *)
 
+(*
    sequent : <formules,reste>
    formules : <G,D>
    G/D : liste de <indice,a> où a : <priorite,sf>

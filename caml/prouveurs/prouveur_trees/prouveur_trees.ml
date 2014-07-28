@@ -11,10 +11,11 @@ let exec_maison prog =
 let main f =
   Format.printf "compilation vers trees : %!";
   Time.time Compile.main f;
-  let prog = Analyser_trees.main Path.code_trees in
+  let prog = Analyser_trees.main (Path.code_trees()) in
 
   Compile_trees_vers_coq.main prog;
-  Compile_caml_direct.main ();
+  (*Exec_bin.main ();*)
+  (*Compile_caml_direct.main ();*)
 
   if !Options.trees_via_caml then
     Exec_trees_via_ocamlc.main prog

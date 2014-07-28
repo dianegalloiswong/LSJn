@@ -26,6 +26,9 @@ TARGET=native
 main:
 	$(OCAMLBUILD) main.$(TARGET)
 
+bin:
+	$(OCAMLBUILD) exec_bin.$(TARGET)
+
 trees:
 	$(OCAMLBUILD) main_trees.$(TARGET)
 

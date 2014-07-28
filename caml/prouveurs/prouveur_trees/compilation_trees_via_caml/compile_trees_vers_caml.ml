@@ -121,13 +121,13 @@ let prog ((l,e),nom) =
 
 
 
-let cat_entete = "cat "^Path.entete_caml^" > "^Path.code_caml
+let cat_entete = "cat "^Path.entete_caml^" > "^Path.code_caml()
 
 let main (p : Ast_pos_trees.prog) =
 
   ignore (Unix.system cat_entete);
 
-  let fd = Unix.openfile Path.code_caml [Unix.O_WRONLY;Unix.O_CREAT] 0o640 in
+  let fd = Unix.openfile (Path.code_caml()) [Unix.O_WRONLY;Unix.O_CREAT] 0o640 in
   ignore (Unix.lseek fd 0 Unix.SEEK_END);
   let out = Unix.out_channel_of_descr fd in
   Format.set_formatter_out_channel out;

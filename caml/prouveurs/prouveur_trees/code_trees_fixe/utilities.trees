@@ -1,6 +1,6 @@
-(*
-utilities.ml
+(* fichier utilities *)
 
+(*
 equal : <x,y> -> booléen x=y égalité structurelle
 compare : <x,y> -> booléen x<=y. null < tous les entiers par ordre croissants < tous les couples par ordre lexicographique
 

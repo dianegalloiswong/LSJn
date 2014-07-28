@@ -3,7 +3,8 @@ open Ast_ILTP
 
 
 
-let traite_attendus l = Some (List.fold_left (fun (b1,b2) -> function IL b -> (b,b||b2) | CL b -> (b1,b)) (false,false) l)
+(*let traite_attendus l = Some (List.fold_left (fun (b1,b2) -> function IL b -> (b,b||b2) | CL b -> (b1,b)) (false,false) l)*)
+let traite_attendus l = List.fold_left (fun c -> function IL b -> Some b | CL _ -> c) None l
 
 
 let traite_fact fopt = function

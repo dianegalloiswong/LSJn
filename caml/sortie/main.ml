@@ -1,17 +1,28 @@
 
-
-let formule = ref None
-let attendu = ref None
+let formule_details = ref None
+(*let formule = ref None
+let attendu = ref None*)
 let ma_liste = ref false
 let ma_liste_courte = ref false
 let arg1 = ref 0
 
 (*let details () = Options.preuves := true; Options.cmods := true*)
 
+(*let tiroirs_spec = Arg.Tuple [ Arg.Set_int arg1;
+  Arg.Int (fun arg2 -> formule := Some (Tiroirs.main !arg1 arg2); attendu := Some (Tiroirs.attendu !arg1 arg2)) ]*)
 let tiroirs_spec = Arg.Tuple [ Arg.Set_int arg1;
-  Arg.Int (fun arg2 -> formule := Some (Tiroirs.main !arg1 arg2); attendu := Some (Tiroirs.attendu !arg1 arg2)) ]
+  Arg.Int (fun arg2 -> formule_details := Some (
+    Tiroirs.main !arg1 arg2,
+    Some (!arg1 > arg2),
+    "ph_"^(string_of_int !arg1)^"_"^(string_of_int arg2)
+  )) ]
 
-let eq_boucle n = formule := Some (Eq_boucle.main n); attendu := Some (Eq_boucle.attendu n)
+(*let eq_boucle n = formule := Some (Eq_boucle.main n); attendu := Some (Eq_boucle.attendu n)*)
+let eq_boucle n = formule_details := Some (
+  Eq_boucle.main n,
+  Some false,
+  "eqb_"^(string_of_int n)
+)
 
 let options = [
   "-trees", Arg.Set Options.trees, ": utilise le prouveur \"trees\" au lieu du prouveur caml";
@@ -52,7 +63,7 @@ let faire_fichier nom =
   if Options.affiche_nom_fichier() then Format.printf "%s@." nom;
   try
     let att,f = Analyser_ILTP.main nom in
-    Exec_formule.main att f
+    Exec_formule.main (f,att,nom)
   with Exit -> Format.printf "Exit.@."
 
 
@@ -83,15 +94,18 @@ let () = Arg.parse options (fun nom -> noms := nom:: !noms) usage
 let () = List.iter faire (List.rev !noms)
 
 
-let () = match !formule with Some f -> Exec_formule.main !attendu f | None -> ()
+
+
+
+let () = match !formule_details with Some f -> Exec_formule.main f | None -> ()
 
 let () =
   if !ma_liste then
-    List.iter2 Exec_formule.main Quelques_formules.l_att Quelques_formules.l
+    List.iter Exec_formule.main Quelques_formules.l
 
 let () =
   if !ma_liste_courte then
-    List.iter2 Exec_formule.main Quelques_formules.l1_att Quelques_formules.l1
+    List.iter Exec_formule.main Quelques_formules.l1
 
   
 let () = 

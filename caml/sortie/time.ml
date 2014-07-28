@@ -8,17 +8,18 @@ exception Temps_ecoule
 let echoues = ref 0
 let non_traites = ref 0
 
+let toplevel = ref true
 
-let time f x =
-if Options.time_on() then
-    let start = Unix.gettimeofday () in
-    start_actuel := start;
-    appels := 0;
- try
+let time f x = if Options.time_on() then begin
+  let toplevel_loc = !toplevel in toplevel:=false;
+  let start = Unix.gettimeofday () in
+  start_actuel := start;
+  appels := 0;
+  try
     let res = f x in
     let stop = Unix.gettimeofday () in
     let temps = (stop -. start) in
-    temps_total := !temps_total +. temps;
+    if toplevel_loc then temps_total := !temps_total +. temps;
     if Options.affiche_temps_un() then
       begin
       if !appels > 0 then
@@ -26,9 +27,10 @@ if Options.time_on() then
       else
 	Format.printf "%fs@." temps
       end;
+    toplevel:=toplevel_loc;
     res
- with Temps_ecoule -> Format.printf "temps écoulé (%fs), %d appels à prouvable vus@." !Options.temps_max !appels; raise Temps_ecoule
-else f x
+  with Temps_ecoule -> Format.printf "temps écoulé (%fs), %d appels à prouvable vus@." !Options.temps_max !appels; toplevel:=toplevel_loc; raise Temps_ecoule
+end else f x
 
 
 

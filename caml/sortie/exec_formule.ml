@@ -2,25 +2,27 @@ let prouveur () = if Options.prouveur_trees() then Prouveur_trees.main else Prou
 
 let bool_to_string_fr b = if b then "vrai" else "faux"
 
-let main att_opt f =
+let main (f,att_opt,nom) =
+  Path.set_nom nom;
   if Options.affiche_formule() then Format.printf "%s@." (To_string.formule f);
   if !Options.indexation then (Init_sf_classe.test f)
   else 
-    (try
-       Time.time (fun () ->
-	 let rep = (prouveur ()) f
-	 in
-	 if Options.affiche_rep() then Rep.print rep (*Format.printf "%s@." (bool_to_string_fr rep)*);
-	 match att_opt with
-	   | None -> ()
-	   | Some (batt,_) ->
-	     let b = Rep.est_vrai rep in
-	     if b <> batt then
-	       Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %s    attendu : %s@." (bool_to_string_fr b) (bool_to_string_fr batt)
+    begin
+    try
+      Time.time (fun () ->
+	let rep = (prouveur ()) f in
+	if Options.affiche_rep() then Rep.print rep (*Format.printf "%s@." (bool_to_string_fr rep)*);
+	match att_opt with
+	  | None -> ()
+	  | Some batt ->
+	    let b = Rep.est_vrai rep in
+	    if b <> batt then
+	      Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %s    attendu : %s@." (bool_to_string_fr b) (bool_to_string_fr batt)
        ) ()
-     with Time.Temps_ecoule -> () )
-  ; if not !Options.rien_afficher then Format.printf "@."
-
+    with Time.Temps_ecoule -> ()
+    end;
+  if not !Options.rien_afficher then Format.printf "@.";
+  Path.nom := Path.nom_defaut
 
 
 

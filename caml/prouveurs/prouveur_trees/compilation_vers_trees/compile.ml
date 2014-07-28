@@ -10,15 +10,15 @@ let string_cat =
 *)
 
 
-let string_cat =
+let string_cat () =
   (List.fold_left (fun s s1 -> s^" "^s1) "cat" liste_code_trees_fixe)
-    ^" >> "^code_trees
+    ^" >> "^code_trees()
 
 
 
 
 let main f =
-  let fd = Unix.openfile (*fonctions_sf*)code_trees [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
+  let fd = Unix.openfile (*fonctions_sf*)(code_trees()) [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
   let out = Unix.out_channel_of_descr fd in
   Format.set_formatter_out_channel out;
 
@@ -43,4 +43,4 @@ let main f =
   Format.set_formatter_out_channel stdout;
   Unix.close fd;
 
-  ignore (Unix.system string_cat)
+  ignore (Unix.system (string_cat()))
