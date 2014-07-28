@@ -1,6 +1,24 @@
 open Ast_pos_trees
 open Tree
 
+let prefixe = "
+Require Import Arith.
+Require Import List.
+Require Import String.
+
+Require Import env.
+
+Require Import fun_defs.
+Require Import fam.
+Require Import fam_eval.
+Require Import fam_compiler.
+Require Import fam_print.
+"
+let suffixe = "
+Let code := compile_code prouveur_prog (CALL func_programme NULL).
+
+Eval compute in fam_linstr_string code.
+"
 
 
 let variables_liste = [
@@ -148,7 +166,10 @@ let decl_func (f,x,e) =
 
 
 let prog ((l,e),nom) =
-  Format.printf "\n(* compilé à partir du fichier %s *)\n@." nom;
+
+  Format.printf "\n(* compilé à partir du fichier %s *)\n" nom;
+  (match !Path.formule with None -> () | Some f -> Format.printf "\n(* formule : %s *)@." (To_string.formule f));
+
   Hashtbl.clear fonctions;
   List.iter (fun ((f,_),_,_) -> Hashtbl.add fonctions f ()) l;
 
@@ -156,20 +177,24 @@ let prog ((l,e),nom) =
 Definition recfun := Fun*(Var*expr X*X).\n
 Definition program := list recfun.\n
 ";*)
+
+  Format.print_string prefixe;
+
+  Format.printf "@.";
   print_decl_noms_func ();
+  Format.printf "@.";
   print_decl_variables ();
+  Format.printf "@.";
 
   List.iter decl_func_body l;
 
   Format.printf "Definition prouveur_prog : program unit :=\n";
   List.iter decl_func l;
-  Format.printf "nil.@."
+  Format.printf "nil.@.";
 
-  (* et e ?? *)
+  Format.print_string suffixe;
 
-
-
-
+  Format.printf "@."
 
 
 

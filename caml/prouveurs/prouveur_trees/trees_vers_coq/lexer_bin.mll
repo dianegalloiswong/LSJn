@@ -11,6 +11,8 @@
     lexbuf.lex_curr_p <-
       { pos with pos_lnum = pos.pos_lnum + 1; pos_bol = pos.pos_cnum }
 
+  let partie_principale = ref false
+
 }
 
 
@@ -22,9 +24,9 @@ let ident = (alpha | '_') (alpha | chiffre | '_')*
 
 
 let space = [' ' '\t']
-
+(*
 rule debut = parse
-  | '\"'    { token lexbuf }
+  | "\""    { token lexbuf }
   | '\n'    { newline lexbuf; debut lexbuf }
   | _       { debut lexbuf }
 
@@ -32,9 +34,9 @@ and fin = parse
   | eof     { EOF }
   | '\n'    { newline lexbuf; fin lexbuf }
   | _       { fin lexbuf }
-
-and token = parse
-(*  | '\"'    { fin lexbuf }*)
+*)
+rule token = parse
+  | "\""    { partie_principale := not !partie_principale; token lexbuf }
   | '\n'    { newline lexbuf; token lexbuf }
   | space+  { token lexbuf }
 
@@ -62,7 +64,7 @@ and token = parse
   | entier as s  { INT (int_of_string s) }
 
   | eof     { EOF }
-  | _ as c  { raise (Lexing_error c) }
+  | _ as c  { if !partie_principale then raise (Lexing_error c) else token lexbuf }
 
 
 

@@ -15,7 +15,8 @@ let fichier_seul s =
     else aux (n-1)
   in aux (len-1)
 let set_nom s = nom := fichier_seul s
-
+let formule = ref (None : Def.formule option)
+let reset () = nom:=nom_defaut; formule:=None
 
 
 
@@ -44,7 +45,7 @@ let code_caml_sortie () = path_tmp_trees^(!nom)^"_caml_sortie.txt"
 
 
 (* vers coq *)
-let code_coq () = path_tmp_trees^(!nom)^"_coq.txt"
+let code_coq () = path_tmp_trees^(!nom)^".v"
 (*
 let bin () = path_tmp_trees^(!nom)^"_binaire.txt"
 let bin_sortie () = path_tmp_trees^(!nom)^"_binaire_sortie.txt"

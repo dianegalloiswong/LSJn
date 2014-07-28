@@ -3,7 +3,7 @@ let prouveur () = if Options.prouveur_trees() then Prouveur_trees.main else Prou
 let bool_to_string_fr b = if b then "vrai" else "faux"
 
 let main (f,att_opt,nom) =
-  Path.set_nom nom;
+  Path.set_nom nom; Path.formule:=Some f;
   if Options.affiche_formule() then Format.printf "%s@." (To_string.formule f);
   if !Options.indexation then (Init_sf_classe.test f)
   else 
@@ -22,7 +22,7 @@ let main (f,att_opt,nom) =
     with Time.Temps_ecoule -> ()
     end;
   if not !Options.rien_afficher then Format.printf "@.";
-  Path.nom := Path.nom_defaut
+  Path.reset ()
 
 
 
