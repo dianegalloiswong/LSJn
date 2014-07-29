@@ -1,49 +1,41 @@
 (*entete_caml_direct*)
 
-(*equal ?*)
-(* 
-compare = compare
-pred n = n-1
-length = List.length
-mem
-sort
-nth
-*)
-
 (* utilities *)
+
+let inexistant _ = assert false
 
 let rec rm x = function
   | [] -> assert false
   | h::t when h=x -> t
   | h::t -> h::(rm x t)
 
-let rec mem_inf (n,x) = function
-  | [] -> false
-  | (i,y)::_ when i<=n && y=x -> true
-  | _::t -> mem_inf (n,x) t
+let mem_inf (n,x) l = List.exists (fun (i,y) -> i<=n && y=x) l
 
 
 (* sequent *)
 
-type sequent = { mutable g : couple list; mutable n : int; mutable d : couple list; mutable fauxL : bool; mutable id : bool }
+type couple = int*int
+type sequent = { 
+  mutable g : (int*couple) list; 
+  mutable d : (int*couple) list; 
+  mutable cl_g : couple list; 
+  mutable cl_d : couple list; 
+  mutable n : int; 
+  mutable fauxL : bool; 
+  mutable id : bool 
+}
 
 let seq = { g=[]; d=[]; n=0; cl_g=[]; cl_d=[]; fauxL=false; id=false }
 
-(***)
-(*
-let n_of_seq () = seq.n
-let g_of_seq () = seq.g
-let d_of_seq () = seq.d
-*)
-let rm_ax () = seq.fauxL<-false; seq.id<-false
-(*...*)
 
+let n_of_seq () = seq.n
 
 let incr_n () =
   seq.n <- seq.n + 1;
-  if mem (seq.n,0) seq.cl_g then seq.fauxL <- true
-
+  if List.mem (seq.n,0) seq.cl_g then seq.fauxL <- true
 let decr_n () = seq.n <- seq.n - 1
+
+let rm_ax () = seq.fauxL<-false; seq.id<-false
 
 let add_cl_g (i,cl) =
   seq.cl_g <- (i,cl)::seq.cl_g;
@@ -69,10 +61,6 @@ let rm_d ((i,a),cl) =
   seq.d <- rm (i,a) seq.d;
   rm_cl_d (i,cl)
 
-let programme () =
-  ajout_formule_initiale ();
-  prouvable ()
-
 
 (* plus_forte_priorite *)
 
@@ -82,7 +70,7 @@ let plus_forte_priorite () =
   ) (0,(7,0)) seq.g in
   let (i,(p,sf)) = List.fold_left (fun ( (_,(pc,_)) as xc) ( (i,(p,_)) as x) ->
     if i=seq.n && p<pc then x else xc
-  ) x seq.g in
+  ) x seq.d in
   (p,(i,sf))
 
 
@@ -96,19 +84,23 @@ let all_imp_d () =
 let nb_imp_g () = List.length (all_imp_g ())
 let nb_imp_d () = List.length (all_imp_d ())
 
-let nth_imp_g k = List.nth (List.sort compare (all_imp_g ())) k
-let nth_imp_d k = List.nth (List.sort compare (all_imp_d ())) k
-
+let nth_imp_g k = 
+  let (i,(p,sf)) = List.nth (List.sort compare (all_imp_g ())) k
+  in (i,sf)
+let nth_imp_d k = 
+  let (i,(p,sf)) = List.nth (List.sort compare (all_imp_d ())) k
+  in (i,sf)
 
 (* prouvable *)
 
-let rec prouvable () =
+let appels = ref 0
+let rec prouvable () = incr appels;
   if seq.fauxL || seq.id then true else
   let (p,i_sf) = plus_forte_priorite () in
   if p=1 || p=2 then inv1prem i_sf
   else if p=3 || p=4 then inv2prem i_sf
   else if p=5 then imp ()
-  else 0
+  else if p=6 then false else assert false
 
 and inv1prem (i,sf) =
   call_prem1 (sf,i);
@@ -186,7 +178,11 @@ and imp_aux_d k nb_d =
 and imp () =
   let nb_g = nb_imp_g () in
   let nb_d = nb_imp_d () in
+  imp_aux_g 0 nb_g nb_d
 
 
+and programme () =
+  ajout_formule_initiale ();
+  prouvable ()
 
 

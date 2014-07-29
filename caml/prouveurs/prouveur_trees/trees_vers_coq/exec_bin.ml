@@ -25,6 +25,9 @@ let analyser nom =
       raise exn
 
 
-let (*main*) () =
-  let prog = analyser Path.bin in
+let main nom =
+  let prog = analyser (Path.bin nom) in
   Machine_abstraite.main prog
+
+let () = Arg.parse [] (fun nom -> main nom) ""
+

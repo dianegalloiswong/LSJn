@@ -118,25 +118,34 @@ let decl_func (f,x,e) =
 
 
 
-let cat_entete = "cat "^Path.entete_caml_direct^" > "^Path.code_caml_direct()
+let cat_entete () = "cat "^Path.entete_caml_direct^" >> "^Path.code_caml_direct()
 
 let main () =
 
-  ignore (Unix.system cat_entete);
+  (*(match !Path.formule with None -> () | Some f -> Format.printf "\n(* formule : %s *)@." (To_string.formule f));*)
 
-  let fd = Unix.openfile (Path.code_caml_direct()) [Unix.O_WRONLY;Unix.O_CREAT] 0o640 in
-  ignore (Unix.lseek fd 0 Unix.SEEK_END);
+  
+
+  let fd = Unix.openfile (Path.code_caml_direct()) [Unix.O_WRONLY;Unix.O_CREAT;Unix.O_TRUNC] 0o640 in
+  (*ignore (Unix.lseek fd 0 Unix.SEEK_END);*)
   let out = Unix.out_channel_of_descr fd in
   Format.set_formatter_out_channel out;
 
+  (match !Path.formule with None -> () | Some f -> Format.printf "\n(* formule : %s *)@." (To_string.formule f));
+
+  ignore (Unix.system (cat_entete()));
+  ignore (Unix.lseek fd 0 Unix.SEEK_END);
+
   Format.printf "\n(* compilé à partir de la formule *)@.";
 
+  Hashtbl.clear fonctions;
   List.iter (fun df -> decl_func df;Format.printf"@.") (List.rev !Fonctions_compilees.fonctions);
 
 (*  List.iter (fun df -> decl_func df;Format.printf"@.") (List.rev (Make_call_num.fonctions_call ()));*)
 
   Format.printf "\nlet expr = programme ()\n";
   Format.printf "\nlet () = Format.printf \"%%s@@.\" (if expr then \"1\" else \"0\")";
+  Format.printf "\nlet () = Format.printf \"%%d@@.\" !appels";
   Format.printf "@.";
 
   Format.set_formatter_out_channel stdout;

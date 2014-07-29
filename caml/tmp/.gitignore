@@ -1,3 +1,6 @@
-# Ignore everything in this directory except this file
+# Ignore every file in this directory except this file and files .gitkeep
 *
 !.gitignore
+!*/
+!*.gitkeep
+

@@ -1,9 +1,16 @@
-let prouveur () = if Options.prouveur_trees() then Prouveur_trees.main else Prouveur_caml.main
+let prouveur () = 
+  if Options.prouveur_trees() then 
+    Prouveur_trees.main 
+  else if !Options.compile_caml then
+    Prouveur_compile_caml.main
+  else
+    Prouveur_caml.main
 
 let bool_to_string_fr b = if b then "vrai" else "faux"
 
 let main (f,att_opt,nom) =
   Path.set_nom nom; Path.formule:=Some f;
+  if nom<>"" && Options.affiche_nom_formule() then Format.printf "%s@." !Path.nom;
   if Options.affiche_formule() then Format.printf "%s@." (To_string.formule f);
   if !Options.indexation then (Init_sf_classe.test f)
   else 
@@ -17,7 +24,7 @@ let main (f,att_opt,nom) =
 	  | Some batt ->
 	    let b = Rep.est_vrai rep in
 	    if b <> batt then
-	      Format.printf "!!!!!!!!!!!!!!!!!    obtenu : %s    attendu : %s@." (bool_to_string_fr b) (bool_to_string_fr batt)
+	      Format.printf "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!! %s\n!! obtenu : %s    attendu : %s\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@." !Path.nom (bool_to_string_fr b) (bool_to_string_fr batt)
        ) ()
     with Time.Temps_ecoule -> ()
     end;

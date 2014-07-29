@@ -26,6 +26,7 @@ let eq_boucle n = formule_details := Some (
 
 let options = [
   "-trees", Arg.Set Options.trees, ": utilise le prouveur \"trees\" au lieu du prouveur caml";
+  "-compile-caml", Arg.Set Options.compile_caml, ": génère un code caml dépendant de la formule et le compile avec ocamlc";
   "-trees-via-caml", Arg.Set Options.trees_via_caml, ": génère le code \"trees\", le compile en caml et l'exécute avec ocamlc";
 
   (* général *)

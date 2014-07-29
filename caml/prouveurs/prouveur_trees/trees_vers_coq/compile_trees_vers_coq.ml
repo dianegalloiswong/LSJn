@@ -17,7 +17,7 @@ Require Import fam_print.
 let suffixe = "
 Let code := compile_code prouveur_prog (CALL func_programme NULL).
 
-Eval compute in fam_linstr_string code.
+Eval vm_compute in fam_linstr_string code.
 "
 
 

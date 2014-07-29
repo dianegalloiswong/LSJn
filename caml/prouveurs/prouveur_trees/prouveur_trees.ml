@@ -8,16 +8,15 @@ let exec_maison prog =
     | _ -> Format.eprintf "Le résultat de l'exécution n'est pas un booléen@."; Print_ast_trees.tree t; raise Exit
 
 
-let main f =
-  Format.printf "compilation vers trees : %!";
-  Time.time Compile.main f;
+let main (f : Def.formule) : bool =
+  if Options.affiche_temps_etapes() then Format.printf "compilation vers trees : %!";
+  Time.time Compile_vers_trees.main f;
   let prog = Analyser_trees.main (Path.code_trees()) in
 
   Compile_trees_vers_coq.main prog;
   (*Exec_bin.main ();*)
-  (*Compile_caml_direct.main ();*)
-
-  if !Options.trees_via_caml then
+  
+  (*if !Options.trees_via_caml then
     Exec_trees_via_ocamlc.main prog
-  else
+  else*)
     exec_maison prog
