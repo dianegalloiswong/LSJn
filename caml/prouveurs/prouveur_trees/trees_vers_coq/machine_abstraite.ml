@@ -33,7 +33,7 @@ type instr =
   | HALT
 
 (* STOP = LDA 0::UJP::nil *)
-exception Halt of stack
+exception Halt of int*stack
 
 let step t_instr (n,e,s) = match t_instr.(n) with
   | LDA a -> (n+1,e,A a::s)
@@ -67,15 +67,16 @@ let step t_instr (n,e,s) = match t_instr.(n) with
     (n+1,e,V(Some(Int(v-1)))::s)     |_->assert false)
   | LEQ -> (match s with V(Some(Int v))::V(Some(Int w))::s ->
     (n+1,e,V(Some(Int(if w<=v then 1 else 0)))::s)     |_->assert false)
-  | HALT -> raise (Halt s)
+  | HALT -> raise (Halt (n,s))
 
 
 
 let main (l : instr list) =
   let t_instr = Array.of_list l in
-  let rec aux state = aux (step t_instr state) in
-  let s = try aux (1,Env.empty,[]) with Halt s -> s in
-  match s with
+  let rec loop_step state = loop_step (step t_instr state) in
+  let n,s = try loop_step (1,Env.empty,[]) with Halt (n,s) -> n,s in
+  if n=0 then match s with
     | [V(Some t)] -> Format.printf "resultat de l'execution du binaire : "; Tree.print t; Format.printf "@."
     | [_] -> Format.eprintf "execution du binaire : le resultat n'est pas un arbre@."
     | _ -> Format.eprintf "execution du binaire : la pile n'est pas de taille 1@."
+  else Format.eprintf "execution du binaire : ne termine pas sur l'instruction 0@."

@@ -85,6 +85,10 @@ let rec expr = function
     Format.printf "(";
     expr e;
     Format.printf " +1)"
+  | EPred e ->
+    Format.printf "(";
+    expr e;
+    Format.printf " -1)"
   | ENot e ->
     Format.printf "not (";
     expr e;

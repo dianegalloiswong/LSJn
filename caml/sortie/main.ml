@@ -69,7 +69,7 @@ let faire_fichier nom =
 
 
 let pointp nom = let n = String.length nom in nom.[n-2]='.' && nom.[n-1]='p'
-
+(*
 let rec faire_d dnom =
   let dh = Unix.opendir dnom in
   try
@@ -86,14 +86,16 @@ and faire nom =
 	faire_fichier nom
       | Unix.S_DIR -> faire_d nom
       | _ -> ()
-
+*)
 
 
 let noms = ref []
 let () = Arg.parse options (fun nom -> noms := nom:: !noms) usage
 
-let () = List.iter faire (List.rev !noms)
-
+(*let () = List.iter faire (List.rev !noms)*)
+let () = List.iter (fun nom ->
+  if pointp nom && Time.faire_fichier nom then faire_fichier nom
+) (List_files.main !noms)
 
 
 

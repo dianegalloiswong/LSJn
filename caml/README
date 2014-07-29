@@ -1,3 +1,7 @@
+
+à faire : rétablir Seq.print et Seq.fold_vars, preuves et c-m avec le prouveur simple
+
+
 ajout d'un prouveur utilisant le langage "trees" terminé. On l'utilise en donnant le flag -trees
 (les fichiers dans ce langage ont pour l'instant l'extension .ml pour la coloration, mais sont situés exclusivement dans code_trees_fixe et code_trees_genere)
 La partie "Description des fichiers" du README n'est pas à jour.

@@ -136,10 +136,12 @@ let rec reord_imp_d k nb = D.reord_imp s.n k s.d
 
 let var_g () =
   (*if !Options.cmods then*)
+(*
     G.fold_vars s.n (fun l (i,a) -> match !sf.(a) with
       | CVar x -> x::l
       | _ -> l
     ) [] s.g
+*)assert false
   (*else []*)
 
 
@@ -168,9 +170,10 @@ let choix_formule () =
 
 
 
-let print () =
+let print () =assert false (*
   Format.printf "{   ";
   G.print s.g;
   Format.printf "}  =>(%d)  {   " s.n;
   D.print s.d;
   Format.printf "}"
+			   *)

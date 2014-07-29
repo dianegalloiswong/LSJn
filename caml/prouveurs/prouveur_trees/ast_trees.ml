@@ -13,14 +13,15 @@ type expr =
   | ECall of func*expr
   | EIsnull of expr
   | EIsint of expr
-  | EIsnode of  expr
   | ELeq of expr*expr
   | EIf of expr*expr*expr
+  | ESucc of expr
+  | EPred of expr
 
   (*nouveaux*)
   | EEq of expr*expr (* égalité structurelle *)
+  | EIsnode of  expr
   | ELess of expr*expr
-  | ESucc of expr
   | ENot of expr
   | EAnd of expr*expr
   | EOr of expr*expr
