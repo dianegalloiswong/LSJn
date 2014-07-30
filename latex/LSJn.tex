@@ -278,64 +278,57 @@ Parmi celles-ci, on privilégie celles qui n'ont qu'une prémisse ($\land L$ et $\
 
 %L'algorithme est le suivant.
 
-%\begin{figure}[!h]
-%%\centering
-%\def\true{\emph{vrai}}
-%\def\false{\emph{faux}}
-%\def\lett{\textbf{soit }}
-%\def\if{\textbf{si} }
-%\def\then{\textbf{alors} }
-%\def\return{\textbf{retourner} }
-%\def\select{\textbf{sélectionner} }
-%\def\from{\textbf{dans} }
-%
-%\textbf{fonction} estProuvable ($\s$)
-%
-%\quad \lett $\s=\Th;\G\To\D$
-%
-%\quad \if ($\bot\in\G$) \then \return \true
-%
-%\quad \if ($\G\cap\D\neq\emptyset$) \then \return \true
-%
-%\quad \if ($\G$ et $\D$ ne contiennent que des formules \emph{atomiques}) \then \return \false
-%
-%
-%\quad \if (il existe $A\land B\in\G$) \then $\{$
-%
-%\quad \quad \select $H=A\land B$ \from $\G$
-%
-%\quad \quad \return estProuvable($prem(\land L, \s, H)$)
-%
-%\quad $\}$
-%
-%
-%\quad \if (il existe $A\lor B\in\D$) \then $\{$
-%
-%\quad \quad \select $H=A\lor B$ \from $\D$
-%
-%\quad \quad \return estProuvable($prem(\lor R, \s, H)$)
-%
-%\quad $\}$
-%
-%
-%\caption{Algorithme}
-%\label{fig:algo}
-%\end{figure}
+\begin{figure}[!h]
+%\centering
+\def\true{\emph{vrai}}
+\def\false{\emph{faux}}
+\def\lett{\textbf{soit }}
+\def\if{\textbf{si} }
+\def\then{\textbf{alors} }
+\def\return{\textbf{retourner} }
+\def\select{\textbf{sélectionner} }
+\def\from{\textbf{dans} }
+
+\textbf{fonction} estProuvable ($\s$)
+
+\quad \lett $\s=\Th;\G\To\D$
+
+\quad \if ($\bot\in\G$) \then \return \true
+
+\quad \if ($\G\cap\D\neq\emptyset$) \then \return \true
+
+\quad \if ($\G$ et $\D$ ne contiennent que des formules \emph{atomiques}) \then \return \false
+
+
+\quad \if (il existe $A\land B\in\G$) \then $\{$
+
+\quad \quad \select $H=A\land B$ \from $\G$
+
+\quad \quad \return estProuvable($prem(\land L, \s, H)$)
+
+\quad $\}$
+
+
+\quad \if (il existe $A\lor B\in\D$) \then $\{$
+
+\quad \quad \select $H=A\lor B$ \from $\D$
+
+\quad \quad \return estProuvable($prem(\lor R, \s, H)$)
+
+\quad $\}$
+
+\quad ...
+
+
+\caption{Algorithme}
+\label{fig:algo}
+\end{figure}
 
 
 
 \subsection{?}
 
 
-
-définitions de l'article, pseudo-code
-
-définitions : instance, formule principale
-
-
-\
-
-\
 
 
 \def\instance{
@@ -458,7 +451,7 @@ Les règles du calcul \LSJn\ sont décrite dans la figure~\ref{fig:reglesLSJn}. Ch
 
 
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 
 \emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
@@ -699,46 +692,46 @@ La propriété de la sous-formule est encore plus intéressante dans le cadre de la
 \label{fig:indexation}
 \end{figure}
 
-\subsection{Absence de duplication}
-
-
-\
-
-\
-\subsection{Inversibilité de certaines prémisses de $\to L$ et $\to R$}
-
-
-$((\bigwedge_{i=1}^{n}p_{i} \lor (\lnot\lnot p_{1}\to f) \lor \bigvee_{i=2}^{n}(p_{i}\to f))\to f)\to f$
-
-\
-
-$(\;[ \;(p_{1}\land p_{2} \land ... \land p_{n}) \lor (\lnot\lnot p_{1}\to f) \lor (p_{2}\to f) \lor ... \lor (p_{n}\to f)\;]\to f\;)\to f$
-
-\
-
-$1:f \quad\To_{0}\quad 0:  p1 \land ( p2 \land p3 )  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f  \;,\;  0: p3 \to f  \;,\; 0: f$
-
-\
-
-$f\;;\;\emptyset \quad\To\quad p_{1} \land p_{2} \land ... \land p_{n} \;,\; \lnot\lnot p_{1}\to f \;,\; p_{2}\to f \;,\; ...  \;,\; p_{n}\to f \;,\; f$
-
-
-
-\section{Quelques explications sur l'implémentation}
-
-\subsection{Précalculs : indexation, classes, priorités}
-
-\subsection{Gestion efficace des formules du séquent : insertion et suppression, choix de la formule principale}
-
-
-
-\section{Vers une recherche de preuve compilée et certifiée}
-
-\subsection{Un langage simple pour la certification}
-
-\subsection{Compilation : des fonctions pour chaque sous-formule}
-
-
+%\subsection{Absence de duplication}
+%
+%
+%\
+%
+%\
+%\subsection{Inversibilité de certaines prémisses de $\to L$ et $\to R$}
+%
+%
+%$((\bigwedge_{i=1}^{n}p_{i} \lor (\lnot\lnot p_{1}\to f) \lor \bigvee_{i=2}^{n}(p_{i}\to f))\to f)\to f$
+%
+%\
+%
+%$(\;[ \;(p_{1}\land p_{2} \land ... \land p_{n}) \lor (\lnot\lnot p_{1}\to f) \lor (p_{2}\to f) \lor ... \lor (p_{n}\to f)\;]\to f\;)\to f$
+%
+%\
+%
+%$1:f \quad\To_{0}\quad 0:  p1 \land ( p2 \land p3 )  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f  \;,\;  0: p3 \to f  \;,\; 0: f$
+%
+%\
+%
+%$f\;;\;\emptyset \quad\To\quad p_{1} \land p_{2} \land ... \land p_{n} \;,\; \lnot\lnot p_{1}\to f \;,\; p_{2}\to f \;,\; ...  \;,\; p_{n}\to f \;,\; f$
+%
+%
+%
+%\section{Quelques explications sur l'implémentation}
+%
+%\subsection{Précalculs : indexation, classes, priorités}
+%
+%\subsection{Gestion efficace des formules du séquent : insertion et suppression, choix de la formule principale}
+%
+%
+%
+%\section{Vers une recherche de preuve compilée et certifiée}
+%
+%\subsection{Un langage simple pour la certification}
+%
+%\subsection{Compilation : des fonctions pour chaque sous-formule}
+%
+%
 
 
 
