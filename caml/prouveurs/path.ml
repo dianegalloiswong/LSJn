@@ -1,6 +1,6 @@
 let path_prouveur_trees = "prouveurs/prouveur_trees/"
 let path_tmp = "tmp/"
-(*path_prouveur_trees^"code_trees_genere/"*)
+
 
 let ext_trees = ".trees"
 
@@ -51,7 +51,18 @@ let liste_code_trees_fixe = List.map (fun s -> path_prouveur_trees^"code_trees_f
 
 
 
+(* compile caml *)
+let entete_caml_direct = "prouveurs/prouveur_compile_caml/code_fixe_entete.ml"
+let path_tmp_caml = path_tmp^"caml/"
+let code_caml() = path_tmp_caml^(!nom)^".ml"
+let code_caml_direct () = (*path_tmp^(!nom)^"_caml_direct.ml"*) code_caml()
+let code_caml_executable() = path_tmp_caml^(!nom)^".out"
+let code_caml_sortie() = path_tmp_caml^(!nom)^"_sortie.txt"
 
+
+
+
+(*
 (* compilateur vers caml *)
 let entete_caml = path_prouveur_trees^"code_trees_fixe/entete_caml.ml"
 
@@ -63,9 +74,9 @@ let code_caml_sortie() = path_caml^(!nom)^"_sortie.txt"
 let code_caml_executable () = path_tmp^(!nom)^"_caml"
 let code_caml_sortie () = path_tmp^(!nom)^"_caml_sortie.txt"*)
 (*let code_caml_errors () = path_tmp^(!nom)^"_caml_errors.txt"*)
+*)
 
-
-
+(*
 (* vers coq *)
 let path_coq = path_tmp^"coq/"
 let code_coq () = path_coq^(!nom)^".v"
@@ -74,7 +85,5 @@ let bin () = path_tmp^(!nom)^"_binaire.txt"
 let bin_sortie () = path_tmp^(!nom)^"_binaire_sortie.txt"
 *)
 let bin s = path_coq^s^".out"
+*)
 
-(* directement en caml *)
-let entete_caml_direct = path_prouveur_trees^"code_trees_fixe/entete_caml_direct.ml"
-let code_caml_direct () = (*path_tmp^(!nom)^"_caml_direct.ml"*) code_caml()

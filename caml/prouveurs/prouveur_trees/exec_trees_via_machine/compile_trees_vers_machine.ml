@@ -1,47 +1,11 @@
-(*type var = string
-type func = string*)
-
 open Ast_trees
-(*
-  | EVar of var
-  | ENull
-  | EInt of int
-  | ENode of expr*expr
-  | EMatch of expr*var*var*expr
-  | ELetin of var*expr*expr
-  | ECall of func*expr
-  | EIsnull of expr
-  | EIsint of expr
-  | ELeq of expr*expr
-  | EIf of expr*expr*expr
-  | ESucc of expr
-  | EPred of expr
-*)
+
 type decl_func = func*(var*expr)
 
 open Machine_abstraite
-(*
-type instr =
-  | LDA of int
-  | LDC of int
-  | LDN
-  | LDV of var
-  | SAVE of var
-  | STV of var
-  | RST of var
 
-  | UJP
-  | SKIP
-  | PAIR
-  | SPLIT
-  | SWAP
-  | ISNULL
-  | ISINT
-  | SUCC
-  | PRED
-  | LEQ
-  | HALT
-*)
+
+
 let rec expr_compile lnk i e = 
   match e with
       | ENull                -> (1,[LDN]) 
@@ -163,14 +127,3 @@ let main (prg,exp) =
   let code_exp = prg_compile lnk 1 exp            in
   let code_fun = cc_prg lnk (1+lexp+2) prg
   in  HALT::List.flatten (List.map (fun (_,x,_) -> x) (code_exp::code_fun))
-
-
-
-
-
-(*
-let prg = ("f",("x", EVar "x"))::[]
-let exp = ECall ("f",ENull)
-
-compile prg exp
-*)

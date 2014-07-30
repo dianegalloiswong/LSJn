@@ -12,7 +12,7 @@ let exec_direct prog =
 let exec_via_machine prog =
   let p = Convert_ast_pos.main (fst prog) in
   if Options.affiche_temps_etapes() then Format.printf "compilation du binaire : %!";
-  let bin = Time.time Compiler_coq.main p in
+  let bin = Time.time Compile_trees_vers_machine.main p in
   if Options.affiche_temps_etapes() then Format.printf "exécution du binaire : %!";
   Time.time Machine_abstraite.main bin
 
