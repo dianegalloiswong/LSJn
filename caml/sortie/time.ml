@@ -3,51 +3,16 @@ let temps_total = ref 0.
 let start_actuel = ref 0.
 let appels = ref 0 (* à prouvable *)
 
-exception Temps_ecoule
-
 let echoues = ref 0
 let non_traites = ref 0
 
 let toplevel = ref true
 
-let time f x = if Options.time_on() then begin
-  let toplevel_loc = !toplevel in toplevel:=false;
-  let start = Unix.gettimeofday () in
-  start_actuel := start;
-  appels := 0;
-  try
-    let res = f x in
-    let stop = Unix.gettimeofday () in
-    let temps = (stop -. start) in
-    if toplevel_loc then temps_total := !temps_total +. temps;
-    if Options.affiche_temps_un() then
-      begin
-      if !appels > 0 then
-	Format.printf "%fs, %d appels à prouvable@." temps !appels
-      else
-	Format.printf "%fs@." temps
-      end;
-    toplevel:=toplevel_loc;
-    res
-  with Temps_ecoule -> Format.printf "temps écoulé (%fs), %d appels à prouvable vus@." !Options.temps_max !appels; toplevel:=toplevel_loc; raise Temps_ecoule
-end else f x
-
-
-
-let verif_timeout () =
-  incr appels;
-  if Options.stop_on() && (Unix.gettimeofday () -. !start_actuel > !Options.temps_max) then
-    (incr echoues; raise Temps_ecoule)
-
-
-
 
 
 (* pour ne pas faire les problèmes plus difficiles que ceux déjà échoués *)
-
 let courant = ref ("",0)
 let trop_longs = ref []
-
 let parse nom =
   let s1,s2 =
     let len = String.length nom in
@@ -63,12 +28,10 @@ let parse nom =
     (s1,0)
   else
     try (s1,int_of_string (String.sub s2 2 3)) with _ -> assert false
-
 let rec mem_inf (s,n) = function
   | [] -> false
   | (s',i)::_ when s'=s && i<=n -> true
   | _::t -> mem_inf (s,n) t
-
 let faire_fichier nom =
   if Options.stop_on() then
     try
@@ -78,10 +41,58 @@ let faire_fichier nom =
     with Exit -> true
   else true
 
-let verif_timeout () = 
-  if Options.stop_on() then
-    try verif_timeout () with Temps_ecoule ->
-      trop_longs := !courant :: !trop_longs;
-      raise Temps_ecoule
-  else
-    verif_timeout ()
+
+
+
+
+exception Timeout
+
+
+let sigalrm_handler = Sys.Signal_handle (fun _ -> raise Timeout)
+let timeout t_max f x =
+  let t_max = (int_of_float t_max)+1 in
+  let old_behavior = Sys.signal Sys.sigalrm sigalrm_handler in
+  let reset_sigalrm () = Sys.set_signal Sys.sigalrm old_behavior 
+  in ignore (Unix.alarm t_max) ;
+  try  let res = f x in reset_sigalrm () ; res  
+  with exc -> reset_sigalrm () ; raise exc
+(*http://www.pps.univ-paris-diderot.fr/Livres/ora/DA-OCAML/book-ora169.html*)
+
+
+let handle_timeout () = 
+  Format.printf "temps écoulé (%fs)" !Options.temps_max;
+  if !appels > 0 then Format.printf ", %d appels à prouvable vus" !appels;
+  Format.printf "@.";
+  incr echoues;
+  trop_longs := !courant :: !trop_longs;
+  raise Timeout
+
+
+let time f x = if Options.time_on() then 
+  begin
+  let toplevel_loc = !toplevel in toplevel:=false;
+  let start = Unix.gettimeofday () in
+  start_actuel := start;
+  appels := 0;
+  try
+    let res = if Options.stop_on() then timeout !Options.temps_max f x else f x in
+    let stop = Unix.gettimeofday () in
+    let temps = (stop -. start) in
+    if toplevel_loc then temps_total := !temps_total +. temps;
+    if Options.affiche_temps_un() then
+      begin
+      if !appels > 0 then
+	Format.printf "%fs, %d appels à prouvable@." temps !appels
+      else
+	Format.printf "%fs@." temps
+      end;
+    toplevel:=toplevel_loc;
+    res
+  with Timeout -> toplevel:=toplevel_loc; handle_timeout ()
+  end
+else f x
+
+let verif_timeout () =
+  incr appels;
+  if Options.stop_on() && (Unix.gettimeofday () -. !start_actuel > !Options.temps_max) then
+    raise Timeout

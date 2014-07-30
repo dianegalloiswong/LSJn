@@ -26,7 +26,7 @@ let main (f,att_opt,nom) =
 	    if b <> batt then
 	      Format.printf "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n!! %s\n!! obtenu : %s    attendu : %s\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@." !Path.nom (bool_to_string_fr b) (bool_to_string_fr batt)
        ) ()
-    with Time.Temps_ecoule -> ()
+    with Time.Timeout -> ()
     end;
   if not !Options.rien_afficher then Format.printf "@.";
   Path.reset ()

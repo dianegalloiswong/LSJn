@@ -1,6 +1,6 @@
 open Tree
 
-type var = int
+type var = (*int*)string
 
 module Env = Map.Make(struct type t = var let compare = compare end)
 type env = Tree.tree Env.t
@@ -76,7 +76,7 @@ let main (l : instr list) =
   let rec loop_step state = loop_step (step t_instr state) in
   let n,s = try loop_step (1,Env.empty,[]) with Halt (n,s) -> n,s in
   if n=0 then match s with
-    | [V(Some t)] -> Format.printf "resultat de l'execution du binaire : "; Tree.print t; Format.printf "@."
-    | [_] -> Format.eprintf "execution du binaire : le resultat n'est pas un arbre@."
-    | _ -> Format.eprintf "execution du binaire : la pile n'est pas de taille 1@."
-  else Format.eprintf "execution du binaire : ne termine pas sur l'instruction 0@."
+    | [V(Some t)] -> t
+    | [_] -> Format.eprintf "execution du binaire : le resultat n'est pas un arbre@."; raise Exit
+    | _ -> Format.eprintf "execution du binaire : la pile n'est pas de taille 1@."; raise Exit
+  else (Format.eprintf "execution du binaire : ne termine pas sur l'instruction 0@."; raise Exit)
