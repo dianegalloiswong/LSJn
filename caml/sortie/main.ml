@@ -1,31 +1,26 @@
 
 let formule_details = ref None
-(*let formule = ref None
-let attendu = ref None*)
 let ma_liste = ref false
 let ma_liste_courte = ref false
 let arg1 = ref 0
 
-(*let details () = Options.preuves := true; Options.cmods := true*)
-
-(*let tiroirs_spec = Arg.Tuple [ Arg.Set_int arg1;
-  Arg.Int (fun arg2 -> formule := Some (Tiroirs.main !arg1 arg2); attendu := Some (Tiroirs.attendu !arg1 arg2)) ]*)
 let tiroirs_spec = Arg.Tuple [ Arg.Set_int arg1;
   Arg.Int (fun arg2 -> formule_details := Some (
     Tiroirs.main !arg1 arg2,
     Some (!arg1 > arg2),
     "ph_"^(string_of_int !arg1)^"_"^(string_of_int arg2)
   )) ]
-
-(*let eq_boucle n = formule := Some (Eq_boucle.main n); attendu := Some (Eq_boucle.attendu n)*)
 let eq_boucle n = formule_details := Some (
   Eq_boucle.main n,
   Some false,
   "eqb_"^(string_of_int n)
 )
 
+
+
 let options = [
   "-trees", Arg.Set Options.trees, ": utilise le prouveur \"trees\" au lieu du prouveur caml";
+  "-trees-machine", Arg.Set Options.trees_machine, ": passe aussi par le .trees mais compile un code exécuté par une machine abstraite";
   "-compile-caml", Arg.Set Options.compile_caml, ": génère un code caml dépendant de la formule et le compile avec ocamlc";
   "-trees-via-caml", Arg.Set Options.trees_via_caml, ": génère le code \"trees\", le compile en caml et l'exécute avec ocamlc";
 
@@ -58,49 +53,47 @@ let options = [
 
 let usage = "Par défaut : affiche nom de fichier éventuel, temps mis pour décider si la formule est prouvable, et résultat obtenu seulement s'il est différent de celui attendu.\n  <nom de fichier en .p> (syntaxe des problèmes d'ILTP) : exécute sur la formule décrite par le fichier, en comparant avec le résultat attendu donné dans les commentaires\n  <nom de répertoire> : cherche récursivement les fichiers en .p"
 
+let noms = ref []
 
 
-let faire_fichier nom =
+
+
+
+(* parsing de la ligne de commande *)
+
+let () = Arg.parse options (fun nom -> noms := nom:: !noms) usage
+
+
+
+
+
+
+(* fichiers et répertoires *)
+
+let do_file nom =
   if Options.affiche_nom_fichier() then Format.printf "%s@." nom;
   try
     let att,f = Analyser_ILTP.main nom in
     Exec_formule.main (f,att,nom)
   with Exit -> Format.printf "Exit.@."
 
-
 let pointp nom = let n = String.length nom in nom.[n-2]='.' && nom.[n-1]='p'
-(*
-let rec faire_d dnom =
-  let dh = Unix.opendir dnom in
-  try
-    while true do
-      let s = Unix.readdir dh in
-      if s.[0] <> '.' then faire (dnom^"/"^s)
-    done;
-  with End_of_file -> ()
 
-and faire nom =
-    match (Unix.stat nom).Unix.st_kind with
-      | Unix.S_REG when (pointp nom) && (Time.faire_fichier nom) -> 
-	(*Exec_ILTP.main nom*)
-	faire_fichier nom
-      | Unix.S_DIR -> faire_d nom
-      | _ -> ()
-*)
-
-
-let noms = ref []
-let () = Arg.parse options (fun nom -> noms := nom:: !noms) usage
-
-(*let () = List.iter faire (List.rev !noms)*)
 let () = List.iter (fun nom ->
-  if pointp nom && Time.faire_fichier nom then faire_fichier nom
+  if pointp nom && Time.faire_fichier nom then do_file nom
 ) (List_files.main !noms)
 
 
 
 
+(* formule seule *)
+
 let () = match !formule_details with Some f -> Exec_formule.main f | None -> ()
+
+
+
+
+(* listes prédéfinies de formules *)
 
 let () =
   if !ma_liste then
@@ -111,6 +104,11 @@ let () =
     List.iter Exec_formule.main Quelques_formules.l1
 
   
+
+
+
+(* affichage final *)
+
 let () = 
   if Options.affiche_temps_total() then Format.printf "temps total : %fs@." !Time.temps_total;
   if !Time.echoues > 0 then Format.printf "non terminés en moins de %fs : %d@." !Options.temps_max !Time.echoues;

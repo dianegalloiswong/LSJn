@@ -11,77 +11,77 @@ let func f = Format.print_string (
   else "inexistant"
 )
 
-let rec caml_expr = function
+let rec expr = function
   | EVar x -> var x
   | EInt n -> Format.printf "%d" n
   | ENode (e1,e2) ->
     Format.printf "(";
-    caml_expr e1;
+    expr e1;
     Format.printf ",";
-    caml_expr e2;
+    expr e2;
     Format.printf ")"
   | ELetin (x,e1,e2) ->
     Format.printf "let ";
     var x;
     Format.printf " = ";
-    caml_expr e1;
+    expr e1;
     Format.printf " in\n";
-    caml_expr e2
+    expr e2
   | ECall (f,e) ->
     Format.printf "(";
     func f;
     Format.printf " ";
-    caml_expr e;
+    expr e;
     Format.printf ")"
   | ESucc e ->
     Format.printf "((";
-    caml_expr e;
+    expr e;
     Format.printf ")+1)"
   | ELess (e1,e2) ->
-    caml_expr e1;
+    expr e1;
     Format.printf " < ";
-    caml_expr e2
+    expr e2
   | EIf (b,e1,e2) ->
     Format.printf "(if ";
-    caml_expr b;
+    expr b;
     Format.printf " then \n";
-    caml_expr e1;
+    expr e1;
     Format.printf " else \n";
-    caml_expr e2;
+    expr e2;
     Format.printf ")"
   | _ -> assert false
 
-let rec caml_expr_seq = function
+let rec expr_seq = function
   | ELetin ("seq",e1,e2) ->
-    caml_expr_seq e1;
+    expr_seq e1;
     Format.printf ";\n";
-    caml_expr_seq e2
-  | ENode (e,EVar "seq") -> caml_expr_seq e
+    expr_seq e2
+  | ENode (e,EVar "seq") -> expr_seq e
   | EVar "seq" -> Format.printf "()\n"
   | EVar x -> var x
   | EInt n -> Format.printf "%d" n
   | ENode (e1,e2) ->
     Format.printf "(";
-    caml_expr_seq e1;
+    expr_seq e1;
     Format.printf ",";
-    caml_expr_seq e2;
+    expr_seq e2;
     Format.printf ")"
   | ELetin (x,e1,e2) ->
     Format.printf "let ";
     var x;
     Format.printf " = ";
-    caml_expr_seq e1;
+    expr_seq e1;
     Format.printf " in\n";
-    caml_expr_seq e2
+    expr_seq e2
   | ECall (f,e) ->
     Format.printf "(";
     func f;
     Format.printf " ";
-    caml_expr_seq e;
+    expr_seq e;
     Format.printf ")"
   | ESucc e ->
     Format.printf "((";
-    caml_expr_seq e;
+    expr_seq e;
     Format.printf ")+1)"
   | _ -> assert false
 
@@ -94,14 +94,14 @@ let decl_func (f,x,e) =
   match x with
     | "seq" -> (*fonction ajout_formule_initiale*)
       Format.printf " () = \n";
-      caml_expr_seq e
+      expr_seq e
     | "arg" ->
       if String.sub f 0 2 = "sf" then
 	begin
         Format.printf " "; var "i"; Format.printf " = \n";
 	match e with EMatch(e1,x,y,e2) ->
         assert (x = "i" && y = "seq");
-        caml_expr_seq e2 
+        expr_seq e2 
 	|_->assert false
 	end
       else if String.sub f 0 5 = "call_" then
@@ -109,7 +109,7 @@ let decl_func (f,x,e) =
         Format.printf " (k,x) = \n";
         match e with EMatch(e1,x,y,e2) ->
         assert (x = "k" && y = "x");
-        caml_expr e2
+        expr e2
         |_->assert false
 	end
     | _ -> assert false
@@ -120,7 +120,7 @@ let decl_func (f,x,e) =
 
 let cat_entete () = "cat "^Path.entete_caml_direct^" >> "^Path.code_caml_direct()
 
-let main () =
+let from_fonctions_compilees () =
 
   (*(match !Path.formule with None -> () | Some f -> Format.printf "\n(* formule : %s *)@." (To_string.formule f));*)
 
@@ -141,8 +141,6 @@ let main () =
   Hashtbl.clear fonctions;
   List.iter (fun df -> decl_func df;Format.printf"@.") (List.rev !Fonctions_compilees.fonctions);
 
-(*  List.iter (fun df -> decl_func df;Format.printf"@.") (List.rev (Make_call_num.fonctions_call ()));*)
-
   Format.printf "\nlet expr = programme ()\n";
   Format.printf "\nlet () = Format.printf \"%%s@@.\" (if expr then \"1\" else \"0\")";
   Format.printf "\nlet () = Format.printf \"%%d@@.\" !appels";
@@ -150,3 +148,9 @@ let main () =
 
   Format.set_formatter_out_channel stdout;
   Unix.close fd
+
+
+
+let main f = 
+  Init_fonctions_compilees.main f;
+  from_fonctions_compilees ()

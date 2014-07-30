@@ -1,17 +1,4 @@
-let main (f : Def.formule) : bool =
-
-  Format.printf "compilation vers caml : %!";
-  Time.time (fun () ->
-
-    Init_sf_classe.main f;
-    Init_priorite.main ();
-
-    Cote.remplir ();
-    Make_fonctions_sf.main ();
-    Make_call_num.main ();
-
-    Compile_caml_direct.main ()
-
-  ) ();
-
+let main (formule : Def.formule) : bool =
+  if Options.affiche_temps_etapes() then Format.printf "compilation vers caml : %!";
+  Time.time Compile_caml_direct.main formule;
   Use_ocamlc.main ()

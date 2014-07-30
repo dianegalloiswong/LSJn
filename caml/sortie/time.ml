@@ -59,14 +59,6 @@ let timeout t_max f x =
 (*http://www.pps.univ-paris-diderot.fr/Livres/ora/DA-OCAML/book-ora169.html*)
 
 
-let handle_timeout () = 
-  Format.printf "temps écoulé (%fs)" !Options.temps_max;
-  if !appels > 0 then Format.printf ", %d appels à prouvable vus" !appels;
-  Format.printf "@.";
-  incr echoues;
-  trop_longs := !courant :: !trop_longs;
-  raise Timeout
-
 
 let time f x = if Options.time_on() then 
   begin
@@ -81,14 +73,23 @@ let time f x = if Options.time_on() then
     if toplevel_loc then temps_total := !temps_total +. temps;
     if Options.affiche_temps_un() then
       begin
-      if !appels > 0 then
+      if toplevel_loc && !appels > 0 then
 	Format.printf "%fs, %d appels à prouvable@." temps !appels
       else
 	Format.printf "%fs@." temps
       end;
     toplevel:=toplevel_loc;
     res
-  with Timeout -> toplevel:=toplevel_loc; handle_timeout ()
+  with Timeout -> 
+    let stop = Unix.gettimeofday () in
+    let temps = (stop -. start) in
+    Format.printf "timeout (temps mis : %fs, max. autorise : %fs)" temps !Options.temps_max;
+    if !appels > 0 then Format.printf ", %d appels à prouvable vus" !appels;
+    Format.printf "@.";
+    if toplevel_loc then (incr echoues;
+			  trop_longs := !courant :: !trop_longs);
+    toplevel:=toplevel_loc;
+    raise Timeout
   end
 else f x
 

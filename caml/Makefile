@@ -19,6 +19,7 @@ OCAMLBUILD=ocamlbuild -classic-display \
 		-I prouveurs/prouveur_trees/interpreteur_trees \
 		-I prouveurs/prouveur_trees/trees_vers_coq \
 		-I prouveurs/prouveur_trees/caml_caml \
+		-I prouveurs/prouveur_trees/fonctions_compilees \
 	-use-menhir
 TARGET=native
 

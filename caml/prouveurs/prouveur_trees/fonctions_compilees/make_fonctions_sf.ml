@@ -133,12 +133,12 @@ let impR h a b =
 
   let body_prem1 = body_of_list [ (* i=n *)
     eletin_seq "rm_d" "i" h;
-    eletin_seq "add_d" "i" b;
     eletin_seq "add_g" "i" a;
+    eletin_seq "add_d" "i" b;
   ] in
   let body_rev1 = body_of_list [
-    eletin_seq "rm_g" "i" a;
     eletin_seq "rm_d" "i" b;
+    eletin_seq "rm_g" "i" a;
     eletin_seq "add_d" "i" h;
     eletin_seq_rm_ax;
   ] in
@@ -147,13 +147,13 @@ let impR h a b =
     eletin_seq "rm_d" "i" h;
     eletin_seq_incr_n;
     eletin "nplus1" (esucc(evar "i"));
-    eletin_seq "add_d" "nplus1" b;
     eletin_seq "add_g" "nplus1" a;
+    eletin_seq "add_d" "nplus1" b;
   ] in
   let body_rev2 = body_of_list [
     eletin "nplus1" (esucc(evar "i"));
-    eletin_seq "rm_g" "nplus1" a;
     eletin_seq "rm_d" "nplus1" b;
+    eletin_seq "rm_g" "nplus1" a;
     eletin_seq_decr_n;
     eletin_seq "add_d" "i" h;
     eletin_seq_rm_ax;
