@@ -12,4 +12,5 @@
 *.blg
 ILTP*
 caml/testsILTP/
-caml/stats*
+#caml/stats*
+caml/*.txt

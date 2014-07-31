@@ -23,6 +23,7 @@ let options = [
   "-trees-machine", Arg.Set Options.trees_machine, ": passe aussi par le .trees mais compile un code exécuté par une machine abstraite";
   "-compile-caml", Arg.Set Options.compile_caml, ": génère un code caml dépendant de la formule et le compile avec ocamlc";
   "-trees-via-caml", Arg.Set Options.trees_via_caml, ": génère le code \"trees\", le compile en caml et l'exécute avec ocamlc";
+  "-all", Arg.Set Options.all, ": les quatre prouveurs";
 
   (* général *)
   "-indexation", Arg.Set Options.indexation, ": affiche formules et contenu des tableaux sf et classe ; ne lance pas la recherche de preuve";
@@ -64,6 +65,7 @@ let noms = ref []
 let () = Arg.parse options (fun nom -> noms := nom:: !noms) usage
 
 
+let () = if !Options.all then Test_all.init ()
 
 
 
@@ -114,6 +116,6 @@ let () =
   if !Time.echoues > 0 then Format.printf "non terminés en moins de %fs : %d@." !Options.temps_max !Time.echoues;
   if !Time.non_traites > 0 then Format.printf "non traités (car problème plus facile non terminé) : %d@." !Time.non_traites
 
-
+let () = if !Options.all then Test_all.close ()
 
 

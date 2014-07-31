@@ -18,6 +18,20 @@ Problems/SYJ/SYJ204+1.006.p	.01s		6.6s
 pigeonhole 3 2			.02s		.0002s
 	(dans les 2 cas 78 appels prouvable)
 
+
+
+
+
+tests avec les 4 prouveurs
+-ph 4 3 Problems/SYJ/SYJ201+1.002.p Problems/SYJ/SYJ204+1.006.p
+results0.txt
+
+
+
+
+
+
+
 --------
 
 Usage

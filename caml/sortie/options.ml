@@ -8,6 +8,7 @@ let trees_via_caml = ref false
 let trees_machine = ref false
 let prouveur_trees () = !trees || !trees_via_caml || !trees_machine
 let compile_caml = ref false
+let all = ref false
 
 let preuves = ref false
 let cmods = ref false

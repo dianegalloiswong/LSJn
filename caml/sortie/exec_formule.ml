@@ -8,8 +8,7 @@ let prouveur () =
 
 let bool_to_string_fr b = if b then "vrai" else "faux"
 
-let main (f,att_opt,nom) =
-  Path.set_nom nom; Path.formule:=Some f;
+let un_prouveur (f,att_opt,nom) =
   if nom<>"" && Options.affiche_nom_formule() then Format.printf "%s@." !Path.nom;
   if Options.affiche_formule() then Format.printf "%s@." (To_string.formule f);
   if !Options.indexation then (Init_sf_classe.test f)
@@ -28,12 +27,43 @@ let main (f,att_opt,nom) =
        ) ()
     with Time.Timeout -> ()
     end;
-  if not !Options.rien_afficher then Format.printf "@.";
+  if not !Options.rien_afficher then Format.printf "@."
+  
+
+
+
+let all arg =
+  
+  Options.trees:=false;
+  Options.trees_machine:=false;
+  Options.compile_caml:=false;
+
+  (* prouveur simple *)
+  un_prouveur arg;
+
+  (* prouveur compile-caml *)
+  Options.compile_caml:=true;
+  un_prouveur arg;
+  Options.compile_caml:=false;
+
+  (* prouveur trees *)
+  Options.trees:=true;
+  un_prouveur arg;
+  Options.trees:=false;
+
+  (* prouveur trees-machine *)
+  Options.trees_machine:=true;
+  un_prouveur arg;
+  Options.trees_machine:=false;
+
+  Test_all.nom := !Path.nom;
+  Test_all.print_res_formule ()
+
+
+let main ((f,_,nom) as arg) =
+  Path.set_nom nom; Path.formule:=Some f;
+  if !Options.all then all arg else un_prouveur arg;
   Path.reset ()
-
-
-
-
 
 (*
 let bts b = if b then "vrai" else "faux"

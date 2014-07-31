@@ -45,6 +45,11 @@ let faire_fichier nom =
 
 
 
+
+
+
+
+
 exception Timeout
 
 
@@ -79,6 +84,9 @@ let time f x = if Options.time_on() then
 	Format.printf "%fs@." temps
       end;
     toplevel:=toplevel_loc;
+    if !Options.all then 
+      (Test_all.remplir_float temps;
+       if toplevel_loc && !appels > 0 then Test_all.remplir_int !appels);
     res
   with Timeout -> 
     let stop = Unix.gettimeofday () in
