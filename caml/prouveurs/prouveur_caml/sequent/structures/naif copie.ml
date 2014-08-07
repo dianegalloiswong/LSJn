@@ -8,34 +8,32 @@ let to_couple (i,_,sf) = (i,sf)
 
 module G = 
 struct
-  type t = (int*int) list ref
+  type t = (int*int*int) list ref
   let empty () = ref []
-  let add c t = t := c:: !t
-  let rm c t = t := rm c !t
+  let add c t = t := (to_triple c):: !t
+  let rm c t = t := rm (to_triple c) !t
   let fold_vars _ = assert false
   let priorite_plus_forte n t =
-    List.fold_left (fun (p,c) (i,sf) ->
-      if i<=n && !Global_ref.priorite.(sf)<p then
-	!Global_ref.priorite.(sf),(i,sf)
+    List.fold_left (fun (pc,cc) (i,p,sf) ->
+      if i<=n && p<pc then
+	p,(i,sf)
       else
-	p,c
+	pc,cc
     ) (6,(0,0)) !t
   let all_imp n t =
     List.filter (fun (i,sf) -> i<=n && !Global_ref.priorite.(sf)=5) !t
   let nombre_imp n t = List.length (all_imp n t)
-  let nth_imp n k t =
-    let l = List.map to_triple (all_imp n t) in
-    to_couple (List.nth (List.sort compare l) k)
+  let nth_imp n k t = List.nth (List.sort compare (all_imp n t)) k
   let reord_imp n k t = ()
   let print t = assert false
 end
 
 module D = 
 struct
-  type t = (int*int) list ref
+  type t = (int*int*int) list ref
   let empty () = ref []
-  let add c t = t := c:: !t
-  let rm c t = t := rm c !t
+  let add c t = t := (to_triple c):: !t
+  let rm c t = t := rm (to_triple c) !t
   let fold_vars _ = assert false
   let priorite_plus_forte n t =
     List.fold_left (fun (p,c) (i,sf) ->
@@ -47,9 +45,7 @@ struct
   let all_imp n t =
     List.filter (fun (i,sf) -> i=n && !Global_ref.priorite.(sf)=5) !t
   let nombre_imp n t = List.length (all_imp n t)
-  let nth_imp n k t =
-    let l = List.map to_triple (all_imp n t) in
-    to_couple (List.nth (List.sort compare l) k)
+  let nth_imp n k t = List.nth (List.sort compare (all_imp n t)) k
   let reord_imp n k t = ()
   let print t = assert false
 end

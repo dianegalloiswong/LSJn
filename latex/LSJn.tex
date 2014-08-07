@@ -18,6 +18,7 @@
 \newtheorem{q}[moncompteur]{ \textbf{Question}}{}
 \newtheorem{prop}[moncompteur]{ \textbf{Proposition}}{}
 \newtheorem{df}[moncompteur]{ \textbf{Définition}}{}
+\newtheorem*{df*}{ \textbf{Définition}}{}
 \newtheorem{rem}[moncompteur]{ \textbf{Remarque}}{}
 \newtheorem{theo}[moncompteur]{ \textbf{Théorème}}{}
 \newtheorem*{theo*}{ \textbf{Théorème}}{}
@@ -67,6 +68,11 @@
 
 
 %stage
+\newcommand{\LK}{$\mathbf{LK}$}
+\newcommand{\LJ}{$\mathbf{LJ}$}
+\newcommand{\LSJ}{$\mathbf{LSJ}$}
+\newcommand{\LSJn}{$\mathbf{LSJ'}$}
+
 \newcommand{\s}{\sigma}
 \newcommand{\Sig}{\mathfrak S}
 \newcommand{\G}{\Gamma}
@@ -76,8 +82,7 @@
 \newcommand{\Dp}{\Delta}
 \newcommand{\Gt}{\widetilde\Gamma}
 \newcommand{\Dt}{\widetilde\Delta}
-\newcommand{\LSJ}{$\mathbf{LSJ}$}
-\newcommand{\LSJn}{$\mathbf{LSJ'}$}
+
 \newcommand{\surj}{
 %\mathrm{surj}
 %\boldsymbol
@@ -108,36 +113,8 @@
 
 \
 
-définition formule ?
 
-\section{Le calcul \LSJ}
-
-L'article \cite{LSJ} définit un calcul de séquents \LSJ. Une sémantique naturelle des séquents est définie à l'aide des modèles de Kripke, mais nous ne la présentons pas. En effet, ce qui nous intéresse est l'existence, pour toute formule, d'un séquent qui est prouvable dans le calcul \LSJ\ si, et seulement si, la formule est prouvable en logique intuitionniste. Nous renvoyons à l'article pour les démonstrations, notamment celle de la complétude du calcul.
-
-\subsection{Les séquents}
-
-On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrence est pris en compte, mais non l'ordre des éléments. Cela permettra de ne pas avoir besoin de règles explicites d'échange.
-
-Un \textbf{séquent} est la donnée de trois multiensembles $\Th$, $\G$ et $\D$ de formules ; on écrit alors $\Th\;;\;\G\;\To\;\D$.
-
-Une définition d'un séquent \textbf{réfutable} est donnée dans l'article à l'aide des modèles de Kripke. Nous ne la détaillons pas ici, car ce qui nous intéresse surtout est la propriété suivante qui en découle, démontrée dans l'article. La définition de \textbf{prouvable} sera donnée plus tard car elle est liée aux règles du calcul, mais ceci illustre son intérêt.
-\begin{prop}\label{propSignificationSequent}
-%Soit $\G$, $\D$ des multiensembles de formules. Le séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{prouvable} dans \LSJ, c'est-à-dire non réfutable, si et seulement si la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ est valide en logique intuitionniste.
-Un séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{réfutable} si, et seulement si, la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ n'est pas valide en logique intuitionniste. Un séquent est \textbf{prouvable} dans \LSJ\ si, et seulement si, il n'est pas réfutable.
-
-\end{prop}
-\begin{cor}
-Soit $A$ une formule, elle est valide en logique intuitionniste si et seulement si le séquent $\emptyset;\emptyset\To A$ est  prouvable dans \LSJ.
-\end{cor}
-
-Les multiensembles $\G$ et $\D$, et leur signification dans la propriété \ref{propSignificationSequent} sont des éléments habituels en calcul des séquents. En revanche, $\Th$ est propre à \LSJ, et est difficile à interpréter car contrairement au cas où $\Th$ est vide, un séquent avec $\Th$ quelconque ne peut pas être représenté par une formule. On peut dire est que $\Th$ contient des formules gardées en réserve, non visibles directement dans le séquent (une formule de $\Th$ ne peut pas être \emph{formule principale}), mais qui peuvent être transférées dans $\G$ et ainsi devenir visibles. On verra que les seules règles qui agissent sur $\Th$ sont celles qui concernent le connecteur $\to$.
-
-Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \textbf{formules de gauche}, celles de $\D$ les \textbf{formules de droite}, et celles de $\Th$ les \textbf{formules de réserve} du séquent (appellations non conventionnelles).
-
-%
-
-\subsection{Les règles}
-
+%regles et instances
 \def\regle{
 \def\defaultHypSeparation{\hskip .05in}
 	\AXC	{$prem_{1}$}
@@ -163,6 +140,293 @@ Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \te
 	\UIC{$\s$}
 	\DP
 }
+
+
+
+%LJ, règles structurelles
+\def\echange{
+	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
+	\RightLabel{$(permut.\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To D$}
+	\DP
+}
+\def\contraction{
+	\AXC	{$\G,A,A \To D$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+\def\weakening{
+	\AXC	{$\G \To D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+%LJ, axiomes
+\def\LJId{
+	\AXC	{}
+	\RightLabel{Id}
+	\UIC{$A,\G \To A$}
+	\DP
+}
+\def\LJbotL{
+	\AXC	{}
+	\RightLabel{$\bot L$}
+	\UIC{$\bot,\G \To D$}
+	\DP
+}
+%LJ,règles logiques
+\def\LJetL{
+	\AXC	{$A,B,\G \To D$}
+	\RightLabel{$\land L$}
+	\UIC{$A\land B,\G \To D$}
+	\DP
+}
+\def\LJetR{
+	\AXC	{$\G \To A$}
+	\AXC	{$\G \To B$}
+	\RightLabel{$\land R$}
+	\BIC{$\G \To A\land B$}
+	\DP
+}
+\def\LJouL{
+	\AXC	{$A,\G \To D$}
+	\AXC	{$B,\G \To D$}
+	\RightLabel{$\lor L$}
+	\BIC{$A\lor B,\G \To D$}
+	\DP
+}
+\def\LJouRun{
+	\AXC	{$\G \To A$}
+	\RightLabel{$\lor R_{1}$}
+	\UIC{$\G \To A\lor B$}
+	\DP
+}
+\def\LJouRdeux{
+	\AXC	{$\G \To B$}
+	\RightLabel{$\lor R_{2}$}
+	\UIC{$\G \To A\lor B$}
+	\DP
+}
+\def\LJimpL{
+	\AXC	{$\G \To A$}
+	\AXC	{$B,\G \To D$}
+	\RightLabel{$\to L$}
+	\BIC{$A\to B,\G \To D$}
+	\DP
+}
+\def\LJimpR{
+	\AXC	{$A,\G \To B$}
+	\RightLabel{$\to R$}
+	\UIC{$\G \To A\to B$}
+	\DP
+}
+
+%LK
+\def\LKetR{
+	\AXC	{$\G \To A,\D$}
+	\AXC	{$\G \To B,\D$}
+	\RightLabel{$\land R$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+}
+\def\LKouR{
+	\AXC	{$\G \To A,B,\D$}
+	\RightLabel{$\lor R$}
+	\UIC{$\G \To A\lor B,\D$}
+	\DP
+}
+
+
+
+
+
+
+\section{Logique intuitionniste propositionnelle : approche par le calcul de séquents \LJ}
+
+%Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par un calcul de séquents.
+
+On s'intéresse à la partie propositionnelle de la logique intuitionniste : les formules sont construites à partir de la constante $\bot$, de variables propositionnelles et des connecteur $\land$, $\lor$, $\to$. Une formule est \emph{atomique} si elle est réduite à une variables propositionnelle ou $\bot$. La notation $\lnot A$ signifie $A\to\bot$.
+
+
+
+
+
+
+%\subsection{LJ : le calcul originel de la logique intuitionniste}
+%\subsection{De \LK\ à \LJ}
+\
+
+Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par un calcul de séquents.
+
+\subsection{Les règles}
+
+
+On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrences est pris en compte, mais non l'ordre des éléments. Cela permettra de ne pas avoir besoin de règles explicites d'échange. On utilise des lettres romaines (typiquement $A$, $B$, $G$, $D$) pour désigner les formules et des lettres grecques ($\G$, $\D$) pour les multiensembles de formules. La notation $A,\G$ représente le multiensemble obtenu à partir de $\G$ en ajoutant une occurrence de $A$. Lorsqu'il n'y a pas matière à confusion, on représente un multiensemble vide par un simple blanc.
+
+%Un \textbf{séquent} de \LK\ est la donnée de deux multiensembles de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on écrit $\G \To \D$.
+
+Un \textbf{séquent} de \LJ\ est la donnée d'un multiensemble de formules $\G$ (les ``hypothèses'') et d'une formule $D$ (la ``conclusion'') ; on écrit $\G \To D$.
+
+
+On dispose de \textbf{règles}, données sous la forme \regle. $\mathcal R$ est le nom de la règle. $prem_{1}$, ... , $prem_{p}$ sont les (resp. première, ... , $p$-ième) \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques.
+
+Les \textbf{axiomes} sont les règles sans prémisse. Un calcul de séquents comporte en général deux sortes de règles en plus de quelques axiomes : des \emph{règles logiques} et des \emph{règles structurelles}. Pour les règles logiques, il existe une unique formule de la conclusion dont on connaît le connecteur : c'est la \textbf{formule principale}, qui disparaît généralement dans les prémisses au profit de formules plus simples. Les règles structurelles ne se préoccupent pas des connecteurs, mais, comme leur nom l'indique, de la structure du séquent. Elles dépendent fortement du choix de définition d'un séquent : les règles d'échange comme\echange\ font partie des règles structurelles lorsqu'on retient les formules de $\G$ sous la forme d'une liste ; comme nous travaillons avec un mutiensemble, nous n'en avons pas besoin.
+
+Les axiomes et règles logiques de \LJ\ sont données dans la figure~\ref{fig:reglesLJ}. Comme règle structurelle, on ne considère que\contraction\ : cela suffit pour avoir un calcul complet (voir ??). 
+%Cette présentation du calcul \LJ\ diffère un peu de celle de Gentzen, mais on peut facilement passer de l'une à l'autre à l'aide des règles structurelles de Gentzen.
+Cette présentation diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ\ (on peut facilement passer d'une définition à l'autre à l'aide des règles structurelles, si on rajoute la règle structurelle \weakening\ qui est juste mais pas nécessaire pour la complétude de notre approche).
+
+
+\begin{figure}
+\centering
+
+$$\begin{array}{cc}
+	\LJbotL & \LJId \\\\
+	\LJetL & \LJetR \\\\
+	\LJouL & \quad\LJouRun \quad \LJouRdeux \\\\
+	\LJimpL & \LJimpR 
+%	\multicolumn{2}{c}{\impL}\\\\
+%	\multicolumn{2}{c}{\impR}
+\end{array}$$
+
+\caption{Axiomes et règles logiques du calcul \LJ}
+\label{fig:reglesLJ}
+\end{figure}
+
+
+\subsection{Prouvabilité}
+
+
+
+Une \textbf{instance} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
+
+Une \textbf{preuve} est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors \instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
+
+Un séquent est \textbf{prouvable} par le calcul \LJ\ s'il existe une preuve à la racine de laquelle il est associé. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+
+Ceci nous permet de définir la prouvabilité en logique intuitionniste.
+
+\begin{df*}
+Une formule $A$ est \textbf{prouvable en logique intuitionniste} si le séquent $\;\To A$ est prouvable par le calcul \LJ\ (on écrit $\;\To A$ pour $\emptyset \To A$).
+\end{df*}
+
+\noindent
+\textbf{Interprétation d'un séquent.}
+%Les séquents sont des structures pratiques pour le calcul de séquents où ils sont manipulés à l'aide de règles, mais ils 
+Les séquents, en plus d'être des structures pratiques pour le calcul de séquents où ils sont manipulés à l'aide de règles, 
+ont en eux-mêmes une interprétation logique très simple grâce à la propriété suivante : un séquent $\G \To D$ est prouvable par le calcul \LJ\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ est prouvable en logique intuitionniste.
+
+
+\subsection{Comparaison avec la logique classique (calcul \LK)}
+%\
+%\noindent
+%\emph{Remarque.}
+La logique classique peut être définie à l'aide d'un calcul de séquents appelé \LK, très similaire à \LJ\ (en fait, c'est \LJ\ qui a été dérivé de \LK\ pour passer de la logique classique à la logique intuitionniste). Un séquent de \LK\ comporte un autre multiensemble $\D$ de ``conclusions'' au lieu d'une unique conclusion $D$ : on écrit $\G \To \D$. Un tel séquent a également une interprétation logique : il est prouvable par \LK\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ est vraie en logique classique.
+
+ Les règles sont modifiées en conséquence : par exemple\LKetR\ remplace\LJetR. Bien entendu, on ajoute aussi des règles structurelles agissant sur $\D$.
+ Mais surtout, on n'a plus qu'une règle pour le $\lor$ à droite :\LKouR. (Dans d'autres définitions, on garde deux règles distinctes, mais la règle que nous donnons ici peut être déduite de ces deux règles et de règles structurelles.)
+ 
+\def\LKTiersExclu{
+	\AXC	{}
+	\RightLabel{Id}
+	\UIC	{$A \To A, \bot$}
+	\RightLabel{$\to R$}
+	\UIC	{$\To A, (A\to\bot)$}
+	\RightLabel{$\lor R$}
+	\UIC{$\To A\lor (A\to\bot)$}
+	\DP
+}
+
+ 
+C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$, les deux formules sont encore visibles. Un bon exemple est la preuve du principe du tiers exclu $A\lor\lnot A$ (figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : si on peut appliquer l'axiome Id à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé à les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$, il faut prouver $A$ ou prouver $B$, et une fois qu'on a choisit lequel on prouve, on n'a plus accès à l'autre. Ainsi, on ne peut prouver $A\lor\lnot A$, car une preuve de $\;\To A\lor\lnot A$ contiendrait une preuve de $\;\To A$ ou une preuve de $\;\To \lnot A$, et aucun de ces deux séquents n'est prouvable.
+
+ %on ne peut prouver le séquent $\To A$, ni le séquent $\To 
+%, où on applique l'axiome Id à une occurrence de $A$ venant du $\lnot A$ 
+
+\begin{figure}
+%\centering
+\LKTiersExclu
+
+\caption{Preuve dans \LK\ de $A\lor\lnot A$}
+\label{fig:LKTiersExclu}
+\end{figure}
+
+
+
+
+
+
+
+
+\section{Avantages et inconvénients de différents calculs de séquents pour la logique intuitionniste}
+
+
+
+nécessité de contraction ou réécriture de $\to L$ (preuve de $\lnot\lnot(A\lor\lnot A)$)
+
+LJT
+
+
+
+
+
+%%%%%%%%%%
+
+
+\section{Le calcul \LSJ}
+
+L'article \cite{LSJ} définit un calcul de séquents \LSJ. Une sémantique naturelle des séquents est définie à l'aide des modèles de Kripke, mais nous ne la présentons pas. En effet, ce qui nous intéresse est l'existence, pour toute formule, d'un séquent qui est prouvable dans le calcul \LSJ\ si, et seulement si, la formule est prouvable en logique intuitionniste. Nous renvoyons à l'article pour les démonstrations, notamment celle de la complétude du calcul.
+
+\subsection{Les séquents}
+
+On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrences est pris en compte, mais non l'ordre des éléments. Cela permettra de ne pas avoir besoin de règles explicites d'échange.
+
+Un \textbf{séquent} est la donnée de trois multiensembles $\Th$, $\G$ et $\D$ de formules ; on écrit alors $\Th\;;\;\G\;\To\;\D$.
+
+Une définition d'un séquent \textbf{réfutable} est donnée dans l'article à l'aide des modèles de Kripke. Nous ne la détaillons pas ici, car ce qui nous intéresse surtout est la propriété suivante qui en découle, démontrée dans l'article. La définition de \textbf{prouvable} sera donnée plus tard car elle est liée aux règles du calcul, mais ceci illustre son intérêt.
+\begin{prop}\label{propSignificationSequent}
+%Soit $\G$, $\D$ des multiensembles de formules. Le séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{prouvable} dans \LSJ, c'est-à-dire non réfutable, si et seulement si la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ est valide en logique intuitionniste.
+Un séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{réfutable} si, et seulement si, la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ n'est pas valide en logique intuitionniste. Un séquent est \textbf{prouvable} dans \LSJ\ si, et seulement si, il n'est pas réfutable.
+
+\end{prop}
+\begin{cor}
+Soit $A$ une formule, elle est valide en logique intuitionniste si et seulement si le séquent $\emptyset;\emptyset\To A$ est  prouvable dans \LSJ.
+\end{cor}
+
+Les multiensembles $\G$ et $\D$, et leur signification dans la propriété \ref{propSignificationSequent} sont des éléments habituels en calcul des séquents. En revanche, $\Th$ est propre à \LSJ, et est difficile à interpréter car contrairement au cas où $\Th$ est vide, un séquent avec $\Th$ quelconque ne peut pas être représenté par une formule. On peut dire est que $\Th$ contient des formules gardées en réserve, non visibles directement dans le séquent (une formule de $\Th$ ne peut pas être \emph{formule principale}), mais qui peuvent être transférées dans $\G$ et ainsi devenir visibles. On verra que les seules règles qui agissent sur $\Th$ sont celles qui concernent le connecteur $\to$.
+
+Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \textbf{formules de gauche}, celles de $\D$ les \textbf{formules de droite}, et celles de $\Th$ les \textbf{formules de réserve} du séquent (appellations non conventionnelles).
+
+%
+
+\subsection{Les règles}
+
+%\def\regle{
+%\def\defaultHypSeparation{\hskip .05in}
+%	\AXC	{$prem_{1}$}
+%	\AXC	{...}
+%	\AXC	{$prem_{p}$}
+%	\RightLabel{$(\mathcal R)$}
+%	\TIC{$concl$}
+%	\DP
+%}
+%\def\instance{
+%\def\defaultHypSeparation{\hskip .05in}
+%	\AXC	{$\s_{1}$}
+%	\AXC	{...}
+%	\AXC	{$\s_{p}$}
+%	\RightLabel{$(\mathcal R)$}
+%	\TIC{$\s$}
+%	\DP
+%}
+%\def\instanceAx{
+%\centerAlignProof
+%	\AXC	{\qquad}
+%	\RightLabel{$(\mathcal A)$}
+%	\UIC{$\s$}
+%	\DP
+%}
 
 
 \def\botL{
@@ -732,6 +996,49 @@ La propriété de la sous-formule est encore plus intéressante dans le cadre de la
 %\subsection{Compilation : des fonctions pour chaque sous-formule}
 %
 %
+
+
+
+
+
+
+
+
+
+
+
+\section{Implémentation}
+\subsection{Indexation}
+
+cf ``Propriété de la sous-formule et indexation'' + explication sur les classes (et priorités) et les champs axiomes du séquent
+
+
+
+\subsection{Structure de données pour le séquent}
+
+Au cours de l'algorithme, on manipule un ``séquent'', censé représenter un séquent du calcul \LSJn, contenant les informations suivantes :
+
+\noindent-\;
+des informations de taille constante : l'indice $n$ du séquent, et des booléens $id$ et $fauxL$, indiquant si les axiomes de même nom sont applicables au séquent ;
+
+\noindent-\;
+les couples \emph{indice}: \emph{formule} contenus dans les champs $\G$ et $\D$ du séquent.
+
+Comme nous l'avons expliqué en introduisant le calcul \LSJn, le but de celui-ci est de pouvoir effectuer la recherche de preuve en ne gardant à chaque instant qu'un seul séquent en mémoire.
+
+\
+
+
+Intéressons-nous maintenant à la complexité temporelle.
+
+Celle-ci dépend du nombre de règles qu'on essaie d'appliquer, c'est-à-dire le nombre d'appels récursifs à la fonction \emph{prouvable} (?) dont le pseudo-code est donné en figure ? page ?. Ce nombre dépend de la taille de la formule et des connecteurs présents dedans (et selon l'ordre dans lequel on choisit les formules principales cela peut beaucoup varier pour une même formule, mais on s'intéresse à la complexité dans le pire cas). Mais il ne dépend pas de notre choix d'implémentation (sauf pour l'ordre des ``implique'', mais encore une fois pas si on regarde le pire cas).
+
+
+
+
+
+
+
 
 
 
