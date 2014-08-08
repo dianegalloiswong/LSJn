@@ -261,26 +261,23 @@ Il existe de nombreuses approches de la logique intuitionniste : on choisit ici 
 
 \subsection{Les règles}
 
-
+\noindent
+\textbf{Multiensembles et notations.}
 On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrences est pris en compte, mais non l'ordre des éléments. Cela permettra de ne pas avoir besoin de règles explicites d'échange. On utilise des lettres romaines (typiquement $A$, $B$, $D$, $G$) pour désigner les formules et des lettres grecques ($\G$, $\D$) pour les multiensembles de formules. La notation ``$A,\G$'' représente le multiensemble obtenu à partir de $\G$ en ajoutant une occurrence de $A$. Lorsqu'il n'y a pas matière à confusion, on représente un multiensemble vide par un simple blanc.
 
 %Un \textbf{séquent} de \LK\ est la donnée de deux multiensembles de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on écrit $\G \To \D$.
 
+\begin{df*}
 Un \textbf{séquent} de \LJ\ est la donnée d'un multiensemble de formules $\G$ (les ``hypothèses'') et d'une formule $D$ (la ``conclusion'') ; on écrit $\G \To D$.
+\end{df*}
 
 
-On dispose de \textbf{règles}, données sous la forme \regle. $\mathcal R$ est le nom de la règle. $prem_{1}$, ... , $prem_{p}$ sont les 
-%(resp. première, ... , $p$-ième) 
-\textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques.
 
-Les \textbf{axiomes} sont les règles sans prémisse. Un calcul de séquents comporte en général deux sortes de règles en plus de quelques axiomes : des \emph{règles logiques} et des \emph{règles structurelles}. Pour les règles logiques, il existe une unique formule de la conclusion dont on connaît le connecteur : c'est la \textbf{formule principale}, qui disparaît généralement dans les prémisses au profit de formules plus simples. Les règles structurelles ne se préoccupent pas des connecteurs, mais, comme leur nom l'indique, de la structure du séquent. Elles dépendent fortement du choix de définition d'un séquent : les règles d'échange comme\echange\ font partie des règles structurelles lorsqu'on retient les formules de $\G$ sous la forme d'une liste ; comme nous travaillons avec un mutiensemble, nous n'en avons pas besoin.
+On dispose de \textbf{règles} données dans la figure~\ref{fig:reglesLJ}.  Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques. La distinction entre règles \emph{logiques} et \emph{structurelles} sera expliquée plus loin.
 
-Les axiomes et règles logiques de \LJ\ sont données dans la figure~\ref{fig:reglesLJ}. Comme règle structurelle, on ne considère que\contraction\ : cela suffit pour avoir un calcul complet (voir ??). 
-%Cette présentation du calcul \LJ\ diffère un peu de celle de Gentzen, mais on peut facilement passer de l'une à l'autre à l'aide des règles structurelles de Gentzen.
-Cette présentation diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ. On peut d'ailleurs facilement passer d'une définition à l'autre à l'aide des règles structurelles, si on rajoute la règle structurelle \weakening\ qui est juste mais pas nécessaire pour la complétude de notre approche).
+Cette présentation diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ. On peut d'ailleurs facilement passer d'une définition à l'autre à l'aide des règles structurelles.
 
-
-\begin{figure}
+\begin{figure}[h]
 \centering
 
 $$\begin{array}{cc}
@@ -297,6 +294,21 @@ $$\begin{array}{cc}
 \end{figure}
 
 
+%\
+%
+%On dispose de \textbf{règles}, données sous la forme \regle. $\mathcal R$ est le nom de la règle. $prem_{1}$, ... , $prem_{p}$ sont les 
+%%(resp. première, ... , $p$-ième) 
+%\textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques.
+%
+%Les \textbf{axiomes} sont les règles sans prémisse. Un calcul de séquents comporte en général deux sortes de règles en plus de quelques axiomes : des \emph{règles logiques} et des \emph{règles structurelles}. Pour les règles logiques, il existe une unique formule de la conclusion dont on connaît le connecteur : c'est la \textbf{formule principale}, qui disparaît généralement dans les prémisses au profit de formules plus simples. Les règles structurelles ne se préoccupent pas des connecteurs, mais, comme leur nom l'indique, de la structure du séquent. Elles dépendent fortement du choix de définition d'un séquent : les règles d'échange comme\echange\ font partie des règles structurelles lorsqu'on retient les formules de $\G$ sous la forme d'une liste ; comme nous travaillons avec un mutiensemble, nous n'en avons pas besoin.
+%
+%Les axiomes et règles logiques de \LJ\ sont données dans la figure~\ref{fig:reglesLJ}. Comme règle structurelle, on ne considère que\contraction\ : cela suffit pour avoir un calcul complet (voir ??). 
+%%Cette présentation du calcul \LJ\ diffère un peu de celle de Gentzen, mais on peut facilement passer de l'une à l'autre à l'aide des règles structurelles de Gentzen.
+%Cette présentation diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ. On peut d'ailleurs facilement passer d'une définition à l'autre à l'aide des règles structurelles, si on rajoute la règle structurelle \weakening\ qui est juste mais pas nécessaire pour la complétude de notre approche.
+
+
+
+
 \subsection{Prouvabilité}
 
 
@@ -305,7 +317,9 @@ Une \textbf{instance} d'une règle $\mathcal R$ a la même forme que la règle : \i
 
 Une \textbf{preuve} (ou arbre de preuve) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
-Un séquent $\s$ est \textbf{prouvable} par le calcul \LJ\ s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+\begin{df*}
+Un séquent $\s$ est \textbf{\emph{prouvable}} par le calcul \LJ\ s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+\end{df*}
 
 Ceci nous permet de définir la prouvabilité en logique intuitionniste.
 
@@ -348,7 +362,7 @@ C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent
  %on ne peut prouver le séquent $\To A$, ni le séquent $\To 
 %, où on applique l'axiome Id à une occurrence de $A$ venant du $\lnot A$ 
 
-\begin{figure}
+\begin{figure}[h]
 \centering
 \LKTiersExclu
 
@@ -368,9 +382,35 @@ C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent
 
 Un calcul de séquents est généralement défini par sa propre définition d'un séquent ainsi qu'un ensemble de règles. Il est souvent attaché à une logique : à partir d'une formule, on peut construire un séquent qui est prouvable si et seulement si la formule est ``prouvable'' ou ``vraie'' dans la logique en question (l'appellation dépend de la logique). Il existe plusieurs calculs de séquents pour la logique intuitionniste, sans parler des nombreuses autres logiques existantes.
 
+\
+
+\noindent
+\textbf{Algorithme.}
 Un calcul de séquents suggère naturellement un algorithme de recherche de preuve : pour essayer de prouver un séquent, on choisit une règle dont il peut être la conclusion et on essaie de prouver les prémisses correspondantes. Si elles sont toutes prouvables (notamment, s'il n'y en a pas : si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès (pour chacune, au moins une prémisse est non prouvable), on conclut que le séquent initial n'est pas prouvable.
 
 Un tel algorithme est correct par construction et d'après la définition de la prouvabilité d'un séquent. En revanche, les causes possibles de non terminaison sont nombreuses. Assurer la terminaison est une des raisons qui rendent certaines propriétés sur les calculs de séquents très intéressantes.
+
+
+\
+
+\noindent
+\textbf{Classification des règles.}
+On distingue généralement deux sortes de règles. Les \emph{règles logiques} remplacent une formule de la conclusion par une ou des formules plus simples. La formule remplacée, appelée \emph{formule principale}, doit avoir une forme donnée en fonction de la règle. Les \emph{règles structurelles} manipulent la structure du séquent en enlevant, dupliquant, dépla\c cant des formules dont on n'a pas besoin de connaître la forme. Elles dépendent du choix de structure du séquent : pour le calcul \LJ, si on avait choisi de réprésenter $\G$ par une liste et non un multiensemble, on aurait eu besoin d'ajouter une règle d'échange \echange.
+
+\
+
+\noindent
+\textbf{Coupure.}
+La règle de coupure (figure~1, ``cut'') condamne l'algorithme à elle seule, puisqu'il peut y avoir une infinité de prémisses associées à une conclusion donnée. Heureusement, cette règle est souvent non nécessaire : de nombreux calculs de séquents possèdent la propriété d'élimination de la coupure, si bien qu'on peut faire comme si cette règle n'existait pas. C'est une propriété souvent difficile à démontrer, mais on ne s'y intéressera pas. Désormais, on présentera des calculs sans donner de règle de coupure.
+
+
+\
+
+\noindent
+\textbf{Règles structurelles et coupure à éviter.}
+
+
+
 
 La règle de coupure (figure~1, ``cut'') condamne l'algorithme à elle seule, puisqu'il peut y avoir une infinité de prémisses associées à une conclusion donnée. Pour commencer, on veut donc un calcul où le nombre d'instances ayant une conclusion donnée est toujours fini. Mais même ainsi, comme pour essayer de prouver un séquent, on rappelle l'algorithme sur d'autres séquents, il faut un argument soigneux de terminaison : par exemple, associer à chaque séquent une ``taille'' entière positive, telle que pour toute instance des règles, les ``tailles'' de toutes les prémisses sont strictement inférieures à celle de la conclusion. Comme on le verra, la propriété de la sous-formule est bien pratique pour ce point-là.
 
