@@ -244,7 +244,17 @@
 
 \section{Logique intuitionniste propositionnelle : approche par le calcul de séquents \LJ}
 
+
+
+
+Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par le calcul de séquents \LJ\ introduit par Gentzen (?). Cela permet de se familiariser avec les calculs de séquents, avant de discuter
+
+
+
+
 %Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par un calcul de séquents.
+
+\
 
 On s'intéresse à la partie propositionnelle de la logique intuitionniste : les formules sont construites à partir de la constante $\bot$, de variables propositionnelles et des connecteurs $\land$, $\lor$, $\to$. Une formule est \emph{atomique} si elle est réduite à une variable propositionnelle ou $\bot$. La notation $\lnot A$ signifie $A\to\bot$.
 
@@ -255,11 +265,13 @@ On s'intéresse à la partie propositionnelle de la logique intuitionniste : les f
 
 %\subsection{LJ : le calcul originel de la logique intuitionniste}
 %\subsection{De \LK\ à \LJ}
+\subsection{Définition du calcul \LJ}
+
+%Un calcul de séquents se caractérise en général par sa propre définition d'un séquent, ainsi qu'un ensemble de règles. Voici
+%Comme la plupart des calculs de séquents, le calcul \LJ\ se caractérise par une définition de ses \emph{séquents} ainsi qu'un ensemble de \emph{règles}.
+Les éléments qui caractérisent généralement un calcul de séquents sont une définition de ses \emph{séquents} et un ensemble de \emph{règles}. Présentons ceux du calcul \LJ.
+
 \
-
-Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par un calcul de séquents.
-
-\subsection{Les règles}
 
 \noindent
 \textbf{Multiensembles et notations.}
@@ -268,14 +280,14 @@ On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le n
 %Un \textbf{séquent} de \LK\ est la donnée de deux multiensembles de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on écrit $\G \To \D$.
 
 \begin{df*}
-Un \textbf{séquent} de \LJ\ est la donnée d'un multiensemble de formules $\G$ (les ``hypothèses'') et d'une formule $D$ (la ``conclusion'') ; on écrit $\G \To D$.
+Un \textbf{\emph{séquent}} de \LJ\ est la donnée d'un multiensemble de formules $\G$ (les ``hypothèses'') et d'une formule $D$ (la ``conclusion'') ; on écrit $\G \To D$.
 \end{df*}
 
 
 
-On dispose de \textbf{règles} données dans la figure~\ref{fig:reglesLJ}.  Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques. La distinction entre règles \emph{logiques} et \emph{structurelles} sera expliquée plus loin.
+Les \textbf{règles} du calcul \LJ\ sont données dans la figure~\ref{fig:reglesLJ}.  Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques. La distinction entre règles \emph{logiques} et \emph{structurelles} sera expliquée plus loin.
 
-Cette présentation diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ. On peut d'ailleurs facilement passer d'une définition à l'autre à l'aide des règles structurelles.
+Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Elle diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ. On peut d'ailleurs facilement passer d'une définition à l'autre à l'aide des règles structurelles.
 
 \begin{figure}[h]
 \centering
@@ -313,9 +325,9 @@ $$\begin{array}{cc}
 
 
 
-Une \textbf{instance} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
+Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
 
-Une \textbf{preuve} (ou arbre de preuve) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
+Une \textbf{\emph{preuve}} (ou \emph{arbre de preuve}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
 \begin{df*}
 Un séquent $\s$ est \textbf{\emph{prouvable}} par le calcul \LJ\ s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
@@ -324,7 +336,7 @@ Un séquent $\s$ est \textbf{\emph{prouvable}} par le calcul \LJ\ s'il existe un 
 Ceci nous permet de définir la prouvabilité en logique intuitionniste.
 
 \begin{df*}
-Une formule $A$ est \textbf{prouvable en logique intuitionniste} si le séquent $\;\To A$ est prouvable par le calcul \LJ\ (on écrit $\;\To A$ pour $\emptyset \To A$).
+Une formule $A$ est \textbf{\emph{prouvable en logique intuitionniste}} si le séquent $\;\To A$ est prouvable par le calcul \LJ\ (on écrit $\;\To A$ pour $\emptyset \To A$).
 \end{df*}
 
 \noindent
