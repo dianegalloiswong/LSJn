@@ -1,0 +1,227 @@
+
+%regles et instances
+\def\regle{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$prem_{1}$}
+	\AXC	{...}
+	\AXC	{$prem_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$concl$}
+	\DP
+}
+\def\instance{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+}
+\def\instanceAx{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{$(\mathcal A)$}
+	\UIC{$\s$}
+	\DP
+}
+\def\instancedeux{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{$\s_{2}$}
+	\BIC{$\s$}
+	\DP
+}
+
+
+%LJ
+%LJ, axiomes
+\def\LJId{
+	\AXC	{}
+	\RightLabel{(Id)}
+	\UIC{$A,\G \To A$}
+	\DP
+}
+\def\LJbotL{
+	\AXC	{}
+	\RightLabel{$(\bot L)$}
+	\UIC{$\bot,\G \To D$}
+	\DP
+}
+%LJ,règles logiques
+\def\LJetL{
+	\AXC	{$A,B,\G \To D$}
+	\RightLabel{$(\land L)$}
+	\UIC{$A\land B,\G \To D$}
+	\DP
+}
+\def\LJetR{
+	\AXC	{$\G \To A$}
+	\AXC	{$\G \To B$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B$}
+	\DP
+}
+\def\LJouL{
+	\AXC	{$A,\G \To D$}
+	\AXC	{$B,\G \To D$}
+	\RightLabel{$(\lor L)$}
+	\BIC{$A\lor B,\G \To D$}
+	\DP
+}
+\def\LJouRun{
+	\AXC	{$\G \To A$}
+	\RightLabel{$(\lor R_{1})$}
+	\UIC{$\G \To A\lor B$}
+	\DP
+}
+\def\LJouRdeux{
+	\AXC	{$\G \To B$}
+	\RightLabel{$(\lor R_{2})$}
+	\UIC{$\G \To A\lor B$}
+	\DP
+}
+\def\LJimpL{
+	\AXC	{$\G \To A$}
+	\AXC	{$B,\G \To D$}
+	\RightLabel{$(\to L)$}
+	\BIC{$A\to B,\G \To D$}
+	\DP
+}
+\def\LJimpR{
+	\AXC	{$A,\G \To B$}
+	\RightLabel{$(\to R)$}
+	\UIC{$\G \To A\to B$}
+	\DP
+}
+%LJ, règles structurelles
+\def\LJechange{
+	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
+	\RightLabel{$(permut.\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To D$}
+	\DP
+}
+\def\LJcontraction{
+	\AXC	{$\G,A,A \To D$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+\def\LJweakening{
+	\AXC	{$\G \To D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+%LJ, coupure
+\def\LJcut{
+	\AXC	{$\G_{1} \To A$}
+	\AXC	{$\G_{2},A \To D$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G_{1},\G_{2} \To D$}
+	\DP
+}
+
+
+%LK
+\def\LKetR{
+	\AXC	{$\G \To A,\D$}
+	\AXC	{$\G \To B,\D$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+}
+\def\LKouR{
+	\AXC	{$\G \To A,B,\D$}
+	\RightLabel{$(\lor R)$}
+	\UIC{$\G \To A\lor B,\D$}
+	\DP
+}
+
+\def\LKTiersExclu{
+	\AXC	{}
+	\RightLabel{Id}
+	\UIC	{$A \To A, \bot$}
+	\RightLabel{$\to R$}
+	\UIC	{$\To A, (A\to\bot)$}
+	\RightLabel{$\lor R$}
+	\UIC{$\To A\lor (A\to\bot)$}
+	\DP
+}
+
+
+%LJ ajustement
+\def\LJimpLcontr{
+	\AXC	{$A\to B,\G \To A$}
+	\AXC	{$B,\G \To D$}
+	\RightLabel{$\to L$}
+	\BIC{$A\to B,\G \To D$}
+	\DP
+}
+\def\LJimpLcontrA{
+	\AXC	{$A\to B,\G \To A$}
+	\AXC	{$B,\G \To A$}
+	\RightLabel{$\to L$}
+	\BIC{$A\to B,\G \To A$}
+	\DP
+}
+
+\def\LJnnTiersExclu{
+%	\AXC	{}
+%	\RightLabel{Id}
+%	\UIC	{$A \To A, \bot$}
+%	\RightLabel{$\to R$}
+%	\UIC	{$\To A, (A\to\bot)$}
+%	\RightLabel{$\lor R$}
+	
+	\AXC	{}
+	\RightLabel{(Id)}
+	\UIC	{$A \;\To\; A$}
+	\RightLabel{$(\lor R_{1})$}
+	\UIC	{$A \;\To\; A\lor (A\to\bot)$}
+	
+		\AXC	{}
+		\RightLabel{$(\bot L)$}
+		\UIC	{$\bot,A \;\To\; \bot$}
+	
+	\RightLabel{$(\to L)$}
+	\BIC	{$A,(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	\RightLabel{$(\to R)$}
+	\UIC	{$(A\lor (A\to\bot))\to\bot \;\To\; A\to\bot$}
+	\RightLabel{$(\lor R_{2})$}
+	\UIC	{\colorbox{yellow}{$(A\lor (A\to\bot))\to\bot \;\To\; A\lor (A\to\bot)$}}
+	
+		\AXC	{}
+		\RightLabel{$(\bot L)$}
+		\UIC	{$\bot,(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	
+	\RightLabel{$(\to L)$}
+	\BIC	{$(A\lor (A\to\bot))\to\bot \,,\; (A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC	{$(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	\RightLabel{$(\to R)$}
+	\UIC{$\;\To\; ((A\lor (A\to\bot))\to\bot)\to\bot$}
+	\DP
+}
+
+
+
+
+
+%LJT
+\def\LJTimpLun{
+	\AXC	{$B,A,\G \;\To\; D$}
+	\RightLabel{$(\to L_{1})$}
+	\UIC{$A\to B, A,\G \;\To\; D$}
+	\DP
+}
+\def\LJTimpLdeux{
+	\AXC	{$A_{1}\to(A_{2}\to B) \,,\; \G \;\To\; D$}
+	\RightLabel{$(\to L_{2})$}
+	\UIC{$(A_{1}\land A_{2})\to B \,,\; \G \;\To\; D$}
+	\DP
+}
+
+
+
+

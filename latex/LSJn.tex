@@ -1,292 +1,15 @@
-\documentclass[11pt, openany]{article}
-%\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
-\usepackage[frenchb]{babel}
-%\usepackage{slashbox}
-\usepackage{graphicx}
-\usepackage{amsmath,amssymb,amstext}
-\usepackage[latin1]{inputenc}
-\usepackage[OT1]{fontenc}
-%\usepackage{fancybox}
-\usepackage{a4wide}
-%\usepackage{fancyvrb}
-%\usepackage{pgf,tikz}
-%\usetikzlibrary{arrows}
-\usepackage{xcolor}
-%\usepackage{multicol}
-%\usepackage[cm]{fullpage}
-\usepackage{amsthm} %pour les théorèmes sans numéro
-\usepackage{array,multirow,makecell}
-
-
-
-\newcounter{moncompteur}
-\newtheorem{q}[moncompteur]{ \textbf{Question}}{}
-\newtheorem{prop}[moncompteur]{ \textbf{Proposition}}{}
-\newtheorem{df}[moncompteur]{ \textbf{Définition}}{}
-\newtheorem*{df*}{ \textbf{Définition}}{}
-\newtheorem{rem}[moncompteur]{ \textbf{Remarque}}{}
-\newtheorem{theo}[moncompteur]{ \textbf{Théorème}}{}
-\newtheorem*{theo*}{ \textbf{Théorème}}{}
-\newtheorem{conj}[moncompteur]{ \textbf{Conjecture}}{}
-\newtheorem{cor}[moncompteur]{ \textbf{Corollaire}}{}
-\newtheorem{lm}[moncompteur]{ \textbf{Lemme}}{}
-\newtheorem*{lm*}{ \textbf{Lemme}}{}
-%\newtheorem{nota}[moncompteur]{ \textbf{Notation}}{}
-%\newtheorem{conv}[moncompteur]{ \textbf{Convention}}{}
-\newtheorem{exa}[moncompteur]{ \textbf{Exemple}}{}
-\newtheorem{ex}[moncompteur]{ \textbf{Exercice}}{}
-%\newtheorem{app}[moncompteur]{ \textbf{Application}}{}
-%\newtheorem{prog}[moncompteur]{ \textbf{Algorithme}}{}
-%\newtheorem{hyp}[moncompteur]{ \textbf{Hypothèse}}{}
-\newenvironment{dem}{\noindent\textbf{Preuve}\\}{\flushright$\blacksquare$\\}
-%\newcommand{\cg }{[\kern-0.15em [}
-%\newcommand{\cd}{]\kern-0.15em]}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\K}{\mathbb{K}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\U}{\mathbb{U}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\card}{\mathrm{card}}
-
-%TIPE
-%\newcommand{\A}{A^*}
-%\newcommand{\Aa}{A^+}
-%\newcommand{\ouv}{( \thickspace}
-%\newcommand{\fer}{\thickspace )}
-%\newcommand{\KAp}{K \langle A \rangle}
-%\newcommand{\KAs}{K \langle \langle A \rangle \rangle}
-%\newcommand{\sig}{\boldsymbol\sigma}
-%\newcommand{\pig}{\boldsymbol\pi}
-%\newcommand{\Sig}{\boldsymbol\sigma^{*}}
-%\newcommand{\1}{\boldsymbol\varepsilon}
-%\newcommand{\epsi}{\varepsilon}
-%\newcommand{\lie}{\mathfrak{L}}
-%\newcommand{\bwt}{\textnormal{bwt}}
-%\newcommand{\bwts}{\textnormal{bwts}}
-%\newcommand{\esp}{\textvisiblespace}
-%\newcommand{\demo}{\noindent\textit{Démonstration} }
-
-
-%stage
-\newcommand{\LK}{$\mathbf{LK}$}
-\newcommand{\LJ}{$\mathbf{LJ}$}
-\newcommand{\LJT}{$\mathbf{LJT}$}
-\newcommand{\LSJ}{$\mathbf{LSJ}$}
-\newcommand{\LSJn}{$\mathbf{LSJ'}$}
-
-\newcommand{\s}{\sigma}
-\newcommand{\Sig}{\mathfrak S}
-\newcommand{\G}{\Gamma}
-\newcommand{\D}{\Delta}
-\newcommand{\Th}{\Theta}
-\newcommand{\Gp}{\Gamma}
-\newcommand{\Dp}{\Delta}
-\newcommand{\Gt}{\widetilde\Gamma}
-\newcommand{\Dt}{\widetilde\Delta}
-
-\newcommand{\surj}{
-%\mathrm{surj}
-%\boldsymbol
-\Phi
-}
-\newcommand{\To}{\Rightarrow}
-\newcommand{\forget}{\mathsf{forget}}
-
-\usepackage{bussproofs}
-\EnableBpAbbreviations
-
-
-
-\usepackage{mathrsfs}
-
-\bibliographystyle{ieeetr}  
+\input{preamble}
 
 \begin{document}
 \renewcommand{\labelitemi}{$\diamond$}
 \vspace{2cm}~~\\
 
+\input{bussproofs}
 
 \tableofcontents
 
-\
+\pagebreak
 
-\
-
-\
-
-
-%regles et instances
-\def\regle{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$prem_{1}$}
-	\AXC	{...}
-	\AXC	{$prem_{p}$}
-	\RightLabel{$(\mathcal R)$}
-	\TIC{$concl$}
-	\DP
-}
-\def\instance{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s_{1}$}
-	\AXC	{...}
-	\AXC	{$\s_{p}$}
-	\RightLabel{$(\mathcal R)$}
-	\TIC{$\s$}
-	\DP
-}
-\def\instanceAx{
-\centerAlignProof
-	\AXC	{\qquad}
-	\RightLabel{$(\mathcal A)$}
-	\UIC{$\s$}
-	\DP
-}
-\def\instancedeux{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s_{1}$}
-	\AXC	{$\s_{2}$}
-	\BIC{$\s$}
-	\DP
-}
-
-
-%LJ
-%LJ, axiomes
-\def\LJId{
-	\AXC	{}
-	\RightLabel{(Id)}
-	\UIC{$A,\G \To A$}
-	\DP
-}
-\def\LJbotL{
-	\AXC	{}
-	\RightLabel{$(\bot L)$}
-	\UIC{$\bot,\G \To D$}
-	\DP
-}
-%LJ,règles logiques
-\def\LJetL{
-	\AXC	{$A,B,\G \To D$}
-	\RightLabel{$(\land L)$}
-	\UIC{$A\land B,\G \To D$}
-	\DP
-}
-\def\LJetR{
-	\AXC	{$\G \To A$}
-	\AXC	{$\G \To B$}
-	\RightLabel{$(\land R)$}
-	\BIC{$\G \To A\land B$}
-	\DP
-}
-\def\LJouL{
-	\AXC	{$A,\G \To D$}
-	\AXC	{$B,\G \To D$}
-	\RightLabel{$(\lor L)$}
-	\BIC{$A\lor B,\G \To D$}
-	\DP
-}
-\def\LJouRun{
-	\AXC	{$\G \To A$}
-	\RightLabel{$(\lor R_{1})$}
-	\UIC{$\G \To A\lor B$}
-	\DP
-}
-\def\LJouRdeux{
-	\AXC	{$\G \To B$}
-	\RightLabel{$(\lor R_{2})$}
-	\UIC{$\G \To A\lor B$}
-	\DP
-}
-\def\LJimpL{
-	\AXC	{$\G \To A$}
-	\AXC	{$B,\G \To D$}
-	\RightLabel{$(\to L)$}
-	\BIC{$A\to B,\G \To D$}
-	\DP
-}
-\def\LJimpR{
-	\AXC	{$A,\G \To B$}
-	\RightLabel{$(\to R)$}
-	\UIC{$\G \To A\to B$}
-	\DP
-}
-%LJ, règles structurelles
-\def\LJechange{
-	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
-	\RightLabel{$(permut.\ L)$}
-	\UIC{$\G_{1},B,A,\G_{2} \To D$}
-	\DP
-}
-\def\LJcontraction{
-	\AXC	{$\G,A,A \To D$}
-	\RightLabel{$(contraction\ L)$}
-	\UIC{$\G,A \To D$}
-	\DP
-}
-\def\LJweakening{
-	\AXC	{$\G \To D$}
-	\RightLabel{$(weakening\ L)$}
-	\UIC{$\G,A \To D$}
-	\DP
-}
-%LJ, coupure
-\def\LJcut{
-	\AXC	{$\G_{1} \To A$}
-	\AXC	{$\G_{2},A \To D$}
-	\RightLabel{$(cut)$}
-	\BIC{$\G_{1},\G_{2} \To D$}
-	\DP
-}
-
-
-%LK
-\def\LKetR{
-	\AXC	{$\G \To A,\D$}
-	\AXC	{$\G \To B,\D$}
-	\RightLabel{$(\land R)$}
-	\BIC{$\G \To A\land B,\D$}
-	\DP
-}
-\def\LKouR{
-	\AXC	{$\G \To A,B,\D$}
-	\RightLabel{$(\lor R)$}
-	\UIC{$\G \To A\lor B,\D$}
-	\DP
-}
-
-%LJ ajustement
-\def\LJimpLcontr{
-	\AXC	{$A\to B,\G \To A$}
-	\AXC	{$B,\G \To D$}
-	\RightLabel{$\to L$}
-	\BIC{$A\to B,\G \To D$}
-	\DP
-}
-\def\LJimpLcontrA{
-	\AXC	{$A\to B,\G \To A$}
-	\AXC	{$B,\G \To A$}
-	\RightLabel{$\to L$}
-	\BIC{$A\to B,\G \To A$}
-	\DP
-}
-
-
-
-%LJT
-\def\LJTimpLun{
-	\AXC	{$B,A,\G \;\To\; D$}
-	\RightLabel{$(\to L_{1})$}
-	\UIC{$A\to B, A,\G \;\To\; D$}
-	\DP
-}
-\def\LJTimpLdeux{
-	\AXC	{$A_{1}\to(A_{2}\to B) \,,\; \G \;\To\; D$}
-	\RightLabel{$(\to L_{2})$}
-	\UIC{$(A_{1}\land A_{2})\to B \,,\; \G \;\To\; D$}
-	\DP
-}
 
 
 
@@ -511,16 +234,6 @@ C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent
 
  %on ne peut prouver le séquent $\To A$, ni le séquent $\To 
 %, où on applique l'axiome Id à une occurrence de $A$ venant du $\lnot A$ 
-\def\LKTiersExclu{
-	\AXC	{}
-	\RightLabel{Id}
-	\UIC	{$A \To A, \bot$}
-	\RightLabel{$\to R$}
-	\UIC	{$\To A, (A\to\bot)$}
-	\RightLabel{$\lor R$}
-	\UIC{$\To A\lor (A\to\bot)$}
-	\DP
-}
 
 \begin{figure}[h]
 \centering
@@ -529,10 +242,6 @@ C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent
 \caption{Preuve dans \LK\ de $A\lor\lnot A$}
 \label{fig:LKTiersExclu}
 \end{figure}
-
-
-
-
 
 
 %%%%
@@ -693,44 +402,6 @@ du numéro de la prémisse concernée et de la formule principale. Une règle dont t
 %a besoin de quelques ajustements pour pouvoir être appliqué à la recherche automatique de preuves
 Pour appliquer le calcul \LJ\ présenté dans la première partie à la recherche automatique de preuves, il faut quelques ajustements sur le calcul lui-même et sur l'algorithme proposé. Il faut notamment enlever la règle de coupure (figure~\ref{fig:reglesLJ}, \emph{cut}), ce qui est possible car le calcul reste évidemment correct, mais surtout complet. Pour la même raison, on peut aussi enlever la règle \emph{weakening}. En revanche, on ne peut pas supprimer purement et simplement la règle\LJcontraction. On ne pourrait en effet plus prouver la formule bien connue $\lnot\lnot(A\lor\lnot A)$%, dont une preuve est donnée en figure ?.
 \ (voir figure~\ref{fig:LJnnTiersExclu}). Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithme. Une solution consiste à remplacer les deux règles $contraction\ L$ et \LJimpL\ par une seule règle \LJimpLcontr. On n'a alors plus d'appels récursifs sur des séquents strictement croissants $\G,A\To D$ puis $\G,A,A\To D$ puis $\G,A,A,A\To D$ etc. En revanche, on peut avoir un appel récursif sur un séquent déjà rencontré, par exemple si $D=A$, une prémisse est identique à la conclusion dans \LJimpLcontrA. On ajoute alors un système de détection de cycles en retenant tous les séquents rencontrés. L'algorithme obtenu est correct et termine. On a la propriété de la sous-formule. Les règles sont toutes inversibles et locales sauf $\to L$, dont seule la deuxième prémisse est inversible. Mais la détection de cycles est très coûteuse.
-
-\def\LJnnTiersExclu{
-%	\AXC	{}
-%	\RightLabel{Id}
-%	\UIC	{$A \To A, \bot$}
-%	\RightLabel{$\to R$}
-%	\UIC	{$\To A, (A\to\bot)$}
-%	\RightLabel{$\lor R$}
-	
-	\AXC	{}
-	\RightLabel{(Id)}
-	\UIC	{$A \;\To\; A$}
-	\RightLabel{$(\lor R_{1})$}
-	\UIC	{$A \;\To\; A\lor (A\to\bot)$}
-	
-		\AXC	{}
-		\RightLabel{$(\bot L)$}
-		\UIC	{$\bot,A \;\To\; \bot$}
-	
-	\RightLabel{$(\to L)$}
-	\BIC	{$A,(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
-	\RightLabel{$(\to R)$}
-	\UIC	{$(A\lor (A\to\bot))\to\bot \;\To\; A\to\bot$}
-	\RightLabel{$(\lor R_{2})$}
-	\UIC	{\colorbox{yellow}{$(A\lor (A\to\bot))\to\bot \;\To\; A\lor (A\to\bot)$}}
-	
-		\AXC	{}
-		\RightLabel{$(\bot L)$}
-		\UIC	{$\bot,(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
-	
-	\RightLabel{$(\to L)$}
-	\BIC	{$(A\lor (A\to\bot))\to\bot \,,\; (A\lor (A\to\bot))\to\bot \;\To\; \bot$}
-	\RightLabel{$(contraction\ L)$}
-	\UIC	{$(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
-	\RightLabel{$(\to R)$}
-	\UIC{$\;\To\; ((A\lor (A\to\bot))\to\bot)\to\bot$}
-	\DP
-}
 
 \begin{figure}[h]
 \centering
