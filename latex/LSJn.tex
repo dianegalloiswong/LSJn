@@ -11,7 +11,12 @@
 %\usepackage{fancyvrb}
 %\usepackage{pgf,tikz}
 %\usetikzlibrary{arrows}
+\usepackage{xcolor}
+%\usepackage{multicol}
+%\usepackage[cm]{fullpage}
 \usepackage{amsthm} %pour les théorèmes sans numéro
+\usepackage{array,multirow,makecell}
+
 
 
 \newcounter{moncompteur}
@@ -46,9 +51,6 @@
 \newcommand{\card}{\mathrm{card}}
 
 %TIPE
-%\usepackage{multicol}
-%\usepackage[cm]{fullpage}
-%\usepackage{xcolor}
 %\newcommand{\A}{A^*}
 %\newcommand{\Aa}{A^+}
 %\newcommand{\ouv}{( \thickspace}
@@ -70,6 +72,7 @@
 %stage
 \newcommand{\LK}{$\mathbf{LK}$}
 \newcommand{\LJ}{$\mathbf{LJ}$}
+\newcommand{\LJT}{$\mathbf{LJT}$}
 \newcommand{\LSJ}{$\mathbf{LSJ}$}
 \newcommand{\LSJn}{$\mathbf{LSJ'}$}
 
@@ -140,103 +143,150 @@
 	\UIC{$\s$}
 	\DP
 }
-
-
-
-%LJ, règles structurelles
-\def\echange{
-	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
-	\RightLabel{$(permut.\ L)$}
-	\UIC{$\G_{1},B,A,\G_{2} \To D$}
+\def\instancedeux{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{$\s_{2}$}
+	\BIC{$\s$}
 	\DP
 }
-\def\contraction{
-	\AXC	{$\G,A,A \To D$}
-	\RightLabel{$(contraction\ L)$}
-	\UIC{$\G,A \To D$}
-	\DP
-}
-\def\weakening{
-	\AXC	{$\G \To D$}
-	\RightLabel{$(weakening\ L)$}
-	\UIC{$\G,A \To D$}
-	\DP
-}
+
+
+%LJ
 %LJ, axiomes
 \def\LJId{
 	\AXC	{}
-	\RightLabel{Id}
+	\RightLabel{(Id)}
 	\UIC{$A,\G \To A$}
 	\DP
 }
 \def\LJbotL{
 	\AXC	{}
-	\RightLabel{$\bot L$}
+	\RightLabel{$(\bot L)$}
 	\UIC{$\bot,\G \To D$}
 	\DP
 }
 %LJ,règles logiques
 \def\LJetL{
 	\AXC	{$A,B,\G \To D$}
-	\RightLabel{$\land L$}
+	\RightLabel{$(\land L)$}
 	\UIC{$A\land B,\G \To D$}
 	\DP
 }
 \def\LJetR{
 	\AXC	{$\G \To A$}
 	\AXC	{$\G \To B$}
-	\RightLabel{$\land R$}
+	\RightLabel{$(\land R)$}
 	\BIC{$\G \To A\land B$}
 	\DP
 }
 \def\LJouL{
 	\AXC	{$A,\G \To D$}
 	\AXC	{$B,\G \To D$}
-	\RightLabel{$\lor L$}
+	\RightLabel{$(\lor L)$}
 	\BIC{$A\lor B,\G \To D$}
 	\DP
 }
 \def\LJouRun{
 	\AXC	{$\G \To A$}
-	\RightLabel{$\lor R_{1}$}
+	\RightLabel{$(\lor R_{1})$}
 	\UIC{$\G \To A\lor B$}
 	\DP
 }
 \def\LJouRdeux{
 	\AXC	{$\G \To B$}
-	\RightLabel{$\lor R_{2}$}
+	\RightLabel{$(\lor R_{2})$}
 	\UIC{$\G \To A\lor B$}
 	\DP
 }
 \def\LJimpL{
 	\AXC	{$\G \To A$}
 	\AXC	{$B,\G \To D$}
-	\RightLabel{$\to L$}
+	\RightLabel{$(\to L)$}
 	\BIC{$A\to B,\G \To D$}
 	\DP
 }
 \def\LJimpR{
 	\AXC	{$A,\G \To B$}
-	\RightLabel{$\to R$}
+	\RightLabel{$(\to R)$}
 	\UIC{$\G \To A\to B$}
 	\DP
 }
+%LJ, règles structurelles
+\def\LJechange{
+	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
+	\RightLabel{$(permut.\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To D$}
+	\DP
+}
+\def\LJcontraction{
+	\AXC	{$\G,A,A \To D$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+\def\LJweakening{
+	\AXC	{$\G \To D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+%LJ, coupure
+\def\LJcut{
+	\AXC	{$\G_{1} \To A$}
+	\AXC	{$\G_{2},A \To D$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G_{1},\G_{2} \To D$}
+	\DP
+}
+
 
 %LK
 \def\LKetR{
 	\AXC	{$\G \To A,\D$}
 	\AXC	{$\G \To B,\D$}
-	\RightLabel{$\land R$}
+	\RightLabel{$(\land R)$}
 	\BIC{$\G \To A\land B,\D$}
 	\DP
 }
 \def\LKouR{
 	\AXC	{$\G \To A,B,\D$}
-	\RightLabel{$\lor R$}
+	\RightLabel{$(\lor R)$}
 	\UIC{$\G \To A\lor B,\D$}
 	\DP
 }
 
+%LJ ajustement
+\def\LJimpLcontr{
+	\AXC	{$A\to B,\G \To A$}
+	\AXC	{$B,\G \To D$}
+	\RightLabel{$\to L$}
+	\BIC{$A\to B,\G \To D$}
+	\DP
+}
+\def\LJimpLcontrA{
+	\AXC	{$A\to B,\G \To A$}
+	\AXC	{$B,\G \To A$}
+	\RightLabel{$\to L$}
+	\BIC{$A\to B,\G \To A$}
+	\DP
+}
+
+
+
+%LJT
+\def\LJTimpLun{
+	\AXC	{$B,A,\G \;\To\; D$}
+	\RightLabel{$(\to L_{1})$}
+	\UIC{$A\to B, A,\G \;\To\; D$}
+	\DP
+}
+\def\LJTimpLdeux{
+	\AXC	{$A_{1}\to(A_{2}\to B) \,,\; \G \;\To\; D$}
+	\RightLabel{$(\to L_{2})$}
+	\UIC{$(A_{1}\land A_{2})\to B \,,\; \G \;\To\; D$}
+	\DP
+}
 
 
 
@@ -280,31 +330,103 @@ On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le n
 %Un \textbf{séquent} de \LK\ est la donnée de deux multiensembles de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on écrit $\G \To \D$.
 
 \begin{df*}
-Un \textbf{\emph{séquent}} de \LJ\ est la donnée d'un multiensemble de formules $\G$ (les ``hypothèses'') et d'une formule $D$ (la ``conclusion'') ; on écrit $\G \To D$.
+%est la donnée de
+%est constitué de
+Un \textbf{\emph{séquent}} de \LJ\ est consiste en un multiensemble de formules $\G$ (les ``hypothèses'') et une formule $D$ (la ``conclusion'') ; on écrit $\G \To D$.
 \end{df*}
 
 
 
-Les \textbf{règles} du calcul \LJ\ sont données dans la figure~\ref{fig:reglesLJ}.  Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les \textbf{prémisses}, et $concl$ la \textbf{conclusion}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques. La distinction entre règles \emph{logiques} et \emph{structurelles} sera expliquée plus loin.
+Les \textbf{\emph{règles}} du calcul \LJ\ sont données dans la figure~\ref{fig:reglesLJ}.  Pour une règle \regle, $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les \textbf{\emph{prémisses}}, et $concl$ la \textbf{\emph{conclusion}}. Les prémisses et la conclusion sont des séquents où $A$, $B$, $D$ sont des formules quelconques et $\G$ un multiensemble de formules quelconques. 
+%La distinction entre règles \emph{logiques} et \emph{structurelles} sera expliquée plus loin.
+ Les \emph{axiomes} sont les règles sans prémisse.
+On distingue deux grandes familles de règles. Les \emph{règles logiques} remplacent une formule de la conclusion par une ou des formules plus simples. La formule remplacée, appelée \emph{formule principale}, doit avoir une forme donnée en fonction de la règle. Les \emph{règles structurelles} manipulent la structure du séquent en enlevant, dupliquant, dépla\c cant des formules dont on n'a pas besoin de connaître la forme. Elles dépendent du choix de structure du séquent : si on avait 
+%choisi de réprésenter 
+représenté
+$\G$ par une liste et non un multiensemble, on aurait eu besoin d'ajouter une règle d'échange\LJechange.
+
+%On distingue généralement deux sortes de règles. Les \emph{règles logiques} remplacent une formule de la conclusion par une ou des formules plus simples. La formule remplacée, appelée \emph{formule principale}, doit avoir une forme donnée en fonction de la règle. Les \emph{règles structurelles} manipulent la structure du séquent en enlevant, dupliquant, dépla\c cant des formules dont on n'a pas besoin de connaître la forme. Elles dépendent du choix de structure du séquent : pour le calcul \LJ, si on avait choisi de réprésenter $\G$ par une liste et non un multiensemble, on aurait eu besoin d'ajouter une règle d'échange \echange.
+
+
 
 Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Elle diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ. On peut d'ailleurs facilement passer d'une définition à l'autre à l'aide des règles structurelles.
-
+{
+%\setcellgapes{4pt}
+\renewcommand{\arraystretch}{2}
+%\setlength{\extrarowheight}{1.5pt}
 \begin{figure}[h]
 \centering
 
-$$\begin{array}{cc}
-	\LJbotL & \LJId \\\\
-	\LJetL & \LJetR \\\\
-	\LJouL & \quad\LJouRun \quad \LJouRdeux \\\\
-	\LJimpL & \LJimpR 
-%	\multicolumn{2}{c}{\impL}\\\\
-%	\multicolumn{2}{c}{\impR}
-\end{array}$$
+%$\begin{tabular}{cc|}
+%	\LJbotL & \LJId \\ \hline
+%	\LJetL & \LJetR \\
+%	\LJouL & \quad\LJouRun \quad \LJouRdeux \\
+%	\LJimpL & \LJimpR 
+%%	\multicolumn{2}{c}{\impL}\\\\
+%%	\multicolumn{2}{c}{\impR}
+%\end{tabular}$
 
-\caption{Axiomes et règles logiques du calcul \LJ}
+%\def\identite{
+%\begin{tabular}{cc}
+%	\emph{Identité} \qquad&\qquad \LJId
+%\end{tabular}
+%}
+%\def\coupure{
+%\begin{tabular}{cc}
+%	\emph{Coupure} & \LJcut
+%\end{tabular}
+%}
+%\def\logiques{
+%$\begin{tabular}{cc}
+%%	\LJbotL & \LJId \\ \hline
+%%	\multicolumn{2}{c}{\emph{Règles logiques}} \\
+%	\LJbotL & \emph{Règles logiques} \\
+%	\LJetL & \LJetR \\
+%	\LJouL & \LJouRun \LJouRdeux \\
+%	\LJimpL & \LJimpR 
+%\end{tabular}$
+%}
+%\def\structurelles{
+%$\begin{tabular}{c}
+%	\emph{Règles structurelles} \\
+%	\LJweakening \\
+%	\LJcontraction
+%\end{tabular}$
+%}
+%
+%%$\begin{tabular}{cc|}
+%%%	\LJbotL & \LJId \\ \hline 
+%%	\multicolumn{2}{c}{\logiques}
+%%\end{tabular}$
+%$\begin{tabular}{|c|c|}
+%	\hline
+%	\identite & \coupure \\
+%	\hline 
+%	{\logiques} & \structurelles \\
+%	\hline
+%\end{tabular}$
+
+$\begin{tabular}{|cc|c|}
+	\hline
+	\textbf{\large{Identité}} & \LJId & \textbf{\large{Coupure}} \\
+	\cline{1-2}
+	\LJbotL & \textbf{\large{Règles logiques}} & \LJcut \\[4pt]
+	\cline{3-3}
+	\LJetL & \LJetR & \textbf{\large{Règles structurelles}} \\
+	\LJouL & \LJouRun \LJouRdeux & \LJweakening \\
+	\LJimpL & \LJimpR & \LJcontraction \\[4pt]
+	\hline
+%
+%	\emph{Règles structurelles} \\
+%	\LJweakening \\
+%	\LJcontraction
+\end{tabular}$
+
+
+\caption{Règles du calcul \LJ}
 \label{fig:reglesLJ}
 \end{figure}
-
+}
 
 %\
 %
@@ -321,30 +443,56 @@ $$\begin{array}{cc}
 
 
 
-\subsection{Prouvabilité}
+%\subsection{Prouvabilité}
+%
+%
+%
+%Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
+%
+%Une \textbf{\emph{preuve}} (ou \emph{arbre de preuve}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
+%
+%\begin{df*}
+%Un séquent $\s$ est \textbf{\emph{prouvable}} par le calcul \LJ\ s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+%\end{df*}
+%
+%Ceci nous permet de définir la prouvabilité en logique intuitionniste.
+%
+%\begin{df*}
+%Une formule $A$ est \textbf{\emph{prouvable en logique intuitionniste}} si le séquent $\;\To A$ est prouvable par le calcul \LJ\ (on écrit $\;\To A$ pour $\emptyset \To A$).
+%\end{df*}
+%
+%\noindent
+%\textbf{Interprétation d'un séquent.}
+%%Les séquents sont des structures pratiques pour le calcul de séquents où ils sont manipulés à l'aide de règles, mais ils 
+%%Les séquents, en plus d'être des structures pratiques pour le calcul de séquents où ils sont manipulés à l'aide de règles, 
+%Les séquents, en plus d'être des structures pratiques à manipuler à l'aide de règles, 
+%ont en eux-mêmes une interprétation logique très simple grâce à la propriété suivante : un séquent $\G \To D$ est prouvable par le calcul \LJ\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ est prouvable en logique intuitionniste.
+%
 
 
 
+\subsection{Prouvabilité d'un séquent}
+
+Les définitions suivantes s'appliquent aux calculs de séquents en général, pas seulement \LJ.
 Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
-
 Une \textbf{\emph{preuve}} (ou \emph{arbre de preuve}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
 \begin{df*}
-Un séquent $\s$ est \textbf{\emph{prouvable}} par le calcul \LJ\ s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+Un séquent $\s$ est \textbf{\emph{prouvable}} (\emph{dans} ou \emph{par un calcul de séqents considéré}) s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
 \end{df*}
 
-Ceci nous permet de définir la prouvabilité en logique intuitionniste.
+\subsection{Une définition de la logique intuitionniste}
+
+On peut maintenant donner une définition de la prouvabilité d'une formule en logique intuitionniste. L'idée est qu'un séquent $\G\To D$ représente la formule $\left(\bigwedge_{G\in\G}G\right)\to D$.
 
 \begin{df*}
 Une formule $A$ est \textbf{\emph{prouvable en logique intuitionniste}} si le séquent $\;\To A$ est prouvable par le calcul \LJ\ (on écrit $\;\To A$ pour $\emptyset \To A$).
 \end{df*}
 
-\noindent
-\textbf{Interprétation d'un séquent.}
-%Les séquents sont des structures pratiques pour le calcul de séquents où ils sont manipulés à l'aide de règles, mais ils 
-%Les séquents, en plus d'être des structures pratiques pour le calcul de séquents où ils sont manipulés à l'aide de règles, 
-Les séquents, en plus d'être des structures pratiques à manipuler à l'aide de règles, 
-ont en eux-mêmes une interprétation logique très simple grâce à la propriété suivante : un séquent $\G \To D$ est prouvable par le calcul \LJ\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ est prouvable en logique intuitionniste.
+Il existe de nombreuses autres manières d'aborder la logique intuitionniste, par exemple avec les modèles de Kripke (voir ?).
+
+
+
 
 
 \subsection{Comparaison avec la logique classique (calcul \LK)}
@@ -352,11 +500,17 @@ ont en eux-mêmes une interprétation logique très simple grâce à la propriété sui
 %\noindent
 %\emph{Remarque.}
 %Le calcul \LJ\ a été dérivé d'un calcul \LK\
-La logique classique peut être définie à l'aide d'un calcul de séquents appelé \LK, très similaire à \LJ\ (en fait, c'est \LJ\ qui a été dérivé de \LK\ pour passer de la logique classique à la logique intuitionniste). Un séquent de \LK\ comporte un autre multiensemble $\D$ de ``conclusions'' au lieu d'une unique conclusion $D$ : on écrit $\G \To \D$. Un tel séquent a également une interprétation logique : il est prouvable par \LK\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ est vraie en logique classique.
+La logique classique peut être définie à l'aide d'un calcul de séquents appelé \LK, très similaire à \LJ\ (en fait, c'est \LJ\ qui a été dérivé de \LK\ pour passer de la logique classique à la logique intuitionniste). Un séquent de \LK\ comporte un autre multiensemble $\D$ de ``conclusions'' au lieu d'une unique conclusion $D$ : on écrit $\G \To \D$. Un tel séquent a également une interprétation logique : 
+%il est prouvable par \LK\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ est vraie en logique classique.
+il représente la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique classique.
 
  Les règles sont modifiées en conséquence : par exemple\LKetR\ remplace\LJetR. Bien entendu, on ajoute aussi des règles structurelles agissant sur $\D$.
  Mais surtout, on n'a plus qu'une règle pour le $\lor$ à droite :\LKouR. (Dans d'autres définitions, on garde deux règles distinctes, mais la règle que nous donnons ici peut être déduite de ces deux règles et de règles structurelles.)
- 
+  
+C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve du principe du tiers exclu $A\lor\lnot A$ (figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : si on peut appliquer l'axiome Id à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut prouver $A\lor\lnot A$, car ni $\;\To A$ ni $\;\To \lnot A$ n'est prouvable.
+
+ %on ne peut prouver le séquent $\To A$, ni le séquent $\To 
+%, où on applique l'axiome Id à une occurrence de $A$ venant du $\lnot A$ 
 \def\LKTiersExclu{
 	\AXC	{}
 	\RightLabel{Id}
@@ -367,12 +521,6 @@ La logique classique peut être définie à l'aide d'un calcul de séquents appelé \
 	\UIC{$\To A\lor (A\to\bot)$}
 	\DP
 }
-
- 
-C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve du principe du tiers exclu $A\lor\lnot A$ (figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : si on peut appliquer l'axiome Id à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut prouver $A\lor\lnot A$, car ni $\;\To A$ ni $\;\To \lnot A$ n'est prouvable.
-
- %on ne peut prouver le séquent $\To A$, ni le séquent $\To 
-%, où on applique l'axiome Id à une occurrence de $A$ venant du $\lnot A$ 
 
 \begin{figure}[h]
 \centering
@@ -387,66 +535,219 @@ C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent
 
 
 
+%%%%
+%
+%%\section{Avantages et inconvénients de différents calculs de séquents pour la logique intuitionniste}
+%\section{Application du calcul de séquents à la recherche de preuve automatisée. Comparaison des différents systèmes}
+%
+%Un calcul de séquents est généralement défini par sa propre définition d'un séquent ainsi qu'un ensemble de règles. Il est souvent attaché à une logique : à partir d'une formule, on peut construire un séquent qui est prouvable si et seulement si la formule est ``prouvable'' ou ``vraie'' dans la logique en question (l'appellation dépend de la logique). Il existe plusieurs calculs de séquents pour la logique intuitionniste, sans parler des nombreuses autres logiques existantes.
+%
+%\
+%
+%\noindent
+%\textbf{Algorithme.}
+%Un calcul de séquents suggère naturellement un algorithme de recherche de preuve : pour essayer de prouver un séquent, on choisit une règle dont il peut être la conclusion et on essaie de prouver les prémisses correspondantes. Si elles sont toutes prouvables (notamment, s'il n'y en a pas : si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès (pour chacune, au moins une prémisse est non prouvable), on conclut que le séquent initial n'est pas prouvable.
+%
+%Un tel algorithme est correct par construction et d'après la définition de la prouvabilité d'un séquent. En revanche, les causes possibles de non terminaison sont nombreuses. Assurer la terminaison est une des raisons qui rendent certaines propriétés sur les calculs de séquents très intéressantes.
+%
+%
+%\
+%
+%\noindent
+%\textbf{Classification des règles.}
+%On distingue généralement deux sortes de règles. Les \emph{règles logiques} remplacent une formule de la conclusion par une ou des formules plus simples. La formule remplacée, appelée \emph{formule principale}, doit avoir une forme donnée en fonction de la règle. Les \emph{règles structurelles} manipulent la structure du séquent en enlevant, dupliquant, dépla\c cant des formules dont on n'a pas besoin de connaître la forme. Elles dépendent du choix de structure du séquent : pour le calcul \LJ, si on avait choisi de réprésenter $\G$ par une liste et non un multiensemble, on aurait eu besoin d'ajouter une règle d'échange \echange.
+%
+%\
+%
+%\noindent
+%\textbf{Coupure.}
+%La règle de coupure (figure~1, ``cut'') condamne l'algorithme à elle seule, puisqu'il peut y avoir une infinité de prémisses associées à une conclusion donnée. Heureusement, cette règle est souvent non nécessaire : de nombreux calculs de séquents possèdent la propriété d'élimination de la coupure, si bien qu'on peut faire comme si cette règle n'existait pas. C'est une propriété souvent difficile à démontrer, mais on ne s'y intéressera pas. Désormais, on présentera des calculs sans donner de règle de coupure.
+%
+%
+%\
+%
+%\noindent
+%\textbf{Règles structurelles et coupure à éviter.}
+%
+%
+%
+%
+%La règle de coupure (figure~1, ``cut'') condamne l'algorithme à elle seule, puisqu'il peut y avoir une infinité de prémisses associées à une conclusion donnée. Pour commencer, on veut donc un calcul où le nombre d'instances ayant une conclusion donnée est toujours fini. Mais même ainsi, comme pour essayer de prouver un séquent, on rappelle l'algorithme sur d'autres séquents, il faut un argument soigneux de terminaison : par exemple, associer à chaque séquent une ``taille'' entière positive, telle que pour toute instance des règles, les ``tailles'' de toutes les prémisses sont strictement inférieures à celle de la conclusion. Comme on le verra, la propriété de la sous-formule est bien pratique pour ce point-là.
+%
+%%il n'a pas de raison de terminer a priori. 
+%
+%%:  si on obtient qu'un séquent est prouvable, on  a en fait trouvé un arbre de preuve correspondant par construction de l'algorithme ; si on obtient qu'il n'est pas prouvable, cela signifie qu'il n'existe aucune instance de règle dont il est la conclusion et dont les prémisses sont prouvables, donc il ne peut pas être associé à la racine d'un arbre de preuve.
+%
+%
+%
+%
+%\subsection{\LJ\ : existence de cycles}
+%
+%
+%
+%
+%
+%
+%\
+%
+%
+%nécessité de contraction ou réécriture de $\to L$ (preuve de $\lnot\lnot(A\lor\lnot A)$)
+%
+%LJT
 
 
-%\section{Avantages et inconvénients de différents calculs de séquents pour la logique intuitionniste}
-\section{Application du calcul de séquents à la recherche de preuve automatisée. Comparaison des différents systèmes}
+%%%%%%%%%
 
-Un calcul de séquents est généralement défini par sa propre définition d'un séquent ainsi qu'un ensemble de règles. Il est souvent attaché à une logique : à partir d'une formule, on peut construire un séquent qui est prouvable si et seulement si la formule est ``prouvable'' ou ``vraie'' dans la logique en question (l'appellation dépend de la logique). Il existe plusieurs calculs de séquents pour la logique intuitionniste, sans parler des nombreuses autres logiques existantes.
+
+\section{D'un calcul de séquents à une recherche de preuve automatisée. Avantages et inconvénients de différents calculs}
+
+Il existe plusieurs calculs de séquents pour la logique intuitionniste, sans parler des nombreuses autres logiques existantes. Un tel calcul comporte ses propres définition d'un séquent, règles, et construction pour chaque formule d'un séquent qui est prouvable par le calcul ssi la formule est prouvable en logique intuitionniste. En dériver l'algorithme de recherche de preuve ci-après est assez naturel. Sa correction est immédiate par construction. En revanche, la terminaison pose problème. 
+%Il faut parfois complexifier beaucoup l'algorithme pour l'assurer. Afin d'éviter de devoir le faire, il faut certaines propriétés sur le calcul de séquents. 
+Elle n'est pas toujours assurée, et même quand elle l'est, souvent difficile à prouver.
+Nous présentons %l'algorithme générique, puis 
+quelques propriétés sur les calculs de séquents
+qui sont intéressantes pour assurer la terminaison et améliorer la complexité de l'algorithme qui leur est associé. Enfin, nous comparons quelques calculs de séquents existants pour la logique intuitionniste.
+
+
+
+\subsection{Algorithme de recherche de preuve}
+
+%Un calcul de séquents suggère naturellement un algorithme de recherche de preuve : pour essayer de prouver un séquent, 
+On considère un calcul de séquents. Pour déterminer si un séquent est prouvable,
+on choisit une règle dont il peut être la conclusion et on 
+%essaie de prouver les 
+applique récursivement la recherche de preuve aux
+prémisses correspondantes. Si elles sont toutes prouvables (en particulier, s'il n'y en a pas : si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès, c'est-à-dire que pour chacune, au moins une prémisse est non prouvable (en particulier, s'il n'y a aucune règle applicable : si le séquent n'est la conclusion d'aucune instance), on conclut que le séquent initial n'est pas prouvable.
+
+Cet algorithme est correct par construction et d'après la définition de la prouvabilité d'un séquent. En revanche, 
+%sans certaines conditions, il ne termine pas toujours.
+il y a des causes possibles de non terminaison, qui se regroupent en deux catégories : ``largeur'' infinie, ``profondeur'' infinie. Pour éviter une ``largeur'' infinie,
+il faut que pour un séquent donné, le nombre d'instances dont il est conclusion soit fini.
+En ce qui concerne le problème de ``profondeur'' dû à la récursivité, on peut par exemple
+%associer à chaque séquent une valeur dans un ensemble bien ordonné, de sorte que pour toute instance de règle, les valeurs associées aux prémisses sont toutes strictement inférieures à celle associée à la conclusion. 
+munir les séquents d'un ordre bien fondé, de sorte que pour toute instance de règle, les prémisses sont toutes strictement inférieures à la conclusion.
+%Comme on le verra, la propriété de la sous-formule est bien pratique pour cela.
+%La propriété de la sous-formule qu'on verra plus loin est bien pratique pour cela.
+%associer à chaque séquent un entier positif, de sorte que pour toute instance de règle, les entiers associés aux prémisses sont tous strictement inférieurs à celui associé à la conclusion. Comme on le verra, la propriété de la sous-formule est bien pratique pour cela.
+
+
+\subsection{Propriétés intéressantes des calculs de séquents}
+
+
+\noindent
+\textit{Remarque : la règle de coupure.}
+La règle de coupure, par exemple pour \LJ\ : \LJcut, rend l'algorithme proposé inutilisable parce qu'il ne termine jamais. En effet, on explore indéfiniment en ``largeur'', car le nombre d'instances dont un séquent donné est conclusion est infini, $A$ pouvant être n'importe quelle formule. Heureusement, cette règle est souvent non nécessaire. De nombreux calculs la formulent car c'est une bonne chose que l'implication représentée par un séquent soit transitive, mais s'en passent ensuite grâce à un \emph{théorème d'élimination de la coupure} (souvent difficile à établir). Quoi qu'il en soit, on ne s'intéresse désormais qu'à des calculs dans lesquels cette règle n'est pas énoncée.
 
 \
 
 \noindent
-\textbf{Algorithme.}
-Un calcul de séquents suggère naturellement un algorithme de recherche de preuve : pour essayer de prouver un séquent, on choisit une règle dont il peut être la conclusion et on essaie de prouver les prémisses correspondantes. Si elles sont toutes prouvables (notamment, s'il n'y en a pas : si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès (pour chacune, au moins une prémisse est non prouvable), on conclut que le séquent initial n'est pas prouvable.
+\textbf{Absence de duplication.}
+%Les règles de duplication, par exemple 
+Certaines règles, comme la contraction à gauche de \LJ\ : 
 
-Un tel algorithme est correct par construction et d'après la définition de la prouvabilité d'un séquent. En revanche, les causes possibles de non terminaison sont nombreuses. Assurer la terminaison est une des raisons qui rendent certaines propriétés sur les calculs de séquents très intéressantes.
-
+\noindent
+\LJcontraction, sont problématiques pour la terminaison de l'algorithme. En effet, pour essayer de prouver $\G,A\To D$, on peut être amené à essayer de prouver $\G,A,A\To D$, puis en appliquant encore la même règle à essayer de prouver $\G,A,A,A\To D$, et ainsi de suite, sans fin. On parle de duplication car au cours de notre recherche de preuve, on passe de la conclusion à la prémisse en dupliquant la formule $A$. Il est tout de même possible d'adapter l'algorithme à une duplication dans certains cas, comme on le verra pour le calcul \LJ.
 
 \
 
 \noindent
-\textbf{Classification des règles.}
-On distingue généralement deux sortes de règles. Les \emph{règles logiques} remplacent une formule de la conclusion par une ou des formules plus simples. La formule remplacée, appelée \emph{formule principale}, doit avoir une forme donnée en fonction de la règle. Les \emph{règles structurelles} manipulent la structure du séquent en enlevant, dupliquant, dépla\c cant des formules dont on n'a pas besoin de connaître la forme. Elles dépendent du choix de structure du séquent : pour le calcul \LJ, si on avait choisi de réprésenter $\G$ par une liste et non un multiensemble, on aurait eu besoin d'ajouter une règle d'échange \echange.
+\textbf{Propriété de la sous-formule.}
+La formule $B$ est une \textbf{\emph{sous-formule}} de la formule $A$ si $B$ est égale à $A$ ou si $A$ est de la forme $A_{1}$`connecteur'$A_{2}$ et [$B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formules de $A_{2}$]. Un calcul de séquents vérifie la \textbf{\emph{propriété de la sous-formule}} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) la preuve est une sous-formule d'une formule de $\s$. 
+%En particulier, le séquent $\To A$ a une preuve dans laquelle toute formule est une sous-formule de $A$.
+%
+La propriété de la sous-formule est très utile pour un calcul de séquents. 
+%Souvent, le calcul présente une propriété un peu plus forte, qui assure la terminaison de l'algorithme : toutes les règles sont des règles logiques où on passe de la conclusion aux prémisses en rempla\c cant une formule principale d'une forme donnée par une ou plusieurs sous-formules strictes. Dans ce cas
+Souvent, elle fait partie des arguments qui permettent de montrer la terminaison. Elle fournit en effet un ordre bien fondé sur les formules, qu'il reste à étendre de fa\c con bien choisie aux séquents.
+%Elle permet de montrer assez facilement la terminaison de l'algorithme dans le cas où toutes les règles sont des règles logiques : on remplace une formule d'une forme donnée dans la conclusion par des
+%
+%La propriété de la sous-formule
+Elle est également utile lors de l'implémentation : si on veut appliquer la recherche de preuve à un séquent donné, on peut connaître à l'avance la liste exhaustive de toutes les formules susceptibles d'apparaître. On peut donc effectuer une indexation préliminaire, puis représenter les formules par des objets de taille constante, par exemple des entiers, au lieu d'arbres qui peuvent être coûteux en mémoire. Voir la sous-section ? pour un exemple détaillé d'une telle indexation.
 
 \
 
 \noindent
-\textbf{Coupure.}
-La règle de coupure (figure~1, ``cut'') condamne l'algorithme à elle seule, puisqu'il peut y avoir une infinité de prémisses associées à une conclusion donnée. Heureusement, cette règle est souvent non nécessaire : de nombreux calculs de séquents possèdent la propriété d'élimination de la coupure, si bien qu'on peut faire comme si cette règle n'existait pas. C'est une propriété souvent difficile à démontrer, mais on ne s'y intéressera pas. Désormais, on présentera des calculs sans donner de règle de coupure.
-
+\textbf{Inversibilité de certaines règles ou prémisses.}
+Dans l'algorithme proposé, il peut être assez long de montrer qu'un séquent n'est pas prouvable, puisqu'on essaie toutes les instances dont il est la conclusion. La notion d'inversibilité permet de terminer beaucoup plus rapidement dans certains cas. 
+Une prémisse $prem_{i}$ d'une règle\regle(aussi appelée \emph{$i$-ème prémisse de $\mathcal R$}) est \textbf{\emph{inversible}} si on a : si $prem_{i}$ est non prouvable, alors $concl$ est non prouvable. Une règle est \textbf{\emph{inversible}} si toutes ses prémisses sont inversibles. Ainsi, si au cours de la recherche de preuve, on obtient qu'une prémisse non inversible est non prouvable, on peut directement conclure que la conclusion ne l'est pas non plus, sans avoir besoin d'essayer d'autre règle.
 
 \
 
 \noindent
-\textbf{Règles structurelles et coupure à éviter.}
-
-
-
-
-La règle de coupure (figure~1, ``cut'') condamne l'algorithme à elle seule, puisqu'il peut y avoir une infinité de prémisses associées à une conclusion donnée. Pour commencer, on veut donc un calcul où le nombre d'instances ayant une conclusion donnée est toujours fini. Mais même ainsi, comme pour essayer de prouver un séquent, on rappelle l'algorithme sur d'autres séquents, il faut un argument soigneux de terminaison : par exemple, associer à chaque séquent une ``taille'' entière positive, telle que pour toute instance des règles, les ``tailles'' de toutes les prémisses sont strictement inférieures à celle de la conclusion. Comme on le verra, la propriété de la sous-formule est bien pratique pour ce point-là.
-
-%il n'a pas de raison de terminer a priori. 
-
-%:  si on obtient qu'un séquent est prouvable, on  a en fait trouvé un arbre de preuve correspondant par construction de l'algorithme ; si on obtient qu'il n'est pas prouvable, cela signifie qu'il n'existe aucune instance de règle dont il est la conclusion et dont les prémisses sont prouvables, donc il ne peut pas être associé à la racine d'un arbre de preuve.
-
-
-
-
-\subsection{\LJ\ : existence de cycles}
+\textbf{Localité des règles.} L'algorithme nécessite de savoir déterminer, pour un séquent donné, toutes les instances dont il est conclusion, et en particulier calculer les prémisses de ces instances. Pour une instance, la \textbf{\emph{formule principale}} est la formule de la conclusion qui joue un rôle particulier : elle est remplacée dans les prémisses par une ou plusieurs formules plus simples (règles logiques ; dans ce cas la formule doit avoir une forme particulière, par exemple présenter un connecteur donné), ou dupliquée ou supprimée (règles structurelles). Sous certaines condition (notamment, absence de règle de coupure) souvent vérifiées, on peut facilement calculer, à partir d'une conclusion donnée et d'une règle et d'un choix de formule principale %adaptée à 
+autorisé par la règle, toutes les prémisses de la seule instance correspondantes. Mais ce n'est pas tout. Lorsqu'on s'intéresse à une prémisse, on risque d'avoir à nouveau besoin plus tard de la conclusion, par exemple pour calculer une autre prémisse, ou essayer une autre instance s'il y a une prémisse non inversible non prouvable.
+%
+Une solution consiste à retenir la conclusion pendant qu'on effectue la recherche de preuve sur les différentes prémisses, mais cela peut être coûteux en mémoire. Une autre solution est possible si on sait retrouver la conclusion à partir de n'importe quelle prémisse et %d'informations moins coûteuses : le 
+du numéro de la prémisse concernée et de la formule principale. Une règle dont toutes les instances vérifient ce qui précède est dite \textbf{\emph{locale}}. Si toutes les règles sont locales, on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (numéro de prémisse et formule principale) qui sont moins coûteuses. C'est donc plus efficace en terme de complexité spatiale.
 
 
 
 
 
+\subsection{Exemples de calculs de séquents pour la logique intuitionniste}
+
+
+
+\noindent
+\textbf{\LJ.}
+%Le calcul \LJ\ présenté dans la première partie %peut difficilement être appliqué à une recherche automatique de preuve tel quel.
+%a besoin de quelques ajustements pour pouvoir être appliqué à la recherche automatique de preuves
+Pour appliquer le calcul \LJ\ présenté dans la première partie à la recherche automatique de preuves, il faut quelques ajustements sur le calcul lui-même et sur l'algorithme proposé. Il faut notamment enlever la règle de coupure (figure~\ref{fig:reglesLJ}, \emph{cut}), ce qui est possible car le calcul reste évidemment correct, mais surtout complet. Pour la même raison, on peut aussi enlever la règle \emph{weakening}. En revanche, on ne peut pas supprimer purement et simplement la règle\LJcontraction. On ne pourrait en effet plus prouver la formule bien connue $\lnot\lnot(A\lor\lnot A)$%, dont une preuve est donnée en figure ?.
+\ (voir figure~\ref{fig:LJnnTiersExclu}). Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithme. Une solution consiste à remplacer les deux règles $contraction\ L$ et \LJimpL\ par une seule règle \LJimpLcontr. On n'a alors plus d'appels récursifs sur des séquents strictement croissants $\G,A\To D$ puis $\G,A,A\To D$ puis $\G,A,A,A\To D$ etc. En revanche, on peut avoir un appel récursif sur un séquent déjà rencontré, par exemple si $D=A$, une prémisse est identique à la conclusion dans \LJimpLcontrA. On ajoute alors un système de détection de cycles en retenant tous les séquents rencontrés. L'algorithme obtenu est correct et termine. On a la propriété de la sous-formule. Les règles sont toutes inversibles et locales sauf $\to L$, dont seule la deuxième prémisse est inversible. Mais la détection de cycles est très coûteuse.
+
+\def\LJnnTiersExclu{
+%	\AXC	{}
+%	\RightLabel{Id}
+%	\UIC	{$A \To A, \bot$}
+%	\RightLabel{$\to R$}
+%	\UIC	{$\To A, (A\to\bot)$}
+%	\RightLabel{$\lor R$}
+	
+	\AXC	{}
+	\RightLabel{(Id)}
+	\UIC	{$A \;\To\; A$}
+	\RightLabel{$(\lor R_{1})$}
+	\UIC	{$A \;\To\; A\lor (A\to\bot)$}
+	
+		\AXC	{}
+		\RightLabel{$(\bot L)$}
+		\UIC	{$\bot,A \;\To\; \bot$}
+	
+	\RightLabel{$(\to L)$}
+	\BIC	{$A,(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	\RightLabel{$(\to R)$}
+	\UIC	{$(A\lor (A\to\bot))\to\bot \;\To\; A\to\bot$}
+	\RightLabel{$(\lor R_{2})$}
+	\UIC	{\colorbox{yellow}{$(A\lor (A\to\bot))\to\bot \;\To\; A\lor (A\to\bot)$}}
+	
+		\AXC	{}
+		\RightLabel{$(\bot L)$}
+		\UIC	{$\bot,(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	
+	\RightLabel{$(\to L)$}
+	\BIC	{$(A\lor (A\to\bot))\to\bot \,,\; (A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC	{$(A\lor (A\to\bot))\to\bot \;\To\; \bot$}
+	\RightLabel{$(\to R)$}
+	\UIC{$\;\To\; ((A\lor (A\to\bot))\to\bot)\to\bot$}
+	\DP
+}
+
+\begin{figure}[h]
+\centering
+\LJnnTiersExclu
+
+\caption{Preuve dans \LJ\ de $\lnot\lnot(A\lor\lnot A)$% : on a besoin de la règle $contraction\ L$
+. Sans la règle $contraction\ L$, le séquent surligné serait $\;\To A\lor\lnot A$ qui n'est pas prouvable.
+}
+\label{fig:LJnnTiersExclu}
+\end{figure}
 
 \
 
-
-nécessité de contraction ou réécriture de $\to L$ (preuve de $\lnot\lnot(A\lor\lnot A)$)
-
-LJT
-
+\noindent
+\textbf{\LJT.}
+Le calcul \LJT\ est introduit par R. Dyckhoff dans \cite{LJT} pour pallier le problème de cycles de \LJ. Il n'y a pas de règle de contraction, et la règle $\to L$ est remplacée par quatre règles selon la structure de $A$ dans la formule principale $A\to B$ : par exemple \LJTimpLun où $A$ doit être %\emph{atomique} c'est-à-dire 
+réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la sous-formule, mais on peut quand même déterminer toutes les formules susceptibles d'apparaître lorsqu'on essaie de prouver un séquent donné. Dyckhoff montre que l'algorithme termine en choisissant bien un bon ordre sur les formules puis sur les séquents. Toutes les règles sont inversibles et locales sauf une des règles qui remplacent $\to L$, qui comporte deux prémisses dont seule la deuxième est inversible.
 
 
 
@@ -673,24 +974,6 @@ Parmi celles-ci, on privilégie celles qui n'ont qu'une prémisse ($\land L$ et $\
 \subsection{?}
 
 
-
-
-\def\instance{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s_{1}$}
-	\AXC	{...}
-	\AXC	{$\s_{p}$}
-	\TIC{$\s$}
-	\DP
-}
-
-\def\instancedeux{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s_{1}$}
-	\AXC	{$\s_{2}$}
-	\BIC{$\s$}
-	\DP
-}
 
 
 On voit immédiatement que l'algorithme nécessite de pouvoir déduire d'un séquent, d'une règle et d'une formule principale contenue dans le séquent et sur laquelle la règle peut agir, les séquents correspondant aux différentes prémisses. Ce n'est pas difficile : pour les axiomes il n'y a rien à faire ; pour les autres règles, la formule principale $H$ étant de la forme $A \text{ 'connecteur' } B$, il suffit d'enlever $H$ du séquent et, selon le connecteur et le côté où se trouvait $H$, d'ajouter $A$ ou $B$ à $\Th$, $\G$, $\D$ ou nulle part.
