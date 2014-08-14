@@ -222,6 +222,206 @@
 	\DP
 }
 
+%%%%%%%%%%%%
+
+%LSJ
+
+\def\LSJfauxL{
+	\AXC	{}
+	\RightLabel{$\bot L$}
+	\UIC{$\Th\,; \bot, \G \To \D$}
+	\DP
+}
+\def\Id{
+	\AXC	{}
+	\RightLabel{$\mathrm{Id}$}
+	\UIC{$\Th\,; A,\G \To A,\D$}
+	\DP
+}
+\def\LSJetL{
+	\AXC{$\Th\,; A, B,\G \To \D$}
+	\RightLabel{$\land L$}
+	\UIC{$\Th\,; A\land B,\G \To  \D$}
+	\DP
+}
+\def\LSJetR{
+	\AXC{$\Th\,; \G \To A,\D$}
+	\AXC{$\Th\,; \G \To B,\D$}
+	\RightLabel{$\land R$}
+	\BIC{$\Th\,; \G \To A\land B,\D$}
+	\DP
+}
+\def\LSJouL{
+	\AXC{$\Th\,; A,\G \To \D$}
+	\AXC{$\Th\,; B,\G \To \D$}
+	\RightLabel{$\lor L$}
+	\BIC{$\Th\,; A\lor B,\G \To \D$}
+	\DP
+}
+\def\LSJouR{
+	\AXC{$\Th\,; \G \To A,B,\D$}
+	\RightLabel{$\lor R$}
+	\UIC{$\Th\,; \G \To A\lor B,\D$}
+	\DP
+}
+\def\LSJimpL{
+	\AXC{$\Th\,; B,\G \To \D$}
+	\AXC{$B,\Th\,; \G \To A,\D$}
+	\AXC{$B\,; \Th,\G \To A$}
+	\RightLabel{$\to L$}
+	\TIC{$\Th\,; A\to B,\G \To \D$}
+	\DP
+}
+\def\LSJimpR{
+	\AXC{$\Th\,; A,\G \To B,\D$}
+	\AXC{$\emptyset\,; A,\Th,\G \To B$}
+	\RightLabel{$\to R$}
+	\BIC{$\Th\,; \G \To A\to B,\D$}
+	\DP
+}
+
+
+
+% LSJL
+
+
+\def\LSJLfauxL{
+	\AXC	{}
+	\RightLabel{$\bot L'$}
+	\UIC{$i:\bot, \Gp \To_{n} \Dp$}
+	\DP
+}
+\def\Id{
+	\AXC	{}
+	\RightLabel{$\mathrm{Id}'$}
+	\UIC{$i:A,\Gp \To_{n} n:A,\Dp$}
+	\DP
+}
+\def\LSJLetL{
+	\AXC{$i:A,i:B,\Gp \To_{n} \Dp$}
+	\RightLabel{$\land L'$}
+	\UIC{$i:A\land B,\Gp \To_{n} \Dp$}
+	\DP
+}
+\def\LSJLetR{
+	\AXC{$\Gp \To_{n} n:A,\Dp$}
+	\AXC{$\Gp \To_{n} n:B,\Dp$}
+	\RightLabel{$\land R'$}
+	\BIC{$\Gp \To_{n} n:A\land B,\Dp$}
+	\DP
+}
+\def\LSJLouL{
+	\AXC{$i:A,\Gp \To_{n} \Dp$}
+	\AXC{$i:B,\Gp \To_{n} \Dp$}
+	\RightLabel{$\lor L'$}
+	\BIC{$i:A\lor B,\Gp \To_{n} \Dp$}
+	\DP
+}
+\def\LSJLouR{
+	\AXC{$\Gp \To_{n} n:A,n:B,\Dp$}
+	\RightLabel{$\lor R'$}
+	\UIC{$\Gp \To_{n} n:A\lor B,\Dp$}
+	\DP
+}
+\def\LSJLimpL{
+	\AXC{$i:B,\Gp \To_{n} \Dp$}
+	\AXC{$n+1:B,\Gp \To_{n} n:A,\Dp$}
+	\AXC{$n+2:B,\Gp \To_{n+1} n+1:A, \Dp$}
+	\RightLabel{$\to L'$}
+	\TIC{$i:A\to B,\Gp \To_{n} \Dp$}
+	\DP
+}
+\def\LSJLimpR{
+	\AXC{$0:A,\Gp \To_{n} n:B,\Dp$}
+	\AXC{$0:A,\Gp \To_{n+1} n+1:B, \Dp$}
+	\RightLabel{$\to R'$}
+	\BIC{$\Gp \To_{n} n:A\to B,\Dp$}
+	\DP
+}
+
+
+% équivalence LSJL LSJ
+
+\def\instanceR{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+}
+\def\instanceRp{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s'_{1}$}
+	\AXC	{...}
+	\AXC	{$\s'_{p}$}
+	\RightLabel{$(\mathcal R')$}
+	\TIC{$\s'$}
+	\DP
+}
+\def\instanceAx{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{$(\mathcal A)$}
+	\UIC{$\s$}
+	\DP
+}
+\def\instanceAxp{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{$(\mathcal A')$}
+	\UIC{$\s'$}
+	\DP
+}
+\def\instanceId{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{(Id)}
+	\UIC{$\s$}
+	\DP
+}
+\def\instanceIdp{
+\centerAlignProof
+	\AXC	{\qquad}
+	\RightLabel{(Id$'$)}
+	\UIC{$\s'$}
+	\DP
+}
+\def\instanceetR{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{$\s_{2}$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\s$}
+	\DP
+}
+\def\instanceetRp{
+\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s'_{1}$}
+	\AXC	{$\s'_{2}$}
+	\RightLabel{($\land R'$)}
+	\BIC{$\s'$}
+	\DP
+}
+\def\instanceimpL{
+\def\defaultHypSeparation{\hskip .in}
+	\AXC	{$\s_{1}$}
+	\AXC	{$\s_{2}$}
+	\AXC	{$\s_{3}$}
+	\RightLabel{($\to L$)}
+	\TIC{$\s$}
+	\DP
+}
+\def\instanceimpLp{
+\def\defaultHypSeparation{\hskip .in}
+	\AXC	{$\s'_{1}$}
+	\AXC	{$\s'_{2}$}
+	\AXC	{$\s'_{3}$}
+	\RightLabel{($\to L'$)}
+	\TIC{$\s'$}
+	\DP
+}
 
 
 

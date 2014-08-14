@@ -39,6 +39,23 @@
 %\newtheorem{prog}[moncompteur]{ \textbf{Algorithme}}{}
 %\newtheorem{hyp}[moncompteur]{ \textbf{Hypothèse}}{}
 \newenvironment{dem}{\noindent\textbf{Preuve}\\}{\flushright$\blacksquare$\\}
+
+%\newenvironment{myindentpar}[1]%
+%{\begin{list}{}%
+%         {\setlength{\leftmargin}{#1}}%
+%         \item[]%
+%}
+%{\end{list}}
+
+\newcommand{\subsectionDescription}[1]{
+\addtocontents{toc}{%\textit{
+%\qquad\qquad
+\hangindent=3.5\parindent \hangafter=0
+\noindent
+#1
+}%}
+}
+
 %\newcommand{\cg }{[\kern-0.15em [}
 %\newcommand{\cd}{]\kern-0.15em]}
 \newcommand{\R}{\mathbb{R}}
@@ -74,7 +91,7 @@
 \newcommand{\LJ}{$\mathbf{LJ}$}
 \newcommand{\LJT}{$\mathbf{LJT}$}
 \newcommand{\LSJ}{$\mathbf{LSJ}$}
-\newcommand{\LSJn}{$\mathbf{LSJ'}$}
+\newcommand{\LSJn}{$\mathbf{LSJ\boldsymbol\ell}$}
 
 \newcommand{\s}{\sigma}
 \newcommand{\Sig}{\mathfrak S}
@@ -88,7 +105,7 @@
 
 \newcommand{\surj}{
 %\mathrm{surj}
-%\boldsymbol
+\boldsymbol
 \Phi
 }
 \newcommand{\To}{\Rightarrow}

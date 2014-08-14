@@ -40,6 +40,7 @@ On s'intéresse à la partie propositionnelle de la logique intuitionniste : les f
 %\subsection{De \LK\ à \LJ}
 \subsection{Définition du calcul \LJ}
 
+
 %Un calcul de séquents se caractérise en général par sa propre définition d'un séquent, ainsi qu'un ensemble de règles. Voici
 %Comme la plupart des calculs de séquents, le calcul \LJ\ se caractérise par une définition de ses \emph{séquents} ainsi qu'un ensemble de \emph{règles}.
 Les éléments qui caractérisent généralement un calcul de séquents sont une définition de ses \emph{séquents} et un ensemble de \emph{règles}. Présentons ceux du calcul \LJ.
@@ -195,6 +196,7 @@ $\begin{tabular}{|cc|c|}
 
 
 \subsection{Prouvabilité d'un séquent}
+\label{ProuvabiliteSequent}
 
 Les définitions suivantes s'appliquent aux calculs de séquents en général, pas seulement \LJ.
 Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
@@ -212,7 +214,7 @@ On peut maintenant donner une définition de la prouvabilité d'une formule en log
 Une formule $A$ est \textbf{\emph{prouvable en logique intuitionniste}} si le séquent $\;\To A$ est prouvable par le calcul \LJ\ (on écrit $\;\To A$ pour $\emptyset \To A$).
 \end{df*}
 
-Il existe de nombreuses autres manières d'aborder la logique intuitionniste, par exemple avec les modèles de Kripke (voir ?).
+Il existe de nombreuses autres manières d'aborder la logique intuitionniste, par exemple avec les modèles de Kripke (?).
 
 
 
@@ -223,11 +225,14 @@ Il existe de nombreuses autres manières d'aborder la logique intuitionniste, par
 %\noindent
 %\emph{Remarque.}
 %Le calcul \LJ\ a été dérivé d'un calcul \LK\
-La logique classique peut être définie à l'aide d'un calcul de séquents appelé \LK, très similaire à \LJ\ (en fait, c'est \LJ\ qui a été dérivé de \LK\ pour passer de la logique classique à la logique intuitionniste). Un séquent de \LK\ comporte un autre multiensemble $\D$ de ``conclusions'' au lieu d'une unique conclusion $D$ : on écrit $\G \To \D$. Un tel séquent a également une interprétation logique : 
+%La logique classique peut être définie à l'aide d'un calcul de séquents appelé \LK, très similaire à \LJ\ (en fait, c'est \LJ\ qui a été dérivé de \LK\ pour passer de la logique classique à la logique intuitionniste). 
+%La logique classique peut être définie à l'aide d'un calcul de séquents appelé \LK, dont \LJ\, qui en a été dérivé pour la logique intuitionniste, est très proche.
+La logique classique peut être définie à l'aide d'un calcul de séquents appelé \LK, dont \LJ\ a été dérivé pour la logique intuitionniste. Un séquent de \LK\ comporte un autre multiensemble $\D$ de ``conclusions'' au lieu d'une unique conclusion $D$ : on écrit $\G \To \D$. Un tel séquent a également une interprétation logique : 
 %il est prouvable par \LK\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ est vraie en logique classique.
 il représente la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique classique.
-
- Les règles sont modifiées en conséquence : par exemple\LKetR\ remplace\LJetR. Bien entendu, on ajoute aussi des règles structurelles agissant sur $\D$.
+%
+Les règles %sont modifiées
+diffèrent en conséquence : par exemple\LKetR\ remplace\LJetR. Bien entendu, on ajoute aussi des règles structurelles agissant sur $\D$.
  Mais surtout, on n'a plus qu'une règle pour le $\lor$ à droite :\LKouR. (Dans d'autres définitions, on garde deux règles distinctes, mais la règle que nous donnons ici peut être déduite de ces deux règles et de règles structurelles.)
   
 C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve du principe du tiers exclu $A\lor\lnot A$ (figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : si on peut appliquer l'axiome Id à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut prouver $A\lor\lnot A$, car ni $\;\To A$ ni $\;\To \lnot A$ n'est prouvable.
@@ -342,6 +347,13 @@ munir les séquents d'un ordre bien fondé, de sorte que pour toute instance de rè
 
 \subsection{Propriétés intéressantes des calculs de séquents}
 
+\subsectionDescription{
+Remarque : la règle de coupure.
+Absence de contraction.
+Propriété de la sous-formule.
+Inversibilité de certaines règles ou prémisses.
+Localité des règles.
+}
 
 \noindent
 \textit{Remarque : la règle de coupure.}
@@ -394,7 +406,11 @@ du numéro de la prémisse concernée et de la formule principale. Une règle dont t
 
 \subsection{Exemples de calculs de séquents pour la logique intuitionniste}
 
-
+%\subsectionDescription{
+%LJ.
+%LJT.
+%}
+%\subsectionDescription{LJLJT}
 
 \noindent
 \textbf{\LJ.}
@@ -423,8 +439,244 @@ réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la so
 
 
 
-%%%%%%%%%%
+%%%%%
 
+
+\section{Le calcul de séquents utilisé pour l'implémentation : \LSJ, légèrement modifié en \LSJn}
+
+Le calcul de séquents utilisé pour l'implémentation est \LSJn, une variante de \LSJ. Le calcul \LSJ\ est présenté par M. Ferrari, C. Fiorentini et G. Fiorino dans \cite{LSJ}. Il présente des priopriétés très intéressantes pour l'application à la recherche de preuve. \LSJn\ est fondamentalement le même calcul, %où les séquents sont représentés
+avec une représentation des séquents un peu plus riche en informations. Il a été proposé par mon maître de stage D. Larchey-Wendling. \LSJn\ hérite de toutes les bonnes propriétés de \LSJ, en ajoutant la localité des règles.
+
+%
+
+\subsection{Séquents et règles de \LSJ}
+
+%L'article \cite{LSJ} définit le calcul de séquents \LSJ. Une sémantique naturelle des séquents est proposée à l'aide des modèles de Kripke, mais nous ne la présentons pas. En effet, ce qui nous intéresse est l'existence, pour toute formule, d'un séquent qui est prouvable dans le calcul \LSJ\ si, et seulement si, la formule est prouvable en logique intuitionniste. Nous renvoyons à l'article pour les démonstrations, notamment celles de la correction et de la complétude du calcul.
+
+
+
+\begin{df}
+Un \textbf{\emph{séquent}} de \LSJ\ est la donnée de trois multiensembles $\Th$, $\G$ et $\D$ de formules ; on écrit $\Th\;;\;\G\;\To\;\D$.
+\end{df}
+
+
+%On a vu que dans \LJ, le séquent représente ... et dans \LK,
+On a vu que dans les calculs \LK\ et \LJ, le séquent $\G \To \D$ représente la formule ${\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)}$, respectivement en logique classique et en logique intuitionniste, avec $\D$ contenant exactement une formule pour \LJ. C'est une interprétation courante en calcul de séquents. Pour \LSJ, on ne sait pas représenter un séquent $\Th\,;\,\G\To\D$ par une seule formule.
+%Une sémantique pour les séquents
+On a cependant le résultat suivant : un séquent $\varnothing\,;\,\G\To\D$ est prouvable dans \LSJ\ si et seulement si la formule ${\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)}$ est prouvable en logique intuitionniste.
+$\G$ et $\D$ ont donc une signification ordinaire.
+En revanche, $\Th$ est propre à \LSJ, et difficile à interpréter. On peut dire que $\Th$ contient des formules gardées en réserve, non accessibles directement (une formule de $\Th$ ne peut pas être \emph{formule principale}), mais qui peuvent être transférées dans $\G$ et ainsi devenir accessibles. On verra que les seules règles qui agissent sur $\Th$ sont celles qui concernent le connecteur $\to$.
+L'article \cite{LSJ} propose bien une interprétation du séquent $\Th\;;\;\G\;\To\;\D$ pour $\Th$ quelconque, en utilisant des modèles de Kripke. Nous ne la détaillons pas, car ce qui nous intéresse surtout est la propriété suivante qui découle du résultat énoncé sur un séquent avec $\Th$ vide.
+%Une interprétation du séquent $\Th\;;\;\G\;\To\;\D$ pour $\Th$ quelconque est 
+
+
+%\
+%La définition d'un séquent \emph{prouvable} est celle qui a été donnée en \ref{ProuvabiliteSequent} pour le calcul \LJ.
+%La définition d'un séquent \emph{prouvable} a été donnée en \ref{ProuvabiliteSequent}.
+
+%\begin{prop}\label{propSignificationSequent}
+%%Soit $\G$, $\D$ des multiensembles de formules. Le séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{prouvable} dans \LSJ, c'est-à-dire non réfutable, si et seulement si la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ est valide en logique intuitionniste.
+%Un séquent $\emptyset\;;\;\G\;\To\;\D$ est \textbf{réfutable} si, et seulement si, la formule $\bigwedge_{A\in\G}A\,\to\,\bigvee_{B\in\D}B$ n'est pas valide en logique intuitionniste. Un séquent est \textbf{prouvable} dans \LSJ\ si, et seulement si, il n'est pas réfutable.
+%\end{prop}
+
+\begin{prop}
+Soit $A$ une formule, elle est valide en logique intuitionniste si et seulement si le séquent $\emptyset;\emptyset\To A$ est  prouvable dans \LSJ.
+\end{prop}
+
+Les \textbf{\emph{règles}} du calcul \LSJ\ sont données dans la figure~\ref{fig:reglesLSJ}. Toutes les règles sont des \emph{axiomes} ou des \emph{règles logiques}. Il n'y a pas de \emph{règle structurelle} ni de règle de \emph{coupure}.
+\begin{figure}
+\centering
+
+$$\begin{array}{cc}
+	\LSJfauxL & \Id \\\\
+	\LSJetL & \LSJetR \\\\
+	\LSJouL & \LSJouR \\\\
+	\multicolumn{2}{c}{\LSJimpL}\\\\
+	\multicolumn{2}{c}{\LSJimpR}
+\end{array}$$
+
+\caption{Les règles du calcul \LSJ}
+\label{fig:reglesLSJ}
+\end{figure}
+
+\
+
+\noindent
+\textbf{Propriétés de \LSJ.}
+(Pour les démonstrations, voir \cite{LSJ}.)
+Le calcul \LSJ\ est sans contraction et vérifie la propriété de la sous-formule.
+L'algorithme décrit dans la deuxième partie termine pour \LSJ.
+Les règles $\land L$, $\land R$, $\lor L$ et $\lor R$ sont inversibles ;
+les deux premières prémisses de $\to L$ et la première prémisse de $\to R$ sont inversibles ;
+la troisième prémisse de $\to L$ et la deuxième prémisse de $\to R$ ne sont pas inversibles.
+
+%On remarque que les règles $\land L$, $\land R$, $\lor L$ et $\lor R$ sont locales. En revanche, les règles $\to L$ et $\to R$ ne sont pas locales : pour chacune, les formules représentées par $\D$ dans la conclusion n'apparaissent nulle part dans la dernière prémisse, il n'est donc pas possible de retrouver la conclusion en connaissant uniquement cette prémisse, la formule principale et le numéro de la prémisse, puisqu'il n'y a aucun moyen d'en déduire ce qui se trouve dans $\D$. C'est pour cette raison qu'on introduit le calcul \LSJn, dans lequel toutes les règles sont locales.
+
+\
+
+\noindent
+\textbf{Non localité de certaines règles.}
+Les règles $\to L$ et $\to R$ ne sont pas locales : pour chacune, les formules représentées par $\D$ dans la conclusion n'apparaissent nulle part dans la dernière prémisse, il n'est donc pas possible de retrouver la conclusion en connaissant uniquement cette prémisse, la formule principale et le numéro de la prémisse, puisqu'il n'y a aucun moyen d'en déduire ce qui se trouve dans $\D$. C'est pour cette raison qu'on introduit le calcul \LSJn, dans lequel toutes les règles sont locales.
+
+
+%
+
+\subsection{Séquents et règles de \LSJn}
+
+Le calcul \LSJn\ est très proche du calcul \LSJ : chaque règle de \LSJn\ est l'adaptation directe d'une règle de \LSJ\ à une autre structure des séquents. Contrairement à \LSJ, les règles de \LSJn\ sont toutes locales.
+Pour cela, les séquents de \LSJn\ représentent chacun un séquent de \LSJ, avec un peu plus d'informations : celles qui sont parfois nécessaire pour retrouver la conclusion à partir d'une prémisse. Cette représentation est exhaustive et correcte. On définit en effet une surjection $\surj$ de l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ, et on montre dans la sous-section suivante qu'un séquent de \LSJn\ est prouvable dans \LSJn\ si, et seulement si, son image par $\surj$ est prouvable dans \LSJ.
+
+\begin{df}
+Un \textbf{\emph{séquent}} de \LSJn\ est la donnée de deux multiensembles $\Gp$ et $\Dp$ de couples $entier\,:\,formule$, et d'un entier naturel $n$, tels que tous les entiers présents dans $\Gp$ sont $\leq n+1$ et tous ceux présents dans $\Dp$ sont $\leq n$ ; on écrit $\Gp \Rightarrow_{n} \Dp$.
+\end{df}
+
+\noindent
+\textbf{Lien avec les séquents de \LSJ\ : l'application $\surj$.}
+Soit $M$ un multiensemble de couples $entier\,:\,formule$, l'entier d'un couple étant appelé son indice. On note $M_{k}$ le multiensemble obtenu à partir de $M$ en ne gardant que les couples d'indice $k$, et $M_{\leq k}$ celui obtenu en ne gardant que les couples d'indice inférieur à $k$. On note $\forget(M)$ le multiensemble de formules obtenu en oubliant l'indice et ne gardant que la formule de chaque couple de $M$.
+On définit l'application $\surj$ de 
+l'ensemble des séquents de \LSJn\ dans l'ensemble des séquents de \LSJ
+%$\Sig'$ dans $\Sig$
+, qui à $\G' \To_{n} \D'$ associe $\Th\, ;\G \To \D$ %\quad 
+\noindent
+où~:~
+$\left\{
+\begin{array}{l}
+%	\Th = \{ A \:|\: n+1:A \in \G'\} \\
+%	\G = \{ A \:|\: \exists i\leq n,\ i:A \in \G'\} \\
+%	\D = \{ A \:|\: n:A \in \D'\}
+	\Th = \forget (\G'_{n+1}) \\
+	\G = \forget (\G'_{\leq n}) \\
+	\D = \forget (\D'_{n})
+\end{array}
+\right.$.
+C'est une \textbf{surjection} : en effet tout séquent $\Th \,;\G\To\D$ de \LSJ\ a au moins pour antécédent le séquent $\G' \To_{0} \D'$, 
+%avec $\G' = \{ 0:A \:|\: A \in \G\} \cup \{ 1:A \:|\: A \in \Th\}$ et $\D' = \{ 0:A \:|\: A \in \D\}$.
+où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de $\G$ en rempla\c cant chaque occurrence d'une formule $A$ par une occurrence du couple $0:A$) avec $1:\Th$, et où $\D'=0:\D$.
+
+\
+
+
+
+
+Les \textbf{\emph{règles}} du calcul \LSJn\ sont données dans la figure~\ref{fig:reglesLSJn}. Chacune correspond à une règle de \LSJ.
+
+\begin{figure}[h]
+\centering
+
+\emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
+$$\begin{array}{cc}
+	\LSJLfauxL & \Id \\\\
+	\LSJLetL & \LSJLetR \\\\
+	\LSJLouL & \LSJLouR \\\\
+	\multicolumn{2}{c}{\LSJLimpL}\\\\
+	\multicolumn{2}{c}{\LSJLimpR}
+\end{array}$$
+
+\caption{Les règles du calcul \LSJn}
+\label{fig:reglesLSJn}
+\end{figure}
+
+\LSJn\ présente les mêmes propriétés que \LSJ, auxquelles s'ajoute la localité de toutes les règles.
+
+%
+
+\subsection{\'Equivalence entre \LSJn\ et \LSJ}
+
+On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquents de \LSJn.
+Soit $\sigma\in\Sig$, on note $\vdash\sigma$ si $\sigma$ est prouvable dans \LSJ\ ; soit $\sigma'\in\Sig'$, on note $\vdash'\sigma'$ si $\sigma'$ est prouvable dans \LSJn.
+Montrons que pour tous $\s\in\Sig$ et $\s'\in\Sig'$ tels que $\s=\surj(\s')$, on a $\vdash\s$ si et seulement si $\vdash\s'$, où $\surj$ est la surjection de $\Sig'$ sur $\Sig$ définie précédemment.
+
+\
+
+Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
+
+
+\begin{lm}
+Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$ et soit $\mathcal R$ une règle de \LSJ.
+
+1) Si \instanceR alors il existe $\s'_{1}$, ... , $\s'_{p}$ tels que pour tout $k$, $\s_{k} = \surj (\s'_{k})$, et \instanceRp.
+
+2) Si \instanceRp, posons pour tout $k$, $\s_{k} = \surj (\s'_{k})$, alors \instanceR.
+
+\noindent
+Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulement si \instanceAxp.
+\end{lm}
+
+\begin{dem}
+On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id, $\land R$ et $\to L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
+
+\
+
+%\noindent-\quad 
+\noindent Id :\quad On a\instanceId\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceIdp.
+
+\
+
+\noindent $\land R$ :	\quad
+
+1) Si \instanceetR\ alors il existe des formules $A$ et $B$ et un multiensemble $\Dt$ tels que $\D = A \land B, \Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$.
+ Posons $\Dt' = \D' - n:A \land B$ le multiensemble obtenu en retirant une seule occurrence de $n:A\land B$ à $\D'$ (qui contient cet élément parce que $\D$ contient $A\land B$ et par définition de $\surj$),
+ et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$.
+ Alors on a bien $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ (en remarquant que 
+ %$\Dt = \{ C \:|\: n:C \in \Dt'\}$
+$\Dt = \forget (\Dt'_{n})$
+), et \instanceetRp (en remarquant que $\s' = \G' \To_{n} n:A \land B,\Dt'$).
+
+2) Si \instanceetRp\ alors il existe $A$, $B$ et $\Dt'$ tels que $\D' = n:A \land B, \Dt'$ et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$ ; 
+ on pose $\Dt = \D - A \land B$ le multiensemble obtenu en retirant une seule occurrence de $A\land B$ à $\D$,
+ et $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ ; on obtient $\s = \Th\, ;\G \To A\land B,\Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$\; d'où\instanceetR.
+
+\
+
+\noindent $\to L$ :	\quad
+
+1) Si \instanceimpL\ alors il existe $A$, $B$ et $\Gt$ tels que $\G=A\to B,\Gt$ et $\s_{1} = \Th\, ;B,\Gt \To \D$ et $\s_{2} = B,\Th\, ;\Gt \To A,\D$ et $\s_{3} = B \,; \Th,\Gt \To A$ ; et il existe $i\leq n$ tel que $i:A\to B\in\G'$ ;
+ on pose $\Gt' = \G' - i:A\to B$ (on retire une seule occurrence de $i:A\to B$ de $\G'$) et $\s'_{1} = i:B,\Gt' \To_{n} \D'$ et $\s'_{2} = n+1:B,\Gt' \To_{n} n:A,\D'$ et $\s'_{3} = n+2:B,\Gt' \To_{n+1} n+1:A, \D'$ et on vérifie que cela convient.
+
+2) Si \instanceimpLp\ alors il existe $i$, $A$, $B$ et $\Gt'$ tels que $\G'=i:A\to B,\Gt'$ et $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ ont la forme donnée ci-dessus ; on pose $\Gt = \G - A\to B$ (on retire une seule occurrence de $A\to B$ de $\G$), alors les images $\s_{1}$, $\s_{2}$ et $\s_{3}$ par $\surj$ de $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ respectivement s'écrivent comme ci-dessus et donc \instanceimpL.
+\end{dem}
+
+
+
+\begin{theo}
+Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$, alors $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
+%Soit $\sigma$ un séquent de \LSJ\ et $\sigma'$ un séquent de \LSJn\ tels que $\sigma=\surj(\sigma')$, alors $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
+\end{theo}
+
+\begin{dem}
+Par récurrence sur la \emph{taille} de $\s\in\Sig$, c'est-à-dire la somme des tailles des formules des trois multiensembles apparaissant dans $\s$.
+
+\
+
+\noindent
+On initialise pour tout $\sigma = \Th\, ;\G \To \D$ tel que toutes les formules dans $\G$ et dans $\D$ sont atomiques : soit $\sigma' = \G' \To_{n} \D' \in\Sig'$ tel que $\sigma=\surj(\sigma')$. Alors toutes les formules associées à un $i \leq n$ dans $\G'$ et toutes les formules associées à $n$ dans $\D'$ sont aussi atomiques. En étudiant la forme des conclusions des règles non axiomatiques de \LSJ\ comme de \LSJn,
+on remarque que si $\s$ (resp. $\s'$) est la conclusion d'une règle de \LSJ\ (resp. \LSJn), alors la règle est un axiome. L'initialisation est donc un cas particulier de ce qui suit avec $p=0$ (ce qui entraîne qu'on n'utilise en fait pas l'hypothèse de récurrence).
+
+% on obtient que : $\vdash \s$ si et seulement si $\s$ est une conséquence directe d'un axiome de \LSJ, et $\vdash' \s'$ si et seulement si $\s'$ est une conséquence directe d'un axiome de \LSJn. Or d'après le lemme, pour $\mathcal A$ axiome de \LSJ, \instanceAx si et seulement si \instanceAxp. On en déduit $\vdash \sigma$ si et seulement si $\vdash' \sigma'$.
+
+\
+
+\noindent
+Soit $\s = \Th\, ;\G \To \D \in\Sig$. Soit $\sigma' = \G' \To_{n} \D' \in\Sig'$ tel que $\sigma=\surj(\sigma')$.
+
+On suppose $\vdash \s$. Alors il existe une règle $\mathcal R$ de \LSJ\ et $\s_{1}$, ... , $\s_{p} \in\Sig$ (avec éventuellement $p$ nul) tels que $\vdash \s_{k}$ pour tout $k$ et\instanceR. D'après le lemme, il existe $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\s_{k}=\surj(\s'_{k})$ pour tout $k$ et\instanceRp. Pour tout $k$, on applique l'hypothèse de récurrence à $\s_{k}$ qui a une \emph{taille} strictement inférieure à celle de $\s$, et on obtient $\vdash' \s'_{k}$. On en déduit $\vdash' \s'$.
+
+On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $\s'_{1}$, ... , $\s'_{p} \in\Sig'$ tels que $\vdash' \s'_{k}$ pour tout $k$ et\instanceRp. On pose $\s_{k}=\surj(\s'_{k})$ pour tout $k$. D'après le lemme on a \instanceR, en particulier on peut appliquer l'hypothèse de récurrence aux $\s_{k}$ donc $\vdash \s_{k}$ pour tout $k$, d'où $\vdash \s$.
+
+\end{dem}
+
+
+
+%%%%%
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 
 \section{Le calcul \LSJ}
 
@@ -454,87 +706,6 @@ Pour un séquent $\Th\;;\;\G\;\To\;\D$, on appellera les formules de $\G$ les \te
 
 \subsection{Les règles}
 
-%\def\regle{
-%\def\defaultHypSeparation{\hskip .05in}
-%	\AXC	{$prem_{1}$}
-%	\AXC	{...}
-%	\AXC	{$prem_{p}$}
-%	\RightLabel{$(\mathcal R)$}
-%	\TIC{$concl$}
-%	\DP
-%}
-%\def\instance{
-%\def\defaultHypSeparation{\hskip .05in}
-%	\AXC	{$\s_{1}$}
-%	\AXC	{...}
-%	\AXC	{$\s_{p}$}
-%	\RightLabel{$(\mathcal R)$}
-%	\TIC{$\s$}
-%	\DP
-%}
-%\def\instanceAx{
-%\centerAlignProof
-%	\AXC	{\qquad}
-%	\RightLabel{$(\mathcal A)$}
-%	\UIC{$\s$}
-%	\DP
-%}
-
-
-\def\botL{
-	\AXC	{}
-	\RightLabel{$\bot L$}
-	\UIC{$\Th\,; \bot, \G \To \D$}
-	\DP
-}
-\def\Id{
-	\AXC	{}
-	\RightLabel{$\mathrm{Id}$}
-	\UIC{$\Th\,; A,\G \To A,\D$}
-	\DP
-}
-\def\etL{
-	\AXC{$\Th\,; A, B,\G \To \D$}
-	\RightLabel{$\land L$}
-	\UIC{$\Th\,; A\land B,\G \To  \D$}
-	\DP
-}
-\def\etR{
-	\AXC{$\Th\,; \G \To A,\D$}
-	\AXC{$\Th\,; \G \To B,\D$}
-	\RightLabel{$\land R$}
-	\BIC{$\Th\,; \G \To A\land B,\D$}
-	\DP
-}
-\def\ouL{
-	\AXC{$\Th\,; A,\G \To \D$}
-	\AXC{$\Th\,; B,\G \To \D$}
-	\RightLabel{$\lor L$}
-	\BIC{$\Th\,; A\lor B,\G \To \D$}
-	\DP
-}
-\def\ouR{
-	\AXC{$\Th\,; \G \To A,B,\D$}
-	\RightLabel{$\lor R$}
-	\UIC{$\Th\,; \G \To A\lor B,\D$}
-	\DP
-}
-\def\impL{
-	\AXC{$\Th\,; B,\G \To \D$}
-	\AXC{$B,\Th\,; \G \To A,\D$}
-	\AXC{$B\,; \Th,\G \To A$}
-	\RightLabel{$\to L$}
-	\TIC{$\Th\,; A\to B,\G \To \D$}
-	\DP
-}
-\def\impR{
-	\AXC{$\Th\,; A,\G \To B,\D$}
-	\AXC{$\emptyset\,; A,\Th,\G \To B$}
-	\RightLabel{$\to R$}
-	\BIC{$\Th\,; \G \To A\to B,\D$}
-	\DP
-}
-
 %Une règle est de la forme\regle où $\mathcal R$ est le nom de la règle, et $prem_{1}$, ... , $prem_{p}$, $concl$ décrivent des séquents d'une certaine forme. Par exemple $\Th\;;\;A\lor B,\G\;\To\;\D$ représente n'importe quel séquent où au moins une des formules de gauche est une disjonction, et si $\Th\;;\;A,\G\;\To\;\D$ se trouve dans la même règle, cela représente un séquent obtenu à partir du précédent en rempla\c cant une disjonction de gauche $A\lor B$ par son premier terme $A$.
 
 
@@ -545,11 +716,11 @@ Les règles du calcul \LSJ\ sont données dans la figure~\ref{fig:reglesLSJ}. La n
 \centering
 
 $$\begin{array}{cc}
-	\botL & \Id \\\\
-	\etL & \etR \\\\
-	\ouL & \ouR \\\\
-	\multicolumn{2}{c}{\impL}\\\\
-	\multicolumn{2}{c}{\impR}
+	\LSJfauxL & \Id \\\\
+	\LSJetL & \LSJetR \\\\
+	\LSJouL & \LSJouR \\\\
+	\multicolumn{2}{c}{\LSJimpL}\\\\
+	\multicolumn{2}{c}{\LSJimpR}
 \end{array}$$
 
 \caption{Les règles du calcul \LSJ}
@@ -557,7 +728,7 @@ $$\begin{array}{cc}
 \end{figure}
 
 
-Une \textbf{instance} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui ont bien la forme donnée par la définition de la règle. Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
+Une \textbf{instance} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui ont bien la forme donnée par la définition de la règle. Par exemple \LSJetL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
 
 Une \textbf{preuve} est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors \instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
@@ -691,74 +862,17 @@ Un séquent de \LSJn\ est la donnée de deux multiensembles $\Gp$ et $\Dp$ de coup
 
 Les règles du calcul \LSJn\ sont décrite dans la figure~\ref{fig:reglesLSJn}. Chacune correspond à une règle de \LSJ.
 
-\
-
-\def\botL{
-	\AXC	{}
-	\RightLabel{$\bot L'$}
-	\UIC{$i:\bot, \Gp \To_{n} \Dp$}
-	\DP
-}
-\def\Id{
-	\AXC	{}
-	\RightLabel{$\mathrm{Id}'$}
-	\UIC{$i:A,\Gp \To_{n} n:A,\Dp$}
-	\DP
-}
-\def\etL{
-	\AXC{$i:A,i:B,\Gp \To_{n} \Dp$}
-	\RightLabel{$\land L'$}
-	\UIC{$i:A\land B,\Gp \To_{n} \Dp$}
-	\DP
-}
-\def\etR{
-	\AXC{$\Gp \To_{n} n:A,\Dp$}
-	\AXC{$\Gp \To_{n} n:B,\Dp$}
-	\RightLabel{$\land R'$}
-	\BIC{$\Gp \To_{n} n:A\land B,\Dp$}
-	\DP
-}
-\def\ouL{
-	\AXC{$i:A,\Gp \To_{n} \Dp$}
-	\AXC{$i:B,\Gp \To_{n} \Dp$}
-	\RightLabel{$\lor L'$}
-	\BIC{$i:A\lor B,\Gp \To_{n} \Dp$}
-	\DP
-}
-\def\ouR{
-	\AXC{$\Gp \To_{n} n:A,n:B,\Dp$}
-	\RightLabel{$\lor R'$}
-	\UIC{$\Gp \To_{n} n:A\lor B,\Dp$}
-	\DP
-}
-\def\impL{
-	\AXC{$i:B,\Gp \To_{n} \Dp$}
-	\AXC{$n+1:B,\Gp \To_{n} n:A,\Dp$}
-	\AXC{$n+2:B,\Gp \To_{n+1} n+1:A, \Dp$}
-	\RightLabel{$\to L'$}
-	\TIC{$i:A\to B,\Gp \To_{n} \Dp$}
-	\DP
-}
-\def\impR{
-	\AXC{$0:A,\Gp \To_{n} n:B,\Dp$}
-	\AXC{$0:A,\Gp \To_{n+1} n+1:B, \Dp$}
-	\RightLabel{$\to R'$}
-	\BIC{$\Gp \To_{n} n:A\to B,\Dp$}
-	\DP
-}
-
-
 
 \begin{figure}[h]
 \centering
 
 \emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
 $$\begin{array}{cc}
-	\botL & \Id \\\\
-	\etL & \etR \\\\
-	\ouL & \ouR \\\\
-	\multicolumn{2}{c}{\impL}\\\\
-	\multicolumn{2}{c}{\impR}
+	\LSJLfauxL & \Id \\\\
+	\LSJLetL & \LSJLetR \\\\
+	\LSJLouL & \LSJLouR \\\\
+	\multicolumn{2}{c}{\LSJLimpL}\\\\
+	\multicolumn{2}{c}{\LSJLimpR}
 \end{array}$$
 
 \caption{Les règles du calcul \LSJn}
@@ -802,87 +916,6 @@ où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de
 \
 
 
-
-\def\instanceR{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s_{1}$}
-	\AXC	{...}
-	\AXC	{$\s_{p}$}
-	\RightLabel{$(\mathcal R)$}
-	\TIC{$\s$}
-	\DP
-}
-\def\instanceRp{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s'_{1}$}
-	\AXC	{...}
-	\AXC	{$\s'_{p}$}
-	\RightLabel{$(\mathcal R')$}
-	\TIC{$\s'$}
-	\DP
-}
-\def\instanceAx{
-\centerAlignProof
-	\AXC	{\qquad}
-	\RightLabel{$(\mathcal A)$}
-	\UIC{$\s$}
-	\DP
-}
-\def\instanceAxp{
-\centerAlignProof
-	\AXC	{\qquad}
-	\RightLabel{$(\mathcal A')$}
-	\UIC{$\s'$}
-	\DP
-}
-\def\instanceId{
-\centerAlignProof
-	\AXC	{\qquad}
-	\RightLabel{(Id)}
-	\UIC{$\s$}
-	\DP
-}
-\def\instanceIdp{
-\centerAlignProof
-	\AXC	{\qquad}
-	\RightLabel{(Id$'$)}
-	\UIC{$\s'$}
-	\DP
-}
-\def\instanceetR{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s_{1}$}
-	\AXC	{$\s_{2}$}
-	\RightLabel{$(\land R)$}
-	\BIC{$\s$}
-	\DP
-}
-\def\instanceetRp{
-\def\defaultHypSeparation{\hskip .05in}
-	\AXC	{$\s'_{1}$}
-	\AXC	{$\s'_{2}$}
-	\RightLabel{($\land R'$)}
-	\BIC{$\s'$}
-	\DP
-}
-\def\instanceimpL{
-\def\defaultHypSeparation{\hskip .in}
-	\AXC	{$\s_{1}$}
-	\AXC	{$\s_{2}$}
-	\AXC	{$\s_{3}$}
-	\RightLabel{($\to L$)}
-	\TIC{$\s$}
-	\DP
-}
-\def\instanceimpLp{
-\def\defaultHypSeparation{\hskip .in}
-	\AXC	{$\s'_{1}$}
-	\AXC	{$\s'_{2}$}
-	\AXC	{$\s'_{3}$}
-	\RightLabel{($\to L'$)}
-	\TIC{$\s'$}
-	\DP
-}
 
 
 Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
