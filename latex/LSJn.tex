@@ -1,5 +1,9 @@
 \input{preamble}
 
+%déplacer dans preamble si ok
+\newcommand{\imp}{\to\negthickspace}
+
+
 \begin{document}
 \renewcommand{\labelitemi}{$\diamond$}
 \vspace{2cm}~~\\
@@ -20,7 +24,9 @@
 
 
 
-Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par le calcul de séquents \LJ\ introduit par Gentzen (?). Cela permet de se familiariser avec les calculs de séquents, avant de discuter
+Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par le calcul de séquents \LJ\ introduit par Gentzen. 
+Elle fournit une définition de la prouvabilité d'une formule en logique intuitionniste qui n'est pas la plus courante ni la plus rapide à exposer ; mais elle permet de présenter un premier calcul de séquents avec de nombreuses définitions qui seront utiles par la suite.
+%Cela permet de se familiariser avec les calculs de séquents, avant de discuter
 
 
 
@@ -29,7 +35,7 @@ Il existe de nombreuses approches de la logique intuitionniste : on choisit ici 
 
 \
 
-On s'intéresse à la partie propositionnelle de la logique intuitionniste : les formules sont construites à partir de la constante $\bot$, de variables propositionnelles et des connecteurs $\land$, $\lor$, $\to$. Une formule est \emph{atomique} si elle est réduite à une variable propositionnelle ou $\bot$. La notation $\lnot A$ signifie $A\to\bot$.
+On s'intéresse à la partie propositionnelle de la logique intuitionniste : les formules sont construites à partir de la constante $\bot$, de variables propositionnelles et des connecteurs binaires $\land$, $\lor$, $\to$. Une formule est \emph{atomique} si elle est réduite à une variable propositionnelle ou $\bot$. La notation $\lnot A$ signifie $A\to\bot$.
 
 
 
@@ -53,11 +59,11 @@ On s'intéresse à des \emph{multiensembles}, c'est-à-dire des collections où le n
 
 %Un \textbf{séquent} de \LK\ est la donnée de deux multiensembles de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on écrit $\G \To \D$.
 
-\begin{df*}
+\begin{df}
 %est la donnée de
 %est constitué de
 Un \textbf{\emph{séquent}} de \LJ\ est consiste en un multiensemble de formules $\G$ (les ``hypothèses'') et une formule $D$ (la ``conclusion'') ; on écrit $\G \To D$.
-\end{df*}
+\end{df}
 
 
 
@@ -74,10 +80,10 @@ $\G$ par une liste et non un multiensemble, on aurait eu besoin d'ajouter une rè
 
 
 Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Elle diffère de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même l'appeler le calcul \LJ. On peut d'ailleurs facilement passer d'une définition à l'autre à l'aide des règles structurelles.
+
 {
-%\setcellgapes{4pt}
 \renewcommand{\arraystretch}{2}
-%\setlength{\extrarowheight}{1.5pt}
+
 \begin{figure}[h]
 \centering
 
@@ -130,6 +136,8 @@ Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Ell
 %	\hline
 %\end{tabular}$
 
+\resizebox{\textwidth}{!}{
+
 $\begin{tabular}{|cc|c|}
 	\hline
 	\textbf{\large{Identité}} & \LJId & \textbf{\large{Coupure}} \\
@@ -146,6 +154,7 @@ $\begin{tabular}{|cc|c|}
 %	\LJcontraction
 \end{tabular}$
 
+}
 
 \caption{Règles du calcul \LJ}
 \label{fig:reglesLJ}
@@ -202,17 +211,20 @@ Les définitions suivantes s'appliquent aux calculs de séquents en général, pas s
 Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
 Une \textbf{\emph{preuve}} (ou \textbf{\emph{arbre de preuve}}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
-\begin{df*}
-Un séquent $\s$ est \textbf{\emph{prouvable}} (\emph{dans} ou \emph{par un calcul de séqents considéré}) s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
-\end{df*}
+\begin{df}
+Un séquent $\s$ est \textbf{\emph{prouvable}} \emph{dans} 
+%(ou \emph{par}) 
+%ou \emph{par}
+\emph{un calcul de séquents} s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+\end{df}
 
-\subsection{Une définition de la logique intuitionniste}
+\subsection{Une définition de la prouvabilité en logique intuitionniste}
 
 On peut maintenant donner une définition de la prouvabilité d'une formule en logique intuitionniste. L'idée est qu'un séquent $\G\To D$ représente la formule $\left(\bigwedge_{G\in\G}G\right)\to D$.
 
-\begin{df*}
+\begin{df}
 Une formule $A$ est \textbf{\emph{prouvable en logique intuitionniste}} si le séquent $\;\To A$ est prouvable par le calcul \LJ\ (on écrit $\;\To A$ pour $\emptyset \To A$).
-\end{df*}
+\end{df}
 
 Il existe de nombreuses autres manières d'aborder la logique intuitionniste, par exemple avec les modèles de Kripke (?).
 
@@ -232,21 +244,24 @@ La logique classique peut être définie à l'aide d'un calcul de séquents appelé \
 il représente la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique classique.
 %
 Les règles %sont modifiées
-diffèrent en conséquence : par exemple\LKetR\ remplace\LJetR. Bien entendu, on ajoute aussi des règles structurelles agissant sur $\D$.
- Mais surtout, on n'a plus qu'une règle pour le $\lor$ à droite :\LKouR. (Dans d'autres définitions, on garde deux règles distinctes, mais la règle que nous donnons ici peut être déduite de ces deux règles et de règles structurelles.)
-  
+diffèrent en conséquence : par exemple\LKetR\ remplace ${\LJetR\,.}$ Bien entendu, on ajoute aussi des règles structurelles agissant sur $\D$.
+ Mais surtout, on n'a plus qu'une règle pour le $\lor$ à droite : ${\LKouR\,.}$ (Dans d'autres définitions, on garde deux règles distinctes, mais la règle que nous donnons ici peut être déduite de ces deux règles et de règles structurelles.)
+ 
+\begin{floatingfigure}%[h]
+	[r]{3.7cm}
+\centering
+\LKTiersExclu
+
+%\caption{Preuve dans \LK\ de $A\lor\lnot A$}
+\caption{Preuve de $A\lor\lnot A$ dans \LK}
+\label{fig:LKTiersExclu}
+\end{floatingfigure}
+
 C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve du principe du tiers exclu $A\lor\lnot A$ (figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : si on peut appliquer l'axiome Id à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut prouver $A\lor\lnot A$, car ni $\;\To A$ ni $\;\To \lnot A$ n'est prouvable.
 
  %on ne peut prouver le séquent $\To A$, ni le séquent $\To 
 %, où on applique l'axiome Id à une occurrence de $A$ venant du $\lnot A$ 
 
-\begin{figure}[h]
-\centering
-\LKTiersExclu
-
-\caption{Preuve dans \LK\ de $A\lor\lnot A$}
-\label{fig:LKTiersExclu}
-\end{figure}
 
 
 %%%%
@@ -322,7 +337,7 @@ Il existe plusieurs calculs de séquents pour la logique intuitionniste, sans par
 Elle n'est pas toujours assurée, et même quand elle l'est, souvent difficile à prouver.
 Nous présentons %l'algorithme générique, puis 
 quelques propriétés sur les calculs de séquents
-qui sont intéressantes pour assurer la terminaison et améliorer la complexité de l'algorithme qui leur est associé. Enfin, nous comparons quelques calculs de séquents existants pour la logique intuitionniste.
+qui sont intéressantes pour assurer la terminaison et améliorer la complexité de l'algorithme qui leur est associé. Enfin, nous donnons deux exemples de calculs de séquents existants pour la logique intuitionniste, antérieurs au calcul que nous utilisons pour l'implémentation.
 
 
 
@@ -339,13 +354,18 @@ Cet algorithme est correct par construction et d'après la définition de la prouv
 %sans certaines conditions, il ne termine pas toujours.
 il y a des causes possibles de non terminaison, qui se regroupent en deux catégories : ``largeur'' infinie, ``profondeur'' infinie. Pour éviter une ``largeur'' infinie,
 il faut que pour un séquent donné, le nombre d'instances dont il est conclusion soit fini.
-En ce qui concerne le problème de ``profondeur'' dû à la récursivité, on peut par exemple
+En ce qui concerne le problème de ``profondeur'' dû à la récursivité, on peut souvent
 %associer à chaque séquent une valeur dans un ensemble bien ordonné, de sorte que pour toute instance de règle, les valeurs associées aux prémisses sont toutes strictement inférieures à celle associée à la conclusion. 
 munir les séquents d'un ordre bien fondé, de sorte que pour toute instance de règle, les prémisses sont toutes strictement inférieures à la conclusion.
 %Comme on le verra, la propriété de la sous-formule est bien pratique pour cela.
 %La propriété de la sous-formule qu'on verra plus loin est bien pratique pour cela.
 %associer à chaque séquent un entier positif, de sorte que pour toute instance de règle, les entiers associés aux prémisses sont tous strictement inférieurs à celui associé à la conclusion. Comme on le verra, la propriété de la sous-formule est bien pratique pour cela.
 
+\
+
+\noindent
+\textit{Remarque : la règle de coupure.}
+La règle de coupure, par exemple pour \LJ\ : ${\LJcut,}$ rend l'algorithme proposé inutilisable parce qu'il ne termine jamais. En effet, on explore indéfiniment en ``largeur'', car le nombre d'instances dont un séquent donné est conclusion est infini, $A$ pouvant être n'importe quelle formule. Heureusement, cette règle est souvent non nécessaire. De nombreux calculs la formulent car c'est une bonne chose que l'implication représentée par un séquent soit transitive, mais s'en passent ensuite grâce à un \emph{théorème d'élimination de la coupure} (souvent difficile à établir). Quoi qu'il en soit, on ne s'intéresse désormais qu'à des calculs dans lesquels cette règle n'est pas énoncée.
 
 \subsection{Propriétés intéressantes des calculs de séquents}
 
@@ -357,9 +377,11 @@ Inversibilité de certaines règles ou prémisses.
 Localité des règles.
 }
 
-\noindent
-\textit{Remarque : la règle de coupure.}
-La règle de coupure, par exemple pour \LJ\ : \LJcut, rend l'algorithme proposé inutilisable parce qu'il ne termine jamais. En effet, on explore indéfiniment en ``largeur'', car le nombre d'instances dont un séquent donné est conclusion est infini, $A$ pouvant être n'importe quelle formule. Heureusement, cette règle est souvent non nécessaire. De nombreux calculs la formulent car c'est une bonne chose que l'implication représentée par un séquent soit transitive, mais s'en passent ensuite grâce à un \emph{théorème d'élimination de la coupure} (souvent difficile à établir). Quoi qu'il en soit, on ne s'intéresse désormais qu'à des calculs dans lesquels cette règle n'est pas énoncée.
+%Nous présentons %l'algorithme générique, puis 
+%quelques propriétés sur les calculs de séquents
+%qui sont intéressantes pour assurer la terminaison et améliorer la complexité de l'algorithme qui leur est associé.
+
+Un calcul de séquents peut présenter certaines des propriétés suivantes, qui contribuent à assurer la terminaison ou améliorer la complexité de l'algorithme précédent.
 
 \
 
@@ -369,7 +391,8 @@ La règle de coupure, par exemple pour \LJ\ : \LJcut, rend l'algorithme proposé i
 Certaines règles, comme la contraction à gauche de \LJ\ : 
 %
 %\noindent
-\LJcontraction, sont problématiques pour la terminaison de l'algorithme. En effet, pour essayer de prouver $\G,A\To D$, on peut être amené à essayer de prouver $\G,A,A\To D$, puis en appliquant encore la même règle à essayer de prouver $\G,A,A,A\To D$, et ainsi de suite, sans fin. 
+\linebreak
+${\LJcontraction}$, sont problématiques pour la terminaison de l'algorithme. En effet, pour essayer de prouver $\G,A\To D$, on peut être amené à essayer de prouver $\G,A,A\To D$, puis en appliquant encore la même règle à essayer de prouver $\G,A,A,A\To D$, et ainsi de suite, sans fin. 
 %On parle de duplication car au cours de notre recherche de preuve, on passe de la conclusion à la prémisse en dupliquant la formule $A$. 
 Il est parfois possible d'adapter l'algorithme à une possibilité de contraction en prenant certaines précautions, comme on le verra pour le calcul \LJ.
 %Il est tout de même possible d'adapter l'algorithme à une duplication dans certains cas, comme on le verra pour le calcul \LJ.
@@ -378,7 +401,7 @@ Il est parfois possible d'adapter l'algorithme à une possibilité de contraction 
 
 \noindent
 \textbf{Propriété de la sous-formule.}
-La formule $B$ est une \textbf{\emph{sous-formule}} de la formule $A$ si $B$ est égale à $A$ ou si $A$ est de la forme $A_{1}$`connecteur'$A_{2}$ et [$B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formules de $A_{2}$]. Un calcul de séquents vérifie la \textbf{\emph{propriété de la sous-formule}} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) la preuve est une sous-formule d'une formule de $\s$. 
+La formule $B$ est une \textbf{\emph{sous-formule}} de la formule $A$ si $B$ est égale à $A$ ou si $A$ est de la forme $A_{1}\diamond A_{2}$ où $\diamond$ est un connecteur et [$B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formule de $A_{2}$]. Un calcul de séquents vérifie la \textbf{\emph{propriété de la sous-formule}} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) cette preuve est une sous-formule d'une formule de $\s$. 
 %En particulier, le séquent $\To A$ a une preuve dans laquelle toute formule est une sous-formule de $A$.
 %
 La propriété de la sous-formule est très utile pour un calcul de séquents. 
@@ -394,22 +417,33 @@ Elle est également utile lors de l'implémentation : si on veut appliquer la rech
 \noindent
 \textbf{Inversibilité de certaines règles ou prémisses.}
 Dans l'algorithme proposé, il peut être assez long de montrer qu'un séquent n'est pas prouvable, puisqu'on essaie toutes les instances dont il est la conclusion. La notion d'inversibilité permet de terminer beaucoup plus rapidement dans certains cas. 
-Une prémisse $prem_{i}$ d'une règle\regle(aussi appelée \emph{$i$-ème prémisse de $\mathcal R$}) est \textbf{\emph{inversible}} si on a : si $prem_{i}$ est non prouvable, alors $concl$ est non prouvable. Une règle est \textbf{\emph{inversible}} si toutes ses prémisses sont inversibles. Ainsi, si au cours de la recherche de preuve, on obtient qu'une prémisse non inversible est non prouvable, on peut directement conclure que la conclusion ne l'est pas non plus, sans avoir besoin d'essayer d'autre règle.
+Une prémisse $prem_{i}$ d'une règle\regle(aussi appelée \emph{$i$-ème prémisse de $\mathcal R$}) est \textbf{\emph{inversible}} si on a : si $prem_{i}$ est non prouvable, alors $concl$ est non prouvable. Une règle est \textbf{\emph{inversible}} si toutes ses prémisses sont inversibles. Ainsi, si au cours de la recherche de preuve, on obtient qu'une prémisse inversible est non prouvable, on peut directement conclure que la conclusion ne l'est pas non plus, sans avoir besoin d'essayer d'autre règle.
 
 \
 
 \noindent
-\textbf{Localité des règles.} L'algorithme nécessite de savoir déterminer, pour un séquent donné, toutes les instances dont il est conclusion, et en particulier calculer les prémisses de ces instances. Pour une instance, la \emph{formule principale} est la formule de la conclusion qui joue un rôle particulier : elle est remplacée dans les prémisses par une ou plusieurs formules plus simples (règles logiques ; dans ce cas la formule doit avoir une forme particulière, par exemple présenter un connecteur donné), ou dupliquée ou supprimée (règles structurelles). Sous certaines condition (notamment, absence de règle de coupure) souvent vérifiées, on peut facilement calculer, à partir d'une conclusion donnée et d'une règle et d'un choix de formule principale %adaptée à 
-autorisé par la règle, toutes les prémisses de la seule instance correspondantes. Mais ce n'est pas tout. Lorsqu'on s'intéresse à une prémisse, on risque d'avoir à nouveau besoin plus tard de la conclusion, par exemple pour calculer une autre prémisse, ou essayer une autre instance s'il y a une prémisse non inversible non prouvable.
+\textbf{Localité des règles.} 
+L'algorithme nécessite de savoir déterminer, pour un séquent donné, toutes les instances dont il est conclusion, et en particulier calculer les prémisses de ces instances. 
+Pour une instance, la \emph{formule principale} est la formule de la conclusion qui est remplacée dans les prémisses par d'autres formules (règles logiques ; la formule doit alors avoir une forme particulière, par exemple présenter un connecteur donné) ou dupliquée ou supprimée (règles structurelles).
+Souvent, pour une conclusion et une règle données et un choix de formule principale autorisé par la règle, il existe une unique instance correspondante, dont on peut facilement calculer toutes les prémisses.
 %
-Une solution consiste à retenir la conclusion pendant qu'on effectue la recherche de preuve sur les différentes prémisses, mais cela peut être coûteux en mémoire. Une autre solution est possible si on sait retrouver la conclusion à partir de n'importe quelle prémisse et %d'informations moins coûteuses : le 
-du numéro de la prémisse concernée et de la formule principale. Une règle dont toutes les instances vérifient ce qui précède est dite \textbf{\emph{locale}}. Si toutes les règles sont locales, on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (numéro de prémisse et formule principale) qui sont moins coûteuses. C'est donc plus efficace en terme de complexité spatiale.
+Parfois, on a aussi le sens inverse : à partir de la $k$-ième prémisse, si on connaît la règle et le numéro $k$ et la formule principale, on peut construire la conclusion. On dit qu'une règle est \textbf{\emph{locale}} si on a cette dernière propriété pour toutes les prémisses de toutes ses instances.
+%
+Si toutes les règles sont locales (et si on cherche juste à décider si un séquent est prouvable sans demander d'arbre de preuve le cas échéant), alors on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (numéro de prémisse, formule principale) qui sont moins coûteuses. %C'est donc plus efficace en terme de complexité spatiale.
+Lorsque qu'on s'intéresse à une instance dont le séquent retenu est conclusion, on transforme ce séquent en une prémisse, sur laquelle on relance l'algorithme. Et inversement, on a parfois besoin de revenir à la conclusion à partir d'une prémisse et des informations supplémentaires retenues : par exemple pour ensuite calculer une autre prémisse de l'instance, ou encore pour essayer d'appliquer une autre règle à la conclusion si on a trouvé une prémisse non prouvable et non inversible.
+Ainsi, si toutes les règles du calcul sont locales, on peut améliorer la complexité spatiale de l'algorithme.
+
+%L'algorithme nécessite de savoir déterminer, pour un séquent donné, toutes les instances dont il est conclusion, et en particulier calculer les prémisses de ces instances. Pour une instance, la \emph{formule principale} est la formule de la conclusion qui joue un rôle particulier : elle est remplacée dans les prémisses par une ou plusieurs formules plus simples (règles logiques ; dans ce cas la formule doit avoir une forme particulière, par exemple présenter un connecteur donné), ou dupliquée ou supprimée (règles structurelles). Sous certaines conditions (notamment, absence de règle de coupure) souvent vérifiées, on peut facilement calculer, à partir d'une conclusion donnée et d'une règle et d'un choix de formule principale %adaptée à 
+%autorisé par la règle, toutes les prémisses de la seule instance correspondante. Mais ce n'est pas tout. Lorsqu'on s'intéresse à une prémisse, on risque d'avoir à nouveau besoin plus tard de la conclusion, par exemple pour calculer une autre prémisse, ou essayer une autre instance s'il y a une prémisse non inversible non prouvable.
+%%
+%Une solution consiste à retenir la conclusion pendant qu'on effectue la recherche de preuve sur les différentes prémisses, mais cela peut être coûteux en mémoire. Une autre solution est possible si on sait retrouver la conclusion à partir de n'importe quelle prémisse et %d'informations moins coûteuses : le 
+%du numéro de la prémisse concernée et de la formule principale. Une règle dont toutes les instances vérifient ce qui précède est dite \textbf{\emph{locale}}. Si toutes les règles sont locales, on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (numéro de prémisse et formule principale) qui sont moins coûteuses. C'est donc plus efficace en terme de complexité spatiale.
 
 
 
 
 
-\subsection{Exemples de calculs de séquents pour la logique intuitionniste}
+\subsection{Deux exemples de calculs de séquents pour la logique intuitionniste}
 
 %\subsectionDescription{
 %LJ.
@@ -421,25 +455,31 @@ du numéro de la prémisse concernée et de la formule principale. Une règle dont t
 \textbf{\LJ.}
 %Le calcul \LJ\ présenté dans la première partie %peut difficilement être appliqué à une recherche automatique de preuve tel quel.
 %a besoin de quelques ajustements pour pouvoir être appliqué à la recherche automatique de preuves
-Pour appliquer le calcul \LJ\ présenté dans la première partie à la recherche automatique de preuves, il faut quelques ajustements sur le calcul lui-même et sur l'algorithme proposé. Il faut notamment enlever la règle de coupure (figure~\ref{fig:reglesLJ}, \emph{cut}), ce qui est possible car le calcul reste évidemment correct, mais surtout complet. Pour la même raison, on peut aussi enlever la règle \emph{weakening}. En revanche, on ne peut pas supprimer purement et simplement la règle\LJcontraction. On ne pourrait en effet plus prouver la formule bien connue $\lnot\lnot(A\lor\lnot A)$%, dont une preuve est donnée en figure ?.
-\ (voir figure~\ref{fig:LJnnTiersExclu}). Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithme. Une solution consiste à remplacer les deux règles $contraction\ L$ et \LJimpL\ par une seule règle \LJimpLcontr. On n'a alors plus d'appels récursifs sur des séquents strictement croissants $\G,A\To D$ puis $\G,A,A\To D$ puis $\G,A,A,A\To D$ etc. En revanche, on peut avoir un appel récursif sur un séquent déjà rencontré, par exemple si $D=A$, une prémisse est identique à la conclusion dans \LJimpLcontrA. On ajoute alors un système de détection de cycles en retenant tous les séquents rencontrés. L'algorithme obtenu est correct et termine. On a la propriété de la sous-formule. Les règles sont toutes inversibles et locales sauf $\to L$, dont seule la deuxième prémisse est inversible. Mais la détection de cycles est très coûteuse.
+Pour appliquer le calcul \LJ\ présenté dans la première partie à la recherche automatique de preuves, il faut quelques ajustements sur le calcul lui-même et sur l'algorithme proposé. Il faut notamment enlever la règle de coupure (figure~\ref{fig:reglesLJ}, \emph{cut}), ce qui est possible car le calcul reste évidemment correct, mais surtout complet. Pour la même raison, on peut aussi enlever la règle \emph{weakening}. En revanche, on ne peut pas supprimer purement et simplement la règle\LJcontraction. On ne pourrait 
+%en effet 
+par exemple
+plus prouver la formule %bien connue 
+${\lnot\lnot(A\lor\lnot A)}$%, dont une preuve est donnée en figure ?
+.
+%\ (voir figure~\ref{fig:LJnnTiersExclu}). 
+Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithme. Une solution consiste à remplacer les deux règles $contraction\ L$ et \LJimpL\ par une seule règle \LJimpLcontr. On n'a alors plus d'appels récursifs sur des séquents strictement croissants $\G,A\To D$ puis $\G,A,A\To D$ puis $\G,A,A,A\To D$ etc. En revanche, on peut avoir un appel récursif sur un séquent déjà rencontré, par exemple si $D=A$, une prémisse est identique à la conclusion dans \LJimpLcontrA. On ajoute alors un système de détection de cycles en retenant tous les séquents rencontrés. L'algorithme obtenu est correct et termine. On a la propriété de la sous-formule. Les règles sont toutes inversibles et locales sauf $\to L$, dont seule la deuxième prémisse est inversible. Mais la détection de cycles est très coûteuse.
 
-\begin{figure}[h]
-\centering
-\LJnnTiersExclu
-
-\caption{Preuve dans \LJ\ de $\lnot\lnot(A\lor\lnot A)$% : on a besoin de la règle $contraction\ L$
-. Sans la règle $contraction\ L$, le séquent surligné serait $\;\To A\lor\lnot A$ qui n'est pas prouvable.
-}
-\label{fig:LJnnTiersExclu}
-\end{figure}
+%\begin{figure}[h]
+%\centering
+%\LJnnTiersExclu
+%
+%\caption{Preuve dans \LJ\ de $\lnot\lnot(A\lor\lnot A)$% : on a besoin de la règle $contraction\ L$
+%. Sans la règle $contraction\ L$, le séquent surligné serait $\;\To A\lor\lnot A$ qui n'est pas prouvable.
+%}
+%\label{fig:LJnnTiersExclu}
+%\end{figure}
 
 \
 
 \noindent
 \textbf{\LJT.}
 Le calcul \LJT\ est introduit par R. Dyckhoff dans \cite{LJT} pour pallier le problème de cycles de \LJ. Il n'y a pas de règle de contraction, et la règle $\to L$ est remplacée par quatre règles selon la structure de $A$ dans la formule principale $A\to B$ : par exemple \LJTimpLun où $A$ doit être %\emph{atomique} c'est-à-dire 
-réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la sous-formule, mais on peut quand même déterminer toutes les formules susceptibles d'apparaître lorsqu'on essaie de prouver un séquent donné. Dyckhoff montre que l'algorithme termine en choisissant bien un bon ordre sur les formules puis sur les séquents. Toutes les règles sont inversibles et locales sauf une des règles qui remplacent $\to L$, qui comporte deux prémisses dont seule la deuxième est inversible.
+réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la sous-formule, mais on peut quand même déterminer toutes les formules susceptibles d'apparaître lorsqu'on essaie de prouver un séquent donné. Dyckhoff montre que l'algorithme termine en choisissant bien un bon ordre sur les formules puis sur les séquents. Toutes les règles sont inversibles et locales sauf une des règles qui remplacent $\imp L$, qui comporte deux prémisses dont seule la deuxième est inversible.
 
 
 
@@ -488,32 +528,38 @@ L'article \cite{LSJ} propose bien une interprétation du séquent $\Th\;;\;\G\;\To
 Soit $A$ une formule, elle est valide en logique intuitionniste si et seulement si le séquent $\emptyset;\emptyset\To A$ est  prouvable dans \LSJ.
 \end{prop}
 
-Les \textbf{\emph{règles}} du calcul \LSJ\ sont données dans la figure~\ref{fig:reglesLSJ}. Toutes les règles sont des \emph{axiomes} ou des \emph{règles logiques}. Il n'y a pas de \emph{règle structurelle} ni de règle de \emph{coupure}.
-\begin{figure}
+\def\mywidth{0.6\textwidth}
+\begin{floatingfigure}[r]{\mywidth}
 \centering
 
-$$\begin{array}{cc}
+\resizebox{\mywidth}{!}{
+
+$\begin{array}{cc}
 	\LSJfauxL & \Id \\\\
 	\LSJetL & \LSJetR \\\\
 	\LSJouL & \LSJouR \\\\
 	\multicolumn{2}{c}{\LSJimpL}\\\\
 	\multicolumn{2}{c}{\LSJimpR}
-\end{array}$$
+\end{array}$
+
+}
 
 \caption{Les règles du calcul \LSJ}
 \label{fig:reglesLSJ}
-\end{figure}
+\end{floatingfigure}
+
+Les \textbf{\emph{règles}} du calcul \LSJ\ sont données dans la figure~\ref{fig:reglesLSJ}. Toutes les règles sont des \emph{axiomes} ou des \emph{règles logiques}. Il n'y a pas de \emph{règle structurelle} ni de règle de \emph{coupure}.
 
 \
 
 \noindent
 \textbf{Propriétés de \LSJ.}
-(Pour les démonstrations, voir \cite{LSJ}.)
+(Pour les \\démonstrations, voir \cite{LSJ}.)
 Le calcul \LSJ\ est sans contraction et vérifie la propriété de la sous-formule.
 L'algorithme décrit dans la deuxième partie termine pour \LSJ.
 Les règles $\land L$, $\land R$, $\lor L$ et $\lor R$ sont inversibles ;
-les deux premières prémisses de $\to L$ et la première prémisse de $\to R$ sont inversibles ;
-la troisième prémisse de $\to L$ et la deuxième prémisse de $\to R$ ne sont pas inversibles.
+les deux premières prémisses de ${\imp L}$ et la première prémisse de ${\imp R}$ sont inversibles ;
+la troisième prémisse de ${\imp L}$ et la deuxième prémisse de ${\imp R}$ ne sont pas inversibles.
 
 %On remarque que les règles $\land L$, $\land R$, $\lor L$ et $\lor R$ sont locales. En revanche, les règles $\to L$ et $\to R$ ne sont pas locales : pour chacune, les formules représentées par $\D$ dans la conclusion n'apparaissent nulle part dans la dernière prémisse, il n'est donc pas possible de retrouver la conclusion en connaissant uniquement cette prémisse, la formule principale et le numéro de la prémisse, puisqu'il n'y a aucun moyen d'en déduire ce qui se trouve dans $\D$. C'est pour cette raison qu'on introduit le calcul \LSJn, dans lequel toutes les règles sont locales.
 
@@ -558,30 +604,40 @@ C'est une \textbf{surjection} : en effet tout séquent $\Th \,;\G\To\D$ de \LSJ\ 
 %avec $\G' = \{ 0:A \:|\: A \in \G\} \cup \{ 1:A \:|\: A \in \Th\}$ et $\D' = \{ 0:A \:|\: A \in \D\}$.
 où $\G'$ est l'union de $0 : \G$ (le multiensemble de couples obtenu à partir de $\G$ en rempla\c cant chaque occurrence d'une formule $A$ par une occurrence du couple $0:A$) avec $1:\Th$, et où $\D'=0:\D$.
 
-\
 
 
-
-
-Les \textbf{\emph{règles}} du calcul \LSJn\ sont données dans la figure~\ref{fig:reglesLSJn}. Chacune correspond à une règle de \LSJ.
-
-\begin{figure}[h]
+\def\mywidthbis{0.79\textwidth}%0.79
+\begin{floatingfigure}[r]{\mywidthbis}
 \centering
 
-\emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
-$$\begin{array}{cc}
+\resizebox{\mywidthbis}{!}{
+
+%\emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
+
+$\begin{array}{cc}
+	\multicolumn{2}{c}{\emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}} \\\\
 	\LSJLfauxL & \Id \\\\
 	\LSJLetL & \LSJLetR \\\\
 	\LSJLouL & \LSJLouR \\\\
 	\multicolumn{2}{c}{\LSJLimpL}\\\\
 	\multicolumn{2}{c}{\LSJLimpR}
-\end{array}$$
+\end{array}$
+
+}
 
 \caption{Les règles du calcul \LSJn}
 \label{fig:reglesLSJn}
-\end{figure}
+\end{floatingfigure}
+
+\
+
+Les \textbf{\emph{règles}} du calcul \LSJn\ sont données dans la figure~\ref{fig:reglesLSJn}. Chacune correspond à une règle de \LSJ.
+
+\
 
 \LSJn\ présente les mêmes propriétés que \LSJ, auxquelles s'ajoute la localité de toutes les règles.
+
+\
 
 %
 
@@ -591,10 +647,7 @@ On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquen
 Soit $\sigma\in\Sig$, on note $\vdash\sigma$ si $\sigma$ est prouvable dans \LSJ\ ; soit $\sigma'\in\Sig'$, on note $\vdash'\sigma'$ si $\sigma'$ est prouvable dans \LSJn.
 Montrons que pour tous $\s\in\Sig$ et $\s'\in\Sig'$ tels que $\s=\surj(\s')$, on a $\vdash\s$ si et seulement si $\vdash\s'$, où $\surj$ est la surjection de $\Sig'$ sur $\Sig$ définie précédemment.
 
-\
-
 Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
-
 
 \begin{lm}
 Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$ et soit $\mathcal R$ une règle de \LSJ.
@@ -608,37 +661,39 @@ Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulem
 \end{lm}
 
 \begin{dem}
-On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id, $\land R$ et $\to L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
+On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id, $\land R$ et $\to\negthickspace L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
 
-\
+\noindent
+\textbf{Id}: \quad On a\instanceId\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceIdp.
 
-%\noindent-\quad 
-\noindent Id :\quad On a\instanceId\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceIdp.
 
-\
+%\noindent 
+%$\boldsymbol\land \boldsymbol R$ :	\quad
+%%
+%1) Si \instanceetR\ alors il existe des formules $A$ et $B$ et un multiensemble $\Dt$ tels que $\D = A \land B, \Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$.
+% Posons $\Dt' = \D' - n:A \land B$ le multiensemble obtenu en retirant une seule occurrence de $n:A\land B$ à $\D'$ (qui contient cet élément parce que $\D$ contient $A\land B$ et par définition de $\surj$),
+% et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$.
+% Alors on a bien $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ (en remarquant que 
+% %$\Dt = \{ C \:|\: n:C \in \Dt'\}$
+%$\Dt = \forget (\Dt'_{n})$
+%), et \instanceetRp (en remarquant que $\s' = \G' \To_{n} n:A \land B,\Dt'$).
+%%
+%\quad2)~
+%Si \instanceetRp\ alors il existe $A$, $B$ et $\Dt'$ tels que $\D' = n:A \land B, \Dt'$ et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$ ; 
+% on pose $\Dt = \D - A \land B$ le multiensemble obtenu en retirant une seule occurrence de $A\land B$ à $\D$,
+% et $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ ; on obtient $\s = \Th\, ;\G \To A\land B,\Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$\; d'où\instanceetR.
 
-\noindent $\land R$ :	\quad
-
-1) Si \instanceetR\ alors il existe des formules $A$ et $B$ et un multiensemble $\Dt$ tels que $\D = A \land B, \Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$.
- Posons $\Dt' = \D' - n:A \land B$ le multiensemble obtenu en retirant une seule occurrence de $n:A\land B$ à $\D'$ (qui contient cet élément parce que $\D$ contient $A\land B$ et par définition de $\surj$),
- et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$.
- Alors on a bien $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ (en remarquant que 
- %$\Dt = \{ C \:|\: n:C \in \Dt'\}$
-$\Dt = \forget (\Dt'_{n})$
-), et \instanceetRp (en remarquant que $\s' = \G' \To_{n} n:A \land B,\Dt'$).
-
-2) Si \instanceetRp\ alors il existe $A$, $B$ et $\Dt'$ tels que $\D' = n:A \land B, \Dt'$ et $\s'_{1} = \G' \To_{n} n:A,\Dt'$ et $\s'_{2} = \G' \To_{n} n:B,\Dt'$ ; 
- on pose $\Dt = \D - A \land B$ le multiensemble obtenu en retirant une seule occurrence de $A\land B$ à $\D$,
- et $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ ; on obtient $\s = \Th\, ;\G \To A\land B,\Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$\; d'où\instanceetR.
-
-\
-
-\noindent $\to L$ :	\quad
-
-1) Si \instanceimpL\ alors il existe $A$, $B$ et $\Gt$ tels que $\G=A\to B,\Gt$ et $\s_{1} = \Th\, ;B,\Gt \To \D$ et $\s_{2} = B,\Th\, ;\Gt \To A,\D$ et $\s_{3} = B \,; \Th,\Gt \To A$ ; et il existe $i\leq n$ tel que $i:A\to B\in\G'$ ;
- on pose $\Gt' = \G' - i:A\to B$ (on retire une seule occurrence de $i:A\to B$ de $\G'$) et $\s'_{1} = i:B,\Gt' \To_{n} \D'$ et $\s'_{2} = n+1:B,\Gt' \To_{n} n:A,\D'$ et $\s'_{3} = n+2:B,\Gt' \To_{n+1} n+1:A, \D'$ et on vérifie que cela convient.
-
-2) Si \instanceimpLp\ alors il existe $i$, $A$, $B$ et $\Gt'$ tels que $\G'=i:A\to B,\Gt'$ et $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ ont la forme donnée ci-dessus ; on pose $\Gt = \G - A\to B$ (on retire une seule occurrence de $A\to B$ de $\G$), alors les images $\s_{1}$, $\s_{2}$ et $\s_{3}$ par $\surj$ de $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ respectivement s'écrivent comme ci-dessus et donc \instanceimpL.
+\noindent 
+$\boldsymbol\to \negthickspace \boldsymbol L$ :	\quad
+%
+1) Si \instanceimpL\ alors il existe $A$, $B$ et $\Gt$ tels que $\G=A\to B,\Gt$ et $\s_{1} = \Th\, ;B,\Gt \To \D$ et $\s_{2} = B,\Th\, ;\Gt \To A,\D$ et $\s_{3} = B \,; \Th,\Gt \To A$ ; et il existe $i\leq n$ tel que $i:A\to B\in\G'$. On pose $\Gt' = \G' - i:A\to B$ (on retire une seule occurrence de $i:A\to B$ de $\G'$) et $\s'_{1} = i:B,\Gt' \To_{n} \D'$ et $\s'_{2} = n+1:B,\Gt' \To_{n} n:A,\D'$ et $\s'_{3} = n+2:B,\Gt' \To_{n+1} n+1:A, \D'$ et on vérifie qu'on a bien
+$\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ et $\s_{3}=\surj(\s'_{3})$ (en remarquant que 
+$\Gt = \forget (\Gt'_{\leq n})$
+), et aussi\instanceimpLp).
+\linebreak
+%
+\quad2)~
+Si \instanceimpLp\ alors il existe $i$, $A$, $B$ et $\Gt'$ tels que $\G'=i:A\to B,\Gt'$ et $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ ont la forme donnée ci-dessus ; on pose $\Gt = \G - A\to B$ (on retire une seule occurrence de $A\to B$ de $\G$), alors les images $\s_{1}$, $\s_{2}$ et $\s_{3}$ par $\surj$ de $\s'_{1}$, $\s'_{2}$ et $\s'_{3}$ respectivement s'écrivent comme ci-dessus et donc ${\instanceimpL.}$
 \end{dem}
 
 
@@ -674,7 +729,121 @@ On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $
 
 %%%%%
 
+\pagebreak
 
+\section*{Efficacité de \LSJ}
+
+
+L'étude qui suit porte sur le calcul \LSJ. En effet, \LSJn\ hérite de toutes les propriétés intéressantes de \LSJ, en apportant une localité des règles qui facilite une implémentation économe en mémoire.
+
+
+\subsection{Propriété de la sous-formule et indexation}
+
+$B$ est une \textbf{sous-formule} de $A$ si $B=A$ ou si $A$ est de la forme $A_{1}$`connecteur'$A_{2}$ et ($B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formules de $A_{2}$). Un calcul de séquents vérifie la \textbf{propriété de la sous-formule} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) la preuve est une sous-formule d'une formule de $\s$. En particulier, le séquent $\To A$ a une preuve dans laquelle toute formule est une sous-formule de $A$.
+
+Le calcul \LSJ vérifie la propriété de la sous-formule : on le constate aisément en observant chaque règle.
+
+La propriété de la sous-formule est très recherchée en calcul des séquents. D'une part, elle donne une borne sur les formules qu'il faudra manipuler au cours d'une recherche de preuve, qui sont évidemment toutes plus petites que la formule qu'on essaie de prouver. Mais surtout, elle permet de connaître à l'avance la liste exhaustive des formules qu'on pourra rencontrer. On peut donc à l'avance les numéroter : ainsi, les formules d'un séquents sont simplement représentées par un entier. Il faut quelques informations sur ces numéros : par exemple pour une formule $A\land B$, il faut savoir qu'il s'agit d'un ``et'', et pouvoir déterminer $A$ et $B$. Il faut aussi pouvoir reconnaître quand l'axiome Id (une même formule apparaît des deux côtés du séquent) s'applique : pour cela on associe à chaque formule une classe, qui correspond à une classe d'équivalence de la relation d'égalité structurelle. La taille de toutes ces informations réunies est linéaire en la taille de la formule de départ (c'est-à-dire le nombre de n\oe uds de l'arbre qui la représente, qui est aussi le nombre de sous-formules avec multiplicité). Un exemple est donné par la figure~\ref{fig:indexation}.
+
+La propriété de la sous-formule est encore plus intéressante dans le cadre de la recherche de preuve compilée : connaître à l'avance les formules qui apparaîtront permet d'écrire pour chacune des fonctions agissant sur le séquent, au lieu de les calculer au cours de la recherche de preuve (voir ??).
+
+\begin{figure}[h]
+%\centering
+\includegraphics[width=0.3\linewidth]{indexation} %Quelques_formules.f12
+\caption{Indexation de la formule $(a\land b)\land(\lnot c \lor (a\land b))$}
+\label{fig:indexation}
+\end{figure}
+
+%\subsection{Absence de duplication}
+%
+%
+%\
+%
+%\
+%\subsection{Inversibilité de certaines prémisses de $\to L$ et $\to R$}
+%
+%
+%$((\bigwedge_{i=1}^{n}p_{i} \lor (\lnot\lnot p_{1}\to f) \lor \bigvee_{i=2}^{n}(p_{i}\to f))\to f)\to f$
+%
+%\
+%
+%$(\;[ \;(p_{1}\land p_{2} \land ... \land p_{n}) \lor (\lnot\lnot p_{1}\to f) \lor (p_{2}\to f) \lor ... \lor (p_{n}\to f)\;]\to f\;)\to f$
+%
+%\
+%
+%$1:f \quad\To_{0}\quad 0:  p1 \land ( p2 \land p3 )  \;,\; 0: \lnot\lnot p1 \to f  \;,\;  0: p2 \to f  \;,\;  0: p3 \to f  \;,\; 0: f$
+%
+%\
+%
+%$f\;;\;\emptyset \quad\To\quad p_{1} \land p_{2} \land ... \land p_{n} \;,\; \lnot\lnot p_{1}\to f \;,\; p_{2}\to f \;,\; ...  \;,\; p_{n}\to f \;,\; f$
+%
+%
+%
+%\section{Quelques explications sur l'implémentation}
+%
+%\subsection{Précalculs : indexation, classes, priorités}
+%
+%\subsection{Gestion efficace des formules du séquent : insertion et suppression, choix de la formule principale}
+%
+%
+%
+%\section{Vers une recherche de preuve compilée et certifiée}
+%
+%\subsection{Un langage simple pour la certification}
+%
+%\subsection{Compilation : des fonctions pour chaque sous-formule}
+%
+%
+
+
+
+
+
+
+
+
+
+
+
+\section{Implémentation}
+\subsection{Indexation}
+
+cf ``Propriété de la sous-formule et indexation'' + explication sur les classes (et priorités) et les champs axiomes du séquent
+
+
+
+\subsection{Structure de données pour le séquent}
+
+Au cours de l'algorithme, on manipule un ``séquent'', censé représenter un séquent du calcul \LSJn, contenant les informations suivantes :
+
+\noindent-\;
+des informations de taille constante : l'indice $n$ du séquent, et des booléens $id$ et $fauxL$, indiquant si les axiomes de même nom sont applicables au séquent ;
+
+\noindent-\;
+les couples \emph{indice}: \emph{formule} contenus dans les champs $\G$ et $\D$ du séquent.
+
+Comme nous l'avons expliqué en introduisant le calcul \LSJn, le but de celui-ci est de pouvoir effectuer la recherche de preuve en ne gardant à chaque instant qu'un seul séquent en mémoire.
+
+\
+
+
+Intéressons-nous maintenant à la complexité temporelle.
+
+Celle-ci dépend du nombre de règles qu'on essaie d'appliquer, c'est-à-dire le nombre d'appels récursifs à la fonction \emph{prouvable} (?) dont le pseudo-code est donné en figure ? page ?. Ce nombre dépend de la taille de la formule et des connecteurs présents dedans (et selon l'ordre dans lequel on choisit les formules principales cela peut beaucoup varier pour une même formule, mais on s'intéresse à la complexité dans le pire cas). Mais il ne dépend pas de notre choix d'implémentation (sauf pour l'ordre des ``implique'', mais encore une fois pas si on regarde le pire cas).
+
+
+
+
+
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{LSJn}
+
+\end{document}
 
 
 

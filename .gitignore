@@ -14,3 +14,4 @@ ILTP*
 caml/testsILTP/
 #caml/stats*
 caml/*.txt
+*.sty
