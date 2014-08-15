@@ -200,7 +200,7 @@ $\begin{tabular}{|cc|c|}
 
 Les définitions suivantes s'appliquent aux calculs de séquents en général, pas seulement \LJ.
 Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
-Une \textbf{\emph{preuve}} (ou \emph{arbre de preuve}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
+Une \textbf{\emph{preuve}} (ou \textbf{\emph{arbre de preuve}}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
 \begin{df*}
 Un séquent $\s$ est \textbf{\emph{prouvable}} (\emph{dans} ou \emph{par un calcul de séqents considéré}) s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
@@ -313,7 +313,9 @@ C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent
 %%%%%%%%%
 
 
-\section{D'un calcul de séquents à une recherche de preuve automatisée. Avantages et inconvénients de différents calculs}
+%\section{D'un calcul de séquents à une recherche de preuve automatisée. Avantages et inconvénients de différents calculs}
+\section{Propriétés favorisant l'application d'un calcul de séquents à la recherche automatisée de preuve et exemples de calculs}
+
 
 Il existe plusieurs calculs de séquents pour la logique intuitionniste, sans parler des nombreuses autres logiques existantes. Un tel calcul comporte ses propres définition d'un séquent, règles, et construction pour chaque formule d'un séquent qui est prouvable par le calcul ssi la formule est prouvable en logique intuitionniste. En dériver l'algorithme de recherche de preuve ci-après est assez naturel. Sa correction est immédiate par construction. En revanche, la terminaison pose problème. 
 %Il faut parfois complexifier beaucoup l'algorithme pour l'assurer. Afin d'éviter de devoir le faire, il faut certaines propriétés sur le calcul de séquents. 
@@ -331,7 +333,7 @@ On considère un calcul de séquents. Pour déterminer si un séquent est prouvable,
 on choisit une règle dont il peut être la conclusion et on 
 %essaie de prouver les 
 applique récursivement la recherche de preuve aux
-prémisses correspondantes. Si elles sont toutes prouvables (en particulier, s'il n'y en a pas : si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès, c'est-à-dire que pour chacune, au moins une prémisse est non prouvable (en particulier, s'il n'y a aucune règle applicable : si le séquent n'est la conclusion d'aucune instance), on conclut que le séquent initial n'est pas prouvable.
+prémisses correspondantes. Si elles sont toutes prouvables (en particulier, s'il n'y en a pas : si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable ; de plus, si on a calculé un arbre de preuve pour chaque prémisse, on en obtient un pour le séquent initial. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès, c'est-à-dire que pour chacune, au moins une prémisse est non prouvable (en particulier, s'il n'y a aucune règle applicable : si le séquent n'est la conclusion d'aucune instance), on conclut que le séquent initial n'est pas prouvable.
 
 Cet algorithme est correct par construction et d'après la définition de la prouvabilité d'un séquent. En revanche, 
 %sans certaines conditions, il ne termine pas toujours.
@@ -362,12 +364,15 @@ La règle de coupure, par exemple pour \LJ\ : \LJcut, rend l'algorithme proposé i
 \
 
 \noindent
-\textbf{Absence de duplication.}
+\textbf{Absence de contraction.}
 %Les règles de duplication, par exemple 
 Certaines règles, comme la contraction à gauche de \LJ\ : 
-
-\noindent
-\LJcontraction, sont problématiques pour la terminaison de l'algorithme. En effet, pour essayer de prouver $\G,A\To D$, on peut être amené à essayer de prouver $\G,A,A\To D$, puis en appliquant encore la même règle à essayer de prouver $\G,A,A,A\To D$, et ainsi de suite, sans fin. On parle de duplication car au cours de notre recherche de preuve, on passe de la conclusion à la prémisse en dupliquant la formule $A$. Il est tout de même possible d'adapter l'algorithme à une duplication dans certains cas, comme on le verra pour le calcul \LJ.
+%
+%\noindent
+\LJcontraction, sont problématiques pour la terminaison de l'algorithme. En effet, pour essayer de prouver $\G,A\To D$, on peut être amené à essayer de prouver $\G,A,A\To D$, puis en appliquant encore la même règle à essayer de prouver $\G,A,A,A\To D$, et ainsi de suite, sans fin. 
+%On parle de duplication car au cours de notre recherche de preuve, on passe de la conclusion à la prémisse en dupliquant la formule $A$. 
+Il est parfois possible d'adapter l'algorithme à une possibilité de contraction en prenant certaines précautions, comme on le verra pour le calcul \LJ.
+%Il est tout de même possible d'adapter l'algorithme à une duplication dans certains cas, comme on le verra pour le calcul \LJ.
 
 \
 
@@ -394,7 +399,7 @@ Une prémisse $prem_{i}$ d'une règle\regle(aussi appelée \emph{$i$-ème prémisse d
 \
 
 \noindent
-\textbf{Localité des règles.} L'algorithme nécessite de savoir déterminer, pour un séquent donné, toutes les instances dont il est conclusion, et en particulier calculer les prémisses de ces instances. Pour une instance, la \textbf{\emph{formule principale}} est la formule de la conclusion qui joue un rôle particulier : elle est remplacée dans les prémisses par une ou plusieurs formules plus simples (règles logiques ; dans ce cas la formule doit avoir une forme particulière, par exemple présenter un connecteur donné), ou dupliquée ou supprimée (règles structurelles). Sous certaines condition (notamment, absence de règle de coupure) souvent vérifiées, on peut facilement calculer, à partir d'une conclusion donnée et d'une règle et d'un choix de formule principale %adaptée à 
+\textbf{Localité des règles.} L'algorithme nécessite de savoir déterminer, pour un séquent donné, toutes les instances dont il est conclusion, et en particulier calculer les prémisses de ces instances. Pour une instance, la \emph{formule principale} est la formule de la conclusion qui joue un rôle particulier : elle est remplacée dans les prémisses par une ou plusieurs formules plus simples (règles logiques ; dans ce cas la formule doit avoir une forme particulière, par exemple présenter un connecteur donné), ou dupliquée ou supprimée (règles structurelles). Sous certaines condition (notamment, absence de règle de coupure) souvent vérifiées, on peut facilement calculer, à partir d'une conclusion donnée et d'une règle et d'un choix de formule principale %adaptée à 
 autorisé par la règle, toutes les prémisses de la seule instance correspondantes. Mais ce n'est pas tout. Lorsqu'on s'intéresse à une prémisse, on risque d'avoir à nouveau besoin plus tard de la conclusion, par exemple pour calculer une autre prémisse, ou essayer une autre instance s'il y a une prémisse non inversible non prouvable.
 %
 Une solution consiste à retenir la conclusion pendant qu'on effectue la recherche de preuve sur les différentes prémisses, mais cela peut être coûteux en mémoire. Une autre solution est possible si on sait retrouver la conclusion à partir de n'importe quelle prémisse et %d'informations moins coûteuses : le 
@@ -676,6 +681,8 @@ On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+.
 \pagebreak
 
 \section{Le calcul \LSJ}
