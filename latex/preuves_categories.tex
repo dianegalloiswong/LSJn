@@ -1,0 +1,182 @@
+\input{preamble}
+
+
+
+\begin{document}
+%\renewcommand{\labelitemi}{$\diamond$}
+\renewcommand{\labelitemi}{$\bullet$}
+\vspace{2cm}~~\\
+
+\input{bussproofs}
+
+\tableofcontents
+
+\pagebreak
+
+
+
+
+
+% def catégorie
+\begin{df}
+Une \textbf{\emph{catégorie}} consiste en une collection d'\emph{objets} et une collection de \emph{morphismes}, cette dernière munie d'une opérations binaire partielle $\circ$ appelée \emph{composition}, avec les propriétés suivantes.
+
+\begin{itemize}
+
+\item
+\`A chaque morphisme $f$ est associé un couple d'objets $(A,B)$ ; on écrit $f:A\to B$.
+On dit que $A\to B$ est le \emph{type} de $f$, et que $f$ est un morphisme \emph{de} $A$ \emph{vers} $B$, et encore que $A$ est le \emph{domaine} ou la \emph{source} de $f$, et $B$ le \emph{codomaine} ou la \emph{cible} de $f$.
+
+\item
+Pour tous objets $A$, $B$, $C$ et morphismes $f$, $g$ tels que $f:A\to B$ et $g:B\to C$, le morphisme $g\circ f$ existe et $g\circ f:A\to C$.
+
+\item
+\textbf{Identité.}
+Pour tout objet $A$, il existe un morphisme particulier $id_{A}:A\to A$ appelé \emph{identitié sur $A$}, tel que 
+%pour tous objet $B$ et morphismes $f:B\to A$ et $g:A\to B$, $id_{A}\circ f=f$ et $g\circ id_{A}=g$.
+pour tout objet $B$, pour tout $f:B\to A$, $id_{A}\circ f=f$ et pour tout $g:A\to B$, $g\circ id_{A}=g$.
+
+\item
+\textbf{Associativité.}
+Pour tous $f:A\to B$, $g:B\to C$, $h:C\to D$, on a $h\circ(g\circ f) = (h\circ g)\circ f$.
+
+\end{itemize}
+\end{df}
+
+On désigne souvent une catégorie par la collection de ses objets.
+
+
+% def catégorie monoïdale
+\begin{df}
+%Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\C$ munie d'un bifoncteur ${\otimes:\C\times\C \longrightarrow \C}$ tel que
+%
+%\begin{itemize}
+%%\item
+%%pour tous objets $A$, $B$, $C$, il existe une isomorphisme naturel d'associativité
+%%\linebreak
+%%${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$ ;
+%%\item
+%%il existe un objet $e$, unitaire
+%\item
+%une \textbf{associativité} est fournie par un morphisme naturel pour tous objets $A$, $B$, $C$ : ${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$ ;
+%\item
+%il existe un objet $e$ \textbf{unitaire} grâce à des morphismes naturels pour tout objet $A$ : ${\lambda_{A}:e\otimes A\to A}$ et ${\rho_{A}:A\otimes e\to A}$.
+% 
+%\end{itemize}
+
+Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\C$ munie d'un bifoncteur ${\otimes:\C\times\C \longrightarrow \C}$ et d'un objet $e$, tel que les morphismes suivants existent
+
+\begin{itemize}
+\item
+pour tous objets $A$, $B$, $C$, un isomorphisme
+%\linebreak
+${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$ permettant de parler d'associativité ;
+\item
+pour tout objet $A$, des isomorphismes ${\lambda_{A}:e\otimes A\to A}$ et ${\rho_{A}:A\otimes e\to A}$ justifiant le nom d'\textbf{unité} pour $e$ ;
+\end{itemize}
+
+\noindent
+et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$. On a omis les indices de $\alpha$, $\lambda$, $\rho$ et écrit $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme $\alpha_{A,B,C}\otimes id_{A}$.
+
+\includegraphics[width=\linewidth]{diagrammeMonoidalePenta}
+\centering{\includegraphics[width=0.5\linewidth]{diagrammeMonoidaleTri}}
+
+\end{df}
+
+
+
+
+
+\pagebreak
+
+\`A chaque preuve $\pi$ on associe une \emph{dénotation} $[\pi]$, qu'on veut invariante par élimination de la coupure.
+
+\
+
+Les objets sont les formules et les morphismes sont des dénotations de preuves. Les morphismes d'une formule $A$ vers une formule $B$ sont les dénotations des différentes preuves du séquent $A\vdash B$ (si le séquent n'est pas prouvable, il n'y en a pas).
+
+Soit $A$, $B$, $C$ des formules, $\pi_{1}$ une preuve de $A\vdash B$ et $\pi_{2}$ une preuve de $B\vdash C$. On définit $[\pi_{2}]\circ[\pi_{1}]$ comme la dénotation de la preuve suivante de $A\vdash C$
+\begin{prooftree}
+	\AXC	{$\pi_{1}$}
+	\noLine
+	\UIC{$A\vdash B$}
+	\AXC	{$\pi_{2}$}
+	\noLine
+	\UIC{$B\vdash C$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash C$}
+\end{prooftree}
+
+L'identité $id_{A}$ sur une formule $A$ est la dénotation de la preuve
+{\centerAlignProof
+	\AXC	{}
+	\RightLabel{$(Id)$}
+	\UIC{$A\vdash A$}
+	\DP
+}.
+Soit $\pi$ une preuve de $A\vdash B$, l'élimination de la coupure transforme la preuve
+\\
+\begin{center}
+	\AXC	{}
+	\RightLabel{$(Id)$}
+	\UIC{$A\vdash A$}
+	\AXC	{$\pi$}
+	\noLine
+	\UIC{$A\vdash B$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash B$}
+	\DP
+\qquad\qquad en \qquad\qquad
+	\AXC	{$\pi$}
+	\noLine
+	\UIC{$A\vdash B$}
+	\DP
+\end{center}
+
+\noindent
+donc on a bien $[\pi]\circ id_{A}=[\pi]$. De même pour $\pi$ une preuve de $B\vdash A$, on a $id_{A}\circ[\pi]=[\pi]$.
+
+L'associativité vient de ce que les preuves
+\\
+\begin{center}
+	\AXC	{$\pi_{1}$}
+	\noLine
+	\UIC{$A\vdash B$}
+	\AXC	{$\pi_{2}$}
+	\noLine
+	\UIC{$B\vdash C$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash C$}
+	\AXC	{$\pi_{3}$}
+	\noLine
+	\UIC{$C\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash D$}
+	\DP
+\quad et \quad
+	\AXC	{$\pi_{1}$}
+	\noLine
+	\UIC{$A\vdash B$}
+	\AXC	{$\pi_{2}$}
+	\noLine
+	\UIC{$B\vdash C$}
+	\AXC	{$\pi_{3}$}
+	\noLine
+	\UIC{$C\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$B\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash D$}
+	\DP
+\end{center}
+
+\noindent
+sont équivalentes à élimination de la coupure près.
+
+
+
+
+
+
+
+\end{document}

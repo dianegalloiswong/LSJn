@@ -1,7 +1,5 @@
 \input{preamble}
 
-%déplacer dans preamble si ok
-\newcommand{\imp}{\to\negthickspace}
 
 
 \begin{document}
@@ -370,7 +368,7 @@ La règle de coupure, par exemple pour \LJ\ : ${\LJcut,}$ rend l'algorithme propo
 \subsection{Propriétés intéressantes des calculs de séquents}
 
 \subsectionDescription{
-Remarque : la règle de coupure.
+%Remarque : la règle de coupure.
 Absence de contraction.
 Propriété de la sous-formule.
 Inversibilité de certaines règles ou prémisses.
@@ -661,9 +659,9 @@ Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulem
 \end{lm}
 
 \begin{dem}
-On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id, $\land R$ et $\to\negthickspace L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
+On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id et $\to\negthickspace L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
 
-\noindent
+%\noindent
 \textbf{Id}: \quad On a\instanceId\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceIdp.
 
 
@@ -683,7 +681,7 @@ On le montre pour chaque règle ; c'est une conséquence assez directe de la défin
 % on pose $\Dt = \D - A \land B$ le multiensemble obtenu en retirant une seule occurrence de $A\land B$ à $\D$,
 % et $\s_{1}=\surj(\s'_{1})$ et $\s_{2}=\surj(\s'_{2})$ ; on obtient $\s = \Th\, ;\G \To A\land B,\Dt$ et $\s_{1} = \Th\, ;\G \To A,\Dt$ et $\s_{2} = \Th\, ;\G \To B,\Dt$\; d'où\instanceetR.
 
-\noindent 
+%\noindent 
 $\boldsymbol\to \negthickspace \boldsymbol L$ :	\quad
 %
 1) Si \instanceimpL\ alors il existe $A$, $B$ et $\Gt$ tels que $\G=A\to B,\Gt$ et $\s_{1} = \Th\, ;B,\Gt \To \D$ et $\s_{2} = B,\Th\, ;\Gt \To A,\D$ et $\s_{3} = B \,; \Th,\Gt \To A$ ; et il existe $i\leq n$ tel que $i:A\to B\in\G'$. On pose $\Gt' = \G' - i:A\to B$ (on retire une seule occurrence de $i:A\to B$ de $\G'$) et $\s'_{1} = i:B,\Gt' \To_{n} \D'$ et $\s'_{2} = n+1:B,\Gt' \To_{n} n:A,\D'$ et $\s'_{3} = n+2:B,\Gt' \To_{n+1} n+1:A, \D'$ et on vérifie qu'on a bien
