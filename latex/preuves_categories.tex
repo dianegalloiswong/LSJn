@@ -11,6 +11,239 @@
 
 \tableofcontents
 
+
+\section{Calcul de séquents : exemple de la logique classique}
+
+\section{La logique linéaire}
+
+\section{\'Elimination de la coupure}
+
+\section{Catégories}
+
+
+\subsection{Invariant modulaire et catégorie}
+
+\noindent
+\textbf{Notation.}
+Soit $p$ une preuve du séquent $\s$. On écrit
+	\AXC	{$p$}
+	%\noLine
+	\dottedLine
+	\UIC{$\;\s\;$}
+	\DP
+car souvent, il est intéressant d'expliciter $\s$ pour prolonger $p$ en une preuve plus complexe d'un autre séquent.
+
+\
+
+\`A chaque preuve $p$, on associe une \textbf{\emph{dénotation}} $[p]$. On veut que cela constitue un invariant selon l'élimination de la coupure : deux preuves on la même dénotation si, et seulement si, une peut être obtenue en appliquant à l'autre des transformations autorisée par la procédure d'élimination de la coupure. Ceci est motivé par une analogie avec la théorie des n\oe uds, où les invariants sont relatifs aux transformations de Reidemeister (?).
+
+\begin{floatingfigure}[r]{0.27\textwidth}
+%$p$ :
+%\begin{prooftree}
+	\AXC	{$p_{1}$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\AXC	{$p_{2}$}
+	\dottedLine
+	\UIC{$B\vdash C$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash C$}
+	\DP\\
+%\end{prooftree}
+\end{floatingfigure}
+
+
+On demande également la propriété suivante. Soit $A$, $B$, $C$ des formules, et $p_{1}$ et $p_{2}$ des preuves de $A \vdash B$ et $B \vdash C$ respectivement. La règle de coupure fournit immédiatement la preuve $p$ de $A \vdash C$ ci-contre. On veut que sa dénotation $[p]$ se déduise à partir de $[p_{1}]$ et $[p_{2}]$. On introduit pour cela la \textbf{loi de composition $\circ$} telle que $[p] = [p_{2}] \circ [p_{1}]$.
+On dit alors que l'invariant est \emph{modulaire}.
+
+On remarque que la loi de composition $\circ$ est \textbf{associative} et présente pour chaque formule une \textbf{identité} à gauche et à droite. En effet, soit $A$, $B$, $C$, $D$ des formules, et $p_{1}$, $p_{2}$, $p_{3}$ des preuves respectives de $A \vdash B$, $B \vdash C$, $C \vdash D$. On peut en déduire deux preuves de $A \vdash D$ :
+\\
+\begin{center}
+	\AXC	{$p_{1}$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\AXC	{$p_{2}$}
+	\dottedLine
+	\UIC{$B\vdash C$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash C$}
+	\AXC	{$p_{3}$}
+	\dottedLine
+	\UIC{$C\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash D$}
+	\DP
+\quad et \quad
+	\AXC	{$p_{1}$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\AXC	{$p_{2}$}
+	\dottedLine
+	\UIC{$B\vdash C$}
+	\AXC	{$p_{3}$}
+	\dottedLine
+	\UIC{$C\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$B\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash D$}
+	\DP
+\end{center}
+
+\noindent
+qui sont équivalentes d'après le procédé d'élimination de la coupure. Cela signifie précisément que $([p_{1}]\circ[p_{2}])\circ[p_{3}] = [p_{1}]\circ([p_{2}]\circ[p_{3}])$. L'identité pour une formule $A$ est la dénotation de la preuve 
+{\centerAlignProof
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\DP
+}
+; on note cette dénotation $id_{A}$. Soit $p$ une preuve de $A \vdash B$, les deux preuves 
+%\\
+%%\def\proofSkipAmount{\vskip -10em}
+%\begin{center}
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\AXC	{$p$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash B$}
+	\DP
+%\qquad\qquad et \qquad\qquad
+et
+	\AXC	{$p$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\DP
+%\end{center}
+%
+%\noindent
+sont équivalentes selon l'élimination de la coupure, ce qui signifie que $[p]\circ id_{A}=[p]$. De même, pour $p$ une preuve de $B\vdash A$, on a $id_{A}\circ[p]=[p]$.
+
+
+% def catégorie
+\begin{df}
+Une \textbf{\emph{catégorie}} consiste en une collection d'\emph{objets} et une collection de \emph{morphismes}, cette dernière munie d'une opérations binaire partielle $\circ$ appelée \emph{composition}, avec les propriétés suivantes.
+
+\begin{itemize}
+
+\item
+\`A chaque morphisme $f$ est associé un couple d'objets $(A,B)$ ; on écrit $f:A\to B$.
+On dit que $A\to B$ est le \emph{type} de $f$, et que $f$ est un morphisme \emph{de} $A$ \emph{vers} $B$, et encore que $A$ est le \emph{domaine} ou la \emph{source} de $f$, et $B$ le \emph{codomaine} ou la \emph{cible} de $f$.
+
+\item
+Pour tous objets $A$, $B$, $C$ et morphismes $f$, $g$ tels que $f:A\to B$ et $g:B\to C$, le morphisme $g\circ f$ existe et $g\circ f:A\to C$.
+
+\item
+\textbf{Identité.}
+Pour tout objet $A$, il existe un morphisme particulier $id_{A}:A\to A$ appelé \emph{identitié sur $A$}, tel que 
+%pour tous objet $B$ et morphismes $f:B\to A$ et $g:A\to B$, $id_{A}\circ f=f$ et $g\circ id_{A}=g$.
+pour tout objet $B$, pour tout $f:B\to A$, $id_{A}\circ f=f$ et pour tout $g:A\to B$, $g\circ id_{A}=g$.
+
+\item
+\textbf{Associativité.}
+Pour tous $f:A\to B$, $g:B\to C$, $h:C\to D$, on a $h\circ(g\circ f) = (h\circ g)\circ f$.
+
+\end{itemize}
+\end{df}
+
+Les dénotations des preuves permettent de définir une catégorie. \`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. La composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$.
+
+
+%
+
+
+\subsection{Produit tensoriel et catégorie monoïdale}
+
+\begin{floatingfigure}[r]{0.3\textwidth}
+%\begin{prooftree}
+	\AXC	{$p_{1}$}
+	\dottedLine
+	\UIC{$A_{1}\vdash B_{1}$}
+	   \AXC{$p_{2}$}
+	   \dottedLine
+	   \UIC{$A_{2}\vdash B_{2}$}
+	\RightLabel{$\otimes R$}
+	\BIC{$A_{1},A_{2} \vdash B_{1}\otimes B_{2}$}
+	\RightLabel{$\otimes L$}
+	\UIC{$A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$}
+\DP
+\\
+%\end{prooftree}
+\end{floatingfigure}
+
+
+L'opérateur de logique linéaire $\otimes$ permet de définir un produit tensoriel sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$. On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on remarque qu'à partir de preuves $p_{1}$ de $A_{1}\vdash B_{1}$ et $p_{2}$ de $A_{2}\vdash B_{2}$
+%	\AXC	{$p_{1}$}
+%	\dottedLine
+%	\UIC{$A_{1}\vdash B_{1}$}
+%	\DP
+%et
+%	\AXC	{$p_{2}$}
+%	\dottedLine
+%	\UIC{$A_{2}\vdash B_{2}$}
+%	\DP
+, on peut déduire la preuve $p$ ci-contre de $A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$. On définit alors ${[p_{1}]\otimes[p_{2}]=[p]}$.
+
+\
+
+\begin{df}
+Soit $\Ccal$ et $\Dcal$ des catégories. Un \textbf{\emph{foncteur}} $F:\Ccal\longrightarrow\Dcal$ de $\Ccal$ vers $\Dcal$ consiste en une application des objets de $\Ccal$ vers les objets de $\Dcal$ et une application des morphismes de $\Ccal$ vers les morphismes de $\Dcal$, notées toutes deux $F$ par abus d'écriture, tel que
+\begin{itemize}
+\item
+Pour tous objets $A$, $B$ et morphisme $f:A\to B$ de $\Ccal$, on a $F(f):F(A)\to F(B)$.
+\item
+Pour tous morphismes $f:A\to B$ et $g:B\to C$ de $\Ccal$, on a $F(g\circ f)=F(g)\circ F(f)$.
+\item
+Pour tout objet $A$ de $\Ccal$, on a $F(id_{A})=id_{F(A)}$.
+\end{itemize}
+\end{df}
+
+\begin{df}
+Soit $\Ccal$ et $\Dcal$ des catégories. On définit la \textbf{\emph{catégorie produit}} $\Ccal\times\Dcal$, où ${Obj(\Ccal\times\Dcal)}=Obj(\Ccal)\times Obj(\Dcal)$ et ${Hom_{(A,A')\to(B,B')}=Hom_{A\to B}(\Ccal)\times Hom_{A' \to B'}(\Dcal)}$.
+\end{df}
+
+L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$.
+
+% def catégorie monoïdale
+\begin{df}
+Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur ${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ et d'un objet $e$, tel que les morphismes suivants existent
+
+\begin{itemize}
+\item
+pour tous objets $A$, $B$, $C$, un isomorphisme
+%\linebreak
+${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$ permettant de parler d'associativité ;
+\item
+pour tout objet $A$, des isomorphismes ${\lambda_{A}:e\otimes A\to A}$ et ${\rho_{A}:A\otimes e\to A}$ justifiant le nom d'\textbf{unité} pour $e$ ;
+\end{itemize}
+
+\noindent
+et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$. On a omis les indices de $\alpha$, $\lambda$, $\rho$ et écrit $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme $\alpha_{A,B,C}\otimes id_{A}$.
+
+\includegraphics[width=\linewidth]{diagrammeMonoidalePenta}
+\centering{\includegraphics[width=0.5\linewidth]{diagrammeMonoidaleTri}}
+
+\end{df}
+
+
+L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ constitue une \textbf{catégorie monoïdale} avec comme objet unité $[1]$, la dénotation de la formule $1$, élément neutre pour le connecteur $\otimes$.
+
+En effet
+
+
+
+
+\subsection{Catégorie fermée}
+
+\subsection{Symétrie}
+
+\subsection{Catégorie libre}
+
+
+
 \pagebreak
 
 
@@ -64,7 +297,7 @@ On désigne souvent une catégorie par la collection de ses objets.
 % 
 %\end{itemize}
 
-Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\C$ munie d'un bifoncteur ${\otimes:\C\times\C \longrightarrow \C}$ et d'un objet $e$, tel que les morphismes suivants existent
+Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur ${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ et d'un objet $e$, tel que les morphismes suivants existent
 
 \begin{itemize}
 \item
