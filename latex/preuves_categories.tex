@@ -205,7 +205,12 @@ Pour tout objet $A$ de $\Ccal$, on a $F(id_{A})=id_{F(A)}$.
 Soit $\Ccal$ et $\Dcal$ des catégories. On définit la \textbf{\emph{catégorie produit}} $\Ccal\times\Dcal$, où ${Obj(\Ccal\times\Dcal)}=Obj(\Ccal)\times Obj(\Dcal)$ et ${Hom_{(A,A')\to(B,B')}=Hom_{A\to B}(\Ccal)\times Hom_{A' \to B'}(\Dcal)}$.
 \end{df}
 
-L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$.
+%L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$.
+
+\begin{df}
+Soit une catégorie,
+un morphisme $f:A\to B$ est un \textbf{\emph{isomorphisme}} s'il existe un morphisme $f^{-1}:B\to A$ tel que $f^{-1}\circ f=id_{A}$ et $f\circ f^{-1}=id_{B}$.
+\end{df}
 
 % def catégorie monoïdale
 \begin{df}
@@ -229,18 +234,147 @@ et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$
 \end{df}
 
 
-L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ constitue une \textbf{catégorie monoïdale} avec comme objet unité $[1]$, la dénotation de la formule $1$, élément neutre pour le connecteur $\otimes$.
+L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
+En effet, on peut définir des morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ comme les dénotations des preuves suivantes\\
 
-En effet
+\def\alphaABC{
+$\alpha_{A,B,C}$ : \qquad\qquad
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	  \AXC{}
+	  \RightLabel{$(id)$}
+	  \UIC{$B\vdash B$}
+	    \AXC{}
+	    \RightLabel{$(id)$}
+	    \UIC{$C\vdash C$}
+	  \RightLabel{$(\otimes R)$}
+	  \BIC{$B,C \vdash B\otimes C$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A,B,C \vdash A\otimes(B\otimes C)$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes B,C \vdash A\otimes(B\otimes C)$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$(A\otimes B)\otimes C \vdash A\otimes(B\otimes C)$}
+\DP
+}
+
+\def\lambdaA{
+$\lambda_{A}$ : \quad
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\RightLabel{$(\1 L)$}
+	\UIC{$\1,A\vdash A$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$\1\otimes A\vdash A$}
+\DP
+}
+
+\def\rhoA{
+$\rho_{A}$ : \quad
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\RightLabel{$(\1 L)$}
+	\UIC{$A,\1\vdash A$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes\1\vdash A$}
+\DP
+}
+
+\begin{tabular}{p{0.5\linewidth}p{0.5\linewidth}}
+	\multicolumn{2}{l}{\quad\; \alphaABC} \\ \\
+	\lambdaA & \rhoA
+\end{tabular}
+
+\
+
+\noindent
+Les propriétés des diagrammes...
+
+En revanche, ces morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ ne sont pas des isomorphismes.
 
 
 
+
+
+\def\noninverseUn{
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\RightLabel{$(\1 L)$}
+	\UIC{$A,\1\vdash A$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes\1\vdash A$}
+		\AXC{}
+		\RightLabel{$(id)$}
+		\UIC{$A\vdash A$}
+			\AXC{}
+			\RightLabel{$(\1 R)$}
+			\UIC{$\vdash \1$}
+		\RightLabel{$(\otimes R)$}
+		\BIC{$A\vdash A\otimes\1$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\otimes\1\vdash A\otimes\1$}
+	\noLine
+	\UIC{}
+	\noLine
+	\UIC{$p_{1}$}
+\DP
+}
+\def\noninverseDeux{
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\RightLabel{$(\1 L)$}
+	\UIC{$A,\1\vdash A$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes\1\vdash A$}
+		\AXC{}
+		\RightLabel{$(\1 R)$}
+		\UIC{$\vdash \1$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A\otimes\1\vdash A\otimes\1$}
+	\noLine
+	\UIC{}
+	\noLine
+	\UIC{$p_{2}$}
+\DP
+}
+\def\noninverseTrois{
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+		\AXC{}
+		\RightLabel{$(id)$}
+		\UIC{$\1 \vdash \1$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A,\1\vdash A\otimes\1$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes\1\vdash A\otimes\1$}
+	\noLine
+	\UIC{}
+	\noLine
+	\UIC{$p_{3}$}
+\DP
+}
+\resizebox{\linewidth}{!}{
+%\begin{tabular}{ccc}
+%	\noninverseUn & \noninverseDeux & \noninverseTrois
+%\end{tabular}
+\noninverseUn \quad \noninverseDeux \quad \noninverseTrois
+}
 
 \subsection{Catégorie fermée}
 
 \subsection{Symétrie}
 
 \subsection{Catégorie libre}
+
+
+
+
 
 
 
