@@ -40,6 +40,7 @@ car souvent, il est intéressant d'expliciter $\s$ pour prolonger $p$ en une preu
 \begin{floatingfigure}[r]{0.27\textwidth}
 %$p$ :
 %\begin{prooftree}
+\noindent
 	\AXC	{$p_{1}$}
 	\dottedLine
 	\UIC{$A\vdash B$}
@@ -165,10 +166,11 @@ Cette définition ne tient compte que des dénotations de preuves où le séquent pr
 %
 
 
-\subsection{Produit tensoriel et catégorie monoïdale}
+\subsection{Produit tensoriel et bifoncteur}
 
-\def\sizedefotimes{0.3\textwidth}
+\def\sizedefotimes{0.27\textwidth}
 \begin{floatingfigure}[r]{\sizedefotimes}
+\noindent
 \resizebox{\sizedefotimes}{!}{
 	\AXC	{$p_{1}$}
 	\dottedLine
@@ -185,14 +187,14 @@ Cette définition ne tient compte que des dénotations de preuves où le séquent pr
 	\noLine
 	\UIC{$p$}
 \DP
-
 }
 \\
 \end{floatingfigure}
 
 
-Le connecteur de logique linéaire $\otimes$ permet de définir un produit tensoriel sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$. On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on remarque qu'à partir de preuves $p_{1}$ de $A_{1}\vdash B_{1}$ et 
-\\
+
+
+Le connecteur de logique linéaire $\otimes$ permet de définir un produit tensoriel sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$. On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on remarque qu'à partir de preuves $p_{1}$ de $A_{1}\vdash B_{1}$ et
 
 \noindent
 $p_{2}$ de $A_{2}\vdash B_{2}$
@@ -205,9 +207,95 @@ $p_{2}$ de $A_{2}\vdash B_{2}$
 %	\dottedLine
 %	\UIC{$A_{2}\vdash B_{2}$}
 %	\DP
-, on peut déduire la preuve $p$ ci-contre de $A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$. On définit alors ${[p_{1}]\otimes[p_{2}]=[p]}$. On admet que l'opérateur est bien défini : si on a deux autres preuves $p'_{1}$ et $p'_{2}$ telles que $[p'_{1}]=[p_{1}]$ et $[p'_{2}]=[p_{2}]$, et si $p'$ est la preuve obtenue à partir de $p'_{1}$ et $p'_{2}$ selon le procédé utilisé pour construire $p$, alors $[p']=[p]$.
+, on peut déduire la preuve $p$ ci-contre de $A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$. On définit alors ${[p_{1}]\otimes[p_{2}]=[p]}$.
 
-On verra que munir la catégorie $\CProofs$ de $\otimes$ en fait une catégorie monoïdale. Mais pour définir ce qu'est une catégorie monoïdale, il faut plusieurs autres définitions sur les catégories.
+L'opérateur est bien défini : si on a deux autres preuves $p'_{1}$ et $p'_{2}$ telles que $[p'_{1}]=[p_{1}]$ et $[p'_{2}]=[p_{2}]$, et si $p'$ est la preuve obtenue à partir de $p'_{1}$ et $p'_{2}$ selon le procédé utilisé pour construire $p$, alors $[p']=[p]$. En effet, le procédé d'élimination de la coupure autorise évidemment à remplacer la preuve $p_{1}$ apparaissant dans la preuve $p$ par une preuve $p'_{1}$ qui lui est équivalente.
+
+Intéressons-nous à la compatibilité de $\otimes$ avec $\circ$. Soit des morphismes de  $f_{1} : A_{1}\to B_{1}$, $f_{2} : A_{2}\to B_{2}$, $g_{1} : B_{1}\to C_{1}$, $g_{2} : B_{2}\to C_{2}$ (on confond un objet avec sa dénotation pour simplifier l'écriture). Pour chaque morphisme $f$, soit $p(f)$ une preuve de dénotation $f$. Les deux preuves suivantes sont équivalentes selon le p.é.c., ce qui signifie que $(g_{1}\otimes g_{2})\circ(f_{1}\otimes f_{2}) = (g_{1}\circ f_{1})\otimes(g_{2}\circ f_{2})$.
+\vspace{2mm}
+
+\noindent
+\resizebox{\linewidth}{!}{
+	\AXC	{$p(f_{1})$}
+	\dottedLine
+	\UIC{$A_{1}\vdash B_{1}$}
+		\AXC{$p(f_{2})$}
+		\dottedLine
+		\UIC{$A_{2}\vdash B_{2}$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A_{1},A_{2} \vdash B_{1}\otimes B_{2}$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$}
+		\AXC	{$p(g_{1})$}
+		\dottedLine
+		\UIC{$B_{1}\vdash C_{1}$}
+			\AXC{$p(g_{2})$}
+			\dottedLine
+			\UIC{$B_{2}\vdash C_{2}$}
+		\RightLabel{$(\otimes R)$}
+		\BIC{$B_{1},B_{2} \vdash C_{1}\otimes C_{2}$}
+		\RightLabel{$(\otimes L)$}
+		\UIC{$B_{1}\otimes B_{2} \vdash C_{1}\otimes C_{2}$}
+	\RightLabel{$(cut)$}
+	\BIC{$A_{1}\otimes A_{2} \vdash C_{1}\otimes C_{2}$}
+\DP
+\quad
+	\AXC	{$p(f_{1})$}
+	\dottedLine
+	\UIC{$A_{1}\vdash B_{1}$}
+		\AXC	{$p(g_{1})$}
+		\dottedLine
+		\UIC{$B_{1}\vdash C_{1}$}
+	\RightLabel{$(cut)$}
+	\BIC{$A_{1} \vdash C_{1}$}
+		\AXC{$p(f_{2})$}
+		\dottedLine
+		\UIC{$A_{2}\vdash B_{2}$}
+			\AXC{$p(g_{2})$}
+			\dottedLine
+			\UIC{$B_{2}\vdash C_{2}$}
+		\RightLabel{$(cut)$}
+		\BIC{$A_{2} \vdash C_{2}$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A_{1},A_{2} \vdash C_{1}\otimes C_{2}$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A_{1}\otimes A_{2} \vdash C_{1}\otimes C_{2}$}		
+\DP
+}
+\vspace{1mm}
+
+\noindent
+On a également l'égalité $id_{[A]\otimes[B]}=id_{[A]}\otimes id_{[B]}$ en raison de l'équivalence des preuves
+\vspace{1.5mm}
+
+\noindent
+\resizebox{3cm}{!}{
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\otimes B \vdash A\otimes B$}
+	\DP
+}
+et
+\resizebox{4cm}{!}{
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A \vdash A$}
+		\AXC{}
+		\RightLabel{$(id)$}
+		\UIC{$B \vdash B$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A,B \vdash A\otimes B$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes B \vdash A\otimes B$}
+	\DP
+}
+.
+\vspace{3mm}
+
+\
+
+
+Ces propriétés signifient que l'opérateur $\otimes$ constitue un \textbf{bifoncteur} sur $\CProofs$, c'est-à-dire un foncteur de $\CProofs\times\CProofs$ vers $\CProofs$, avec les définitions suivantes.
 
 \
 
@@ -224,6 +312,22 @@ Pour tout objet $A$ de $\Ccal$, on a $F(id_{A})=id_{F(A)}$.
 \end{df}
 
 \begin{df}
+Soit $\Ccal$ et $\Dcal$ des catégories. On définit la \textbf{\emph{catégorie produit}} $\Ccal\times\Dcal$, où ${Obj(\Ccal\times\Dcal)}=Obj(\Ccal)\times Obj(\Dcal)$ et ${Hom_{(A,A')\to(B,B')}=Hom_{A\to B}(\Ccal)\times Hom_{A' \to B'}(\Dcal)}$.
+\end{df}
+
+
+%
+
+
+\subsection{Catégorie monoïdale}
+
+%On verra que munir la catégorie $\CProofs$ de $\otimes$ en fait une catégorie monoïdale. Mais pour définir ce qu'est une catégorie monoïdale, il faut plusieurs autres définitions sur les catégories.
+
+La catégorie $\CProofs$ ayant été munie du bifoncteur $\otimes$, on se demande s'il s'agit d'une catégorie monoïdale, dont la définition est donnée après deux définitions auxiliaires.
+%, qui s'appuie sur les deux définitions suivantes, est donnée ensuite.
+%à leur suite.
+
+\begin{df}
 Soit $\Ccal$ et $\Dcal$ des catégories. Soit $F,G:\Ccal\longrightarrow\Dcal$ des foncteurs de $\Ccal$ vers $\Dcal$. Une \textbf{\emph{transformation naturelle}} $\theta$ de $F$ vers $G$ est une famille $\big(\;\theta_{A} : F(A) \to G(A)\;\big)_{A\in Obj(\Ccal)}$ de morphismes de $\Dcal$, indexée par les objets de $\Ccal$, telle que le diagramme suivant commute dans $\Dcal$ pour tout morphisme $f:A\to B$ de $\Ccal$
 
 {\centering\includegraphics[width=0.4\linewidth]{diagrammeNaturel}
@@ -234,10 +338,6 @@ On note $\theta : F \Rightarrow G$, voire $\theta : F \Rightarrow G : \Ccal \lon
 \end{df}
 
 
-
-\begin{df}
-Soit $\Ccal$ et $\Dcal$ des catégories. On définit la \textbf{\emph{catégorie produit}} $\Ccal\times\Dcal$, où ${Obj(\Ccal\times\Dcal)}=Obj(\Ccal)\times Obj(\Dcal)$ et ${Hom_{(A,A')\to(B,B')}=Hom_{A\to B}(\Ccal)\times Hom_{A' \to B'}(\Dcal)}$.
-\end{df}
 
 
 
@@ -296,7 +396,9 @@ On omet souvent les indices de $\alpha$, $\lambda$, $\rho$ lorsqu'il n'y a pas d
 \end{df}
 
 
-L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\CProofs$, c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
+%L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\CProofs$, c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
+
+La catégorie $\Ccal$ munie du bifoncteur $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
 En effet, on peut définir des morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ comme les dénotations des preuves suivantes\\
 
 \def\alphaABC{
@@ -447,9 +549,47 @@ Cependant en ajoutant des transformations ...
 %\noninverseUn \quad \noninverseDeux \quad \noninverseTrois
 %}
 
-\subsection{Catégorie fermée}
+
+%
+
 
 \subsection{Symétrie}
+
+\def\sizesymetrie{0.27\textwidth}
+\begin{floatingfigure}[r]{\sizesymetrie}
+\noindent
+\resizebox{\sizesymetrie}{!}{
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$B\vdash B$}
+		\AXC{}
+		\RightLabel{$(id)$}
+		\UIC{$A\vdash A$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$B,A \vdash B\otimes A$}
+	\RightLabel{$(exchange)$}
+	\UIC{$A,B \vdash B\otimes A$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes B \vdash B\otimes A$}
+\DP
+}
+\\
+\end{floatingfigure}
+
+La logique linéaire est commutative : la règle d'échange ... permet de construire la preuve canonique de $A\otimes B \vdash B\otimes A$ ci-contre. On peut alors ajouter un nouvel isomorphisme naturel à $\CProofs$ pour en faire une catégorie monoïdale symétrique. Des variantes ``non commutatives'' ont été étudiées dans la littérature, où la règle d'échange est supprimée ou affaiblie. Dans ce dernier cas, on peut parfois obtenir une catégorie monoïdale non pas symétrique, mais \emph{tressée}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%
+
+
+\subsection{Catégorie fermée}
+
+
 
 \subsection{Catégorie libre}
 
