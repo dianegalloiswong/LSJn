@@ -48,6 +48,10 @@ car souvent, il est intéressant d'expliciter $\s$ pour prolonger $p$ en une preu
 	\UIC{$B\vdash C$}
 	\RightLabel{$(cut)$}
 	\BIC{$A\vdash C$}
+	\noLine
+	\UIC{}
+	\noLine
+	\UIC{$p$}
 	\DP\\
 %\end{prooftree}
 \end{floatingfigure}
@@ -122,6 +126,7 @@ et
 %\noindent
 sont équivalentes selon l'élimination de la coupure, ce qui signifie que $[p]\circ id_{A}=[p]$. De même, pour $p$ une preuve de $B\vdash A$, on a $id_{A}\circ[p]=[p]$.
 
+Ces propriétés sur les dénotations permettent d'utiliser le formalisme des catégories.
 
 % def catégorie
 \begin{df}
@@ -145,37 +150,52 @@ pour tout objet $B$, pour tout $f:B\to A$, $id_{A}\circ f=f$ et pour tout $g:A\t
 \item
 \textbf{Associativité.}
 Pour tous $f:A\to B$, $g:B\to C$, $h:C\to D$, on a $h\circ(g\circ f) = (h\circ g)\circ f$.
-
 \end{itemize}
+
+\
+
+\noindent\textbf{Notations.} Soit $\Ccal$ une catégorie, on note $Obj(\Ccal)$ la classe de ses objets et $Hom(\Ccal)$ celle de ses morphismes. Pour des objets $A$ et $B$, on note $Hom_{A\to B}(\Ccal)$ la classe des morphismes de type $A\to B$. On peut omettre l'argument $\Ccal$ s'il n'y a pas d'ambiguïté, par exemple si on travaille sur une seule catégorie.
 \end{df}
 
-Les dénotations des preuves permettent de définir une catégorie. \`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. La composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$.
+Les dénotations des preuves s'organisent sous la forme de la catégorie suivante, qu'on appellera $\CProofs$. \`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. La composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$.
 
+%Pour l'instant, on ne considère 
+Cette définition ne tient compte que des dénotations de preuves où le séquent prouvé a une unique formule à gauche et une unique formule à droite ; les autres séquents des preuves peuvent avoir n'importe quelle forme. Cette restriction est conservée dans les quelques sous-section qui suivent, où on enrichit notre catégorie. ... Enfin, on étend ce formalisme à toutes les preuves de logique linéaire intuitionniste, c'est-à-dire avec des séquents qui ont un nombre quelconque de formules à gauche et exactement une formule à droite.
 
 %
 
 
 \subsection{Produit tensoriel et catégorie monoïdale}
 
-\begin{floatingfigure}[r]{0.3\textwidth}
-%\begin{prooftree}
+\def\sizedefotimes{0.3\textwidth}
+\begin{floatingfigure}[r]{\sizedefotimes}
+\resizebox{\sizedefotimes}{!}{
 	\AXC	{$p_{1}$}
 	\dottedLine
 	\UIC{$A_{1}\vdash B_{1}$}
 	   \AXC{$p_{2}$}
 	   \dottedLine
 	   \UIC{$A_{2}\vdash B_{2}$}
-	\RightLabel{$\otimes R$}
+	\RightLabel{$(\otimes R)$}
 	\BIC{$A_{1},A_{2} \vdash B_{1}\otimes B_{2}$}
-	\RightLabel{$\otimes L$}
+	\RightLabel{$(\otimes L)$}
 	\UIC{$A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$}
+	\noLine
+	\UIC{}
+	\noLine
+	\UIC{$p$}
 \DP
+
+}
 \\
-%\end{prooftree}
 \end{floatingfigure}
 
 
-L'opérateur de logique linéaire $\otimes$ permet de définir un produit tensoriel sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$. On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on remarque qu'à partir de preuves $p_{1}$ de $A_{1}\vdash B_{1}$ et $p_{2}$ de $A_{2}\vdash B_{2}$
+Le connecteur de logique linéaire $\otimes$ permet de définir un produit tensoriel sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$. On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on remarque qu'à partir de preuves $p_{1}$ de $A_{1}\vdash B_{1}$ et 
+\\
+
+\noindent
+$p_{2}$ de $A_{2}\vdash B_{2}$
 %	\AXC	{$p_{1}$}
 %	\dottedLine
 %	\UIC{$A_{1}\vdash B_{1}$}
@@ -185,7 +205,9 @@ L'opérateur de logique linéaire $\otimes$ permet de définir un produit tensoriel
 %	\dottedLine
 %	\UIC{$A_{2}\vdash B_{2}$}
 %	\DP
-, on peut déduire la preuve $p$ ci-contre de $A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$. On définit alors ${[p_{1}]\otimes[p_{2}]=[p]}$.
+, on peut déduire la preuve $p$ ci-contre de $A_{1}\otimes A_{2} \vdash B_{1}\otimes B_{2}$. On définit alors ${[p_{1}]\otimes[p_{2}]=[p]}$. On admet que l'opérateur est bien défini : si on a deux autres preuves $p'_{1}$ et $p'_{2}$ telles que $[p'_{1}]=[p_{1}]$ et $[p'_{2}]=[p_{2}]$, et si $p'$ est la preuve obtenue à partir de $p'_{1}$ et $p'_{2}$ selon le procédé utilisé pour construire $p$, alors $[p']=[p]$.
+
+On verra que munir la catégorie $\CProofs$ de $\otimes$ en fait une catégorie monoïdale. Mais pour définir ce qu'est une catégorie monoïdale, il faut plusieurs autres définitions sur les catégories.
 
 \
 
@@ -202,43 +224,83 @@ Pour tout objet $A$ de $\Ccal$, on a $F(id_{A})=id_{F(A)}$.
 \end{df}
 
 \begin{df}
+Soit $\Ccal$ et $\Dcal$ des catégories. Soit $F,G:\Ccal\longrightarrow\Dcal$ des foncteurs de $\Ccal$ vers $\Dcal$. Une \textbf{\emph{transformation naturelle}} $\theta$ de $F$ vers $G$ est une famille $\big(\;\theta_{A} : F(A) \to G(A)\;\big)_{A\in Obj(\Ccal)}$ de morphismes de $\Dcal$, indexée par les objets de $\Ccal$, telle que le diagramme suivant commute dans $\Dcal$ pour tout morphisme $f:A\to B$ de $\Ccal$
+
+{\centering\includegraphics[width=0.4\linewidth]{diagrammeNaturel}
+
+}
+\noindent
+On note $\theta : F \Rightarrow G$, voire $\theta : F \Rightarrow G : \Ccal \longrightarrow \Dcal$.
+\end{df}
+
+
+
+\begin{df}
 Soit $\Ccal$ et $\Dcal$ des catégories. On définit la \textbf{\emph{catégorie produit}} $\Ccal\times\Dcal$, où ${Obj(\Ccal\times\Dcal)}=Obj(\Ccal)\times Obj(\Dcal)$ et ${Hom_{(A,A')\to(B,B')}=Hom_{A\to B}(\Ccal)\times Hom_{A' \to B'}(\Dcal)}$.
 \end{df}
 
-%L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$.
+
 
 \begin{df}
 Soit une catégorie,
 un morphisme $f:A\to B$ est un \textbf{\emph{isomorphisme}} s'il existe un morphisme $f^{-1}:B\to A$ tel que $f^{-1}\circ f=id_{A}$ et $f\circ f^{-1}=id_{B}$.
 \end{df}
 
+
 % def catégorie monoïdale
 \begin{df}
-Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur ${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ et d'un objet $e$, tel que les morphismes suivants existent
-
+Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur \\${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ (pour lequel on utilise une notation infixe) et d'un objet particulier $e$, %tel que les morphismes suivants existent
+%
+%\begin{itemize}
+%\item
+%pour tous objets $A$, $B$, $C$, un isomorphisme naturel
+%%\linebreak
+%${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$ permettant de parler d'associativité ;
+%\item
+%pour tout objet $A$, des isomorphismes naturels ${\lambda_{A}:e\otimes A\to A}$ et ${\rho_{A}:A\otimes e\to A}$ %justifiant le nom d'\textbf{unité} pour $e$ ;
+%permettant d'appeler $e$ l'objet \textbf{unité} ;
+%\end{itemize}
+telle qu'il existe des \textbf{isomorphismes naturels}
 \begin{itemize}
 \item
-pour tous objets $A$, $B$, $C$, un isomorphisme
-%\linebreak
-${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$ permettant de parler d'associativité ;
+${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$, permettant de parler d'associativité ;
 \item
-pour tout objet $A$, des isomorphismes ${\lambda_{A}:e\otimes A\to A}$ et ${\rho_{A}:A\otimes e\to A}$ justifiant le nom d'\textbf{unité} pour $e$ ;
+${\lambda_{A}:e\otimes A\to A}$ ;
+\item
+${\rho_{A}:A\otimes e\to A}$,
+permettant avec le précédent d'appeler $e$ l'objet \textbf{unité} ;
 \end{itemize}
 
 \noindent
-et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$. On a omis les indices de $\alpha$, $\lambda$, $\rho$ et écrit $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme $\alpha_{A,B,C}\otimes id_{A}$.
+et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$. 
 
 \includegraphics[width=\linewidth]{diagrammeMonoidalePenta}
-\centering{\includegraphics[width=0.5\linewidth]{diagrammeMonoidaleTri}}
+{\centering\includegraphics[width=0.5\linewidth]{diagrammeMonoidaleTri}
+
+}
+\noindent
+Ces diagrammes sont appelés diagrammes \emph{pentagonal} et \emph{triangulaire}. Leur commutativité est la \emph{propriété de cohérence}.
+%On a omis les indices de $\alpha$, $\lambda$, $\rho$ et écrit $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme $\alpha_{A,B,C}\otimes id_{A}$.
+On omet souvent les indices de $\alpha$, $\lambda$, $\rho$ lorsqu'il n'y a pas d'ambiguïté. Ici, on écrit aussi $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme ${\alpha_{A,B,C}\otimes id_{A}}$.
+
+\
+
+\noindent\textbf{Précision.} On parle d'isomorphismes naturels car il y a bien des transformations naturelles associées. En fait la condition sur $\alpha$ est $\alpha : F \Rightarrow G :\Ccal\times\Ccal\times\Ccal \longrightarrow \Ccal$ avec $F:(x,y,z) \mapsto (x\otimes y)\otimes z$ et $G:(x,y,z) \mapsto x\otimes(y\otimes z)$ où $x$, $y$, $z$ sont trois objets ou trois morphismes de $\Ccal$. On écrit $\alpha_{A,B,C}$ pour $\alpha_{(A,B,C)}$. Les $\alpha_{A,B,C}$ sont bien des morphismes de $\Ccal$, qui est la catégorie d'arrivée de $F$ et $G$. On veut aussi ${\lambda : (e\otimes\bullet) \Rightarrow Id_{\Ccal} : \Ccal \longrightarrow \Ccal}$ où $(e\otimes\bullet) : \left\{
+\begin{array}{l}
+	A \mapsto e\otimes A \\
+	f \mapsto id_{e}\otimes f
+\end{array}
+\right.$ et où $Id_{\Ccal}$ est le foncteur identité sur $\Ccal$. Il y a une condition similaire pour $\rho$.
+
 
 \end{df}
 
 
-L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\Ccal$ (?), c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
+L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\CProofs$, c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
 En effet, on peut définir des morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ comme les dénotations des preuves suivantes\\
 
 \def\alphaABC{
-$\alpha_{A,B,C}$ : \qquad\qquad
+$\alpha_{A,B,C}$ :
 	\AXC{}
 	\RightLabel{$(id)$}
 	\UIC{$A\vdash A$}
@@ -260,7 +322,7 @@ $\alpha_{A,B,C}$ : \qquad\qquad
 }
 
 \def\lambdaA{
-$\lambda_{A}$ : \quad
+$\lambda_{A}$ :
 	\AXC{}
 	\RightLabel{$(id)$}
 	\UIC{$A\vdash A$}
@@ -272,7 +334,7 @@ $\lambda_{A}$ : \quad
 }
 
 \def\rhoA{
-$\rho_{A}$ : \quad
+$\rho_{A}$ : 
 	\AXC{}
 	\RightLabel{$(id)$}
 	\UIC{$A\vdash A$}
@@ -283,20 +345,38 @@ $\rho_{A}$ : \quad
 \DP
 }
 
-\begin{tabular}{p{0.5\linewidth}p{0.5\linewidth}}
-	\multicolumn{2}{l}{\quad\; \alphaABC} \\ \\
-	\lambdaA & \rhoA
-\end{tabular}
+%\begin{tabular}{p{0.5\linewidth}p{0.5\linewidth}}
+%	\multicolumn{2}{l}{\quad\; \alphaABC} \\ \\
+%	\lambdaA & \rhoA
+%\end{tabular}
+% alpha : \qquad\qquad, 2 autres : \quad
+
+\noindent
+\resizebox{\linewidth}{!}{
+\alphaABC \quad \lambdaA \quad \rhoA
+}
 
 \
 
 \noindent
-Les propriétés des diagrammes...
+Il s'agit bien de transformations naturelles, et on a bien la propriété de cohérence. ...
 
-En revanche, ces morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ ne sont pas des isomorphismes.
+En revanche, ces morphismes $\alpha$, $\lambda$, $\rho$ ne sont pas des isomorphismes. On n'écrit plus les indices, qui sont toujours les mêmes. On peut définir des morphismes naturels \\${\bar\alpha_{A,B,C} : A\circ(B\circ C) \to (A\circ B)\circ C}$ \,,\; ${\bar\lambda_{A} : A \to e\circ A}$ \,,\; ${\bar\rho_{A} : A \to A\circ e}$\,, par exemple $\bar\lambda_{A}$ est la dénotation de 
+\resizebox{3cm}{!}{
+	\AXC{}
+	\RightLabel{$(\1 R)$}
+	\UIC{$\vdash \1$}
+		\AXC{}
+		\RightLabel{$(id)$}
+		\UIC{$A\vdash A$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A\vdash \1\otimes A$}
+\DP
+}
+. On pense naturellement à ces morphismes quand on cherche des inverses de $\alpha$, $\lambda$ et $\rho$. On a bien ${\lambda\circ\bar\lambda = id_{A}}$ et ${\rho\circ\bar\rho=id_{A}}$, en revanche on n'a aucune des égalités suivantes : ${\bar\lambda\circ\lambda = id_{e\circ A}}$\,,\; ${\bar\rho\circ\rho=id_{A\circ e}}$\,,\; ${\bar\alpha\circ\alpha=id_{(A\circ B)\circ C}}$\,,\; ${\alpha\circ\bar\alpha=id_{A\circ(B\circ C)}}$\,.
 
 
-
+Cependant en ajoutant des transformations ...
 
 
 \def\noninverseUn{
@@ -359,12 +439,13 @@ En revanche, ces morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ ne sont 
 	\UIC{$p_{3}$}
 \DP
 }
-\resizebox{\linewidth}{!}{
-%\begin{tabular}{ccc}
-%	\noninverseUn & \noninverseDeux & \noninverseTrois
-%\end{tabular}
-\noninverseUn \quad \noninverseDeux \quad \noninverseTrois
-}
+%\noindent
+%\resizebox{\linewidth}{!}{
+%%\begin{tabular}{ccc}
+%%	\noninverseUn & \noninverseDeux & \noninverseTrois
+%%\end{tabular}
+%\noninverseUn \quad \noninverseDeux \quad \noninverseTrois
+%}
 
 \subsection{Catégorie fermée}
 
