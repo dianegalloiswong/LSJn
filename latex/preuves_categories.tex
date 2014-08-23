@@ -12,13 +12,24 @@
 \tableofcontents
 
 
-\section{Calcul de séquents : exemple de la logique classique}
+%\section{Calcul de séquents : exemple de la logique classique}
+%
+%\section{La logique linéaire}
+%
+%\section{\'Elimination de la coupure}
+%
+%\section{Catégories}
+%
 
-\section{La logique linéaire}
+\
 
-\section{\'Elimination de la coupure}
+\
 
-\section{Catégories}
+\idees{
+On suppose qu'on a présenté la logique linéaire et son calcul de séquents, et le procédé d'élimination de la coupure (qu'on abrège pour l'instant parfois en p.é.c., mais cela peut changer). On distingue le p.é.c. ``strict'' avec seulement les transformations nécessaires pour le théorème d'élimination de la coupure, du p.é.c. ``large'' où on a rajouté les transformations qui font que alpha, lambda, rho deviennent des isomorphismes et donc permettent d'obtenir vraiment une catégorie monoïdale.
+}
+
+\section{}
 
 
 \subsection{Invariant modulaire et catégorie}
@@ -35,12 +46,11 @@ car souvent, il est intéressant d'expliciter $\s$ pour prolonger $p$ en une preu
 
 \
 
-\`A chaque preuve $p$, on associe une \textbf{\emph{dénotation}} $[p]$. On veut que cela constitue un invariant selon l'élimination de la coupure : deux preuves on la même dénotation si, et seulement si, une peut être obtenue en appliquant à l'autre des transformations autorisée par la procédure d'élimination de la coupure. Ceci est motivé par une analogie avec la théorie des n\oe uds, où les invariants sont relatifs aux transformations de Reidemeister (?).
+\`A chaque preuve $p$, on associe une \textbf{\emph{dénotation}} $[p]$. On veut que cela constitue un invariant selon l'élimination de la coupure : deux preuves on la même dénotation si, et seulement si, une peut être obtenue en appliquant à l'autre des transformations autorisée par la procédure d'élimination de la coupure. Ceci est motivé par une analogie avec la théorie des n\oe uds, où les invariants sont relatifs aux transformations de Reidemeister.
+\idees{expliquer ? ne pas en parler ?}
 
 \begin{floatingfigure}[r]{0.27\textwidth}
-%$p$ :
-%\begin{prooftree}
-\noindent
+\centering
 	\AXC	{$p_{1}$}
 	\dottedLine
 	\UIC{$A\vdash B$}
@@ -54,7 +64,6 @@ car souvent, il est intéressant d'expliciter $\s$ pour prolonger $p$ en une preu
 	\noLine
 	\UIC{$p$}
 	\DP\\
-%\end{prooftree}
 \end{floatingfigure}
 
 
@@ -158,10 +167,15 @@ Pour tous $f:A\to B$, $g:B\to C$, $h:C\to D$, on a $h\circ(g\circ f) = (h\circ g
 \noindent\textbf{Notations.} Soit $\Ccal$ une catégorie, on note $Obj(\Ccal)$ la classe de ses objets et $Hom(\Ccal)$ celle de ses morphismes. Pour des objets $A$ et $B$, on note $Hom_{A\to B}(\Ccal)$ la classe des morphismes de type $A\to B$. On peut omettre l'argument $\Ccal$ s'il n'y a pas d'ambiguïté, par exemple si on travaille sur une seule catégorie.
 \end{df}
 
-Les dénotations des preuves s'organisent sous la forme de la catégorie suivante, qu'on appellera $\CProofs$. \`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. La composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$.
+Les dénotations des preuves s'organisent sous la forme de la catégorie suivante, qu'on appellera $\CProofs$.
+\idees{choix du nom ?}
+\`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. La composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$. On notera aussi $A$ la dénotation de la formule $A$, sauf lorsqu'on souhaite insister sur le fait qu'il s'agit d'une dénotation. Cela permet d'alléger l'écriture et de retrouver la notation employée dans les définitions sur les catégories.
 
 %Pour l'instant, on ne considère 
-Cette définition ne tient compte que des dénotations de preuves où le séquent prouvé a une unique formule à gauche et une unique formule à droite ; les autres séquents des preuves peuvent avoir n'importe quelle forme. Cette restriction est conservée dans les quelques sous-section qui suivent, où on enrichit notre catégorie. ... Enfin, on étend ce formalisme à toutes les preuves de logique linéaire intuitionniste, c'est-à-dire avec des séquents qui ont un nombre quelconque de formules à gauche et exactement une formule à droite.
+Cette définition ne tient compte que des dénotations de preuves où le séquent prouvé a une unique formule à gauche et une unique formule à droite ; les autres séquents des preuves peuvent avoir n'importe quelle forme. Cette restriction est conservée dans 
+\idees{quelques sous-sections ? tout le reste de la partie ? toujours ? Est-ce qu'on peut étendre ce formalisme à n'importe quelle preuve de la logique intuitionniste linéaire grâce au théorème de MacLane, cf. mail ?}
+%les quelques sous-section qui suivent, où on enrichit notre catégorie. ... Enfin, on étend ce formalisme à toutes les preuves de la logique linéaire intuitionniste, %c'est-à-dire avec des séquents qui 
+%où les séquents ont un nombre quelconque de formules à gauche et exactement une formule à droite.
 
 %
 
@@ -170,7 +184,7 @@ Cette définition ne tient compte que des dénotations de preuves où le séquent pr
 
 \def\sizedefotimes{0.27\textwidth}
 \begin{floatingfigure}[r]{\sizedefotimes}
-\noindent
+\centering
 \resizebox{\sizedefotimes}{!}{
 	\AXC	{$p_{1}$}
 	\dottedLine
@@ -194,10 +208,9 @@ Cette définition ne tient compte que des dénotations de preuves où le séquent pr
 
 
 
-Le connecteur de logique linéaire $\otimes$ permet de définir un produit tensoriel sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$. On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on remarque qu'à partir de preuves $p_{1}$ de $A_{1}\vdash B_{1}$ et
-
-\noindent
-$p_{2}$ de $A_{2}\vdash B_{2}$
+%Le connecteur de logique linéaire $\otimes$ permet de définir un produit tensoriel sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$.
+Le connecteur de logique linéaire $\otimes$, appelé \emph{produit tensoriel}, induit un opérateur sur les dénotations de formules, aussi noté $\otimes$ : on pose $[A]\otimes[B]=[A\otimes B]$.
+On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on remarque qu'à partir de preuves $p_{1}$ de $A_{1}\vdash B_{1}$ et $p_{2}$ de $A_{2}\vdash B_{2}$
 %	\AXC	{$p_{1}$}
 %	\dottedLine
 %	\UIC{$A_{1}\vdash B_{1}$}
@@ -211,7 +224,8 @@ $p_{2}$ de $A_{2}\vdash B_{2}$
 
 L'opérateur est bien défini : si on a deux autres preuves $p'_{1}$ et $p'_{2}$ telles que $[p'_{1}]=[p_{1}]$ et $[p'_{2}]=[p_{2}]$, et si $p'$ est la preuve obtenue à partir de $p'_{1}$ et $p'_{2}$ selon le procédé utilisé pour construire $p$, alors $[p']=[p]$. En effet, le procédé d'élimination de la coupure autorise évidemment à remplacer la preuve $p_{1}$ apparaissant dans la preuve $p$ par une preuve $p'_{1}$ qui lui est équivalente.
 
-Intéressons-nous à la compatibilité de $\otimes$ avec $\circ$. Soit des morphismes de  $f_{1} : A_{1}\to B_{1}$, $f_{2} : A_{2}\to B_{2}$, $g_{1} : B_{1}\to C_{1}$, $g_{2} : B_{2}\to C_{2}$ (on confond un objet avec sa dénotation pour simplifier l'écriture). Pour chaque morphisme $f$, soit $p(f)$ une preuve de dénotation $f$. Les deux preuves suivantes sont équivalentes selon le p.é.c., ce qui signifie que $(g_{1}\otimes g_{2})\circ(f_{1}\otimes f_{2}) = (g_{1}\circ f_{1})\otimes(g_{2}\circ f_{2})$.
+Intéressons-nous à la compatibilité de $\otimes$ avec $\circ$. Soit des morphismes de  $f_{1} : A_{1}\to B_{1}$\,,\; $f_{2} : A_{2}\to B_{2}$\,,\; $g_{1} : B_{1}\to C_{1}$\,,\; $g_{2} : B_{2}\to C_{2}$ %(on confond un objet avec sa dénotation pour simplifier l'écriture)
+. Pour chaque morphisme $f$, soit $p(f)$ une preuve de dénotation $f$. Les deux preuves suivantes sont équivalentes selon le p.é.c., ce qui signifie que $(g_{1}\otimes g_{2})\circ(f_{1}\otimes f_{2}) = (g_{1}\circ f_{1})\otimes(g_{2}\circ f_{2})$.
 \vspace{2mm}
 
 \noindent
@@ -349,7 +363,7 @@ un morphisme $f:A\to B$ est un \textbf{\emph{isomorphisme}} s'il existe un morph
 
 % def catégorie monoïdale
 \begin{df}
-Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur \\${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ (pour lequel on utilise une notation infixe) et d'un objet particulier $e$, %tel que les morphismes suivants existent
+Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur \\${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ (pour lequel on utilise une notation infixe) avec d'un objet particulier $e$, %tel que les morphismes suivants existent
 %
 %\begin{itemize}
 %\item
@@ -379,11 +393,11 @@ et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$
 
 }
 \noindent
-Ces diagrammes sont appelés diagrammes \emph{pentagonal} et \emph{triangulaire}. Leur commutativité est la \emph{propriété de cohérence}.
+Ces diagrammes sont appelés \emph{diagrammes pentagonal} et \emph{triangulaire}. Leur commutativité est la \emph{propriété de cohérence}.
 %On a omis les indices de $\alpha$, $\lambda$, $\rho$ et écrit $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme $\alpha_{A,B,C}\otimes id_{A}$.
 On omet souvent les indices de $\alpha$, $\lambda$, $\rho$ lorsqu'il n'y a pas d'ambiguïté. Ici, on écrit aussi $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme ${\alpha_{A,B,C}\otimes id_{A}}$.
 
-\
+\vspace{2mm}
 
 \noindent\textbf{Précision.} On parle d'isomorphismes naturels car il y a bien des transformations naturelles associées. En fait la condition sur $\alpha$ est $\alpha : F \Rightarrow G :\Ccal\times\Ccal\times\Ccal \longrightarrow \Ccal$ avec $F:(x,y,z) \mapsto (x\otimes y)\otimes z$ et $G:(x,y,z) \mapsto x\otimes(y\otimes z)$ où $x$, $y$, $z$ sont trois objets ou trois morphismes de $\Ccal$. On écrit $\alpha_{A,B,C}$ pour $\alpha_{(A,B,C)}$. Les $\alpha_{A,B,C}$ sont bien des morphismes de $\Ccal$, qui est la catégorie d'arrivée de $F$ et $G$. On veut aussi ${\lambda : (e\otimes\bullet) \Rightarrow Id_{\Ccal} : \Ccal \longrightarrow \Ccal}$ où $(e\otimes\bullet) : \left\{
 \begin{array}{l}
@@ -398,7 +412,8 @@ On omet souvent les indices de $\alpha$, $\lambda$, $\rho$ lorsqu'il n'y a pas d
 
 %L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\CProofs$, c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
 
-La catégorie $\Ccal$ munie du bifoncteur $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
+On munit la catégorie $\CProofs$ du bifoncteur $\otimes$ et on choisit comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$. On obtient une \textbf{catégorie monoïdale}, ou presque une catégorie monoïdale, selon les choix effectués pour définir le procédé d'élimination de la coupure.
+%La catégorie $\Ccal$ munie du bifoncteur $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
 En effet, on peut définir des morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ comme les dénotations des preuves suivantes\\
 
 \def\alphaABC{
@@ -461,9 +476,10 @@ $\rho_{A}$ :
 \
 
 \noindent
-Il s'agit bien de transformations naturelles, et on a bien la propriété de cohérence. ...
-
-En revanche, ces morphismes $\alpha$, $\lambda$, $\rho$ ne sont pas des isomorphismes. On n'écrit plus les indices, qui sont toujours les mêmes. On peut définir des morphismes naturels \\${\bar\alpha_{A,B,C} : A\circ(B\circ C) \to (A\circ B)\circ C}$ \,,\; ${\bar\lambda_{A} : A \to e\circ A}$ \,,\; ${\bar\rho_{A} : A \to A\circ e}$\,, par exemple $\bar\lambda_{A}$ est la dénotation de 
+Il s'agit bien de transformations naturelles, et on a bien la propriété de cohérence.
+\idees{démonstrations, ou au moins explications, exemples de preuves équivalentes ?}
+%
+La définition d'une \emph{catégorie monoïdale} exige que ces morphismes $\alpha$, $\lambda$, $\rho$ soient des isomorphismes. On n'écrit plus les indices, qui sont toujours les mêmes. On peut définir des morphismes naturels $\bar\alpha_{A,B,C} : A\circ(B\circ C) \to (A\circ B)\circ C$ \,,\; $\bar\lambda_{A} : A \to e\circ A$ \,,\; $\bar\rho_{A} : A \to A\circ e$\,, par exemple $\bar\lambda_{A}$ est la dénotation de 
 \resizebox{3cm}{!}{
 	\AXC{}
 	\RightLabel{$(\1 R)$}
@@ -475,72 +491,89 @@ En revanche, ces morphismes $\alpha$, $\lambda$, $\rho$ ne sont pas des isomorph
 	\BIC{$A\vdash \1\otimes A$}
 \DP
 }
-. On pense naturellement à ces morphismes quand on cherche des inverses de $\alpha$, $\lambda$ et $\rho$. On a bien ${\lambda\circ\bar\lambda = id_{A}}$ et ${\rho\circ\bar\rho=id_{A}}$, en revanche on n'a aucune des égalités suivantes : ${\bar\lambda\circ\lambda = id_{e\circ A}}$\,,\; ${\bar\rho\circ\rho=id_{A\circ e}}$\,,\; ${\bar\alpha\circ\alpha=id_{(A\circ B)\circ C}}$\,,\; ${\alpha\circ\bar\alpha=id_{A\circ(B\circ C)}}$\,.
+. On pense naturellement à ces morphismes quand on cherche des inverses de $\alpha$, $\lambda$ et $\rho$. On a bien ${\lambda\circ\bar\lambda = id_{A}}$ et ${\rho\circ\bar\rho=id_{A}}$. En revanche, si on considère un p.é.c. ``strict'', on n'a aucune des égalités suivantes : ${\bar\lambda\circ\lambda = id_{e\circ A}}$\,,\; ${\bar\rho\circ\rho=id_{A\circ e}}$\,,\; ${\bar\alpha\circ\alpha=id_{(A\circ B)\circ C}}$\,,\; ${\alpha\circ\bar\alpha=id_{A\circ(B\circ C)}}$\,. Si on considère au contraire la version plus ``large'' du p.é.c., on a bien toutes ces égalités. Les transformations autorisées qui ont été ajoutées au p.é.c. strict pour obtenir cette version large sont d'ailleurs expressément choisies pour satisfaire ces égalités. Dans la suite, on suppose toujours qu'on a choisi la version ``large'' du p.é.c., donc $\CProofs$ est bien une catégorie monoïdale.
+%On obtient alors que $\CProofs$ est une \textbf{catégorie monoïdale}. Dans la suite, on se met toujours dans ce cas
 
 
-Cependant en ajoutant des transformations ...
+
+%En revanche, si on considère un p.é.c. ``strict'', ces morphismes $\alpha$, $\lambda$, $\rho$ ne sont pas des isomorphismes. On n'écrit plus les indices, qui sont toujours les mêmes. On peut définir des morphismes naturels $\bar\alpha_{A,B,C} : A\circ(B\circ C) \to (A\circ B)\circ C$ \,,\; $\bar\lambda_{A} : A \to e\circ A$ \,,\; $\bar\rho_{A} : A \to A\circ e$\,, par exemple $\bar\lambda_{A}$ est la dénotation de 
+%\resizebox{3cm}{!}{
+%	\AXC{}
+%	\RightLabel{$(\1 R)$}
+%	\UIC{$\vdash \1$}
+%		\AXC{}
+%		\RightLabel{$(id)$}
+%		\UIC{$A\vdash A$}
+%	\RightLabel{$(\otimes R)$}
+%	\BIC{$A\vdash \1\otimes A$}
+%\DP
+%}
+%. On pense naturellement à ces morphismes quand on cherche des inverses de $\alpha$, $\lambda$ et $\rho$. On a bien ${\lambda\circ\bar\lambda = id_{A}}$ et ${\rho\circ\bar\rho=id_{A}}$, mais on n'a aucune des égalités suivantes : ${\bar\lambda\circ\lambda = id_{e\circ A}}$\,,\; ${\bar\rho\circ\rho=id_{A\circ e}}$\,,\; ${\bar\alpha\circ\alpha=id_{(A\circ B)\circ C}}$\,,\; ${\alpha\circ\bar\alpha=id_{A\circ(B\circ C)}}$\,.
+%
+%Cependant en ajoutant des transformations ...
 
 
-\def\noninverseUn{
-	\AXC{}
-	\RightLabel{$(id)$}
-	\UIC{$A\vdash A$}
-	\RightLabel{$(\1 L)$}
-	\UIC{$A,\1\vdash A$}
-	\RightLabel{$(\otimes L)$}
-	\UIC{$A\otimes\1\vdash A$}
-		\AXC{}
-		\RightLabel{$(id)$}
-		\UIC{$A\vdash A$}
-			\AXC{}
-			\RightLabel{$(\1 R)$}
-			\UIC{$\vdash \1$}
-		\RightLabel{$(\otimes R)$}
-		\BIC{$A\vdash A\otimes\1$}
-	\RightLabel{$(cut)$}
-	\BIC{$A\otimes\1\vdash A\otimes\1$}
-	\noLine
-	\UIC{}
-	\noLine
-	\UIC{$p_{1}$}
-\DP
-}
-\def\noninverseDeux{
-	\AXC{}
-	\RightLabel{$(id)$}
-	\UIC{$A\vdash A$}
-	\RightLabel{$(\1 L)$}
-	\UIC{$A,\1\vdash A$}
-	\RightLabel{$(\otimes L)$}
-	\UIC{$A\otimes\1\vdash A$}
-		\AXC{}
-		\RightLabel{$(\1 R)$}
-		\UIC{$\vdash \1$}
-	\RightLabel{$(\otimes R)$}
-	\BIC{$A\otimes\1\vdash A\otimes\1$}
-	\noLine
-	\UIC{}
-	\noLine
-	\UIC{$p_{2}$}
-\DP
-}
-\def\noninverseTrois{
-	\AXC{}
-	\RightLabel{$(id)$}
-	\UIC{$A\vdash A$}
-		\AXC{}
-		\RightLabel{$(id)$}
-		\UIC{$\1 \vdash \1$}
-	\RightLabel{$(\otimes R)$}
-	\BIC{$A,\1\vdash A\otimes\1$}
-	\RightLabel{$(\otimes L)$}
-	\UIC{$A\otimes\1\vdash A\otimes\1$}
-	\noLine
-	\UIC{}
-	\noLine
-	\UIC{$p_{3}$}
-\DP
-}
+
+%\def\noninverseUn{
+%	\AXC{}
+%	\RightLabel{$(id)$}
+%	\UIC{$A\vdash A$}
+%	\RightLabel{$(\1 L)$}
+%	\UIC{$A,\1\vdash A$}
+%	\RightLabel{$(\otimes L)$}
+%	\UIC{$A\otimes\1\vdash A$}
+%		\AXC{}
+%		\RightLabel{$(id)$}
+%		\UIC{$A\vdash A$}
+%			\AXC{}
+%			\RightLabel{$(\1 R)$}
+%			\UIC{$\vdash \1$}
+%		\RightLabel{$(\otimes R)$}
+%		\BIC{$A\vdash A\otimes\1$}
+%	\RightLabel{$(cut)$}
+%	\BIC{$A\otimes\1\vdash A\otimes\1$}
+%	\noLine
+%	\UIC{}
+%	\noLine
+%	\UIC{$p_{1}$}
+%\DP
+%}
+%\def\noninverseDeux{
+%	\AXC{}
+%	\RightLabel{$(id)$}
+%	\UIC{$A\vdash A$}
+%	\RightLabel{$(\1 L)$}
+%	\UIC{$A,\1\vdash A$}
+%	\RightLabel{$(\otimes L)$}
+%	\UIC{$A\otimes\1\vdash A$}
+%		\AXC{}
+%		\RightLabel{$(\1 R)$}
+%		\UIC{$\vdash \1$}
+%	\RightLabel{$(\otimes R)$}
+%	\BIC{$A\otimes\1\vdash A\otimes\1$}
+%	\noLine
+%	\UIC{}
+%	\noLine
+%	\UIC{$p_{2}$}
+%\DP
+%}
+%\def\noninverseTrois{
+%	\AXC{}
+%	\RightLabel{$(id)$}
+%	\UIC{$A\vdash A$}
+%		\AXC{}
+%		\RightLabel{$(id)$}
+%		\UIC{$\1 \vdash \1$}
+%	\RightLabel{$(\otimes R)$}
+%	\BIC{$A,\1\vdash A\otimes\1$}
+%	\RightLabel{$(\otimes L)$}
+%	\UIC{$A\otimes\1\vdash A\otimes\1$}
+%	\noLine
+%	\UIC{}
+%	\noLine
+%	\UIC{$p_{3}$}
+%\DP
+%}
 %\noindent
 %\resizebox{\linewidth}{!}{
 %%\begin{tabular}{ccc}
@@ -553,11 +586,11 @@ Cependant en ajoutant des transformations ...
 %
 
 
-\subsection{Symétrie}
+\subsection{\'Echange et catégorie monoïdale symétrique}
 
 \def\sizesymetrie{0.27\textwidth}
 \begin{floatingfigure}[r]{\sizesymetrie}
-\noindent
+\centering
 \resizebox{\sizesymetrie}{!}{
 	\AXC{}
 	\RightLabel{$(id)$}
@@ -576,9 +609,77 @@ Cependant en ajoutant des transformations ...
 \\
 \end{floatingfigure}
 
-La logique linéaire est commutative : la règle d'échange ... permet de construire la preuve canonique de $A\otimes B \vdash B\otimes A$ ci-contre. On peut alors ajouter un nouvel isomorphisme naturel à $\CProofs$ pour en faire une catégorie monoïdale symétrique. Des variantes ``non commutatives'' ont été étudiées dans la littérature, où la règle d'échange est supprimée ou affaiblie. Dans ce dernier cas, on peut parfois obtenir une catégorie monoïdale non pas symétrique, mais \emph{tressée}
+La logique linéaire est commutative : la règle d'échange ... permet de construire la preuve canonique de $A\otimes B \vdash B\otimes A$ ci-contre. On peut alors ajouter un nouvel isomorphisme naturel à $\CProofs$ pour en faire une catégorie monoïdale symétrique. Des variantes ``non commutatives'' ont été étudiées dans la littérature, où la règle d'échange est supprimée ou affaiblie. %Dans ce dernier cas, on peut parfois obtenir une catégorie monoïdale non pas symétrique, mais \emph{tressée}
+Dans ce dernier cas, on peut parfois obtenir quand même une catégorie monoïdale tressée.
+
+\vspace{3mm}
+%\
+
+\begin{df}
+Soit $\Ccal$ une catégorie monoïdale, avec les notations précédentes. C'est une \textbf{\emph{catégorie monoïdale tressée}} s'il existe un \textbf{isomorphisme naturel} $\gamma_{A,B} : A\otimes B \to B\otimes A$ tel que les \emph{diagrammes hexagonaux} suivants commutent.
+\vspace{1mm}
+
+\noindent
+\includegraphics[width=0.48\linewidth]{diagrammeHexa1}
+\quad
+\includegraphics[width=0.48\linewidth]{diagrammeHexa2}
+\end{df}
 
 
+
+\begin{df}
+Soit $\Ccal$ une catégorie monoïdale tressée, avec les notations précédentes. C'est une \textbf{\emph{catégorie monoïdale symétrique}} si pour tous objets $A$, $B$, on a $\gamma_{B,A}=\gamma_{A,B}^{-1}$. Dans ce cas, on n'a pas besoin de vérifier la commutativité du second diagramme de la définition précédente, qui est entraînée par la commutativité du premier diagramme appliquée à $\gamma_{B,A}$.
+\end{df}
+
+Dans $\Ccal$, on définit $\gamma_{A,B}$ comme la dénotation de la preuve canonique de $A\otimes B \vdash B\otimes A$ donnée précédemment. %Si on a assoupli l'équivalence d'élimination de la coupure pour que $\Ccal$ soit une catégorie monoïdale, on 
+On obtient alors une \textbf{catégorie monoïdale symétrique}.
+\idees{vrai ? démonstrations, explications, exemples ?}
+
+
+%
+
+
+
+\subsection{Implication linéaire et catégorie monoïdale fermée}
+
+Intéressons-nous maintenant à l'implication linéaire $\multimap$. Ce connecteur logique induit encore une fois un opérateur sur les dénotations de formules, qui a un sens en théorie des catégories.
+
+\begin{df}
+Soit $\Ccal$ une catégorie monoïdale, toujours avec les mêmes notations. Une \textbf{\emph{structure fermée à gauche}} sur $\Ccal$ consiste en un opérateur $\multimap$ sur les objets et pour tous objets $A$, $B$, un morphisme $eval_{A,B} : A\otimes(A\multimap B)\to B$, vérifiant la propriété d'universalité suivante : pour tout objet $X$ et tout morphisme $f:A\otimes X\to B$, il existe un unique morphisme $h:X\to A\multimap B$ tel que le diagramme suivant commute.
+
+\noindent
+{\centering
+\includegraphics[width=4cm]{diagrammeFermeeGauche}
+
+}
+On dit alors que $\Ccal$ est une \textbf{\emph{catégorie monoïdale fermée}}.
+\end{df}
+
+
+\def\sizesymetrie{0.3\textwidth}
+\begin{floatingfigure}[r]{\sizesymetrie}
+\centering
+\resizebox{\sizesymetrie}{!}{
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+		\AXC{}
+		\RightLabel{$(id)$}
+		\UIC{$B\vdash B$}	
+	\RightLabel{$(\multimap L)$}
+	\BIC{$A,(A\multimap B) \vdash B$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes(A\multimap B) \vdash B$}
+\DP
+}
+\\
+\end{floatingfigure}
+
+On munit $\CProofs$ de l'opérateur $\multimap$ sur les dénotations de formules correspondant à l'implication linéaire. On définit $eval_{A,B}$ comme la dénotation de la preuve ci-contre. On obtient alors une \textbf{catégorie monoïdale fermée}.
+\idees{Est-ce vrai ? Est-ce qu'on peut expliquer facilement comment obtenir $h$ à partir de $f$ ?}
+
+
+%
 
 
 
@@ -586,9 +687,14 @@ La logique linéaire est commutative : la règle d'échange ... permet de construir
 
 %%%%%%%%%%%%%%
 
+\end{document}
 
-\subsection{Catégorie fermée}
 
+
+
+
+
+\subsection{``Avec'' et produit cartésien}
 
 
 \subsection{Catégorie libre}

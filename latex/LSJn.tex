@@ -748,7 +748,7 @@ On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $
 \bibliography{LSJn}
 
 
-\end{document}
+%\end{document}
 
 %%%%%
 
@@ -836,6 +836,24 @@ cf ``Propriété de la sous-formule et indexation'' + explication sur les classes 
 
 
 \subsection{Structure de données pour le séquent}
+
+
+
+
+Comme toutes les règles de \LSJn\ sont locales, on peut n'avoir à tout moment qu'un seul séquent en mémoire. Un séquent de \LSJn\ consiste en deux multiensembles $\G$ et $\D$ de couples ``\emph{ indice\!:\,formule }'' et %un entier $n$ : l'\emph{indice} du séquent. L'indice 
+un \emph{indice} du séquent $n$. Les indices sont des entiers, et grâce à l'indexation, les formules sont aussi des entiers. La question qui se pose est le choix de structure de données pour $\G$ et $\D$.
+
+Considérons une des règles les plus simples : \LSJLetL. Au cours de l'algorithme de recherche de preuve, on peut être amené à vouloir transformer notre séquent courant, alors égal à la conclusion, en la prémisse. On veut pour cela retirer $i:A\land B$ de $\G$ et y ajouter $i:A$ et $i:B$. On peut aussi avoir besoin de faire la transformations inverse, c'est-à-dire retirer les deux derniers couples et rajouter le premier. Un des objectifs est donc que ces opérations soient rapides.
+
+
+
+On définit la complexité d'une étape comme la somme des complexités dans le pire cas de l'ajout d'un couple, du retrait d'un couple, et du choix d'un couple principal.
+%
+De simples listes entraînent bien sûr une complexité de l'ordre du cardinal des multiensembles. On peut obtenir un choix de couple principal en temps constant avec des listes triées, et
+
+
+\
+
 
 Au cours de l'algorithme, on manipule un ``séquent'', censé représenter un séquent du calcul \LSJn, contenant les informations suivantes :
 
