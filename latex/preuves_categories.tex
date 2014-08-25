@@ -344,13 +344,16 @@ La catégorie $\CProofs$ ayant été munie du bifoncteur $\otimes$, on se demande s
 \begin{df}
 Soit $\Ccal$ et $\Dcal$ des catégories. Soit $F,G:\Ccal\longrightarrow\Dcal$ des foncteurs de $\Ccal$ vers $\Dcal$. Une \textbf{\emph{transformation naturelle}} $\theta$ de $F$ vers $G$ est une famille $\big(\;\theta_{A} : F(A) \to G(A)\;\big)_{A\in Obj(\Ccal)}$ de morphismes de $\Dcal$, indexée par les objets de $\Ccal$, telle que le diagramme suivant commute dans $\Dcal$ pour tout morphisme $f:A\to B$ de $\Ccal$
 
-{\centering\includegraphics[width=0.4\linewidth]{diagrammeNaturel}
+{\centering
+%\includegraphics[width=0.4\linewidth]{diagrammeNaturel}
+\begin{tikzcd}
+	F(A) \arrow[r,"\theta_{A}"] \arrow[d,"F(f)"] & G(A) \arrow[d,"G(f)"] \\
+	F(B) \arrow[r,"\theta_{B}"] & G(B)\end{tikzcd}
 
 }
 \noindent
 On note $\theta : F \Rightarrow G$, voire $\theta : F \Rightarrow G : \Ccal \longrightarrow \Dcal$.
 \end{df}
-
 
 
 
@@ -388,9 +391,30 @@ permettant avec le précédent d'appeler $e$ l'objet \textbf{unité} ;
 \noindent
 et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$. 
 
-\includegraphics[width=\linewidth]{diagrammeMonoidalePenta}
-{\centering\includegraphics[width=0.5\linewidth]{diagrammeMonoidaleTri}
-
+%\includegraphics[width=\linewidth]{diagrammeMonoidalePenta}
+%{\centering
+%\includegraphics[width=0.5\linewidth]{diagrammeMonoidaleTri}
+%			
+%}
+{\centering
+\begin{tikzcd}
+	& (A\otimes B)\otimes(C\otimes D) \arrow[rd,"\alpha_{A,B,C\otimes D}"] & \\
+	((A\otimes B)\otimes C)\otimes D 
+			\arrow[ru,"\alpha_{A\otimes B,C,D}"] 
+			\arrow[d,"\alpha_{A,B,C}\otimes id_{D}"] 
+		& & A\otimes(B\otimes(C\otimes D)) \\
+	(A\otimes(B\otimes C)\otimes D 
+			\arrow[rr,"\alpha_{A,B\otimes C,D}"]
+		& & A\otimes((B\otimes C)\otimes D)
+			\arrow[u,"id_{A}\otimes\alpha_{B,C,D}"]\end{tikzcd}
+\begin{tikzcd}
+	(A\otimes e)\otimes B
+			\arrow[rr,"\alpha_{A,e,B}"]
+			\arrow[rd,"\rho_{A}\otimes id_{B}"]
+		& & A\otimes(e\otimes B)
+			\arrow[ld,"id_{A}\otimes\lambda_{B}"] \\
+	& A\otimes B &\end{tikzcd}
+			
 }
 \noindent
 Ces diagrammes sont appelés \emph{diagrammes pentagonal} et \emph{triangulaire}. Leur commutativité est la \emph{propriété de cohérence}.

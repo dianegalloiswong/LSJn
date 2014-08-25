@@ -3,7 +3,8 @@
 
 
 \begin{document}
-\renewcommand{\labelitemi}{$\diamond$}
+%\renewcommand{\labelitemi}{$\diamond$}
+\renewcommand{\labelitemi}{$\bullet$}
 \vspace{2cm}~~\\
 
 \input{bussproofs}
@@ -90,7 +91,7 @@ Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Ell
 \centering
 
 %$\begin{tabular}{cc|}
-%	\LJbotL & \LJId \\ \hline
+%	\LJbotL & \LJid \\ \hline
 %	\LJetL & \LJetR \\
 %	\LJouL & \quad\LJouRun \quad \LJouRdeux \\
 %	\LJimpL & \LJimpR 
@@ -100,7 +101,7 @@ Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Ell
 
 %\def\identite{
 %\begin{tabular}{cc}
-%	\emph{Identité} \qquad&\qquad \LJId
+%	\emph{Identité} \qquad&\qquad \LJid
 %\end{tabular}
 %}
 %\def\coupure{
@@ -110,7 +111,7 @@ Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Ell
 %}
 %\def\logiques{
 %$\begin{tabular}{cc}
-%%	\LJbotL & \LJId \\ \hline
+%%	\LJbotL & \LJid \\ \hline
 %%	\multicolumn{2}{c}{\emph{Règles logiques}} \\
 %	\LJbotL & \emph{Règles logiques} \\
 %	\LJetL & \LJetR \\
@@ -127,7 +128,7 @@ Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Ell
 %}
 %
 %%$\begin{tabular}{cc|}
-%%%	\LJbotL & \LJId \\ \hline 
+%%%	\LJbotL & \LJid \\ \hline 
 %%	\multicolumn{2}{c}{\logiques}
 %%\end{tabular}$
 %$\begin{tabular}{|c|c|}
@@ -142,7 +143,7 @@ Cette présentation est à peu près celle donnée par Dyckhoff dans \cite{LJT}. Ell
 
 $\begin{tabular}{|cc|c|}
 	\hline
-	\textbf{\large{Identité}} & \LJId & \textbf{\large{Coupure}} \\
+	\textbf{\large{Identité}} & \LJid & \textbf{\large{Coupure}} \\
 	\cline{1-2}
 	\LJbotL & \textbf{\large{Règles logiques}} & \LJcut \\[4pt]
 	\cline{3-3}
@@ -260,10 +261,10 @@ diffèrent en conséquence : par exemple\LKetR\ remplace ${\LJetR\,.}$ Bien entend
 \label{fig:LKTiersExclu}
 \end{floatingfigure}
 
-C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve du principe du tiers exclu $A\lor\lnot A$ (figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : si on peut appliquer l'axiome Id à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut pas prouver $A\lor\lnot A$, car ni $\;\To A$ ni $\;\To \lnot A$ n'est prouvable.
+C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve du principe du tiers exclu $A\lor\lnot A$ (figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : si on peut appliquer l'axiome $id$ à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut pas prouver $A\lor\lnot A$, car ni $\;\To A$ ni $\;\To \lnot A$ n'est prouvable.
 
  %on ne peut prouver le séquent $\To A$, ni le séquent $\To 
-%, où on applique l'axiome Id à une occurrence de $A$ venant du $\lnot A$ 
+%, où on applique l'axiome $id$ à une occurrence de $A$ venant du $\lnot A$ 
 
 
 
@@ -345,6 +346,7 @@ qui sont intéressantes pour assurer la terminaison et améliorer la complexité de
 
 
 \subsection{Algorithme de recherche de preuve}
+\label{algoGeneral}
 
 %Un calcul de séquents suggère naturellement un algorithme de recherche de preuve : pour essayer de prouver un séquent, 
 On considère un calcul de séquents. Pour déterminer si un séquent est prouvable,
@@ -538,7 +540,7 @@ Soit $A$ une formule, elle est valide en logique intuitionniste si et seulement 
 \resizebox{\mywidth}{!}{
 
 $\begin{array}{cc}
-	\LSJfauxL & \Id \\\\
+	\LSJfauxL & \LSJid \\\\
 	\LSJetL & \LSJetR \\\\
 	\LSJouL & \LSJouR \\\\
 	\multicolumn{2}{c}{\LSJimpL}\\\\
@@ -619,7 +621,7 @@ avec ${\G' = 0 : \G \cup 1:\Th}$ et ${\D'=0:\D}$, où par exemple $0 : \G$ est le
 
 $\begin{array}{cc}
 	\multicolumn{2}{c}{\emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}} \\\\
-	\LSJLfauxL & \Id \\\\
+	\LSJLfauxL & \LSJLid \\\\
 	\LSJLetL & \LSJLetR \\\\
 	\LSJLouL & \LSJLouR \\\\
 	\multicolumn{2}{c}{\LSJLimpL}\\\\
@@ -664,10 +666,10 @@ Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulem
 \end{lm}
 
 \begin{proof}
-On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id et $\to\negthickspace L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
+On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour $id$ et $\to\negthickspace L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
 
 %\noindent
-\textbf{Id}: \quad On a\instanceId\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceIdp.
+$\mathbf{id}$: \quad On a\instanceid\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceidp.
 
 
 %\noindent 
@@ -734,63 +736,96 @@ On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $
 
 
 \section{Implémentation}
+
+On utilise l'algorithme dont le pseudo-code est donné dans \cite{LSJ}. Il s'agit de l'algorithme donné en \ref{algoGeneral}, en mettant à profit l'inversibilité de la plupart des règles et prémisses. Adapter l'algorithme de \LSJ\ à \LSJn\ est immédiat ; cependant, on ne garde en mémoire qu'un seul séquent qu'on modifie en place, et on utilise la localité des règles pour retrouver le séquent initial avant d'essayer une nouvelle prémisse ou une nouvelle instance. 
+
+\subsection{Ordre d'essai des instances : choix de la formule principale}
+
+Ce qui est précisé dans \cite{LSJ}, mais pas en \ref{algoGeneral} puisque c'est propre au calcul \LSJ, est l'ordre dans lequel on s'intéresse aux différentes instances dont un séquent donné est conclusion. On privilégie naturellement celles qui offrent une possibilité de terminer rapidement la recherche de preuve, ce qui induit une priorité en fonction de la règle associée : d'abord les axiomes, puis les règles inversibles à une seule prémisse $\land L$ et $\lor R$, puis celles à deux prémisses $\land R$ et $\lor L$, et enfin les règles non inversibles $\imp L$ et $\imp R$. 
+
+Par ailleurs, pour une formule donnée de la conclusion, on remarque qu'il y a au plus une instance telle que cette formule est la formule principale, et la règle associée ne dépend que de la formule. De plus toute instance ne correspondant pas à un axiome a une formule principale. Décider l'instance à considérer revient alors à choisir une formule principale. 
+
+
+\begin{floatingfigure}[r]{4.5cm}
+\centering
+$
+\begin{array}{ccc}
+	\text{Forme} & \text{Côté} & \text{Priorité} \\
+	A\land B & L & 1 \\
+	A\lor B & R & 2 \\
+	A\lor B & L & 3 \\
+	A\land B & R & 4 \\
+	A\imp B & L & 5 \\
+	A\imp B & R & 5 \\
+\end{array}
+$
+\caption{Priorité selon la forme de la formule et son appartenance à $\G$ (``côté $L$'') ou $\D$ (``côté $R$'')}
+\label{fig:priorite}
+\end{floatingfigure}
+
+
+Pour cela, on associe donc à toute formule composée (c'est-à-dire de la forme $A\,c\,B$ avec $c$ un connecteur) de $\G$ et de $\D$ une \textbf{priorité} selon la figure~\ref{fig:priorite}. Plus l'entier est petit, plus la formule est prioritaire. On choisit alors la formule la plus prioritaire parmi les formules ``accessibles'', c'est-à-dire les formules de $\G$ auxquelles est associé un indice inférieur à l'indice $n$ du séquent, ou celles de $\D$ avec un indice égal à $n$ ; ce sont exactement les formules qui auraient figuré dans $\G$ ou $\D$ d'un séquent $\Th\,;\G\To\D$ de \LSJ. Ce choix de formule principale n'intervient qu'après avoir testé les axiomes. S'il n'y a aucune formule principale possible, le séquent est non prouvable. Le seul cas où on peut avoir plusieurs instances à tester pour un séquent donné est celui où la priorité la plus petite donc la plus forte est $5$. Dans ce cas, on teste successivement les formules ``accessibles'' de forme $A\to B$ de $\G$ comme de $\D$, jusqu'à trouver une instance dont toutes les prémisses sont prouvables donc aussi la conclusion, ou les avoir toutes testées sans succès et conclure que le séquent initial n'est pas prouvable. On a arbitrairement choisi que $\land L$ est prioritaire sur $\lor R$. Cela permet de déduire directement de la priorité la règle concernée, sauf dans le cas particulier des ``implique''.
+
+
+
+
+
 \subsection{Indexation}
 
 Une formule peut être considérée comme un \textbf{arbre binaire} dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquettés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. On rappelle qu'une formule est \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou à une variable, c'est-à-dire si l'arbre associé est une feuille.
 %
-Considérons une formule de la forme $A\,c\,B$ où $c$ est un connecteur binaire. Au cours de l'algorithme, on peut avoir besoin d'informations dessus : par exemple, on peut être amené dans le cadre de certaines règles à l'enlever d'un séquent pour la remplacer par $A$ ou par $B$. Il faut donc connaître $A$ et $B$. Et de même récursivement, il faut connaître les fils de $A$ et ceux de $B$, donc finalement on doit retenir tous les n\oe uds de l'arbre correspondant à la formule. Mais on préfère éviter de représenter les formules manipulées dans l'algorithme sous forme d'arbres, pour des raisons qu'on verra plus loin, par exemple la complexité du test d'égalité structurelle de deux arbres. On préfère utiliser une conséquence de la propriété de la sous-formule, que \LSJn\ hérite de \LSJ : toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ est atomique, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau, et donc sa complexité spatiale puisque le contenu d'une case est de taille constante, est la taille de la formule $A$ dont on veut décider la prouvabilité. Au cours de l'algorithme, on représente alors les formules par des entiers, et on peut accéder facilement aux fils de n'importe quelle formule considérée.
+On utilise la propriété de la sous-formule, que \LSJn\ hérite de \LSJ, pour obtenir une représentation des formules plus facile à manipuler. En effet, si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on applique l'algorithme de preuve au séquent $\; \To A$, donc toutes les formules susceptibles d'apparaître sont des sous-formules de la formule $A$. On peut ainsi réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. On retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ a cette forme, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la taille de la formule $A$ dont on veut décider la prouvabilité. On peut alors accéder facilement aux fils de n'importe quelle formule considérée, et comme on a récursivement cette information sur les fils, on peut retrouver, à partir du numéro d'une formule, toutes les informations de l'arbre associé.
 
-\
+La figure~\ref{fig:indexation} donne un exemple d'indexation. ``sf'' comme ``sous-formule'' est le numéro associé à une formule, ``description'' ce qui est stocké dans le tableau, est ``classe'' est expliqué dans la prochaine sous-section.
 
-\noindent
-\textbf{Classes d'égalité structurelle.}
-Au cours de l'algorithme, on a souvent besoin de vérifier si l'axiome d'identité~$id$ s'applique, c'est-à-dire si une même formule apparaît des deux côtés du séquent, avec des indices adéquats ; ``même formule'' est à comprendre au sens de l'égalité structurelle, c'est-à-dire l'égalité des arbres associés. Tester cette égalité entre les formules représentées par deux entiers donnés est possible à partir des informations dont on dispose mais long (de l'ordre du minimum des tailles des deux formules). On préfère, au cours de l'indexation, construire un deuxième tableau, qui à chaque entier associe un numéro de \emph{classe}, à comprendre comme les classes d'équivalence de l'égalité structurelle. Ainsi, on détermine en temps constant si les formules associées à deux entiers donnés sont égales structurellement.
 
-%Or, deux entiers distincts peuvent représenter des formules égales structurellement. Il est possible de tester cette égalité puisqu'on peut déterminer les fils des formules considérées, puis récursivement, si les connecteurs sont le mêmes tester les égalités respectives des fils jusqu'à arriver à des formules atomiques. Mais la complexité est au moins le minimum des tailles des deux formules considérées.
 
-\
-
-\noindent
-\textbf{Priorités.}
-Les priorités de la sous-section précédente peuvent être déterminées au cours de l'indexation. Car les connecteurs sont bien sûr connus, mais surtout, on peut décider de quel côté du séquent une formule donnée est susceptible d'apparaître. On se donne un ensemble à deux éléments $E=\{gauche,droite\}$. Si $\Ccal$ est un élément de $E$, on note $\bar\Ccal$ l'autre élément de $E$. On constate en observant les règles que si une formule $H=A\land B$ ou $H=A\lor B$ apparaît du côté $\Ccal$ d'un séquent, alors $A$ et $B$ ne peuvent apparaître dans une séquent que du même côté $\Ccal$ ; et si $H=A\to B$ apparaît du côté $\Ccal$, alors $B$ ne peut apparaître que du même côté $\Ccal$, et $A$ du côté opposé $\bar\Ccal$. Comme on sait que dans la recherche de preuve pour une formule $A$, cette formule apparaît à $droite$ dans le séquent initial $\;\To A$, on est capable d'associer un côté, puis une priorité à chaque sous-formule de $A$.
+%\
+%
+%\noindent
+%\textbf{Priorités.}
+%Les priorités de la sous-section précédente peuvent être déterminées au cours de l'indexation. Car les connecteurs sont bien sûr connus, mais surtout, on peut décider de quel côté du séquent une formule donnée est susceptible d'apparaître. On se donne un ensemble à deux éléments $E=\{gauche,droite\}$. Si $\Ccal$ est un élément de $E$, on note $\bar\Ccal$ l'autre élément de $E$. On constate en observant les règles que si une formule $H=A\land B$ ou $H=A\lor B$ apparaît du côté $\Ccal$ d'un séquent, alors $A$ et $B$ ne peuvent apparaître dans une séquent que du même côté $\Ccal$ ; et si $H=A\to B$ apparaît du côté $\Ccal$, alors $B$ ne peut apparaître que du même côté $\Ccal$, et $A$ du côté opposé $\bar\Ccal$. Comme on sait que dans la recherche de preuve pour une formule $A$, cette formule apparaît à $droite$ dans le séquent initial $\;\To A$, on est capable d'associer un côté, puis une priorité à chaque sous-formule de $A$.
 
 
 
 
-\begin{center}
+%\begin{center}
+%\begin{tikzpicture}[xscale=1,yscale=1]
+%% Styles (MODIFIABLES)
+%\tikzstyle{fleche}=[->,>=latex,thick]
+%\tikzstyle{noeud}=[fill=yellow,circle,draw]
+%\tikzstyle{feuille}=[fill=yellow,circle,draw]
+%% Dimensions (MODIFIABLES)
+%\def\DistanceInterNiveaux{1}
+%\def\DistanceInterFeuilles{1}
+%% Dimensions calculées (NON MODIFIABLES)
+%\def\NiveauA{(-0)*\DistanceInterNiveaux}
+%\def\NiveauB{(-1)*\DistanceInterNiveaux}
+%\def\NiveauC{(-2)*\DistanceInterNiveaux}
+%\def\InterFeuilles{(1)*\DistanceInterFeuilles}
+%% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+%\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$f$};
+%\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$g$};
+%\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$a$};
+%\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$a$};
+%% Arcs (MODIFIABLES : Styles)
+%\draw (R)--(Ra);
+%\draw (Ra)--(Raa);
+%\draw (R)--(Rb);
+%\end{tikzpicture}
+%\end{center}
+%%:-+-+-+-+- Fin
+
+\def\arbreIndexation{
+%\begin{center}
 \begin{tikzpicture}[xscale=1,yscale=1]
 % Styles (MODIFIABLES)
 \tikzstyle{fleche}=[->,>=latex,thick]
 \tikzstyle{noeud}=[fill=yellow,circle,draw]
 \tikzstyle{feuille}=[fill=yellow,circle,draw]
 % Dimensions (MODIFIABLES)
-\def\DistanceInterNiveaux{1}
-\def\DistanceInterFeuilles{1}
-% Dimensions calculées (NON MODIFIABLES)
-\def\NiveauA{(-0)*\DistanceInterNiveaux}
-\def\NiveauB{(-1)*\DistanceInterNiveaux}
-\def\NiveauC{(-2)*\DistanceInterNiveaux}
-\def\InterFeuilles{(1)*\DistanceInterFeuilles}
-% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$f$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$g$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$a$};
-\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$a$};
-% Arcs (MODIFIABLES : Styles)
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (R)--(Rb);
-\end{tikzpicture}
-\end{center}
-%:-+-+-+-+- Fin
-
-\begin{center}
-\begin{tikzpicture}[xscale=1,yscale=1]
-% Styles (MODIFIABLES)
-\tikzstyle{fleche}=[->,>=latex,thick]
-\tikzstyle{noeud}=[fill=yellow,circle,draw]
-\tikzstyle{feuille}=[fill=yellow,circle,draw]
-% Dimensions (MODIFIABLES)
+%\def\DistanceInterNiveaux{1}
+%\def\DistanceInterFeuilles{1.5}
 \def\DistanceInterNiveaux{1}
 \def\DistanceInterFeuilles{1.5}
 % Dimensions calculées (NON MODIFIABLES)
@@ -800,17 +835,18 @@ Les priorités de la sous-section précédente peuvent être déterminées au cours de
 \def\NiveauD{(-3)*\DistanceInterNiveaux}
 \def\InterFeuilles{(1)*\DistanceInterFeuilles}
 % Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-\node (R) at ({(2)*\InterFeuilles},{\NiveauA}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Ra) at ({(0.5)*\InterFeuilles},{\NiveauB}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Rab) at ({(1)*\InterFeuilles},{\NiveauC}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Rb) at ({(3.5)*\InterFeuilles},{\NiveauB}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Rba) at ({(2.5)*\InterFeuilles},{\NiveauC}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Rbaa) at ({(2)*\InterFeuilles},{\NiveauD}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Rbab) at ({(3)*\InterFeuilles},{\NiveauD}) {$\autour{\to}{11}{7}{D}{?}a$};
-\node (Rbb) at ({(4.5)*\InterFeuilles},{\NiveauC}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Rbba) at ({(4)*\InterFeuilles},{\NiveauD}) {$\autour{\to}{11}{7}{D}{?}$};
-\node (Rbbb) at ({(5)*\InterFeuilles},{\NiveauD}) {$\autour{\to}{11}{7}{D}{?}$};
+\node (R) at ({(2)*\InterFeuilles},{\NiveauA}) {$\autour{\imp}{11}{7}{D}{?}$};
+\node (Ra) at ({(0.5)*\InterFeuilles},{\NiveauB}) {$\autour{\land}{3}{3}{D}{?}$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$\autour{A}{1}{1}{D}{?}$};
+\node (Rab) at ({(1)*\InterFeuilles},{\NiveauC}) {$\autour{B}{2}{2}{D}{?}$};
+\node (Rb) at ({(3.5)*\InterFeuilles},{\NiveauB}) {$\autour{\lor}{10}{6}{D}{?}$};
+\node (Rba) at ({(2.5)*\InterFeuilles},{\NiveauC}) {$\autour{\imp}{6}{5}{D}{?}$};
+\node (Rbaa) at ({(2)*\InterFeuilles},{\NiveauD}) {$\autour{\bot}{4}{0}{D}{?}$};
+\node (Rbab) at ({(3)*\InterFeuilles},{\NiveauD}) {$\autour{C}{5}{4}{D}{?}a$};
+\node (Rbb) at ({(4.5)*\InterFeuilles},{\NiveauC}) {$\autour{\land}{9}{3}{D}{?}$};
+\node (Rbba) at ({(4)*\InterFeuilles},{\NiveauD}) {$\autour{A}{7}{1}{D}{?}$};
+\node (Rbbb) at ({(5)*\InterFeuilles},{\NiveauD}) {$\autour{B}{8}{2}{D}{?}$};
+\node (legende) at ({(4.5)*\InterFeuilles},{\NiveauA}) {$\autour{\text{n\oe ud}}{\textbf{sf}}{\textit{classe}}{D}{?}$};
 % Arcs (MODIFIABLES : Styles)
 \draw (R)--(Ra);
 \draw (Ra)--(Raa);
@@ -823,49 +859,74 @@ Les priorités de la sous-section précédente peuvent être déterminées au cours de
 \draw (Rbb)--(Rbba);
 \draw (Rbb)--(Rbbb);
 \end{tikzpicture}
-\end{center}
+%\end{center}
 %:-+-+-+-+- Fin
+}
 
 
-
-\
-
-%Retenir une formule demande donc une complexité spatiale de l'ordre du nombre de n\oe uds de l'arbre correspondant, qu'on appellera la \emph{taille} de la formule. En effet, considérons une formule de la forme $A\,c\,B$ où $c$ est un connecteur binaire. On a besoin de conserver des informations dessus : par exemple, on peut être amené dans le cadre de certaines règles à l'enlever d'un séquent pour la remplacer par $A$ ou par $B$. Il faut donc connaître $A$ et $B$. Et de même récursivement, il faut connaître les fils de $A$ et ceux de $B$, donc finalement on doit retenir tous les n\oe uds de l'arbre correspondant à la formule. Pour une seule formule, on a ainsi vraiment besoin d'un espace de l'ordre de sa taille. En revanche, on peut retenir les multiensembles de formules qui apparaissent au cours de l'algorithme en utilisant beaucoup moins d'espace que la somme des tailles des formules, tout en conservant toutes les informations dont on peut avoir besoin sur ces formules. 
-%%
-%La propriété essentielle pour cela est la propriété de la sous-formule, que \LSJn\ hérite de \LSJ. Elle a pour conséquence que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou une variable locale si $B$ a cette forme, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la taille de la formule $A$ dont on veut décider la prouvabilité. La complexité spatiale pour un multiensemble de formules qui pourraient apparaître en exécutant l'algorithme est alors la taille de $A$ plus le cardinal du multiensemble, ce qui est bien mieux que la somme des tailles des formules du multiensemble dans le pire cas
-%
-%
-%\
-%
-%On a vu que \LSJn, comme \LSJ, possède la propriété de la sous-formule. Une conséquence est que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$. Ensuite, lorsqu'on effectue la recherche de preuve sur $\; \To A$, les formules contenues dans les multiensembles d'un séquent sont représentées par des entiers et occupent donc une mémoire constante. Il faut cependant faire attention à garder suffisamment d'information : remplacer tout un arbre par un entier n'est jamais anodin. Si on travaille sur une formule de la forme $A\land B$, on peut avoir besoin
-
-%Une formule peut être considérée comme un arbre binaire dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquettés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. Retenir une formule demande donc une complexité spatiale de l'ordre du nombre de n\oe uds de l'arbre correspondant, qu'on appellera la \emph{taille} de la formule. Cependant, on peut retenir certains multiensembles de formules en utilisant beaucoup moins d'espace que la somme des tailles de ses formules.
-%
-%On a vu que \LSJn, comme \LSJ, possède la propriété de la sous-formule. Une conséquence est que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$. Ensuite, lorsqu'on effectue la recherche de preuve sur $\; \To A$, les formules contenues dans les multiensembles d'un séquent sont représentées par des entiers et occupent donc une mémoire constante. Il faut cependant faire attention à garder suffisamment d'information : remplacer tout un arbre par un entier n'est jamais anodin. Si on travaille sur une formule de la forme $A\land B$, on peut avoir besoin
-
-
-
-\subsection{Propriété de la sous-formule et indexation}
-
-$B$ est une \textbf{sous-formule} de $A$ si $B=A$ ou si $A$ est de la forme $A_{1}$`connecteur'$A_{2}$ et ($B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formules de $A_{2}$). Un calcul de séquents vérifie la \textbf{propriété de la sous-formule} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) la preuve est une sous-formule d'une formule de $\s$. En particulier, le séquent $\To A$ a une preuve dans laquelle toute formule est une sous-formule de $A$.
-
-Le calcul \LSJ vérifie la propriété de la sous-formule : on le constate aisément en observant chaque règle.
-
-La propriété de la sous-formule est très recherchée en calcul des séquents. D'une part, elle donne une borne sur les formules qu'il faudra manipuler au cours d'une recherche de preuve, qui sont évidemment toutes plus petites que la formule qu'on essaie de prouver. Mais surtout, elle permet de connaître à l'avance la liste exhaustive des formules qu'on pourra rencontrer. On peut donc à l'avance les numéroter : ainsi, les formules d'un séquents sont simplement représentées par un entier. Il faut quelques informations sur ces numéros : par exemple pour une formule $A\land B$, il faut savoir qu'il s'agit d'un ``et'', et pouvoir déterminer $A$ et $B$. Il faut aussi pouvoir reconnaître quand l'axiome Id (une même formule apparaît des deux côtés du séquent) s'applique : pour cela on associe à chaque formule une classe, qui correspond à une classe d'équivalence de la relation d'égalité structurelle. La taille de toutes ces informations réunies est linéaire en la taille de la formule de départ (c'est-à-dire le nombre de n\oe uds de l'arbre qui la représente, qui est aussi le nombre de sous-formules avec multiplicité). Un exemple est donné par la figure~\ref{fig:indexation}.
-
-La propriété de la sous-formule est encore plus intéressante dans le cadre de la recherche de preuve compilée : connaître à l'avance les formules qui apparaîtront permet d'écrire pour chacune des fonctions agissant sur le séquent, au lieu de les calculer au cours de la recherche de preuve (voir ??).
 
 \begin{figure}[h]
-%\centering
+\centering
 \includegraphics[width=0.3\linewidth]{indexation} %Quelques_formules.f12
+\qquad
+\arbreIndexation
 \caption{Indexation de la formule $(a\land b)\land(\lnot c \lor (a\land b))$}
 \label{fig:indexation}
 \end{figure}
 
 
 
+\subsection{Classes d'égalité structurelle pour l'axiome $id$}
+\label{subsection:classes}
 
-\subsection{Structure de données pour le séquent}
+L'axiome\LSJLid\ $(i\leq n)$ affirme qu'un séquent est prouvable si une même formule $A$ apparaît, de fa\c con ``accessible'' (condition sur les indices), de part et d'autre du séquent. 
+%
+``même formule'' est à comprendre au sens de l'égalité structurelle, c'est-à-dire l'égalité des arbres associés. Tester cette égalité entre les arbres est long (de l'ordre du nombre de n\oe uds du plus petit). On préfère, au cours de l'indexation, construire un deuxième tableau, qui à chaque numéro de formule associe un numéro de \emph{classe}, à comprendre comme les classes d'équivalence de l'égalité structurelle. Ainsi, on détermine en temps constant si les formules associées à deux entiers donnés sont égales structurellement. %Ces classent apparaissent dans la figure~\ref{?}.
+Voir la figure~\ref{fig:indexation}.
+
+
+
+%
+
+
+
+\subsection{Structure de données pour les multiensembles $\G$ et $\D$ du séquent}
+
+
+
+Soit $\s=\G\To\D$ le séquent qu'on garde en mémoire au cours de l'algorithme. Le choix de la représentation de $\G$ et $\D$, multiensembles de couples ``\emph{ indice\,:\!formule }'', est motivé par ce qui suit. On doit souvent, et donc on voudrait pouvoir rapidement
+\begin{itemize}
+\item
+choisir un couple principal $i:H$ le plus prioritaire ;
+\item
+retirer le couple principal choisi $i:H$ du séquent donc de $\G$ ou $\D$, et si $H=A\,c\,B$, ajouter $j:A$ ou $k:B$ où $j$ et $k$ sont des indices valant $n$, l'indice du séquent, ou $n+1$ ;
+\item
+inversement, retirer $j:A$ ou $k:B$ et rajouter $i:H$.
+\end{itemize}
+
+
+Nous représentons $\G$, comme $\D$, par un tableau à $6?$ cases, une par priorité. Dans la case $p$ se trouve une liste de couples (\;\emph{un indice $i$}\;,\; \emph{la liste des formules H de priorité $p$ telles que $i\!:\!H$ est dans $\G$ (resp. $\D$)}\;) ; ces couples sont triés par indices décroissants ; un tel couple n'est présent que si sa liste de formules est non vide. %Voir l'exemple de la figure~\ref{?}.
+
+Le tableau indexé par les indices permet d'une part un choix rapide du couple principal, et d'autre part, d'ajouter rapidement n'importe quel couple $j:A$ quelle que soit sa priorité. Utiliser par exemple une liste de tous les couples triés par priorité assurerait le premier point, mais pas le second. Le tri des indices par ordre décroissant est pour l'ajout de $j:A$ ou $k:B$, car dans toutes les règles, $j$ et $k$ valent $n$ ou $n+1$, où $n$ est l'indice du séquent. Avoir un seul couple avec une liste de formules par indice permet l'ajout en temps constant d'un couple d'indice $n$ même dans $\G$, où il peut y avoir des couples d'indice $n+1$. Le retrait du couple principal $i:H$ ne pose pas de problème : par choix du couple principal, il se trouve au début de la liste. Enfin, pour assurer que retirer $j:A$ ou $k:B$ ou rajouter $i:H$ se fait aussi en temps constant, on vérifie qu'entre le moment où on passe d'une conclusion d'une instance à une prémisse, et celui où on repasse de la prémisse à la conclusion, la représentation des multiensembles de la prémisse est exactement la même, avec toutes les listes dans le même ordre. 
+%
+On obtient bien toutes les opérations voulues en temps constant, sauf dans un cas : lorsque les formules les plus prioritaires sont des ``implique'', il faut parfois en essayer plusieurs. On effectue des permutations circulaires pour faire varier le couple principal, choisi comme celui en tête de liste. On n'oublie pas, selon le nombre de couples principaux qui ont été essayés, de finir de permuter les formules afin de bien revenir à une représentation du séquent identique à la représentation initiale.
+%Un problème se pose cependant si les formules les plus prioritaires sont les ``implique'' : il faut parfois en essayer plusieurs. On le résout en effectuant chaque fois une permutation circulaire afin de mettre un nouveau couple en tête de liste, qui sera choisi comme couple principal.
+
+%Une structure de données similaire, avec un tableau indexé par les classes d'égalité structurelle et dans la case $cl$, des listes de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i:H$ où $H$ est de classe $cl$ dans $\G$ (resp. $\D$)}\;), est utilisée pour retenir les classes apparaissant dans le séquent afin de vérifier rapidement si l'axiome $id$ s'applique.
+
+
+
+%
+
+
+
+\subsection{Informations supplémentaires pour un test rapide des axiomes}
+
+Les axiomes sont testés à chaque appel récursif sur un nouveau séquent. L'axiome $id$ notamment est long à tester naïvement : il faudrait tester, pour tout couple $(A,B)$ de formules ``accessibles'' avec $A$ dans $\G$ et $B$ dans $\D$, si $A=B$ (égalité structurelle expliquée en \ref{subsection:classes}). La complexité associée est le produit des cardinaux de $\G$ et $\D$. On préfère retenir les multiensembles obtenus à partir de $\G$ et $\D$ en rempla\c cant la formule de chaque couple par sa classe, appelés respectivement $Cl\G$ et $Cl\D$. On retient également deux variables booléennes $fauxL$ et $id$. Lorsqu'on ajoute une formule à $\D$, on met à jour $Cl\D$, et on vérifie si la classe de la formule ajoutée est présente et ``accessible'' dans $Cl\G$, auquel cas on assigne $vrai$ à $id$. De même pour un ajout à $\G$ en inversant $Cl\D$ et $Cl\G$, mais en plus, si la formule ajoutée est $\bot$ avec un indice inférieur à celui du séquent, on assigne $vrai$ à $fauxL$. Lorsqu'on transforme une prémisse d'une instance en la conclusion, on réassigne $faux$ aux deux variables : si l'instance a été testée, c'est parce qu'aucun axiome n'était applicable à la conclusion.
+
+L'intérêt d'avoir remplacé les formules par leur classe est qu'on peut représenter $Cl\G$ et $Cl\D$ avec une structure de données similaire à celle pour $\G$ et $\D$ : un tableau indexé par les classes et dans la case $cl$, une liste de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i\!:\!cl$ dans $Cl\G$ (resp. $Cl\D$)}\;). Vérifier si une classe donnée est présente et ``accessible'' se fait alors en temps constant.
+
+
 
 \section{Perspective de certification}
 \subsection{Un langage simple pour faciliter la certification}
@@ -896,7 +957,7 @@ $B$ est une \textbf{sous-formule} de $A$ si $B=A$ ou si $A$ est de la forme $A_{
 
 Le calcul \LSJ vérifie la propriété de la sous-formule : on le constate aisément en observant chaque règle.
 
-La propriété de la sous-formule est très recherchée en calcul des séquents. D'une part, elle donne une borne sur les formules qu'il faudra manipuler au cours d'une recherche de preuve, qui sont évidemment toutes plus petites que la formule qu'on essaie de prouver. Mais surtout, elle permet de connaître à l'avance la liste exhaustive des formules qu'on pourra rencontrer. On peut donc à l'avance les numéroter : ainsi, les formules d'un séquents sont simplement représentées par un entier. Il faut quelques informations sur ces numéros : par exemple pour une formule $A\land B$, il faut savoir qu'il s'agit d'un ``et'', et pouvoir déterminer $A$ et $B$. Il faut aussi pouvoir reconnaître quand l'axiome Id (une même formule apparaît des deux côtés du séquent) s'applique : pour cela on associe à chaque formule une classe, qui correspond à une classe d'équivalence de la relation d'égalité structurelle. La taille de toutes ces informations réunies est linéaire en la taille de la formule de départ (c'est-à-dire le nombre de n\oe uds de l'arbre qui la représente, qui est aussi le nombre de sous-formules avec multiplicité). Un exemple est donné par la figure~\ref{fig:indexation}.
+La propriété de la sous-formule est très recherchée en calcul des séquents. D'une part, elle donne une borne sur les formules qu'il faudra manipuler au cours d'une recherche de preuve, qui sont évidemment toutes plus petites que la formule qu'on essaie de prouver. Mais surtout, elle permet de connaître à l'avance la liste exhaustive des formules qu'on pourra rencontrer. On peut donc à l'avance les numéroter : ainsi, les formules d'un séquents sont simplement représentées par un entier. Il faut quelques informations sur ces numéros : par exemple pour une formule $A\land B$, il faut savoir qu'il s'agit d'un ``et'', et pouvoir déterminer $A$ et $B$. Il faut aussi pouvoir reconnaître quand l'axiome $id$ (une même formule apparaît des deux côtés du séquent) s'applique : pour cela on associe à chaque formule une classe, qui correspond à une classe d'équivalence de la relation d'égalité structurelle. La taille de toutes ces informations réunies est linéaire en la taille de la formule de départ (c'est-à-dire le nombre de n\oe uds de l'arbre qui la représente, qui est aussi le nombre de sous-formules avec multiplicité). Un exemple est donné par la figure~\ref{fig:indexation}.
 
 La propriété de la sous-formule est encore plus intéressante dans le cadre de la recherche de preuve compilée : connaître à l'avance les formules qui apparaîtront permet d'écrire pour chacune des fonctions agissant sur le séquent, au lieu de les calculer au cours de la recherche de preuve (voir ??).
 
@@ -904,7 +965,7 @@ La propriété de la sous-formule est encore plus intéressante dans le cadre de la
 %\centering
 \includegraphics[width=0.3\linewidth]{indexation} %Quelques_formules.f12
 \caption{Indexation de la formule $(a\land b)\land(\lnot c \lor (a\land b))$}
-\label{fig:indexation}
+\label{fig:indexationBis}
 \end{figure}
 
 %\subsection{Absence de duplication}
@@ -959,9 +1020,48 @@ La propriété de la sous-formule est encore plus intéressante dans le cadre de la
 
 
 \section{Implémentation}
+
+
 \subsection{Indexation}
 
-cf ``Propriété de la sous-formule et indexation'' + explication sur les classes (et priorités) et les champs axiomes du séquent
+Une formule peut être considérée comme un \textbf{arbre binaire} dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquettés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. On rappelle qu'une formule est \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou à une variable, c'est-à-dire si l'arbre associé est une feuille.
+%
+Considérons une formule de la forme $A\,c\,B$ où $c$ est un connecteur binaire. Au cours de l'algorithme, on peut avoir besoin d'informations dessus : par exemple, on peut être amené dans le cadre de certaines règles à l'enlever d'un séquent pour la remplacer par $A$ ou par $B$. Il faut donc connaître $A$ et $B$. Et de même récursivement, il faut connaître les fils de $A$ et ceux de $B$, donc finalement on doit retenir tous les n\oe uds de l'arbre correspondant à la formule. Mais on préfère éviter de représenter les formules manipulées dans l'algorithme sous forme d'arbres, pour des raisons qu'on verra plus loin, par exemple la complexité du test d'égalité structurelle de deux arbres. On préfère utiliser une conséquence de la propriété de la sous-formule, que \LSJn\ hérite de \LSJ : toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ est atomique, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau, et donc sa complexité spatiale puisque le contenu d'une case est de taille constante, est la taille de la formule $A$ dont on veut décider la prouvabilité. Au cours de l'algorithme, on représente alors les formules par des entiers, et on peut accéder facilement aux fils de n'importe quelle formule considérée.
+
+\
+
+\noindent
+\textbf{Classes d'égalité structurelle.}
+Au cours de l'algorithme, on a souvent besoin de vérifier si l'axiome d'identité~$id$ s'applique, c'est-à-dire si une même formule apparaît des deux côtés du séquent, avec des indices adéquats ; ``même formule'' est à comprendre au sens de l'égalité structurelle, c'est-à-dire l'égalité des arbres associés. Tester cette égalité entre les formules représentées par deux entiers donnés est possible à partir des informations dont on dispose mais long (de l'ordre du minimum des tailles des deux formules). On préfère, au cours de l'indexation, construire un deuxième tableau, qui à chaque entier associe un numéro de \emph{classe}, à comprendre comme les classes d'équivalence de l'égalité structurelle. Ainsi, on détermine en temps constant si les formules associées à deux entiers donnés sont égales structurellement.
+
+%Or, deux entiers distincts peuvent représenter des formules égales structurellement. Il est possible de tester cette égalité puisqu'on peut déterminer les fils des formules considérées, puis récursivement, si les connecteurs sont le mêmes tester les égalités respectives des fils jusqu'à arriver à des formules atomiques. Mais la complexité est au moins le minimum des tailles des deux formules considérées.
+
+\
+
+\noindent
+\textbf{Priorités.}
+Les priorités de la sous-section précédente peuvent être déterminées au cours de l'indexation. Car les connecteurs sont bien sûr connus, mais surtout, on peut décider de quel côté du séquent une formule donnée est susceptible d'apparaître. On se donne un ensemble à deux éléments $E=\{gauche,droite\}$. Si $\Ccal$ est un élément de $E$, on note $\bar\Ccal$ l'autre élément de $E$. On constate en observant les règles que si une formule $H=A\land B$ ou $H=A\lor B$ apparaît du côté $\Ccal$ d'un séquent, alors $A$ et $B$ ne peuvent apparaître dans une séquent que du même côté $\Ccal$ ; et si $H=A\to B$ apparaît du côté $\Ccal$, alors $B$ ne peut apparaître que du même côté $\Ccal$, et $A$ du côté opposé $\bar\Ccal$. Comme on sait que dans la recherche de preuve pour une formule $A$, cette formule apparaît à $droite$ dans le séquent initial $\;\To A$, on est capable d'associer un côté, puis une priorité à chaque sous-formule de $A$.
+
+
+\
+
+%Retenir une formule demande donc une complexité spatiale de l'ordre du nombre de n\oe uds de l'arbre correspondant, qu'on appellera la \emph{taille} de la formule. En effet, considérons une formule de la forme $A\,c\,B$ où $c$ est un connecteur binaire. On a besoin de conserver des informations dessus : par exemple, on peut être amené dans le cadre de certaines règles à l'enlever d'un séquent pour la remplacer par $A$ ou par $B$. Il faut donc connaître $A$ et $B$. Et de même récursivement, il faut connaître les fils de $A$ et ceux de $B$, donc finalement on doit retenir tous les n\oe uds de l'arbre correspondant à la formule. Pour une seule formule, on a ainsi vraiment besoin d'un espace de l'ordre de sa taille. En revanche, on peut retenir les multiensembles de formules qui apparaissent au cours de l'algorithme en utilisant beaucoup moins d'espace que la somme des tailles des formules, tout en conservant toutes les informations dont on peut avoir besoin sur ces formules. 
+%%
+%La propriété essentielle pour cela est la propriété de la sous-formule, que \LSJn\ hérite de \LSJ. Elle a pour conséquence que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou une variable locale si $B$ a cette forme, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la taille de la formule $A$ dont on veut décider la prouvabilité. La complexité spatiale pour un multiensemble de formules qui pourraient apparaître en exécutant l'algorithme est alors la taille de $A$ plus le cardinal du multiensemble, ce qui est bien mieux que la somme des tailles des formules du multiensemble dans le pire cas
+%
+%
+%\
+%
+%On a vu que \LSJn, comme \LSJ, possède la propriété de la sous-formule. Une conséquence est que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$. Ensuite, lorsqu'on effectue la recherche de preuve sur $\; \To A$, les formules contenues dans les multiensembles d'un séquent sont représentées par des entiers et occupent donc une mémoire constante. Il faut cependant faire attention à garder suffisamment d'information : remplacer tout un arbre par un entier n'est jamais anodin. Si on travaille sur une formule de la forme $A\land B$, on peut avoir besoin
+
+%Une formule peut être considérée comme un arbre binaire dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquettés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. Retenir une formule demande donc une complexité spatiale de l'ordre du nombre de n\oe uds de l'arbre correspondant, qu'on appellera la \emph{taille} de la formule. Cependant, on peut retenir certains multiensembles de formules en utilisant beaucoup moins d'espace que la somme des tailles de ses formules.
+%
+%On a vu que \LSJn, comme \LSJ, possède la propriété de la sous-formule. Une conséquence est que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$. Ensuite, lorsqu'on effectue la recherche de preuve sur $\; \To A$, les formules contenues dans les multiensembles d'un séquent sont représentées par des entiers et occupent donc une mémoire constante. Il faut cependant faire attention à garder suffisamment d'information : remplacer tout un arbre par un entier n'est jamais anodin. Si on travaille sur une formule de la forme $A\land B$, on peut avoir besoin
+
+
+
+
+
 
 
 
@@ -1063,7 +1163,7 @@ Les règles du calcul \LSJ\ sont données dans la figure~\ref{fig:reglesLSJ}. La n
 \centering
 
 $$\begin{array}{cc}
-	\LSJfauxL & \Id \\\\
+	\LSJfauxL & \LSJid \\\\
 	\LSJetL & \LSJetR \\\\
 	\LSJouL & \LSJouR \\\\
 	\multicolumn{2}{c}{\LSJimpL}\\\\
@@ -1215,7 +1315,7 @@ Les règles du calcul \LSJn\ sont décrite dans la figure~\ref{fig:reglesLSJn}. Ch
 
 \emph{$n$ et parfois $i$ désignent toujours des entiers naturels, avec $i\leq n$}
 $$\begin{array}{cc}
-	\LSJLfauxL & \Id \\\\
+	\LSJLfauxL & \LSJLid \\\\
 	\LSJLetL & \LSJLetR \\\\
 	\LSJLouL & \LSJLouR \\\\
 	\multicolumn{2}{c}{\LSJLimpL}\\\\
@@ -1280,12 +1380,12 @@ Pour un axiome $\mathcal A$, cela signifie simplement : \instanceAx si et seulem
 \end{lm}
 
 \begin{proof}
-On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour Id, $\land R$ et $\to L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
+On le montre pour chaque règle ; c'est une conséquence assez directe de la définition de $\surj$. Faisons-le par exemple pour $id$, $\land R$ et $\to L$. \`A chaque fois, on se donne $\s = \Th\, ;\G \To \D$ et $\s' = \G' \To_{n} \D' \in\Sig'$ tels que $\s=\surj(\s')$.
 
 \
 
 %\noindent-\quad 
-\noindent Id :\quad On a\instanceId\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceIdp.
+\noindent $id$ :\quad On a\instanceid\ si et seulement s'il existe une formule $A$ appartenant à la fois à $\G$ et $\D$, ce qui équivaut, par définition de $\surj$, à : il existe $A$ et $i\leq n$ tels que $n:A\in\D'$ et $i:A\in\G'$, c'est-à-dire \instanceidp.
 
 \
 
@@ -1359,7 +1459,7 @@ $B$ est une \textbf{sous-formule} de $A$ si $B=A$ ou si $A$ est de la forme $A_{
 
 Le calcul \LSJ vérifie la propriété de la sous-formule : on le constate aisément en observant chaque règle.
 
-La propriété de la sous-formule est très recherchée en calcul des séquents. D'une part, elle donne une borne sur les formules qu'il faudra manipuler au cours d'une recherche de preuve, qui sont évidemment toutes plus petites que la formule qu'on essaie de prouver. Mais surtout, elle permet de connaître à l'avance la liste exhaustive des formules qu'on pourra rencontrer. On peut donc à l'avance les numéroter : ainsi, les formules d'un séquents sont simplement représentées par un entier. Il faut quelques informations sur ces numéros : par exemple pour une formule $A\land B$, il faut savoir qu'il s'agit d'un ``et'', et pouvoir déterminer $A$ et $B$. Il faut aussi pouvoir reconnaître quand l'axiome Id (une même formule apparaît des deux côtés du séquent) s'applique : pour cela on associe à chaque formule une classe, qui correspond à une classe d'équivalence de la relation d'égalité structurelle. La taille de toutes ces informations réunies est linéaire en la taille de la formule de départ (c'est-à-dire le nombre de n\oe uds de l'arbre qui la représente, qui est aussi le nombre de sous-formules avec multiplicité). Un exemple est donné par la figure~\ref{fig:indexation}.
+La propriété de la sous-formule est très recherchée en calcul des séquents. D'une part, elle donne une borne sur les formules qu'il faudra manipuler au cours d'une recherche de preuve, qui sont évidemment toutes plus petites que la formule qu'on essaie de prouver. Mais surtout, elle permet de connaître à l'avance la liste exhaustive des formules qu'on pourra rencontrer. On peut donc à l'avance les numéroter : ainsi, les formules d'un séquents sont simplement représentées par un entier. Il faut quelques informations sur ces numéros : par exemple pour une formule $A\land B$, il faut savoir qu'il s'agit d'un ``et'', et pouvoir déterminer $A$ et $B$. Il faut aussi pouvoir reconnaître quand l'axiome $id$ (une même formule apparaît des deux côtés du séquent) s'applique : pour cela on associe à chaque formule une classe, qui correspond à une classe d'équivalence de la relation d'égalité structurelle. La taille de toutes ces informations réunies est linéaire en la taille de la formule de départ (c'est-à-dire le nombre de n\oe uds de l'arbre qui la représente, qui est aussi le nombre de sous-formules avec multiplicité). Un exemple est donné par la figure~\ref{fig:indexation}.
 
 La propriété de la sous-formule est encore plus intéressante dans le cadre de la recherche de preuve compilée : connaître à l'avance les formules qui apparaîtront permet d'écrire pour chacune des fonctions agissant sur le séquent, au lieu de les calculer au cours de la recherche de preuve (voir ??).
 
