@@ -735,15 +735,24 @@ On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $
 
 
 
-\section{Implémentation}
+\section{\'Eléments d'implémentation}
+
 
 On utilise l'algorithme dont le pseudo-code est donné dans \cite{LSJ}. Il s'agit de l'algorithme donné en \ref{algoGeneral}, en mettant à profit l'inversibilité de la plupart des règles et prémisses. Adapter l'algorithme de \LSJ\ à \LSJn\ est immédiat ; cependant, on ne garde en mémoire qu'un seul séquent qu'on modifie en place, et on utilise la localité des règles pour retrouver le séquent initial avant d'essayer une nouvelle prémisse ou une nouvelle instance. 
 
 \subsection{Ordre d'essai des instances : choix de la formule principale}
+\label{subsection:choixFormulePrincipale}
 
 Ce qui est précisé dans \cite{LSJ}, mais pas en \ref{algoGeneral} puisque c'est propre au calcul \LSJ, est l'ordre dans lequel on s'intéresse aux différentes instances dont un séquent donné est conclusion. On privilégie naturellement celles qui offrent une possibilité de terminer rapidement la recherche de preuve, ce qui induit une priorité en fonction de la règle associée : d'abord les axiomes, puis les règles inversibles à une seule prémisse $\land L$ et $\lor R$, puis celles à deux prémisses $\land R$ et $\lor L$, et enfin les règles non inversibles $\imp L$ et $\imp R$. 
 
-Par ailleurs, pour une formule donnée de la conclusion, on remarque qu'il y a au plus une instance telle que cette formule est la formule principale, et la règle associée ne dépend que de la formule. De plus toute instance ne correspondant pas à un axiome a une formule principale. Décider l'instance à considérer revient alors à choisir une formule principale. 
+Une formule est dite \emph{composée} si elle est de la forme $A\,c\,B$ avec $c$ un connecteur, c'est-à-dire non réduite à $\bot$ ou une variable.
+%
+%Par ailleurs, pour une formule donnée de la conclusion, on remarque qu'
+On remarque que, pour une formule composée donnée d'un séquent,
+il y a exactement une instance dont ce séquent est conclusion avec cette formule comme formule principale, et la règle associée ne dépend que de la formule et de 
+%son appartenance à $\G$ ou à $\D$
+sa position \emph{à gauche} (dans $\G$) ou \emph{à droite} (dans $\D$) du séquent
+. De plus toute instance ne correspondant pas à un axiome a une formule principale, qui est composée. Décider l'instance à considérer revient alors à choisir une formule principale. 
 
 
 \begin{floatingfigure}[r]{4.5cm}
@@ -764,7 +773,9 @@ $
 \end{floatingfigure}
 
 
-Pour cela, on associe donc à toute formule composée (c'est-à-dire de la forme $A\,c\,B$ avec $c$ un connecteur) de $\G$ et de $\D$ une \textbf{priorité} selon la figure~\ref{fig:priorite}. Plus l'entier est petit, plus la formule est prioritaire. On choisit alors la formule la plus prioritaire parmi les formules ``accessibles'', c'est-à-dire les formules de $\G$ auxquelles est associé un indice inférieur à l'indice $n$ du séquent, ou celles de $\D$ avec un indice égal à $n$ ; ce sont exactement les formules qui auraient figuré dans $\G$ ou $\D$ d'un séquent $\Th\,;\G\To\D$ de \LSJ. Ce choix de formule principale n'intervient qu'après avoir testé les axiomes. S'il n'y a aucune formule principale possible, le séquent est non prouvable. Le seul cas où on peut avoir plusieurs instances à tester pour un séquent donné est celui où la priorité la plus petite donc la plus forte est $5$. Dans ce cas, on teste successivement les formules ``accessibles'' de forme $A\to B$ de $\G$ comme de $\D$, jusqu'à trouver une instance dont toutes les prémisses sont prouvables donc aussi la conclusion, ou les avoir toutes testées sans succès et conclure que le séquent initial n'est pas prouvable. On a arbitrairement choisi que $\land L$ est prioritaire sur $\lor R$. Cela permet de déduire directement de la priorité la règle concernée, sauf dans le cas particulier des ``implique''.
+Pour cela, on associe à toute formule composée 
+%(c'est-à-dire de la forme $A\,c\,B$ avec $c$ un connecteur)
+de $\G$ et de $\D$ une \textbf{priorité} selon la figure~\ref{fig:priorite}. Plus l'entier est petit, plus la formule est prioritaire. On choisit alors la formule la plus prioritaire parmi les formules ``accessibles'', c'est-à-dire les formules de $\G$ auxquelles est associé un indice inférieur à l'indice $n$ du séquent, ou celles de $\D$ avec un indice égal à $n$ ; ce sont exactement les formules qui auraient figuré dans $\G$ ou $\D$ d'un séquent $\Th\,;\G\To\D$ de \LSJ. Ce choix de formule principale n'intervient qu'après avoir testé les axiomes. S'il n'y a aucune formule principale possible, le séquent est non prouvable. Le seul cas où on peut avoir plusieurs instances à tester pour un séquent donné est celui où la priorité la plus petite donc la plus forte est $5$. Dans ce cas, on teste successivement les formules ``accessibles'' de forme $A\to B$ de $\G$ comme de $\D$, jusqu'à trouver une instance dont toutes les prémisses sont prouvables donc aussi la conclusion, ou les avoir toutes testées sans succès et conclure que le séquent initial n'est pas prouvable. On a arbitrairement choisi que $\land L$ est prioritaire sur $\lor R$. Cela permet de déduire directement de la priorité la règle concernée, sauf dans le cas particulier des ``implique''.
 
 
 
@@ -775,6 +786,8 @@ Pour cela, on associe donc à toute formule composée (c'est-à-dire de la forme $A
 Une formule peut être considérée comme un \textbf{arbre binaire} dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquettés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. On rappelle qu'une formule est \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou à une variable, c'est-à-dire si l'arbre associé est une feuille.
 %
 On utilise la propriété de la sous-formule, que \LSJn\ hérite de \LSJ, pour obtenir une représentation des formules plus facile à manipuler. En effet, si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on applique l'algorithme de preuve au séquent $\; \To A$, donc toutes les formules susceptibles d'apparaître sont des sous-formules de la formule $A$. On peut ainsi réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. On retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ a cette forme, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la taille de la formule $A$ dont on veut décider la prouvabilité. On peut alors accéder facilement aux fils de n'importe quelle formule considérée, et comme on a récursivement cette information sur les fils, on peut retrouver, à partir du numéro d'une formule, toutes les informations de l'arbre associé.
+
++ côté ?
 
 La figure~\ref{fig:indexation} donne un exemple d'indexation. ``sf'' comme ``sous-formule'' est le numéro associé à une formule, ``description'' ce qui est stocké dans le tableau, est ``classe'' est expliqué dans la prochaine sous-section.
 
@@ -929,8 +942,67 @@ L'intérêt d'avoir remplacé les formules par leur classe est qu'on peut représent
 
 
 \section{Perspective de certification}
+
+Un des objectifs du stage était de s'intéresser à la certification d'un prouveur de logique intuitionniste s'appuyant sur \LSJ. \'Ecrire la certification d'un tel programme est très long et n'a pas été abordé. 
+%En revanche, plusieurs variantes d'implémentation, dont la certification devrait être plus facile mais dont l'efficacité est diminuée, on été étudiées.
+En revanche, l'implémentation a été modifiée de fa\c con à faciliter la certification, au détriment de l'efficacité. Plusieurs variantes d'implémentation ont ainsi été étudiées, afin de comparer certaines méthodes en termes de facilité de certification et d'efficacité.
+
 \subsection{Un langage simple pour faciliter la certification}
+
+Un premier pas vers la certification est l'utilisation d'un langage relativement simple, afin de limiter le nombre de propriétés à démontrer. Le langage que nous avons employé pour cette raison, qu'on notera \T, comporte un seul type de données : des arbres binaires, qui consistent en l'arbre vide ou une feuille étiquetée par un entier naturel ou un couple d'arbres. Les expressions sont données dans la figure~\ref{fig:expr}, \emph{var} désignant une variable et \emph{nomf} un nom de fonction, les chevrons $<.,.>$ étant utilisés pour les couples d'arbres. La condition du \textbf{if} doit être une feuille d'un entier $n$, correspondant à \emph{faux} si $n=0$ et \emph{vrai} sinon ; \textbf{isnull}, \textbf{isint} et la comparaison renvoient de même une feuille contenant $0$ ou $1$. La première expression du \textbf{match} doit s'évaluer à un couple, sinon il y a une erreur à l'exécution. De même, dans la comparaison ou dans \textbf{succ} (successeur) ou \textbf{pred} (prédécesseur), les expressions doivent être des feuilles. Une déclaration de fonction est un triplet de la forme (\emph{nomf}, \emph{var}, \emph{expr}) comportant le nom de la fonction, celui de son argument, et enfin son corps dans lequel l'argument peut apparaître comme une variable libre. Un programme consiste en une liste de déclarations de fonctions considérées comme mutuellement récursives, puis une expression à évaluer.
+
+L'intérêt d'utiliser ce langage est que mon encadrant D. Larchey-Wendling a réalisé pour celui-ci un compilateur certifié vers une machine abstraite, ainsi qu'un interpréteur certifié de cette machine abstraite. Son objectif est justement l'écriture grâce à ce langage d'un prouveur certifié.
+
+\begin{figure}[h]
+\centering	
+\def\expr{\emph{expr}}
+%\expr\ = \emph{vide} $\mid$ 
+\def\pipe{\;\mid\;}
+$
+\begin{array}{ccl}
+expr = & &
+	var 
+	\pipe vide 
+	\pipe n \in \mathbb N 
+	\pipe <\!expr,expr\!>
+	\pipe \textbf{match } expr  \textbf{ with } <\!var,var\!>\; \Rightarrow expr
+\\ & \mid &
+	\textbf{let } var = expr \textbf{ in } expr
+	\pipe \textbf{call } nomf \ expr
+	\pipe \textbf{isnull } expr
+	\pipe \textbf{isint } expr
+\\ & \mid &
+	expr \leq expr
+	\pipe \textbf{if } expr \textbf{ then } expr \textbf{ else } expr
+	\pipe \textbf{succ } expr
+	\pipe \textbf{pred } expr
+\end{array}
+$
+\caption{Les expressions du langage \T}
+\label{fig:expr}
+\end{figure}
+
+
+
+%
+
+
+
 \subsection{Compilation d'un programme spécifique à une formule donnée}
+
+On a vu en \ref{subsection:choixFormulePrincipale} que pour une formule composée donnée d'un séquent, il y a exactement une instance dont le séquent est conclusion avec cette formule principale, et la règle associée ne dépendent que du connecteur de la formule et de sa position à gauche ou à droite du séquent. Ces informations sont connues à l'issue de l'indexation. On peut alors calculer, pour chaque formule composée, de numéro $f$, et chaque prémisse, de numéro $k$, de l'unique règle associée, des fonctions de transformation de séquent $prem_{f,k}$ et $rev_{f,k}$, qui permettent de passer de la conclusion à la $k$-ième prémisse et réciproquement. Ces fonctions prennent en arguement l'indice $i$ de la formule principale, qui n'est connu qu'à l'exécution.
+
+On peut ainsi, pour une formule donnée, compiler un code dans lequel des fonctions pour chaque sous-formule sont écrites en dur. L'exécution de ce code doit ensuite renvoyer si cette formule est prouvable. Calculer ces fonctions n'est pas très long par rapport à la recherche de preuve elle-même, effectuée à l'exécution, au cours de laquelle chacune de ces fonctions peut être appelée à plusieurs reprises.
+
+L'intérêt principal de cette approche est qu'elle permet de se fixer un premier objectif : certifer le programme qui a été compilé en fonction de la formule, c'est-à-dire montrer que son exécution renvoie bien la prouvabilité de la formule. Ensuite, bien sûr, il faut aussi certifier la compilation vers ce programme afin d'obtenir un prouveur certifé. Mais pour l'instant, on continue à effectuer l'indexation, puis la compilation vers \T\ des fonctions associées aux sous-formules, en OCaml. On ajoute ensuite ces fonctions à du code en \T\ ne dépendant pas de la formule, pour obtenir un code intégralement en \T\ dont l'exécution doit renvoyer la prouvabilité de la formule initiale.
+
+
+
+
+%
+
+
+
 \subsection{Comparaison de différentes implémentations}
 
 
