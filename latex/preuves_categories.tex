@@ -348,7 +348,8 @@ Soit $\Ccal$ et $\Dcal$ des catégories. Soit $F,G:\Ccal\longrightarrow\Dcal$ des
 %\includegraphics[width=0.4\linewidth]{diagrammeNaturel}
 \begin{tikzcd}
 	F(A) \arrow[r,"\theta_{A}"] \arrow[d,"F(f)"] & G(A) \arrow[d,"G(f)"] \\
-	F(B) \arrow[r,"\theta_{B}"] & G(B)\end{tikzcd}
+	F(B) \arrow[r,"\theta_{B}"] & G(B)
+\end{tikzcd}
 
 }
 \noindent
@@ -406,20 +407,22 @@ et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$
 	(A\otimes(B\otimes C)\otimes D 
 			\arrow[rr,"\alpha_{A,B\otimes C,D}"]
 		& & A\otimes((B\otimes C)\otimes D)
-			\arrow[u,"id_{A}\otimes\alpha_{B,C,D}"]\end{tikzcd}
+			\arrow[u,"id_{A}\otimes\alpha_{B,C,D}"]
+\end{tikzcd}
 \begin{tikzcd}
 	(A\otimes e)\otimes B
 			\arrow[rr,"\alpha_{A,e,B}"]
 			\arrow[rd,"\rho_{A}\otimes id_{B}"]
 		& & A\otimes(e\otimes B)
 			\arrow[ld,"id_{A}\otimes\lambda_{B}"] \\
-	& A\otimes B &\end{tikzcd}
+	& A\otimes B &
+\end{tikzcd}
 			
 }
 \noindent
 Ces diagrammes sont appelés \emph{diagrammes pentagonal} et \emph{triangulaire}. Leur commutativité est la \emph{propriété de cohérence}.
 %On a omis les indices de $\alpha$, $\lambda$, $\rho$ et écrit $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme $\alpha_{A,B,C}\otimes id_{A}$.
-On omet souvent les indices de $\alpha$, $\lambda$, $\rho$ lorsqu'il n'y a pas d'ambiguïté. Ici, on écrit aussi $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme ${\alpha_{A,B,C}\otimes id_{A}}$.
+%On omet souvent les indices de $\alpha$, $\lambda$, $\rho$ lorsqu'il n'y a pas d'ambiguïté. Ici, on écrit aussi $A$ pour $id_{A}$ : par exemple, comprendre $\alpha\otimes D$ comme ${\alpha_{A,B,C}\otimes id_{A}}$.
 
 \vspace{2mm}
 
@@ -647,6 +650,24 @@ Soit $\Ccal$ une catégorie monoïdale, avec les notations précédentes. C'est une 
 \includegraphics[width=0.48\linewidth]{diagrammeHexa1}
 \quad
 \includegraphics[width=0.48\linewidth]{diagrammeHexa2}
+
+\begin{tikzcd}
+	& A\otimes(B\otimes C)
+		\arrow[r,"\alpha_{A,e,B}"]
+	& (B\otimes C)\otimes A
+& \\
+	(A\otimes B)\otimes C
+		\arrow[ru,"\alpha_{A,e,B}"]
+		\arrow[ru,"\alpha_{A,e,B}"]	
+	& & & B\otimes(C\otimes A)
+%	(A\otimes e)\otimes B
+%			\arrow[rr,"\alpha_{A,e,B}"]
+%			\arrow[rd,"\rho_{A}\otimes id_{B}"]
+%		& & A\otimes(e\otimes B)
+%			\arrow[ld,"id_{A}\otimes\lambda_{B}"] \\
+%	& A\otimes B &
+\end{tikzcd}
+
 \end{df}
 
 

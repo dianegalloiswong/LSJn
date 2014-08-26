@@ -422,7 +422,7 @@ Elle est également utile lors de l'implémentation : si on veut appliquer la rech
 \noindent
 \textbf{Inversibilité de certaines règles ou prémisses.}
 Dans l'algorithme proposé, il peut être assez long de montrer qu'un séquent n'est pas prouvable, puisqu'on essaie toutes les instances dont il est la conclusion. La notion d'inversibilité permet de terminer beaucoup plus rapidement dans certains cas. 
-Une prémisse $prem_{i}$ d'une règle\regle(aussi appelée \emph{$i$-ème prémisse de $\mathcal R$}) est \textbf{\emph{inversible}} si on a : si $prem_{i}$ est non prouvable, alors $concl$ est non prouvable. Une règle est \textbf{\emph{inversible}} si toutes ses prémisses sont inversibles. Ainsi, si au cours de la recherche de preuve, on obtient qu'une prémisse inversible est non prouvable, on peut directement conclure que la conclusion ne l'est pas non plus, sans avoir besoin d'essayer d'autre règle.
+Une prémisse $prem_{k}$ d'une règle\regle(aussi appelée \emph{$k$-ième prémisse de $\mathcal R$}) est \textbf{\emph{inversible}} si on a : si $prem_{k}$ est non prouvable, alors $concl$ est non prouvable. Une règle est \textbf{\emph{inversible}} si toutes ses prémisses sont inversibles. Ainsi, si au cours de la recherche de preuve, on obtient qu'une prémisse inversible est non prouvable, on peut directement conclure que la conclusion ne l'est pas non plus, sans avoir besoin d'essayer d'autre règle.
 
 \
 
@@ -652,7 +652,7 @@ On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquen
 Soit $\sigma\in\Sig$, on note $\vdash\sigma$ si $\sigma$ est prouvable dans \LSJ\ ; soit $\sigma'\in\Sig'$, on note $\vdash'\sigma'$ si $\sigma'$ est prouvable dans \LSJn.
 Montrons que pour tous $\s\in\Sig$ et $\s'\in\Sig'$ tels que $\s=\surj(\s')$, on a $\vdash\s$ si et seulement si $\vdash\s'$, où $\surj$ est la surjection de $\Sig'$ sur $\Sig$ définie précédemment.
 
-Soit $\mathcal R$ une règle de \LSJ. On note $\mathcal R'$ la règle de \LSJn\ qui lui correspond. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
+Soit $\mathcal R$ une règle de \LSJ. Pour les distinguer, on notera ici $\mathcal R'$ la règle de \LSJn\ de même nom. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
 
 \begin{lm}
 Soit $\sigma\in\Sig$ et $\sigma'\in\Sig'$ tels que $\sigma=\surj(\sigma')$ et soit $\mathcal R$ une règle de \LSJ.
@@ -745,7 +745,8 @@ On utilise l'algorithme dont le pseudo-code est donné dans \cite{LSJ}. Il s'agit
 
 Ce qui est précisé dans \cite{LSJ}, mais pas en \ref{algoGeneral} puisque c'est propre au calcul \LSJ, est l'ordre dans lequel on s'intéresse aux différentes instances dont un séquent donné est conclusion. On privilégie naturellement celles qui offrent une possibilité de terminer rapidement la recherche de preuve, ce qui induit une priorité en fonction de la règle associée : d'abord les axiomes, puis les règles inversibles à une seule prémisse $\land L$ et $\lor R$, puis celles à deux prémisses $\land R$ et $\lor L$, et enfin les règles non inversibles $\imp L$ et $\imp R$. 
 
-Une formule est dite \emph{composée} si elle est de la forme $A\,c\,B$ avec $c$ un connecteur, c'est-à-dire non réduite à $\bot$ ou une variable.
+%Une formule est dite \emph{composée} si elle est de la forme $A\,c\,B$ avec $c$ un connecteur, c'est-à-dire non réduite à $\bot$ ou une variable.
+Une formule est dite \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou une variable ; sinon, elle est \textbf{\emph{composée}}, c'est-à-dire de la forme $A\,c\,B$ avec $c$ un connecteur.
 %
 %Par ailleurs, pour une formule donnée de la conclusion, on remarque qu'
 On remarque que, pour une formule composée donnée d'un séquent,
@@ -758,14 +759,17 @@ sa position \emph{à gauche} (dans $\G$) ou \emph{à droite} (dans $\D$) du séquen
 \begin{floatingfigure}[r]{4.5cm}
 \centering
 $
-\begin{array}{ccc}
+\begin{array}{lcc}
 	\text{Forme} & \text{Côté} & \text{Priorité} \\
 	A\land B & L & 1 \\
 	A\lor B & R & 2 \\
 	A\lor B & L & 3 \\
 	A\land B & R & 4 \\
-	A\imp B & L & 5 \\
-	A\imp B & R & 5 \\
+	A\imp B & L,R & 5 \\
+	atomique & L,R & 6
+%	A\imp B & L & 5 \\
+%	A\imp B & R & 5 \\
+%	\multicolumn{2}{c}{atomique} & 6
 \end{array}
 $
 \caption{Priorité selon la forme de la formule et son appartenance à $\G$ (``côté $L$'') ou $\D$ (``côté $R$'')}
@@ -773,9 +777,10 @@ $
 \end{floatingfigure}
 
 
-Pour cela, on associe à toute formule composée 
+Pour cela, on associe à chaque formule %composée 
 %(c'est-à-dire de la forme $A\,c\,B$ avec $c$ un connecteur)
-de $\G$ et de $\D$ une \textbf{priorité} selon la figure~\ref{fig:priorite}. Plus l'entier est petit, plus la formule est prioritaire. On choisit alors la formule la plus prioritaire parmi les formules ``accessibles'', c'est-à-dire les formules de $\G$ auxquelles est associé un indice inférieur à l'indice $n$ du séquent, ou celles de $\D$ avec un indice égal à $n$ ; ce sont exactement les formules qui auraient figuré dans $\G$ ou $\D$ d'un séquent $\Th\,;\G\To\D$ de \LSJ. Ce choix de formule principale n'intervient qu'après avoir testé les axiomes. S'il n'y a aucune formule principale possible, le séquent est non prouvable. Le seul cas où on peut avoir plusieurs instances à tester pour un séquent donné est celui où la priorité la plus petite donc la plus forte est $5$. Dans ce cas, on teste successivement les formules ``accessibles'' de forme $A\to B$ de $\G$ comme de $\D$, jusqu'à trouver une instance dont toutes les prémisses sont prouvables donc aussi la conclusion, ou les avoir toutes testées sans succès et conclure que le séquent initial n'est pas prouvable. On a arbitrairement choisi que $\land L$ est prioritaire sur $\lor R$. Cela permet de déduire directement de la priorité la règle concernée, sauf dans le cas particulier des ``implique''.
+de $\G$ et de $\D$ une \textbf{priorité} selon la figure~\ref{fig:priorite}. %On associe la priorité $6$ aux formules atomiques ($\bot$ ou une variable). 
+Plus l'entier est petit, plus la formule est prioritaire. On choisit alors la formule la plus prioritaire parmi les formules ``accessibles'', c'est-à-dire les formules de $\G$ auxquelles est associé un indice inférieur à l'indice $n$ du séquent, ou celles de $\D$ avec un indice égal à $n$ ; ce sont exactement les formules qui auraient figuré dans $\G$ ou $\D$ d'un séquent $\Th\,;\G\To\D$ de \LSJ. Ce choix de formule principale n'intervient qu'après avoir testé les axiomes. Si la formule la plus prioritaire est de priorité $6$, il n'y a aucune formule principale possible, donc le séquent est non prouvable. Le seul cas où on peut avoir plusieurs instances à tester pour un séquent donné est celui où la formule la plus prioritaire est de priorité $5$. Dans ce cas, on teste successivement les formules ``accessibles'' de forme $A\to B$ de $\G$ comme de $\D$, jusqu'à trouver une instance dont toutes les prémisses sont prouvables donc aussi la conclusion, ou les avoir toutes testées sans succès et conclure que le séquent initial n'est pas prouvable. On a arbitrairement choisi que $\land L$ est prioritaire sur $\lor R$, et $\lor L$ sur $\land R$. Cela permet de déduire directement de la priorité la règle concernée, sauf dans le cas particulier des ``implique''.
 
 
 
@@ -783,13 +788,21 @@ de $\G$ et de $\D$ une \textbf{priorité} selon la figure~\ref{fig:priorite}. Plu
 
 \subsection{Indexation}
 
-Une formule peut être considérée comme un \textbf{arbre binaire} dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquettés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. On rappelle qu'une formule est \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou à une variable, c'est-à-dire si l'arbre associé est une feuille.
+Une formule peut être considérée comme un \textbf{arbre binaire} dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquetés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. 
+%On rappelle qu'une formule est \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou à une variable, c'est-à-dire si l'arbre associé est une feuille.
 %
-On utilise la propriété de la sous-formule, que \LSJn\ hérite de \LSJ, pour obtenir une représentation des formules plus facile à manipuler. En effet, si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on applique l'algorithme de preuve au séquent $\; \To A$, donc toutes les formules susceptibles d'apparaître sont des sous-formules de la formule $A$. On peut ainsi réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. On retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ a cette forme, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la taille de la formule $A$ dont on veut décider la prouvabilité. On peut alors accéder facilement aux fils de n'importe quelle formule considérée, et comme on a récursivement cette information sur les fils, on peut retrouver, à partir du numéro d'une formule, toutes les informations de l'arbre associé.
+On utilise la propriété de la sous-formule, que \LSJn\ hérite de \LSJ, pour obtenir une représentation des formules plus facile à manipuler. En effet, si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on applique l'algorithme de preuve au séquent $\; \To A$, donc toutes les formules susceptibles d'apparaître sont des sous-formules de la formule $A$. On peut ainsi réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. On retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ est atomique, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la \emph{taille} de la formule $A$ dont on veut décider la prouvabilité, c'est-à-dire le nombre de n\oe uds de l'arbre correspondant. On peut alors accéder facilement aux fils de n'importe quelle formule considérée, et comme on a récursivement cette information sur les fils, on peut retrouver, à partir du numéro d'une formule, toutes les informations de l'arbre associé.
 
-+ côté ?
+On peut aussi déterminer, au cours de l'indexation, l'unique côté possible pour un numéro de formule donné, le \emph{côté} d'une formule dans un séquent étant $L$ si elle est dans $\G$, $R$ si elle est dans $\D$. En effet, si $H=A\land B$ ou $H=A\lor B$, alors $A$ et $B$ ont toutes deux le même côté que $H$ ; si $H=A\to B$ alors $B$ a le même côté que $H$ et $A$ le côté opposé. 
+On distingue ici les différentes occurrences d'une même formule, qui ont des numéros associés distincts.
+%Attention, on s'intéresse ici aux occurrences des formules, identifiées par leur numéro, et non aux formules en tant qu'arbres qui peuvent apparaître simultanément des deux côtés.
+%aux numéros de formules et pas aux formules en tant qu'arbre : par exemple si on a $A\to A$ dans un séquent, la formule $A$ pourra apparaître des deux côtés dans un futur séquent, mais ces deux occurrences ne seront pas associées au même numéro. 
+Comme on sait que dans la recherche de preuve pour une formule $A$, 
+%cette formule apparaît à $droite$ 
+le côté de cette formule est $R$
+dans le séquent initial $\;\To A$, on peut associer un côté à chaque numéro représentant une sous-formule de $A$.
 
-La figure~\ref{fig:indexation} donne un exemple d'indexation. ``sf'' comme ``sous-formule'' est le numéro associé à une formule, ``description'' ce qui est stocké dans le tableau, est ``classe'' est expliqué dans la prochaine sous-section.
+%La figure~\ref{fig:indexation} donne un exemple d'indexation. ``sf'' comme ``sous-formule'' est le numéro associé à une formule, ``description'' ce qui est stocké dans le tableau, ``côté'' et ``classe'' est expliqué dans la prochaine sous-section.
 
 
 
@@ -848,18 +861,19 @@ La figure~\ref{fig:indexation} donne un exemple d'indexation. ``sf'' comme ``sou
 \def\NiveauD{(-3)*\DistanceInterNiveaux}
 \def\InterFeuilles{(1)*\DistanceInterFeuilles}
 % Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-\node (R) at ({(2)*\InterFeuilles},{\NiveauA}) {$\autour{\imp}{11}{7}{D}{?}$};
-\node (Ra) at ({(0.5)*\InterFeuilles},{\NiveauB}) {$\autour{\land}{3}{3}{D}{?}$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$\autour{A}{1}{1}{D}{?}$};
-\node (Rab) at ({(1)*\InterFeuilles},{\NiveauC}) {$\autour{B}{2}{2}{D}{?}$};
-\node (Rb) at ({(3.5)*\InterFeuilles},{\NiveauB}) {$\autour{\lor}{10}{6}{D}{?}$};
-\node (Rba) at ({(2.5)*\InterFeuilles},{\NiveauC}) {$\autour{\imp}{6}{5}{D}{?}$};
-\node (Rbaa) at ({(2)*\InterFeuilles},{\NiveauD}) {$\autour{\bot}{4}{0}{D}{?}$};
-\node (Rbab) at ({(3)*\InterFeuilles},{\NiveauD}) {$\autour{C}{5}{4}{D}{?}a$};
-\node (Rbb) at ({(4.5)*\InterFeuilles},{\NiveauC}) {$\autour{\land}{9}{3}{D}{?}$};
-\node (Rbba) at ({(4)*\InterFeuilles},{\NiveauD}) {$\autour{A}{7}{1}{D}{?}$};
-\node (Rbbb) at ({(5)*\InterFeuilles},{\NiveauD}) {$\autour{B}{8}{2}{D}{?}$};
-\node (legende) at ({(4.5)*\InterFeuilles},{\NiveauA}) {$\autour{\text{n\oe ud}}{\textbf{sf}}{\textit{classe}}{D}{?}$};
+\node (R) at ({(2)*\InterFeuilles},{\NiveauA}) {$\autour{\imp}{11}{7}{R}{?}$};
+\node (Ra) at ({(0.5)*\InterFeuilles},{\NiveauB}) {$\autour{\land}{3}{3}{L}{?}$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$\autour{A}{1}{1}{L}{?}$};
+\node (Rab) at ({(1)*\InterFeuilles},{\NiveauC}) {$\autour{B}{2}{2}{L}{?}$};
+\node (Rb) at ({(3.5)*\InterFeuilles},{\NiveauB}) {$\autour{\lor}{10}{6}{R}{?}$};
+\node (Rba) at ({(2.5)*\InterFeuilles},{\NiveauC}) {$\autour{\imp}{6}{5}{R}{?}$};
+\node (Rbaa) at ({(2)*\InterFeuilles},{\NiveauD}) {$\autour{\bot}{4}{0}{L}{?}$};
+\node (Rbab) at ({(3)*\InterFeuilles},{\NiveauD}) {$\autour{C}{5}{4}{R}{?}$};
+\node (Rbb) at ({(4.5)*\InterFeuilles},{\NiveauC}) {$\autour{\land}{9}{3}{R}{?}$};
+\node (Rbba) at ({(4)*\InterFeuilles},{\NiveauD}) {$\autour{A}{7}{1}{R}{?}$};
+\node (Rbbb) at ({(5)*\InterFeuilles},{\NiveauD}) {$\autour{B}{8}{2}{R}{?}$};
+%\node (legende) at ({(4.5)*\InterFeuilles},{\NiveauA}) {$\autour{\text{n\oe ud}}{\textbf{sf}}{\textit{classe}}{D}{?}$};
+%\node (legende) at ({(4.5)*\InterFeuilles},{\NiveauA}) {$\autour{.}{\textbf{sf}}{\textit{classe}}{D}{?}$};
 % Arcs (MODIFIABLES : Styles)
 \draw (R)--(Ra);
 \draw (Ra)--(Raa);
@@ -883,7 +897,9 @@ La figure~\ref{fig:indexation} donne un exemple d'indexation. ``sf'' comme ``sou
 \includegraphics[width=0.3\linewidth]{indexation} %Quelques_formules.f12
 \qquad
 \arbreIndexation
-\caption{Indexation de la formule $(a\land b)\land(\lnot c \lor (a\land b))$}
+\caption{Indexation de la formule $(a\land b)\land(\lnot c \lor (a\land b))$.
+``sf'' comme ``sous-formule'' est le numéro associé à une formule (en gras dans l'arbre), ``description'' ce qui est stocké dans le tableau. La classe d'une formule (en italique) est expliquée dans la prochaine sous-section.
+}
 \label{fig:indexation}
 \end{figure}
 
@@ -894,8 +910,12 @@ La figure~\ref{fig:indexation} donne un exemple d'indexation. ``sf'' comme ``sou
 
 L'axiome\LSJLid\ $(i\leq n)$ affirme qu'un séquent est prouvable si une même formule $A$ apparaît, de fa\c con ``accessible'' (condition sur les indices), de part et d'autre du séquent. 
 %
-``même formule'' est à comprendre au sens de l'égalité structurelle, c'est-à-dire l'égalité des arbres associés. Tester cette égalité entre les arbres est long (de l'ordre du nombre de n\oe uds du plus petit). On préfère, au cours de l'indexation, construire un deuxième tableau, qui à chaque numéro de formule associe un numéro de \emph{classe}, à comprendre comme les classes d'équivalence de l'égalité structurelle. Ainsi, on détermine en temps constant si les formules associées à deux entiers donnés sont égales structurellement. %Ces classent apparaissent dans la figure~\ref{?}.
-Voir la figure~\ref{fig:indexation}.
+``même formule'' est à comprendre au sens de l'égalité structurelle, c'est-à-dire l'égalité des arbres associés. On teste très souvent cette égalité au cours de la recherche de preuve.
+%Tester cette égalité entre les
+Le faire sur des arbres est long (de l'ordre du nombre de n\oe uds du plus petit). On préfère, au cours de l'indexation, construire un deuxième tableau, qui à chaque numéro de formule associe un numéro de \emph{classe}, à comprendre comme les classes d'équivalence de l'égalité structurelle ; voir a figure~\ref{fig:indexation}. Ainsi, on détermine ensuite en temps constant si les formules associées à deux entiers donnés sont égales structurellement. 
+%La complexité de la construction de ce tableau est de l'ordre de la taille de la formule initiale au carré, ce qui est de toute fa\c con inférieur celle de la recherche de preuve.
+
+%Ces classent apparaissent dans la figure~\ref{?}. Voir la figure~\ref{fig:indexation}.
 
 
 
@@ -907,7 +927,7 @@ Voir la figure~\ref{fig:indexation}.
 
 
 
-Soit $\s=\G\To\D$ le séquent qu'on garde en mémoire au cours de l'algorithme. Le choix de la représentation de $\G$ et $\D$, multiensembles de couples ``\emph{ indice\,:\!formule }'', est motivé par ce qui suit. On doit souvent, et donc on voudrait pouvoir rapidement
+Soit $\s={\G\!\To\!\D}$ le séquent qu'on garde en mémoire au cours de l'algorithme. Le choix de la représentation de $\G$ et $\D$, multiensembles de couples ``\emph{ indice\!:\;formule }'', est motivé par ce qui suit. On doit souvent, et donc on voudrait pouvoir rapidement
 \begin{itemize}
 \item
 choisir un couple principal $i:H$ le plus prioritaire ;
@@ -918,9 +938,11 @@ inversement, retirer $j:A$ ou $k:B$ et rajouter $i:H$.
 \end{itemize}
 
 
-Nous représentons $\G$, comme $\D$, par un tableau à $6?$ cases, une par priorité. Dans la case $p$ se trouve une liste de couples (\;\emph{un indice $i$}\;,\; \emph{la liste des formules H de priorité $p$ telles que $i\!:\!H$ est dans $\G$ (resp. $\D$)}\;) ; ces couples sont triés par indices décroissants ; un tel couple n'est présent que si sa liste de formules est non vide. %Voir l'exemple de la figure~\ref{?}.
+Nous représentons $\G$, comme $\D$, par un tableau à $6$ cases, une par priorité. Dans la case $p$ se trouve une liste de couples (\;\emph{un indice $i$}\;,\; \emph{la liste des formules H de priorité $p$ telles que $i\!:\!H$ est dans $\G$ resp. $\D$}\;) ; ces couples sont triés par indices décroissants ; un tel couple n'est présent que si sa liste de formules est non vide. %Voir l'exemple de la figure~\ref{?}.
 
-Le tableau indexé par les indices permet d'une part un choix rapide du couple principal, et d'autre part, d'ajouter rapidement n'importe quel couple $j:A$ quelle que soit sa priorité. Utiliser par exemple une liste de tous les couples triés par priorité assurerait le premier point, mais pas le second. Le tri des indices par ordre décroissant est pour l'ajout de $j:A$ ou $k:B$, car dans toutes les règles, $j$ et $k$ valent $n$ ou $n+1$, où $n$ est l'indice du séquent. Avoir un seul couple avec une liste de formules par indice permet l'ajout en temps constant d'un couple d'indice $n$ même dans $\G$, où il peut y avoir des couples d'indice $n+1$. Le retrait du couple principal $i:H$ ne pose pas de problème : par choix du couple principal, il se trouve au début de la liste. Enfin, pour assurer que retirer $j:A$ ou $k:B$ ou rajouter $i:H$ se fait aussi en temps constant, on vérifie qu'entre le moment où on passe d'une conclusion d'une instance à une prémisse, et celui où on repasse de la prémisse à la conclusion, la représentation des multiensembles de la prémisse est exactement la même, avec toutes les listes dans le même ordre. 
+Le tableau indexé par les indices permet d'une part un choix rapide du couple principal, et d'autre part, d'ajouter rapidement n'importe quel couple $j:A$ quelle que soit sa priorité. Utiliser par exemple une liste de tous les couples triés par priorité assurerait le premier point, mais pas le second. Le tri des indices par ordre décroissant est pour l'ajout de $j:A$ ou $k:B$, car dans toutes les règles, $j$ et $k$ valent $n$ ou $n+1$, où $n$ est l'indice du séquent. Avoir un seul couple avec une liste de formules par indice permet l'ajout en temps constant d'un couple d'indice $n$ même dans $\G$, où il peut y avoir des couples d'indice $n+1$. %Le retrait du couple principal $i:H$ ne pose pas de problème : il se trouve au début de la liste car le couple principal est choisi comme le premier convenable rencontré. 
+Le couple principal se trouve au début de la liste car il est choisi comme le premier convenable rencontré, son retrait est donc en temps constant.
+Enfin, pour assurer que retirer $j:A$ ou $k:B$ ou rajouter $i:H$ se fait aussi en temps constant, on vérifie qu'entre le moment où on passe d'une conclusion d'une instance à une prémisse, et celui où on repasse de la prémisse à la conclusion, la représentation des multiensembles de la prémisse est exactement la même, avec toutes les listes dans le même ordre. 
 %
 On obtient bien toutes les opérations voulues en temps constant, sauf dans un cas : lorsque les formules les plus prioritaires sont des ``implique'', il faut parfois en essayer plusieurs. On effectue des permutations circulaires pour faire varier le couple principal, choisi comme celui en tête de liste. On n'oublie pas, selon le nombre de couples principaux qui ont été essayés, de finir de permuter les formules afin de bien revenir à une représentation du séquent identique à la représentation initiale.
 %Un problème se pose cependant si les formules les plus prioritaires sont les ``implique'' : il faut parfois en essayer plusieurs. On le résout en effectuant chaque fois une permutation circulaire afin de mettre un nouveau couple en tête de liste, qui sera choisi comme couple principal.
@@ -935,9 +957,9 @@ On obtient bien toutes les opérations voulues en temps constant, sauf dans un ca
 
 \subsection{Informations supplémentaires pour un test rapide des axiomes}
 
-Les axiomes sont testés à chaque appel récursif sur un nouveau séquent. L'axiome $id$ notamment est long à tester naïvement : il faudrait tester, pour tout couple $(A,B)$ de formules ``accessibles'' avec $A$ dans $\G$ et $B$ dans $\D$, si $A=B$ (égalité structurelle expliquée en \ref{subsection:classes}). La complexité associée est le produit des cardinaux de $\G$ et $\D$. On préfère retenir les multiensembles obtenus à partir de $\G$ et $\D$ en rempla\c cant la formule de chaque couple par sa classe, appelés respectivement $Cl\G$ et $Cl\D$. On retient également deux variables booléennes $fauxL$ et $id$. Lorsqu'on ajoute une formule à $\D$, on met à jour $Cl\D$, et on vérifie si la classe de la formule ajoutée est présente et ``accessible'' dans $Cl\G$, auquel cas on assigne $vrai$ à $id$. De même pour un ajout à $\G$ en inversant $Cl\D$ et $Cl\G$, mais en plus, si la formule ajoutée est $\bot$ avec un indice inférieur à celui du séquent, on assigne $vrai$ à $fauxL$. Lorsqu'on transforme une prémisse d'une instance en la conclusion, on réassigne $faux$ aux deux variables : si l'instance a été testée, c'est parce qu'aucun axiome n'était applicable à la conclusion.
+Les axiomes sont testés à chaque appel récursif sur un nouveau séquent. L'axiome $id$ notamment est long à tester naïvement : il faudrait tester, pour tout couple $(A,B)$ de formules ``accessibles'' avec $A$ dans $\G$ et $B$ dans $\D$, si $A=B$ (égalité structurelle expliquée en \ref{subsection:classes}). La complexité associée est le produit des cardinaux de $\G$ et $\D$. On préfère retenir les multiensembles obtenus à partir de $\G$ et $\D$ en rempla\c cant la formule de chaque couple par sa classe, appelés respectivement $\ClG$ et $\ClD$. On retient également deux variables booléennes $fauxL$ et $id$. Lorsqu'on ajoute une formule à $\D$, on met à jour $\ClD$, et on vérifie si la classe de la formule ajoutée est présente et ``accessible'' dans $\ClG$, auquel cas on assigne $vrai$ à $id$. De même pour un ajout à $\G$ en échangeant les rôles de $\ClD$ et $\ClG$, mais en plus, si la formule ajoutée est $\bot$ avec un indice inférieur à celui du séquent, on assigne $vrai$ à $fauxL$. Lorsqu'on transforme une prémisse d'une instance en la conclusion, on réassigne $faux$ aux deux variables : si l'instance a été testée, c'est parce qu'aucun axiome n'était applicable à la conclusion. Ainsi, lorsqu'au début de chaque appel récursif sur le séquent actuellement en mémoire, on commence par tester les axiomes, il suffit de regarder si $id$ ou $fauxL$ contient $vrai$.
 
-L'intérêt d'avoir remplacé les formules par leur classe est qu'on peut représenter $Cl\G$ et $Cl\D$ avec une structure de données similaire à celle pour $\G$ et $\D$ : un tableau indexé par les classes et dans la case $cl$, une liste de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i\!:\!cl$ dans $Cl\G$ (resp. $Cl\D$)}\;). Vérifier si une classe donnée est présente et ``accessible'' se fait alors en temps constant.
+L'intérêt d'avoir remplacé les formules par leur classe est qu'on peut représenter $\ClG$ et $\ClD$ avec une structure de données similaire à celle pour $\G$ et $\D$ : un tableau indexé par les classes et dans la case $cl$, une liste de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i\!:\!cl$ dans $\ClG$ resp. $\ClD$}\;). Vérifier si une classe donnée est présente et ``accessible'' se fait alors en temps constant.
 
 
 
@@ -949,7 +971,7 @@ En revanche, l'implémentation a été modifiée de fa\c con à faciliter la certific
 
 \subsection{Un langage simple pour faciliter la certification}
 
-Un premier pas vers la certification est l'utilisation d'un langage relativement simple, afin de limiter le nombre de propriétés à démontrer. Le langage que nous avons employé pour cette raison, qu'on notera \T, comporte un seul type de données : des arbres binaires, qui consistent en l'arbre vide ou une feuille étiquetée par un entier naturel ou un couple d'arbres. Les expressions sont données dans la figure~\ref{fig:expr}, \emph{var} désignant une variable et \emph{nomf} un nom de fonction, les chevrons $<.,.>$ étant utilisés pour les couples d'arbres. La condition du \textbf{if} doit être une feuille d'un entier $n$, correspondant à \emph{faux} si $n=0$ et \emph{vrai} sinon ; \textbf{isnull}, \textbf{isint} et la comparaison renvoient de même une feuille contenant $0$ ou $1$. La première expression du \textbf{match} doit s'évaluer à un couple, sinon il y a une erreur à l'exécution. De même, dans la comparaison ou dans \textbf{succ} (successeur) ou \textbf{pred} (prédécesseur), les expressions doivent être des feuilles. Une déclaration de fonction est un triplet de la forme (\emph{nomf}, \emph{var}, \emph{expr}) comportant le nom de la fonction, celui de son argument, et enfin son corps dans lequel l'argument peut apparaître comme une variable libre. Un programme consiste en une liste de déclarations de fonctions considérées comme mutuellement récursives, puis une expression à évaluer.
+Un premier pas vers la certification est l'utilisation d'un langage relativement simple, afin de limiter le nombre de propriétés à démontrer. Le langage que nous avons employé pour cette raison, qu'on notera \T, comporte un seul type de données : des arbres binaires, qui consistent en l'arbre vide ou une feuille étiquetée par un entier naturel ou un couple d'arbres. Les expressions sont données dans la figure~\ref{fig:expr}, \emph{var} désignant une variable et \emph{nomf} un nom de fonction, des chevrons $<\!\!.,.\!\!>$ étant utilisés pour les couples d'arbres. La condition du \textbf{if} doit être une feuille d'un entier $n$, correspondant à \emph{faux} si $n=0$ et \emph{vrai} sinon ; \textbf{isnull}, \textbf{isint} et la comparaison renvoient de même une feuille contenant $0$ ou $1$. La première expression du \textbf{match} doit s'évaluer à un couple, sinon il y a une erreur à l'exécution. De même, dans la comparaison ou dans \textbf{succ} (successeur) ou \textbf{pred} (prédécesseur), les expressions doivent être des feuilles. Une déclaration de fonction est un triplet de la forme (\emph{nomf}, \emph{var}, \emph{expr}) comportant le nom de la fonction, celui de son argument, et enfin son corps dans lequel l'argument peut apparaître comme une variable libre. Un programme consiste en une liste de déclarations de fonctions considérées comme mutuellement récursives, puis une expression à évaluer.
 
 L'intérêt d'utiliser ce langage est que mon encadrant D. Larchey-Wendling a réalisé pour celui-ci un compilateur certifié vers une machine abstraite, ainsi qu'un interpréteur certifié de cette machine abstraite. Son objectif est justement l'écriture grâce à ce langage d'un prouveur certifié.
 
@@ -990,11 +1012,11 @@ $
 
 \subsection{Compilation d'un programme spécifique à une formule donnée}
 
-On a vu en \ref{subsection:choixFormulePrincipale} que pour une formule composée donnée d'un séquent, il y a exactement une instance dont le séquent est conclusion avec cette formule principale, et la règle associée ne dépendent que du connecteur de la formule et de sa position à gauche ou à droite du séquent. Ces informations sont connues à l'issue de l'indexation. On peut alors calculer, pour chaque formule composée, de numéro $f$, et chaque prémisse, de numéro $k$, de l'unique règle associée, des fonctions de transformation de séquent $prem_{f,k}$ et $rev_{f,k}$, qui permettent de passer de la conclusion à la $k$-ième prémisse et réciproquement. Ces fonctions prennent en arguement l'indice $i$ de la formule principale, qui n'est connu qu'à l'exécution.
+On a vu en \ref{subsection:choixFormulePrincipale} que pour une formule composée donnée d'un séquent, il y a exactement une instance dont le séquent est conclusion avec cette formule principale, et la règle associée ne dépendent que du connecteur de la formule et de sa position à gauche ou à droite du séquent. Ces informations sont connues à l'issue de l'indexation. On peut alors calculer, pour chaque formule composée, de numéro $f$, et chaque prémisse, de numéro $k$, de l'unique règle associée, des fonctions de transformation de séquent $prem_{f,k}$ et $rev_{f,k}$, qui permettent de passer de la conclusion à la $k$-ième prémisse et réciproquement. Ces fonctions prennent en argument l'indice $i$ de la formule principale, qui n'est connu qu'à l'exécution.
 
-On peut ainsi, pour une formule donnée, compiler un code dans lequel des fonctions pour chaque sous-formule sont écrites en dur. L'exécution de ce code doit ensuite renvoyer si cette formule est prouvable. Calculer ces fonctions n'est pas très long par rapport à la recherche de preuve elle-même, effectuée à l'exécution, au cours de laquelle chacune de ces fonctions peut être appelée à plusieurs reprises.
+On peut ainsi, pour une formule donnée, compiler un code dans lequel des fonctions pour chaque sous-formule sont écrites en dur. L'exécution de ce code doit ensuite renvoyer un booléen indiquant si cette formule est prouvable. Calculer ces fonctions n'est pas très long par rapport à la recherche de preuve elle-même, effectuée à l'exécution, au cours de laquelle chacune de ces fonctions peut être appelée à plusieurs reprises.
 
-L'intérêt principal de cette approche est qu'elle permet de se fixer un premier objectif : certifer le programme qui a été compilé en fonction de la formule, c'est-à-dire montrer que son exécution renvoie bien la prouvabilité de la formule. Ensuite, bien sûr, il faut aussi certifier la compilation vers ce programme afin d'obtenir un prouveur certifé. Mais pour l'instant, on continue à effectuer l'indexation, puis la compilation vers \T\ des fonctions associées aux sous-formules, en OCaml. On ajoute ensuite ces fonctions à du code en \T\ ne dépendant pas de la formule, pour obtenir un code intégralement en \T\ dont l'exécution doit renvoyer la prouvabilité de la formule initiale.
+L'intérêt principal de cette approche est qu'elle permet de se fixer un premier objectif : certifier le programme qui a été compilé en fonction de la formule, c'est-à-dire montrer que son exécution renvoie le bon résultat. Bien sûr, il faudrait ensuite aussi certifier la compilation vers ce programme afin d'obtenir un prouveur certifié. Mais on s'autorise dans un premier temps à effectuer en OCaml l'indexation, puis la compilation vers \T\ des fonctions associées aux sous-formules. On ajoute ensuite ces fonctions à du code en \T\ ne dépendant pas de la formule, pour obtenir un code intégralement en \T\ dont l'exécution doit renvoyer la prouvabilité de la formule initiale.
 
 
 
@@ -1011,7 +1033,7 @@ L'intérêt principal de cette approche est qu'elle permet de se fixer un premier 
 \bibliography{LSJn}
 
 
-%\end{document}
+\end{document}
 
 %%%%%
 
