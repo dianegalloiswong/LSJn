@@ -397,7 +397,7 @@ Certaines règles, comme la contraction à gauche de \LJ\ :
 %
 %\noindent
 \linebreak
-${\LJcontraction}$, sont problématiques pour la terminaison de l'algorithme. En effet, pour essayer de prouver $\G,A\To D$, on peut être amené à essayer de prouver $\G,A,A\To D$, puis en appliquant encore la même règle à essayer de prouver $\G,A,A,A\To D$, et ainsi de suite, sans fin. 
+${\LJcontraction}$, sont problématiques pour la terminaison de l'algorithme. En effet, pour essayer de prouver $A,\G\To D$, on peut être amené à essayer de prouver $A,A,\G\To D$, puis en appliquant encore la même règle à essayer de prouver $A,A,A,\G\To D$, et ainsi de suite, sans fin. 
 %On parle de duplication car au cours de notre recherche de preuve, on passe de la conclusion à la prémisse en dupliquant la formule $A$. 
 Il est parfois possible d'adapter l'algorithme à une possibilité de contraction en prenant certaines précautions, comme on le verra pour le calcul \LJ.
 %Il est tout de même possible d'adapter l'algorithme à une duplication dans certains cas, comme on le verra pour le calcul \LJ.
@@ -406,7 +406,7 @@ Il est parfois possible d'adapter l'algorithme à une possibilité de contraction 
 
 \noindent
 \textbf{Propriété de la sous-formule.}
-La formule $B$ est une \textbf{\emph{sous-formule}} de la formule $A$ si $B$ est égale à $A$ ou si $A$ est de la forme $A_{1}\diamond A_{2}$ où $\diamond$ est un connecteur et [$B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formule de $A_{2}$]. Un calcul de séquents vérifie la \textbf{\emph{propriété de la sous-formule}} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) cette preuve est une sous-formule d'une formule de $\s$. 
+La formule $B$ est une \textbf{\emph{sous-formule}} de la formule $A$ si $B$ est égale à $A$ ou si $A$ est de la forme $A_{1}c A_{2}$ où $c$ est un connecteur et [$B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formule de $A_{2}$]. Un calcul de séquents vérifie la \textbf{\emph{propriété de la sous-formule}} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) cette preuve est une sous-formule d'une formule de $\s$. 
 %En particulier, le séquent $\To A$ a une preuve dans laquelle toute formule est une sous-formule de $A$.
 %
 La propriété de la sous-formule est très utile pour un calcul de séquents. 
@@ -650,7 +650,7 @@ Les \textbf{\emph{règles}} du calcul \LSJn\ sont données dans la figure~\ref{fig
 
 On note $\Sig$ l'ensemble des séquents de \LSJ, et $\Sig'$ l'ensemble des séquents de \LSJn.
 Soit $\sigma\in\Sig$, on note $\vdash\sigma$ si $\sigma$ est prouvable dans \LSJ\ ; soit $\sigma'\in\Sig'$, on note $\vdash'\sigma'$ si $\sigma'$ est prouvable dans \LSJn.
-Montrons que pour tous $\s\in\Sig$ et $\s'\in\Sig'$ tels que $\s=\surj(\s')$, on a $\vdash\s$ si et seulement si $\vdash\s'$, où $\surj$ est la surjection de $\Sig'$ sur $\Sig$ définie précédemment.
+Montrons que pour tous $\s\in\Sig$ et $\s'\in\Sig'$ tels que $\s=\surj(\s')$, on a $\vdash\s$ si et seulement si $\vdash'\s'$, où $\surj$ est la surjection de $\Sig'$ sur $\Sig$ définie précédemment.
 
 Soit $\mathcal R$ une règle de \LSJ. Pour les distinguer, on notera ici $\mathcal R'$ la règle de \LSJn\ de même nom. On écrit \instanceR\ et \instanceRp\ des instances de ces règles.
 
