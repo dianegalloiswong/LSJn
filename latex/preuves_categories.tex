@@ -8,31 +8,525 @@
 \vspace{2cm}~~\\
 
 \input{bussproofs}
+%communs : id,coupure
+\def\id{
+\centerAlignProof
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A \To A$}
+	\DP
+}
+\def\cut{
+	\AXC	{$\G \To A,\D$}
+	\AXC	{$\G',A \To \D'$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To \D,\D'$}
+	\DP
+}
+
 
 \tableofcontents
 
 
-%\section{Calcul de séquents : exemple de la logique classique}
-%
-%\section{La logique linéaire}
-%
-%\section{\'Elimination de la coupure}
-%
-%\section{Catégories}
-%
-
 \
 
 \
+
+
+%%%
 
 \section{Introduction aux calculs de séquents à travers \LK\ pour la logique classique et \LJ\ pour la logique intuitionniste}
+
+
+
+
+\idees{
+calculs de séquents :
+outils / procédé de raisonnement
+... dans l'introduction générale ?
+}
+
+Nous introduisons dans cette première partie les définitions dont nous aurons besoin sur les calculs de séquents, à travers l'exemple du calcul de séquents \LK. Nous expliquons en quoi ce calcul défini par Gentzen correspond à la logique classique. Nous présentons ensuite le calcul \LJ, que Gentzen a dérivé de \LK\ afin de représenter la logique intuitionniste. Enfin, nous expliquons comment certaines propriétés des deux logiques considérées peuvent se comprendre en étudiant leur calcul de séquents respectif.
+
+Les formules considérées dans cette partie sont construites à partir de constantes $\bot$ (\emph{faux}) et $\top$ (\emph{vrai}), de variables propositionnelles, du connecteur unaire $\lnot$ (\emph{non}), et des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}) et $\to$ (\emph{implique}). On s'intéresse en effet à la partie propositionnelle de chaque logique.
+
+
+\subsection{Des séquents et des règles}
+
+Un calcul de séquents se caractérise par sa propre définition d'un objet syntaxique appelé \emph{séquent}, ainsi que par un ensemble de \emph{règles} agissant sur les séquents.
+
+Par exemple, pour le calcul de séquents \LK, la définition d'un séquent est la suivante, et les règles sont données dans la figure~\ref{fig:reglesLK}.
+
+\begin{df}
+Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on l'écrit $\G \vdash \D$.
+\end{df}
+
+%LK
+%id, coupure : communs
+
+%LK,règles logiques
+\def\LKfauxL{
+	\AXC	{}
+	\RightLabel{$(\bot L)$}
+	\UIC{$\G,\bot \To \D$}
+	\DP
+}
+\def\LKvraiR{
+	\AXC	{}
+	\RightLabel{$(\top R)$}
+	\UIC{$\G \To \top,\D$}
+	\DP
+}
+\def\LKnonL{
+	\AXC	{$\G \To A,\D$}
+	\RightLabel{$(\lnot L)$}
+	\UIC{$\G,\lnot A \To \D$}
+	\DP
+}
+\def\LKnonR{
+	\AXC	{$\G,A \To \D$}
+	\RightLabel{$(\lnot L)$}
+	\UIC{$\G \To \lnot A,\D$}
+	\DP
+}
+\def\LKetL{
+	\AXC	{$\G,A,B \To \D$}
+	\RightLabel{$(\land L)$}
+	\UIC{$\G,A\land B \To \D$}
+	\DP
+}
+\def\LKetR{
+	\AXC	{$\G \To A,\D$}
+	\AXC	{$\G \To B,\D$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+}
+\def\LKouL{
+	\AXC	{$\G,A \To \D$}
+	\AXC	{$\G,B \To \D$}
+	\RightLabel{$(\lor L)$}
+	\BIC{$\G,A\lor B \To \D$}
+	\DP
+}
+\def\LKouR{
+	\AXC	{$\G \To A,B,\D$}
+	\RightLabel{$(\lor R)$}
+	\UIC{$\G \To A\lor B,\D$}
+	\DP
+}
+\def\LKimpL{
+	\AXC	{$\G \To A,\D$}
+	\AXC	{$\G,B \To \D$}
+	\RightLabel{$(\to L)$}
+	\BIC{$\G,A\to B \To \D$}
+	\DP
+}
+\def\LKimpR{
+	\AXC	{$\G,A \To B,\D$}
+	\RightLabel{$(\to R)$}
+	\UIC{$\G \To A\to B,\D$}
+	\DP
+}
+%LK, règles structurelles
+\def\LKweakeningL{
+	\AXC	{$\G \To \D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To \D$}
+	\DP
+}
+\def\LKweakeningR{
+	\AXC	{$\G \To \D$}
+	\RightLabel{$(weakening\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+}
+\def\LKcontractionL{
+	\AXC	{$\G,A,A \To \D$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC{$\G,A \To \D$}
+	\DP
+}
+\def\LKcontractionR{
+	\AXC	{$\G \To A,A,\D$}
+	\RightLabel{$(contraction\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+}
+\def\LKexchangeL{
+	\AXC	{$\G_{1},A,B,\G_{2} \To \D$}
+	\RightLabel{$(exchange\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
+	\DP
+}
+\def\LKexchangeR{
+	\AXC	{$\G \To \D_{1},A,B,\D_{2}$}
+	\RightLabel{$(exchange\ L)$}
+	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
+	\DP
+}
+
+%LK variantes
+\def\LKetLun{
+	\AXC	{$\G,A \To \D$}
+	\RightLabel{$(\land L_{1})$}
+	\UIC{$\G,A\land B \To \D$}
+	\DP
+}
+\def\LKetLdeux{
+	\AXC	{$\G,B \To \D$}
+	\RightLabel{$(\land L_{2})$}
+	\UIC{$\G,A\land B \To \D$}
+	\DP
+}
+
+\def\LKouRun{
+	\AXC	{$\G \To A,\D$}
+	\RightLabel{$(\lor R_{1})$}
+	\UIC{$\G \To A\lor B,\D$}
+	\DP
+}
+\def\LKouRdeux{
+	\AXC	{$\G \To B,\D$}
+	\RightLabel{$(\lor R_{2})$}
+	\UIC{$\G \To A\lor B,\D$}
+	\DP
+}
+
+
+\begin{figure}[h]
+%\begin{floatingfigure}[r]{0.6\linewidth}
+\centering
+{\renewcommand{\arraystretch}{1.3}
+\resizebox{0.6\linewidth}{!}{
+%$\begin{tabular}{|cc|c|}
+%	\hline
+%	\textbf{\large{Identité}} & \LJid & \textbf{\large{Coupure}} \\
+%	\cline{1-2}
+%	\LJbotL & \textbf{\large{Règles logiques}} & \LJcut \\[4pt]
+%	\cline{3-3}
+%	\LJetL & \LJetR & \textbf{\large{Règles structurelles}} \\
+%	\LJouL & \LJouRun \LJouRdeux & \LJweakening \\
+%	\LJimpL & \LJimpR & \LJcontraction \\[4pt]
+%	\hline
+%\end{tabular}$
+$\begin{tabular}{|cc|}
+	\hline
+	\multicolumn{1}{|c|}{\textbf{\large{Identité}}} & \textbf{\large{Coupure}} \\ 
+	\multicolumn{1}{|c|}{\id} & \cut \\[9pt] \hline
+	\multicolumn{2}{|c|}{\textbf{\large{Règles logiques}}} \\
+	\LKfauxL & \LKvraiR \\[5pt]
+	\LKnonL & \LKnonR \\[9pt]
+	\LKetL & \LKetR \\[9pt]
+	\LKouL & \LKouR \\[9pt]
+	\LKimpL & \LKimpR \\[9pt] \hline
+	\multicolumn{2}{|c|}{\textbf{\large{Règles structurelles}}} \\
+	\LKweakeningL & \LKweakeningR \\[9pt]
+	\LKcontractionL & \LKcontractionR \\[9pt]
+	\LKexchangeL & \LKexchangeR \\[9pt] \hline
+%	\LKL & \LKR \\
+\end{tabular}$
+}
+}
+\caption{Règles du calcul \LK}
+\label{fig:reglesLK}
+\end{figure}
+%\end{floatingfigure}
+
+
+Pour une règle ${\regle,}$ $\mathcal R$ est le nom de la règle, $prem_{1}$, ... , $prem_{p}$ sont les \textbf{\emph{prémisses}}, et $concl$ la \textbf{\emph{conclusion}}. 
+%$prem_{k}$ sera appelée la \emph{$k$-ième prémisse} ou \emph{prémisse numéro $k$}.%?
+Les prémisses et la conclusion sont des séquents où $A$, $B$ sont des formules quelconques et $\G$, $\D$ des listes de formules quelconques. 
+L'idée est qu'une règle affirme : si toutes les prémisses sont vraies, alors la conclusion est aussi vraie. Cette idée est formalisée en \ref{subsection:ProuvabiliteSequent}.
+%Les \textbf{\emph{axiomes}} sont les règles sans prémisse.%?
+
+On distingue deux grandes familles de règles. Les \textbf{\emph{règles logiques}} remplacent une formule de la conclusion par une ou des formules plus simples. La formule remplacée, appelée \emph{formule principale}, doit avoir une forme donnée en fonction de la règle. Les  \textbf{\emph{règles structurelles}} manipulent la structure du séquent en enlevant, dupliquant, dépla\c cant des formules dont on n'a pas besoin de connaître la forme. Elles dépendent du choix de structure du séquent : 
+par exemple, si on représentait $\G$ et $\D$ par des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrences est pris en compte mais pas l'ordre des éléments, on n'aurait pas besoin des règles d'échange $exchange\ L$ et $exchange\ R$.
+
+\subsection{Variantes d'écriture de certaines règles}
+\label{subsection:VariantesEcritureRegles}
+
+Cette présentation %, inspirée de la présentation de \LJ\ par Dyckhoff dans \cite{LJT}, 
+diffère %légèrement 
+de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même appeler ce calcul de séquents \LK. Gentzen écrit deux règles\LKetLun et \LKetLdeux à la place de \LKetL, et de même deux autres règles à la place de $\lor R$. On a cependant une équivalence grâce aux règles structurelles. Ci-dessous à gauche, on retrouve en effet la règle $\land L_{1}$ à partir de $\land L$ et $weakening\ L$, et on peut faire de même pour $\land L_{2}$. \`A droite, on retrouve $\land L$ à partir de $\land L_{1}$ et $\land L_{2}$ et $contraction\ L$. On s'autorise à faire agir $\land L_{1}$ sur une formule qui n'est pas la dernière de la liste : cela est possible en appliquant plusieurs fois la règle $exchange\ L$, 
+ce qu'on a pas fait explicitement par souci de lisibilité.
+%mais le faire explicitement alourdirait 
+\vspace{1mm}
+
+{
+\centering
+	\AXC	{$\G,A \To \D$}
+	\RightLabel{$(weakening L)$}
+	\UIC{$\G,A,B \To \D$}
+	\RightLabel{$(\land L)$}
+	\UIC{$\G,A\land B \To \D$}
+	\DP
+\qquad
+	\AXC	{$\G,A,B \To \D$}
+	\RightLabel{$(\land L_{1})$}
+	\UIC{$\G,A\land B,B \To \D$}
+	\RightLabel{$(\land L_{2})$}
+	\UIC{$\G,A\land B,A\land B \To \D$}
+	\RightLabel{$(contraction L)$}
+	\UIC{$\G,A\land B \To \D$}
+	\DP
+
+}
+%	\AXC	{$\G,A \To \D$}
+%	\RightLabel{$(\land L_{1})$}
+%	\UIC{$\G,A\land B \To \D$}
+%	\DP
+
+
+
+
+\subsection{Prouvabilité d'un séquent}
+\label{subsection:ProuvabiliteSequent}
+
+%Les définitions suivantes s'appliquent aux calculs de séquents en général, pas seulement \LJ.
+Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
+Une \textbf{\emph{preuve}} (ou \textbf{\emph{arbre de preuve}}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
+
+\begin{df}
+Un séquent $\s$ est \textbf{\emph{prouvable}} \emph{dans} 
+%(ou \emph{par}) 
+%ou \emph{par}
+\emph{un calcul de séquents} s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+\end{df}
+
+
+\subsection{Lien avec une logique, interprétation des séquents}
+
+Un calcul de séquents est généralement associé à une logique, à travers une propriété similaire à la suivante, qui concerne \LK\ et la logique classique.
+
+\begin{prop}
+Une formule $A$ est valide en logique classique si, et seulement si, le séquent $\;\vdash A$ est prouvable par le calcul \LK\ (on écrit $\;\vdash A$ pour $\emptyset \vdash A$, $\emptyset$ désignant ici la liste vide).
+\end{prop}
+
+Les séquents sont des objets syntaxiques pratiques à manipuler à l'aide de règles. Cependant, ils ont souvent une interprétation dans la logique considérée : par exemple pour \LK, un séquent $\G \vdash \D$ s'interprète comme une formule de logique classique grâce à la propriété suivante. Il signifie ainsi : ``si on suppose toutes les formules de $\G$, on peut montrer au moins une formule de $\D$'', d'où
+%De là viennent 
+les appellations ``hypothèses'' pour les formules de $\G$ et ``conclusions'' pour celles de $\D$.
+
+\begin{prop}
+Un séquent $\G \vdash \D$ est prouvable par le calcul \LK\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ est valide en logique classique.
+\end{prop}
+
+\subsection{Calcul des séquents \LJ\ et logique intuitionniste}
+
+Gentzen a dérivé le calcul \LJ\ de \LK\ dans le but de correspondre à la logique intuitionniste. La modification apportée à \LK\ pour cela est simple et efficace : on restreint les séquents à ceux qui ont exactement une formule à droite, c'est-à-dire dans $\D$ avec les notations habituelles ; les règles sont adaptées en conséquence. La principale conséquence est l'impossibilité d'utiliser les règles structurelles à droite du séquent. La nouvelle définition d'un séquent est donc la suivante, et les règles sont données dans la figure~\ref{fig:reglesLJ}. 
+
+\begin{df}
+Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ (les ``hypothèses'') et une formule $D$ (la ``conclusion'') ; on l'écrit $\G \vdash D$.
+\end{df}
+
+
+%LJ
+%id : commun
+%cut
+\def\LJcut{
+	\AXC	{$\G \To A$}
+	\AXC	{$\G',A \To D$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To D$}
+	\DP
+}
+
+%LJ,règles logiques
+\def\LJfauxL{
+	\AXC	{}
+	\RightLabel{$(\bot L)$}
+	\UIC{$\G,\bot \To D$}
+	\DP
+}
+\def\LJetL{
+	\AXC	{$\G,A,B \To D$}
+	\RightLabel{$(\land L)$}
+	\UIC{$\G,A\land B \To D$}
+	\DP
+}
+\def\LJetR{
+	\AXC	{$\G \To A$}
+	\AXC	{$\G \To B$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B$}
+	\DP
+}
+\def\LJouL{
+	\AXC	{$\G,A \To D$}
+	\AXC	{$\G,B \To D$}
+	\RightLabel{$(\lor L)$}
+	\BIC{$\G,A\lor B \To D$}
+	\DP
+}
+\def\LJouRun{
+	\AXC	{$\G \To A$}
+	\RightLabel{$(\lor R_{1})$}
+	\UIC{$\G \To A\lor B$}
+	\DP
+}
+\def\LJouRdeux{
+	\AXC	{$\G \To B$}
+	\RightLabel{$(\lor R_{2})$}
+	\UIC{$\G \To A\lor B$}
+	\DP
+}
+\def\LJimpL{
+	\AXC	{$\G \To A$}
+	\AXC	{$\G,B \To D$}
+	\RightLabel{$(\to L)$}
+	\BIC{$\G,A\to B \To D$}
+	\DP
+}
+\def\LJimpR{
+	\AXC	{$\G,A \To B$}
+	\RightLabel{$(\to R)$}
+	\UIC{$\G \To A\to B$}
+	\DP
+}
+%LJ, règles structurelles
+\def\LJcontractionL{
+	\AXC	{$\G,A,A \To D$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+\def\LJweakeningL{
+	\AXC	{$\G \To D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To D$}
+	\DP
+}
+\def\LJexchangeL{
+	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
+	\RightLabel{$(exchange\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To D$}
+	\DP
+}
+
+
+\begin{figure}[h]
+\centering
+\renewcommand{\arraystretch}{1.5}
+\resizebox{0.7\linewidth}{!}{
+$\begin{tabular}{|cc|}
+	\hline 
+	\multicolumn{1}{|c|}{\textbf{\large{Identité}}} & \textbf{\large{Coupure}} \\
+	\multicolumn{1}{|c|}{\id} & \LJcut \\[7pt] \hline
+	\LJfauxL & \textbf{\large{Règles logiques}} \\[5pt]
+	\LJetL & \LJetR \\[9pt]
+	\LJouL & \LJouRun \LJouRdeux \\[9pt]
+	\LJimpL & \LJimpR \\[7pt] \hline
+%	\multicolumn{2}{|c|}{\textbf{\large{Règles structurelles}}} \\ \hline
+	\textbf{\large{Règles structurelles}} & \LJweakeningL \\[9pt]
+	\LJcontractionL & \LJexchangeL \\[7pt] \hline
+\end{tabular}$
+}
+\caption{Règles du calcul \LJ}
+\label{fig:reglesLJ}
+\end{figure}
+
+
+Les règles structurelles à droite de \LK, qui changent le nombre de formules à droite ou en nécessitent au moins deux, disparaissent. La règle\LKouL ne s'adapte pas non plus aux séquents de \LJ\ ; on la remplace par deux règles comme en \ref{subsection:VariantesEcritureRegles}.
+
+Le connecteur $\lnot$ disparaît également. En logique intuitionniste, $\lnot A$ a bien un sens, mais on préfère considérer qu'il s'agit d'une simple notation pour $A\!\to\!\bot$. Cette décision est justifiée par le fait qu'en logique intuitionniste, $\lnot$ n'est pas involutif : la formule $\lnot\lnot A$ n'est pas équivalente à $A$.
+
+\
+
+Comme \LK\ avec la logique classique, \LJ\ est liée à la logique intuitionniste : \LJ\ permet de caractériser la prouvabilité d'une formule en logique intuitionniste. Un séquent de \LJ\ peut également s'interpréter en logique intuitionniste.
+
+\begin{prop}
+Une formule $A$ est prouvable en logique intuitionniste si, et seulement si, le séquent $\;\vdash A$ est prouvable par le calcul \LJ.
+\end{prop}
+
+\begin{prop}
+Un séquent $\G \vdash D$ est prouvable par le calcul \LJ\ si, et seulement si, la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ est prouvable en logique intuitionniste.
+\end{prop}
+
+
+%
+
+\subsection{Une différence entre logique classique et logique intuitionniste}
+
+\begin{floatingfigure}[r]{4.2cm}
+\centering
+	\AXC	{}
+	\RightLabel{(id)}
+	\UIC	{$A \To A$}
+	\RightLabel{(weak.\ R)}
+	\UIC	{$A \To A, \bot$}
+	\RightLabel{$(\to R)$}
+	\UIC	{$\To A\,,\; A\!\to\!\bot$}
+	\RightLabel{$(\lor R)$}
+	\UIC{$\To A\lor (A\!\to\!\bot)$}
+	\DP
+\\
+%\caption{Preuve de $A\lor(A\!\to\!\bot)$ dans \LK}
+%\label{fig:LKTiersExclu}
+\end{floatingfigure}
+
+C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve ci-contre dans \LK\ du principe du tiers exclu $A\lor\lnot A$ 
+%(figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : 
+, qu'on écrit $A\lor(A\!\to\!\bot)$ pour mieux comparer à la logique intuitionniste où le $\lnot$ se comporte différemment.
+Si on peut appliquer l'axiome $id$ à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut pas prouver $A\lor(A\!\to\!\bot)$, car ni le séquent $\;\To A$ ni le séquent $\;\To (A\!\to\!\bot)$ n'est prouvable.
+
+\vspace{.3em}
+
+\def\widthhere{7cm}
+\begin{floatingfigure}[r]{\widthhere}
+\centering
+\resizebox{\widthhere}{!}{
+	\AXC	{}
+	\RightLabel{(id)}
+	\UIC	{$A \To A$}
+	\RightLabel{(weak.\ R)}
+	\UIC	{$A \To A, \bot$}
+	\RightLabel{$(\to R)$}
+	\UIC	{$\To A\,,\; A\!\to\!\bot$}
+	\RightLabel{$(\lor R_{2})$}
+	\UIC	{$\To A\,,\; A\lor(A\to\bot)$}
+	\RightLabel{$(\lor R_{1})$}
+	\UIC{$\To A\lor (A\to\bot)\,,\;A\lor (A\to\bot)$}
+	\RightLabel{$(contr.\ R)$}
+	\UIC{$\To A\lor(A\!\to\!\bot)$}
+	\DP
+%	\AXC	{}
+%	\RightLabel{(id)}
+%	\UIC	{$A \To A, \bot$}
+%	\RightLabel{$(\to R)$}
+%	\UIC	{$\To A\,,\; (A\to\bot)$}
+%	\RightLabel{$(\to R)$}
+%	\UIC	{$\To A\,,\; A\lor(A\to\bot)$}
+%	\RightLabel{$(\lor R_{1})$}
+%	\UIC{$\To A\lor (A\to\bot)\,,\;A\lor (A\to\bot)$}
+%	\RightLabel{$(contr.\ R)$}
+%	\UIC{$\To A\lor (A\to\bot)$}
+%	\DP
+}
+%\caption{Preuve de $A\lor(A\!\to\!\bot)$ dans \LK}
+%\label{fig:LKTiersExclu}
+\end{floatingfigure}
+
+\noindent
+\textit{Remarque.} %Même avec la présentation de \LK\ de Gentzen où on a deux règles\LKouRun et\LKouRdeux au lieu de notre unique règle $\lor R$, pour montrer 
+Même avec la présentation de \LK\ de Gentzen où on a deux règles $\lor R_{1}$ et $\lor R_{2}$ au lieu de notre unique règle $\lor R$, dans la preuve ci-contre de $A\lor(A\!\to\!\bot)$, on utilise une contraction à droite afin de conserver à la fois $A$ et $A\!\to\!\bot$. Le principe est le même que dans les équivalences d'écriture des règles en \ref{subsection:VariantesEcritureRegles}.
+
+\ %vspace{.3em}
+
+Finalement, on peut considérer que la logique intuitionniste est obtenue à partir de la logique classique en interdisant certaines règles structurelles. Une autre logique couramment étudiée, la logique linéaire, s'obtient à partir de la logique classique en conservant toutes les règles structurelles, mais en restreignant fortement leur utilisation.
+
+\
+
+
+
+%%%
+
 
 
 \section{Logique linéaire (CLL) et logique linéaire intuitionniste (ILL)}
 
 La logique linéaire (CLL) est une extension de la logique classique. Elle présente un grand un intérêt des points de vue logique aussi bien qu'informatique, notamment parce qu'elle contient une notion de ``ressources'' qui ne peuvent pas être utilisées inconsidérément. On peut considérer qu'elle est obtenue à partir de la logique classique en limitant l'usage des règles structurelles, si bien que de nouvelles nuances apparaissent, pour lesquelles sont introduits de nouveaux connecteurs. 
 
-Voici un calcul de séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK. Les connecteurs, différents, sont donnés dans la figure~\ref{?}. Les règles sont données dans la figure~\ref{?}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{?}, puis une interprétation en terme de ``ressources'' dans la sous-section~\ref{?}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
+Voici un calcul de séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK. Les connecteurs, différents, sont donnés dans la figure~\ref{fig:connecteurs}. Les règles sont données dans la figure~\ref{fig:reglesCLL}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{subsection:connecteursetc}, puis une interprétation en terme de ``ressources'' dans la sous-section~\ref{subsection:ressources}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
 
 %La logique linéaire intuitionniste (ILL) est obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique : en se restreignant aux séquents avec une unique formule à droite ; ici, 
 %
@@ -82,21 +576,7 @@ Voici un calcul de séquents pour la logique linéaire. Les séquents sont les même
 
 
 %CLL
-%CLL, id
-\def\CLLid{
-	\AXC	{}
-	\RightLabel{$(id)$}
-	\UIC{$A \To A$}
-	\DP
-}
-%CLL, coupure
-\def\CLLcut{
-	\AXC	{$\G_{1} \To A,\D$}
-	\AXC	{$\G',A \To \D'$}
-	\RightLabel{$(cut)$}
-	\BIC{$\G,\G' \To \D,\D'$}
-	\DP
-}
+%id, coupure : commun
 
 %CLL,règles logiques
 \def\CLLnonL{
@@ -265,10 +745,16 @@ Voici un calcul de séquents pour la logique linéaire. Les séquents sont les même
 	\UIC{$\G \To ?A,\D$}
 	\DP
 }
-\def\LJechange{
-	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
-	\RightLabel{$(permut.\ L)$}
-	\UIC{$\G_{1},B,A,\G_{2} \To D$}
+\def\CLLexchangeL{
+	\AXC	{$\G_{1},A,B,\G_{2} \To \D$}
+	\RightLabel{$(exchange\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
+	\DP
+}
+\def\CLLexchangeR{
+	\AXC	{$\G \To \D_{1},A,B,\D_{2}$}
+	\RightLabel{$(exchange\ R)$}
+	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
 	\DP
 }
 
@@ -280,10 +766,11 @@ Voici un calcul de séquents pour la logique linéaire. Les séquents sont les même
 \centering
 {
 \renewcommand{\arraystretch}{2}
+\resizebox{\linewidth}{!}{
 $
 \begin{tabular}{|c|c|}
  	\hline
-	\CLLid & \CLLcut \\ \hline
+	\id & \cut \\ \hline
 	\CLLnonL & \CLLnonR \\ \hline
 	\CLLtenseurL & \CLLtenseurR \\ \hline
 	\CLLavecLun \; \CLLavecLdeux & \CLLavecR \\ \hline
@@ -300,9 +787,10 @@ $
 	\CLLbangL \; \CLLwhynotL & \CLLbangR  \; \CLLwhynotR \\ \hline
 	\CLLweakeningL & \CLLweakeningR \\ \hline
 	\CLLcontractionL & \CLLcontractionR \\ \hline
-	+echange &  \\ \hline
+	\CLLexchangeL & \CLLexchangeR \\ \hline
 \end{tabular}
 $
+}
 }
 \caption{Les règles}
 \label{fig:reglesCLL}
@@ -313,12 +801,14 @@ $
 
 
 \subsection{Limitation des règles structurelles, nouveaux connecteurs, modalités}
+\label{subsection:connecteursetc}
 
-L'usage des règles structurelles est restreint à certains types de formules qu'on verra plus loin. Une conséquence importante est qu'on n'a plus l'équivalence entre les deux écritures possibles des règles liées à $\land$, vues en \ref{?}. C'est pourquoi on introduit deux connecteurs distincts $\otimes$ et $\&$, qui pourraient tous deux se lire ``et'' en première approximation, correspondant chacun à une définition possible de $\land$ dans \LK\ : voir la figure~\ref{?}. De même, le $\lor$ de logique classique est séparé en deux connecteurs $\oplus$ et $\revAnd$. On souhaite tout de même garder des règles structurelles, dont l'usage est seulement limité. On introduit pour cela des connecteurs unaires \emph{modaux}, ou \emph{modalités}, $!$ et $?$. Les règles structurelles peuvent seulement être appliquées à des formules comportant un de ces connecteurs : $!$ si la formule est à gauche, $?$ si elle est à droite. On a aussi des règles d'introduction de ces connecteurs, où par exemple $!\G$ représente une liste dont toutes les formules sont de la forme $!A$. On retrouve des relations entre $\otimes$ et $\&$ grâce à ces modalités : par exemple $(!A)\otimes(!B) = !(A\& B)$, qu'on discute dans la prochaine sous-section.
+L'usage des règles structurelles est restreint à certains types de formules qu'on verra plus loin. Une conséquence importante est qu'on n'a plus l'équivalence entre les deux écritures possibles des règles liées à $\land$, vues en \ref{subsection:VariantesEcritureRegles}. C'est pourquoi on introduit deux connecteurs distincts $\otimes$ et $\&$, qui pourraient tous deux se lire ``et'' en première approximation, correspondant chacun à une définition possible de $\land$ dans \LK\ : voir la figure~\ref{?}. De même, le $\lor$ de logique classique est séparé en deux connecteurs $\oplus$ et $\revAnd$. On souhaite tout de même garder des règles structurelles, dont l'usage est seulement limité. On introduit pour cela des connecteurs unaires \emph{modaux}, ou \emph{modalités}, $!$ et $?$. Les règles structurelles peuvent seulement être appliquées à des formules comportant un de ces connecteurs : $!$ si la formule est à gauche, $?$ si elle est à droite. On a aussi des règles d'introduction de ces connecteurs, où par exemple $!\G$ représente une liste dont toutes les formules sont de la forme $!A$. On retrouve des relations entre $\otimes$ et $\&$ grâce à ces modalités : par exemple $(!A)\otimes(!B) = !(A\& B)$, qu'on discute dans la prochaine sous-section.
 
 
 
 \subsection{Interprétation : une idée de ``ressources''}
+\label{subsection:ressources}
 
 La logique linéaire est une logique de ``ressources''. L'implication linéaire $A\multimap B$ peut en effet se comprendre comme ``on peut dépenser un objet de type $A$ pour obtenir un objet de type $B$''. Ici, ``type'' est simplement un mot du langage courant et non un terme mathématique ou informatique.% ; on aurait aussi bien pu dire ``un objet de sorte $A$'', mais cela  
 La formule $A\otimes B$ représente la possession à la fois d'un objet de type $A$ et d'un autre objet de type $B$. On comprend alors la notion de ``dépense'' en remarquant que, si on a $A\multimap B$ et $A\multimap C$, on n'obtient pas pour autant $A\multimap B\otimes C$ car un seul objet de type $A$ ne peut pas être dépensé deux fois ; en revanche on obtient bien $A\otimes A \multimap B\otimes C$. On n'obtient pas non plus $A\otimes A\otimes A \multimap B\otimes C$ car un objet de type $A$ ne serait pas dépensé ; cela est lié au fait que la formule $A\multimap\1$ n'est pas universellement valide, où $\1$ est l'élément neutre pour $\otimes$. Une analogie courante et pertinente compare ce fragment de la logique linéaire aux équations de réaction en chimie, avec la maxime de Lavoisier bien connue ``Rien ne se perd, rien ne se crée, tout se transforme''. Par exemple, l'équation $CH_{4} + 2O_{2} \longrightarrow CO_{2} + 2H_{2}O$ peut être fidèlement représentée par la formule $!(CH_{4}\otimes O_{2}\otimes O_{2} \multimap CO_{2}\otimes H_{2}O\otimes H_{2}O)$, où $CH_{4}$ etc. sont considérés comme des constantes ; la modalité $!$, discutée plus loin, signifie qu'on peut appliquer cette réaction autant de fois qu'on le souhaite.
