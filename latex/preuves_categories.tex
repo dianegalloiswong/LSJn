@@ -1,49 +1,56 @@
-\input{preamble}
+%\input{preamble}
+%\begin{document}
+%\renewcommand{\labelitemi}{$\bullet$}
+%\vspace{2cm}~~\\
+%\input{bussproofs}
 
 
 
-\begin{document}
-%\renewcommand{\labelitemi}{$\diamond$}
-\renewcommand{\labelitemi}{$\bullet$}
-\vspace{2cm}~~\\
-
-\input{bussproofs}
 %communs : id,coupure
 \def\id{
 \centerAlignProof
 	\AXC	{}
 	\RightLabel{$(id)$}
-	\UIC{$A \To A$}
+	\UIC{$A \vdash A$}
 	\DP
 }
 \def\cut{
-	\AXC	{$\G \To A,\D$}
-	\AXC	{$\G',A \To \D'$}
+	\AXC	{$\G \vdash A,\D$}
+	\AXC	{$\G',A \vdash \D'$}
 	\RightLabel{$(cut)$}
-	\BIC{$\G,\G' \To \D,\D'$}
+	\BIC{$\G,\G' \vdash \D,\D'$}
 	\DP
 }
+
+
+
+\part*{Mémoire}
+
+\idees{Rapport de stage : page \pageref{part:rapportstage}}
+
+\section*{Introduction}
 
 
 \tableofcontents
 
-
 \
 
 \
+
+\idees{mettre le plan du rapport de stage au début du rapport de stage}
 
 
 %%%
 
 \section{Introduction aux calculs de séquents à travers \LK\ pour la logique classique et \LJ\ pour la logique intuitionniste}
-
+\label{section:introductionCalculsSequents}
 
 
 
 \idees{
 calculs de séquents :
 outils / procédé de raisonnement
-... dans l'introduction générale ?
+... dans l'introduction générale du mémoire ?
 }
 
 Nous introduisons dans cette première partie les définitions dont nous aurons besoin sur les calculs de séquents, à travers l'exemple du calcul de séquents \LK. Nous expliquons en quoi ce calcul défini par Gentzen correspond à la logique classique. Nous présentons ensuite le calcul \LJ, que Gentzen a dérivé de \LK\ afin de représenter la logique intuitionniste. Enfin, nous expliquons comment certaines propriétés des deux logiques considérées peuvent se comprendre en étudiant leur calcul de séquents respectif.
@@ -61,6 +68,10 @@ Par exemple, pour le calcul de séquents \LK, la définition d'un séquent est la s
 Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on l'écrit $\G \vdash \D$.
 \end{df}
 
+
+\noindent
+\textit{Notation.} $X,Y$ désigne la liste obtenue en concaténant les listes $X$ et $Y$ ; si $X$ ou $Y$ est une formule, on la considère comme la liste à un élément correspondante.
+
 %LK
 %id, coupure : communs
 
@@ -68,128 +79,128 @@ Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ (les
 \def\LKfauxL{
 	\AXC	{}
 	\RightLabel{$(\bot L)$}
-	\UIC{$\G,\bot \To \D$}
+	\UIC{$\G,\bot \vdash \D$}
 	\DP
 }
 \def\LKvraiR{
 	\AXC	{}
 	\RightLabel{$(\top R)$}
-	\UIC{$\G \To \top,\D$}
+	\UIC{$\G \vdash \top,\D$}
 	\DP
 }
 \def\LKnonL{
-	\AXC	{$\G \To A,\D$}
+	\AXC	{$\G \vdash A,\D$}
 	\RightLabel{$(\lnot L)$}
-	\UIC{$\G,\lnot A \To \D$}
+	\UIC{$\G,\lnot A \vdash \D$}
 	\DP
 }
 \def\LKnonR{
-	\AXC	{$\G,A \To \D$}
+	\AXC	{$\G,A \vdash \D$}
 	\RightLabel{$(\lnot L)$}
-	\UIC{$\G \To \lnot A,\D$}
+	\UIC{$\G \vdash \lnot A,\D$}
 	\DP
 }
 \def\LKetL{
-	\AXC	{$\G,A,B \To \D$}
+	\AXC	{$\G,A,B \vdash \D$}
 	\RightLabel{$(\land L)$}
-	\UIC{$\G,A\land B \To \D$}
+	\UIC{$\G,A\land B \vdash \D$}
 	\DP
 }
 \def\LKetR{
-	\AXC	{$\G \To A,\D$}
-	\AXC	{$\G \To B,\D$}
+	\AXC	{$\G \vdash A,\D$}
+	\AXC	{$\G \vdash B,\D$}
 	\RightLabel{$(\land R)$}
-	\BIC{$\G \To A\land B,\D$}
+	\BIC{$\G \vdash A\land B,\D$}
 	\DP
 }
 \def\LKouL{
-	\AXC	{$\G,A \To \D$}
-	\AXC	{$\G,B \To \D$}
+	\AXC	{$\G,A \vdash \D$}
+	\AXC	{$\G,B \vdash \D$}
 	\RightLabel{$(\lor L)$}
-	\BIC{$\G,A\lor B \To \D$}
+	\BIC{$\G,A\lor B \vdash \D$}
 	\DP
 }
 \def\LKouR{
-	\AXC	{$\G \To A,B,\D$}
+	\AXC	{$\G \vdash A,B,\D$}
 	\RightLabel{$(\lor R)$}
-	\UIC{$\G \To A\lor B,\D$}
+	\UIC{$\G \vdash A\lor B,\D$}
 	\DP
 }
 \def\LKimpL{
-	\AXC	{$\G \To A,\D$}
-	\AXC	{$\G,B \To \D$}
+	\AXC	{$\G \vdash A,\D$}
+	\AXC	{$\G,B \vdash \D$}
 	\RightLabel{$(\to L)$}
-	\BIC{$\G,A\to B \To \D$}
+	\BIC{$\G,A\to B \vdash \D$}
 	\DP
 }
 \def\LKimpR{
-	\AXC	{$\G,A \To B,\D$}
+	\AXC	{$\G,A \vdash B,\D$}
 	\RightLabel{$(\to R)$}
-	\UIC{$\G \To A\to B,\D$}
+	\UIC{$\G \vdash A\to B,\D$}
 	\DP
 }
 %LK, règles structurelles
 \def\LKweakeningL{
-	\AXC	{$\G \To \D$}
+	\AXC	{$\G \vdash \D$}
 	\RightLabel{$(weakening\ L)$}
-	\UIC{$\G,A \To \D$}
+	\UIC{$\G,A \vdash \D$}
 	\DP
 }
 \def\LKweakeningR{
-	\AXC	{$\G \To \D$}
+	\AXC	{$\G \vdash \D$}
 	\RightLabel{$(weakening\ R)$}
-	\UIC{$\G \To A,\D$}
+	\UIC{$\G \vdash A,\D$}
 	\DP
 }
 \def\LKcontractionL{
-	\AXC	{$\G,A,A \To \D$}
+	\AXC	{$\G,A,A \vdash \D$}
 	\RightLabel{$(contraction\ L)$}
-	\UIC{$\G,A \To \D$}
+	\UIC{$\G,A \vdash \D$}
 	\DP
 }
 \def\LKcontractionR{
-	\AXC	{$\G \To A,A,\D$}
+	\AXC	{$\G \vdash A,A,\D$}
 	\RightLabel{$(contraction\ R)$}
-	\UIC{$\G \To A,\D$}
+	\UIC{$\G \vdash A,\D$}
 	\DP
 }
 \def\LKexchangeL{
-	\AXC	{$\G_{1},A,B,\G_{2} \To \D$}
+	\AXC	{$\G_{1},A,B,\G_{2} \vdash \D$}
 	\RightLabel{$(exchange\ L)$}
-	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
+	\UIC{$\G_{1},B,A,\G_{2} \vdash \D$}
 	\DP
 }
 \def\LKexchangeR{
-	\AXC	{$\G \To \D_{1},A,B,\D_{2}$}
+	\AXC	{$\G \vdash \D_{1},A,B,\D_{2}$}
 	\RightLabel{$(exchange\ L)$}
-	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
+	\UIC{$\G \vdash \D_{1},B,A,\D_{2}$}
 	\DP
 }
 
 %LK variantes
 \def\LKetLun{
-	\AXC	{$\G,A \To \D$}
+	\AXC	{$\G,A \vdash \D$}
 	\RightLabel{$(\land L_{1})$}
-	\UIC{$\G,A\land B \To \D$}
+	\UIC{$\G,A\land B \vdash \D$}
 	\DP
 }
 \def\LKetLdeux{
-	\AXC	{$\G,B \To \D$}
+	\AXC	{$\G,B \vdash \D$}
 	\RightLabel{$(\land L_{2})$}
-	\UIC{$\G,A\land B \To \D$}
+	\UIC{$\G,A\land B \vdash \D$}
 	\DP
 }
 
 \def\LKouRun{
-	\AXC	{$\G \To A,\D$}
+	\AXC	{$\G \vdash A,\D$}
 	\RightLabel{$(\lor R_{1})$}
-	\UIC{$\G \To A\lor B,\D$}
+	\UIC{$\G \vdash A\lor B,\D$}
 	\DP
 }
 \def\LKouRdeux{
-	\AXC	{$\G \To B,\D$}
+	\AXC	{$\G \vdash B,\D$}
 	\RightLabel{$(\lor R_{2})$}
-	\UIC{$\G \To A\lor B,\D$}
+	\UIC{$\G \vdash A\lor B,\D$}
 	\DP
 }
 
@@ -255,26 +266,26 @@ ce qu'on a pas fait explicitement par souci de lisibilité.
 
 {
 \centering
-	\AXC	{$\G,A \To \D$}
+	\AXC	{$\G,A \vdash \D$}
 	\RightLabel{$(weakening L)$}
-	\UIC{$\G,A,B \To \D$}
+	\UIC{$\G,A,B \vdash \D$}
 	\RightLabel{$(\land L)$}
-	\UIC{$\G,A\land B \To \D$}
+	\UIC{$\G,A\land B \vdash \D$}
 	\DP
 \qquad
-	\AXC	{$\G,A,B \To \D$}
+	\AXC	{$\G,A,B \vdash \D$}
 	\RightLabel{$(\land L_{1})$}
-	\UIC{$\G,A\land B,B \To \D$}
+	\UIC{$\G,A\land B,B \vdash \D$}
 	\RightLabel{$(\land L_{2})$}
-	\UIC{$\G,A\land B,A\land B \To \D$}
+	\UIC{$\G,A\land B,A\land B \vdash \D$}
 	\RightLabel{$(contraction L)$}
-	\UIC{$\G,A\land B \To \D$}
+	\UIC{$\G,A\land B \vdash \D$}
 	\DP
 
 }
-%	\AXC	{$\G,A \To \D$}
+%	\AXC	{$\G,A \vdash \D$}
 %	\RightLabel{$(\land L_{1})$}
-%	\UIC{$\G,A\land B \To \D$}
+%	\UIC{$\G,A\land B \vdash \D$}
 %	\DP
 
 
@@ -324,10 +335,10 @@ Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ (les `
 %id : commun
 %cut
 \def\LJcut{
-	\AXC	{$\G \To A$}
-	\AXC	{$\G',A \To D$}
+	\AXC	{$\G \vdash A$}
+	\AXC	{$\G',A \vdash D$}
 	\RightLabel{$(cut)$}
-	\BIC{$\G,\G' \To D$}
+	\BIC{$\G,\G' \vdash D$}
 	\DP
 }
 
@@ -335,71 +346,71 @@ Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ (les `
 \def\LJfauxL{
 	\AXC	{}
 	\RightLabel{$(\bot L)$}
-	\UIC{$\G,\bot \To D$}
+	\UIC{$\G,\bot \vdash D$}
 	\DP
 }
 \def\LJetL{
-	\AXC	{$\G,A,B \To D$}
+	\AXC	{$\G,A,B \vdash D$}
 	\RightLabel{$(\land L)$}
-	\UIC{$\G,A\land B \To D$}
+	\UIC{$\G,A\land B \vdash D$}
 	\DP
 }
 \def\LJetR{
-	\AXC	{$\G \To A$}
-	\AXC	{$\G \To B$}
+	\AXC	{$\G \vdash A$}
+	\AXC	{$\G \vdash B$}
 	\RightLabel{$(\land R)$}
-	\BIC{$\G \To A\land B$}
+	\BIC{$\G \vdash A\land B$}
 	\DP
 }
 \def\LJouL{
-	\AXC	{$\G,A \To D$}
-	\AXC	{$\G,B \To D$}
+	\AXC	{$\G,A \vdash D$}
+	\AXC	{$\G,B \vdash D$}
 	\RightLabel{$(\lor L)$}
-	\BIC{$\G,A\lor B \To D$}
+	\BIC{$\G,A\lor B \vdash D$}
 	\DP
 }
 \def\LJouRun{
-	\AXC	{$\G \To A$}
+	\AXC	{$\G \vdash A$}
 	\RightLabel{$(\lor R_{1})$}
-	\UIC{$\G \To A\lor B$}
+	\UIC{$\G \vdash A\lor B$}
 	\DP
 }
 \def\LJouRdeux{
-	\AXC	{$\G \To B$}
+	\AXC	{$\G \vdash B$}
 	\RightLabel{$(\lor R_{2})$}
-	\UIC{$\G \To A\lor B$}
+	\UIC{$\G \vdash A\lor B$}
 	\DP
 }
 \def\LJimpL{
-	\AXC	{$\G \To A$}
-	\AXC	{$\G,B \To D$}
+	\AXC	{$\G \vdash A$}
+	\AXC	{$\G,B \vdash D$}
 	\RightLabel{$(\to L)$}
-	\BIC{$\G,A\to B \To D$}
+	\BIC{$\G,A\to B \vdash D$}
 	\DP
 }
 \def\LJimpR{
-	\AXC	{$\G,A \To B$}
+	\AXC	{$\G,A \vdash B$}
 	\RightLabel{$(\to R)$}
-	\UIC{$\G \To A\to B$}
+	\UIC{$\G \vdash A\to B$}
 	\DP
 }
 %LJ, règles structurelles
 \def\LJcontractionL{
-	\AXC	{$\G,A,A \To D$}
+	\AXC	{$\G,A,A \vdash D$}
 	\RightLabel{$(contraction\ L)$}
-	\UIC{$\G,A \To D$}
+	\UIC{$\G,A \vdash D$}
 	\DP
 }
 \def\LJweakeningL{
-	\AXC	{$\G \To D$}
+	\AXC	{$\G \vdash D$}
 	\RightLabel{$(weakening\ L)$}
-	\UIC{$\G,A \To D$}
+	\UIC{$\G,A \vdash D$}
 	\DP
 }
 \def\LJexchangeL{
-	\AXC	{$\G_{1},A,B,\G_{2} \To D$}
+	\AXC	{$\G_{1},A,B,\G_{2} \vdash D$}
 	\RightLabel{$(exchange\ L)$}
-	\UIC{$\G_{1},B,A,\G_{2} \To D$}
+	\UIC{$\G_{1},B,A,\G_{2} \vdash D$}
 	\DP
 }
 
@@ -451,23 +462,23 @@ Un séquent $\G \vdash D$ est prouvable par le calcul \LJ\ si, et seulement si, l
 \centering
 	\AXC	{}
 	\RightLabel{(id)}
-	\UIC	{$A \To A$}
+	\UIC	{$A \vdash A$}
 	\RightLabel{(weak.\ R)}
-	\UIC	{$A \To A, \bot$}
+	\UIC	{$A \vdash A, \bot$}
 	\RightLabel{$(\to R)$}
-	\UIC	{$\To A\,,\; A\!\to\!\bot$}
+	\UIC	{$\vdash A\,,\; A\!\to\!\bot$}
 	\RightLabel{$(\lor R)$}
-	\UIC{$\To A\lor (A\!\to\!\bot)$}
+	\UIC{$\vdash A\lor (A\!\to\!\bot)$}
 	\DP
 \\
 %\caption{Preuve de $A\lor(A\!\to\!\bot)$ dans \LK}
 %\label{fig:LKTiersExclu}
 \end{floatingfigure}
 
-C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\To A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve ci-contre dans \LK\ du principe du tiers exclu $A\lor\lnot A$ 
+C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\vdash A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve ci-contre dans \LK\ du principe du tiers exclu $A\lor\lnot A$ 
 %(figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : 
 , qu'on écrit $A\lor(A\!\to\!\bot)$ pour mieux comparer à la logique intuitionniste où le $\lnot$ se comporte différemment.
-Si on peut appliquer l'axiome $id$ à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\To A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\To A$ ou prouver $\;\To B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut pas prouver $A\lor(A\!\to\!\bot)$, car ni le séquent $\;\To A$ ni le séquent $\;\To (A\!\to\!\bot)$ n'est prouvable.
+Si on peut appliquer l'axiome $id$ à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\vdash A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\vdash A$ ou prouver $\;\vdash B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut pas prouver $A\lor(A\!\to\!\bot)$, car ni le séquent $\;\vdash A$ ni le séquent $\;\vdash (A\!\to\!\bot)$ n'est prouvable.
 
 \vspace{.3em}
 
@@ -477,29 +488,29 @@ Si on peut appliquer l'axiome $id$ à la formule $A$ (ce qui nécessite deux occur
 \resizebox{\widthhere}{!}{
 	\AXC	{}
 	\RightLabel{(id)}
-	\UIC	{$A \To A$}
+	\UIC	{$A \vdash A$}
 	\RightLabel{(weak.\ R)}
-	\UIC	{$A \To A, \bot$}
+	\UIC	{$A \vdash A, \bot$}
 	\RightLabel{$(\to R)$}
-	\UIC	{$\To A\,,\; A\!\to\!\bot$}
+	\UIC	{$\vdash A\,,\; A\!\to\!\bot$}
 	\RightLabel{$(\lor R_{2})$}
-	\UIC	{$\To A\,,\; A\lor(A\to\bot)$}
+	\UIC	{$\vdash A\,,\; A\lor(A\to\bot)$}
 	\RightLabel{$(\lor R_{1})$}
-	\UIC{$\To A\lor (A\to\bot)\,,\;A\lor (A\to\bot)$}
+	\UIC{$\vdash A\lor (A\to\bot)\,,\;A\lor (A\to\bot)$}
 	\RightLabel{$(contr.\ R)$}
-	\UIC{$\To A\lor(A\!\to\!\bot)$}
+	\UIC{$\vdash A\lor(A\!\to\!\bot)$}
 	\DP
 %	\AXC	{}
 %	\RightLabel{(id)}
-%	\UIC	{$A \To A, \bot$}
+%	\UIC	{$A \vdash A, \bot$}
 %	\RightLabel{$(\to R)$}
-%	\UIC	{$\To A\,,\; (A\to\bot)$}
+%	\UIC	{$\vdash A\,,\; (A\to\bot)$}
 %	\RightLabel{$(\to R)$}
-%	\UIC	{$\To A\,,\; A\lor(A\to\bot)$}
+%	\UIC	{$\vdash A\,,\; A\lor(A\to\bot)$}
 %	\RightLabel{$(\lor R_{1})$}
-%	\UIC{$\To A\lor (A\to\bot)\,,\;A\lor (A\to\bot)$}
+%	\UIC{$\vdash A\lor (A\to\bot)\,,\;A\lor (A\to\bot)$}
 %	\RightLabel{$(contr.\ R)$}
-%	\UIC{$\To A\lor (A\to\bot)$}
+%	\UIC{$\vdash A\lor (A\to\bot)$}
 %	\DP
 }
 %\caption{Preuve de $A\lor(A\!\to\!\bot)$ dans \LK}
@@ -522,17 +533,17 @@ Finalement, on peut considérer que la logique intuitionniste est obtenue à parti
 
 
 
-\section{Logique linéaire (CLL) et logique linéaire intuitionniste (ILL)}
+\section{Logique linéaire (LL) et logique linéaire intuitionniste (ILL)}
 
-La logique linéaire (CLL) est une extension de la logique classique. Elle présente un grand un intérêt des points de vue logique aussi bien qu'informatique, notamment parce qu'elle contient une notion de ``ressources'' qui ne peuvent pas être utilisées inconsidérément. On peut considérer qu'elle est obtenue à partir de la logique classique en limitant l'usage des règles structurelles, si bien que de nouvelles nuances apparaissent, pour lesquelles sont introduits de nouveaux connecteurs. 
+La logique linéaire (LL) est une extension de la logique classique. Elle présente un grand un intérêt des points de vue logique aussi bien qu'informatique, notamment parce qu'elle contient une notion de ``ressources'' qui ne peuvent pas être utilisées inconsidérément. On peut considérer qu'elle est obtenue à partir de la logique classique en limitant l'usage des règles structurelles, si bien que de nouvelles nuances apparaissent, pour lesquelles sont introduits de nouveaux connecteurs. 
 
-Voici un calcul de séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK. Les connecteurs, différents, sont donnés dans la figure~\ref{fig:connecteurs}. Les règles sont données dans la figure~\ref{fig:reglesCLL}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{subsection:connecteursetc}, puis une interprétation en terme de ``ressources'' dans la sous-section~\ref{subsection:ressources}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
+Voici un calcul de séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK\ : deux listes de formules $\G$ et $\D$, avec la notation $\G \vdash \D$. Les connecteurs, différents, sont donnés dans la figure~\ref{fig:connecteurs}. Les règles sont données dans la figure~\ref{fig:reglesLL}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{subsection:connecteursetc}, puis une interprétation en terme de ``ressources'' dans la sous-section~\ref{subsection:ressources}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
 
 %La logique linéaire intuitionniste (ILL) est obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique : en se restreignant aux séquents avec une unique formule à droite ; ici, 
 %
 %Ses séquents sont ainsi les même que ceux de
 %
-%On construit la logique linéaire intuitionniste (notée ILL) en restreignant encore une fois les séquents de la logique linéaire (notée CLL) à des séquents avec une unique formule à droite.
+%On construit la logique linéaire intuitionniste (notée ILL) en restreignant encore une fois les séquents de la logique linéaire (notée LL) à des séquents avec une unique formule à droite.
 
 
 \begin{figure}[h]
@@ -575,186 +586,186 @@ Voici un calcul de séquents pour la logique linéaire. Les séquents sont les même
 
 
 
-%CLL
+%LL
 %id, coupure : commun
 
-%CLL,règles logiques
-\def\CLLnonL{
+%LL,règles logiques
+\def\LLnonL{
 	\AXC	{$\G \vdash A,\D$}
 	\RightLabel{$(\lnot L)$}
-	\UIC{$\G,\lnot A \To \D$}
+	\UIC{$\G,\lnot A \vdash \D$}
 	\DP
 }
-\def\CLLnonR{
+\def\LLnonR{
 	\AXC	{$\G,A \vdash \D$}
 	\RightLabel{$(\lnot R)$}
-	\UIC{$\G \To \lnot A,\D$}
+	\UIC{$\G \vdash \lnot A,\D$}
 	\DP
 }
-\def\CLLtenseurL{
-	\AXC	{$\G,A,B \To \D$}
+\def\LLtenseurL{
+	\AXC	{$\G,A,B \vdash \D$}
 	\RightLabel{$(\otimes L)$}
-	\UIC{$\G,A\otimes B \To \D$}
+	\UIC{$\G,A\otimes B \vdash \D$}
 	\DP
 }
-\def\CLLtenseurR{
-	\AXC	{$\G \To A,\D$}
-	\AXC	{$\G' \To B,\D'$}
+\def\LLtenseurR{
+	\AXC	{$\G \vdash A,\D$}
+	\AXC	{$\G' \vdash B,\D'$}
 	\RightLabel{$(\otimes R)$}
-	\BIC{$\G \To A\otimes B,\D,\D'$}
+	\BIC{$\G \vdash A\otimes B,\D,\D'$}
 	\DP
 }
-\def\CLLavecLun{
-	\AXC	{$\G,A \To \D$}
+\def\LLavecLun{
+	\AXC	{$\G,A \vdash \D$}
 	\RightLabel{$(\& L_{1})$}
-	\UIC{$\G,A\& B \To \D$}
+	\UIC{$\G,A\& B \vdash \D$}
 	\DP
 }
-\def\CLLavecLdeux{
-	\AXC	{$\G,B \To \D$}
+\def\LLavecLdeux{
+	\AXC	{$\G,B \vdash \D$}
 	\RightLabel{$(\& L_{2})$}
-	\UIC{$\G,A\& B \To \D$}
+	\UIC{$\G,A\& B \vdash \D$}
 	\DP
 }
-\def\CLLavecR{
-	\AXC	{$\G \To A,\D$}
-	\AXC	{$\G \To B,\D$}
+\def\LLavecR{
+	\AXC	{$\G \vdash A,\D$}
+	\AXC	{$\G \vdash B,\D$}
 	\RightLabel{$(\& R)$}
-	\BIC{$\G \To A\& B,\D$}
+	\BIC{$\G \vdash A\& B,\D$}
 	\DP
 }
-\def\CLLplusL{
-	\AXC	{$\G,A \To \D$}
-	\AXC	{$\G,B \To \D$}
+\def\LLplusL{
+	\AXC	{$\G,A \vdash \D$}
+	\AXC	{$\G,B \vdash \D$}
 	\RightLabel{$(\oplus L)$}
-	\BIC{$\G,A\oplus B \To \D$}
+	\BIC{$\G,A\oplus B \vdash \D$}
 	\DP
 }
-\def\CLLplusRun{
-	\AXC	{$\G \To A,\D$}
+\def\LLplusRun{
+	\AXC	{$\G \vdash A,\D$}
 	\RightLabel{$(\oplus R_{1})$}
-	\UIC{$\G \To A\oplus B,\D$}
+	\UIC{$\G \vdash A\oplus B,\D$}
 	\DP
 }
-\def\CLLplusRdeux{
-	\AXC	{$\G \To B,\D$}
+\def\LLplusRdeux{
+	\AXC	{$\G \vdash B,\D$}
 	\RightLabel{$(\oplus R_{2})$}
-	\UIC{$\G \To A\oplus B,\D$}
+	\UIC{$\G \vdash A\oplus B,\D$}
 	\DP
 }
-\def\CLLparalleleL{
-	\AXC	{$\G,A \To \D$}
-	\AXC	{$\G',B \To \D'$}
+\def\LLparalleleL{
+	\AXC	{$\G,A \vdash \D$}
+	\AXC	{$\G',B \vdash \D'$}
 	\RightLabel{$(\revAnd L)$}
-	\BIC{$\G,\G',A\revAnd B \To \D,\D'$}
+	\BIC{$\G,\G',A\revAnd B \vdash \D,\D'$}
 	\DP
 }
-\def\CLLparalleleR{
-	\AXC	{$\G \To A,B,\D$}
+\def\LLparalleleR{
+	\AXC	{$\G \vdash A,B,\D$}
 	\RightLabel{$(\revAnd R)$}
-	\UIC{$\G \To A\revAnd B,\D$}
+	\UIC{$\G \vdash A\revAnd B,\D$}
 	\DP
 }
 
-%CLL, constantes
-\def\CLLunL{
-	\AXC	{$\G \To \D$}
+%LL, constantes
+\def\LLunL{
+	\AXC	{$\G \vdash \D$}
 	\RightLabel{$(\1 L)$}
-	\UIC{$\G,\1 \To \D$}
+	\UIC{$\G,\1 \vdash \D$}
 	\DP
 }
-\def\CLLunR{
+\def\LLunR{
 	\AXC	{}
 	\RightLabel{$(\1 R)$}
-	\UIC{$\; \To \1$}
+	\UIC{$\; \vdash \1$}
 	\DP
 }
-\def\CLLzeroL{
+\def\LLzeroL{
 	\AXC	{}
 	\RightLabel{$(\0 L)$}
-	\UIC{$\0 \To \;$}
+	\UIC{$\0 \vdash \;$}
 	\DP
 }
-\def\CLLzeroR{
-	\AXC	{$\G \To \D$}
+\def\LLzeroR{
+	\AXC	{$\G \vdash \D$}
 	\RightLabel{$(\0 R)$}
-	\UIC{$\G \To \0,\D$}
+	\UIC{$\G \vdash \0,\D$}
 	\DP
 }
-\def\CLLbotL{
+\def\LLbotL{
 	\AXC	{}
 	\RightLabel{$(\bot L)$}
-	\UIC{$\G,\bot \To \D$}
+	\UIC{$\G,\bot \vdash \D$}
 	\DP
 }
-\def\CLLtopR{
+\def\LLtopR{
 	\AXC	{}
 	\RightLabel{$(\top R)$}
-	\UIC{$\G \To \top,\D$}
+	\UIC{$\G \vdash \top,\D$}
 	\DP
 }
 
-%CLL, modalités
-\def\CLLbangL{
-	\AXC	{$\G,A \To \D$}
+%LL, modalités
+\def\LLbangL{
+	\AXC	{$\G,A \vdash \D$}
 	\RightLabel{$(! L)$}
-	\UIC{$\G,!A \To \D$}
+	\UIC{$\G,!A \vdash \D$}
 	\DP
 }
-\def\CLLbangR{
-	\AXC	{$!\G \To A,?\D$}
+\def\LLbangR{
+	\AXC	{$!\G \vdash A,?\D$}
 	\RightLabel{$(! R)$}
-	\UIC{$!\G \To !A,!\D$}
+	\UIC{$!\G \vdash !A,!\D$}
 	\DP
 }
-\def\CLLwhynotL{
-	\AXC	{$!\G,A \To ?\D$}
+\def\LLwhynotL{
+	\AXC	{$!\G,A \vdash ?\D$}
 	\RightLabel{$(? L)$}
-	\UIC{$!\G,?A \To ?\D$}
+	\UIC{$!\G,?A \vdash ?\D$}
 	\DP
 }
-\def\CLLwhynotR{
-	\AXC	{$\G \To A,\D$}
+\def\LLwhynotR{
+	\AXC	{$\G \vdash A,\D$}
 	\RightLabel{$(? R)$}
-	\UIC{$\G \To ?A,\D$}
+	\UIC{$\G \vdash ?A,\D$}
 	\DP
 }
 
-%CLL, règles structurelles
-\def\CLLweakeningL{
-	\AXC	{$\G \To \D$}
+%LL, règles structurelles
+\def\LLweakeningL{
+	\AXC	{$\G \vdash \D$}
 	\RightLabel{$(weakening\ L)$}
-	\UIC{$\G,!A \To \D$}
+	\UIC{$\G,!A \vdash \D$}
 	\DP
 }
-\def\CLLweakeningR{
-	\AXC	{$\G \To \D$}
+\def\LLweakeningR{
+	\AXC	{$\G \vdash \D$}
 	\RightLabel{$(weakening\ R)$}
-	\UIC{$\G \To ?A,\D$}
+	\UIC{$\G \vdash ?A,\D$}
 	\DP
 }
-\def\CLLcontractionL{
-	\AXC	{$\G,!A,!A \To \D$}
+\def\LLcontractionL{
+	\AXC	{$\G,!A,!A \vdash \D$}
 	\RightLabel{$(contraction\ L)$}
-	\UIC{$\G,!A \To \D$}
+	\UIC{$\G,!A \vdash \D$}
 	\DP
 }
-\def\CLLcontractionR{
-	\AXC	{$\G \To ?A,?A,\D$}
+\def\LLcontractionR{
+	\AXC	{$\G \vdash ?A,?A,\D$}
 	\RightLabel{$(contraction\ R)$}
-	\UIC{$\G \To ?A,\D$}
+	\UIC{$\G \vdash ?A,\D$}
 	\DP
 }
-\def\CLLexchangeL{
-	\AXC	{$\G_{1},A,B,\G_{2} \To \D$}
+\def\LLexchangeL{
+	\AXC	{$\G_{1},A,B,\G_{2} \vdash \D$}
 	\RightLabel{$(exchange\ L)$}
-	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
+	\UIC{$\G_{1},B,A,\G_{2} \vdash \D$}
 	\DP
 }
-\def\CLLexchangeR{
-	\AXC	{$\G \To \D_{1},A,B,\D_{2}$}
+\def\LLexchangeR{
+	\AXC	{$\G \vdash \D_{1},A,B,\D_{2}$}
 	\RightLabel{$(exchange\ R)$}
-	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
+	\UIC{$\G \vdash \D_{1},B,A,\D_{2}$}
 	\DP
 }
 
@@ -771,29 +782,29 @@ $
 \begin{tabular}{|c|c|}
  	\hline
 	\id & \cut \\ \hline
-	\CLLnonL & \CLLnonR \\ \hline
-	\CLLtenseurL & \CLLtenseurR \\ \hline
-	\CLLavecLun \; \CLLavecLdeux & \CLLavecR \\ \hline
-	\CLLplusL & \CLLplusRun \; \CLLplusRdeux \\ \hline
-	\CLLparalleleL & \CLLparalleleR \\ \hline
-%	\CLLunL & \CLLunR \\
-%	\CLLzeroL & \CLLzeroR \\
-%	\CLLbotL & \CLLtopR \\
+	\LLnonL & \LLnonR \\ \hline
+	\LLtenseurL & \LLtenseurR \\ \hline
+	\LLavecLun \; \LLavecLdeux & \LLavecR \\ \hline
+	\LLplusL & \LLplusRun \; \LLplusRdeux \\ \hline
+	\LLparalleleL & \LLparalleleR \\ \hline
+%	\LLunL & \LLunR \\
+%	\LLzeroL & \LLzeroR \\
+%	\LLbotL & \LLtopR \\
 %\hspace{-2.5mm}
-	\CLLunL \; \CLLzeroL & \CLLunR \; \CLLzeroR \\ \hline
-	\CLLbotL & \CLLtopR \\ \hline
-%	\CLLbangL & \CLLbangR \\
-%	\CLLwhynotL & \CLLwhynotR \\
-	\CLLbangL \; \CLLwhynotL & \CLLbangR  \; \CLLwhynotR \\ \hline
-	\CLLweakeningL & \CLLweakeningR \\ \hline
-	\CLLcontractionL & \CLLcontractionR \\ \hline
-	\CLLexchangeL & \CLLexchangeR \\ \hline
+	\LLunL \; \LLzeroL & \LLunR \; \LLzeroR \\ \hline
+	\LLbotL & \LLtopR \\ \hline
+%	\LLbangL & \LLbangR \\
+%	\LLwhynotL & \LLwhynotR \\
+	\LLbangL \; \LLwhynotL & \LLbangR  \; \LLwhynotR \\ \hline
+	\LLweakeningL & \LLweakeningR \\ \hline
+	\LLcontractionL & \LLcontractionR \\ \hline
+	\LLexchangeL & \LLexchangeR \\ \hline
 \end{tabular}
 $
 }
 }
-\caption{Les règles}
-\label{fig:reglesCLL}
+\caption{Les règles d'un calcul de séquents pour LL}
+\label{fig:reglesLL}
 \end{figure}
 
 
@@ -803,7 +814,7 @@ $
 \subsection{Limitation des règles structurelles, nouveaux connecteurs, modalités}
 \label{subsection:connecteursetc}
 
-L'usage des règles structurelles est restreint à certains types de formules qu'on verra plus loin. Une conséquence importante est qu'on n'a plus l'équivalence entre les deux écritures possibles des règles liées à $\land$, vues en \ref{subsection:VariantesEcritureRegles}. C'est pourquoi on introduit deux connecteurs distincts $\otimes$ et $\&$, qui pourraient tous deux se lire ``et'' en première approximation, correspondant chacun à une définition possible de $\land$ dans \LK\ : voir la figure~\ref{?}. De même, le $\lor$ de logique classique est séparé en deux connecteurs $\oplus$ et $\revAnd$. On souhaite tout de même garder des règles structurelles, dont l'usage est seulement limité. On introduit pour cela des connecteurs unaires \emph{modaux}, ou \emph{modalités}, $!$ et $?$. Les règles structurelles peuvent seulement être appliquées à des formules comportant un de ces connecteurs : $!$ si la formule est à gauche, $?$ si elle est à droite. On a aussi des règles d'introduction de ces connecteurs, où par exemple $!\G$ représente une liste dont toutes les formules sont de la forme $!A$. On retrouve des relations entre $\otimes$ et $\&$ grâce à ces modalités : par exemple $(!A)\otimes(!B) = !(A\& B)$, qu'on discute dans la prochaine sous-section.
+L'usage des règles structurelles est restreint à certains types de formules qu'on verra plus loin. Une conséquence importante est qu'on n'a plus l'équivalence entre les deux écritures possibles des règles liées à $\land$, vues en \ref{subsection:VariantesEcritureRegles}. C'est pourquoi on introduit deux connecteurs distincts $\otimes$ et $\&$, qui pourraient tous deux se lire ``et'' en première approximation, correspondant chacun à une définition possible de $\land$ dans \LK\ (cf. les règles liées à ces connecteurs dans la figure~\ref{fig:reglesLL}). De même, le $\lor$ de logique classique est séparé en deux connecteurs $\oplus$ et $\revAnd$. On souhaite tout de même garder des règles structurelles, dont l'usage est seulement limité. On introduit pour cela des connecteurs unaires \emph{modaux}, ou \emph{modalités}, $!$ et $?$. Les règles structurelles peuvent seulement être appliquées à des formules comportant un de ces connecteurs : $!$ si la formule est à gauche, $?$ si elle est à droite. On a aussi des règles d'introduction de ces connecteurs, où par exemple $!\G$ représente une liste dont toutes les formules sont de la forme $!A$. On retrouve des relations entre $\otimes$ et $\&$ grâce à ces modalités : par exemple $(!A)\otimes(!B) = !(A\& B)$, qu'on discute dans la prochaine sous-section.
 
 
 
@@ -820,14 +831,38 @@ La modalité $!A$ signifie qu'on peut posséder un objet de type $A$ autant de foi
 
 \subsection{Logique linéaire intuitionniste}
 
-Les séquents de la logique linéaire intuitionniste sont les mêmes que ceux de \LJ.
+La logique linéaire intuitionniste (ILL) peut être associée à un calcul dont les séquents sont les mêmes que ceux de \LJ\ : une liste de formules $\G$ et une formule $D$, avec la notation $\G \vdash D$ ; les règles sont données dans la figure~\ref{fig:reglesILL}.
 
-La logique linéaire intuitionniste (ILL) est obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique : en se restreignant aux séquents avec une unique formule à droite. Le connecteur de logique linéaire $\revAnd$ disparaît alors, puisque les règles liées nécessitent des séquents avec plusieurs formules à droite. Le connecteur $\oplus$ peut être conservé, mais traditionnellement, il est absent de ce qu'on appelle la \emph{logique linéaire intuitionniste}, qui devient la \emph{logique linéaire intuitionniste à produits finis} lorsqu'on le rajoute.
+La logique linéaire intuitionniste (ILL) est obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique : en se restreignant aux séquents avec une unique formule à droite. 
+On ne garde que les connecteurs binaires $\otimes$, $\multimap$ et $\&$ avec leur élément neutre éventuel, et le connecteur modal $!$.
+Le $\lnot$ disparaît pour la même raison qu'en logique intuitionniste. (?) Les autres connecteurs sont liés à des règles qui ne s'adaptent pas aux séquents avec une unique formule à droite, à l'exception de $\oplus$ qui pourrait être conservé sans problème. Néanmoins, on se conforme à une tradition qui consiste à parler de \emph{logique linéaire intuitionniste} lorsqu'on ne considère pas de connecteur $\oplus$, et de \emph{logique linéaire intuitionniste à produits finis} lorsqu'on le rajoute.
+%Le connecteur de logique linéaire $\revAnd$ disparaît alors, puisque les règles liées nécessitent des séquents avec plusieurs formules à droite. Le connecteur $\oplus$ peut être conservé, mais traditionnellement, il est absent de ce qu'on appelle la \emph{logique linéaire intuitionniste}, qui devient la \emph{logique linéaire intuitionniste à produits finis} lorsqu'on le rajoute.
 
+\begin{figure}[h]
+\centering
+{
+%\renewcommand{\arraystretch}{2}
+%\resizebox{\linewidth}{!}{
+%}
+\idees{à faire}
+}
+\caption{Les règles d'un calcul de séquents pour ILL}
+\label{fig:reglesILL}
+\end{figure}
 
 
 
 \section{Le procédé d'élimination de la coupure (p.é.c.) pour ILL}
+
+coupure intéressante : transitivité, conclusion prouvée à son tour utilisée comme hypothèse
+
+souvent, coupure non nécessaire : correct et surtout complet sans.
+mais démonstration souvent difficile
+
+démonstration également intéressante. constructive : transformer n'importe quelle preuve en preuve du même séquent sans coupure. pour cela, énumération de transformations élémentaires : agissent sur petite partie de la preuve.
+
+ces transformations permettent de définir une relation d'équivalence
+
 
 
 \section{}
@@ -841,7 +876,7 @@ On suppose qu'on a présenté la logique linéaire et son calcul de séquents, et le
 
 \noindent
 \textbf{Notation.}
-Soit $p$ une preuve du séquent $\s$. On écrit
+Soit $p$ une preuve du séquent $\s$. On écrit%
 	\AXC	{$p$}
 	%\noLine
 	\dottedLine
@@ -974,7 +1009,7 @@ Pour tous $f:A\to B$, $g:B\to C$, $h:C\to D$, on a $h\circ(g\circ f) = (h\circ g
 
 Les dénotations des preuves s'organisent sous la forme de la catégorie suivante, qu'on appellera $\CProofs$.
 \idees{choix du nom ?}
-\`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. La composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$. On notera aussi $A$ la dénotation de la formule $A$, sauf lorsqu'on souhaite insister sur le fait qu'il s'agit d'une dénotation. Cela permet d'alléger l'écriture et de retrouver la notation employée dans les définitions sur les catégories.
+\`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. Comme on l'a vu, la composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$. On notera aussi $A$ la dénotation de la formule $A$, sauf lorsqu'on souhaite insister sur le fait qu'il s'agit d'une dénotation. Cela permet d'alléger l'écriture et de retrouver la notation employée dans les définitions sur les catégories.
 
 %Pour l'instant, on ne considère 
 Cette définition ne tient compte que des dénotations de preuves où le séquent prouvé a une unique formule à gauche et une unique formule à droite ; les autres séquents des preuves peuvent avoir n'importe quelle forme. Cette restriction est conservée dans 
@@ -1451,28 +1486,51 @@ Dans ce dernier cas, on peut parfois obtenir quand même une catégorie monoïdale 
 Soit $\Ccal$ une catégorie monoïdale, avec les notations précédentes. C'est une \textbf{\emph{catégorie monoïdale tressée}} s'il existe un \textbf{isomorphisme naturel} $\gamma_{A,B} : A\otimes B \to B\otimes A$ tel que les \emph{diagrammes hexagonaux} suivants commutent.
 \vspace{1mm}
 
-\noindent
-\includegraphics[width=0.48\linewidth]{diagrammeHexa1}
-\quad
-\includegraphics[width=0.48\linewidth]{diagrammeHexa2}
+%\noindent
+%\includegraphics[width=0.48\linewidth]{diagrammeHexa1}
+%\quad
+%\includegraphics[width=0.48\linewidth]{diagrammeHexa2}
 
+{\centering
+%\resizebox{0.7\linewidth}{!}{
 \begin{tikzcd}
 	& A\otimes(B\otimes C)
-		\arrow[r,"\alpha_{A,e,B}"]
+		\arrow[r,"\gamma_{A,B\otimes C}"]
 	& (B\otimes C)\otimes A
+		\arrow[rd,bend left,"\alpha_{B,C,A}"]
 & \\
 	(A\otimes B)\otimes C
-		\arrow[ru,"\alpha_{A,e,B}"]
-		\arrow[ru,"\alpha_{A,e,B}"]	
+		\arrow[ru,bend left,"\alpha_{A,B,C}"]
+		\arrow[rd,bend right,"\gamma_{A,B}\otimes id_{C}"']	
 	& & & B\otimes(C\otimes A)
-%	(A\otimes e)\otimes B
-%			\arrow[rr,"\alpha_{A,e,B}"]
-%			\arrow[rd,"\rho_{A}\otimes id_{B}"]
-%		& & A\otimes(e\otimes B)
-%			\arrow[ld,"id_{A}\otimes\lambda_{B}"] \\
-%	& A\otimes B &
+\\
+	& (B\otimes A)\otimes C
+		\arrow[r,"\alpha_{B,A,C}"]
+	& B\otimes(A\otimes C)
+		\arrow[ru,bend right,"id_{B}\otimes\gamma_{A,C}"']
 \end{tikzcd}
+\quad
 
+\noindent
+\begin{tikzcd}
+	& (A\otimes B)\otimes C
+		\arrow[r,"\gamma_{A\otimes B,C}"]
+	& C\otimes(A\otimes B)
+		\arrow[rd,bend left,"\alpha^{-1}_{C,A,B}"]
+& \\
+	A\otimes(B\otimes C)
+		\arrow[ru,bend left,"\alpha^{-1}_{A,B,C}"]
+		\arrow[rd,bend right,"id_{A}\otimes\gamma_{B,C}"']	
+	& & & (C\otimes A)\otimes B
+\\
+	& A\otimes(C\otimes B)
+		\arrow[r,"\alpha^{-1}_{A,C,B}"]
+	& (A\otimes C)\otimes B
+		\arrow[ru,bend right,"\gamma_{C,A}\otimes id_{B}"']
+\end{tikzcd}
+%}
+
+}
 \end{df}
 
 
@@ -1499,7 +1557,16 @@ Soit $\Ccal$ une catégorie monoïdale, toujours avec les mêmes notations. Une \te
 
 \noindent
 {\centering
-\includegraphics[width=4cm]{diagrammeFermeeGauche}
+%\includegraphics[width=4cm]{diagrammeFermeeGauche}
+\begin{tikzcd}
+	A\otimes X
+		\arrow[d,"id_{A}\otimes h"']
+		\arrow[rd,"f"]
+& \\
+	A\otimes(A\multimap B)
+		\arrow[r,"eval_{A,B}"']
+	& B
+\end{tikzcd}
 
 }
 On dit alors que $\Ccal$ est une \textbf{\emph{catégorie monoïdale fermée}}.
@@ -1528,17 +1595,23 @@ On dit alors que $\Ccal$ est une \textbf{\emph{catégorie monoïdale fermée}}.
 On munit $\CProofs$ de l'opérateur $\multimap$ sur les dénotations de formules correspondant à l'implication linéaire. On définit $eval_{A,B}$ comme la dénotation de la preuve ci-contre. On obtient alors une \textbf{catégorie monoïdale fermée}.
 \idees{Est-ce vrai ? Est-ce qu'on peut expliquer facilement comment obtenir $h$ à partir de $f$ ?}
 
+\
 
-%
+\
 
+\idees{généralisation à n'importe quelle preuve de logique intuitionniste ?}
+
+%%%
+
+\section*{Conclusion}
 
 
 
 
 %%%%%%%%%%%%%%
 
-\end{document}
-
+%\end{document}
+\begin{comment}
 
 
 
@@ -1722,5 +1795,6 @@ sont équivalentes à élimination de la coupure près.
 
 
 
+\end{comment}
 
-\end{document}
+%\end{document}
