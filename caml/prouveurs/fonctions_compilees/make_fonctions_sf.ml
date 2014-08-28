@@ -3,7 +3,7 @@ open Global_ref
 
 open Ast_trees
 
-open Cote
+(*open Cote*)
 
 open Fonctions_compilees
 
@@ -192,7 +192,7 @@ let main () =     (* remplit Fonctions_compilees.fonctions *)
     match !sf.(h) with
       | CFaux | CVar _ -> ()
       | C (conn,a,b) ->
-	let f = match conn,!Cote.cote.(h) with
+	let f = match conn,!cote.(h) with
 	  | Et,L -> etL
 	  | Et,R -> etR
 	  | Ou,L -> ouL

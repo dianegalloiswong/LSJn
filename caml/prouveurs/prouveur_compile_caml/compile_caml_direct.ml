@@ -152,5 +152,9 @@ let from_fonctions_compilees () =
 
 
 let main f = 
-  Init_fonctions_compilees.main f;
+  (*Init_fonctions_compilees.main f;*)
+  Indexation.main f;
+  Make_fonctions_sf.main ();
+  Make_call_num.main ();
+
   from_fonctions_compilees ()

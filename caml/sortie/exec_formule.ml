@@ -11,7 +11,7 @@ let bool_to_string_fr b = if b then "vrai" else "faux"
 let un_prouveur (f,att_opt,nom) =
   if nom<>"" && Options.affiche_nom_formule() then Format.printf "%s@." !Path.nom;
   if Options.affiche_formule() then Format.printf "%s@." (To_string.formule f);
-  if !Options.indexation then (Init_sf_classe.test f)
+  if !Options.indexation then (Indexation.main f; Indexation.print ())
   else 
     begin
     try

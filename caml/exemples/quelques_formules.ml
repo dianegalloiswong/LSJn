@@ -32,7 +32,7 @@ let f9 = Eq_boucle.main 5
 let f10 = Tiroirs.main 3 2
 let f11 = Tiroirs.main 2 2
 
-let f12 = F(Et, F(Et,a,b), F(Ou, non c, F(Et,a,b)))
+let f12 = F(Imp, F(Et,a,b), F(Ou, non c, F(Et,a,b)))
 
 let f0 = (f0,Some false,"f0")
 let f1 = (f1,Some true,"f1")
@@ -47,7 +47,7 @@ let f8 = (f8,Some false,"f8")
 let f9 = (f9,Some false,"f9")
 let f10 = (f10,Some true,"f10")
 let f11 = (f11,Some false,"f11")
-let f12 = (f12,Some false,"f12")
+let f12 = (f12,Some true,"f12")
 
 
 
@@ -66,7 +66,7 @@ let l_att = [(*f0,*)false,false;
 	     (*f9,*)false,true;
 	     (*f10,*)true,true;
 	     (*f11,*)false,false;
-             (*f12,*)false,false;
+             (*f12,*)true,true;
             ]
 let l_att = List.map (fun x -> Some x) l_att
 

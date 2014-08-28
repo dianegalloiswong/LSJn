@@ -51,7 +51,7 @@ let main formule =
   Global_ref.classe := classe
 
 
-
+(*
 let aligne n = if n<10 then " " else ""
 
 let test f =
@@ -61,39 +61,5 @@ let test f =
   for i=1 to (Array.length !sf)-1 do
     Format.printf "  %s%d     %s%d      %s@." (aligne i) i (aligne !classe.(i)) !classe.(i) (To_string.case_sf !sf.(i))
   done
-
-
-
-
-
-(*
-
-let tab_of_formule formule =
-  let t = Array.make (nombre_noeuds formule) CFaux in
-  let ajout_case c libre =
-    let rec cherche i = 
-      if i = libre then -1
-      else if t.(i) = c then i
-      else cherche (i+1)
-    in
-    let i = cherche 0 in
-    if i = -1 then
-      (t.(libre) <- c;
-       libre,libre+1)
-    else
-      i,libre
-  in
-  let rec remplir f libre = match f with
-    | FFaux -> ajout_case CFaux libre
-    | FVar x -> ajout_case (CVar x) libre
-    | F(conn,f1,f2) ->
-      let libre1,i1 = remplir f1 libre in
-      let libre2,i2 = remplir f2 libre in
-      ajout_case (C (conn,i1,i2)) libre2
-  in
-  let i,len = remplir formule 0 in
-  let t' = Array.make len CFaux in
-  for k=0 to len-1 do t'.(k)<-t.(k) done;
-  t',i
-
 *)
+

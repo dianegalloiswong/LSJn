@@ -124,10 +124,14 @@ let main f =
   Format.printf "\n(* fonctions dépendant de la formule *)\n";
   Format.printf "\n(*\n%s@." (To_string.formule f);
 
-
+(*
   Init_sf_classe.test f;
   Init_priorite.main ();
   Cote.remplir ();
+*)
+  Indexation.main f;
+  Indexation.print ();
+
   Make_fonctions_sf.main ();
   Make_call_num.main ();
 
