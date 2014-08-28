@@ -30,6 +30,7 @@
 
 \section*{Introduction}
 
+présenter les différentes logiques, notamment logique intuitionniste
 
 \tableofcontents
 
@@ -537,7 +538,10 @@ Finalement, on peut considérer que la logique intuitionniste est obtenue à parti
 
 La logique linéaire (LL) est une extension de la logique classique. Elle présente un grand un intérêt des points de vue logique aussi bien qu'informatique, notamment parce qu'elle contient une notion de ``ressources'' qui ne peuvent pas être utilisées inconsidérément. On peut considérer qu'elle est obtenue à partir de la logique classique en limitant l'usage des règles structurelles, si bien que de nouvelles nuances apparaissent, pour lesquelles sont introduits de nouveaux connecteurs. 
 
-Voici un calcul de séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK\ : deux listes de formules $\G$ et $\D$, avec la notation $\G \vdash \D$. Les connecteurs, différents, sont donnés dans la figure~\ref{fig:connecteurs}. Les règles sont données dans la figure~\ref{fig:reglesLL}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{subsection:connecteursetc}, puis une interprétation en terme de ``ressources'' dans la sous-section~\ref{subsection:ressources}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
+Voici un calcul de séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK\ : deux listes de formules $\G$ et $\D$, avec la notation $\G \vdash \D$. Les connecteurs, différents, sont donnés dans la figure~\ref{fig:connecteurs}. 
+Les formules sont alors construites à partir de variables propositionnelles, de ces connecteurs, et de constantes qui sont chacune un élément neutre associé à un connecteur. Par exemple $\1$ est l'élément neutre pour $\otimes$, c'est-à-dire que pour toute formule $A$, $A\otimes\1=\1\otimes A=A$.
+%\`A chaque connecteur est associé un élément neutre, c'est-à-dire une constante
+Les règles sont données dans la figure~\ref{fig:reglesLL}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{subsection:connecteursetc}, puis une interprétation en terme de ``ressources'' dans la sous-section~\ref{subsection:ressources}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
 
 %La logique linéaire intuitionniste (ILL) est obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique : en se restreignant aux séquents avec une unique formule à droite ; ici, 
 %
@@ -666,6 +670,20 @@ Voici un calcul de séquents pour la logique linéaire. Les séquents sont les même
 	\UIC{$\G \vdash A\revAnd B,\D$}
 	\DP
 }
+\def\LLimpL{
+	\AXC	{$\G \vdash A,\D$}
+	\AXC	{$\G',B \vdash \D'$}
+	\RightLabel{$(\multimap\! L)$}
+	\BIC{$\G,\G',A\multimap B \vdash \D,\D'$}
+	\DP
+}
+\def\LLimpR{
+	\AXC	{$\G,A \vdash B,\D$}
+	\RightLabel{$(\multimap\! R)$}
+	\UIC{$\G \vdash A\multimap B,\D$}
+	\DP
+}
+
 
 %LL, constantes
 \def\LLunL{
@@ -787,6 +805,7 @@ $
 	\LLavecLun \; \LLavecLdeux & \LLavecR \\ \hline
 	\LLplusL & \LLplusRun \; \LLplusRdeux \\ \hline
 	\LLparalleleL & \LLparalleleR \\ \hline
+	\LLimpL & \LLimpR \\ \hline
 %	\LLunL & \LLunR \\
 %	\LLzeroL & \LLzeroR \\
 %	\LLbotL & \LLtopR \\
@@ -824,9 +843,17 @@ L'usage des règles structurelles est restreint à certains types de formules qu'o
 La logique linéaire est une logique de ``ressources''. L'implication linéaire $A\multimap B$ peut en effet se comprendre comme ``on peut dépenser un objet de type $A$ pour obtenir un objet de type $B$''. Ici, ``type'' est simplement un mot du langage courant et non un terme mathématique ou informatique.% ; on aurait aussi bien pu dire ``un objet de sorte $A$'', mais cela  
 La formule $A\otimes B$ représente la possession à la fois d'un objet de type $A$ et d'un autre objet de type $B$. On comprend alors la notion de ``dépense'' en remarquant que, si on a $A\multimap B$ et $A\multimap C$, on n'obtient pas pour autant $A\multimap B\otimes C$ car un seul objet de type $A$ ne peut pas être dépensé deux fois ; en revanche on obtient bien $A\otimes A \multimap B\otimes C$. On n'obtient pas non plus $A\otimes A\otimes A \multimap B\otimes C$ car un objet de type $A$ ne serait pas dépensé ; cela est lié au fait que la formule $A\multimap\1$ n'est pas universellement valide, où $\1$ est l'élément neutre pour $\otimes$. Une analogie courante et pertinente compare ce fragment de la logique linéaire aux équations de réaction en chimie, avec la maxime de Lavoisier bien connue ``Rien ne se perd, rien ne se crée, tout se transforme''. Par exemple, l'équation $CH_{4} + 2O_{2} \longrightarrow CO_{2} + 2H_{2}O$ peut être fidèlement représentée par la formule $!(CH_{4}\otimes O_{2}\otimes O_{2} \multimap CO_{2}\otimes H_{2}O\otimes H_{2}O)$, où $CH_{4}$ etc. sont considérés comme des constantes ; la modalité $!$, discutée plus loin, signifie qu'on peut appliquer cette réaction autant de fois qu'on le souhaite.
 
-Intéressons-nous maintenant à $\&$, l'autre connecteur issu du $\land$ du logique classique. La formule $A\& B$ représente la possession, au choix, d'un objet de type $A$ ou d'un objet de type $B$. \`A partir de $A\multimap B$ et $A\multimap C$, on obtient bien $A\multimap B\&C$ : on a le choix de la fa\c con dont on dépense l'objet de type $A$. Le fait qu'on ne possède finalement qu'un seul objet, de type $A$ ou de type $B$, peut donner l'impression qu'il s'agit d'une disjonction. Le point important est la possibilité de choisir soi-même le type parmi $A$ et $B$. Cela entraîne qu'on peut prouver $A\&B\multimap A$ et $A\&B\multimap B$, mais pas $A\multimap A\&B$, donc il s'agit bien d'une conjonction. C'est $A\oplus B$ qui représente la possession d'un objet dont le type est $A$ ou $B$, sans possibilité de choisir. Il s'agit cette fois d'une disjonction : on peut prouver $A\multimap A\oplus B$ mais pas $A\oplus B\multimap A$.
+Intéressons-nous maintenant à $\&$, l'autre connecteur issu du $\land$ du logique classique. La formule $A\& B$ représente la %possession
+possibilité de posséder%
+, au choix, un objet de type $A$ ou un objet de type $B$. \`A partir de $A\multimap B$ et $A\multimap C$, on obtient bien $A\multimap B\&C$ : on a le choix de la fa\c con dont on dépense l'objet de type $A$. Le fait qu'on ne possède finalement qu'un seul objet, de type $A$ ou de type $B$, peut donner l'impression qu'il s'agit d'une disjonction. Le point important est la possibilité de choisir %soi-même 
+le type parmi $A$ et $B$. Cela entraîne qu'on peut prouver $A\&B\multimap A$ et $A\&B\multimap B$, mais pas $A\multimap A\&B$, donc il s'agit bien d'une conjonction. C'est $A\oplus B$ qui représente la possession d'un objet dont on sait que le type est $A$ ou $B$, 
+%sans possibilité de choisir
+mais on ne peut pas choisir lequel des deux%
+. Il s'agit cette fois d'une disjonction : on peut prouver $A\multimap A\oplus B$ mais pas $A\oplus B\multimap A$.
 
 La modalité $!A$ signifie qu'on peut posséder un objet de type $A$ autant de fois qu'on le souhaite, y compris zéro. Un exemple significatif est l'égalité $(!A)\otimes(!B) = !(A\& B)$ : posséder simultanément autant d'objets qu'on veut de type $A$ et autant d'objets qu'on veut de type $B$, revient à avoir autant de fois qu'on veut la possibilité de choisir de posséder un objet de type $A$ ou un objet de type $B$.
+
+$\revAnd$, $?$
 
 
 \subsection{Logique linéaire intuitionniste}
