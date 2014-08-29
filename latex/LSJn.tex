@@ -12,6 +12,15 @@
 \section*{Introduction}
 
 
+La logique intuitionniste %suscite beaucoup d'intérêt en philosophie
+présente un grand intérêt philosophique, logique et informatique.
+Elle diffère notamment de la logique classique par l'absence du principe du tiers exclu $A\lor\lnot A$.
+%
+La recherche automatisée de preuves en logique intuitionniste propositionnelle (ILP) est un thème de recherche mature. Parmi les techniques fréquemment utilisées se trouvent des adaptations de calculs de séquents bien choisis. Par exemple, l'équipe TYPES a développé un prouveur automatisé pour ILP appelé STRIP \cite{STRIP}, basé sur une variante du calcul de séquents \LJT\ \cite{LJT}. Cependant, des structures de données sophistiquée sont nécessaires, si bien qu'une certification de ce prouveur semble compromise. Le calcul de séquents \LSJ\ \cite{LSJ}, relativement récent (2012), paraît prometteur pour la recherche automatisée de preuve dans ILP : l'algorithme basé dessus est facile à implémenter avec des structures de données relativement simples, ce qui est favorable à une possibilité de certification. C'est ce qui a conduit mes encadrants à proposer ce sujet de stage : recherche de preuves compilée et certifiée en logique intuitionniste propositionnelle, avec pour idée de se baser sur \LSJ.
+
+J'ai effectué ce stage au sein de l'équipe TYPES du LORIA de Nancy, sous la direction de D. Galmiche et D. Larchey-Wendling. J'ai implémenté un premier prouveur d'ILP à partir du calcul de séquents \LSJ. Je l'ai testé sur les formules de la banque ILTP \cite{ILTP}, et j'ai découvert que ce calcul (qui apparemment n'avait pas encore été appliqué à la réalisation pratique d'un prouveur) offre une bien meilleure complexité, sur une formule donnée d'ILTP, que tous les prouveurs actuellement répertoriés. Ensuite, j'ai essayé de simplifier le code de ce prouveur, encore trop complexe, dans une perspective de certification. Je n'ai pas eu le temps d'aborder la certification en elle-même, qui serait très longue à effectuer. J'ai cependant réalisé et comparé diverses implémentations afin d'étudier comment on pourrait faciliter une certification éventuelle sans trop perdre en efficacité.
+
+Dans ce rapport, j'explique comment un algorithme de recherche de preuve peut être déduit d'un calcul de séquents, et quelles propriétés du calcul de séquent peuvent rendre cet algorithme effectif et efficace. Je donne pour exemples \LJ\ et \LJT, deux calculs dont des variantes ont été effectivement employée pour réaliser des prouveurs d'ILP, par exemple STRIP. J'introduis ensuite \LSJ, qui présente des propriétés dont on comprend mieux l'intérêt à la lumière de ce qui précède, puis une légère variante \LSJn, qui permet d'obtenir facilement une bonne complexité spatiale, et je prouve que \LSJn\ est bien équivalent à \LSJ. En ce qui concerne l'implémentation, je donne quelques détails essentiels ou remarquables. Puis, j'explique certaines décisions prises en faveur de la certification. Enfin, je présente les différentes variantes de prouveur d'ILP que j'ai effectivement réalisées, et les compare en termes de facilité de certification et d'efficacité.
 
 \tableofcontents
 
@@ -189,7 +198,7 @@ Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithm
 \noindent
 \textbf{\LJT.}
 Le calcul \LJT\ est introduit par R. Dyckhoff dans \cite{LJT} pour pallier le problème de cycles de \LJ. Il n'y a pas de règle de contraction, et la règle $\to L$ est remplacée par quatre règles selon la structure de $A$ dans la formule principale $A\to B$ : par exemple \LJTimpLun où $A$ doit être %\emph{atomique} c'est-à-dire 
-réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la sous-formule, mais on peut quand même déterminer toutes les formules susceptibles d'apparaître lorsqu'on essaie de prouver un séquent donné. Dyckhoff montre que l'algorithme termine en choisissant bien un bon ordre sur les formules puis sur les séquents. Toutes les règles sont inversibles et locales sauf une des règles qui remplacent $\imp L$, qui comporte deux prémisses dont seule la deuxième est inversible.
+réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la sous-formule, mais on peut quand même déterminer toutes les formules susceptibles d'apparaître lorsqu'on essaie de prouver un séquent donné. Dyckhoff montre que l'algorithme termine en choisissant bien un bon ordre sur les formules puis sur les séquents. Toutes les règles sont inversibles et locales sauf une des règles qui remplacent $\imp L$, qui comporte deux prémisses dont seule la deuxième est inversible. Une variante de \LJT\ est le fondement du prouveur STRIP \cite{STRIP}.
 
 
 
@@ -672,13 +681,14 @@ L'intérêt d'avoir remplacé les formules par leur classe est qu'on peut représent
 
 Un des objectifs du stage était de s'intéresser à la certification d'un prouveur de logique intuitionniste s'appuyant sur \LSJ. \'Ecrire la certification d'un tel programme est très long et n'a pas été abordé. 
 %En revanche, plusieurs variantes d'implémentation, dont la certification devrait être plus facile mais dont l'efficacité est diminuée, on été étudiées.
-En revanche, l'implémentation a été modifiée de fa\c con à faciliter la certification, au détriment de l'efficacité. Plusieurs variantes d'implémentation ont ainsi été étudiées, afin de comparer certaines méthodes en termes de facilité de certification et d'efficacité.
+En revanche, l'implémentation a été modifiée de fa\c con à faciliter la certification, souvent au détriment de l'efficacité. 
+Plusieurs variantes d'implémentation ont ainsi été étudiées, afin de comparer certaines méthodes en termes de facilité de certification et d'efficacité.
+%On présente dans cette section les deux changements principaux qu'on a  
 
 \subsection{Un langage simple pour faciliter la certification}
 
 Un premier pas vers la certification est l'utilisation d'un langage relativement simple, afin de limiter le nombre de propriétés à démontrer. Le langage que nous avons employé pour cette raison, qu'on notera \T, comporte un seul type de données : des arbres binaires, qui consistent en l'arbre vide ou une feuille étiquetée par un entier naturel ou un couple d'arbres. Les expressions sont données dans la figure~\ref{fig:expr}, \emph{var} désignant une variable et \emph{nomf} un nom de fonction, des chevrons $<\!\!.,.\!\!>$ étant utilisés pour les couples d'arbres. La condition du \textbf{if} doit être une feuille d'un entier $n$, correspondant à \emph{faux} si $n=0$ et \emph{vrai} sinon ; \textbf{isnull}, \textbf{isint} et la comparaison renvoient de même une feuille contenant $0$ ou $1$. La première expression du \textbf{match} doit s'évaluer à un couple, sinon il y a une erreur à l'exécution. De même, dans la comparaison ou dans \textbf{succ} (successeur) ou \textbf{pred} (prédécesseur), les expressions doivent être des feuilles. Une déclaration de fonction est un triplet de la forme (\emph{nomf}, \emph{var}, \emph{expr}) comportant le nom de la fonction, celui de son argument, et enfin son corps dans lequel l'argument peut apparaître comme une variable libre. Un programme consiste en une liste de déclarations de fonctions considérées comme mutuellement récursives, puis une expression à évaluer.
 
-L'intérêt d'utiliser ce langage est que mon encadrant D. Larchey-Wendling a réalisé pour celui-ci un compilateur certifié vers une machine abstraite, ainsi qu'un interpréteur certifié de cette machine abstraite. Son objectif est justement l'écriture grâce à ce langage d'un prouveur certifié.
 
 \begin{figure}[h]
 \centering	
@@ -710,6 +720,9 @@ $
 \end{figure}
 
 
+L'intérêt d'utiliser ce langage est que mon encadrant D. Larchey-Wendling a réalisé pour celui-ci un compilateur certifié vers un langage exécutable par une machine abstraite assez simple, ainsi qu'un programme certifié simulant l'exécution de cette machine abstraite. On notera \M\ le langage associé à cette machine abstraite. L'objectif de ces travaux sur \T\ est justement de pouvoir écrire, grâce à ce langage, des prouveurs certifiés.
+
+
 
 %
 
@@ -730,7 +743,96 @@ L'intérêt principal de cette approche est qu'elle permet de se fixer un premier 
 
 
 
-\subsection{Comparaison de différentes implémentations}
+%\subsection{Comparaison de différentes implémentations}
+
+
+\section{Différentes variantes de prouveur réalisées, tests effectués, comparaison des résultats}
+
+\def\vspaceval{1em}
+%\vspace{\vspaceval}
+
+Le langage de programmation utilisé est OCaml, à la fois pour l'algorithme de recherche de preuve à proprement parler, et pour les fonctionnalités annexes : analyseurs, interpréteurs, et même gestion des appels système pour le chronométrage, le parcours d'un répertoire ou l'écriture dans un fichier.
+
+On génère parfois des fichiers auxiliaires contenant du code en langage \T\ (langage défini, comme \M, en \ref{subsection:langagesimple}). % ; ces fichiers sont ensuite analysés pour obtenir un arbre de syntaxe abstraite.
+% mais certains fichiers auxiliaire générés sont 
+On peut se demander quel est l'intérêt de générer ces fichiers qui sont ensuite analysés, plutôt que de construire directement un arbre de syntaxe abstraite. La réponse est qu'une partie importante du code de ces fichiers, qui ne dépend pas de la formule qu'on essaie de prouver, a été écrite à la main directement en \T, donc on a de toute fa\c con besoin d'un analyseur pour \T\ ; de plus il est intéressant d'avoir un aper\c cu visuel du code généré pour une formule donnée.
+
+\vspace{\vspaceval}
+
+On a finalement implémenté cinq programmes distincts, partageant des morceaux de code plus ou moins importants (par exemple, tous partagent ce qui concerne l'indexation), qui sont tous des prouveurs de logique intuitionniste : ils renvoient si une formule de logique intuitionniste donnée en argument est prouvable.
+Une description rapide de chacun est donnée en~\ref{subsection:prouveurs}.
+
+\vspace{\vspaceval}
+
+Afin de tester ces prouveurs, on a utilisé la bibliothèque ILTP~\cite{ILTP}, qui contient des formules de référence pour évaluer les prouveurs de logique intuitionniste propositionnelle. Les fichiers d'ILTP sont en Prolog mais n'utilisent qu'un nombre très limité de constructions syntaxiques ; on a donc pu écrire un analyseur naïf ne reconnaissant que ces constructions, qui extrait d'un fichier ILTP une formule à donner en argument au prouveur, ainsi que le booléen, indiquant si cette formule est prouvable, que le prouveur est censé renvoyer, afin de pouvoir tester rapidement la correction du prouveur.
+
+En \ref{subsection:efficaciteLSJ}, on compare notre prouveur le plus efficace (``prouveur simple'' dans~\ref{subsection:prouveurs}) aux prouveurs répertoriés par ILTP. En~\ref{subsection:comparaison}, on compare entre eux nos différents prouveurs.
+
+
+\subsection{Les différents prouveurs implémentés}
+
+
+%Les implémentations qui ont été réalisées sont les suivantes
+%Différentes implémentations ont été réalisées. On se retrouve ainsi avec 
+%On a finalement implémenté
+%cinq programmes distincts, partageant des morceaux de code plus ou moins importants (par exemple, tous partagent ce qui concerne l'indexation), qui sont tous des prouveurs de logique intuitionniste : ils renvoient si une formule de logique intuitionniste donnée en argument est prouvable.
+%En fait, l'argument est parfois un fichier analysé... cf. ILTP
+%Voici une description rapide de chacun. 
+
+\def\vspaceval{.3em}
+%\vspace{\vspaceval}
+
+\begin{itemize}
+%\item
+%On a d'abord implémenté, intégralement en OCaml, la recherche de preuve telle qu'elle est décrite dans l'article présentant \LSJ\ \cite{LSJ}, en utilisant tout ce qui est décrit dans la section~\ref{section:implementation}, notamment les structures de données élaborées de \ref{subsection:structureSequent}.
+\item
+``\textbf{Prouveur simple}''.
+Ce prouveur, le premier implémenté, est le plus simple et le plus efficace. 
+%Il utilise 
+Il effectue directement la recherche de preuve telle qu'elle est décrite dans l'article présentant \LSJ\ \cite{LSJ}, en utilisant
+tout ce qui est décrit dans la section~\ref{section:implementation}, notamment les structures de données élaborées de \ref{subsection:structureSequent}. En revanche, aucun effort n'est fait pour faciliter la certification.
+\vspace{\vspaceval}
+
+\item
+``\textbf{Prouveur simple avec listes}''.
+\vspace{\vspaceval}
+
+\item
+``\textbf{Prouveur \T}''. On compile un programme en langage \T\ adapté à la formule donnée en argument. Pour cela, on réalise l'indexation, puis, comme expliqué en \ref{subsection:fonctionssf} on compile des fonctions correspondant à chaque sous-formule de la formule initiale. On ajoute ensuite ces fonctions à du code en \T\ écrit à l'avance, car indépendant de la formule. Le programme intégral en \T\ obtenu est écrit dans un fichier temporaire. Dans un deuxième temps, on exécute ce programme à l'aide d'un analyseur pour \T\ puis d'un interpréteur relativement naïf. Cela renvoie un booléen qui doit indiquer si la formule initiale est prouvable en logique intuitionniste.
+\vspace{\vspaceval}
+
+\item
+``\textbf{Prouveur \T\ \M}''. On génère le même programme en \T\ que précédemment. Mais cette fois, pour l'exécuter, on utilise un compilateur (fourni par D. Larchey-Wendling) de \T\ vers \M. On simule ensuite assez facilement l'exécution du code en \M\ par la machine abstraite simple à laquelle ce langage correspond.
+(Le code en \M\ n'est pas écrit dans un fichier, mais directement passé au simulateur sous la forme d'un arbre de syntaxe abstraite.)
+%un langage correspondant à une machine abstraite assez simple, dont l'exécution est facile à simuler.
+\vspace{\vspaceval}
+
+\item
+``\textbf{Prouveur compilé caml}''. On compile, selon la méthode employée par le ``prouveur \T'', un programme adapté à la formule donnée en argument, mais ce programme est écrit en OCaml. On lance ensuite le compilateur ocamlc sur le fichier temporaire contenant ce programme, puis on lance le fichier exécutable généré. Ce prouveur a été implémenté afin de tester de l'efficacité de la compilation de fonctions adaptées à la formule, sans l'influence de l'utilisation du langage \T\ moins élaboré.
+
+\end{itemize}
+%\vspace{\vspaceval}
+
+
+%
+
+
+\subsection{Efficacité de \LSJ}
+
+Le ``prouveur simple'', qui est une implémentation assez directe de l'algorithme proposé dans~\cite{LSJ}, avec de légers changements comme la transformation du calcul en \LSJn, se compare honorablement aux prouveurs répertoriés par ILTP.
+
+
+\subsection{}
+
+\
+
+- implémentation effective
+
+- tests (ILTP)
+
+- résultats
+
+- commentaires
 
 
 
@@ -740,7 +842,19 @@ algorithme implémenté naïvement en une demi-journée. mais retravaillé, sans cess
 
 écriture d'analyseurs, automatisation de tests...
 
+factorisation de code, partage entre les différents prouveurs (génie logiciel)
+
 essai de différentes implémentations
+
+\
+
+l'algorithme vient de \cite{LSJ}, \LSJn\ de ... l'efficacité de l'algorithme vient entièrement de \LSJ
+
+le langage \T
+
+j'ai remarqué que 
+
+j'ai choisi les implémentations réalisées parmi diverses suggestions
 
 
 
