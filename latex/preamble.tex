@@ -14,12 +14,16 @@
 %\usetikzlibrary{arrows}
 \usepackage{xcolor}
 %\usepackage{multicol}
-%\usepackage[cm]{fullpage}
+%\usepackage[in]{fullpage}
 \usepackage{amsthm} %pour les théorèmes sans numéro
 \usepackage{array,multirow,makecell}
 \usepackage{mathrsfs}
 \usepackage{floatflt}
 \usepackage{verbatim}
+\usepackage{url}
+\usepackage{titletoc}
+\usepackage[top=1in, bottom=2cm, left=3cm, right=3cm]{geometry}
+
 
 
 \usepackage{bussproofs}\EnableBpAbbreviations
@@ -59,6 +63,7 @@
 
 
 \renewcommand{\labelitemi}{$\bullet$}
+\newcommand{\ts}{\textsuperscript}
 
 
 %\newcommand{\R}{\mathbb{R}}
@@ -134,7 +139,8 @@
 \boldsymbol
 \Phi
 }
-\newcommand{\To}{\Rightarrow}
+%\newcommand{\To}{\Rightarrow}
+\newcommand{\To}{\vdash}
 \newcommand{\forget}{\mathsf{forget}}
 
 

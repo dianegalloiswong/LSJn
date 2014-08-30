@@ -23,50 +23,80 @@
 }
 
 
+%\vspace*{-3em}
+\vspace*{0em}
 
-\part*{Mémoire}
 
-\idees{Rapport de stage : page \pageref{part:rapportstage}}
+\part*{Mémoire : Calcul des séquents \\et transfert vers une catégorie}
+
+\vspace{1em}
+
+%\idees{Rapport de stage : page \pageref{part:rapportstage}}
 
 \section*{Introduction}
 
-présenter les différentes logiques, notamment logique intuitionniste
+Une ``preuve'' évoque souvent une succession d'arguments
+%, que ce soit dans un livre, où l'objectif est de convaincre le lecteur de la validité d'une propriété énoncée, ou au tableau, le destinataire étant cette fois un auditoire. 
+dont l'objectif est de convaincre un auditoire ou un lecteur de la validité d'une assertion.
+La \emph{théorie de la preuve} formalise, à l'aide d'un langage mathématique, cet événement consistant à convaincre quelqu'un : une \emph{preuve} devient alors un objet mathématique. 
+%Elle se situe au croisement entre mathématiques et informatique.
+Il s'agit d'une branche de la logique %située au croisement entre mathématiques et informatique, qui est également étudiée en philosophie.
+qui s'intègre à la fois en mathématiques, en informatique et en philosophie.
+%
+%Un des formalismes 
+Le calcul des séquents, introduit par Gentzen, est un formalisme de théorie de la preuve qui fait l'objet de nombreuses études. Il présente un grand intérêt en informatique, puisqu'on peut en déduire assez naturellement un algorithme de recherche de preuves, bien qu'il faille prendre certaines précautions pour que cet algorithme termine. Ceci est mis en application dans mon stage. J'ai choisi pour ce mémoire de m'intéresser à 
+%une approche complètement différente 
+un aspect complètement différent
+du calcul des séquents : la construction, à partir d'un calcul des séquents pour la logique linéaire intuitionniste, d'une catégorie mathématique présentant de nombreuses propriétés. Cette construction s'appuie sur une preuve constructive d'un théorème fondamental en calcul des séquents : le théorème d'élimination de la coupure. 
+%Curieusement, ce théorème présente en recherche automatisée de preuves un intérêt
+On retrouve ce théorème en recherche automatisée de preuves, où il présente un intérêt décisif qui consiste à l'oublier ! En effet, il permet de se débarrasser d'une règle de coupure dont la présence est catastrophique pour la terminaison d'un algorithme basé sur un calcul des séquents.
 
-\tableofcontents
+
+%th élimination de la coupure, %bien utile 
+%dont le seul mais immense intérêt
+%en recherche automatisée de preuves %pour 
+%est de se débarrasser d'une règle de coupure dont la présence est catastrophique pour la terminaison d'un algorithme basé sur un calcul des séquents.
+
+
+Dans une première partie, on présente le calcul des séquents, en s'appuyant sur l'exemple du calcul \LK\ correspondant à la logique classique ; on explique aussi comment Gentzen en dérive un autre calcul \LJ\ correspondant à la logique intuitionniste, une logique constructive qu'on peut obtenir à partir de la logique classique en supprimant l'axiome du tiers exclu $A\lor\lnot A$. On introduit ensuite la logique linéaire puis la logique linéaire intuitionniste (ILL), présentée à travers des calculs de séquents qui leur correspondent. On expose alors le principe d'une démonstration constructive du théorème d'élimination de la coupure pour ILL, ce qui définit un \emph{procédé d'élimination de la coupure}. Enfin, on s'appuie sur ce dernier afin de construire une catégorie correspondant au calcul des séquents pour ILL, sur laquelle on énonce quelques propriétés mathématiques.
+
+
+\setcounter{tocdepth}{1}
+%\tableofcontents
+\startlist{toc}
+\printlist{toc}{}{\section*{Table des matières}}
 
 \
 
 \
-
-\idees{mettre le plan du rapport de stage au début du rapport de stage}
 
 
 %%%
 
-\section{Introduction aux calculs de séquents à travers \LK\ pour la logique classique et \LJ\ pour la logique intuitionniste}
+\section{Introduction aux calculs des séquents à travers \LK\ pour la logique classique et \LJ\ pour la logique intuitionniste}
 \label{section:introductionCalculsSequents}
 
 
 
-\idees{
-calculs de séquents :
-outils / procédé de raisonnement
-... dans l'introduction générale du mémoire ?
-}
+%\idees{
+%calculs des séquents :
+%outils / procédé de raisonnement
+%... dans l'introduction générale du mémoire ?
+%}
 
-Nous introduisons dans cette première partie les définitions dont nous aurons besoin sur les calculs de séquents, à travers l'exemple du calcul de séquents \LK. Nous expliquons en quoi ce calcul défini par Gentzen correspond à la logique classique. Nous présentons ensuite le calcul \LJ, que Gentzen a dérivé de \LK\ afin de représenter la logique intuitionniste. Enfin, nous expliquons comment certaines propriétés des deux logiques considérées peuvent se comprendre en étudiant leur calcul de séquents respectif.
+Nous introduisons dans cette première partie les définitions dont nous aurons besoin sur les calculs des séquents, à travers l'exemple du calcul des séquents \LK. Nous expliquons en quoi ce calcul défini par Gentzen correspond à la logique classique. Nous présentons ensuite le calcul \LJ, que Gentzen a dérivé de \LK\ afin de représenter la logique intuitionniste. Enfin, nous expliquons comment certaines propriétés des deux logiques considérées peuvent se comprendre en étudiant leur calcul des séquents respectif.
 
-Les formules considérées dans cette partie sont construites à partir de constantes $\bot$ (\emph{faux}) et $\top$ (\emph{vrai}), de variables propositionnelles, du connecteur unaire $\lnot$ (\emph{non}), et des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}) et $\to$ (\emph{implique}). On s'intéresse en effet à la partie propositionnelle de chaque logique.
+Les formules considérées dans cette partie sont construites à partir de constantes $\bot$ (\emph{faux}) et $\top$ (\emph{vrai}), de variables propositionnelles, du connecteur unaire $\lnot$ (\emph{non}), et des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}) et $\to$ (\emph{implique}). On s'intéresse en effet aux parties propositionnelles de ces logiques.
 
 
 \subsection{Des séquents et des règles}
 
-Un calcul de séquents se caractérise par sa propre définition d'un objet syntaxique appelé \emph{séquent}, ainsi que par un ensemble de \emph{règles} agissant sur les séquents.
+Un calcul des séquents se caractérise par sa propre définition d'un objet syntaxique appelé \emph{séquent}, ainsi que par un ensemble de \emph{règles} agissant sur les séquents.
 
-Par exemple, pour le calcul de séquents \LK, la définition d'un séquent est la suivante, et les règles sont données dans la figure~\ref{fig:reglesLK}.
+Par exemple, pour le calcul des séquents \LK, la définition d'un séquent est la suivante, et les règles sont données dans la figure~\ref{fig:reglesLK}.
 
 \begin{df}
-Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on l'écrit $\G \vdash \D$.
+Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on le note $\G \vdash \D$. On appellera \emph{séquent classique} un tel séquent.
 \end{df}
 
 
@@ -255,13 +285,20 @@ L'idée est qu'une règle affirme : si toutes les prémisses sont vraies, alors la 
 On distingue deux grandes familles de règles. Les \textbf{\emph{règles logiques}} remplacent une formule de la conclusion par une ou des formules plus simples. La formule remplacée, appelée \emph{formule principale}, doit avoir une forme donnée en fonction de la règle. Les  \textbf{\emph{règles structurelles}} manipulent la structure du séquent en enlevant, dupliquant, dépla\c cant des formules dont on n'a pas besoin de connaître la forme. Elles dépendent du choix de structure du séquent : 
 par exemple, si on représentait $\G$ et $\D$ par des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrences est pris en compte mais pas l'ordre des éléments, on n'aurait pas besoin des règles d'échange $exchange\ L$ et $exchange\ R$.
 
+Ce qui distingue notamment le calcul des séquents d'un système de déduction naturelle est que toutes les règles logiques sont des règles d'\emph{introduction à gauche} ou \emph{à droite}, c'est-à-dire que la conclusion contient une constante ou un connecteur supplémentaire par rapport aux prémisses. En déduction naturelle, on aurait des règles d'\emph{élimination} comme
+	\AXC	{$\; \vdash A\land B$}
+	\UIC{$\; \vdash A$}
+	\DP
+.
+
+
 \subsection{Variantes d'écriture de certaines règles}
 \label{subsection:VariantesEcritureRegles}
 
 Cette présentation %, inspirée de la présentation de \LJ\ par Dyckhoff dans \cite{LJT}, 
 diffère %légèrement 
-de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même appeler ce calcul de séquents \LK. Gentzen écrit deux règles\LKetLun et \LKetLdeux à la place de \LKetL, et de même deux autres règles à la place de $\lor R$. On a cependant une équivalence grâce aux règles structurelles. Ci-dessous à gauche, on retrouve en effet la règle $\land L_{1}$ à partir de $\land L$ et $weakening\ L$, et on peut faire de même pour $\land L_{2}$. \`A droite, on retrouve $\land L$ à partir de $\land L_{1}$ et $\land L_{2}$ et $contraction\ L$. On s'autorise à faire agir $\land L_{1}$ sur une formule qui n'est pas la dernière de la liste : cela est possible en appliquant plusieurs fois la règle $exchange\ L$, 
-ce qu'on a pas fait explicitement par souci de lisibilité.
+de celle de Gentzen, mais elle en est suffisamment proche pour qu'on puisse quand même appeler ce calcul des séquents \LK. Gentzen écrit deux règles\LKetLun et \LKetLdeux à la place de \LKetL, et de même deux autres règles à la place de $\lor R$. On a cependant une équivalence grâce aux règles structurelles. Ci-dessous à gauche, on retrouve en effet la règle $\land L_{1}$ à partir de $\land L$ et $weakening\ L$, et on peut faire de même pour $\land L_{2}$. \`A droite, on retrouve $\land L$ à partir de $\land L_{1}$ et $\land L_{2}$ et $contraction\ L$. On s'autorise à faire agir $\land L_{1}$ sur une formule qui n'est pas la dernière de la liste : cela est possible en appliquant plusieurs fois la règle $exchange\ L$, 
+ce qu'on n'a pas fait explicitement par souci de lisibilité.
 %mais le faire explicitement alourdirait 
 \vspace{1mm}
 
@@ -295,21 +332,21 @@ ce qu'on a pas fait explicitement par souci de lisibilité.
 \subsection{Prouvabilité d'un séquent}
 \label{subsection:ProuvabiliteSequent}
 
-%Les définitions suivantes s'appliquent aux calculs de séquents en général, pas seulement \LJ.
-Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse de séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
+%Les définitions suivantes s'appliquent aux calculs des séquents en général, pas seulement \LJ.
+Une \textbf{\emph{instance}} d'une règle $\mathcal R$ a la même forme que la règle : \instance, mais ici les $\s_{i}$ et $\s$ sont des séquents connus explicitement ; bien entendu il faut qu'il s'agisse des séquents qui correspondent à la forme donnée par la définition de la règle. %Par exemple \etL\ devient une instance de la règle $\land L$ (qui a la même écriture que la règle) lorsqu'on connaît les formules $A$ et $B$ et toutes les formules de $\Th$, $\G$, $\D$.
 Une \textbf{\emph{preuve}} (ou \textbf{\emph{arbre de preuve}}) est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors\instance\ est une instance de $\mathcal R$. Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
 
 \begin{df}
 Un séquent $\s$ est \textbf{\emph{prouvable}} \emph{dans} 
 %(ou \emph{par}) 
 %ou \emph{par}
-\emph{un calcul de séquents} s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
+\emph{un calcul des séquents} s'il existe un arbre de preuve tel que le séquent associé à la racine est $\s$. De manière équivalente, on peut définir l'ensemble des séquents prouvables comme le plus petit ensemble vérifiant : pour toute instance \instance\ d'une règle, si pour tout $i$, $\s_{i}$ est prouvable, alors $\s$ est prouvable (en particulier pour toute instance \instanceAx\ d'un axiome $\mathcal A$, $\s$ est prouvable).
 \end{df}
 
 
 \subsection{Lien avec une logique, interprétation des séquents}
 
-Un calcul de séquents est généralement associé à une logique, à travers une propriété similaire à la suivante, qui concerne \LK\ et la logique classique.
+Un calcul des séquents est généralement associé à une logique, à travers une propriété similaire à la suivante, qui concerne \LK\ et la logique classique.
 
 \begin{prop}
 Une formule $A$ est valide en logique classique si, et seulement si, le séquent $\;\vdash A$ est prouvable par le calcul \LK\ (on écrit $\;\vdash A$ pour $\emptyset \vdash A$, $\emptyset$ désignant ici la liste vide).
@@ -325,10 +362,10 @@ Un séquent $\G \vdash \D$ est prouvable par le calcul \LK\ si, et seulement si, 
 
 \subsection{Calcul des séquents \LJ\ et logique intuitionniste}
 
-Gentzen a dérivé le calcul \LJ\ de \LK\ dans le but de correspondre à la logique intuitionniste. La modification apportée à \LK\ pour cela est simple et efficace : on restreint les séquents à ceux qui ont exactement une formule à droite, c'est-à-dire dans $\D$ avec les notations habituelles ; les règles sont adaptées en conséquence. La principale conséquence est l'impossibilité d'utiliser les règles structurelles à droite du séquent. La nouvelle définition d'un séquent est donc la suivante, et les règles sont données dans la figure~\ref{fig:reglesLJ}. 
+Gentzen a dérivé le calcul \LJ\ de \LK\ dans le but de correspondre à la logique intuitionniste. La modification apportée à \LK\ pour cela est simple et élégante : on restreint les séquents à ceux qui ont exactement une formule à droite ; les règles sont adaptées en conséquence. La principale conséquence de cette restriction est l'impossibilité d'utiliser les règles structurelles à droite du séquent. La nouvelle définition d'un séquent est donc la suivante, et les règles sont données dans la figure~\ref{fig:reglesLJ}. 
 
 \begin{df}
-Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ (les ``hypothèses'') et une formule $D$ (la ``conclusion'') ; on l'écrit $\G \vdash D$.
+Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ (les ``hypothèses'') et une formule $D$ (la ``conclusion'') ; on le note $\G \vdash D$. On appelera \emph{séquent intuitionniste} un tel séquent.
 \end{df}
 
 
@@ -438,9 +475,11 @@ $\begin{tabular}{|cc|}
 \end{figure}
 
 
-Les règles structurelles à droite de \LK, qui changent le nombre de formules à droite ou en nécessitent au moins deux, disparaissent. La règle\LKouL ne s'adapte pas non plus aux séquents de \LJ\ ; on la remplace par deux règles comme en \ref{subsection:VariantesEcritureRegles}.
+Les règles structurelles à droite de \LK, qui changent le nombre de formules à droite ou en nécessitent au moins deux, disparaissent. La règle\LKouR ne s'adapte pas immédiatement aux séquents de \LJ\ ; on la remplace par deux règles.%\ref{subsection:VariantesEcritureRegles}.
 
-Le connecteur $\lnot$ disparaît également. En logique intuitionniste, $\lnot A$ a bien un sens, mais on préfère considérer qu'il s'agit d'une simple notation pour $A\!\to\!\bot$. Cette décision est justifiée par le fait qu'en logique intuitionniste, $\lnot$ n'est pas involutif : la formule $\lnot\lnot A$ n'est pas équivalente à $A$.
+Le connecteur $\lnot$ disparaît également.  En effet, les règles qui lui sont associées dans \LK\ modifient le nombre de formules à droite du séquent. On donne bien un sens à $\lnot A$ en  logique intuitionniste, mais on considère qu'il s'agit d'une simple notation pour $A\!\to\!\bot$. 
+De plus, en logique intuitionniste, $\lnot$ n'est pas involutif : la formule $\lnot\lnot A$ n'est pas équivalente à $A$.
+%Cette décision est justifiée par le fait qu'en logique intuitionniste, $\lnot$ n'est pas involutif : la formule $\lnot\lnot A$ n'est pas équivalente à $A$.
 
 \
 
@@ -476,10 +515,10 @@ Un séquent $\G \vdash D$ est prouvable par le calcul \LJ\ si, et seulement si, l
 %\label{fig:LKTiersExclu}
 \end{floatingfigure}
 
-C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage de séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\vdash A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve ci-contre dans \LK\ du principe du tiers exclu $A\lor\lnot A$ 
+C'est la possibilité d'avoir plusieurs formules dans la partie droite du séquent qui permet de prouver davantage des séquents dans \LK\ que dans \LJ. On comprend ainsi la différence entre le ``ou'' classique et le ``ou'' intuitionniste. En logique classique, prouver $A\lor B$, c'est prouver le séquent $\;\vdash A,B$ : les deux formules sont encore présentes. Un bon exemple est la preuve ci-contre dans \LK\ du principe du tiers exclu $A\lor\lnot A$ 
 %(figure~\ref{fig:LKTiersExclu} ; on rappelle que $\lnot A$ est une notation pour $A\to\bot$) : 
 , qu'on écrit $A\lor(A\!\to\!\bot)$ pour mieux comparer à la logique intuitionniste où le $\lnot$ se comporte différemment.
-Si on peut appliquer l'axiome $id$ à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\vdash A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ : il faut donc prouver $\;\vdash A$ ou prouver $\;\vdash B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut pas prouver $A\lor(A\!\to\!\bot)$, car ni le séquent $\;\vdash A$ ni le séquent $\;\vdash (A\!\to\!\bot)$ n'est prouvable.
+Si on peut appliquer l'axiome $id$ à la formule $A$ (ce qui nécessite deux occurrences distinctes de la formule, une de chaque côté), c'est bien parce qu'on a conservé les deux parties de la formule initiale. Tandis qu'en logique intuitionniste, pour prouver $A\lor B$ c'est-à-dire $\;\vdash A\lor B$, les seules règles applicables sont $\lor R_{1}$ et $\lor R_{2}$ (et la règle de coupure, mais on verra plus loin qu'elle n'est jamais nécessaire) : il faut donc prouver $\;\vdash A$ ou prouver $\;\vdash B$ ; une fois qu'on a choisi lequel on va prouver, on n'a plus accès à l'autre. Ainsi, on ne peut pas prouver $A\lor(A\!\to\!\bot)$, car ni le séquent $\;\vdash A$ ni le séquent $\;\vdash (A\!\to\!\bot)$ n'est prouvable.
 
 \vspace{.3em}
 
@@ -536,14 +575,14 @@ Finalement, on peut considérer que la logique intuitionniste est obtenue à parti
 
 \section{Logique linéaire (LL) et logique linéaire intuitionniste (ILL)}
 
-La logique linéaire (LL) est une extension de la logique classique. Elle présente un grand un intérêt des points de vue logique aussi bien qu'informatique, notamment parce qu'elle contient une notion de ``ressources'' qui ne peuvent pas être utilisées inconsidérément. On peut considérer qu'elle est obtenue à partir de la logique classique en limitant l'usage des règles structurelles, si bien que de nouvelles nuances apparaissent, pour lesquelles sont introduits de nouveaux connecteurs. 
+La logique linéaire (LL) est une extension de la logique classique. Elle présente un grand intérêt des points de vue logique aussi bien qu'informatique, notamment parce qu'elle contient une notion de ``ressources'' qui ne peuvent pas être utilisées inconsidérément. On peut considérer qu'elle est obtenue à partir de la logique classique en limitant l'usage des règles structurelles, si bien que de nouvelles nuances apparaissent, pour lesquelles sont introduits de nouveaux connecteurs. 
 
-Voici un calcul de séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK\ : deux listes de formules $\G$ et $\D$, avec la notation $\G \vdash \D$. Les connecteurs, différents, sont donnés dans la figure~\ref{fig:connecteurs}. 
+Voici un calcul des séquents pour la logique linéaire. Les séquents sont les mêmes que ceux de \LK\ : deux listes de formules $\G$ et $\D$, avec la notation $\G \vdash \D$. Les connecteurs, différents, sont donnés dans la figure~\ref{fig:connecteurs}, inspirée de (\cite{panorama}, p.40). 
 Les formules sont alors construites à partir de variables propositionnelles, de ces connecteurs, et de constantes qui sont chacune un élément neutre associé à un connecteur. Par exemple $\1$ est l'élément neutre pour $\otimes$, c'est-à-dire que pour toute formule $A$, $A\otimes\1=\1\otimes A=A$.
 %\`A chaque connecteur est associé un élément neutre, c'est-à-dire une constante
-Les règles sont données dans la figure~\ref{fig:reglesLL}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{subsection:connecteursetc}, puis une interprétation en terme de ``ressources'' dans la sous-section~\ref{subsection:ressources}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
+Les règles, empruntées à (\cite{troelstra}, Table~1), sont données dans la figure~\ref{fig:reglesLL}. Des explications sur ces connecteurs et ces règles sont proposées dans la sous-section~\ref{subsection:connecteursetc}, puis une interprétation en terme de ``ressources''~\cite{synsem} dans la sous-section~\ref{subsection:ressources}. Enfin, on présente la logique linéaire intuitionniste (ILL).%, obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique.
 
-\idees{sources}
+%\idees{sources}
 
 %La logique linéaire intuitionniste (ILL) est obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique : en se restreignant aux séquents avec une unique formule à droite ; ici, 
 %
@@ -553,38 +592,70 @@ Les règles sont données dans la figure~\ref{fig:reglesLL}. Des explications sur 
 
 
 \begin{figure}[h]
-\centering
+%\centering
 
-\def\nomCol{
-\resizebox{2.7cm}{!}{
-\begin{tabular}{cc}
-	\multicolumn{2}{c}{\'Elément neutre} \\
-	Symbole & Nom
-\end{tabular}
-}
-}
+%\def\nomCol{
+%\resizebox{2.7cm}{!}{
+%\begin{tabular}{cc}
+%	\multicolumn{2}{c}{\'Elément neutre} \\
+%	Symbole & Nom
+%\end{tabular}
+%}
+%}
 
-\begin{tabular}{|c|c|c|c|}
-	\hline
-	\multirow{2}{*}{\large{Symbole}} & \multirow{2}{*}{\large{Nom}} & \multicolumn{2}{c|}{\small{\'Elément neutre}} \\[-1mm] 
-	& & \small{Symbole} & \small{Nom} \\ \hline
-	$\otimes$ & \emph{tenseur /} & $\1$ & \emph{un} \\[-1.5mm]
-	& \emph{produit tensoriel} & & \\ \hline
-	$\&$ & \emph{avec} & $\top$ & \emph{top} \\ \hline
-	$\oplus$ & \emph{plus} & $\0$ & \emph{zéro} \\ \hline
-	$\revAnd$ & \emph{produit parallèle} & $\bot$ & \emph{bot} \\ \hline
-	$\multimap$ & \emph{implication linéaire} & \multicolumn{2}{c|}{\scriptsize{pas d'élément neutre}} \\ \hline
-	\multicolumn{4}{c}{Connecteurs binaires}
-\end{tabular}
-\qquad\qquad
+%\begin{tabular}{|c|c|c|c|}
+%	\hline
+%	\multirow{2}{*}{\large{Symbole}} & \multirow{2}{*}{\large{Nom}} & \multicolumn{2}{c|}{\small{\'Elément neutre}} \\[-1mm] 
+%	& & \small{Symbole} & \small{Nom} \\ \hline
+%	$\otimes$ & \emph{tenseur /} & $\1$ & \emph{un} \\[-1.5mm]
+%	& \emph{produit tensoriel} & & \\ \hline
+%	$\&$ & \emph{avec} & $\top$ & \emph{top} \\ \hline
+%	$\oplus$ & \emph{plus} & $\0$ & \emph{zéro} \\ \hline
+%	$\revAnd$ & \emph{produit parallèle} & $\bot$ & \emph{bot} \\ \hline
+%	$\multimap$ & \emph{implication linéaire} & \multicolumn{2}{c|}{\scriptsize{pas d'élément neutre}} \\ \hline
+%	\multicolumn{4}{c}{Connecteurs binaires}
+%\end{tabular}
+%\qquad\qquad
+%\begin{tabular}{|c|c|}
+%	\hline
+%	\large{Symbole} & \large{Nom} \\ \hline
+%	$\lnot$ & \emph{non} \\ \hline
+%	$!$ & \emph{bang} \\ \hline
+%	$?$ & \emph{why not} \\ \hline
+%	\multicolumn{2}{c}{Connecteurs unaires}
+%\end{tabular}
 \begin{tabular}{|c|c|}
 	\hline
-	\large{Symbole} & \large{Nom} \\ \hline
+	Symbole & Nom \\ \hline
+	$\otimes$ & \emph{tenseur /} \\[-1.5mm]
+	& \emph{produit tensoriel} \\ \hline
+	$\&$ & \emph{avec} \\ \hline
+	$\oplus$ & \emph{plus} \\ \hline
+	$\revAnd$ & \emph{produit parallèle} \\ \hline
+	$\multimap$ & \emph{implication linéaire} \\ \hline
+	\multicolumn{2}{c}{Connecteurs binaires}
+\end{tabular}
+\quad
+\begin{tabular}{|c|c|}
+	\hline
+	Symbole & Nom \\ \hline
 	$\lnot$ & \emph{non} \\ \hline
 	$!$ & \emph{bang} \\ \hline
 	$?$ & \emph{why not} \\ \hline
 	\multicolumn{2}{c}{Connecteurs unaires}
 \end{tabular}
+\quad
+\begin{tabular}{|c|c|c|}
+	\hline
+	\multirow{2}{*}{Symbole} & \multirow{2}{*}{Nom} & \'Elément \\[-1mm] 
+	& & neutre de \\ \hline
+	$\1$ & \emph{un} & $\otimes$ \\ \hline
+	$\top$ & \emph{top} & $\&$ \\ \hline
+	$\0$ & \emph{zéro} & $\oplus$ \\ \hline
+	$\bot$ & \emph{bot} & $\revAnd$ \\ \hline
+	\multicolumn{3}{c}{Constantes}
+\end{tabular}
+
 
 \caption{Les connecteurs de la logique linéaire}
 \label{fig:connecteurs}	
@@ -797,55 +868,56 @@ Les règles sont données dans la figure~\ref{fig:reglesLL}. Des explications sur 
 \centering
 {
 \renewcommand{\arraystretch}{2}
-\resizebox{\linewidth}{!}{
+\resizebox{0.8\linewidth}{!}{
 $
-\begin{tabular}{|c|c|}
+\begin{tabular}{|cc|}
  	\hline
-	\id & \cut \\ \hline
-	\LLnonL & \LLnonR \\ \hline
-	\LLtenseurL & \LLtenseurR \\ \hline
-	\LLavecLun \; \LLavecLdeux & \LLavecR \\ \hline
-	\LLplusL & \LLplusRun \; \LLplusRdeux \\ \hline
-	\LLparalleleL & \LLparalleleR \\ \hline
-	\LLimpL & \LLimpR \\ \hline
-%	\LLunL & \LLunR \\
-%	\LLzeroL & \LLzeroR \\
+	\multicolumn{1}{|c|}{\id} & \cut \\ \hline
+	\LLnonL & \LLnonR \\ %\hline
+	\LLtenseurL & \LLtenseurR \\ %\hline
+	\LLavecLun \; \LLavecLdeux & \LLavecR \\ %\hline
+	\LLplusL & \LLplusRun \; \LLplusRdeux \\ %\hline
+	\LLparalleleL & \LLparalleleR \\ %\hline
+	\LLimpL & \LLimpR \\ %\hline
+	\LLunL & \LLunR \\
+	\LLzeroL & \LLzeroR \\
 %	\LLbotL & \LLtopR \\
 %\hspace{-2.5mm}
-	\LLunL \; \LLzeroL & \LLunR \; \LLzeroR \\ \hline
+%	\LLunL \; \LLzeroL & \LLunR \; \LLzeroR \\ \hline
 	\LLbotL & \LLtopR \\ \hline
-%	\LLbangL & \LLbangR \\
-%	\LLwhynotL & \LLwhynotR \\
-	\LLbangL \; \LLwhynotL & \LLbangR  \; \LLwhynotR \\ \hline
-	\LLweakeningL & \LLweakeningR \\ \hline
-	\LLcontractionL & \LLcontractionR \\ \hline
+	\LLbangL & \LLbangR \\
+	\LLwhynotL & \LLwhynotR \\ \hline
+%	\LLbangL \; \LLwhynotL & \LLbangR  \; \LLwhynotR \\ \hline
+	\LLweakeningL & \LLweakeningR \\ %\hline
+	\LLcontractionL & \LLcontractionR \\ %\hline
 	\LLexchangeL & \LLexchangeR \\ \hline
 \end{tabular}
 $
 }
 }
-\caption{Les règles d'un calcul de séquents pour LL}
+\caption{Les règles d'un calcul des séquents pour LL}
 \label{fig:reglesLL}
 \end{figure}
 
-
-
+\noindent
+\textit{Remarque.}
+Une dualité importante liée au connecteur $\lnot$ permet de définir un calcul des séquents pour la logique linéaire dans lequel les séquents ne comportent aucune formule à gauche. On a choisi de conserver des séquents avec des formules des deux côtés par similarité avec les autres calculs de séquents étudiés.
 
 
 \subsection{Limitation des règles structurelles, nouveaux connecteurs, modalités}
 \label{subsection:connecteursetc}
 
-L'usage des règles structurelles est restreint à certains types de formules qu'on verra plus loin. Une conséquence importante est qu'on n'a plus l'équivalence entre les deux écritures possibles des règles liées à $\land$, vues en \ref{subsection:VariantesEcritureRegles}. C'est pourquoi on introduit deux connecteurs distincts $\otimes$ et $\&$, qui pourraient tous deux se lire ``et'' en première approximation, correspondant chacun à une définition possible de $\land$ dans \LK\ (cf. les règles liées à ces connecteurs dans la figure~\ref{fig:reglesLL}). De même, le $\lor$ de logique classique est séparé en deux connecteurs $\oplus$ et $\revAnd$. On souhaite tout de même garder des règles structurelles, dont l'usage est seulement limité. On introduit pour cela des connecteurs unaires \emph{modaux}, ou \emph{modalités}, $!$ et $?$. Les règles structurelles peuvent seulement être appliquées à des formules comportant un de ces connecteurs : $!$ si la formule est à gauche, $?$ si elle est à droite. On a aussi des règles d'introduction de ces connecteurs, où par exemple $!\G$ représente une liste dont toutes les formules sont de la forme $!A$. On retrouve des relations entre $\otimes$ et $\&$ grâce à ces modalités : par exemple $(!A)\otimes(!B) = !(A\& B)$, qu'on discute dans la prochaine sous-section.
+L'usage des règles structurelles est restreint à certains types de formules qu'on verra plus loin. Une conséquence importante est qu'on n'a plus l'équivalence entre les deux écritures possibles des règles liées à $\land$, vues en \ref{subsection:VariantesEcritureRegles}. C'est pourquoi on introduit deux connecteurs distincts $\otimes$ et $\&$, qui pourraient tous deux se lire ``et'' en première approximation, correspondant chacun à une définition possible de $\land$ dans \LK\ (cf. les règles liées à ces connecteurs dans la figure~\ref{fig:reglesLL}). De même, le $\lor$ de logique classique est séparé en deux connecteurs $\oplus$ et $\revAnd$. On souhaite tout de même garder des règles structurelles, dont l'usage est seulement limité. On introduit pour cela des connecteurs unaires \emph{modaux}, ou \emph{modalités}, $!$ et $?$. Les règles structurelles peuvent seulement être appliquées à des formules comportant un de ces connecteurs : $!$ si la formule est à gauche, $?$ si elle est à droite. On a aussi des règles d'introduction de ces connecteurs, où par exemple $!\G$ représente une liste dont toutes les formules sont de la forme $!A$. On retrouve des relations entre $\otimes$ et $\&$ grâce à ces modalités : par exemple $(!A)\otimes(!B) =\ !(A\& B)$, qu'on discute dans la prochaine sous-section.
 
 
 
 \subsection{Interprétation : une idée de ``ressources''}
 \label{subsection:ressources}
 
-La logique linéaire est une logique de ``ressources''. L'implication linéaire $A\multimap B$ peut en effet se comprendre comme ``on peut dépenser un objet de type $A$ pour obtenir un objet de type $B$''. Ici, ``type'' est simplement un mot du langage courant et non un terme mathématique ou informatique.% ; on aurait aussi bien pu dire ``un objet de sorte $A$'', mais cela  
+La logique linéaire est une logique de ``ressources''. L'implication linéaire $A\multimap B$ peut en effet se comprendre comme ``on peut dépenser un objet de type $A$ pour obtenir un objet de type $B$''. Ici, ``type'' est simplement un mot du langage courant et non un terme mathématique ou informatique. % ; on aurait aussi bien pu dire ``un objet de sorte $A$'', mais cela  
 La formule $A\otimes B$ représente la possession à la fois d'un objet de type $A$ et d'un autre objet de type $B$. On comprend alors la notion de ``dépense'' en remarquant que, si on a $A\multimap B$ et $A\multimap C$, on n'obtient pas pour autant $A\multimap B\otimes C$ car un seul objet de type $A$ ne peut pas être dépensé deux fois ; en revanche on obtient bien $A\otimes A \multimap B\otimes C$. On n'obtient pas non plus $A\otimes A\otimes A \multimap B\otimes C$ car un objet de type $A$ ne serait pas dépensé ; cela est lié au fait que la formule $A\multimap\1$ n'est pas universellement valide, où $\1$ est l'élément neutre pour $\otimes$. Une analogie courante et pertinente compare ce fragment de la logique linéaire aux équations de réaction en chimie, avec la maxime de Lavoisier bien connue ``Rien ne se perd, rien ne se crée, tout se transforme''. Par exemple, l'équation $CH_{4} + 2O_{2} \longrightarrow CO_{2} + 2H_{2}O$ peut être fidèlement représentée par la formule $!(CH_{4}\otimes O_{2}\otimes O_{2} \multimap CO_{2}\otimes H_{2}O\otimes H_{2}O)$, où $CH_{4}$ etc. sont considérés comme des constantes ; la modalité $!$, discutée plus loin, signifie qu'on peut appliquer cette réaction autant de fois qu'on le souhaite.
 
-Intéressons-nous maintenant à $\&$, l'autre connecteur issu du $\land$ du logique classique. La formule $A\& B$ représente la %possession
+Intéressons-nous maintenant à $\&$, l'autre connecteur issu du $\land$ de la logique classique. La formule $A\& B$ représente la %possession
 possibilité de posséder%
 , au choix, un objet de type $A$ ou un objet de type $B$. \`A partir de $A\multimap B$ et $A\multimap C$, on obtient bien $A\multimap B\&C$ : on a le choix de la fa\c con dont on dépense l'objet de type $A$. Le fait qu'on ne possède finalement qu'un seul objet, de type $A$ ou de type $B$, peut donner l'impression qu'il s'agit d'une disjonction. Le point important est la possibilité de choisir %soi-même 
 le type parmi $A$ et $B$. Cela entraîne qu'on peut prouver $A\&B\multimap A$ et $A\&B\multimap B$, mais pas $A\multimap A\&B$, donc il s'agit bien d'une conjonction. C'est $A\oplus B$ qui représente la possession d'un objet dont on sait que le type est $A$ ou $B$, 
@@ -853,59 +925,200 @@ le type parmi $A$ et $B$. Cela entraîne qu'on peut prouver $A\&B\multimap A$ et 
 mais on ne peut pas choisir lequel des deux%
 . Il s'agit cette fois d'une disjonction : on peut prouver $A\multimap A\oplus B$ mais pas $A\oplus B\multimap A$.
 
-La modalité $!A$ signifie qu'on peut posséder un objet de type $A$ autant de fois qu'on le souhaite, y compris zéro. Un exemple significatif est l'égalité $(!A)\otimes(!B) = !(A\& B)$ : posséder simultanément autant d'objets qu'on veut de type $A$ et autant d'objets qu'on veut de type $B$, revient à avoir autant de fois qu'on veut la possibilité de choisir de posséder un objet de type $A$ ou un objet de type $B$.
+La modalité $!A$ signifie qu'on peut posséder un objet de type $A$ autant de fois qu'on le souhaite, y compris zéro. Un exemple significatif est l'égalité $(!A)\otimes(!B) =\ !(A\& B)$ : posséder simultanément autant d'objets qu'on veut de type $A$ et autant d'objets qu'on veut de type $B$, revient à avoir autant de fois qu'on veut la possibilité de choisir de posséder un objet de type $A$ ou un objet de type $B$.
 
-$\revAnd$, $?$
+Les connecteurs $\revAnd$ et $?$ sont plus difficiles à expliquer naturellement.
 
 
 \subsection{Logique linéaire intuitionniste}
 
-La logique linéaire intuitionniste (ILL) peut être associée à un calcul dont les séquents sont les mêmes que ceux de \LJ\ : une liste de formules $\G$ et une formule $D$, avec la notation $\G \vdash D$ ; les règles sont données dans la figure~\ref{fig:reglesILL}.
+La logique linéaire intuitionniste (ILL) peut être associée à un calcul dont les séquents sont les mêmes que ceux de \LJ\ : une liste de formules $\G$ et une formule $D$, avec la notation $\G \vdash D$ ; les règles, empruntées pour la plupart à (\cite{theseDLW}, p.75), sont données dans la figure~\ref{fig:reglesILL}.
 
 La logique linéaire intuitionniste (ILL) est obtenue à partir de la logique linéaire de la même manière que la logique intuitionniste est obtenue à partir de la logique classique : en se restreignant aux séquents avec une unique formule à droite. 
-On ne garde que les connecteurs binaires $\otimes$, $\multimap$ et $\&$ avec leur élément neutre éventuel, et le connecteur modal $!$.
-Le $\lnot$ disparaît pour la même raison qu'en logique intuitionniste. (?) Les autres connecteurs sont liés à des règles qui ne s'adaptent pas aux séquents avec une unique formule à droite, à l'exception de $\oplus$ qui pourrait être conservé sans problème. Néanmoins, on se conforme à une tradition qui consiste à parler de \emph{logique linéaire intuitionniste} lorsqu'on ne considère pas de connecteur $\oplus$, et de \emph{logique linéaire intuitionniste à produits finis} lorsqu'on le rajoute.
+On enlève les connecteurs et la constante qui sont liés à des règles qui ne s'adaptent pas aux séquents avec une unique formule à droite, à savoir $\lnot$, $\revAnd$, $\0$ et $?$.
+
+%On ne garde que les connecteurs binaires $\otimes$, $\multimap$ et $\&$ avec leur élément neutre éventuel, et le connecteur modal $!$.
+%En effet, les autres connecteurs sont liés à des règles qui ne s'adaptent pas aux séquents avec une unique formule à droite, à l'exception de $\oplus$ qui pourrait être conservé sans problème. Néanmoins, on se conforme à une tradition qui consiste à parler de \emph{logique linéaire intuitionniste} lorsqu'on ne considère pas de connecteur $\oplus$, et de \emph{logique linéaire intuitionniste à produits finis} lorsqu'on le rajoute.
 %Le connecteur de logique linéaire $\revAnd$ disparaît alors, puisque les règles liées nécessitent des séquents avec plusieurs formules à droite. Le connecteur $\oplus$ peut être conservé, mais traditionnellement, il est absent de ce qu'on appelle la \emph{logique linéaire intuitionniste}, qui devient la \emph{logique linéaire intuitionniste à produits finis} lorsqu'on le rajoute.
+
+
+
+%ILL
+%id, coupure : commun
+
+%ILL,règles logiques
+\def\ILLtenseurL{
+	\AXC	{$\G,A,B \vdash D$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$\G,A\otimes B \vdash D$}
+	\DP
+}
+\def\ILLtenseurR{
+	\AXC	{$\G \vdash A$}
+	\AXC	{$\G' \vdash B$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$\G \vdash A\otimes B$}
+	\DP
+}
+\def\ILLavecLun{
+	\AXC	{$\G,A \vdash D$}
+	\RightLabel{$(\& L_{1})$}
+	\UIC{$\G,A\& B \vdash D$}
+	\DP
+}
+\def\ILLavecLdeux{
+	\AXC	{$\G,B \vdash D$}
+	\RightLabel{$(\& L_{2})$}
+	\UIC{$\G,A\& B \vdash D$}
+	\DP
+}
+\def\ILLavecR{
+	\AXC	{$\G \vdash A$}
+	\AXC	{$\G \vdash B$}
+	\RightLabel{$(\& R)$}
+	\BIC{$\G \vdash A\& B$}
+	\DP
+}
+\def\ILLplusL{
+	\AXC	{$\G,A \vdash D$}
+	\AXC	{$\G,B \vdash D$}
+	\RightLabel{$(\oplus L)$}
+	\BIC{$\G,A\oplus B \vdash D$}
+	\DP
+}
+\def\ILLplusRun{
+	\AXC	{$\G \vdash A$}
+	\RightLabel{$(\oplus R_{1})$}
+	\UIC{$\G \vdash A\oplus B$}
+	\DP
+}
+\def\ILLplusRdeux{
+	\AXC	{$\G \vdash B$}
+	\RightLabel{$(\oplus R_{2})$}
+	\UIC{$\G \vdash A\oplus B$}
+	\DP
+}
+\def\ILLimpL{
+	\AXC	{$\G \vdash A$}
+	\AXC	{$\G',B \vdash D$}
+	\RightLabel{$(\multimap\! L)$}
+	\BIC{$\G,\G',A\multimap B \vdash D$}
+	\DP
+}
+\def\ILLimpR{
+	\AXC	{$\G,A \vdash B$}
+	\RightLabel{$(\multimap\! R)$}
+	\UIC{$\G \vdash A\multimap B$}
+	\DP
+}
+
+
+%ILL, constantes
+\def\ILLunL{
+	\AXC	{$\G \vdash D$}
+	\RightLabel{$(\1 L)$}
+	\UIC{$\G,\1 \vdash D$}
+	\DP
+}
+\def\ILLunR{
+	\AXC	{}
+	\RightLabel{$(\1 R)$}
+	\UIC{$\; \vdash \1$}
+	\DP
+}
+\def\ILLbotL{
+	\AXC	{}
+	\RightLabel{$(\bot L)$}
+	\UIC{$\G,\bot \vdash D$}
+	\DP
+}
+\def\ILLtopR{
+	\AXC	{}
+	\RightLabel{$(\top R)$}
+	\UIC{$\G \vdash \top,D$}
+	\DP
+}
+
+%ILL, modalités
+\def\ILLbangL{
+	\AXC	{$\G,A \vdash D$}
+	\RightLabel{$(! L)$}
+	\UIC{$\G,!A \vdash D$}
+	\DP
+}
+\def\ILLbangR{
+	\AXC	{$!\G \vdash A$}
+	\RightLabel{$(! R)$}
+	\UIC{$!\G \vdash !A$}
+	\DP
+}
+
+%ILL, règles structurelles
+\def\ILLweakeningL{
+	\AXC	{$\G \vdash D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,!A \vdash D$}
+	\DP
+}
+\def\ILLcontractionL{
+	\AXC	{$\G,!A,!A \vdash D$}
+	\RightLabel{$(contraction\ L)$}
+	\UIC{$\G,!A \vdash D$}
+	\DP
+}
+\def\ILLexchangeL{
+	\AXC	{$\G_{1},A,B,\G_{2} \vdash D$}
+	\RightLabel{$(exchange\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \vdash D$}
+	\DP
+}
+
+
+
 
 \begin{figure}[h]
 \centering
 {
-%\renewcommand{\arraystretch}{2}
-%\resizebox{\linewidth}{!}{
-%}
-\idees{à faire}
+\renewcommand{\arraystretch}{2}
+\resizebox{0.8\linewidth}{!}{
+$
+\begin{tabular}{|cc|}
+ 	\hline
+	\multicolumn{1}{|c|}{\id} & \LJcut \\ \hline
+	\ILLtenseurL & \ILLtenseurR \\ %\hline
+	\ILLavecLun \; \ILLavecLdeux & \ILLavecR \\ %\hline
+	\ILLplusL & \ILLplusRun \; \ILLplusRdeux \\
+	\ILLimpL & \ILLimpR \\ %\hline
+	\ILLunL & \ILLunR \\
+	\ILLbotL & \ILLtopR \\ \hline
+	\ILLbangL & \ILLbangR \\ \hline
+	\multicolumn{2}{|c|}{\ILLweakeningL \; \ILLcontractionL \; \ILLexchangeL} \\ \hline\end{tabular}
+$
 }
-\caption{Les règles d'un calcul de séquents pour ILL}
+}
+\caption{Les règles d'un calcul des séquents pour ILL}
 \label{fig:reglesILL}
 \end{figure}
 
 
 
 \section{Le procédé d'élimination de la coupure (p.é.c.) pour ILL}
+\label{section:pec}
 
-coupure intéressante : transitivité, conclusion prouvée à son tour utilisée comme hypothèse
+\subsection{Le théorème d'élimination de la coupure}
 
-souvent, coupure non nécessaire : correct et surtout complet sans.
-mais démonstration souvent difficile
+La règle de coupure :\cut pour des séquents classiques,\\\LJcut pour des séquents intuitionnistes, est, tout comme\id, une règle qu'on retrouve dans la plupart des calculs de séquents. Elle est naturelle lorsqu'on considère l'interprétation d'un séquent classique $\G\vdash\D$ : ``à partir des formules de $\G$, on peut montrer une formule de $\D$''. La règle de coupure signifie alors que si on a $\G\vdash A,\D$ et $\G',A\vdash\D'$ alors, ou bien à partir de $\G$, on peut monter une formule de $\D$, auquel cas on a aussi $\G,\G'\vdash\D,\D'$, ou bien à partir de $\G$ on peut montrer 
+$A$, or à partir de $A$ et $\G'$ on peut montrer une formule de $\D'$, donc à partir de $\G,\G'$ on peut montrer une formule de $\D'$, si bien qu'on a encore $\G,\G'\vdash\D,\D'$. Cette interprétation s'adapte aussi aux séquents intuitionnistes.
+L'idée principale est qu'une conclusion établie peut être immédiatement utilisée comme hypothèse (en rappelant que dans $\G\vdash\D$ les formules de $\G$ sont appelées les hypothèses et celles de $\D$ les conclusions). La règle de coupure représente une transitivité : de $A\vdash B$ et $B\vdash C$ on déduit $A\vdash C$.
 
-démonstration également intéressante. constructive : transformer n'importe quelle preuve en preuve du même séquent sans coupure. pour cela, énumération de transformations élémentaires : agissent sur petite partie de la preuve.
-
-ces transformations permettent de définir une relation d'équivalence
-
+Le \emph{théorème d'élimination de la coupure}, pour un calcul donné présentant une règle de coupure, affirme que si on supprime la règle de coupure du calcul, on obtient un calcul équivalent, c'est-à-dire que les séquents prouvables restent les mêmes. Une formulation équivalente est : tout séquent prouvable dans le calcul considéré admet un arbre de preuve dans lequel la règle de coupure ne figure pas. C'est cette formulation qui est utilisée dans la démonstration que nous allons étudier. Le théorème d'élimination de la coupure est vérifié par de nombreux calculs de séquents, notamment tous ceux que nous avons introduits dans ce mémoire. Il est intéressant d'un point de vue sémantique : la transitivité représentée par la règle de coupure est vérifiée par le calcul, même si on ne l'impose pas par un énoncé explicite de cette règle de coupure. Souvent valide, ce théorème est néanmoins fréquemment difficile à établir.
+%Le théorème d'élimination de la coupure est souvent valide, mais aussi souvent difficile à établir. 
 
 
-\section{}
-
-\idees{
-On suppose qu'on a présenté la logique linéaire et son calcul de séquents, et le procédé d'élimination de la coupure (qu'on abrège pour l'instant parfois en p.é.c., mais cela peut changer). On distingue le p.é.c. ``strict'' avec seulement les transformations nécessaires pour le théorème d'élimination de la coupure, du p.é.c. ``large'' où on a rajouté les transformations qui font que alpha, lambda, rho deviennent des isomorphismes et donc permettent d'obtenir vraiment une catégorie monoïdale.
-}
-
-\idees{source : chapitre 3}
-
-\subsection{Invariant modulaire et catégorie}
+\subsection{\'Eléments d'une démonstration de ce théorème pour ILL}
 
 \noindent
-\textbf{Notation.}
+\textit{Notation.}
 Soit $p$ une preuve du séquent $\s$. On écrit%
 	\AXC	{$p$}
 	%\noLine
@@ -914,10 +1127,127 @@ Soit $p$ une preuve du séquent $\s$. On écrit%
 	\DP
 car souvent, il est intéressant d'expliciter $\s$ pour prolonger $p$ en une preuve plus complexe d'un autre séquent.
 
-\
+\vspace{.5em}
 
-\`A chaque preuve $p$, on associe une \textbf{\emph{dénotation}} $[p]$. On veut que cela constitue un invariant selon l'élimination de la coupure : deux preuves on la même dénotation si, et seulement si, une peut être obtenue en appliquant à l'autre des transformations autorisée par la procédure d'élimination de la coupure. Ceci est motivé par une analogie avec la théorie des n\oe uds, où les invariants sont relatifs aux transformations de Reidemeister.
-\idees{expliquer ? ne pas en parler ?}
+Nous présentons un bref aper\c cu d'une démonstration constructive du théorème d'élimination de la coupure dans le cadre du calcul des séquents lié à la logique linéaire intuitionniste que nous avons présenté. Elle figure dans le chapitre~3 de~\cite{panorama}. En donner les détails serait bien trop long : dans le livre cité, elle occupe une vingtaine de pages. Elle fournit une liste précise de tranformations élémentaires, qui à une preuve d'un séquent associent une autre preuve du même séquent. L'idée est qu'en les appliquant successivement dans un ordre bien choisi à une preuve d'un séquent, on peut obtenir une preuve du même séquent n'utilisant jamais la règle de coupure. Un premier point à noter est qu'une transformation élémentaire peut être appliquée à un sous-arbre d'une preuve donnée : par exemple, une preuve
+\resizebox{1.5cm}{!}{
+	\AXC	{$p$}
+	\dottedLine
+	\UIC{$\;\s\;$}
+	\RightLabel{$(\mathcal R)$}
+	\UIC{$\;\s'\;$}
+	\DP
+}
+peut être transformée en 
+\resizebox{1.5cm}{!}{
+	\AXC	{$p'$}
+	\dottedLine
+	\UIC{$\;\s\;$}
+	\RightLabel{$(\mathcal R)$}
+	\UIC{$\;\s'\;$}
+	\DP
+}
+si la preuve $p$ peut être transformée en $p'$. Les transformations élémentaires sont locales : le nombre de n\oe uds explicités lorsqu'on en énonce une ne dépasse pas une dizaine.
+%
+Bien que la coupure ne soit pas une règle logique, on appelle \emph{formule principale} de\LJcut la formule $A$ qui a un rôle particulier.
+L'idée associée aux applications successives de transformations élémentaires est de ``faire remonter'' les utilisations de la règle de coupure à une profondeur de plus en plus grande dans l'arbre.
+Pour cela, on a parfois besoin de remplacer des utilisations de cette règle par d'autres dont la formule principale est plus petite, quitte à augmenter la taille de l'arbre.
+%, et d'autre part, de remplacer des utilisations de cette règle par d'autres dont la formule principale est plus petite. %L'intérêt de diminuer la taille de la formule principale est de finalement arriver à des formules atomiques, qui 
+Il faut bien entendu que certaines transformations permettent de réduire strictement le nombre d'utilisations de la règle de coupure : par exemple,
+\\
+\vspace{-.8em}
+
+{\centering
+\resizebox{5cm}{!}{
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+		\AXC	{$p$}
+		\dottedLine
+		\UIC{$\G_{1},A,\G_{2}\vdash B$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G_{1},A,\G_{2}\vdash B$}
+	\DP
+}
+\quad se transforme en\quad
+	\AXC	{$p$}
+	\dottedLine
+	\UIC{$\G_{1},A,\G_{2}\vdash B$}
+	\DP
+.
+
+}
+\vspace{.2em}
+
+\noindent
+Un exemple de transformation permettant de diminuer la taille de la formule principale est celle, associée au connecteur $\otimes$, qui transforme
+\\
+\vspace{-.8em}
+
+{\centering
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\otimes B\vdash A\otimes B$}
+	\DP
+\quad en \quad
+\resizebox{4.5cm}{!}{
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+		\AXC	{}
+		\RightLabel{$(id)$}
+		\UIC{$B\vdash B$}
+	\RightLabel{$(\otimes R)$}
+	\BIC{$A,B\vdash A\otimes B$}
+	\RightLabel{$(\otimes L)$}
+	\UIC{$A\otimes B\vdash A\otimes B$}
+	\DP
+}
+.
+
+}
+\noindent
+Le choix de la transformation à appliquer selon la situation est très compliqué : il dépend notamment de la nature des règles qui se situent au-dessus de la règle de coupure qu'on souhaite ``faire remonter'' (éventuellement en plusieurs transformations), mais ce choix n'est parfois pas le même selon que la formule principale d'une de ces règles est ou non égale à la formule principale de la coupure considérée...
+
+\vspace{.5em}
+
+On admettra que le procédé qui consiste à appliquer ces transformations dans un ordre bien choisi fonctionne. On renvoie au chapitre~3 de~\cite{panorama} pour le détail des transformations et du choix de la transformation à appliquer selon la situation.
+
+
+
+\subsection{Procédé d'élimination de la coupure et relation d'équivalence sur les preuves}
+
+On appelle \emph{procédé d'élimination de la coupure}, abrégé en p.é.c., le procédé décrit dans la preuve précédente. Celui-ci est caractérisé par l'ensemble de transformations dont il était question dans la preuve, mais aussi par un choix déterministe de transformation à appliquer selon la situation. On peut construire à partir de ce p.é.c. une relation d'équivalence sur les preuves de logique linéaire intuitionniste. Pour cela, on pose $p\rhd p'$ si on peut passer de la preuve $p$ à la preuve $p'$ en appliquant le p.é.c., puis on considère la clôture symétrique et transitive de $\rhd$. On appelle \emph{équivalence selon le p.é.c.} la relation d'équivalence ainsi obtenue. On remarque que si deux preuves sont équivalentes selon le p.é.c., alors il s'agit de preuves du même séquent.
+
+
+
+% on impose que si on peut passer d'une preuve $p$ à une preuve $p'$ en appliquant le p.é.c., alors $p$ et $p'$ sont équivalentes, puis on ajoute les 
+
+
+% : deux preuves $p$ et $p'$ sont équivalentes si on peut passer de l'une à l'autre en appliquant le p.é.c. (il s'agit alors nécessairement de preuves du même séquent). On parle d'\emph{équivalence selon le p.é.c.}\,. La transitivité est assurée par le déterminisme du procédé : par exemple si le p.é.c. transforme une preuve $p$ en $p'$ et transforme cette même preuve $p$ en $p''$, en itérant l'application de la transformation convenablement choisie à partir de $p$, on obtient un jour $p'$ et on obtient un jour $p''$, et celle des deux qui est rencontrée la première est transformée en l'autre par le p.é.c.\,.
+
+Dans le chapitre~3 de~\cite{panorama}, le p.é.c. est défini très soigneusement, en ne laissant pas plus de liberté que celle qui est nécessaire pour éliminer effectivement toutes les utilisations de la règle de coupure. On qualifiera ce p.é.c. de ``strict''. Il existe en effet un p.é.c. ``large'', obtenu à partir du précédent en autorisant, dans certaines situations précises, l'application d'une transformation différente de celle indiquée par le p.é.c. ``strict''. On verra que 
+%donner cette liberté supplémentaire 
+considérer la relation d'équivalence associée %de la même manière au p.é.c. ``large''
+peut permettre d'obtenir des propriétés intéressantes sur la catégorie qu'on contruira dans la partie suivante à partir des preuves de la logique linéaire intuitionniste.
+
+
+\section{Construction d'une catégorie et propriétés de cette catégorie}
+
+%\idees{
+%On suppose qu'on a présenté la logique linéaire et son calcul des séquents, et le procédé d'élimination de la coupure (qu'on abrège pour l'instant parfois en p.é.c., mais cela peut changer). On distingue le p.é.c. ``strict'' avec seulement les transformations nécessaires pour le théorème d'élimination de la coupure, du p.é.c. ``large'' où on a rajouté les transformations qui font que alpha, lambda, rho deviennent des isomorphismes et donc permettent d'obtenir vraiment une catégorie monoïdale.
+%}
+%
+%\idees{source : chapitre 3}
+
+Cette section est fortement inspirée du chapitre~2 de~\cite{panorama}. On renvoie à celui-ci pour les démonstrations, qui s'appuient souvent sur certaines transformations du procédé d'élimination de la coupure figurant dans le chapitre~3 du même ouvrage et qu'on ne peut pas envisager de recopier ici intégralement.
+
+\subsection{Invariant modulaire et catégorie}
+
+
+\`A chaque preuve $p$, on associe une \textbf{\emph{dénotation}} $[p]$. On veut que cela constitue un invariant selon l'élimination de la coupure : deux preuves ont la même dénotation si, et seulement si, %une peut être obtenue en appliquant à l'autre des transformations autorisées par la procédure d'élimination de la coupure.
+elles sont équivalentes selon le procédé d'élimination de la coupure (cf. section précédente).
+Ceci est motivé par une analogie avec la théorie des n\oe uds, où les invariants sont relatifs aux transformations de Reidemeister.
 
 \begin{floatingfigure}[r]{0.27\textwidth}
 \centering
@@ -938,10 +1268,11 @@ car souvent, il est intéressant d'expliciter $\s$ pour prolonger $p$ en une preu
 
 
 On demande également la propriété suivante. Soit $A$, $B$, $C$ des formules, et $p_{1}$ et $p_{2}$ des preuves de $A \vdash B$ et $B \vdash C$ respectivement. La règle de coupure fournit immédiatement la preuve $p$ de $A \vdash C$ ci-contre. On veut que sa dénotation $[p]$ se déduise à partir de $[p_{1}]$ et $[p_{2}]$. On introduit pour cela la \textbf{loi de composition $\circ$} telle que $[p] = [p_{2}] \circ [p_{1}]$.
-On dit alors que l'invariant est \emph{modulaire}.
+%On dit alors que l'invariant est \emph{modulaire}.
 
 On remarque que la loi de composition $\circ$ est \textbf{associative} et présente pour chaque formule une \textbf{identité} à gauche et à droite. En effet, soit $A$, $B$, $C$, $D$ des formules, et $p_{1}$, $p_{2}$, $p_{3}$ des preuves respectives de $A \vdash B$, $B \vdash C$, $C \vdash D$. On peut en déduire deux preuves de $A \vdash D$ :
 \\
+\vspace{-1.5em}
 \begin{center}
 	\AXC	{$p_{1}$}
 	\dottedLine
@@ -975,7 +1306,7 @@ On remarque que la loi de composition $\circ$ est \textbf{associative} et présen
 \end{center}
 
 \noindent
-qui sont équivalentes d'après le procédé d'élimination de la coupure. Cela signifie précisément que $([p_{1}]\circ[p_{2}])\circ[p_{3}] = [p_{1}]\circ([p_{2}]\circ[p_{3}])$. L'identité pour une formule $A$ est la dénotation de la preuve 
+qui sont équivalentes selon le p.é.c.\,. Cela signifie précisément que $([p_{1}]\circ[p_{2}])\circ[p_{3}] = [p_{1}]\circ([p_{2}]\circ[p_{3}])$. L'identité pour une formule $A$ est la dénotation de la preuve 
 {\centerAlignProof
 	\AXC	{}
 	\RightLabel{$(id)$}
@@ -1010,7 +1341,7 @@ Ces propriétés sur les dénotations permettent d'utiliser le formalisme des catég
 
 % def catégorie
 \begin{df}
-Une \textbf{\emph{catégorie}} consiste en une collection d'\emph{objets} et une collection de \emph{morphismes}, cette dernière munie d'une opérations binaire partielle $\circ$ appelée \emph{composition}, avec les propriétés suivantes.
+Une \textbf{\emph{catégorie}} consiste en une collection d'\emph{objets} et une collection de \emph{morphismes}, cette dernière munie d'une opération binaire partielle $\circ$ appelée \emph{composition}, avec les propriétés suivantes.
 
 \begin{itemize}
 
@@ -1023,7 +1354,7 @@ Pour tous objets $A$, $B$, $C$ et morphismes $f$, $g$ tels que $f:A\to B$ et $g:
 
 \item
 \textbf{Identité.}
-Pour tout objet $A$, il existe un morphisme particulier $id_{A}:A\to A$ appelé \emph{identitié sur $A$}, tel que 
+Pour tout objet $A$, il existe un morphisme particulier $id_{A}:A\to A$ appelé \emph{identité sur $A$}, tel que 
 %pour tous objet $B$ et morphismes $f:B\to A$ et $g:A\to B$, $id_{A}\circ f=f$ et $g\circ id_{A}=g$.
 pour tout objet $B$, pour tout $f:B\to A$, $id_{A}\circ f=f$ et pour tout $g:A\to B$, $g\circ id_{A}=g$.
 
@@ -1037,13 +1368,19 @@ Pour tous $f:A\to B$, $g:B\to C$, $h:C\to D$, on a $h\circ(g\circ f) = (h\circ g
 \noindent\textbf{Notations.} Soit $\Ccal$ une catégorie, on note $Obj(\Ccal)$ la classe de ses objets et $Hom(\Ccal)$ celle de ses morphismes. Pour des objets $A$ et $B$, on note $Hom_{A\to B}(\Ccal)$ la classe des morphismes de type $A\to B$. On peut omettre l'argument $\Ccal$ s'il n'y a pas d'ambiguïté, par exemple si on travaille sur une seule catégorie.
 \end{df}
 
-Les dénotations des preuves s'organisent sous la forme de la catégorie suivante, qu'on appellera $\CProofs$.
-\idees{choix du nom ?}
-\`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules, deux à deux distinctes, constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. Comme on l'a vu, la composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$. On notera aussi $A$ la dénotation de la formule $A$, sauf lorsqu'on souhaite insister sur le fait qu'il s'agit d'une dénotation. Cela permet d'alléger l'écriture et de retrouver la notation employée dans les définitions sur les catégories.
+%Les dénotations des preuves s'organisent sous la forme de
+On construit la catégorie suivante, qu'on appellera $\CProofs$.
+%\idees{choix du nom ?}
+\`A chaque formule $A$ on associe une dénotation $[A]$. Les dénotations des formules %, deux à deux distinctes, 
+constituent les objets de la catégorie. Les morphismes sont des dénotations de preuves. Les morphismes de $[A]$ vers $[B]$ sont les dénotations des preuves de $A\vdash B$ ; si ce séquent n'est pas prouvable, il n'y en a pas. Comme on l'a vu, la composition $\circ$ est bien associative, et l'identité sur $[A]$ est le morphisme $id_{A}$. On notera aussi $A$ la dénotation de la formule $A$, sauf lorsqu'on souhaite insister sur le fait qu'il s'agit d'une dénotation. Ceci permet d'alléger l'écriture et de retrouver la notation employée dans les définitions sur les catégories.
 
 %Pour l'instant, on ne considère 
-Cette définition ne tient compte que des dénotations de preuves où le séquent prouvé a une unique formule à gauche et une unique formule à droite ; les autres séquents des preuves peuvent avoir n'importe quelle forme. Cette restriction est conservée dans 
-\idees{quelques sous-sections ? tout le reste de la partie ? toujours ? Est-ce qu'on peut étendre ce formalisme à n'importe quelle preuve de la logique intuitionniste linéaire grâce au théorème de MacLane, cf. mail ?}
+Cette définition ne tient compte que des dénotations de preuves où le séquent prouvé a une unique formule à gauche et une unique formule à droite ; les autres séquents des preuves peuvent avoir n'importe quelle forme. On donne rapidement, à la fin de cette section, quelques éléments qui permettraient d'étendre ce formalisme à des preuves de n'importe quel séquent intuitionniste.
+
+
+
+%Cette restriction est conservée dans 
+%\idees{quelques sous-sections ? tout le reste de la partie ? toujours ? Est-ce qu'on peut étendre ce formalisme à n'importe quelle preuve de la logique intuitionniste linéaire grâce au théorème de MacLane, cf. mail ?}
 %les quelques sous-section qui suivent, où on enrichit notre catégorie. ... Enfin, on étend ce formalisme à toutes les preuves de la logique linéaire intuitionniste, %c'est-à-dire avec des séquents qui 
 %où les séquents ont un nombre quelconque de formules à gauche et exactement une formule à droite.
 
@@ -1094,7 +1431,7 @@ On souhaite étendre cet opérateur aux dénotations de preuves. Pour cela, on rema
 
 L'opérateur est bien défini : si on a deux autres preuves $p'_{1}$ et $p'_{2}$ telles que $[p'_{1}]=[p_{1}]$ et $[p'_{2}]=[p_{2}]$, et si $p'$ est la preuve obtenue à partir de $p'_{1}$ et $p'_{2}$ selon le procédé utilisé pour construire $p$, alors $[p']=[p]$. En effet, le procédé d'élimination de la coupure autorise évidemment à remplacer la preuve $p_{1}$ apparaissant dans la preuve $p$ par une preuve $p'_{1}$ qui lui est équivalente.
 
-Intéressons-nous à la compatibilité de $\otimes$ avec $\circ$. Soit des morphismes de  $f_{1} : A_{1}\to B_{1}$\,,\; $f_{2} : A_{2}\to B_{2}$\,,\; $g_{1} : B_{1}\to C_{1}$\,,\; $g_{2} : B_{2}\to C_{2}$ %(on confond un objet avec sa dénotation pour simplifier l'écriture)
+Intéressons-nous à la compatibilité de $\otimes$ avec $\circ$. Soit des morphismes  $f_{1} : A_{1}\to B_{1}$\,,\; $f_{2} : A_{2}\to B_{2}$\,,\; $g_{1} : B_{1}\to C_{1}$\,,\; $g_{2} : B_{2}\to C_{2}$ %(on confond un objet avec sa dénotation pour simplifier l'écriture)
 . Pour chaque morphisme $f$, soit $p(f)$ une preuve de dénotation $f$. Les deux preuves suivantes sont équivalentes selon le p.é.c., ce qui signifie que $(g_{1}\otimes g_{2})\circ(f_{1}\otimes f_{2}) = (g_{1}\circ f_{1})\otimes(g_{2}\circ f_{2})$.
 \vspace{2mm}
 
@@ -1208,8 +1545,15 @@ Soit $\Ccal$ et $\Dcal$ des catégories. On définit la \textbf{\emph{catégorie pr
 %On verra que munir la catégorie $\CProofs$ de $\otimes$ en fait une catégorie monoïdale. Mais pour définir ce qu'est une catégorie monoïdale, il faut plusieurs autres définitions sur les catégories.
 
 La catégorie $\CProofs$ ayant été munie du bifoncteur $\otimes$, on se demande s'il s'agit d'une catégorie monoïdale, dont la définition est donnée après deux définitions auxiliaires.
+%Une catégorie monoïdale peut se comprendre comme une catégorie munie d'une structure de monoïde qui a un ``bon comportement'' par rapport aux autres structures de la catégorie, le sens de ce ``bon comportement'' restant à définir.
 %, qui s'appuie sur les deux définitions suivantes, est donnée ensuite.
 %à leur suite.
+
+\begin{df}
+Soit une catégorie,
+un morphisme $f:A\to B$ est un \textbf{\emph{isomorphisme}} s'il existe un morphisme $f^{-1}:B\to A$ tel que $f^{-1}\circ f=id_{A}$ et $f\circ f^{-1}=id_{B}$.
+\end{df}
+
 
 \begin{df}
 Soit $\Ccal$ et $\Dcal$ des catégories. Soit $F,G:\Ccal\longrightarrow\Dcal$ des foncteurs de $\Ccal$ vers $\Dcal$. Une \textbf{\emph{transformation naturelle}} $\theta$ de $F$ vers $G$ est une famille $\big(\;\theta_{A} : F(A) \to G(A)\;\big)_{A\in Obj(\Ccal)}$ de morphismes de $\Dcal$, indexée par les objets de $\Ccal$, telle que le diagramme suivant commute dans $\Dcal$ pour tout morphisme $f:A\to B$ de $\Ccal$
@@ -1224,20 +1568,16 @@ Soit $\Ccal$ et $\Dcal$ des catégories. Soit $F,G:\Ccal\longrightarrow\Dcal$ des
 }
 \noindent
 On note $\theta : F \Rightarrow G$, voire $\theta : F \Rightarrow G : \Ccal \longrightarrow \Dcal$.
+On appelle \emph{isomorphisme naturel} une transformation naturelle qui est une famille d'isomorphismes.
 \end{df}
 
 
 
-
-\begin{df}
-Soit une catégorie,
-un morphisme $f:A\to B$ est un \textbf{\emph{isomorphisme}} s'il existe un morphisme $f^{-1}:B\to A$ tel que $f^{-1}\circ f=id_{A}$ et $f\circ f^{-1}=id_{B}$.
-\end{df}
 
 
 % def catégorie monoïdale
 \begin{df}
-Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur \\${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ (pour lequel on utilise une notation infixe) avec d'un objet particulier $e$, %tel que les morphismes suivants existent
+Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bifoncteur \\${\otimes:\Ccal\times\Ccal \longrightarrow \Ccal}$ (pour lequel on utilise une notation infixe) avec un objet particulier $e$, %tel que les morphismes suivants existent
 %
 %\begin{itemize}
 %\item
@@ -1248,7 +1588,7 @@ Une \textbf{\emph{catégorie monoïdale}} est une catégorie $\Ccal$ munie d'un bif
 %pour tout objet $A$, des isomorphismes naturels ${\lambda_{A}:e\otimes A\to A}$ et ${\rho_{A}:A\otimes e\to A}$ %justifiant le nom d'\textbf{unité} pour $e$ ;
 %permettant d'appeler $e$ l'objet \textbf{unité} ;
 %\end{itemize}
-telle qu'il existe des \textbf{isomorphismes naturels}
+telle qu'il existe des \textbf{isomorphismes naturels} :
 \begin{itemize}
 \item
 ${\alpha_{A,B,C} : (A\otimes B)\otimes C \to A\otimes(B\otimes C)}$, permettant de parler d'associativité ;
@@ -1260,7 +1600,7 @@ permettant avec le précédent d'appeler $e$ l'objet \textbf{unité} ;
 \end{itemize}
 
 \noindent
-et tel que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$. 
+tels que les diagrammes suivants commutent pour tous objets $A$, $B$, $C$, $D$. 
 
 %\includegraphics[width=\linewidth]{diagrammeMonoidalePenta}
 %{\centering
@@ -1296,7 +1636,7 @@ Ces diagrammes sont appelés \emph{diagrammes pentagonal} et \emph{triangulaire}.
 
 \vspace{2mm}
 
-\noindent\textbf{Précision.} On parle d'isomorphismes naturels car il y a bien des transformations naturelles associées. En fait la condition sur $\alpha$ est $\alpha : F \Rightarrow G :\Ccal\times\Ccal\times\Ccal \longrightarrow \Ccal$ avec $F:(x,y,z) \mapsto (x\otimes y)\otimes z$ et $G:(x,y,z) \mapsto x\otimes(y\otimes z)$ où $x$, $y$, $z$ sont trois objets ou trois morphismes de $\Ccal$. On écrit $\alpha_{A,B,C}$ pour $\alpha_{(A,B,C)}$. Les $\alpha_{A,B,C}$ sont bien des morphismes de $\Ccal$, qui est la catégorie d'arrivée de $F$ et $G$. On veut aussi ${\lambda : (e\otimes\bullet) \Rightarrow Id_{\Ccal} : \Ccal \longrightarrow \Ccal}$ où $(e\otimes\bullet) : \left\{
+\noindent\textbf{Précision.} En fait la condition sur $\alpha$ est $\alpha : F \Rightarrow G :\Ccal\times\Ccal\times\Ccal \longrightarrow \Ccal$ avec $F:(x,y,z) \mapsto (x\otimes y)\otimes z$ et $G:(x,y,z) \mapsto x\otimes(y\otimes z)$ où $x$, $y$, $z$ sont trois objets ou trois morphismes de $\Ccal$. On écrit $\alpha_{A,B,C}$ pour $\alpha_{(A,B,C)}$. Les $\alpha_{A,B,C}$ sont bien des morphismes de $\Ccal$, qui est la catégorie d'arrivée de $F$ et $G$. On veut aussi ${\lambda : (e\otimes\bullet) \Rightarrow Id_{\Ccal} : \Ccal \longrightarrow \Ccal}$ où $(e\otimes\bullet) : \left\{
 \begin{array}{l}
 	A \mapsto e\otimes A \\
 	f \mapsto id_{e}\otimes f
@@ -1306,10 +1646,12 @@ Ces diagrammes sont appelés \emph{diagrammes pentagonal} et \emph{triangulaire}.
 
 \end{df}
 
+Le nom de \emph{catégorie monoïdale} vient du fait que l'ensemble des objets de la catégorie (s'il s'agit bien d'un ensemble) muni de $\otimes$ est un monoïde.
+\vspace{.5em}
 
 %L'opérateur $\otimes$ qu'on a définit sur les dénotations de formules puis sur les dénotations de preuves constitue un \emph{bifoncteur} de la catégorie $\CProofs$, c'est-à-dire un foncteur $\otimes : \Ccal\times\Ccal \longrightarrow \Ccal$. $\Ccal$ munie de $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
 
-On munit la catégorie $\CProofs$ du bifoncteur $\otimes$ et on choisit comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$. On obtient une \textbf{catégorie monoïdale}, ou presque une catégorie monoïdale, selon les choix effectués pour définir le procédé d'élimination de la coupure.
+On munit la catégorie $\CProofs$ du bifoncteur $\otimes$ et on choisit comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$ en logique linéaire intuitionniste. On obtient une \textbf{catégorie monoïdale}, ou presque une catégorie monoïdale, selon les choix effectués pour définir le procédé d'élimination de la coupure.
 %La catégorie $\Ccal$ munie du bifoncteur $\otimes$ est presque une \textbf{catégorie monoïdale} avec comme objet unité $[\1]$, la dénotation de la formule $\1$, élément neutre pour le connecteur $\otimes$.
 En effet, on peut définir des morphismes $\alpha_{A,B,C}$, $\lambda_{A}$, $\rho_{A}$ comme les dénotations des preuves suivantes\\
 
@@ -1373,10 +1715,10 @@ $\rho_{A}$ :
 \
 
 \noindent
-Il s'agit bien de transformations naturelles, et on a bien la propriété de cohérence.
-\idees{démonstrations, ou au moins explications, exemples de preuves équivalentes ?}
+Il s'agit bien de transformations naturelles, et on a bien la propriété de cohérence (cf.~\cite{panorama}, chapitre~2).
+%\idees{démonstrations, ou au moins explications, exemples de preuves équivalentes ?}
 %
-La définition d'une \emph{catégorie monoïdale} exige que ces morphismes $\alpha$, $\lambda$, $\rho$ soient des isomorphismes. On n'écrit plus les indices, qui sont toujours les mêmes. On peut définir des morphismes naturels $\bar\alpha_{A,B,C} : A\circ(B\circ C) \to (A\circ B)\circ C$ \,,\; $\bar\lambda_{A} : A \to e\circ A$ \,,\; $\bar\rho_{A} : A \to A\circ e$\,, par exemple $\bar\lambda_{A}$ est la dénotation de 
+La définition d'une \emph{catégorie monoïdale} exige que ces morphismes $\alpha$, $\lambda$, $\rho$ soient des isomorphismes. On n'écrit plus les indices, qui sont toujours les mêmes. On peut définir des morphismes naturels $\bar\alpha_{A,B,C} : A\otimes(B\otimes C) \to (A\otimes B)\otimes C$ \,,\; $\bar\lambda_{A} : A \to e\otimes A$ \,,\; $\bar\rho_{A} : A \to A\otimes e$\,, par exemple $\bar\lambda_{A}$ est la dénotation de 
 \resizebox{3cm}{!}{
 	\AXC{}
 	\RightLabel{$(\1 R)$}
@@ -1388,7 +1730,7 @@ La définition d'une \emph{catégorie monoïdale} exige que ces morphismes $\alpha$
 	\BIC{$A\vdash \1\otimes A$}
 \DP
 }
-. On pense naturellement à ces morphismes quand on cherche des inverses de $\alpha$, $\lambda$ et $\rho$. On a bien ${\lambda\circ\bar\lambda = id_{A}}$ et ${\rho\circ\bar\rho=id_{A}}$. En revanche, si on considère un p.é.c. ``strict'', on n'a aucune des égalités suivantes : ${\bar\lambda\circ\lambda = id_{e\circ A}}$\,,\; ${\bar\rho\circ\rho=id_{A\circ e}}$\,,\; ${\bar\alpha\circ\alpha=id_{(A\circ B)\circ C}}$\,,\; ${\alpha\circ\bar\alpha=id_{A\circ(B\circ C)}}$\,. Si on considère au contraire la version plus ``large'' du p.é.c., on a bien toutes ces égalités. Les transformations autorisées qui ont été ajoutées au p.é.c. strict pour obtenir cette version large sont d'ailleurs expressément choisies pour satisfaire ces égalités. Dans la suite, on suppose toujours qu'on a choisi la version ``large'' du p.é.c., donc $\CProofs$ est bien une catégorie monoïdale.
+. On pense naturellement à ces morphismes quand on cherche des inverses de $\alpha$, $\lambda$ et $\rho$. On a bien ${\lambda\circ\bar\lambda = id_{A}}$ et ${\rho\circ\bar\rho=id_{A}}$. En revanche, si on considère un p.é.c. ``strict'', on n'a aucune des égalités suivantes : ${\bar\lambda\circ\lambda = id_{e\circ A}}$\,,\; ${\bar\rho\circ\rho=id_{A\circ e}}$\,,\; ${\bar\alpha\circ\alpha=id_{(A\circ B)\circ C}}$\,,\; ${\alpha\circ\bar\alpha=id_{A\circ(B\circ C)}}$\,. Si on considère au contraire la version plus ``large'' du p.é.c., on a bien toutes ces égalités, donc $\alpha$, $\lambda$ et $\rho$ sont bien des isomorphismes. Les transformations autorisées qui ont été ajoutées au p.é.c. strict pour obtenir cette version large sont d'ailleurs expressément choisies pour satisfaire ces égalités. Dans la suite, on suppose toujours qu'on a choisi la version ``large'' du p.é.c., donc $\CProofs$ est bien une catégorie monoïdale.
 %On obtient alors que $\CProofs$ est une \textbf{catégorie monoïdale}. Dans la suite, on se met toujours dans ce cas
 
 
@@ -1571,72 +1913,81 @@ Soit $\Ccal$ une catégorie monoïdale tressée, avec les notations précédentes. C'
 
 Dans $\Ccal$, on définit $\gamma_{A,B}$ comme la dénotation de la preuve canonique de $A\otimes B \vdash B\otimes A$ donnée précédemment. %Si on a assoupli l'équivalence d'élimination de la coupure pour que $\Ccal$ soit une catégorie monoïdale, on 
 On obtient alors une \textbf{catégorie monoïdale symétrique}.
-\idees{vrai ? démonstrations, explications, exemples ?}
+%\idees{vrai ? démonstrations, explications, exemples ?}
 
 
 %
 
 
 
-\subsection{Implication linéaire et catégorie monoïdale fermée}
+%\subsection{Implication linéaire et catégorie monoïdale fermée}
+%
+%Intéressons-nous maintenant à l'implication linéaire $\multimap$. Ce connecteur logique induit également un opérateur sur les dénotations de formules, qui a un sens en théorie des catégories.
+%
+%\begin{df}
+%Soit $\Ccal$ une catégorie monoïdale, toujours avec les mêmes notations. Une \textbf{\emph{structure fermée à gauche}} sur $\Ccal$ consiste en un opérateur $\multimap$ sur les objets et pour tous objets $A$, $B$, un morphisme $eval_{A,B} : A\otimes(A\multimap B)\to B$, vérifiant la propriété d'universalité suivante : pour tout objet $X$ et tout morphisme $f:A\otimes X\to B$, il existe un unique morphisme $h:X\to A\multimap B$ tel que le diagramme suivant commute.
+%
+%\noindent
+%{\centering
+%%\includegraphics[width=4cm]{diagrammeFermeeGauche}
+%\begin{tikzcd}
+%	A\otimes X
+%		\arrow[d,"id_{A}\otimes h"']
+%		\arrow[rd,"f"]
+%& \\
+%	A\otimes(A\multimap B)
+%		\arrow[r,"eval_{A,B}"']
+%	& B
+%\end{tikzcd}
+%
+%}
+%On dit alors que $\Ccal$ est une \textbf{\emph{catégorie monoïdale fermée}}.
+%\end{df}
+%
+%
+%\def\sizesymetrie{0.3\textwidth}
+%\begin{floatingfigure}[r]{\sizesymetrie}
+%\centering
+%\resizebox{\sizesymetrie}{!}{
+%	\AXC{}
+%	\RightLabel{$(id)$}
+%	\UIC{$A\vdash A$}
+%		\AXC{}
+%		\RightLabel{$(id)$}
+%		\UIC{$B\vdash B$}	
+%	\RightLabel{$(\multimap L)$}
+%	\BIC{$A,(A\multimap B) \vdash B$}
+%	\RightLabel{$(\otimes L)$}
+%	\UIC{$A\otimes(A\multimap B) \vdash B$}
+%\DP
+%}
+%\\
+%\end{floatingfigure}
+%
+%On munit $\CProofs$ de l'opérateur $\multimap$ sur les dénotations de formules correspondant à l'implication linéaire. On définit $eval_{A,B}$ comme la dénotation de la preuve ci-contre. On obtient alors une \textbf{catégorie monoïdale fermée}.
+%%\idees{Est-ce vrai ? Est-ce qu'on peut expliquer facilement comment obtenir $h$ à partir de $f$ ?}
+%
 
-Intéressons-nous maintenant à l'implication linéaire $\multimap$. Ce connecteur logique induit encore une fois un opérateur sur les dénotations de formules, qui a un sens en théorie des catégories.
+\subsection{Sur une généralisation à des preuves de n'importe quel séquent}
 
-\begin{df}
-Soit $\Ccal$ une catégorie monoïdale, toujours avec les mêmes notations. Une \textbf{\emph{structure fermée à gauche}} sur $\Ccal$ consiste en un opérateur $\multimap$ sur les objets et pour tous objets $A$, $B$, un morphisme $eval_{A,B} : A\otimes(A\multimap B)\to B$, vérifiant la propriété d'universalité suivante : pour tout objet $X$ et tout morphisme $f:A\otimes X\to B$, il existe un unique morphisme $h:X\to A\multimap B$ tel que le diagramme suivant commute.
-
-\noindent
-{\centering
-%\includegraphics[width=4cm]{diagrammeFermeeGauche}
-\begin{tikzcd}
-	A\otimes X
-		\arrow[d,"id_{A}\otimes h"']
-		\arrow[rd,"f"]
-& \\
-	A\otimes(A\multimap B)
-		\arrow[r,"eval_{A,B}"']
-	& B
-\end{tikzcd}
-
-}
-On dit alors que $\Ccal$ est une \textbf{\emph{catégorie monoïdale fermée}}.
-\end{df}
+Dans la définition de $\CProofs$ donnée au début de cette section, on ne s'intéresse qu'aux preuves de séquents qui ont exactement une formule de chaque côté. Pour considérer la dénotation d'une preuve d'un séquent quelconque $\G\vdash D$ comme un morphisme de $\CProofs$, on a besoin d'associer une dénotation à la liste $\G$. Il serait naturel de choisir la dénotation de $G_{1}\otimes ... \otimes G_{k}$, mais ceci n'est pas une formule tant qu'on n'a pas ajouté de parenthèses. Lorsqu'on en ajoute, on obtient des formules qui sont certes équivalentes d'un point de vue logique, mais différentes d'un point de vue structurel, et les dénotations associées n'ont a priori pas de raison d'être égales. On peut résoudre ce problème grâce à une propriété de cohérence qui affirme que $\CProofs$ est équivalente, dans un certain sens qui serait trop long à définir ici, à une catégorie monoïdale symétrique stricte $\Ccal$ ; \emph{stricte} signifie que pour tous objets $A$, $B$, $C$ de $\Ccal$, avec les notations habituelles, on a $(A\otimes B)\otimes C=A\otimes(B\otimes C)$ et $e\otimes A=A=A\otimes e$.
 
 
-\def\sizesymetrie{0.3\textwidth}
-\begin{floatingfigure}[r]{\sizesymetrie}
-\centering
-\resizebox{\sizesymetrie}{!}{
-	\AXC{}
-	\RightLabel{$(id)$}
-	\UIC{$A\vdash A$}
-		\AXC{}
-		\RightLabel{$(id)$}
-		\UIC{$B\vdash B$}	
-	\RightLabel{$(\multimap L)$}
-	\BIC{$A,(A\multimap B) \vdash B$}
-	\RightLabel{$(\otimes L)$}
-	\UIC{$A\otimes(A\multimap B) \vdash B$}
-\DP
-}
-\\
-\end{floatingfigure}
 
-On munit $\CProofs$ de l'opérateur $\multimap$ sur les dénotations de formules correspondant à l'implication linéaire. On définit $eval_{A,B}$ comme la dénotation de la preuve ci-contre. On obtient alors une \textbf{catégorie monoïdale fermée}.
-\idees{Est-ce vrai ? Est-ce qu'on peut expliquer facilement comment obtenir $h$ à partir de $f$ ?}
+%$\CProofs$, telle qu'elle a été définie au début de cette section, ne contient que des dénotations de preuves 
+%
+%Afin d'étendre ce formalisme à n'importe quel séquent intuitionniste $\G \vdash D$, on voudrait associer à $\G=G_{1}, ... , G_{k}$ la dénotation d'une formule de la forme $G_{1}\otimes ... \otimes G_{k}$, mais un problème d'associativité se pose : selon les endroits où on ajoute des parenthèses, on obtient des formules qui sont certes équivalentes, mais différentes d'un point de vue structurel, et les dénotations associées n'ont a priori pas de raison d'être égales. On peut résoudre ce problème grâce à une propriété de cohérence qui affirme que $\CProofs$ est équivalente, dans un certain sens qui serait trop long à définir ici, à une catégorie
 
-\
 
-\
 
-\idees{généralisation à n'importe quelle preuve de logique intuitionniste ?}
+%\idees{généralisation à n'importe quelle preuve de logique intuitionniste ?}
 
 %%%
+%\pagebreak
 
 \section*{Conclusion}
 
-
-
+Après avoir étudié le formalisme du calcul des séquents à travers différents exemples, on a transporté des propriétés sur un calcul des séquents pour ILL donné vers le langage mathématique des catégories. On peut encore interpréter le connecteur $\multimap$ d'ILL en terme de catégorie monoïdale fermée, et le connecteur $\&$ en terme de catégorie cartésienne fermée, et la modalité $!$ en terme d'adjonction entre une catégorie monoïdale symétrique fermée et une catégorie cartésienne ; mais étudier ces propriétés serait trop long pour le cadre de ce mémoire. Les catégories sont omniprésentes en mathématiques ; ces résultats permettent donc d'envisager des liens entre le calcul des séquents et des domaines qui semblent très différents au premier abord. Il y a une analogie forte entre la théorie de la preuve vue à travers le calcul des séquents et la théorie des n\oe uds ; les deux permettent notamment de construire de fa\c con similaire une catégorie libre, présentant de nombreuses propriétés, à partir d'une catégorie donnée (\cite{panorama}, pp.34-38).
 
 %%%%%%%%%%%%%%
 

@@ -4,62 +4,73 @@
 %\vspace{2cm}~~\\
 %\input{bussproofs}
 
+%\vspace*{-8.7em}
+\vspace*{2em}
 
-\part*{Rapport de stage}
+\part*{Rapport de stage : \\Recherche de preuves compilée et certifiée}
 \label{part:rapportstage}
 \setcounter{section}{0}
+
+\vspace{2em}
 
 \section*{Introduction}
 
 
 La logique intuitionniste %suscite beaucoup d'intérêt en philosophie
 présente un grand intérêt philosophique, logique et informatique.
-Elle diffère notamment de la logique classique par l'absence du principe du tiers exclu $A\lor\lnot A$.
+Elle diffère notamment de la logique classique par l'absence du principe du tiers exclu ${A\lor\lnot A}$.
 %
-La recherche automatisée de preuves en logique intuitionniste propositionnelle (ILP) est un thème de recherche mature. Parmi les techniques fréquemment utilisées se trouvent des adaptations de calculs de séquents bien choisis. Par exemple, l'équipe TYPES a développé un prouveur automatisé pour ILP appelé STRIP \cite{STRIP}, basé sur une variante du calcul de séquents \LJT\ \cite{LJT}. Cependant, des structures de données sophistiquée sont nécessaires, si bien qu'une certification de ce prouveur semble compromise. Le calcul de séquents \LSJ\ \cite{LSJ}, relativement récent (2012), paraît prometteur pour la recherche automatisée de preuve dans ILP : l'algorithme basé dessus est facile à implémenter avec des structures de données relativement simples, ce qui est favorable à une possibilité de certification. C'est ce qui a conduit mes encadrants à proposer ce sujet de stage : recherche de preuves compilée et certifiée en logique intuitionniste propositionnelle, avec pour idée de se baser sur \LSJ.
+La recherche automatisée de preuves en logique intuitionniste propositionnelle (ILP) est un thème de recherche mature. Parmi les techniques fréquemment utilisées se trouvent des adaptations de calculs des séquents bien choisis. Par exemple, l'équipe TYPES a développé un prouveur automatisé pour ILP appelé STRIP \cite{STRIP}, basé sur une variante du calcul des séquents \LJT\ \cite{LJT}. Cependant, des structures de données sophistiquée sont nécessaires, si bien qu'une certification de ce prouveur serait difficile. Le calcul des séquents \LSJ\ \cite{LSJ}, relativement récent (2012), paraît prometteur pour la recherche automatisée de preuve dans ILP : l'algorithme basé dessus est facile à implémenter avec des structures de données relativement simples, ce qui est favorable à une possibilité de certification. C'est ce qui a conduit mes encadrants à proposer ce sujet de stage : recherche de preuves compilée et certifiée en logique intuitionniste propositionnelle, avec pour idée de se baser sur \LSJ.
 
-J'ai effectué ce stage au sein de l'équipe TYPES du LORIA de Nancy, sous la direction de D. Galmiche et D. Larchey-Wendling. J'ai implémenté un premier prouveur d'ILP à partir du calcul de séquents \LSJ. Je l'ai testé sur les formules de la banque ILTP \cite{ILTP}, et j'ai découvert que ce calcul (qui apparemment n'avait pas encore été appliqué à la réalisation pratique d'un prouveur) offre une bien meilleure complexité, sur une formule donnée d'ILTP, que tous les prouveurs actuellement répertoriés. Ensuite, j'ai essayé de simplifier le code de ce prouveur, encore trop complexe, dans une perspective de certification. Je n'ai pas eu le temps d'aborder la certification en elle-même, qui serait très longue à effectuer. J'ai cependant réalisé et comparé diverses implémentations afin d'étudier comment on pourrait faciliter une certification éventuelle sans trop perdre en efficacité.
+J'ai effectué ce stage au sein de l'équipe TYPES du LORIA de Nancy, sous la direction de D. Galmiche et D. Larchey-Wendling. J'ai implémenté un premier prouveur d'ILP à partir du calcul des séquents \LSJ. Je l'ai testé sur les formules de la banque ILTP \cite{ILTP}, et j'ai découvert que ce calcul (qui apparemment n'avait pas encore été appliqué à la réalisation pratique d'un prouveur) offre une bien meilleure complexité, sur une formule donnée d'ILTP, que tous les prouveurs actuellement répertoriés. Ensuite, j'ai essayé de simplifier le code de ce prouveur, encore trop complexe, dans une perspective de certification. Je n'ai pas eu le temps d'aborder la certification en elle-même, qui serait très longue à effectuer. J'ai cependant réalisé et comparé diverses implémentations afin d'étudier comment on pourrait faciliter une certification éventuelle sans trop perdre en efficacité.
 
-Dans ce rapport, j'explique comment un algorithme de recherche de preuve peut être déduit d'un calcul de séquents, et quelles propriétés du calcul de séquent peuvent rendre cet algorithme effectif et efficace. Je donne pour exemples \LJ\ et \LJT, deux calculs dont des variantes ont été effectivement employée pour réaliser des prouveurs d'ILP, par exemple STRIP. J'introduis ensuite \LSJ, qui présente des propriétés dont on comprend mieux l'intérêt à la lumière de ce qui précède, puis une légère variante \LSJn, qui permet d'obtenir facilement une bonne complexité spatiale, et je prouve que \LSJn\ est bien équivalent à \LSJ. En ce qui concerne l'implémentation, je donne quelques détails essentiels ou remarquables. Puis, j'explique certaines décisions prises en faveur de la certification. Enfin, je présente les différentes variantes de prouveur d'ILP que j'ai effectivement réalisées, et les compare en termes de facilité de certification et d'efficacité.
+Dans ce rapport, j'explique comment un algorithme de recherche de preuve peut être déduit d'un calcul des séquents, et quelles propriétés du calcul des séquent peuvent rendre cet algorithme effectif et efficace. Je donne pour exemples \LJ\ et \LJT, deux calculs dont des variantes ont été effectivement employées pour réaliser des prouveurs d'ILP, par exemple STRIP. J'introduis ensuite \LSJ, qui présente des propriétés dont on comprend mieux l'intérêt à la lumière de ce qui précède, puis une légère variante \LSJn, qui permet d'obtenir facilement une bonne complexité spatiale, et je prouve que \LSJn\ est bien équivalent à \LSJ. En ce qui concerne l'implémentation, je donne quelques détails essentiels ou intéressants. Puis, j'explique certaines décisions prises en faveur de la certification. Enfin, je présente les différentes variantes de prouveur d'ILP que j'ai effectivement réalisées, et les compare en termes d'efficacité.
 
-\tableofcontents
+\pagebreak
+
+\setcounter{tocdepth}{1}
+%\tableofcontents
+\startlist{toc}
+\printlist{toc}{}{\section*{Table des matières}}
 
 %\pagebreak
-\
+\vspace{4em}
 
-\
 
 On s'intéresse à la partie propositionnelle de la logique intuitionniste : 
 les formules sont construites à partir de la constante $\bot$ (\emph{faux}), de variables propositionnelles et des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}), $\to$ (\emph{implique}). %Une formule est \emph{atomique} si elle est réduite à une variable propositionnelle ou $\bot$. 
 La notation $\lnot A$ signifie $A\to\bot$.
 
-On utilise les notions et définitions suivantes, introduites dans la section~\ref{section:introductionCalculsSequents} du mémoire : calcul de séquents, séquent, règle, prémisse, conclusion, instance, preuve ou arbre de preuve, séquent prouvable dans un calcul.
+On utilise les notions et définitions suivantes, introduites dans la section~\ref{section:introductionCalculsSequents} du mémoire : \emph{calcul des séquents}, \emph{séquent}, \emph{règle}, \emph{prémisse}, \emph{conclusion}, \emph{instance}, \emph{preuve} ou \emph{arbre de preuve}, \emph{séquent prouvable dans un calcul}. De plus, une règle n'ayant aucune prémisse est appelée un \emph{axiome}.
 
 On se réfère également au calcul \LJ\ défini dans cette même section, mais on travaille ici sur une représentation légèrement différente. On s'intéresse en effet à des \emph{multiensembles}, c'est-à-dire des collections où le nombre d'occurrences est pris en compte, mais non l'ordre des éléments. Un séquent de $\G$ consiste alors en un multiensemble (au lieu d'une liste) de formules $\G$ et une formule $D$, toujours noté $\G \vdash D$. On utilise la notation $X,Y$ pour désigner la réunion de deux multiensembles $X$ et $Y$, au lieu de la concaténation de deux listes, $X$ ou $Y$ pouvant encore une fois être une formule représentant ici un multiensemble à un élément. Malgré le changement de structure et grâce à la réutilisation de la notation $X,Y$\,, les règles de \LJ\ sont toujours données par la figure~\ref{fig:reglesLJ} page~\pageref{fig:reglesLJ}, à l'exception de la règles d'échange \LJechange\ qui peut être oubliée puisqu'un multiensemble ne tient pas compte de l'ordre.
 
 
-%\section{D'un calcul de séquents à une recherche de preuve automatisée. Avantages et inconvénients de différents calculs}
-\section{Propriétés favorisant l'application d'un calcul de séquents à la recherche automatisée de preuve et exemples de calculs}
+%\section{D'un calcul des séquents à une recherche de preuve automatisée. Avantages et inconvénients de différents calculs}
+\section{Propriétés favorisant l'application d'un calcul des séquents à la recherche automatisée de preuve et exemples de calculs}
 
 
-Il existe plusieurs calculs de séquents pour la logique intuitionniste, sans parler des nombreuses autres logiques existantes. Un tel calcul comporte ses propres définition d'un séquent, règles, et construction pour chaque formule d'un séquent qui est prouvable par le calcul si et seulement si la formule est prouvable en logique intuitionniste. En dériver l'algorithme de recherche de preuve ci-après est assez naturel. Sa correction est immédiate par construction. En revanche, la terminaison pose problème. 
-%Il faut parfois complexifier beaucoup l'algorithme pour l'assurer. Afin d'éviter de devoir le faire, il faut certaines propriétés sur le calcul de séquents. 
+Il existe plusieurs calculs des séquents pour la logique intuitionniste, sans parler des nombreuses autres logiques existantes. Un tel calcul 
+%comporte ses propres définition d'un séquent, règles, et
+se caractérise par sa propre définition des séquents, et ses propres règles. On veut aussi disposer d'une 
+construction, pour chaque formule, d'un séquent qui est prouvable par le calcul si et seulement si la formule est prouvable en logique intuitionniste. Dériver d'un calcul des séquents pour la logique intuitionniste l'algorithme de recherche de preuve ci-après est assez naturel. Sa correction est immédiate par construction. En revanche, la terminaison pose problème. 
+%Il faut parfois complexifier beaucoup l'algorithme pour l'assurer. Afin d'éviter de devoir le faire, il faut certaines propriétés sur le calcul des séquents. 
 Elle n'est pas toujours assurée, et même quand elle l'est, souvent difficile à prouver.
 Nous présentons %l'algorithme générique, puis 
-quelques propriétés sur les calculs de séquents
-qui sont intéressantes pour assurer la terminaison et améliorer la complexité de l'algorithme qui leur est associé. Enfin, nous donnons deux exemples de calculs de séquents existants pour la logique intuitionniste, antérieurs au calcul que nous utilisons pour l'implémentation.
+quelques propriétés sur les calculs des séquents
+qui sont intéressantes pour assurer la terminaison et améliorer la complexité de l'algorithme qui leur est associé. Enfin, nous donnons deux exemples de calculs des séquents existants pour la logique intuitionniste, antérieurs au calcul que nous utilisons pour l'implémentation.
 
 
 
 \subsection{Algorithme de recherche de preuve}
 \label{algoGeneral}
 
-%Un calcul de séquents suggère naturellement un algorithme de recherche de preuve : pour essayer de prouver un séquent, 
-On considère un calcul de séquents. Pour déterminer si un séquent est prouvable,
+%Un calcul des séquents suggère naturellement un algorithme de recherche de preuve : pour essayer de prouver un séquent, 
+On considère un calcul des séquents. Pour déterminer si un séquent est prouvable,
 on choisit une règle dont il peut être la conclusion et on 
 %essaie de prouver les 
 applique récursivement la recherche de preuve aux
-prémisses correspondantes. Si elles sont toutes prouvables (en particulier, s'il n'y en a pas : si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable ; de plus, si on a calculé un arbre de preuve pour chaque prémisse, on en obtient un pour le séquent initial. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès, c'est-à-dire que pour chacune, au moins une prémisse est non prouvable (en particulier, s'il n'y a aucune règle applicable : si le séquent n'est la conclusion d'aucune instance), on conclut que le séquent initial n'est pas prouvable.
+prémisses correspondantes. Si elles sont toutes prouvables (en particulier, s'il n'y en a pas, c'est-à-dire si le séquent est la conclusion d'un axiome), alors par définition le séquent initial est aussi prouvable ; de plus, si on a calculé un arbre de preuve pour chaque prémisse, on en obtient un pour le séquent initial. Sinon, on essaie une autre règle (sauf dans certains cas où on peut conclure grâce à la notion de règle ou prémisse inversible que nous verrons plus loin). Si on a essayé toutes les règles applicables au séquent sans succès, c'est-à-dire que pour chacune, au moins une prémisse est non prouvable (en particulier, s'il n'y a aucune règle applicable : si le séquent n'est la conclusion d'aucune instance), on conclut que le séquent initial n'est pas prouvable.
 
 Cet algorithme est correct par construction et d'après la définition de la prouvabilité d'un séquent. En revanche, 
 %sans certaines conditions, il ne termine pas toujours.
@@ -77,21 +88,21 @@ munir les séquents d'un ordre bien fondé, de sorte que pour toute instance de rè
 \noindent
 \textit{Remarque : la règle de coupure.}
 La règle de coupure, par exemple pour \LJ\ : \\${\LJcut,}$ rend l'algorithme proposé inutilisable parce qu'il ne termine jamais. En effet, on explore indéfiniment en ``largeur'', car le nombre d'instances dont un séquent donné est conclusion est infini, $A$ pouvant être n'importe quelle formule. Heureusement, cette règle est souvent non nécessaire. De nombreux calculs la formulent car c'est une bonne chose que l'implication représentée par un séquent soit transitive, mais s'en passent ensuite grâce à un \emph{théorème d'élimination de la coupure}, souvent difficile à établir. Voir la section~\ref{section:pec} du mémoire pour plus de détails. Quoi qu'il en soit, on ne s'intéresse désormais qu'à des calculs dans lesquels cette règle ne figure pas.
-\subsection{Propriétés intéressantes des calculs de séquents}
+\subsection{Propriétés intéressantes des calculs des séquents}
 
-\subsectionDescription{
-%Remarque : la règle de coupure.
-Absence de contraction.
-Propriété de la sous-formule.
-Inversibilité de certaines règles ou prémisses.
-Localité des règles.
-}
+%\subsectionDescription{
+%%Remarque : la règle de coupure.
+%Absence de contraction.
+%Propriété de la sous-formule.
+%Inversibilité de certaines règles ou prémisses.
+%Localité des règles.
+%}
 
 %Nous présentons %l'algorithme générique, puis 
-%quelques propriétés sur les calculs de séquents
+%quelques propriétés sur les calculs des séquents
 %qui sont intéressantes pour assurer la terminaison et améliorer la complexité de l'algorithme qui leur est associé.
 
-Un calcul de séquents peut présenter certaines des propriétés suivantes, qui contribuent à assurer la terminaison ou à améliorer la complexité de l'algorithme précédent.
+Un calcul des séquents peut présenter certaines des propriétés suivantes, qui contribuent à assurer la terminaison ou à améliorer la complexité de l'algorithme précédent.
 
 \
 
@@ -110,17 +121,18 @@ Il est parfois possible d'adapter l'algorithme à une possibilité de contraction 
 \
 
 \noindent
-\textbf{Propriété de la sous-formule.}
-La formule $B$ est une \textbf{\emph{sous-formule}} de la formule $A$ si $B$ est égale à $A$ ou si $A$ est de la forme $A_{1}c A_{2}$ où $c$ est un connecteur et [$B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formule de $A_{2}$]. Un calcul de séquents vérifie la \textbf{\emph{propriété de la sous-formule}} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) cette preuve est une sous-formule d'une formule de $\s$. 
+\textbf{Propriété de la sous-formule.} 
+On définit récursivement que
+la formule $B$ est une \textbf{\emph{sous-formule}} de la formule $A$ si $B$ est égale à $A$ ou si $A$ est de la forme $A_{1}c A_{2}$ où $c$ est un connecteur et [$B$ est une sous-formule de $A_{1}$ ou $B$ est une sous-formule de $A_{2}$]. Un calcul des séquents vérifie la \textbf{\emph{propriété de la sous-formule}} si tout séquent prouvable $\s$ admet une preuve telle que toute formule apparaissant dans (un séquent de) cette preuve est une sous-formule d'une formule de $\s$. 
 %En particulier, le séquent $\To A$ a une preuve dans laquelle toute formule est une sous-formule de $A$.
 %
-La propriété de la sous-formule est très utile pour un calcul de séquents. 
+La propriété de la sous-formule est très utile pour un calcul des séquents. 
 %Souvent, le calcul présente une propriété un peu plus forte, qui assure la terminaison de l'algorithme : toutes les règles sont des règles logiques où on passe de la conclusion aux prémisses en rempla\c cant une formule principale d'une forme donnée par une ou plusieurs sous-formules strictes. Dans ce cas
-Souvent, elle fait partie des arguments qui permettent de montrer la terminaison. Elle fournit en effet un ordre bien fondé sur les formules, qu'il reste à étendre de fa\c con bien choisie aux séquents.
+Souvent, elle fait partie des arguments qui permettent de montrer la terminaison. Elle fournit en effet un ordre bien fondé sur les formules (``est une sous-formule stricte de'' étant une relation bien fondée), qu'il reste à étendre de fa\c con bien choisie aux séquents.
 %Elle permet de montrer assez facilement la terminaison de l'algorithme dans le cas où toutes les règles sont des règles logiques : on remplace une formule d'une forme donnée dans la conclusion par des
 %
 %La propriété de la sous-formule
-Elle est également utile lors de l'implémentation : si on veut appliquer la recherche de preuve à un séquent donné, on peut connaître à l'avance la liste exhaustive de toutes les formules susceptibles d'apparaître. On peut donc effectuer une indexation préliminaire, puis représenter les formules par des objets de taille constante, par exemple des entiers, au lieu d'arbres qui peuvent être coûteux en mémoire. Voir la sous-section ? pour un exemple détaillé d'une telle indexation.
+Elle est également utile lors de l'implémentation : si on veut appliquer la recherche de preuve à un séquent donné, on peut connaître à l'avance la liste exhaustive de toutes les formules susceptibles d'apparaître. On peut donc effectuer une indexation préliminaire, puis représenter les formules par des objets de taille constante, par exemple des entiers, au lieu d'arbres qui peuvent être coûteux en mémoire. Voir la section~\ref{subsection:indexation} pour un exemple détaillé d'une telle indexation.
 
 \
 
@@ -137,9 +149,10 @@ L'algorithme nécessite de savoir déterminer, pour un séquent donné, toutes les i
 Pour une instance, la \emph{formule principale} est la formule de la conclusion qui est remplacée dans les prémisses par d'autres formules (règles logiques), ou dupliquée ou supprimée (règles structurelles). Dans le cas des règles logiques, la formule principale doit avoir une forme particulière, par exemple présenter un connecteur donné.
 Souvent, pour une conclusion et une règle données et un choix de formule principale autorisé par la règle, il existe une unique instance correspondante, dont on peut facilement calculer toutes les prémisses.
 %
-Parfois, on a aussi le sens inverse : à partir de la $k$-ième prémisse, si on connaît la règle et le numéro $k$ et la formule principale, on peut construire la conclusion. On dit qu'une règle est \textbf{\emph{locale}} si on a cette dernière propriété pour toutes les prémisses de toutes ses instances.
+Parfois, on a aussi le sens inverse : à partir de la $k$-ième prémisse, si on connaît la règle et le numéro $k$ et la formule principale, on peut construire la conclusion. On dit qu'une règle est \textbf{\emph{locale}} si %on a cette dernière propriété pour toutes les prémisses de toutes ses instances.
+pour toutes les prémisses de toutes ses instances, la différence d'information entre la prémisse et la conclusion est bornée par la taille en mémoire de la formule principale.
 %
-Si toutes les règles sont locales (et si on cherche juste à décider si un séquent est prouvable sans demander d'arbre de preuve le cas échéant), alors on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (numéro de prémisse, formule principale) qui sont moins coûteuses. %C'est donc plus efficace en terme de complexité spatiale.
+Si toutes les règles sont locales (et si on cherche juste à décider si un séquent est prouvable sans demander d'arbre de preuve le cas échéant), alors on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (par exemple numéro de prémisse et formule principale) qui sont moins coûteuses. %C'est donc plus efficace en termes de complexité spatiale.
 Lorsqu'on s'intéresse à une instance dont le séquent retenu est conclusion, on transforme ce séquent en une prémisse, sur laquelle on relance l'algorithme. Et inversement, on a parfois besoin de revenir à la conclusion à partir d'une prémisse et des informations supplémentaires retenues : par exemple pour ensuite calculer une autre prémisse de l'instance, ou encore pour essayer d'appliquer une autre règle à la conclusion si on a trouvé une prémisse non prouvable et non inversible.
 Ainsi, si toutes les règles du calcul sont locales, on peut améliorer la complexité spatiale de l'algorithme.
 
@@ -147,13 +160,13 @@ Ainsi, si toutes les règles du calcul sont locales, on peut améliorer la complex
 %autorisé par la règle, toutes les prémisses de la seule instance correspondante. Mais ce n'est pas tout. Lorsqu'on s'intéresse à une prémisse, on risque d'avoir à nouveau besoin plus tard de la conclusion, par exemple pour calculer une autre prémisse, ou essayer une autre instance s'il y a une prémisse non inversible non prouvable.
 %%
 %Une solution consiste à retenir la conclusion pendant qu'on effectue la recherche de preuve sur les différentes prémisses, mais cela peut être coûteux en mémoire. Une autre solution est possible si on sait retrouver la conclusion à partir de n'importe quelle prémisse et %d'informations moins coûteuses : le 
-%du numéro de la prémisse concernée et de la formule principale. Une règle dont toutes les instances vérifient ce qui précède est dite \textbf{\emph{locale}}. Si toutes les règles sont locales, on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (numéro de prémisse et formule principale) qui sont moins coûteuses. C'est donc plus efficace en terme de complexité spatiale.
+%du numéro de la prémisse concernée et de la formule principale. Une règle dont toutes les instances vérifient ce qui précède est dite \textbf{\emph{locale}}. Si toutes les règles sont locales, on peut ne garder qu'un seul séquent en mémoire à tout moment, plus des informations (numéro de prémisse et formule principale) qui sont moins coûteuses. C'est donc plus efficace en termes de complexité spatiale.
 
 
 
 
 
-\subsection{Deux exemples de calculs de séquents pour la logique intuitionniste}
+\subsection{Deux exemples de calculs des séquents pour la logique intuitionniste}
 
 %\subsectionDescription{
 %LJ.
@@ -174,14 +187,14 @@ Ainsi, si toutes les règles du calcul sont locales, on peut améliorer la complex
 %Le calcul \LJ\ présenté dans la première partie %peut difficilement être appliqué à une recherche automatique de preuve tel quel.
 %a besoin de quelques ajustements pour pouvoir être appliqué à la recherche automatique de preuves
 Pour appliquer le calcul \LJ\ présenté dans la première partie à la recherche automatique de preuves, il faut quelques ajustements sur le calcul lui-même et sur l'algorithme proposé. Il faut notamment enlever la règle de coupure %(figure~\ref{fig:reglesLJ}, \emph{cut})
-, ce qui est possible car le calcul reste évidemment correct, mais même complet (propriété d'élimination de la coupure). Pour la même raison, on peut aussi enlever la règle \emph{weakening\,L}, à condition de récrire la règle $id$ en\LJidbis. En revanche, on ne peut pas supprimer purement et simplement la règle\LJcontraction\!\!. On ne pourrait 
+, ce qui est possible car le calcul reste évidemment correct, mais même complet (propriété d'élimination de la coupure). Pour la même raison, on peut aussi enlever la règle \emph{weakening\,L}, à condition de récrire la règle $id$ en\LJidbis. En revanche, on ne peut pas supprimer purement et simplement la règle\LJcontractionL\!\!. On ne pourrait 
 %en effet 
 par exemple
 plus prouver la formule %bien connue 
 ${\lnot\lnot(A\lor\lnot A)}$%, dont une preuve est donnée en figure ?
 .
 %\ (voir figure~\ref{fig:LJnnTiersExclu}). 
-Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithme. Une solution consiste à remplacer les deux règles $contraction\ L$ et \LJimpL par une seule règle ${\LJimpLcontr.}$ On n'a alors plus d'appels récursifs sur des séquents strictement croissants $\G,A\To D$ puis $\G,A,A\To D$ puis $\G,A,A,A\To D$ etc. En revanche, on peut avoir un appel récursif sur un séquent déjà rencontré, par exemple si $D=A$, une prémisse est identique à la conclusion dans \LJimpLcontrA. On ajoute alors un système de détection de cycles en retenant tous les séquents rencontrés. L'algorithme obtenu est correct et termine. On a la propriété de la sous-formule. Les règles sont toutes inversibles et locales sauf $\imp L$, dont seule la deuxième prémisse est inversible. Mais la détection de cycles est très coûteuse.
+Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithme. Une solution consiste à remplacer les deux règles $contraction\ L$ et \LJimpL par une seule règle ${\LJimpLcontr.}$ On n'a alors plus d'appels récursifs sur des séquents strictement croissants $\G,A\To D$ puis $\G,A,A\To D$ puis $\G,A,A,A\To D$ etc. En revanche, on peut avoir un appel récursif sur un séquent déjà rencontré, par exemple si $D=A$, une prémisse est identique à la conclusion dans \LJimpLcontrA. On ajoute alors un système de détection de cycles en retenant tous les séquents rencontrés \cite{LJloop}. L'algorithme obtenu est correct et termine. On a la propriété de la sous-formule. Les règles sont toutes inversibles et locales sauf $\imp L$, dont seule la deuxième prémisse est inversible. Mais la détection de cycles est très coûteuse.
 
 %\begin{figure}[h]
 %\centering
@@ -198,7 +211,7 @@ Mais comme on l'a vu, cette règle pose un problème de terminaison de l'algorithm
 \noindent
 \textbf{\LJT.}
 Le calcul \LJT\ est introduit par R. Dyckhoff dans \cite{LJT} pour pallier le problème de cycles de \LJ. Il n'y a pas de règle de contraction, et la règle $\to L$ est remplacée par quatre règles selon la structure de $A$ dans la formule principale $A\to B$ : par exemple \LJTimpLun où $A$ doit être %\emph{atomique} c'est-à-dire 
-réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la sous-formule, mais on peut quand même déterminer toutes les formules susceptibles d'apparaître lorsqu'on essaie de prouver un séquent donné. Dyckhoff montre que l'algorithme termine en choisissant bien un bon ordre sur les formules puis sur les séquents. Toutes les règles sont inversibles et locales sauf une des règles qui remplacent $\imp L$, qui comporte deux prémisses dont seule la deuxième est inversible. Une variante de \LJT\ est le fondement du prouveur STRIP \cite{STRIP}.
+réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la sous-formule, mais on peut quand même déterminer toutes les formules susceptibles d'apparaître lorsqu'on essaie de prouver un séquent donné. Dyckhoff montre que l'algorithme termine en choisissant bien un ordre bien fondé sur les formules puis sur les séquents. Toutes les règles sont inversibles et locales sauf une des règles qui remplacent $\imp L$, qui comporte deux prémisses dont seule la deuxième est inversible. Une variante de \LJT\ est le fondement du prouveur STRIP \cite{STRIP}.
 
 
 
@@ -206,16 +219,16 @@ réduite à une variable, ou encore \LJTimpLdeux. On n'a pas la propriété de la so
 %%%%%
 
 
-\section{Le calcul de séquents utilisé pour l'implémentation : \LSJ, légèrement modifié en \LSJn}
+\section{Le calcul des séquents utilisé pour l'implémentation : \LSJ, légèrement modifié en \LSJn}
 
-Le calcul de séquents utilisé pour l'implémentation est \LSJn, une variante de \LSJ. Le calcul \LSJ\ est présenté par M. Ferrari, C. Fiorentini et G. Fiorino dans \cite{LSJ}. Il présente des priopriétés très intéressantes pour l'application à la recherche de preuve. \LSJn\ est fondamentalement le même calcul, %où les séquents sont représentés
+Le calcul des séquents utilisé pour l'implémentation est \LSJn, une variante de \LSJ. Le calcul \LSJ\ est présenté par M. Ferrari, C. Fiorentini et G. Fiorino dans \cite{LSJ}. Il présente des priopriétés très intéressantes pour l'application à la recherche de preuve. \LSJn\ est fondamentalement le même calcul, %où les séquents sont représentés
 avec une représentation des séquents un peu plus riche en informations. Il a été proposé par mon maître de stage D. Larchey-Wendling. \LSJn\ hérite de toutes les bonnes propriétés de \LSJ, en ajoutant la localité des règles.
 
 %
 
 \subsection{Séquents et règles de \LSJ}
 
-%L'article \cite{LSJ} définit le calcul de séquents \LSJ. Une sémantique naturelle des séquents est proposée à l'aide des modèles de Kripke, mais nous ne la présentons pas. En effet, ce qui nous intéresse est l'existence, pour toute formule, d'un séquent qui est prouvable dans le calcul \LSJ\ si, et seulement si, la formule est prouvable en logique intuitionniste. Nous renvoyons à l'article pour les démonstrations, notamment celles de la correction et de la complétude du calcul.
+%L'article \cite{LSJ} définit le calcul des séquents \LSJ. Une sémantique naturelle des séquents est proposée à l'aide des modèles de Kripke, mais nous ne la présentons pas. En effet, ce qui nous intéresse est l'existence, pour toute formule, d'un séquent qui est prouvable dans le calcul \LSJ\ si, et seulement si, la formule est prouvable en logique intuitionniste. Nous renvoyons à l'article pour les démonstrations, notamment celles de la correction et de la complétude du calcul.
 
 
 
@@ -225,7 +238,7 @@ Un \textbf{\emph{séquent}} de \LSJ\ est la donnée de trois multiensembles $\Th$,
 
 
 %On a vu que dans \LJ, le séquent représente ... et dans \LK,
-On a vu que dans les calculs \LK\ et \LJ, le séquent $\G \To \D$ représente la formule \\${\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)}$, respectivement en logique classique et en logique intuitionniste, avec $\D$ contenant exactement une formule pour \LJ. C'est une interprétation courante en calcul de séquents. Pour \LSJ, on ne sait pas représenter un séquent $\Th\,;\,\G\To\D$ par une seule formule.
+On a vu que dans les calculs \LK\ et \LJ, le séquent $\G \To \D$ représente la formule \\${\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)}$, respectivement en logique classique et en logique intuitionniste, avec $\D$ contenant exactement une formule pour \LJ. C'est une interprétation courante en calcul des séquents. Pour \LSJ, on ne sait pas représenter un séquent $\Th\,;\,\G\To\D$ par une seule formule.
 %Une sémantique pour les séquents
 On a cependant le résultat suivant : un séquent $\emptyset\,;\,\G\To\D$ est prouvable dans \LSJ\ si et seulement si la formule ${\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)}$ est prouvable en logique intuitionniste.
 $\G$ et $\D$ ont donc une signification ordinaire.
@@ -450,9 +463,9 @@ On suppose $\vdash' \s'$. Alors il existe une règle $\mathcal R'$ de \LSJn\ et $
 
 
 \section{\'Eléments d'implémentation}
+\label{section:implementation}
 
-
-On utilise l'algorithme dont le pseudo-code est donné dans \cite{LSJ}. Il s'agit de l'algorithme donné en \ref{algoGeneral}, en mettant à profit l'inversibilité de la plupart des règles et prémisses. Adapter l'algorithme de \LSJ\ à \LSJn\ est immédiat ; cependant, on ne garde en mémoire qu'un seul séquent qu'on modifie en place, et on utilise la localité des règles pour retrouver le séquent initial avant d'essayer une nouvelle prémisse ou une nouvelle instance. 
+On utilise l'algorithme dont le pseudo-code est donné dans \cite{LSJ}. Il s'agit de l'algorithme ``générique'' donné en \ref{algoGeneral}, en mettant à profit l'inversibilité de la plupart des règles et prémisses. Adapter l'algorithme de \LSJ\ à \LSJn\ est immédiat ; cependant, on ne garde en mémoire qu'un seul séquent qu'on modifie en place, et on utilise la localité des règles pour retrouver le séquent initial avant d'essayer une nouvelle prémisse ou une nouvelle instance. 
 
 \subsection{Ordre d'essai des instances : choix de la formule principale}
 \label{subsection:choixFormulePrincipale}
@@ -467,7 +480,7 @@ On remarque que, pour une formule composée donnée d'un séquent,
 il y a exactement une instance dont ce séquent est conclusion avec cette formule comme formule principale, et la règle associée ne dépend que de la formule et de 
 %son appartenance à $\G$ ou à $\D$
 sa position \emph{à gauche} (dans $\G$) ou \emph{à droite} (dans $\D$) du séquent
-. De plus toute instance ne correspondant pas à un axiome a une formule principale, qui est composée. Décider l'instance à considérer revient alors à choisir une formule principale. 
+. De plus toute instance ne correspondant pas à un axiome admet une formule principale composée. Décider l'instance à considérer revient alors à choisir une formule principale. 
 
 
 \begin{floatingfigure}[r]{4.5cm}
@@ -501,11 +514,12 @@ Plus l'entier est petit, plus la formule est prioritaire. On choisit alors la fo
 
 
 \subsection{Indexation}
+\label{subsection:indexation}
 
 Une formule peut être considérée comme un \textbf{arbre binaire} dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquetés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. 
 %On rappelle qu'une formule est \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou à une variable, c'est-à-dire si l'arbre associé est une feuille.
 %
-On utilise la propriété de la sous-formule, que \LSJn\ hérite de \LSJ, pour obtenir une représentation des formules plus facile à manipuler. En effet, si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on applique l'algorithme de preuve au séquent $\; \To A$, donc toutes les formules susceptibles d'apparaître sont des sous-formules de la formule $A$. On peut ainsi réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. On retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ est atomique, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la \emph{taille} de la formule $A$ dont on veut décider la prouvabilité, c'est-à-dire le nombre de n\oe uds de l'arbre correspondant. On peut alors accéder facilement aux fils de n'importe quelle formule considérée, et comme on a récursivement cette information sur les fils, on peut retrouver, à partir du numéro d'une formule, toutes les informations de l'arbre associé.
+On utilise la propriété de la sous-formule, que \LSJn\ hérite de \LSJ, pour obtenir une représentation des formules plus facile à manipuler. En effet, si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on applique l'algorithme de preuve au séquent $\; \To A$, donc toutes les formules susceptibles d'apparaître sont des sous-formules de la formule $A$. On peut ainsi réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. On retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ est atomique, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cellules de ce tableau est la \emph{taille} de la formule $A$ dont on veut décider la prouvabilité, c'est-à-dire le nombre de n\oe uds de l'arbre correspondant. On peut alors accéder facilement aux fils de n'importe quelle formule considérée, et comme on a récursivement cette information sur les fils, on peut retrouver, à partir du numéro d'une formule, toutes les informations de l'arbre associé.
 
 On peut aussi déterminer, au cours de l'indexation, l'unique côté possible pour un numéro de formule donné, le \emph{côté} d'une formule dans un séquent étant $L$ si elle est dans $\G$, $R$ si elle est dans $\D$. En effet, si $H=A\land B$ ou $H=A\lor B$, alors $A$ et $B$ ont toutes deux le même côté que $H$ ; si $H=A\to B$ alors $B$ a le même côté que $H$ et $A$ le côté opposé. 
 On distingue ici les différentes occurrences d'une même formule, qui ont des numéros associés distincts.
@@ -624,9 +638,9 @@ dans le séquent initial $\;\To A$, on peut associer un côté à chaque numéro repr
 
 L'axiome\LSJLid\ $(i\leq n)$ affirme qu'un séquent est prouvable si une même formule $A$ apparaît, de fa\c con ``accessible'' (condition sur les indices), de part et d'autre du séquent. 
 %
-``même formule'' est à comprendre au sens de l'égalité structurelle, c'est-à-dire l'égalité des arbres associés. On teste très souvent cette égalité au cours de la recherche de preuve.
+``Même formule'' est à comprendre au sens de l'égalité structurelle, c'est-à-dire l'égalité des arbres associés. On teste très souvent cette égalité au cours de la recherche de preuve.
 %Tester cette égalité entre les
-Le faire sur des arbres est long (de l'ordre du nombre de n\oe uds du plus petit). On préfère, au cours de l'indexation, construire un deuxième tableau, qui à chaque numéro de formule associe un numéro de \emph{classe}, à comprendre comme les classes d'équivalence de l'égalité structurelle ; voir a figure~\ref{fig:indexation}. Ainsi, on détermine ensuite en temps constant si les formules associées à deux entiers donnés sont égales structurellement. 
+Le faire sur des arbres est long (de l'ordre du nombre de n\oe uds du plus petit). On préfère, au cours de l'indexation, construire un deuxième tableau, qui à chaque numéro de formule associe un numéro de \emph{classe}, à comprendre comme les classes d'équivalence de l'égalité structurelle ; voir la figure~\ref{fig:indexation}. Ainsi, on détermine ensuite en temps constant si les formules associées à deux entiers donnés sont égales structurellement. 
 %La complexité de la construction de ce tableau est de l'ordre de la taille de la formule initiale au carré, ce qui est de toute fa\c con inférieur celle de la recherche de preuve.
 
 %Ces classent apparaissent dans la figure~\ref{?}. Voir la figure~\ref{fig:indexation}.
@@ -638,10 +652,10 @@ Le faire sur des arbres est long (de l'ordre du nombre de n\oe uds du plus petit
 
 
 \subsection{Structure de données pour les multiensembles $\G$ et $\D$ du séquent}
+\label{subsection:structuresequent}
 
 
-
-Soit $\s={\G\!\To\!\D}$ le séquent qu'on garde en mémoire au cours de l'algorithme. Le choix de la représentation de $\G$ et $\D$, multiensembles de couples ``\emph{ indice\!:\;formule }'', est motivé par ce qui suit. On doit souvent, et donc on voudrait pouvoir rapidement
+Soit $\s$, de la forme ${\G\!\To\!\D}$, le séquent qu'on garde en mémoire au cours de l'algorithme. Le choix de la représentation de $\G$ et $\D$, multiensembles de couples ``\emph{ indice\!:\;formule }'', est motivé par ce qui suit. On doit souvent, et donc on voudrait pouvoir rapidement
 \begin{itemize}
 \item
 choisir un couple principal $i:H$ le plus prioritaire ;
@@ -652,16 +666,16 @@ inversement, retirer $j:A$ ou $k:B$ et rajouter $i:H$.
 \end{itemize}
 
 
-Nous représentons $\G$, comme $\D$, par un tableau à $6$ cases, une par priorité. Dans la case $p$ se trouve une liste de couples (\;\emph{un indice $i$}\;,\; \emph{la liste des formules H de priorité $p$ telles que $i\!:\!H$ est dans $\G$ resp. $\D$}\;) ; ces couples sont triés par indices décroissants ; un tel couple n'est présent que si sa liste de formules est non vide. %Voir l'exemple de la figure~\ref{?}.
+Nous représentons $\G$, comme $\D$, par un tableau à $6$ cellules, une par priorité. Dans la cellule $p$ se trouve une liste de couples (\;\emph{un indice $i$}\;,\; \emph{la liste des formules H de priorité $p$ telles que $i\!:\!H$ est dans $\G$ resp. $\D$}\;) ; ces couples sont triés par indices décroissants ; un tel couple n'est présent que si sa liste de formules est non vide. %Voir l'exemple de la figure~\ref{?}.
 
-Le tableau indexé par les indices permet d'une part un choix rapide du couple principal, et d'autre part, d'ajouter rapidement n'importe quel couple $j:A$ quelle que soit sa priorité. Utiliser par exemple une liste de tous les couples triés par priorité assurerait le premier point, mais pas le second. Le tri des indices par ordre décroissant est pour l'ajout de $j:A$ ou $k:B$, car dans toutes les règles, $j$ et $k$ valent $n$ ou $n+1$, où $n$ est l'indice du séquent. Avoir un seul couple avec une liste de formules par indice permet l'ajout en temps constant d'un couple d'indice $n$ même dans $\G$, où il peut y avoir des couples d'indice $n+1$. %Le retrait du couple principal $i:H$ ne pose pas de problème : il se trouve au début de la liste car le couple principal est choisi comme le premier convenable rencontré. 
+Le tableau indexé par les indices permet d'une part un choix rapide du couple principal, et d'autre part, d'ajouter rapidement n'importe quel couple $j:A$ quelle que soit sa priorité. Utiliser par exemple une liste de tous les couples triés par priorité assurerait le premier point, mais pas le second. Le tri des indices par ordre décroissant est utile pour l'ajout de $j:A$ ou $k:B$, car dans toutes les règles, $j$ et $k$ valent $n$ ou $n+1$, où $n$ est l'indice du séquent. Avoir un seul couple avec une liste de formules par indice permet l'ajout en temps constant d'un couple d'indice $n$ même dans $\G$, où il peut y avoir des couples d'indice $n+1$. %Le retrait du couple principal $i:H$ ne pose pas de problème : il se trouve au début de la liste car le couple principal est choisi comme le premier convenable rencontré. 
 Le couple principal se trouve au début de la liste car il est choisi comme le premier convenable rencontré, son retrait est donc en temps constant.
 Enfin, pour assurer que retirer $j:A$ ou $k:B$ ou rajouter $i:H$ se fait aussi en temps constant, on vérifie qu'entre le moment où on passe d'une conclusion d'une instance à une prémisse, et celui où on repasse de la prémisse à la conclusion, la représentation des multiensembles de la prémisse est exactement la même, avec toutes les listes dans le même ordre. 
 %
 On obtient bien toutes les opérations voulues en temps constant, sauf dans un cas : lorsque les formules les plus prioritaires sont des ``implique'', il faut parfois en essayer plusieurs. On effectue des permutations circulaires pour faire varier le couple principal, choisi comme celui en tête de liste. On n'oublie pas, selon le nombre de couples principaux qui ont été essayés, de finir de permuter les formules afin de bien revenir à une représentation du séquent identique à la représentation initiale.
 %Un problème se pose cependant si les formules les plus prioritaires sont les ``implique'' : il faut parfois en essayer plusieurs. On le résout en effectuant chaque fois une permutation circulaire afin de mettre un nouveau couple en tête de liste, qui sera choisi comme couple principal.
 
-%Une structure de données similaire, avec un tableau indexé par les classes d'égalité structurelle et dans la case $cl$, des listes de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i:H$ où $H$ est de classe $cl$ dans $\G$ (resp. $\D$)}\;), est utilisée pour retenir les classes apparaissant dans le séquent afin de vérifier rapidement si l'axiome $id$ s'applique.
+%Une structure de données similaire, avec un tableau indexé par les classes d'égalité structurelle et dans la cellule $cl$, des listes de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i:H$ où $H$ est de classe $cl$ dans $\G$ (resp. $\D$)}\;), est utilisée pour retenir les classes apparaissant dans le séquent afin de vérifier rapidement si l'axiome $id$ s'applique.
 
 
 
@@ -673,19 +687,21 @@ On obtient bien toutes les opérations voulues en temps constant, sauf dans un ca
 
 Les axiomes sont testés à chaque appel récursif sur un nouveau séquent. L'axiome $id$ notamment est long à tester naïvement : il faudrait tester, pour tout couple $(A,B)$ de formules ``accessibles'' avec $A$ dans $\G$ et $B$ dans $\D$, si $A=B$ (égalité structurelle expliquée en \ref{subsection:classes}). La complexité associée est le produit des cardinaux de $\G$ et $\D$. On préfère retenir les multiensembles obtenus à partir de $\G$ et $\D$ en rempla\c cant la formule de chaque couple par sa classe, appelés respectivement $\ClG$ et $\ClD$. On retient également deux variables booléennes $fauxL$ et $id$. Lorsqu'on ajoute une formule à $\D$, on met à jour $\ClD$, et on vérifie si la classe de la formule ajoutée est présente et ``accessible'' dans $\ClG$, auquel cas on assigne $vrai$ à $id$. De même pour un ajout à $\G$ en échangeant les rôles de $\ClD$ et $\ClG$, mais en plus, si la formule ajoutée est $\bot$ avec un indice inférieur à celui du séquent, on assigne $vrai$ à $fauxL$. Lorsqu'on transforme une prémisse d'une instance en la conclusion, on réassigne $faux$ aux deux variables : si l'instance a été testée, c'est parce qu'aucun axiome n'était applicable à la conclusion. Ainsi, lorsqu'au début de chaque appel récursif sur le séquent actuellement en mémoire, on commence par tester les axiomes, il suffit de regarder si $id$ ou $fauxL$ contient $vrai$.
 
-L'intérêt d'avoir remplacé les formules par leur classe est qu'on peut représenter $\ClG$ et $\ClD$ avec une structure de données similaire à celle pour $\G$ et $\D$ : un tableau indexé par les classes et dans la case $cl$, une liste de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i\!:\!cl$ dans $\ClG$ resp. $\ClD$}\;). Vérifier si une classe donnée est présente et ``accessible'' se fait alors en temps constant.
+L'intérêt d'avoir remplacé les formules par leur classe est qu'on peut représenter $\ClG$ et $\ClD$ avec une structure de données similaire à celle pour $\G$ et $\D$ : un tableau indexé par les classes et dans la cellule $cl$, une liste de couples (\;\emph{un indice $i$}\;,\;\emph{le nombre de couples $i\!:\!cl$ dans $\ClG$ resp. $\ClD$}\;). Vérifier si une classe donnée est présente et ``accessible'' se fait alors en temps constant.
 
 
 
 \section{Perspective de certification}
 
-Un des objectifs du stage était de s'intéresser à la certification d'un prouveur de logique intuitionniste s'appuyant sur \LSJ. \'Ecrire la certification d'un tel programme est très long et n'a pas été abordé. 
+Un des objectifs du stage était de s'intéresser à la certification d'un prouveur de logique intuitionniste s'appuyant sur \LSJ. \'Ecrire la certification (en Coq) d'un tel programme est très long et n'a pas été abordé. 
 %En revanche, plusieurs variantes d'implémentation, dont la certification devrait être plus facile mais dont l'efficacité est diminuée, on été étudiées.
 En revanche, l'implémentation a été modifiée de fa\c con à faciliter la certification, souvent au détriment de l'efficacité. 
-Plusieurs variantes d'implémentation ont ainsi été étudiées, afin de comparer certaines méthodes en termes de facilité de certification et d'efficacité.
+Voici deux changements favorables à la certification qui ont été utilisés dans l'implémentation de certaines variantes de prouveurs.
+%Plusieurs variantes d'implémentation ont ainsi été étudiées, afin de comparer certaines méthodes en termes de facilité de certification et d'efficacité.
 %On présente dans cette section les deux changements principaux qu'on a  
 
 \subsection{Un langage simple pour faciliter la certification}
+\label{subsection:langagesimple}
 
 Un premier pas vers la certification est l'utilisation d'un langage relativement simple, afin de limiter le nombre de propriétés à démontrer. Le langage que nous avons employé pour cette raison, qu'on notera \T, comporte un seul type de données : des arbres binaires, qui consistent en l'arbre vide ou une feuille étiquetée par un entier naturel ou un couple d'arbres. Les expressions sont données dans la figure~\ref{fig:expr}, \emph{var} désignant une variable et \emph{nomf} un nom de fonction, des chevrons $<\!\!.,.\!\!>$ étant utilisés pour les couples d'arbres. La condition du \textbf{if} doit être une feuille d'un entier $n$, correspondant à \emph{faux} si $n=0$ et \emph{vrai} sinon ; \textbf{isnull}, \textbf{isint} et la comparaison renvoient de même une feuille contenant $0$ ou $1$. La première expression du \textbf{match} doit s'évaluer à un couple, sinon il y a une erreur à l'exécution. De même, dans la comparaison ou dans \textbf{succ} (successeur) ou \textbf{pred} (prédécesseur), les expressions doivent être des feuilles. Une déclaration de fonction est un triplet de la forme (\emph{nomf}, \emph{var}, \emph{expr}) comportant le nom de la fonction, celui de son argument, et enfin son corps dans lequel l'argument peut apparaître comme une variable libre. Un programme consiste en une liste de déclarations de fonctions considérées comme mutuellement récursives, puis une expression à évaluer.
 
@@ -720,8 +736,8 @@ $
 \end{figure}
 
 
-L'intérêt d'utiliser ce langage est que mon encadrant D. Larchey-Wendling a réalisé pour celui-ci un compilateur certifié vers un langage exécutable par une machine abstraite assez simple, ainsi qu'un programme certifié simulant l'exécution de cette machine abstraite. On notera \M\ le langage associé à cette machine abstraite. L'objectif de ces travaux sur \T\ est justement de pouvoir écrire, grâce à ce langage, des prouveurs certifiés.
-
+L'intérêt d'utiliser ce langage est que mon encadrant D. Larchey-Wendling a réalisé pour celui-ci un compilateur certifié vers un langage exécutable par une machine abstraite assez simple, ainsi qu'un programme certifié simulant l'exécution de cette machine abstraite. On notera \M\ le langage associé à cette machine abstraite. Justement, l'objectif de ces travaux sur \T\ %est justement de pouvoir écrire, grâce à ce langage, des prouveurs certifiés.
+serait, à terme, l'utilisation de ce langage (ou plutôt d'une version améliorée de ce langage) pour écrire des prouveurs certifiés.
 
 
 %
@@ -729,8 +745,9 @@ L'intérêt d'utiliser ce langage est que mon encadrant D. Larchey-Wendling a réal
 
 
 \subsection{Compilation d'un programme spécifique à une formule donnée}
+\label{subsection:fonctionssf}
 
-On a vu en \ref{subsection:choixFormulePrincipale} que pour une formule composée donnée d'un séquent, il y a exactement une instance dont le séquent est conclusion avec cette formule principale, et la règle associée ne dépendent que du connecteur de la formule et de sa position à gauche ou à droite du séquent. Ces informations sont connues à l'issue de l'indexation. On peut alors calculer, pour chaque formule composée, de numéro $f$, et chaque prémisse, de numéro $k$, de l'unique règle associée, des fonctions de transformation de séquent $prem_{f,k}$ et $rev_{f,k}$, qui permettent de passer de la conclusion à la $k$-ième prémisse et réciproquement. Ces fonctions prennent en argument l'indice $i$ de la formule principale, qui n'est connu qu'à l'exécution.
+On a vu en \ref{subsection:choixFormulePrincipale} que pour une formule non atomique donnée d'un séquent, il y a exactement une instance dont le séquent est conclusion avec cette formule principale, et la règle associée ne dépend que du connecteur de la formule et de sa position à gauche ou à droite du séquent. Ces informations sont connues à l'issue de l'indexation. On peut alors calculer, pour chaque formule composée, de numéro $f$, et chaque prémisse, de numéro $k$, de l'unique règle associée, des fonctions de transformation des séquent $prem_{f,k}$ et $rev_{f,k}$, qui permettent de passer de la conclusion à la $k$-ième prémisse et réciproquement. Ces fonctions prennent en argument l'indice $i$ de la formule principale, qui n'est connu qu'à l'exécution.
 
 On peut ainsi, pour une formule donnée, compiler un code dans lequel des fonctions pour chaque sous-formule sont écrites en dur. L'exécution de ce code doit ensuite renvoyer un booléen indiquant si cette formule est prouvable. Calculer ces fonctions n'est pas très long par rapport à la recherche de preuve elle-même, effectuée à l'exécution, au cours de laquelle chacune de ces fonctions peut être appelée à plusieurs reprises.
 
@@ -746,9 +763,9 @@ L'intérêt principal de cette approche est qu'elle permet de se fixer un premier 
 %\subsection{Comparaison de différentes implémentations}
 
 
-\section{Différentes variantes de prouveur réalisées, tests effectués, comparaison des résultats}
+\section{Différentes variantes de prouveur et résultats obtenus}
 
-\def\vspaceval{1em}
+\def\vspaceval{.8em}
 %\vspace{\vspaceval}
 
 Le langage de programmation utilisé est OCaml, à la fois pour l'algorithme de recherche de preuve à proprement parler, et pour les fonctionnalités annexes : analyseurs, interpréteurs, et même gestion des appels système pour le chronométrage, le parcours d'un répertoire ou l'écriture dans un fichier.
@@ -766,11 +783,13 @@ Une description rapide de chacun est donnée en~\ref{subsection:prouveurs}.
 
 Afin de tester ces prouveurs, on a utilisé la bibliothèque ILTP~\cite{ILTP}, qui contient des formules de référence pour évaluer les prouveurs de logique intuitionniste propositionnelle. Les fichiers d'ILTP sont en Prolog mais n'utilisent qu'un nombre très limité de constructions syntaxiques ; on a donc pu écrire un analyseur naïf ne reconnaissant que ces constructions, qui extrait d'un fichier ILTP une formule à donner en argument au prouveur, ainsi que le booléen, indiquant si cette formule est prouvable, que le prouveur est censé renvoyer, afin de pouvoir tester rapidement la correction du prouveur.
 
+Les tests ont été effectués sous MacOS avec un processeur 2.7 GHz Intel Core i7.
+
 En \ref{subsection:efficaciteLSJ}, on compare notre prouveur le plus efficace (``prouveur simple'' dans~\ref{subsection:prouveurs}) aux prouveurs répertoriés par ILTP. En~\ref{subsection:comparaison}, on compare entre eux nos différents prouveurs.
 
 
 \subsection{Les différents prouveurs implémentés}
-
+\label{subsection:prouveurs}
 
 %Les implémentations qui ont été réalisées sont les suivantes
 %Différentes implémentations ont été réalisées. On se retrouve ainsi avec 
@@ -790,25 +809,27 @@ En \ref{subsection:efficaciteLSJ}, on compare notre prouveur le plus efficace (`
 Ce prouveur, le premier implémenté, est le plus simple et le plus efficace. 
 %Il utilise 
 Il effectue directement la recherche de preuve telle qu'elle est décrite dans l'article présentant \LSJ\ \cite{LSJ}, en utilisant
-tout ce qui est décrit dans la section~\ref{section:implementation}, notamment les structures de données élaborées de \ref{subsection:structureSequent}. En revanche, aucun effort n'est fait pour faciliter la certification.
+tout ce qui est décrit dans la section~\ref{section:implementation}, notamment les structures de données élaborées de \ref{subsection:structuresequent}. En revanche, aucun effort n'est fait pour faciliter la certification.
 \vspace{\vspaceval}
 
 \item
-``\textbf{Prouveur simple avec listes}''.
+``\textbf{Prouveur simple avec listes}''. Ce prouveur est similaire à celui ci-dessus, mais les structures de données utilisées pour le séquent sont de simples listes. Cela permet une comparaison plus juste avec les prouveurs suivants, pour lesquelles les structures de données élaborées de~\ref{subsection:structuresequent} %seraient difficiles à implémenter. Ce serait tout de même possible, même avec le langage \T, mais n'apporterait pas grand-chose par rapport à l'investissement. 
+ne sont pas implémentées. Ce serait possible de les implémenter, mais ce serait fastidieux, et n'apporterait pas grand-chose par rapport à l'investissement, dans la mesure où ce qui nous intéresse est la variation d'efficacité liée aux changements qu'on introduit ; utiliser ce prouveur comme témoin est une solution plus facile et tout à fait convenable.
+%Et justement, les tests sur ce ``prouveur simple avec listes'' montrent que finalement, 
 \vspace{\vspaceval}
 
 \item
-``\textbf{Prouveur \T}''. On compile un programme en langage \T\ adapté à la formule donnée en argument. Pour cela, on réalise l'indexation, puis, comme expliqué en \ref{subsection:fonctionssf} on compile des fonctions correspondant à chaque sous-formule de la formule initiale. On ajoute ensuite ces fonctions à du code en \T\ écrit à l'avance, car indépendant de la formule. Le programme intégral en \T\ obtenu est écrit dans un fichier temporaire. Dans un deuxième temps, on exécute ce programme à l'aide d'un analyseur pour \T\ puis d'un interpréteur relativement naïf. Cela renvoie un booléen qui doit indiquer si la formule initiale est prouvable en logique intuitionniste.
+``\textbf{Prouveur \T}''. On compile un programme en langage \T\ adapté à la formule donnée en argument. Pour cela, on réalise l'indexation, puis, comme expliqué en~\ref{subsection:fonctionssf}, on compile des fonctions correspondant à chaque sous-formule de la formule initiale. On ajoute ensuite ces fonctions à du code en \T\ écrit à l'avance, car indépendant de la formule. Le programme intégral en \T\ obtenu est écrit dans un fichier temporaire. Dans un deuxième temps, on exécute ce programme à l'aide d'un analyseur pour \T\ puis d'un interpréteur relativement naïf. Cela renvoie un booléen qui doit indiquer si la formule initiale est prouvable en logique intuitionniste.
 \vspace{\vspaceval}
 
 \item
-``\textbf{Prouveur \T\ \M}''. On génère le même programme en \T\ que précédemment. Mais cette fois, pour l'exécuter, on utilise un compilateur (fourni par D. Larchey-Wendling) de \T\ vers \M. On simule ensuite assez facilement l'exécution du code en \M\ par la machine abstraite simple à laquelle ce langage correspond.
+``\textbf{Prouveur \T\ \M}''. On génère le même programme en \T\ que précédemment. Mais cette fois, pour l'exécuter, on utilise un compilateur (fourni par D. Larchey-Wendling) de \T\ vers \M. On simule ensuite l'exécution du code en \M\ par la machine abstraite simple à laquelle ce langage correspond, en utilisant les arbres de caml plutôt qu'en manipulant explicitement des pointeurs.
 (Le code en \M\ n'est pas écrit dans un fichier, mais directement passé au simulateur sous la forme d'un arbre de syntaxe abstraite.)
 %un langage correspondant à une machine abstraite assez simple, dont l'exécution est facile à simuler.
 \vspace{\vspaceval}
 
 \item
-``\textbf{Prouveur compilé caml}''. On compile, selon la méthode employée par le ``prouveur \T'', un programme adapté à la formule donnée en argument, mais ce programme est écrit en OCaml. On lance ensuite le compilateur ocamlc sur le fichier temporaire contenant ce programme, puis on lance le fichier exécutable généré. Ce prouveur a été implémenté afin de tester de l'efficacité de la compilation de fonctions adaptées à la formule, sans l'influence de l'utilisation du langage \T\ moins élaboré.
+``\textbf{Prouveur compilé Caml}''. On compile, selon la méthode employée par le ``prouveur \T'', un programme adapté à la formule donnée en argument, mais ce programme est écrit en OCaml. On lance ensuite le compilateur ocamlc sur le fichier temporaire contenant ce programme, puis on lance le fichier exécutable généré. Ce prouveur a été implémenté afin de tester de l'efficacité de la compilation de fonctions adaptées à la formule, sans l'influence de l'utilisation du langage \T\ moins élaboré.
 
 \end{itemize}
 %\vspace{\vspaceval}
@@ -818,55 +839,146 @@ tout ce qui est décrit dans la section~\ref{section:implementation}, notamment l
 
 
 \subsection{Efficacité de \LSJ}
+\label{subsection:efficaciteLSJ}
 
-Le ``prouveur simple'', qui est une implémentation assez directe de l'algorithme proposé dans~\cite{LSJ}, avec de légers changements comme la transformation du calcul en \LSJn, se compare honorablement aux prouveurs répertoriés par ILTP.
+Le ``prouveur simple'', qui est une implémentation assez directe de l'algorithme proposé dans~\cite{LSJ}, avec de légers changements comme la transformation du calcul en \LSJn, se compare honorablement aux quatre prouveurs répertoriés par ILTP,
+%En fonctions du nombre de ces prouveurs qui terminent (avec bien sûr le bon résultat) sur une formule en moins de cinq minutes, ILTP attribue à cette difficulté entre 0 (tous y arrivent) et 1 (aucun n'y arrive)
+%\`A une formule de référence, ILTP attribue un score de référence égal à 0.25 fois le nombre de ces prouveurs qui ne terminent pas sur cette entrée en moins de cinq minute ; ce score varie donc entre 0 et 1. 
+%
+malgré une implémentation pas toujours optimisée et l'utilisation d'une machine personnelle peu performante. %, il termine parfois plus rapidement que certains de ces prouveurs. 
+Pour chaque formule de la bibliothèque est indiqué le nombre de prouveurs, parmi les quatre répertoriés, qui terminent sur cette entrée en moins de cinq minutes. On a effectué les tests sur notre prouveur avec la même limitation de cinq minutes. Comme on peut s'y attendre, il y a de nombreuses formules sur lesquelles ce prouveur ne termine pas, contrairement à tous ceux d'ILTP. Mais il y a aussi deux formules pour lesquels notre prouveur termine alors que deux des quatre prouveurs répertoriés ne terminent pas, et une autre pour lequel le nôtre termine mais un des quatre non. Et enfin, il y a la famille de formules SYJ209, dont on parle plus loin. Cette efficacité est due aux priorités de \LSJ. On remarque que les formules sur lesquelles notre prouveur est particulièrement performant sont les formules comportant beaucoup de $\to$, ce qui n'est pas surprenant vu que les nouveautés de ce calcul concernent uniquement les règles liées à ce connecteur. %On peut penser que sur les formules avec presque aucun $\to$, sur lesquelles notre prouveur est particulièrement lent comparé aux autres, ce sont plutôt les autres prouveurs qui ont mis au point une gestion efficace des connecteurs $\land$ et $\lor$ que le nôtre qui n'est pas performant.
+
+%nombre d'appels / s ?
+
+Sur une dizaine de formules de la famille SYJ209 (formules qui ont la même forme mais avec un nombre de variables variant entre une dizaine et une vingtaine), aucun des quatre prouveurs répertoriés par ILTP ne termine en moins de cinq minutes, alors que notre prouveur termine en moins d'une milliseconde. Ce sont des formules non prouvables pour lesquelles, au cours de la recherche de preuve, on se retrouve rapidement avec un séquent avec environ autant de formules de la forme $A\!\to\!B$ à droite que le nombre de variables, et dans lequel il n'y a pas de formule plus prioritaire que celles avec $\to$. Il se trouve
+qu'ici, lorsqu'on applique la règle $\imp R$ avec n'importe quelle formule principale, on obtient que la première prémisse, celle qui est inversible, est non prouvable ; de plus on ne rajoute que des formules atomiques, donc on se retrouve avec un séquent similaire au précédent, avec une formule composée de moins. La recherche de preuve termine alors en temps \textbf{linéaire} en le nombre de variables, une fois qu'on a appliqué $\imp R$ à chacune des formules $A\!\to\!B$ dans n'importe quel ordre. Ce qui arrive vraisemblablement avec les prouveurs d'ILTP qui sont aussi basés sur un calcul des séquents, c'est que les prémisses non prouvables qu'on rencontre ne sont pas inversibles. Ainsi, lorsqu'on a $n$ formules en $\to$ dans le séquent, on doit toutes les essayer successivement, et lorsqu'on en essaie une, on se retrouver avec $n-1$ formules qu'on doit de nouveau toutes essayer successivement, et ainsi de suite, ce qui représente \textbf{au moins $\mathbf n\boldsymbol!$} essais de règles, où $n$ est à peu près le nombre de variables : on comprend que ce soit long déjà pour une dizaine de variables.
 
 
-\subsection{}
+%deux fois : même limite que le plus faible
+%
+%y arrive alors que deux non (SYJ207 et aussi SYJ211)
+%
+%alors qu'un non (SYJ212)
+
+\subsection{Comparaison entre les différents prouveurs implémentés}
+\label{subsection:comparaison}
+
+\def\figurewidth{.5\linewidth}
+\begin{floatingfigure}[r]{\figurewidth}
+\centering
+\resizebox{\figurewidth}{!}{
+\begin{tabular}{|c|c|c|c|c|}
+\cline{2-5}
+%\multicolumn{1}{c|}{}&``simple listes''&``compilé\\caml''&``\T''&``\T\ \M''\\
+\multicolumn{1}{c|}{}&``simple&``compilé&\multirow{2}{*}{``\T''}&\multirow{2}{*}{``\T\ \M''}\\
+\multicolumn{1}{c|}{}&listes''&Caml''&&\\
+\hline
+total&$0.08$ s&$.61$ s&$14$ s&$57$ s\\
+$1$\ts{ère} compil.& ---  &$0.01$ s&$0.02$ s&$0.02$ s\\
+$2$\ts{ème} compil.& --- &$0.28$ s&---&$0.02$ s\\
+exécution& --- &$0.32$ s&$14$ s&$57$ s\\
+\hline
+\end{tabular}
+}
+\end{floatingfigure}
+
+
+On a effectué des tests avec les différents prouveurs réalisés. Pour ceux qui sont en plusieurs étapes% (par exemple compilation vers \T, compilation de \T\ vers \M)
+, on détaille les temps de chacune. On renvoie également le nombre d'appels à la fonction récursive principale, qui applique la stratégie de recherche de preuve à un séquent. Ci-contre un exemple de résultats (formule SYJ201+1.002 d'ILTP \cite{ILTP}) ; 
+``1ère compil.'' est la compilation d'un programme en \T\ ou en OCaml adapté à la formule en entrée, ``2e compil.'' la compilation de \T\ vers \M\ ou la compilation par ocamlc ; quelle que soit la méthode, on a ici 71036 appels à la fonction récursive principale.
+%
+En général, comme on peut s'y attendre, l'exécution, au cours de laquelle a lieu la recherche de preuve à proprement parler, est ce qui prend le plus de temps, sauf dans le cas de petites formules où tout est négligeable sauf la compilation par ocamlc. %Il y a aussi une formule qui est tellement longue que c'est la compilation des fonctions pour chaque sous-formule qui ne termine pas ; pour une version un peu plus longue de cette formule, c'est même l'analyseur qui échoue !
+
+
+Le ``prouveur simple'', même dans la version qui utilise de simples listes, reste le plus efficace. Plus on y apporte de modifications, plus l'efficacité diminue, et elle diminue beaucoup. Ce n'est pas très surprenant, ni rédhibitoire. En effet, %il reste beaucoup à améliorer dans ces variantes
+ces variantes ont encore des défauts flagrants, dont certains ne seraient pas trop difficiles à corriger. Par exemple, le langage \T\ ne permet pas d'effets de bords, si bien qu'on crée une nouvelle variable à chaque fois qu'on modifie le séquent ; finalement, bien qu'il n'y ait qu'un seul séquent à la fois sur lequel on est susceptible de travailler, on garde de nombreux séquents en mémoire au cours des appels récursifs. L'ajout d'effets de bord est en général défavorable à la certification, mais on pourrait ici n'avoir que des effets de bords très limités, donc pas trop de difficultés supplémentaires : par exemple, ne disposer que d'une seule variable globale modifiable, dans laquelle on stockerait le séquent. L'utilisation de la machine abstraite liée au langage \M\ est aussi très décevante, car beaucoup moins efficace qu'un simple interpréteur. Lorsqu'on observe un code en \M\ autogénéré, on constate qu'il y a de très nombreuses opérations inutiles, comme la sauvegarde, lors d'appels de fonctions ou de ``let ... in'', de variables qui en fait ne seront plus utilisées. Encore une fois, cela s'arrangerait un peu avec des effets de bords, ou même une possibilité d'%indiquer une autorisation d'oublier 
+autoriser l'oubli de
+certaines variables. Mais le mieux serait encore de coder la recherche de preuve en récursif terminal, ce qui est possible grâce à la localité des règles de \LSJn, et d'optimiser le code en conséquence.
+
+Il reste donc beaucoup à faire, mais l'implémentation d'une recherche de preuve compilée et certifiée basée sur le calcul des séquents \LSJ\ semble vraiment envisageable.
+Bien sûr, un prouveur facile à certifier restera sans doute moins efficace qu'un prouveur qu'on pourrait réaliser sans cette contrainte, mais peut-être %que la perte d'efficacité sera suffisamment faible 
+pourra-t-on obtenir une perte d'efficacité suffisamment faible
+pour être compensée par l'intérêt que présenterait un prouveur certifié.
 
 \
-
-- implémentation effective
-
-- tests (ILTP)
-
-- résultats
-
-- commentaires
 
 
 
 \section*{Conclusion}
 
-algorithme implémenté naïvement en une demi-journée. mais retravaillé, sans cesse amélioré (on ne veut pas seulement un programme qui fonctionne)
+Au cours de ce stage, j'ai confirmé que \LSJ\ est un calculs des séquents particulièrement intéressant dans le cadre de la recherche automatisée de preuves en logique intuitionniste, puisque même avec une implémentation peu optimisée et une machine personnelle peu performante, la comparaison avec d'autres prouveurs existants est encourageante. J'ai même trouvé une formule (appartenant à la banque ILTP) sur laquelle aucun prouveur répertorié ne termine en moins de cinq minutes, alors que celui basé sur \LSJ\ termine en moins d'une milliseconde, ce qui illustre l'intérêt d'avoir des prémisses inversibles dans les règles liées au connecteur $\to$. J'ai aussi exploré des modifications à apporter à ce prouveur afin de le rendre plus facile à certifier ; notamment, j'ai implémenté la compilation, à partir d'une formule donnée, d'un programme dont l'exécution renvoie un booléen indiquant si la formule est prouvable, écrit dans un langage très simple, où le seul type de données consiste en des arbres binaires construits à partir d'un arbre vide et de feuilles étiquetées par des entiers. Les méthodes employées pour faciliter la certification ont pour l'instant un impact fort sur l'efficacité, mais il y a de nombreuses améliorations à envisager, par exemple l'ajout d'effets de bords dans le langage \T, qui compliquerait un peu la certification mais pas trop car ils pourraient être très limités : 
+%par exemple, un petit nombre constant de références globales suffirait à améliorer beaucoup l'efficacité.
+ne disposer que d'une seule variable globale modifiable permettrait déjà une amélioration importante.
 
-écriture d'analyseurs, automatisation de tests...
-
-factorisation de code, partage entre les différents prouveurs (génie logiciel)
-
-essai de différentes implémentations
-
-\
-
-l'algorithme vient de \cite{LSJ}, \LSJn\ de ... l'efficacité de l'algorithme vient entièrement de \LSJ
-
-le langage \T
-
-j'ai remarqué que 
-
-j'ai choisi les implémentations réalisées parmi diverses suggestions
-
-
+Ce stage m'a appris à travailler sur un programme qu'on n'a jamais fini d'améliorer, pour lequel une factorisation la plus importante possible du code et une automatisation d'un grand nombre de tests sont %primordiales.
+extrêmement utiles. Factoriser le code était particulièrement souhaitable pour les nombreux changements apportés aux structures de données représentant les multiensembles du séquent, et puis, surtout, pour implémenter plusieurs prouveurs distincts qui partagent, par exemple, la phase d'indexation.
+%
+%Outre la recherche de preuve à proprement parler, implémenter
+En plus de la recherche de preuve à proprement parler, il y avait aussi beaucoup de fonctionnalités auxiliaires à implémenter, par exemple deux analyseurs : un pour les fichiers d'ILTP et un pour le langage \T.
+%
+Enfin, j'ai eu à choisir, à la suite de discussions avec mes encadrants, quelles variantes de prouveur me semblaient les plus intéressantes et pratiques à implémenter.
+%implémenter, qui semblaient à la fois intéressantes et réalisables.
 
 \
 
-rajouter : \LSJ\ permet aussi de récupérer un contre-modèle de Kripke pour une formule non prouvable
+\
+
+%J'ai pu mettre en pratique de nombreuses 
+%J'ai eu l'occasion cette année
+%encapsulation (modules OCaml), écriture analyseur (ici deux : fichiers ILTP et langage T), module Unix
+%
+%notamment la factorisation du code / écrire un code factorisé
+%
+%Dans un premier temps, j'ai travaillé longuement sur le premier prouveur implémenté, pour lequel on ne s'intéresse pas à la facilité de certification. J'ai modifié à de nombreuses reprises le test des axiomes et la représentation du séquent.
+%
+%algorithme implémenté naïvement en une demi-journée. mais retravaillé, sans cesse amélioré (on ne veut pas seulement un programme qui fonctionne)
+%
+%écriture d'analyseurs, automatisation de tests...
+%
+%factorisation de code, partage entre les différents prouveurs (génie logiciel)
+%
+%essai de différentes implémentations
+%
+%
+%l'algorithme vient de \cite{LSJ}, \LSJn\ de ... l'efficacité de l'algorithme vient entièrement de \LSJ
+%
+%le langage \T
+%
+%j'ai remarqué que 
+%
+%j'ai choisi les implémentations réalisées parmi diverses suggestions
 
 
-\bibliographystyle{plain}
-\bibliography{LSJn}
 
-\idees{ajouter les références du mémoire}
+%\
+
+%rajouter : \LSJ\ permet aussi de récupérer un contre-modèle de Kripke pour une formule non prouvable
+
+%\LSJn\ pas nécessaire pour bonne complexité spatiale mais plus pratique, et permet récursif terminal
+
+%donner les informations sur la machine utilisée pour les tests
+
+%commentaires intro conclusion
+
+%ajouter références mémoire (thèse ?)
+
+%figure règles ILL
+
+%titres figure temps
+
+%connecteur $\lnot$ ILL
+
+%CLL : séquent à un seul côté
+
+%définir séquent classique, intuitionniste
+
+%lien vers mon code sur git ?
+
+%\bibliographystyle{plain}
+%%\bibliographystyle{ieeetr}
+%\bibliography{LSJn}
+
+
 
 %\end{document}
 \begin{comment}
@@ -876,19 +988,19 @@ rajouter : \LSJ\ permet aussi de récupérer un contre-modèle de Kripke pour une f
 \pagebreak
 
 
-\section{Logique intuitionniste propositionnelle : approche par le calcul de séquents \LJ}
+\section{Logique intuitionniste propositionnelle : approche par le calcul des séquents \LJ}
 
 
 
 
-Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par le calcul de séquents \LJ\ introduit par Gentzen. 
-Elle fournit une définition de la prouvabilité d'une formule en logique intuitionniste qui n'est pas la plus courante ni la plus rapide à exposer ; mais elle permet de présenter un premier calcul de séquents avec de nombreuses définitions qui seront utiles par la suite.
-%Cela permet de se familiariser avec les calculs de séquents, avant de discuter
+Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par le calcul des séquents \LJ\ introduit par Gentzen. 
+Elle fournit une définition de la prouvabilité d'une formule en logique intuitionniste qui n'est pas la plus courante ni la plus rapide à exposer ; mais elle permet de présenter un premier calcul des séquents avec de nombreuses définitions qui seront utiles par la suite.
+%Cela permet de se familiariser avec les calculs des séquents, avant de discuter
 
 
 
 
-%Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par un calcul de séquents.
+%Il existe de nombreuses approches de la logique intuitionniste : on choisit ici celle par un calcul des séquents.
 
 \
 
@@ -1211,7 +1323,7 @@ La propriété de la sous-formule est encore plus intéressante dans le cadre de la
 
 Une formule peut être considérée comme un \textbf{arbre binaire} dont les feuilles sont étiquetées par la constante $\bot$ ou une variable propositionnelle, et les n\oe uds internes sont étiquettés par un connecteur binaire. La notion de sous-formule correspond alors à celle de sous-arbre. On rappelle qu'une formule est \textbf{\emph{atomique}} si elle est réduite à $\bot$ ou à une variable, c'est-à-dire si l'arbre associé est une feuille.
 %
-Considérons une formule de la forme $A\,c\,B$ où $c$ est un connecteur binaire. Au cours de l'algorithme, on peut avoir besoin d'informations dessus : par exemple, on peut être amené dans le cadre de certaines règles à l'enlever d'un séquent pour la remplacer par $A$ ou par $B$. Il faut donc connaître $A$ et $B$. Et de même récursivement, il faut connaître les fils de $A$ et ceux de $B$, donc finalement on doit retenir tous les n\oe uds de l'arbre correspondant à la formule. Mais on préfère éviter de représenter les formules manipulées dans l'algorithme sous forme d'arbres, pour des raisons qu'on verra plus loin, par exemple la complexité du test d'égalité structurelle de deux arbres. On préfère utiliser une conséquence de la propriété de la sous-formule, que \LSJn\ hérite de \LSJ : toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ est atomique, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau, et donc sa complexité spatiale puisque le contenu d'une case est de taille constante, est la taille de la formule $A$ dont on veut décider la prouvabilité. Au cours de l'algorithme, on représente alors les formules par des entiers, et on peut accéder facilement aux fils de n'importe quelle formule considérée.
+Considérons une formule de la forme $A\,c\,B$ où $c$ est un connecteur binaire. Au cours de l'algorithme, on peut avoir besoin d'informations dessus : par exemple, on peut être amené dans le cadre de certaines règles à l'enlever d'un séquent pour la remplacer par $A$ ou par $B$. Il faut donc connaître $A$ et $B$. Et de même récursivement, il faut connaître les fils de $A$ et ceux de $B$, donc finalement on doit retenir tous les n\oe uds de l'arbre correspondant à la formule. Mais on préfère éviter de représenter les formules manipulées dans l'algorithme sous forme d'arbres, pour des raisons qu'on verra plus loin, par exemple la complexité du test d'égalité structurelle de deux arbres. On préfère utiliser une conséquence de la propriété de la sous-formule, que \LSJn\ hérite de \LSJ : toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer la prouvabilité de la formule $A$ en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\textbf{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou la variable locale correspondant à $B$ si $B$ est atomique, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cellules de ce tableau, et donc sa complexité spatiale puisque le contenu d'une cellule est de taille constante, est la taille de la formule $A$ dont on veut décider la prouvabilité. Au cours de l'algorithme, on représente alors les formules par des entiers, et on peut accéder facilement aux fils de n'importe quelle formule considérée.
 
 \
 
@@ -1232,7 +1344,7 @@ Les priorités de la sous-section précédente peuvent être déterminées au cours de
 
 %Retenir une formule demande donc une complexité spatiale de l'ordre du nombre de n\oe uds de l'arbre correspondant, qu'on appellera la \emph{taille} de la formule. En effet, considérons une formule de la forme $A\,c\,B$ où $c$ est un connecteur binaire. On a besoin de conserver des informations dessus : par exemple, on peut être amené dans le cadre de certaines règles à l'enlever d'un séquent pour la remplacer par $A$ ou par $B$. Il faut donc connaître $A$ et $B$. Et de même récursivement, il faut connaître les fils de $A$ et ceux de $B$, donc finalement on doit retenir tous les n\oe uds de l'arbre correspondant à la formule. Pour une seule formule, on a ainsi vraiment besoin d'un espace de l'ordre de sa taille. En revanche, on peut retenir les multiensembles de formules qui apparaissent au cours de l'algorithme en utilisant beaucoup moins d'espace que la somme des tailles des formules, tout en conservant toutes les informations dont on peut avoir besoin sur ces formules. 
 %%
-%La propriété essentielle pour cela est la propriété de la sous-formule, que \LSJn\ hérite de \LSJ. Elle a pour conséquence que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou une variable locale si $B$ a cette forme, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cases de ce tableau est la taille de la formule $A$ dont on veut décider la prouvabilité. La complexité spatiale pour un multiensemble de formules qui pourraient apparaître en exécutant l'algorithme est alors la taille de $A$ plus le cardinal du multiensemble, ce qui est bien mieux que la somme des tailles des formules du multiensemble dans le pire cas
+%La propriété essentielle pour cela est la propriété de la sous-formule, que \LSJn\ hérite de \LSJ. Elle a pour conséquence que toutes les formules susceptibles d'apparaître au cours de l'algorithme de recherche de preuve appliqué au séquent $\; \To A$, sont des sous-formules de la formule $A$. Si l'objectif est de déterminer si la formule $A$ est prouvable en logique intuitionniste, on peut donc réaliser une phase préliminaire d'\emph{indexation} où on associe un entier à chaque sous-formule de $A$, c'est-à-dire chaque n\oe ud (n\oe ud interne ou feuille) de l'arbre correspondant. Afin de pouvoir retrouver les informations dont on a besoin sur chaque formule, on retient en plus un tableau qui à l'entier représentant la formule $B$, associe : la constante $\bot$ ou une variable locale si $B$ a cette forme, ou ``$i$ $c$ $j$'' si $B=C\,c\,D$ avec $c$ un connecteur binaire et $i$, $j$ les entiers respectivement associés à $C$, $D$. Le nombre de cellules de ce tableau est la taille de la formule $A$ dont on veut décider la prouvabilité. La complexité spatiale pour un multiensemble de formules qui pourraient apparaître en exécutant l'algorithme est alors la taille de $A$ plus le cardinal du multiensemble, ce qui est bien mieux que la somme des tailles des formules du multiensemble dans le pire cas
 %
 %
 %\
@@ -1748,7 +1860,7 @@ Celle-ci dépend du nombre de règles qu'on essaie d'appliquer, c'est-à-dire le no
 
 \end{comment}
 
-\end{document}
+%\end{document}
 
 
 

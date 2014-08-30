@@ -4,11 +4,18 @@ open Global_ref
 type sous_formule = int
 type couple = int*sous_formule
 
-module G = Tableau_priorite.Main(Case_priorite.G)(*Naif.G*)
-module D = Tableau_priorite.Main(Case_priorite.D)(*Naif.D*)
+(*
+module G = Tableau_priorite.Main(Case_priorite.G)
+module D = Tableau_priorite.Main(Case_priorite.D)D
+module Cl_g = Tableau_classe.Main(Case_classe.G)
+module Cl_d = Tableau_classe.Main(Case_classe.D)
+*)
+(* pour utiliser de simples listes comme structures de données afin de pouvoir mieux comparer avec les variantes, commenter ce qui précède et décommenter ce qui suit *)
 
-module Cl_g = Tableau_classe.Main(Case_classe.G)(*Naif.Cl_g*)
-module Cl_d = Tableau_classe.Main(Case_classe.D)(*Naif.Cl_d*)
+module G = Naif.G
+module D = Naif.D
+module Cl_g = Naif.Cl_g
+module Cl_d = Naif.Cl_d
 
 type t = { mutable g : G.t ; mutable n : int ; mutable d : D.t ;
 	   mutable cl_g : Cl_g.t ; mutable cl_d : Cl_d.t ;
