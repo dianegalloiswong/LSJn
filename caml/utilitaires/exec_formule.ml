@@ -4,7 +4,7 @@ let prouveur () =
   else if !Options.compile_caml then
     Prouveur_compile_caml.main
   else
-    Prouveur_caml.main
+    Prouveur_simple.main
 
 let bool_to_string_fr b = if b then "vrai" else "faux"
 

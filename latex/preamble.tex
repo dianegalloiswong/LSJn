@@ -1,4 +1,12 @@
-\documentclass[11pt, openany]{article}
+%%% article %%%
+%\documentclass[11pt, openany]{article}
+%\usepackage{a4wide}
+%\usepackage{titletoc}
+%%\usepackage[in]{fullpage}
+%\usepackage[top=1in, bottom=2cm, left=3cm, right=3cm]{geometry}
+
+
+
 %\usepackage{pstricks,pstricks-add,pst-math,pst-xkey}
 \usepackage[frenchb]{babel}
 %\usepackage{slashbox}
@@ -7,26 +15,18 @@
 \usepackage[latin1]{inputenc}
 \usepackage[OT1]{fontenc}
 %\usepackage{fancybox}
-\usepackage{a4wide}
 %\usepackage{fancyvrb}
 \usepackage{pgf,tikz} %arbres
-	\usetikzlibrary{cd}
-%\usetikzlibrary{arrows}
+	\usetikzlibrary{cd} %diagrammes commutatifs
+	%\usetikzlibrary{arrows}
 \usepackage{xcolor}
 %\usepackage{multicol}
-%\usepackage[in]{fullpage}
 \usepackage{amsthm} %pour les théorèmes sans numéro
 \usepackage{array,multirow,makecell}
 \usepackage{mathrsfs}
 \usepackage{floatflt}
 \usepackage{verbatim}
 \usepackage{url}
-\usepackage{titletoc}
-\usepackage[top=1in, bottom=2cm, left=3cm, right=3cm]{geometry}
-
-
-
-\usepackage{bussproofs}\EnableBpAbbreviations
 
 
 \bibliographystyle{ieeetr}  
@@ -62,7 +62,7 @@
 %{\end{list}}
 
 
-\renewcommand{\labelitemi}{$\bullet$}
+%\renewcommand{\labelitemi}{$\bullet$}
 \newcommand{\ts}{\textsuperscript}
 
 
@@ -76,10 +76,14 @@
 %\newcommand{\card}{\mathrm{card}}
 
 
+
+%mémoire et stage
+
+\usepackage{bussproofs} %arbres de preuve
+	\EnableBpAbbreviations
+
 \newcommand{\s}{\sigma}
-%\newcommand{\l}{\lambda}
-%\newcommand{\a}{\alpha}
-%\newcommand{\r}{\rho}
+
 
 %mémoire
 \newcommand{\revAnd}{\rotatebox[origin=c]{180}{\&}}
@@ -92,15 +96,6 @@
 \mathcal{CP}
 }
 %
-
-\newcommand{\subsectionDescription}[1]{
-\addtocontents{toc}{%\textit{
-%\qquad\qquad
-\hangindent=3.5\parindent \hangafter=0
-\noindent
-#1
-}%}
-}
 
 
 \newcommand{\idees}[1]{
@@ -154,5 +149,13 @@
 
 
 
+%%%
 
+%\newcommand{\subsectionDescription}[1]{
+%\addtocontents{toc}{
+%\hangindent=3.5\parindent \hangafter=0
+%\noindent
+%#1
+%}
+%}
 

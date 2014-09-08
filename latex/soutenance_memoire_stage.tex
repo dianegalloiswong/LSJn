@@ -1,0 +1,1179 @@
+
+\documentclass[18pt]{beamer}
+\usepackage{beamerthemesplit}
+\usetheme[secheader]
+{Madrid}
+%\usetheme{Warsaw}
+\usecolortheme{dolphin}
+
+\usepackage{graphicx}
+\usepackage{array} %nouveau langages formels
+%\usepackage{landscape}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[frenchb]{babel}
+\usepackage{amstext}
+\usepackage[latin1]{inputenc}
+%\usepackage[OT1]{fontenc}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usepackage{fancyvrb}
+%\usepackage{lipsum}
+\usepackage{xcolor}
+
+
+\newcounter{moncompteur}
+\newtheorem{q}[moncompteur]{ \textbf{Question}}{}
+\newtheorem{prop}[moncompteur]{ \textbf{Proposition}}{}
+\newtheorem{df}[moncompteur]{ \textbf{Définition}}{}
+\newtheorem{rem}[moncompteur]{ \textbf{Remarque}}{}
+\newtheorem{theo}[moncompteur]{ \textbf{Théorème}}{}
+\newtheorem{conj}[moncompteur]{ \textbf{Conjecture}}{}
+\newtheorem{cor}[moncompteur]{ \textbf{Corollaire}}{}
+\newtheorem{lm}[moncompteur]{ \textbf{Lemme}}{}
+%\newtheorem{nota}[moncompteur]{ \textbf{Notation}}{}
+%\newtheorem{conv}[moncompteur]{ \textbf{Convention}}{}
+\newtheorem{exa}[moncompteur]{ \textbf{Exemple}}{}
+\newtheorem{exas}[moncompteur]{ \textbf{Exemples}}{}
+\newtheorem{ex}[moncompteur]{ \textbf{Exercice}}{}
+%\newtheorem{app}[moncompteur]{ \textbf{Application}}{}
+%\newtheorem{prog}[moncompteur]{ \textbf{Algorithme}}{}
+%\newtheorem{hyp}[moncompteur]{ \textbf{Hypothèse}}{}
+\newenvironment{dem}{\noindent\textbf{Preuve}\\}{\flushright$\blacksquare$\\}
+
+\newtheorem{cadre}{}{}
+
+
+
+%mémoire et stage
+\usepackage{bussproofs} %arbres de preuve
+	\EnableBpAbbreviations
+
+\newcommand{\s}{\sigma}
+
+
+%mémoire
+\newcommand{\revAnd}{\rotatebox[origin=c]{180}{\&}}
+\newcommand{\Ccal}{\mathcal{C}}
+\newcommand{\Dcal}{\mathcal{D}}
+\newcommand{\1}{\boldsymbol{1}}
+\newcommand{\0}{\boldsymbol{0}}
+\newcommand{\CProofs}{
+%?\mathcal{C}?
+\mathcal{CP}
+}
+%
+
+
+
+\newcommand{\idees}[1]{
+\textsf{(#1)}
+}
+
+
+
+%stage
+\newcommand{\LK}{$\mathbf{LK}$}
+\newcommand{\LJ}{$\mathbf{LJ}$}
+\newcommand{\LJT}{$\mathbf{LJT}$}
+\newcommand{\LSJ}{$\mathbf{LSJ}$}
+\newcommand{\LSJn}{$\mathbf{LSJ\boldsymbol\ell}$}
+
+%\newcommand{\T}{$\mathbf{T}$}
+\newcommand{\T}{$\boldsymbol{T}$}
+\newcommand{\M}{$\boldsymbol{M}$}
+
+\newcommand{\Sig}{\mathfrak S}
+\newcommand{\G}{\Gamma}
+\newcommand{\D}{\Delta}
+\newcommand{\Th}{\Theta}
+\newcommand{\Gp}{\Gamma}
+\newcommand{\Dp}{\Delta}
+\newcommand{\Gt}{\widetilde\Gamma}
+\newcommand{\Dt}{\widetilde\Delta}
+\newcommand{\ClG}{\widetilde\Gamma}
+\newcommand{\ClD}{\widetilde\Delta}
+
+
+\newcommand{\imp}{\to\negthickspace}
+
+\newcommand{\surj}{
+%\mathrm{surj}
+\boldsymbol
+\Phi
+}
+%\newcommand{\To}{\Rightarrow}
+\newcommand{\To}{\vdash}
+\newcommand{\forget}{\mathsf{forget}}
+
+
+
+\newcommand{\autour}[5]{
+%^{#2}_{#3}#1^{#4}_{#5}
+%\scriptsize{#2}#1_{_{#4}}\scriptsize{#3}
+%^{\mathbf{#2}}#1^{#3}_{_{#4}}
+^{\mathbf{#2}\;}#1^{\;\mathit{#3}}_{_{#4}}
+}
+
+
+
+
+%%%%
+
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\card}{\mathrm{card}}
+
+
+%automates d'arbres
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\TFX}{T(\F,\X)}
+\newcommand{\TF}{T(\F)}
+\newcommand{\TFp}{T(\F')}
+\newcommand{\A}{\mathcal{A}}
+%\renewcommand{\L}{\mathcal{L}}
+\newcommand{\epsi}{\varepsilon}
+
+\setbeamertemplate{navigation symbols}{%
+%\insertslidenavigationsymbol
+%\insertframenavigationsymbol
+%\insertsubsectionnavigationsymbol
+%\insertsectionnavigationsymbol
+%\insertdocnavigationsymbol
+%\insertbackfindforwardnavigationsymbol
+}
+
+
+
+
+
+
+%ÀÉÈ
+
+\begin{document}
+
+
+\AtBeginSection[]
+{
+ \begin{frame}<beamer>
+ \tableofcontents[currentsection]
+ \end{frame}
+}
+
+
+\title{Calcul des séquents}
+\author{Diane Gallois-Wong}
+%\institute{TIPE}
+\date{2014}
+\frame{\titlepage}
+
+
+
+\frame{
+\frametitle{Introduction}
+
+%Automates d'arbres introduits pour la vérification de circuits logiques.
+% 
+%Vers 1960 : Church, Trakhtenbrot, B\"uchi, Rabin, Doner, Thatcher, ...
+%    
+%\
+%    
+%Applications : interprétation abstraite, démonstration automatique de théorèmes et vérification de programmes, bases de données, langages XML Schema, ...
+
+
+}\frame{
+\tableofcontents
+
+}\frame{
+
+Logiques propositionnelles
+
+\
+
+Formule :
+
+
+
+
+}
+%\section{Introduction au calcul des séquents}
+%\subsection{Le calcul \LK\ associé à la logique classique}
+
+
+\frame{
+\frametitle{Les séquents}
+
+Chaque calcul des séquents a sa propre définition d'un \emph{séquent}.
+
+\
+
+\begin{df}
+%Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ (les ``hypothèses'') et $\D$ (les ``conclusions'') ; on le note $\G \vdash \D$. On appellera \emph{séquent classique} un tel séquent.
+Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ et $\D$.
+
+On le note $\G \vdash \D$.
+
+On appellera \emph{séquent classique} un tel séquent.
+
+\end{df}
+
+
+Séquent : $\G \To \D$ \qquad où $\G$, $\D$ listes de formules
+
+\
+
+Formules de $\G$ : ``hypothèses'' \qquad Formules de $\D$ : ``conclusions''
+
+\
+
+correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique classique.
+
+
+
+}
+\frame{
+\frametitle{Les règles}
+
+
+de la forme
+	\AXC{$\G,A \To \D$}
+	\AXC{$\G,B \To \D$}
+	\RightLabel{$(\lor L)$}
+	\BIC{$\G,A\lor B \To \D$}
+	\DP
+
+\
+
+signification
+
+nom, prémisses, conclusion...
+
+introduction du connecteur $\lor$ à gauche
+
+(que des règles d'introduction, pas d'élimination)
+
+
+
+}
+\frame{
+\frametitle{Règles logiques, règles structurelles}
+
+quelque part aussi : identité, coupure
+
+
+
+}
+\frame{
+\frametitle{Prouvabilité}
+
+exemple d'arbre de preuve
+
+
+}
+\frame{
+\frametitle{Calcul IL et logique intuitionniste}
+
+
+
+
+
+
+
+
+}
+%\section{Catégorie}
+
+\frame{
+\frametitle{Logique linéaire intuitionniste}
+
+
+
+}
+\frame{
+\frametitle{\'Elimination de la coupure}
+
+
+
+
+}
+\frame{
+\frametitle{Catégorie : définition}
+
+
+
+
+
+}
+\frame{
+\frametitle{Preuves et catégorie}
+
+
+
+
+}
+\frame{
+\frametitle{Tenseur et catégorie monoïdale ?}
+
+sans donner le détail des définitions, dire qu'on veut des morphismes $\alpha$, $\lambda$, $\rho$ de type donné vérifiant certaines propriétés, et qu'on les obtient comme dénotations de preuves explicites
+
+
+
+
+
+
+
+
+
+%%%%%%
+
+
+
+
+
+
+
+
+}
+\frame{
+\frametitle{Algorithme de recherche de preuve}
+
+Prouveur
+
+
+}
+\frame{
+\frametitle{}
+
+Règle de coupure
+
+\
+
+Règle de contraction
+
+
+}
+\frame{
+\frametitle{}
+
+Inversibilité
+
+\
+
+Localité
+
+
+
+}
+\frame{
+\frametitle{\LSJ}
+
+séquents
+
+\
+
+exemples de règles
+
+
+
+}
+\frame{
+\frametitle{\LSJn}
+
+
+
+
+
+}
+\frame{
+\frametitle{Priorités}
+
+
+
+
+}
+\frame{
+\frametitle{Indexation}
+
+
+
+}
+\frame{
+\frametitle{Efficacité 1}
+
+ILTP, tableau avec quelques temps
+
+
+}
+\frame{
+\frametitle{Efficacité 2}
+
+SYJ209
+
+
+
+}
+\frame{
+\frametitle{Langage \T}
+
+
+
+
+}
+\frame{
+\frametitle{Compilation de fonctions adaptées à la formule}
+
+
+}
+\frame{
+\frametitle{Différents prouveurs}
+
+
+
+
+}
+\frame{
+\frametitle{Pistes d'amélioration}
+
+
+
+}
+\frame{
+\frametitle{}
+
+}
+\end{document}
+
+%%%%%%%%%%%%%%%
+\section{Définitions}
+\subsection{Alphabet gradué et termes}
+\frame{
+
+\begin{df}
+Un \textbf{alphabet gradué} consiste en $\F$ un ensemble fini, et $Arit\acute{e}$ une application de $\F$ dans $\N$.
+L'\textbf{arité} d'un élément $f\in\F$ est l'entier $Arit\acute{e}(f)$.
+\end{df}
+$\F_{p}$ : l'ensemble des éléments de $\F$ d'arité $p$
+
+Un élément d'arité $0$, $1$, ... ,$p$ est appelé respectivement \textit{constante}, \textit{terme unaire}, ... , \textit{terme $p$-aire}.
+
+\
+
+\begin{df}
+Soit $\F$ un alphabet gradué. On suppose que $\F$ contient au moins une constante.
+L'ensemble $\TF$ des \textbf{termes} sur $\F$ est le plus petit ensemble contenant $\F_{0}$ et vérifiant :
+
+pour tous $p\in\N^{*}$, $\: f\in\F_{p}$, $\: t_{1},...,t_{p}\in\TF$, $\; f(t_{1},...,t_{p})\in\TF$.
+\end{df}
+
+
+
+
+
+
+
+
+}\subsection{Automates d'arbres}
+\frame{
+
+\begin{df}
+Un \textbf{automate d'arbres} finis (non déterministe) sur l'alphabet gradué $\F$ est un uplet $\A = (Q,\F,Q_{f},\Delta)$ avec $Q$ un ensemble d'états, $Q_{f}\subset Q$ un ensemble d'états finals, et $\Delta$ une fonction de transition i.e. un ensemble de règles de la forme $f(q_{1},...,q_{p}) \rightarrow q$ avec $q, q_{i} \in Q$ et $f \in \F_{p}$.
+\end{df}
+
+$\F'=\F \cup Q$ (on suppose $\F$ et $Q$ disjoints) avec $\forall q \in Q, Arit\acute{e}(q)=0$
+
+\
+
+Pour $t,t'\in\TFp$ : $\qquad t \rightarrow_{\A} t' \qquad$ si $t'$ s'obtient en rempla\c cant un sous-arbre $f(q_{1},...,q_{p})$ de $t$ par $q$ tel que la règle $f(q_{1},...,q_{p}) \rightarrow q$ est dans $\Delta$.
+
+\
+
+$\rightarrow_{\A}^{*}$ : clôture réflexive et transitive de $\rightarrow_{\A}$
+
+\begin{cadre}
+$t \in \TF$ \textbf{accepté par} $\A$ s'il existe $q\in Q_{f}$ tel que $t \rightarrow_{\A}^{*} q$
+\end{cadre}
+
+\
+
+pas d'état initial : on commence aux constantes ($a \rightarrow q$ avec $a \in \F_{0}$)
+
+
+
+
+}\frame{
+\frametitle{Exemple}
+
+$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
+
+\
+
+$\A = (Q,\F,Q_{f},\Delta) \qquad Q=\{q_{0},q_{1}\} \qquad Q_{f}=\{q_{1}\}$
+
+$\Delta = \{ \quad 0 \rightarrow q_{0} \:,\;  1 \rightarrow q_{1} \:,\;  non(q_{0}) \rightarrow q_{1} \:,\; non(q_{1}) \rightarrow q_{0} \:,$
+
+$\quad 
+et(q_{0},q_{0}) \rightarrow q_{0} \:,\;
+et(q_{0},q_{1}) \rightarrow q_{0} \:,\;
+et(q_{1},q_{0}) \rightarrow q_{0} \:,\;$
+
+$\quad
+et(q_{1},q_{1}) \rightarrow q_{1} \:,\;
+ou(q_{0},q_{0}) \rightarrow q_{0} \:,\;
+ou(q_{0},q_{1}) \rightarrow q_{1} \:,\;$
+
+$\quad 
+ou(q_{1},q_{0}) \rightarrow q_{1} \:,\;
+ou(q_{1},q_{1}) \rightarrow q_{1}
+\quad \}$
+
+\
+
+\def\DistanceInterNiveaux{1}
+\def\DistanceInterFeuilles{1}
+\def\NiveauA{(-0)*\DistanceInterNiveaux}
+\def\NiveauB{(-1)*\DistanceInterNiveaux}
+\def\NiveauC{(-2)*\DistanceInterNiveaux}
+\def\InterFeuilles{(1)*\DistanceInterFeuilles}
+\def\arbreA{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$0$};
+\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
+\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$1$};
+\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$0$};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (R)--(Rb);
+\draw (Rb)--(Rba);
+\draw (Rb)--(Rbb);
+\end{tikzpicture}
+}
+\def\arbreB{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$q_{0}$};
+\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
+\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$q_{1}$};
+\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$q_{0}$};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (R)--(Rb);
+\draw (Rb)--(Rba);
+\draw (Rb)--(Rbb);
+\end{tikzpicture}
+}
+\def\arbreC{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$q_{1}$};
+\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$q_{1}$};
+\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {};
+\draw (R)--(Ra);
+\draw (R)--(Rb);
+\end{tikzpicture}
+}
+\def\arbreD{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$q_{1}$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {};
+\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {};
+\end{tikzpicture}
+}
+\begin{tabular}{cccc}
+   \arbreA & \arbreB & \arbreC & \arbreD \\
+\end{tabular}
+
+
+
+}\frame{
+
+\begin{df}
+Le \textbf{langage d'arbres reconnu} par l'automate d'arbres $\A$, noté $L(\A)$, est l'ensemble des termes de $\TF$ acceptés par $\A$.
+\end{df}
+
+\
+
+On dit ``$\A$ reconnaît $L$'' pour $L=L(\A)$ (et pas seulement ``tout terme de $L$ est reconnu par $\A$'').
+
+\
+
+\begin{df}
+Un langage d'arbres $L$ est \textbf{reconnaissable} s'il existe un automate d'arbres qui reconnaît $L$.
+\end{df}
+
+
+
+
+}\subsection{Lien avec les automates de mots}
+\frame{
+
+\frametitle{Lien avec les automates habituels (de mots)}
+
+Le mot $abbab$ sur l'aphabet $\Sigma = \{ a,b \}$ peut être vu comme le terme $a(b(b(a(b(\#)))))$ sur $\F =  \{ a,b,\# \}$ avec $a$ et $b$ unaire et $\#$ constante, ou plutôt $b(a(b(b(a(\#)))))$ (à l'envers) pour ce qui suit.
+
+\
+
+À un automate de mots $(Q,\Sigma,Q_{i},Q_{f},\Delta_{0})$ on peut associer l'automate d'arbres $(Q,\F,Q_{f},\Delta)$ suivant :
+
+$\F = \Sigma \cup  \{ \# \}$ où les éléments de $\Sigma$ sont d'arité 1 et $\#$ d'arité $0$ ;
+
+$\Delta$ obtenu à partir de $\Delta_{0}$ en transformant $(q,a) \rightarrow q'$ en $a(q) \rightarrow q'$, et en ajoutant $\# \rightarrow q$ pour chaque $q \in Q_{i}$ .
+
+
+
+%}\frame{
+%\frametitle{Et les $\epsi$-transitions ?}
+%
+%\begin{theo}
+%Soit un automate d'arbres $\A = (Q,\F,Q_{f},\Delta)$ avec des $\epsi$-transitions ($\Delta$ contient des règles de la forme $q \rightarrow^{\epsi} q',\quad q,q' \in Q$), il existe un automate d'arbres $\A'$ sans $\epsi$-transition tel que $L(\A)=L(\A')$.
+%\end{theo}
+%
+%\begin{dem}
+%$\A' = (Q,\F,Q_{f},\Delta')$, où $\Delta'$ contient les éléments de $\Delta$ qui ne sont pas des $\epsi$-transitions, ainsi que tous les $f(q_{1},...,q_{p}) \rightarrow q'$ tels qu'il existe $q$ tel que $f(q_{1},...,q_{p}) \rightarrow q \in \Delta$ et $q \rightarrow^{\epsi} q' \in \Delta$
+%\end{dem}
+
+
+
+%%%
+
+
+
+}\section{Quelques propriétés}
+\subsection{Automates déterministes}
+\frame{
+\frametitle{Automates déterministes}
+
+Automate d'arbres déterministe : définition habituelle (maximum une transition dans $\Delta$ pour chaque membre gauche).
+
+\begin{theo}
+Soit $L$ un langage d'arbres reconnaissable, alors il existe $\A$ automate d'arbres déterministe tel que $L=L(\A)$.
+\end{theo}
+
+Preuve similaire à celle pour les automates de mots
+
+\
+
+$\A = (Q,\F,Q_{f},\Delta)$ reconnaissant $L$, on construit $\A' = (Q',\F,Q_{f}',\Delta')$ où :
+
+$Q'=\mathcal{P}(Q)$
+
+$Q_{f}'=\{ s \in Q', s \cap Q_{f} \neq \emptyset \}$
+
+$\Delta' = \{ \; f(s_{1},...,s_{p}) \rightarrow s \;|$
+
+$\qquad\qquad\quad s = \{ \; q \; | \quad \exists q_{1} \in s_{1}, \;...\; ,\: \exists q_{p} \in s_{p}, \; f(q_{1},...,q_{p}) \rightarrow q \in \Delta \} \quad \}$
+
+\
+
+preuve que $\A'$ convient : induction
+
+
+
+%
+
+
+}\subsection{Propriétés de clôture}
+\frame{
+\frametitle{Propriétés de clôture}
+
+\begin{theo}
+La classe des langages reconnaissables par automate d'arbres est close par union, complémentaire, intersection.
+\end{theo}
+
+Preuves similaires à celle pour les automates de mots
+
+\
+
+\begin{itemize}
+    \item union : $\A_{1} = (Q_{1},\F,Q_{f1},\Delta_{1}), \A_{2} = (Q_{2},\F,Q_{f2},\Delta_{2})$
+    
+    $\A = (Q_{1}\sqcup Q_{2},\F,Q_{f1}\sqcup Q_{f2},\Delta_{1}\sqcup\Delta_{2})$
+    
+    \
+    
+    \item complémentaire : $\A = (Q,\F,Q_{f},\Delta)$ \underline{déterministe complet}
+    
+    $Q'_{f}=Q\backslash Q_{f}$
+        
+    \
+    
+    \item intersection : union + complémentaire
+\end{itemize}
+
+
+%
+
+
+}\subsection{Lemme de pompage}
+\frame{
+\frametitle{Lemme de pompage}
+
+\begin{df}
+Soit $\F$ un alphabet gradué. Soit $x$ un symbole de variable ($x \notin \F$). On appellera \textbf{contexte} un élément de $T(\F \cup \{ x \})$ (avec $x$ d'arité $0$) dans lequel $x$ apparaît exactement une fois.
+
+On appelle \textbf{contexte trivial} le contexte $x$.
+\end{df}
+
+$C$ un contexte, $t \in T(\F \cup \{ x \})$, on note $C[t]=C\{x\leftarrow t\} \in T(\F \cup \{ x \})$.
+
+$t \in \TF \Rightarrow C[t] \in \TF\;\,$ ; $\;t \text{ contexte} \Rightarrow C[t] \text{ contexte}$.
+
+\
+
+$C$ un contexte, on pose : $C^{0}=x$ %$C^{1}=C$, 
+et pour $n\in\N$, $C^{n+1}=C^{n}[C]$ %(en particulier $C^{1}=C$)
+
+
+
+}\frame{
+\frametitle{Lemme de pompage}
+
+\begin{theo}
+Soit $L$ un langage d'arbres reconnaissable sur $\F$, alors il existe $k \in \N$ tel que pour tout terme $t\in L$ de hauteur $>k$, il existe des contextes $C$ et $D$ avec $D$ non trivial et $s \in \TF$ tels que 
+$$t=C[D[s]] \quad\text{et}\quad \forall n \in\N,\: C[D^{n}[s]] \in L$$
+\end{theo}
+
+
+%
+
+
+
+
+}\subsection{Complexité}
+\frame{
+\frametitle{Complexité}
+
+$\A = (Q,\F,Q_{f},\Delta)$
+
+taille de la transition $f(q_{1},...,q_{p}) \rightarrow q$   :   $Arit\acute{e}(f)+2$
+
+taille de $\A$   :   $||\A|| = \card Q + \sum_{f(q_{1},...,q_{p}) \rightarrow q \in \Delta}(Arit\acute{e}(f)+2)$
+
+\
+
+taille $||t||$ d'un terme $t$ : ``nombre de noeuds''
+
+\
+
+savoir si un terme $t$ est reconnu par un automate $\A$ :
+
+\begin{tabular}{clc}
+\quad - & $\A$ déterministe : &\quad$O(||t||+||\A||)$ \\
+\quad - & $\A$ non déterministe : &\quad$O(||t||\times||\A||)$
+\end{tabular}
+
+
+
+
+%%%
+
+
+
+}\section{Automates d'arbres ``top-down''}
+\subsection{Définition}
+\frame{
+
+
+\begin{df}
+Un \textbf{automate d'arbres ``top-down''} (non déterministe) sur un alphabet gradué $\F$ est un uplet $\A = (Q,\F,Q_{i},\Delta)$ avec $Q$ un ensemble d'états, $Q_{i}\subset Q$ un ensemble d'états initiaux, et $\Delta$ une fonction de transition i.e. un ensemble de règles de la forme $q(f(x_{1},...,x_{p})) \rightarrow f(q_{1}(x_{1}),...,q_{p}(x_{p}))$ avec $q, q_{i} \in Q$ et $f \in \F_{p}$ (les $x_{i}$ sont des symboles de variables).% ; de plus on impose que pour $a \in \F_{0}$, les transitions faisant intervenir $a$ sont de type $q(a) \rightarrow a$.
+\end{df}
+
+$\F'=\F \cup Q$ (on suppose $\F$ et $Q$ disjoints) avec $\forall q \in Q, Arit\acute{e}(q)=1$
+
+\
+
+Pour $t,t'\in\TFp$ : $\qquad t \rightarrow_{\A} t' \qquad$ si $t'$ s'obtient en rempla\c cant un sous-arbre $q(f(t_{1},...,t_{p}))$ de $t$ par $f(q_{1}(t_{1}),...,q_{p}(t_{p}))$ tel que la règle $q(f(x_{1},...,x_{p})) \rightarrow f(q_{1}(x_{1}),...,q_{p}(x_{p}))$ est dans $\Delta$.
+
+\
+
+$\rightarrow_{\A}^{*}$ : clôture réflexive et transitive de $\rightarrow_{\A}$
+
+\begin{cadre}
+$t \in \TF$ \textbf{accepté par $\A$} s'il existe $q\in Q_{i}$ tel que $q(t) \rightarrow_{\A}^{*} t$
+\end{cadre}
+
+pour $a \in \F_{0}$, transitions de type $q(a) \rightarrow a$
+
+
+
+}\frame{
+\frametitle{Exemple}
+
+$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
+
+\
+
+$\A = (Q,\F,Q_{i},\Delta) \qquad Q=\{q_{1},q_{2}\} \qquad Q_{i}=\{q_{1}\}$
+
+$\Delta = \{ \; q_{0}(0) \rightarrow 0 \:,\;  q_{1}(1) \rightarrow 1 \:,\;  q_{0}(non(x)) \rightarrow q_{1}(x) \:,\;
+q_{1}(non(x)) \rightarrow q_{0}(x),$
+
+$\quad  q_{0}(and(x,y)) \rightarrow et(q_{0}(x),q_{0}(y)) \:,$
+
+$\quad q_{0}(and(x,y)) \rightarrow et(q_{0}(x),q_{1}(y)) \:,$
+
+$\quad  q_{0}(and(x,y)) \rightarrow et(q_{1}(x),q_{0}(y)) \:,$
+
+$\quad  q_{1}(and(x,y)) \rightarrow et(q_{1}(x),q_{1}(y)) \:,$
+
+$\quad  q_{0}(or(x,y)) \rightarrow ou(q_{0}(x),q_{0}(y)) \:,$
+
+$\quad q_{1}(or(x,y)) \rightarrow ou(q_{0}(x),q_{1}(y)) \:,$
+
+$\quad  q_{1}(or(x,y)) \rightarrow ou(q_{1}(x),q_{0}(y)) \:,$
+
+$\quad  q_{1}(or(x,y)) \rightarrow ou(q_{1}(x),q_{1}(y)) \quad \}$
+
+
+
+}\frame{
+\frametitle{Exemple}
+
+$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
+
+\
+
+$\A = (Q,\F,Q_{i},\Delta) \qquad Q=\{q_{0},q_{1}\} \qquad Q_{i}=\{q_{1}\}$
+
+$\Delta = \{ \quad q_{1}(et(x,y)) \rightarrow ou(q_{1}(x),q_{1}(y))\:,\; q_{1}(non(x)) \rightarrow q_{0}(x)\:,$
+
+$\quad q_{1}(ou(x,y)) \rightarrow ou(q_{1}(x),q_{0}(y)) \:,\; q_{0}(0) \rightarrow 0 \:,\;  q_{1}(1) \rightarrow 1 \:,\; \text{etc.} \quad \}$
+
+\
+
+\def\DistanceInterNiveaux{1}
+\def\DistanceInterFeuilles{1}
+\def\NiveauA{(-0)*\DistanceInterNiveaux}
+\def\NiveauB{(-1)*\DistanceInterNiveaux}
+\def\NiveauC{(-2)*\DistanceInterNiveaux}
+\def\NiveauD{(-3)*\DistanceInterNiveaux}
+\def\InterFeuilles{(1)*\DistanceInterFeuilles}
+\def\arbreA{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$q_1$};
+\node (Ra) at ({(1)*\InterFeuilles},{\NiveauB}) {$et$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$non$};
+\node (Raaa) at ({(0)*\InterFeuilles},{\NiveauD}) {$0$};
+\node (Rab) at ({(1.5)*\InterFeuilles},{\NiveauC}) {$ou$};
+\node (Raba) at ({(1)*\InterFeuilles},{\NiveauD}) {$1$};
+\node (Rbab) at ({(2)*\InterFeuilles},{\NiveauD}) {$0$};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (Raa)--(Raaa);
+\draw (Ra)--(Rab);
+\draw (Rab)--(Raba);
+\draw (Rab)--(Rbab);
+\end{tikzpicture}
+}
+\def\arbreB{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$q_1$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$non$};
+\node (Raaa) at ({(0)*\InterFeuilles},{\NiveauD}) {$0$};
+\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$q_1$};
+\node (Rba) at ({(1.5)*\InterFeuilles},{\NiveauC}) {$ou$};
+\node (Rbaa) at ({(1)*\InterFeuilles},{\NiveauD}) {$1$};
+\node (Rbab) at ({(2)*\InterFeuilles},{\NiveauD}) {$0$};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (Raa)--(Raaa);
+\draw (R)--(Rb);
+\draw (Rb)--(Rba);
+\draw (Rba)--(Rbaa);
+\draw (Rba)--(Rbab);
+\end{tikzpicture}
+}
+\def\arbreC{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$q_0$};
+\node (Raaa) at ({(0)*\InterFeuilles},{\NiveauD}) {$0$};
+\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
+\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$q_1$};
+\node (Rbaa) at ({(1)*\InterFeuilles},{\NiveauD}) {$1$};
+\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$q_0$};
+\node (Rbba) at ({(2)*\InterFeuilles},{\NiveauD}) {$0$};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (Raa)--(Raaa);
+\draw (R)--(Rb);
+\draw (Rb)--(Rba);
+\draw (Rba)--(Rbaa);
+\draw (Rb)--(Rbb);
+\draw (Rbb)--(Rbba);
+\end{tikzpicture}
+}
+\def\arbreD{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$0$};
+\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
+\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$1$};
+\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$0$};
+\node () at ({(2)*\InterFeuilles},{\NiveauD}) {};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (R)--(Rb);
+\draw (Rb)--(Rba);
+\draw (Rb)--(Rbb);
+\end{tikzpicture}
+}
+\begin{tabular}{cccc}
+   \arbreA & \arbreB & \arbreC & \arbreD \\
+\end{tabular}
+
+\
+
+$\exists q\in Q_{i}, q(t) \rightarrow_{\A}^{*} t$
+
+
+
+
+}\subsection{Équivalence}
+\frame{
+
+
+
+\begin{theo}
+Les automates d'arbres ``down-top'' et ``top-down'' ont le même pouvoir expressif, i.e. tout langage reconnaissable par un automate d'un type est reconnaissable par un automate de l'autre type.
+\end{theo}
+
+
+
+
+
+}\frame{
+
+\def\DistanceInterNiveaux{1}
+\def\DistanceInterFeuilles{1}
+\def\NiveauA{(-0)*\DistanceInterNiveaux}
+\def\NiveauB{(-1)*\DistanceInterNiveaux}
+\def\NiveauC{(-2)*\DistanceInterNiveaux}
+\def\InterFeuilles{(1)*\DistanceInterFeuilles}
+\def\arbreA{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$0$};
+\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
+\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$1$};
+\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$0$};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (R)--(Rb);
+\draw (Rb)--(Rba);
+\draw (Rb)--(Rbb);
+\end{tikzpicture}
+}
+\def\InterFeuillesB{(2)*\DistanceInterFeuilles}
+\def\arbreB{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(1)*\InterFeuillesB},{\NiveauA}) {\textcolor{orange}{$\epsi$}   $et$   \textcolor{blue}{$q_{1}$}};
+\node (Ra) at ({(0)*\InterFeuillesB},{\NiveauB}) {\textcolor{orange}{$0$}   $non$   \textcolor{blue}{$q_{1}$}};
+\node (Raa) at ({(0)*\InterFeuillesB},{\NiveauC}) {\textcolor{orange}{$00$}   $0$   \textcolor{blue}{$q_{0}$}};
+\node (Rb) at ({(1.5)*\InterFeuillesB},{\NiveauB}) {\textcolor{orange}{$1$}   $ou$   \textcolor{blue}{$q_{1}$}};
+\node (Rba) at ({(1)*\InterFeuillesB},{\NiveauC}) {\textcolor{orange}{$10$}   $1$   \textcolor{blue}{$q_{1}$}};
+\node (Rbb) at ({(2)*\InterFeuillesB},{\NiveauC}) {\textcolor{orange}{$11$}   $0$   \textcolor{blue}{$q_{0}$}};
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (R)--(Rb);
+\draw (Rb)--(Rba);
+\draw (Rb)--(Rbb);
+\end{tikzpicture}
+}
+
+
+
+$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
+
+\
+
+$\A_{d-t} = (Q,\F,Q_{f},\Delta_{d-t}) \qquad \A_{t-d} = (Q,\F,Q_{i},\Delta_{t-d})$
+
+$Q=\{q_{0},q_{1}\} \qquad Q_{f}=Q_{i}=\{q_{1}\}$
+
+%$\Delta_{d-t} = \{ \; 0 \rightarrow q_{0} \:,\;  1 \rightarrow q_{1} \:,\;  not(q_{0}) \rightarrow q_{1} \:,\; and(q_{0},q_{0}) \rightarrow q_{0} \:,\; \text{etc.} \; \}$
+
+%$\A_{t-d} = (Q,\F,Q_{i},\Delta_{t-d}) \qquad Q=\{q_{1},q_{2}\} \qquad Q_{i}=\{q_{1}\}$
+
+%$\Delta_{t-d} = \{ \; q_{0}(0) \rightarrow 0 \:,\;  q_{1}(1) \rightarrow 1 \:,\;  q_{0}(not(x)) \rightarrow q_{1}(x) \:,\; $
+%q_{1}(not(x)) \rightarrow q_{0}(x)$
+
+%$\quad  q_{0}(and(x,y)) \rightarrow and(q_{0}(x),q_{0}(y)) 
+%\:,$
+%
+%$\quad q_{0}(and(x,y)) \rightarrow and(q_{0}(x),q_{1}(y)) \:,$
+%
+%$\quad  q_{0}(and(x,y)) \rightarrow and(q_{1}(x),q_{0}(y)) 
+%\:,\; \text{etc.} \; \}$
+
+\
+
+\begin{tabular}{cc}
+   \arbreA & \arbreB \\
+\end{tabular}
+
+\
+
+\textbf{arbre} : une fonction $tree : \N^{*} \rightarrow \F$
+
+reconnaissable s'il existe $run : Pos(t) \rightarrow Q$ 
+
+si $tree(pos)=f(t_{1},...,t_{p})$ \quad:\quad $q=run(pos),q_{i}=run(pos.i)$
+
+\quad$f(q_{1},...,q_{p}) \rightarrow q \in \Delta_{d-t}$
+
+\quad$q(f(x_{1},...,x_{p})) \rightarrow f(q_{1}(x_{1}),...,q_{p}(x_{p})) \in \Delta_{t-d}$
+
+
+
+
+
+
+}\subsection{Non-équivalence : les automates déterministes}
+\frame{
+
+\def\DistanceInterNiveaux{1}
+\def\DistanceInterFeuilles{1}
+\def\NiveauA{(-0)*\DistanceInterNiveaux}
+\def\NiveauB{(-1)*\DistanceInterNiveaux}
+\def\InterFeuilles{(1)*\DistanceInterFeuilles}
+\def\arbreA{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$ou$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$0$};
+\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$1$};
+\draw (R)--(Ra);
+\draw (R)--(Rb);
+\end{tikzpicture}
+}
+\def\arbreB{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$ou$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$1$};
+\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$0$};
+\draw (R)--(Ra);
+\draw (R)--(Rb);
+\end{tikzpicture}
+}
+\def\arbreC{
+\begin{tikzpicture}[xscale=1,yscale=1]
+\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$ou$};
+\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$0$};
+\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$0$};
+\draw (R)--(Ra);
+\draw (R)--(Rb);
+\end{tikzpicture}
+}
+
+\begin{theo}
+Les automates ``top-down'' déterministes sont strictement moins expressifs que les automates ``top-down'' non déterministes (qui sont équivalents aux automates ``down-top'' non déterministes comme déterministes) ; i.e. il existe des langages reconnaissables par automate ``top-down'' non déterministe mais pas par automate ``down-top'' déterministe.
+\end{theo}
+
+\
+
+Par exemple $\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \} \; \longrightarrow \; L$ habituel
+
+par l'absurde : $\A = (Q,\F,q_{i},\Delta)$ déterministe reconnaissant $L$
+
+\
+
+$q_{i}(ou(x,y)) \rightarrow ou(q(x),q'(y)) \in \Delta$
+
+\
+
+\begin{tabular}{ccc}
+   \arbreA & \arbreB & \qquad\qquad\qquad\arbreC \\ 
+   $q(0)\rightarrow 0 \in \Delta$ & $q'(0)\rightarrow 0 \in \Delta$ &
+\end{tabular}
+
+\
+
+
+
+
+
+%}\frame{
+%
+%\begin{center}
+%\begin{tikzpicture}[xscale=1,yscale=1]
+%% Styles (MODIFIABLES)
+%\tikzstyle{fleche}=[->,>=latex,thick]
+%\tikzstyle{noeud}=[fill=yellow,circle,draw]
+%\tikzstyle{feuille}=[fill=yellow,circle,draw]
+%% Dimensions (MODIFIABLES)
+%\def\DistanceInterNiveaux{1}
+%\def\DistanceInterFeuilles{1}
+%% Dimensions calculées (NON MODIFIABLES)
+%\def\NiveauA{(-0)*\DistanceInterNiveaux}
+%\def\NiveauB{(-1)*\DistanceInterNiveaux}
+%\def\NiveauC{(-2)*\DistanceInterNiveaux}
+%\def\InterFeuilles{(1)*\DistanceInterFeuilles}
+%% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+%\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$f$};
+%\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$g$};
+%\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$a$};
+%\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$a$};
+%% Arcs (MODIFIABLES : Styles)
+%\draw (R)--(Ra);
+%\draw (Ra)--(Raa);
+%\draw (R)--(Rb);
+%\end{tikzpicture}
+%\end{center}
+%%:-+-+-+-+- Fin
+
+
+
+
+
+
+}\section*{Conclusion}
+\frame{
+\frametitle{Conclusion}
+
+Beaucoup d'autres propriétés des automates qu'on connaît (par exemple Myhill-Nerode).
+
+Des spécificités comme l'interaction avec les morphismes d'arbres.
+
+Grammaires d'arbres...
+
+
+
+\
+
+Lien important avec la logique
+
+\
+
+\
+
+\
+
+\
+
+\
+
+Bibliographie :
+
+H. Comon, Florent Jacquemard, M. Dauchet, R. Gilleron, D. Lugiez, C. L\"oding, S. Tison, M. Tommasi,
+
+\quad\textit{Tree Automata Techniques and Applications}, chapitre 1
+
+
+
+
+}\end{document}
