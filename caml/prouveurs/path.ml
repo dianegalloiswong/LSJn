@@ -1,4 +1,4 @@
-let path_prouveur_trees = "prouveurs/prouveur_trees/"
+let path_prouveur_trees = "prouveurs/prouveurs_autres/prouveurs_T_et_TM/"
 let path_tmp = "tmp/"
 
 
@@ -37,6 +37,9 @@ let reset () = nom:=nom_defaut; formule:=None
 
 
 
+
+
+
 let code_trees () = path_tmp^(!nom)^ext_trees
 
 let liste_code_trees_fixe_aux = [
@@ -52,7 +55,7 @@ let liste_code_trees_fixe = List.map (fun s -> path_prouveur_trees^"code_trees_f
 
 
 (* compile caml *)
-let entete_caml_direct = "prouveurs/prouveur_compile_caml/code_fixe_entete.ml"
+let entete_caml_direct = "prouveurs/prouveurs_autres/prouveur_compile_caml/code_fixe_entete.ml"
 let path_tmp_caml = path_tmp^"caml/"
 let code_caml() = path_tmp_caml^(!nom)^".ml"
 let code_caml_direct () = (*path_tmp^(!nom)^"_caml_direct.ml"*) code_caml()

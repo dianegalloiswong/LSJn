@@ -1,50 +1,83 @@
 
-à faire : rétablir Seq.print et Seq.fold_vars, preuves et c-m avec le prouveur simple
+
+On a implémenté différents prouveurs de logique intuitionniste propositionnelle.
+
+Le langage T est un langage fonctionnel simple avec une seule structure de données : des arbres binaires construits à partir d'un arbre vide et de feuilles étiquetées par des entiers naturels. D. Larchey-Wendling a réalisé pour ce langage un compilateur certifié vers un langage exécutable par une machine abstraite assez simple, ainsi qu’un programme certifié simulant l’exécution de cette machine abstraite. On appelle M le langage associé à cette machine abstraite.
+
+Voir le rapport de stage pour plus de détails.
 
 
-ajout d'un prouveur utilisant le langage "trees" terminé. On l'utilise en donnant le flag -trees
-(les fichiers dans ce langage ont pour l'instant l'extension .ml pour la coloration, mais sont situés exclusivement dans code_trees_fixe et code_trees_genere)
-La partie "Description des fichiers" du README n'est pas à jour.
+"Prouveur simple" : Ce prouveur, le premier implémenté, est le plus simple et le plus efficace. Il effectue directement la recherche de preuve telle qu’elle est décrite dans l’article présentant LSJ, en utilisant notamment des structures de données élaborées pour le séquent. En revanche, aucun effort n’est fait pour faciliter la certification.
+"Prouveur T". On compile un programme en langage T adapté à la formule donnée en argument. Pour cela, on réalise l’indexation, puis on compile des fonctions correspondant à chaque sous-formule de la formule initiale. On ajoute ensuite ces fonctions à du code en T écrit à l’avance, car indépendant de la formule. Le programme intégral en T obtenu est écrit dans un fichier temporaire. Dans un deuxième temps, on exécute ce programme à l’aide d’un analyseur pour T puis d’un interpréteur relativement naïf. Cela renvoie un booléen qui doit indiquer si la formule initiale est prouvable en logique intuitionniste.
+“Prouveur T M”. On génère le même programme en T que précédemment. Mais cette fois, pour l’exécuter, on utilise un compilateur (fourni par D. Larchey-Wendling) de T vers M. On simule ensuite l’exécution du code en M par la machine abstraite simple à laquelle ce langage correspond, en utilisant les arbres de caml plutôt qu’en manipulant explicitement des pointeurs. (Le code en M n’est pas écrit dans un fichier, mais directement passé au simulateur sous la forme d’un arbre de syntaxe abstraite.)
+“Prouveur compilé Caml”. On compile, selon la méthode employée par le “prouveur T”, un programme adapté à la formule donnée en argument, mais ce programme est écrit en OCaml. On lance ensuite le compilateur ocamlc sur le fichier temporaire contenant ce programme, puis on lance le fichier exécutable généré. Ce prouveur a été implémenté afin de tester de l’efficacité de la compilation de fonctions adaptées à la formule, sans l’influence de l’utilisation du langage T moins élaboré.
 
 
 
+“Prouveur simple avec listes”. Ce prouveur est similaire au "prouveur simple", mais les structures de données utilisées pour le séquent sont de simples listes. Cela permet une comparaison plus juste avec les autres prouveurs.
+Afin d'utiliser ce prouveur, il faut commenter/décommenter quelques lignes au début de prouveurs/prouveur_simple/sequent/seq.ml (indiquées dans le fichier) ; il devient alors le nouveau prouveur par défaut. Je ne m'attendais pas à vouloir faire varier les structures de données du séquent après compilation.
 
 
 
 
 --------
+
+
+
+
 
 Usage
 
-Les arguments déterminent des formules et résultats attendus correspondants.
-Par défaut : pour chaque formule on imprime le nom de fichier éventuel, puis le temps mis à décider si elle est prouvable.
-Dans tous les cas, si on a déterminé si une formule est prouvable, on compare le résultat obtenu avec celui attendu et s'ils sont différents on le signale.
+Le prouveur utilisé par défaut est le "prouveur simple", qui est le plus efficace. Les autres s'utilisent avec les flags -T, -TM, -compile-caml.
+Formule(s) à traiter :
+   <nom de fichier en .p> (syntaxe des problèmes d'ILTP) : exécute sur la formule décrite par le fichier, en comparant avec le résultat attendu donné dans les commentaires
+   <nom de répertoire> : cherche récursivement les fichiers en .p
+   voir aussi les flags -liste, -liste-courte, -ph, -eqb
+Affichage par défaut : nom de la formule traitée (lié au nom du fichier en .p s'il y en a un), temps mis pour décider si elle est prouvable et nombre d'appels à la fonction récursive principale. On n'affiche en général pas le résultat (prouvable ou non), mais on compare ce résultat à celui qu'on devait trouver, et si ce n'est pas le même, on le signale.
+  -T : utilise le "prouveur T"
+  -TM : utilise le "prouveur T M"
+  -compile-caml : utilise le "prouveur compilé caml"
+  -all : utilise successivement "prouveur simple", "prouveur T", "prouveur T M", "prouveur compilé caml" (et génère un fichier results.txt qui contient les différents temps mis sous forme de tableau, mais il y a parfois des problèmes avec la mise en page du tableau)
+  -indexation : affiche un tableau correspondant à l'étape d'indexation ; ne lance aucune recherche de preuve
+  -f : affiche la formule
+  -resultat : affiche le résultat ("vrai" ou "faux")
+  -rien-afficher : n'affiche que le temps total, sauf si on trouve un résultat différent de celui attendu
+  -notime : ne chronomètre pas
+  -stop <f:float> : arrête si non terminé après f secondes
+  -ph <p:int> <h:int> : traite la formule suivante : principe du pigeonnier avec p pigeons et h trous
+  -eqb <n:int> : traite la formule suivante : (p1 <-> p2) | (p2 <-> p3) | ... | (pn <-> p1)
+  -liste : traite une liste de quelques formules courtes
+  -liste-courte : traite une liste de quelques formules très courtes
 
--indexation : affiche la formule et l'indexation (ne lance pas de recherche de preuve)
--trees : utilise le prouveur "trees"
-Par défaut : utilise le prouveur intégralement en caml
 
-arguments :
-	nom de fichier en .p avec la syntaxe des tests d'ILTP : en extrait directement une formule et le résultat attendu
-	nom de répertoire : cherche récursivement les fichier en .p et fait la même chose
-	-liste-courte : les formules à traiter sont quelques formules très courtes écrites à la main
-	-liste : de même avec en plus des formules un tout petit peu plus longues
-	-ph <int> <int> : la formule à traiter est le principe du pigeonnier avec les arguments donnés
-	-eqb <int> : la formule à traiter est (x1 <-> x2) | ... | (x(n-1) <-> xn) | (xn <-> x1)
-
-options :
-	-f : affiche la formule
-	-rep : affiche le résultat obtenu ("vrai" ou "faux")
-	-rien-afficher : ne rien afficher sauf le temps total (mais comme toujours, si on obtient un résultat faux, on le signale quand même)
-	-notime : ne pas chronométrer
-	-stop <flottant> : arrête de chercher une preuve si le temps donné par l'argument en secondes est écoulé (coûteux en appels système)
-Il manque les options pour afficher preuve ou contre-modèle. Et j'aimerais à un moment en remettre une pour traiter la logique classique : ce n'est pas intéressant niveau efficacité mais ça m'a plusieurs fois permis de repérer des bugs.
 
 
 
 --------
 
-Description des fichiers
+
+
+
+Quelques remarques sur les dossiers
+
+utilitaires : contient ce qui permet de gérer les tests : choix du prouveur, parcours d'un répertoire, analyseur des fichiers d'ILTP, chronométrage etc.
+
+Problems : contient les fichiers d'ILTP qu'on peut obtenir sur le site http://www.cs.uni-potsdam.de/ti/iltp/formulae.html, plus un fichier temoin_se_trompe.p permettant de voir ce qui est affiché si le résultat obtenu ne correspond pas à celui attendu.
+
+prouveurs : ce qui n'est ni dans prouveur_simple, ni dans prouveurs_autres est commun à tous les prouveurs, notamment l'indexation.
+
+
+
+
+
+-------
+
+
+
+
+
+
+Ce qui suit est l'ancienne description des fichiers, à un moment où il n'y avait que le "prouveur simple". Elle est obsolète, mais pour l'instant je la laisse car elle contient des détails que je n'explique pas ailleurs
 
 
 Lorsqu'on dit que nom.ml fait quelque chose, cela sous-entend le cas échéant la fonction Nom.main
@@ -108,12 +141,6 @@ sortie : contient les fichiers d'impression et de choix de ce qu'on imprime (je 
 
 
 
-
-
-
-test_recherche_compilee : simulation de recherche de preuve où les fonctions de transformation du séquent par les règles sont compilées à part : ici ces fonctions sont précalculées et stockées dans un tableau. 
-Ce n'est pas toujours facile de comparer à l'autre implémentation car je ne traite pas les "implique" dans le même ordre donc il y a parfois des écarts violents dans les deux sens dus à la chance de tomber rapidement sur le bon. Néanmoins dans certains cas où le nombre d'appels à "prouvable" est similaire, c'est 1,5 à 2 fois plus long.
-(flag -comp)
 
 
 
