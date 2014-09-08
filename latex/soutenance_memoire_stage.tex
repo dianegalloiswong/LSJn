@@ -23,23 +23,24 @@
 \usepackage{xcolor}
 
 
+
 \newcounter{moncompteur}
-\newtheorem{q}[moncompteur]{ \textbf{Question}}{}
-\newtheorem{prop}[moncompteur]{ \textbf{Proposition}}{}
-\newtheorem{df}[moncompteur]{ \textbf{Définition}}{}
-\newtheorem{rem}[moncompteur]{ \textbf{Remarque}}{}
-\newtheorem{theo}[moncompteur]{ \textbf{Théorème}}{}
-\newtheorem{conj}[moncompteur]{ \textbf{Conjecture}}{}
-\newtheorem{cor}[moncompteur]{ \textbf{Corollaire}}{}
-\newtheorem{lm}[moncompteur]{ \textbf{Lemme}}{}
-%\newtheorem{nota}[moncompteur]{ \textbf{Notation}}{}
-%\newtheorem{conv}[moncompteur]{ \textbf{Convention}}{}
-\newtheorem{exa}[moncompteur]{ \textbf{Exemple}}{}
-\newtheorem{exas}[moncompteur]{ \textbf{Exemples}}{}
-\newtheorem{ex}[moncompteur]{ \textbf{Exercice}}{}
-%\newtheorem{app}[moncompteur]{ \textbf{Application}}{}
-%\newtheorem{prog}[moncompteur]{ \textbf{Algorithme}}{}
-%\newtheorem{hyp}[moncompteur]{ \textbf{Hypothèse}}{}
+\newtheorem{q}[moncompteur]{\textbf{Question}}{}
+\newtheorem{prop}[moncompteur]{\textbf{Proposition}}{}
+\newtheorem{df}[moncompteur]{\textbf{Définition}}{}
+\newtheorem{rem}[moncompteur]{\textbf{Remarque}}{}
+\newtheorem{theo}[moncompteur]{\textbf{Théorème}}{}
+\newtheorem{conj}[moncompteur]{\textbf{Conjecture}}{}
+\newtheorem{cor}[moncompteur]{\textbf{Corollaire}}{}
+\newtheorem{lm}[moncompteur]{\textbf{Lemme}}{}
+%\newtheorem{nota}[moncompteur]{\textbf{Notation}}{}
+%\newtheorem{conv}[moncompteur]{\textbf{Convention}}{}
+\newtheorem{exa}[moncompteur]{\textbf{Exemple}}{}
+\newtheorem{exas}[moncompteur]{\textbf{Exemples}}{}
+\newtheorem{ex}[moncompteur]{\textbf{Exercice}}{}
+%\newtheorem{app}[moncompteur]{\textbf{Application}}{}
+%\newtheorem{prog}[moncompteur]{\textbf{Algorithme}}{}
+%\newtheorem{hyp}[moncompteur]{\textbf{Hypothèse}}{}
 \newenvironment{dem}{\noindent\textbf{Preuve}\\}{\flushright$\blacksquare$\\}
 
 \newtheorem{cadre}{}{}
@@ -49,6 +50,8 @@
 %mémoire et stage
 \usepackage{bussproofs} %arbres de preuve
 	\EnableBpAbbreviations
+
+\newtheorem{dfprop}[moncompteur]{\textbf{Définition / Proposition}}{}
 
 \newcommand{\s}{\sigma}
 
@@ -222,12 +225,12 @@ Un \textbf{\emph{séquent}} de \LK\ consiste en deux listes de formules $\G$ et $
 
 On le note $\G \vdash \D$.
 
-On appellera \emph{séquent classique} un tel séquent.
-
 \end{df}
 
 
-Séquent : $\G \To \D$ \qquad où $\G$, $\D$ listes de formules
+%Séquent : $\G \To \D$ \qquad où $\G$, $\D$ listes de formules
+
+\
 
 \
 
@@ -235,7 +238,7 @@ Formules de $\G$ : ``hypothèses'' \qquad Formules de $\D$ : ``conclusions''
 
 \
 
-correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique classique.
+Un séquent $\G \To \D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique classique.
 
 
 
@@ -243,64 +246,396 @@ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\
 \frame{
 \frametitle{Les règles}
 
+Règles de la forme :
+	\AXC{\emph{prémisses}}
+	\RightLabel{$($\emph{nom de la règle}$)$}
+	\UIC{\quad\emph{conclusion}\quad}
+	\DP
 
-de la forme
-	\AXC{$\G,A \To \D$}
-	\AXC{$\G,B \To \D$}
-	\RightLabel{$(\lor L)$}
-	\BIC{$\G,A\lor B \To \D$}
+\	
+%\vspace{.5em}
+
+%Signification :
+
+\qquad
+Si les prémisses sont valides, alors la conclusion est aussi valide.
+
+\
+
+\
+
+\
+
+Exemples de règles de \LK\ :
+
+{
+\center
+%	\AXC{$\G,A \To \D$}
+%	\AXC{$\G,B \To \D$}
+%	\RightLabel{$(\lor L)$}
+%	\BIC{$\G,A\lor B \To \D$}
+%	\DP
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G \To B,\D$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+\qquad\qquad	
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A \To A$}
+	\DP
+%\qquad\qquad
+%	\AXC{}
+%	\RightLabel{$(\bot L)$}
+%	\UIC{$\G,\bot \To \D$}
+%	\DP
+
+}
+
+%\vspace{1.5em}
+%
+%Ce sont des règles d'introduction : une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion.
+%
+%\vspace{.2em}
+%
+%\qquad
+%$\land R$ : introduction de $\land$ à droite du séquent
+%
+%\vspace{.2em}
+%
+%\qquad
+%$\bot L$ : introduction de $\bot$ à gauche du séquent
+
+
+}
+\frame{
+\frametitle{Familles de règles}
+
+Identité : 
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A \To A$}
+	\DP
+\hfill
+Coupure : 
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G',A \To \D'$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To \D,\D'$}
+	\DP
+
+
+
+
+
+
+
+%\begin{tabular}{c|c}
+%	Règles logiques & Règles structurelles \\[2em]
+%	\etR & \contractionL\\[1.5em]
+%	\fauxL & \exchangeR \\
+%	une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion &
+%\end{tabular}
+
+
+\def\vspaceBetweenRules{\vspace{.6em}}
+
+\begin{columns}[t]
+
+\begin{column}{.48\textwidth}
+\center
+
+Règles logiques
+
+\vspace{1.5em}
+
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G \To B,\D$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{}
+	\RightLabel{$(\bot L)$}
+	\UIC{$\G,\bot \To \D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{$\G,A \To B,\D$}
+	\RightLabel{$(\imp R)$}
+	\UIC{$\G \To A\to B,\D$}
+	\DP
+
+\flushleft
+%Une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion.
+Introduction dans la conclusion d'une constante ou d'un connecteur n'apparaissant pas dans les prémisses.
+
+\end{column}
+
+
+\vrule{}
+
+\begin{column}{.48\textwidth}
+\center
+
+Règles structurelles
+
+\vspace{1.5em}
+
+	\AXC{$\G \To \D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To \D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{$\G \To A,A,\D$}
+	\RightLabel{$(contraction\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{$\G_{1},A,B,\G_{2} \To \D$}
+	\RightLabel{$(exchange\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
+	\DP
+
+\flushleft
+Modification du nombre d'occurrences ou déplacement de formules dont on ne connaît pas la structure.
+
+\end{column}
+
+\end{columns}
+
+
+
+
+
+}
+\frame{
+%\frametitle{Prouvabilité}
+
+Une \emph{preuve}, ou \emph{arbre de preuve}, est un arbre dont chaque n\oe ud est étiqueté par un séquent et une règle,
+% de sorte que lorsqu'on considère les fils de ce n\oe ud, on obtient une application de la règle.
+tel que les séquents associés à un n\oe ud et à ses fils forment une application de la règle associée au n\oe ud.
+
+
+
+\center
+	\AXC{$$}
+	\RightLabel{$(id)$}
+	\UIC{$A \To A$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$A,B \To A$}
+		\AXC{$$}
+		\RightLabel{$(id)$}
+		\UIC{$B \To B$}
+		\RightLabel{$(weakening\ L)$}
+		\UIC{$B,A \To A$}
+		\RightLabel{$(exchange\ L)$}
+		\UIC{$A,B \To A$}
+	\RightLabel{$(\land R)$}
+	\BIC{$A,B \To A\land B$}
+	\DP
+
+\vspace{.5em}
+
+%\flushleft
+
+\begin{df}
+Un séquent est \textbf{prouvable dans un calcul} s'il existe un arbre de preuve dont la racine est étiquetée par ce séquent. On dit alors que l'arbre est une \textbf{preuve de ce séquent}.
+\end{df}
+
+\begin{prop}
+Une formule $A$ est valide en logique classique si, et seulement si, le séquent $\; \To A$ est prouvable dans \LK.
+\end{prop}
+
+
+%Une \emph{preuve}, ou \emph{arbre de preuve}, est un arbre, dont les n\oe uds sont étiquetés par des séquents, tel que : pour tout n\oe ud étiqueté par $\s$, si ses fils sont étiquetés par $\s_{1}$, ... , $\s_{p}$ respectivement, alors
+%	\AXC{$\s_{1}$}
+%	\AXC{$...$}
+%	\AXC{$\s_{p}$}
+%	%\RightLabel{$(\land R)$}
+%	\TIC{$\s$}
+%	\DP
+%est une application d'une règle.
+
+%Une \emph{instance} d'une règle est l'application de cette règle à des séquents donnés
+%%, et s'écrit sous la même forme que la règle 
+%: par exemple
+%	\AXC{$p,q \To r$}
+%	\AXC{$p,q \To s$}
+%	\RightLabel{$(\land R)$}
+%	\BIC{$p,q \To r\land s$}
+%	\DP
+%
+%\
+%
+%Une \emph{preuve}, ou \emph{arbre de preuve}, est un arbre dont les n\oe uds sont étiquetés par un séquent et une règle et ont la même arité que le nombre de prémisses de la règle, et tel que : pour tout n\oe ud de séquent $\s$ et de règle $\mathcal R$, si $\s_{1}$, ... , $\s_{p}$ sont les séquents associés à chacun de ses fils respectivement, alors
+%	\AXC{$\s_{1}$}
+%	\AXC{$...$}
+%	\AXC{$\s_{p}$}
+%	\RightLabel{$(\land R)$}
+%	\TIC{$\s$}
+%	\DP
+%est une instance de $\mathcal R$. %Les feuilles d'un tel arbre sont les n\oe uds auxquels est associé un axiome.
+
+
+
+
+
+}
+\frame{
+\frametitle{Calcul \LJ\ et logique intuitionniste}
+
+On obtient le calcul \LJ\ à partir de \LK\ en se restreignant à des séquents avec exactement une formule à droite.
+
+\begin{df}
+Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ et une formule $D$. On le note $\G \vdash D$. 
+\end{df}
+
+Un séquent $\G \To D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
+
+\
+
+Les règles sont adaptées en conséquence :
+
+\vspace{.5em}
+
+\begin{tabular}{ccc}
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G \To B,\D$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+& \quad $\dashrightarrow$ \quad &
+	\AXC{$\G \To A$}
+	\AXC{$\G \To B$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B$}
+	\DP
+\\[1em]
+%	\AXC{$\G \To A,\D$}
+%	\AXC{$\G,B \To \D$}
+%	\RightLabel{$(\imp L)$}
+%	\BIC{$\G,A\to B \To \D$}
+%	\DP
+%& \quad $\dashrightarrow$ \quad &
+%	\AXC{$\G \To A$}
+%	\AXC{$\G,B \To D$}
+%	\RightLabel{$(\imp L)$}
+%	\BIC{$\G,A\to B \To D$}
+%	\DP
+%\\[1em]
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G',A \To \D'$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To \D,\D'$}
+	\DP
+& \quad $\dashrightarrow$ \quad &
+	\AXC{$\G \To A$}
+	\AXC{$\G',A \To D$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To D$}
+	\DP
+\end{tabular}
+
+
+}
+
+
+\frame{
+\frametitle{Calcul \LJ\ et logique intuitionniste}
+
+Les règles structurelles à droite disparaissent :
+	\AXC{$\G \To \D$}
+	\RightLabel{$(weakening\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+
+\flushright
+	\AXC{$\G \To A,A,\D$}
+	\RightLabel{$(contraction\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+\qquad
+	\AXC{$\G \To \D_{1},A,B,\D_{2}$}
+	\RightLabel{$(exchange\ R)$}
+	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
 	\DP
 
 \
 
-signification
+\flushleft
+\begin{dfprop}
+Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
+\end{dfprop}
 
-nom, prémisses, conclusion...
+\
 
-introduction du connecteur $\lor$ à gauche
-
-(que des règles d'introduction, pas d'élimination)
-
-
-
-}
-\frame{
-\frametitle{Règles logiques, règles structurelles}
-
-quelque part aussi : identité, coupure
-
-
-
-}
-\frame{
-\frametitle{Prouvabilité}
-
-exemple d'arbre de preuve
-
-
-}
-\frame{
-\frametitle{Calcul IL et logique intuitionniste}
-
-
-
-
-
-
-
-
-}
-%\section{Catégorie}
-
-\frame{
-\frametitle{Logique linéaire intuitionniste}
-
+Cette restriction à des séquents avec exactement une formule à droite explique qu'il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste, par exemple le principe du tiers exclu $A \lor \lnot A$ : pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
 
 
 }
 \frame{
 \frametitle{\'Elimination de la coupure}
 
+\begin{tabular}{lcc}
+\hspace{-.6em}Règle de coupure : &
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G',A \To \D'$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To \D,\D'$}
+	\DP
+& dans \LK \\[1em]
+&
+	\AXC{$\G \To A$}
+	\AXC{$\G',A \To D$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To D$}
+	\DP
+& dans \LJ
+\end{tabular}
+
+\
+
+Signification importante : si on prouve $A$, on peut ensuite se servir de $A$ comme hypothèse.
+
+
+\begin{cadre}
+Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, lorsqu'on enlève la règle de coupure, on obtient un calcul des séquents équivalent, c'est-à-dire que les séquents prouvables sont les mêmes.
+\end{cadre}
+
+\begin{theo}
+\LK\ et \LJ\ vérifient la propriété d'élimination de la coupure.
+\end{theo}
+
+
+}
+\frame{
+\frametitle{\'Elimination de la coupure}
+
+Formulation équivalente :
+\begin{cadre}
+%Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, pour tout arbre de preuve, il existe un arbre de preuve qui a la même conclusion (i.e. le même séquent étiquetant la racine) et dans lequel la règle de coupure n'apparaît pas.
+Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, pour toute preuve d'un séquent, il existe une preuve du même séquent dans laquelle la règle de coupure n'apparaît pas.
+\end{cadre}
+
+Il existe des preuves constructives qui proposent un procédé précis pour transformer une preuve donnée d'un séquent en une preuve du même séquent sans la règle de coupure.
+
+\vspace{.5em}
+
+Relation binaire sur les preuves : $p \triangleright p'$ si le procédé permet de transformer $p$ en $p'$.
+
+\vspace{.5em}
+
+La clôture symétrique et transitive de $\triangleright$ définit une relation d'équivalence appelée \emph{équivalence selon le procédé d'élimination de la coupure}.
+%On peut alors définir une relation d'équivalence, appelée \emph{équivalence selon le procédé d'élimination de la coupure}, en considérant la clôture symétrique et transitive de la relation : 
 
 
 
@@ -308,7 +643,31 @@ exemple d'arbre de preuve
 \frame{
 \frametitle{Catégorie : définition}
 
+\begin{df}
+Une \textbf{\emph{catégorie}} consiste en des \textbf{objets} (notés $A$,$B$,...) et des \textbf{morphismes} (notés $f$,$g$,...), avec une loi binaire partielle $\circ$ sur les morphismes, tels que
 
+\begin{itemize}
+\item
+à chaque morphisme $f$ est associé un couple d'objets $(A,B)$ ; \\on note $f:A\to B$.
+
+\item
+si $f:A\to B$ et $g:B\to C$, il existe un morphisme $g\circ f:A\to C$.
+
+\item
+pour tout $A$, il existe une \textbf{identité} $id_{A}:A\to A$ vérifiant $id_{A}\circ f=f$ si $f:B\to A$ et $g\circ id_{A}=g$ si $g:A\to B$.
+
+\item
+la loi $\circ$ est \textbf{associative} :
+si $f:A\to B$ et $g:B\to C$ et $h:C\to D$, alors $h\circ(g\circ f) = (h\circ g)\circ f$.
+\end{itemize}
+
+\end{df}
+
+Exemples :
+
+\qquad objets : ensembles, morphismes : fonctions
+
+\qquad objets : sommets, morphismes : arêtes d'un graphe orienté
 
 
 
@@ -436,7 +795,7 @@ SYJ209
 \frame{
 \frametitle{Différents prouveurs}
 
-
+où mettre la structure du code avec le nombre de lignes
 
 
 }
