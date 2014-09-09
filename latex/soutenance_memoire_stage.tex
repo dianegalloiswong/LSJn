@@ -675,7 +675,98 @@ Exemples :
 \frame{
 \frametitle{Preuves et catégorie}
 
+Cadre : un calcul des séquents vérifiant la propriété d'élimination de la coupure, avec une preuve constructive définissant un procédé d'élimination de la coupure et donc une relation d'équivalence.
 
+\
+
+\`A chaque preuve $p$ on associe une \emph{dénotation} $[p]$ telle que, pour toutes preuves $p$ et $p'$ qui sont équivalentes selon le procédé d'élimination de la coupure, $[p]=[p']$. On associe aussi une dénotation $[A]$ à chaque formule $A$.
+
+\
+
+On définit alors une catégorie $\CProofs$ :
+\begin{itemize}
+\item
+objets : les dénotations des formules
+
+\item
+morphismes : les dénotations des preuves de séquents avec exactement une formule de chaque côté. Si $p$ est une preuve de $A\To B$, alors $[p]:[A]\to [B]$.
+\end{itemize}
+
+}
+\frame{
+\frametitle{Preuves et catégorie}
+
+On définit alors une catégorie $\CProofs$ :
+\begin{itemize}
+\item
+objets : les dénotations des formules
+
+\item
+morphismes : les dénotations des preuves de séquents avec exactement une formule de chaque côté. Si $p$ est une preuve de $A\To B$, alors $[p]:[A]\to [B]$.
+
+
+\item
+%\begin{floatingfigure}[r]{0.4\textwidth}
+%\centering
+%	\AXC	{$p_{1}$}
+%	\dottedLine
+%	\UIC{$A\vdash B$}
+%	\AXC	{$p_{2}$}
+%	\dottedLine
+%	\UIC{$B\vdash C$}
+%	\RightLabel{$(cut)$}
+%	\BIC{$A\vdash C$}
+%	\noLine
+%	\UIC{}
+%	\noLine
+%	\UIC{$p$}
+%	\DP\\
+%\end{floatingfigure}
+
+
+composition $\circ$ sur les morphismes : si $p_{1}$ est une preuve de $A \To B$ et $p_{2}$ une preuve de $B \To C$, donc $[p_{1}]:[A]\to [B]$ et $[p_{2}]:[B]\to [C]$, alors on définit $[p_{2}]\circ[p_{1}]=[p]:[A]\to[C]$ où $p$ est la preuve de
+$A \To C$ suivante :
+\hspace{4em}
+$p$\;:\qquad
+	\AXC	{$p_{1}$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\AXC	{$p_{2}$}
+	\dottedLine
+	\UIC{$B\vdash C$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash C$}
+	\DP
+	
+	
+%\begin{columns}[t]
+%\column[t]{.4\linewidth}
+%\end{columns}
+
+%
+%}
+
+
+
+\vspace{1em}
+
+\item
+identité sur $[A]$ : dénotation de
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\DP
+
+\end{itemize}
+
+
+
+
+}
+\frame{
+\frametitle{Preuves et catégorie}
+
+associativité, propriétés de l'identité
 
 
 }
