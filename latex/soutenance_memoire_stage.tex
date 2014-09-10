@@ -184,10 +184,40 @@
 \title{Calcul des séquents, catégorie et prouveurs}
 \author{Diane Gallois-Wong}
 %\institute{TIPE}
-\date{2014}
+\date{L3 \quad --- \quad 2014}
 \frame{
 %\titlepage
-page de titre à faire
+
+
+
+
+\center
+
+ {\Large Calcul des séquents et transfert vers une catégorie\\}
+  \vspace{.6em}
+ { Mémoire encadré par Paul-André Melliès (PPS)\\}
+ 
+
+ \vspace{3em}
+  {\Large Recherche de preuves compilée et certifiée\\}
+  \vspace{.6em}
+ { Stage effectué au LORIA de Nancy\\
+% au sein de l'équipe TYPES\\
+ sous la direction de Didier Galmiche \\et Dominique Larchey-Wendling\\}
+ 
+  \vspace{3em}
+ 
+ { Diane Gallois-Wong}\\[5pt]
+ \vspace{.5em}
+{ L3 \quad---\quad 2014}
+
+
+
+
+
+
+
+
 }
 
 
@@ -213,6 +243,11 @@ page de titre à faire
 %
 %Exemple d'approche mathématique : transfert vers la théorie des catégories
 
+Théorie de la preuve (fin XIX\textsuperscript{e}s.) : formalisation mathématique d'un exposé d'arguments visant à convaincre un interlocuteur de la validité d'une assertion donnée.
+
+\
+
+\
 
 Calcul des séquents (Gentzen, 1936)
 
@@ -220,17 +255,18 @@ Calcul des séquents (Gentzen, 1936)
 
 \item
 Intérêt pratique : algorithme de recherche de preuves
+(stage)
 
 \item
-Exemple d'approche mathématique : transfert vers la théorie des catégories
-
+Exemple d'approche mathématique : transfert vers la théorie \\des catégories
+(mémoire)
 \end{itemize}
 
-\tableofcontents[
-%	currentsubsection,
-%	sectionstyle=show/hide,
-	subsectionstyle=hide/hide/hide
-]
+%\tableofcontents[
+%%	currentsubsection,
+%%	sectionstyle=show/hide,
+%	subsectionstyle=hide/hide/hide
+%]
 
 
 
@@ -248,27 +284,6 @@ Exemple d'approche mathématique : transfert vers la théorie des catégories
 %    
 %Applications : interprétation abstraite, démonstration automatique de théorèmes et vérification de programmes, bases de données, langages XML Schema, ...
 
-
-
-}
-\frame{
-\frametitle{Les formules}
-
-Logique intuitionniste propositionnelle : formules construites à partir
-\begin{itemize}
-\item
-de variables propositionnelles ;
-\item
-de la constante $\bot$ (\emph{faux}) ;
-\item
-des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}) et $\to$ (\emph{implique}).
-\end{itemize}
-
-$\lnot A$ est une simple notation signifiant $A\to \bot$.
-
-\vspace{3em}
-
-Logique classique propositionnelle : même construction, en ajoutant la constante $\top$ (\emph{vrai}), et le connecteur unaire $\lnot$ (\emph{non}).
 
 
 
@@ -303,7 +318,7 @@ Logique classique propositionnelle : même construction, en ajoutant la constante
 %\section{Introduction au calcul des séquents}
 %\subsection{Le calcul \LK\ associé à la logique classique}
 \section{Mémoire : Calcul des séquents et catégorie}
-\subsection{Définitions sur les calculs des séquents}
+\subsection{Définitions sur les calculs des séquents : exemple du calcul \LK}
 \frame{
 
 \tableofcontents[
@@ -312,16 +327,59 @@ Logique classique propositionnelle : même construction, en ajoutant la constante
 	subsectionstyle=show/shaded/hide
 ]
 
-\vspace{3em}
+%\vspace{3em}
+%
+%Définitions sur les calculs des séquents à travers l'exemple du calcul \LK\ (Gentzen, 1936).
+%\LK\ correspond à la logique classique, \LJ\ à la logique intuitionniste.
+%
+%\vspace{3em}
 
-Définitions sur les calculs des séquents à travers l'exemple du calcul \LK\ puis celui du calcul \LJ.
 
-Ces deux calculs ont été définis par Gentzen (années 1930).
 
-\LK\ correspond à la logique classique, \LJ\ à la logique intuitionniste.
+}
+\frame{
+\frametitle{Formule}
 
-\vspace{3em}
+Logique classique propositionnelle : formules construites à partir
+\begin{itemize}
+\item
+de variables propositionnelles ;
+\item
+des constantes $\bot$ (\emph{faux}) et $\top$ (\emph{vrai}) ;
+\item
+du connecteur unaire $\lnot$ (\emph{non}) ;
+\item
+des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}) et $\to$ (\emph{implique}).
+\end{itemize}
 
+\
+
+\
+
+Logique classique propositionnelle : même construction, en enlevant la constante $\top$, et le connecteur $\lnot$
+
+\vspace{.5em}
+
+$\lnot A$ : notation signifiant $A\to \bot$
+
+
+
+
+%Logique intuitionniste propositionnelle : formules construites à partir
+%\begin{itemize}
+%\item
+%de variables propositionnelles ;
+%\item
+%de la constante $\bot$ (\emph{faux}) ;
+%\item
+%des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}) et $\to$ (\emph{implique}).
+%\end{itemize}
+%
+%$\lnot A$ est une simple notation signifiant $A\to \bot$.
+%
+%\vspace{3em}
+%
+%Logique classique propositionnelle : même construction, en ajoutant la constante $\top$ (\emph{vrai}), et le connecteur unaire $\lnot$ (\emph{non}).
 
 
 
@@ -391,12 +449,22 @@ Exemples de règles de \LK\ :
 	\RightLabel{$(id)$}
 	\UIC{$A \To A$}
 	\DP
-\qquad\qquad
+\qquad
 	\AXC{$\G \To A,\D$}
 	\AXC{$\G \To B,\D$}
 	\RightLabel{$(\land R)$}
 	\BIC{$\G \To A\land B,\D$}
 	\DP
+
+\
+
+\
+
+	\AXC{$\G \To \D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To \D$}
+	\DP	
+
 %
 %	\AXC{$\G,A \To \D$}
 %	\AXC{$\G,B \To \D$}
@@ -426,111 +494,6 @@ Exemples de règles de \LK\ :
 %$\bot L$ : introduction de $\bot$ à gauche du séquent
 
 
-}
-\frame{
-\frametitle{Familles de règles}
-
-Identité : 
-	\AXC{}
-	\RightLabel{$(id)$}
-	\UIC{$A \To A$}
-	\DP
-\hfill
-Coupure : 
-	\AXC{$\G \To A,\D$}
-	\AXC{$\G',A \To \D'$}
-	\RightLabel{$(cut)$}
-	\BIC{$\G,\G' \To \D,\D'$}
-	\DP
-
-
-\vspace{2em}
-
-
-
-
-
-%\begin{tabular}{c|c}
-%	Règles logiques & Règles structurelles \\[2em]
-%	\etR & \contractionL\\[1.5em]
-%	\fauxL & \exchangeR \\
-%	une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion &
-%\end{tabular}
-
-
-\def\vspaceBetweenRules{\vspace{.6em}}
-
-\begin{columns}[t]
-
-\begin{column}{.48\textwidth}
-\center
-
-Règles logiques
-
-\vspace{1.5em}
-
-	\AXC{$\G \To A,\D$}
-	\AXC{$\G \To B,\D$}
-	\RightLabel{$(\land R)$}
-	\BIC{$\G \To A\land B,\D$}
-	\DP
-
-\vspaceBetweenRules
-
-	\AXC{}
-	\RightLabel{$(\bot L)$}
-	\UIC{$\G,\bot \To \D$}
-	\DP
-
-\vspaceBetweenRules
-
-	\AXC{$\G,A \To B,\D$}
-	\RightLabel{$(\imp R)$}
-	\UIC{$\G \To A\to B,\D$}
-	\DP
-
-%\flushleft
-%%Une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion.
-%Introduction dans la conclusion d'une constante ou d'un connecteur n'apparaissant pas dans les prémisses.
-
-\end{column}
-
-
-\vrule{}
-
-\begin{column}{.48\textwidth}
-\center
-
-Règles structurelles
-
-\vspace{1.5em}
-
-	\AXC{$\G \To \D$}
-	\RightLabel{$(weakening\ L)$}
-	\UIC{$\G,A \To \D$}
-	\DP
-
-\vspaceBetweenRules
-
-	\AXC{$\G \To A,A,\D$}
-	\RightLabel{$(contraction\ R)$}
-	\UIC{$\G \To A,\D$}
-	\DP
-
-\vspaceBetweenRules
-
-	\AXC{$\G_{1},A,B,\G_{2} \To \D$}
-	\RightLabel{$(exchange\ L)$}
-	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
-	\DP
-
-%\flushleft
-%Modification du nombre d'occurrences ou déplacement de formules dont on ne connaît pas la structure.
-
-\end{column}
-
-\end{columns}
-
 
 
 
@@ -542,9 +505,9 @@ Règles structurelles
 Une \textbf{preuve}, ou \textbf{arbre de preuve}, est un arbre tel que
 \begin{itemize}
 \item
-chaque n\oe ud est étiqueté par un séquent et une règle ;
+chaque n\oe ud est étiqueté par un séquent ;
 \item
-les séquents associés à un n\oe ud donné et à ses fils forment une application de la règle associée à ce n\oe ud.
+les séquents associés à un n\oe ud donné et à ses fils forment une application d'une règle du calcul.
 \end{itemize}
 
 \
@@ -640,144 +603,6 @@ Une formule $A$ est valide en logique classique si, et seulement si, le séquent 
 
 
 
-}
-\frame{
-\frametitle{Calcul \LJ\ et logique intuitionniste}
-%\frametitle{Les séquents de \LJ}
-
-Calcul \LJ\ obtenu à partir de \LK\ en se restreignant à des séquents avec exactement une formule à droite.
-
-\
-
-%\begin{df}
-%Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ et une formule $D$. On le note $\G \vdash D$. 
-%\end{df}
-%
-%
-%Un séquent $\G \To D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
-
-\textbf{Séquent} de \LJ\ : une liste de formules $\G$ et une formule $D$ ; noté $\G \vdash D$.
-Correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
-
-\
-
-\begin{dfprop}
-Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
-\end{dfprop}
-
-%\
-%
-%\
-%
-%Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
-
-
-
-
-}
-\frame{
-\frametitle{Les règles de \LJ}
-
-
-%Les règles sont adaptées à des séquents avec exactement une formule à droite.
-
-Règles de \LJ\ : adaptation de celles de \LK\ à des séquents avec exactement une formule à droite.
-
-%\vspace{.5em}
-\
-
-\
-
-\begin{tabular}{ccc}
-	\AXC{$\G \To A,\D$}
-	\AXC{$\G \To B,\D$}
-	\RightLabel{$(\land R)$}
-	\BIC{$\G \To A\land B,\D$}
-	\DP
-& \quad $\dashrightarrow$ \quad &
-	\AXC{$\G \To A$}
-	\AXC{$\G \To B$}
-	\RightLabel{$(\land R)$}
-	\BIC{$\G \To A\land B$}
-	\DP
-\\[1em]
-%	\AXC{$\G \To A,\D$}
-%	\AXC{$\G,B \To \D$}
-%	\RightLabel{$(\imp L)$}
-%	\BIC{$\G,A\to B \To \D$}
-%	\DP
-%& \quad $\dashrightarrow$ \quad &
-%	\AXC{$\G \To A$}
-%	\AXC{$\G,B \To D$}
-%	\RightLabel{$(\imp L)$}
-%	\BIC{$\G,A\to B \To D$}
-%	\DP
-%\\[1em]
-	\AXC{$\G \To A,\D$}
-	\AXC{$\G',A \To \D'$}
-	\RightLabel{$(cut)$}
-	\BIC{$\G,\G' \To \D,\D'$}
-	\DP
-& \quad $\dashrightarrow$ \quad &
-	\AXC{$\G \To A$}
-	\AXC{$\G',A \To D$}
-	\RightLabel{$(cut)$}
-	\BIC{$\G,\G' \To D$}
-	\DP
-\end{tabular}
-
-\
-
-\
-
-%Les règles structurelles à droite disparaissent :
-Disparition des règles structurelles à droite :
-	\AXC{$\G \To \D$}
-	\RightLabel{$(weakening\ R)$}
-	\UIC{$\G \To A,\D$}
-	\DP
-
-\flushright
-	\AXC{$\G \To A,A,\D$}
-	\RightLabel{$(contraction\ R)$}
-	\UIC{$\G \To A,\D$}
-	\DP
-\qquad
-	\AXC{$\G \To \D_{1},A,B,\D_{2}$}
-	\RightLabel{$(exchange\ R)$}
-	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
-	\DP
-
-%}
-%\frame{
-%\frametitle{Calcul \LJ\ et logique intuitionniste}
-%
-%
-%%\flushleft
-%\begin{dfprop}
-%Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
-%\end{dfprop}
-%
-%\
-%
-%\
-%
-%\
-%
-%%Cette restriction à des séquents avec exactement une formule à droite explique qu'il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste, par exemple le principe du tiers exclu $A \lor \lnot A$ : pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
-%
-%Il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste.
-%
-%\vspace{.5em}
-%
-%Exemple : principe du tiers exclu $A \lor \lnot A$
-%
-%\vspace{.5em}
-%
-%Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
-%
-
-
 
 
 
@@ -801,37 +626,56 @@ Disparition des règles structurelles à droite :
 %
 %Les séquents de \LLI\ sont les mêmes que ceux de \LJ.
 
-Construction d'une catégorie à partir d'un calcul de séquents
-correspondant à la logique linéaire intuitionniste, qui sera appelé \LLI.
+%Construction d'une catégorie à partir d'un calcul de séquents
+%correspondant à la logique linéaire intuitionniste, qui sera appelé \LLI.
 
-Les séquents de \LLI\ sont les mêmes que ceux de \LJ.
+%Les séquents de \LLI\ sont les mêmes que ceux de \LJ.
 
-Construction basée sur une preuve constructive du théorème d'élimination de la coupure.
+Calcul de séquents \LLI, correspondant à la logique linéaire intuitionniste.
+
+\
+
+Construction basée sur une preuve constructive donnée du théorème d'élimination de la coupure.
 
 
 
 %\vspace{1em}
+
+}
+\frame{
+\frametitle{Les séquents du calcul \LLI}
+
+\textbf{Séquent} de \LLI\ : une liste de formules $\G$ et une formule $D$ ; noté $\G \vdash D$.
+%Correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
+
+\
+
+\
+
+Formules de la logique linéaire intuitionniste : diffèrent de celles de la logiques classiques (autres connecteurs et constantes) mais ce n'est pas important ici.
+
 
 
 }
 \frame{
 \frametitle{Le théorème d'élimination de la coupure}
 
-\begin{tabular}{lcc}
+\begin{tabular}{lcl}
 \hspace{-.6em}Règle de coupure : &
 	\AXC{$\G \To A,\D$}
 	\AXC{$\G',A \To \D'$}
 	\RightLabel{$(cut)$}
 	\BIC{$\G,\G' \To \D,\D'$}
 	\DP
-& dans \LK \\[1em]
+& \quad dans \LK \\[1em]
 &
 	\AXC{$\G \To A$}
 	\AXC{$\G',A \To D$}
 	\RightLabel{$(cut)$}
 	\BIC{$\G,\G' \To D$}
 	\DP
-& dans \LJ\ ou \LLI
+& \quad dans %\LJ\ ou 
+\LLI
 \end{tabular}
 
 \
@@ -846,7 +690,7 @@ Signification importante :
 Si on enlève la règle de coupure du calcul \LLI, on obtient un calcul des séquents équivalent, c'est-à-dire que les séquents prouvables restent les mêmes.
 \end{theoelimcoupure}
 
-Ce théorème est également vérifié pour \LK\ et \LJ.
+Ce théorème est également vérifié pour \LK.%\ et \LJ.
 
 %\vspace{.5em}
 %
@@ -901,7 +745,7 @@ Clôture symétrique et transitive de $\triangleright$ : relation d'équivalence ap
 
 }
 \frame{
-%\frametitle{Catégorie : définition}
+\frametitle{Catégorie : définition}
 
 \begin{df}
 Une \textbf{\emph{catégorie}} consiste en des \textbf{objets} (notés $A$,$B$,...) et des \textbf{morphismes} (notés $f$,$g$,...), avec une loi binaire partielle $\circ$ sur les morphismes, tels que
@@ -1223,7 +1067,7 @@ De même pour $id_{A}\circ[p']=[p']$\\ si $p'$ est une preuve de $B \To A$.
 
 \begin{itemize}
 \item
-\`A partir de certains connecteurs binaires de la logique linéaire intuitionniste, on peut munir cette catégorie $\CProofs$ d'opérateurs afin qu'elle corresponde à des définitions importantes en théorie des catégories (catégorie monoïdale symétrique, catégorie monoïdale fermée, catégorie cartésienne...).
+\`A partir de certains connecteurs de la logique linéaire intuitionniste, on peut munir cette catégorie $\CProofs$ d'opérateurs afin qu'elle corresponde à des définitions importantes en théorie des catégories (catégorie monoïdale symétrique, catégorie monoïdale fermée, catégorie cartésienne...).
 
 \
 
@@ -1282,6 +1126,10 @@ Construction similaire d'une catégorie associée à d'autres calculs de séquents. 
 
 \
 
+Prouveur : programme qui prend en entrée une formule et renvoie si elle est prouvable.
+
+\
+
 Plusieurs prouveurs existants basés sur des calculs des séquents, mais emploi de structures de données complexes.
 
 \
@@ -1316,13 +1164,12 @@ Implémentation d'un prouveur de logique intuitionniste basé sur une légère varia
 
 \vspace{.5em}
 
-Comparaison avec des prouveurs existants.
+Comparaison avec des prouveurs existants en termes d'efficacité.
 
 \vspace{.5em}
 
 Langage utilisé : OCaml.
 %Présentation du calcul \LSJ\ puis d'une légère variante \LSJn.
-
 
 
 }
@@ -1393,11 +1240,11 @@ Seules les règles $\imp L$ et $\imp R$ agissent sur $\Th$.
 	
 
 
-\vspace{2em}
-
-\flushleft
-
-Pas de règle de coupure, pas de règles structurelles.
+%\vspace{2em}
+%
+%\flushleft
+%
+%Pas de règle de coupure, pas de règles structurelles.
 
 
 
@@ -1462,9 +1309,6 @@ $A$ est prouvable en logique intuitionniste si et seulement si $\emptyset\,; \em
 
 
 
-
-
-
 }
 \frame{
 \frametitle{Idée de l'algorithme de recherche de preuve}
@@ -1485,8 +1329,9 @@ S'il y en a une telle que toutes les prémisses sont prouvables (notamment si la 
 
 \
 
-Terminaison %: ordre bien fondé sur les séquents tel que $\s_{i} < \s$.
-assurée par des propriétés de \LSJ.
+Terminaison assurée par des propriétés de \LSJ.
+%souvent difficile à assurer / démontrer.%: ordre bien fondé sur les séquents tel que $\s_{i} < \s$.
+%assurée par des propriétés de \LSJ.
 
 \
 
@@ -1524,7 +1369,23 @@ Une règle est \textbf{inversible} si toutes ses prémisses sont inversibles.
 
 
 
-
+%}
+%\frame{
+%\frametitle{Le calcul \LSJ}
+%
+%Huit règles : $id$, $\bot L$, $\land L$, $\land R$, $\lor L$, $\lor R$, $\imp L$, $\imp R$.
+%
+%\
+%
+%\
+%
+%Calcul associé à la logique intuitionniste : pour toute formule $A$, on peut construire un séquent de \LSJ\ qui est prouvable dans \LSJ\ si, et seulement si, $A$ est prouvable en logique intuitionniste.
+%
+%\
+%
+%\
+%
+%Propriétés assurant la terminaison de l'algorithme.
 
 }
 \frame{
@@ -1688,18 +1549,44 @@ Prouveur testé sur les formules de la bibliothèque ILTP\footnote{\url{http://www
 
 \
 
-Quatre prouveurs de logique intuitionniste propositionnelle sont répertoriés par ILTP.
+\
 
-Difficulté d'une formule : \\0.25 * nombre de prouveurs ne terminant pas en moins de cinq minutes.
+\begin{columns}
+
+\column{.5\linewidth}
+
+
+\begin{tabular}{lcc}
+	Formule & Temps\footnotemark & Difficulté \\
+	SYJ202+1.004 & $>$ 300 s & 0.00 \\
+	SYJ207+1.005 & 9.1 s & 0.50 \\
+	SYJ211+1.008 & 20 s & 0.25 \\
+	SYJ211+1.009 & 166 s & 0.50 \\
+	SYJ211+1.010 & $>$ 300 s & 0.75 \\
+	SYJ209+1.011 & 0.1 ms & 1.00 \\
+	SYJ209+1.020 & 0.4 ms & 1.00
+\end{tabular}
+
+
+\column{.4\linewidth}
+
+Quatre prouveurs de logique intuitionniste propositionnelle sont répertoriés par ILTP.
 
 \
 
-(à faire :
+Difficulté d'une formule : \\0.25 * nombre de prouveurs ne terminant pas en moins de cinq minutes.
 
-tableau : comparaison de quelques temps
-\footnote{
-Tests effectués sous MacOS avec un processeur 2.7 GHz Intel Core i7.
-} avec les difficultés données par ILTP. Notamment, SYJ209 : difficulté 1, notre prouveur termine en moins d'une milliseconde : grâce à l'inversibilité d'une prémisse de $\imp R$, linéaire en la taille de la formule initiale au lieu de factoriel)
+\end{columns}
+
+\footnotetext{Tests effectués sous MacOS avec un processeur 2.7 GHz Intel Core i7.}
+
+
+%(à faire :
+%
+%tableau : comparaison de quelques temps
+%\footnote{
+%Tests effectués sous MacOS avec un processeur 2.7 GHz Intel Core i7.
+%} avec les difficultés données par ILTP. Notamment, SYJ209 : difficulté 1, notre prouveur termine en moins d'une milliseconde : grâce à l'inversibilité d'une prémisse de $\imp R$, linéaire en la taille de la formule initiale au lieu de factoriel)
 %deux fois : même limite que le plus faible
 %
 %y arrive alors que deux non (SYJ207 et aussi SYJ211)
@@ -1755,19 +1642,21 @@ Petit langage fonctionnel ; seul type de données : des arbres binaires construit
 
 \
 
+\
+
 Réalisation par D. Larchey-Wendling d'un compilateur certifié en Coq de \T\ vers un langage exécutable par une machine abstraite assez simple, et d'un programme certifié simulant l'exécution de cette machine abstraite.
 
 \M\ : langage associé à cette machine abstraite.
 
-\
-
-\
-
-
-Mettre cette image ? (avec une meilleure qualité) Décoratif, mais %risque de soulever des questions qu'on n'a pas le temps de poser
-je n'ai pas le temps d'en parler...
-
-\includegraphics[width=.6\linewidth]{Tmem}
+%\
+%
+%\
+%
+%
+%Mettre cette image ? (avec une meilleure qualité) Décoratif, mais %risque de soulever des questions qu'on n'a pas le temps de poser
+%je n'ai pas le temps d'en parler...
+%
+%\includegraphics[width=.6\linewidth]{Tmem}
 
 
 }
@@ -1793,7 +1682,9 @@ formule principale : $A\lor B$
 
 Juste après la phase d'indexation : compilation, pour chaque numéro de formule, de fonctions de transformation du séquent dans le cas où cette formule est la formule principale. 
 
-Entre 0 et 6 fonctions pour chaque numéro de formule.
+%Entre 0 et 6 fonctions pour chaque numéro de formule.
+
+\
 
 \
 
@@ -1830,19 +1721,20 @@ Par exemple, compilation en \T\ de ces fonctions pour chaque numéro \\de formule
 
 }
 \frame{
-\frametitle{Répartition du code ?}
+\frametitle{Différentes parties du programme}
 
 \def\myindent{\qquad}
 
 \begin{tabular}{lrc}
+	\multicolumn{3}{r}{\hspace{15em} Nombre de lignes de code} \\[1em]
 	Utilitaires (gestion des tests)
-		&950&22\%\\
+		&950&\\ %22%
 	\myindent Analyseur ILTP
 		&170&\\
 	Commun aux prouveurs (93\% : indexation)
 		&190&\\
 	Prouveur simple (sauf commun)
-		&1000&\\
+		&1000&\\ %24%
 	\myindent Strutures de données  pour le séquent
 		&330&\\
 %	Autres prouveurs (sauf commun)
@@ -2051,3 +1943,252 @@ Autres références : cf. document écrit.
 31 : image mem ?
 
 34 : nombre de lignes
+
+
+}
+\frame{
+\frametitle{Familles de règles}
+
+Identité : 
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A \To A$}
+	\DP
+\hfill
+Coupure : 
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G',A \To \D'$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To \D,\D'$}
+	\DP
+
+
+\vspace{2em}
+
+
+
+
+
+%\begin{tabular}{c|c}
+%	Règles logiques & Règles structurelles \\[2em]
+%	\etR & \contractionL\\[1.5em]
+%	\fauxL & \exchangeR \\
+%	une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion &
+%\end{tabular}
+
+
+\def\vspaceBetweenRules{\vspace{.6em}}
+
+\begin{columns}[t]
+
+\begin{column}{.48\textwidth}
+\center
+
+Règles logiques
+
+\vspace{1.5em}
+
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G \To B,\D$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{}
+	\RightLabel{$(\bot L)$}
+	\UIC{$\G,\bot \To \D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{$\G,A \To B,\D$}
+	\RightLabel{$(\imp R)$}
+	\UIC{$\G \To A\to B,\D$}
+	\DP
+
+%\flushleft
+%%Une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion.
+%Introduction dans la conclusion d'une constante ou d'un connecteur n'apparaissant pas dans les prémisses.
+
+\end{column}
+
+
+\vrule{}
+
+\begin{column}{.48\textwidth}
+\center
+
+Règles structurelles
+
+\vspace{1.5em}
+
+	\AXC{$\G \To \D$}
+	\RightLabel{$(weakening\ L)$}
+	\UIC{$\G,A \To \D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{$\G \To A,A,\D$}
+	\RightLabel{$(contraction\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+
+\vspaceBetweenRules
+
+	\AXC{$\G_{1},A,B,\G_{2} \To \D$}
+	\RightLabel{$(exchange\ L)$}
+	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
+	\DP
+
+%\flushleft
+%Modification du nombre d'occurrences ou déplacement de formules dont on ne connaît pas la structure.
+
+\end{column}
+
+\end{columns}
+
+}
+\frame{
+\frametitle{Calcul \LJ\ et logique intuitionniste}
+%\frametitle{Les séquents de \LJ}
+
+Calcul \LJ\ obtenu à partir de \LK\ en se restreignant à des séquents avec exactement une formule à droite.
+
+\
+
+%\begin{df}
+%Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ et une formule $D$. On le note $\G \vdash D$. 
+%\end{df}
+%
+%
+%Un séquent $\G \To D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
+
+\textbf{Séquent} de \LJ\ : une liste de formules $\G$ et une formule $D$ ; noté $\G \vdash D$.
+Correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
+
+\
+
+\begin{dfprop}
+Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
+\end{dfprop}
+
+%\
+%
+%\
+%
+%Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+
+
+
+
+}
+\frame{
+\frametitle{Les règles de \LJ}
+
+
+%Les règles sont adaptées à des séquents avec exactement une formule à droite.
+
+Règles de \LJ\ : adaptation de celles de \LK\ à des séquents avec exactement une formule à droite.
+
+%\vspace{.5em}
+\
+
+\
+
+\begin{tabular}{ccc}
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G \To B,\D$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B,\D$}
+	\DP
+& \quad $\dashrightarrow$ \quad &
+	\AXC{$\G \To A$}
+	\AXC{$\G \To B$}
+	\RightLabel{$(\land R)$}
+	\BIC{$\G \To A\land B$}
+	\DP
+\\[1em]
+%	\AXC{$\G \To A,\D$}
+%	\AXC{$\G,B \To \D$}
+%	\RightLabel{$(\imp L)$}
+%	\BIC{$\G,A\to B \To \D$}
+%	\DP
+%& \quad $\dashrightarrow$ \quad &
+%	\AXC{$\G \To A$}
+%	\AXC{$\G,B \To D$}
+%	\RightLabel{$(\imp L)$}
+%	\BIC{$\G,A\to B \To D$}
+%	\DP
+%\\[1em]
+	\AXC{$\G \To A,\D$}
+	\AXC{$\G',A \To \D'$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To \D,\D'$}
+	\DP
+& \quad $\dashrightarrow$ \quad &
+	\AXC{$\G \To A$}
+	\AXC{$\G',A \To D$}
+	\RightLabel{$(cut)$}
+	\BIC{$\G,\G' \To D$}
+	\DP
+\end{tabular}
+
+\
+
+\
+
+%Les règles structurelles à droite disparaissent :
+Disparition des règles structurelles à droite :
+	\AXC{$\G \To \D$}
+	\RightLabel{$(weakening\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+
+\flushright
+	\AXC{$\G \To A,A,\D$}
+	\RightLabel{$(contraction\ R)$}
+	\UIC{$\G \To A,\D$}
+	\DP
+\qquad
+	\AXC{$\G \To \D_{1},A,B,\D_{2}$}
+	\RightLabel{$(exchange\ R)$}
+	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
+	\DP
+
+%}
+%\frame{
+%\frametitle{Calcul \LJ\ et logique intuitionniste}
+%
+%
+%%\flushleft
+%\begin{dfprop}
+%Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
+%\end{dfprop}
+%
+%\
+%
+%\
+%
+%\
+%
+%%Cette restriction à des séquents avec exactement une formule à droite explique qu'il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste, par exemple le principe du tiers exclu $A \lor \lnot A$ : pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+%
+%Il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste.
+%
+%\vspace{.5em}
+%
+%Exemple : principe du tiers exclu $A \lor \lnot A$
+%
+%\vspace{.5em}
+%
+%Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+%
+
+
+
+
+
+
