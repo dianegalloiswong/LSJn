@@ -21,7 +21,8 @@
 \usepackage{fancyvrb}
 %\usepackage{lipsum}
 \usepackage{xcolor}
-
+\usepackage{changepage}
+\usepackage{multirow}
 
 
 \newcounter{moncompteur}
@@ -45,6 +46,9 @@
 
 \newtheorem{cadre}{}{}
 
+\newcommand{\ts}{\textsuperscript}
+
+
 
 
 %mémoire et stage
@@ -52,11 +56,15 @@
 	\EnableBpAbbreviations
 
 \newtheorem{dfprop}[moncompteur]{\textbf{Définition / Proposition}}{}
+\newtheorem{theoelimcoupure}[moncompteur]{\textbf{Théorème d'élimination de la coupure}}{}
 
 \newcommand{\s}{\sigma}
 
 
 %mémoire
+\newcommand{\LK}{$\mathbf{LK}$}
+\newcommand{\LJ}{$\mathbf{LJ}$}
+\newcommand{\LLI}{$\mathbf{LLI}$}
 \newcommand{\revAnd}{\rotatebox[origin=c]{180}{\&}}
 \newcommand{\Ccal}{\mathcal{C}}
 \newcommand{\Dcal}{\mathcal{D}}
@@ -77,8 +85,6 @@
 
 
 %stage
-\newcommand{\LK}{$\mathbf{LK}$}
-\newcommand{\LJ}{$\mathbf{LJ}$}
 \newcommand{\LJT}{$\mathbf{LJT}$}
 \newcommand{\LSJ}{$\mathbf{LSJ}$}
 \newcommand{\LSJn}{$\mathbf{LSJ\boldsymbol\ell}$}
@@ -165,12 +171,12 @@
 \begin{document}
 
 
-\AtBeginSection[]
-{
- \begin{frame}<beamer>
- \tableofcontents[currentsection]
- \end{frame}
-}
+%\AtBeginSection[]
+%{
+% \begin{frame}<beamer>
+% \tableofcontents[currentsection]
+% \end{frame}
+%}
 
 
 \title{Calcul des séquents}
@@ -184,6 +190,25 @@
 \frame{
 \frametitle{Introduction}
 
+Théorie de la preuve (fin XIX\textsuperscript{e}s.) : formalisation mathématique d'un exposé d'arguments visant à convaincre un interlocuteur de la validité d'une assertion.
+
+\vspace{2em}
+
+Calcul des séquents (Gentzen, 1936) :
+
+\begin{adjustwidth}{2.5em}{0em}
+
+\vspace{.5em}
+
+
+Intérêt informatique : algorithme de recherche de preuves
+
+\vspace{.5em}
+
+
+Exemple d'approche mathématique : transfert vers la théorie des catégories
+
+\end{adjustwidth}
 %Automates d'arbres introduits pour la vérification de circuits logiques.
 % 
 %Vers 1960 : Church, Trakhtenbrot, B\"uchi, Rabin, Doner, Thatcher, ...
@@ -193,16 +218,52 @@
 %Applications : interprétation abstraite, démonstration automatique de théorèmes et vérification de programmes, bases de données, langages XML Schema, ...
 
 
+
+}
+\frame{
+\frametitle{Les formules}
+
+Logique intuitionniste propositionnelle : formules construites à partir
+\begin{itemize}
+\item
+de variables propositionnelles ;
+\item
+de la constante $\bot$ (\emph{faux}) ;
+\item
+des connecteurs binaires $\land$ (\emph{et}), $\lor$ (\emph{ou}) et $\to$ (\emph{implique}).
+\end{itemize}
+
+$\lnot A$ est une simple notation signifiant $A\to \bot$.
+
+\vspace{3em}
+
+Logique classique propositionnelle : même construction, en ajoutant la constante $\top$ (\emph{vrai}), et le connecteur unaire $\lnot$ (\emph{non}).
+
+
+
+
+
 }\frame{
 \tableofcontents
 
-}\frame{
-
-Logiques propositionnelles
-
-\
-
-Formule :
+%}
+%\section{Mémoire : calcul des séquents et catégorie}
+%\frame{
+%
+%Mémoire :
+%
+%\begin{itemize}
+%\item
+%\textbf{Définitions sur les calculs de séquents}
+%
+%à travers les exemples des calculs \LK\ et \LJ\ définis par Gentzen, correspondant respectivement à la logique classique et à la logique intuitionniste
+%
+%\item
+%\textbf{Construction d'une catégorie à partir d'un calcul de séquents}
+%correspondant à la logique linéaire intuitionniste, en s'appuyant sur une preuve constructive du théorème d'élimination de la coupure détaillée par P. A. Melliès dans
+%
+%\end{itemize}
+%
 
 
 
@@ -210,8 +271,27 @@ Formule :
 }
 %\section{Introduction au calcul des séquents}
 %\subsection{Le calcul \LK\ associé à la logique classique}
+\section{Mémoire : Calcul des séquents et catégorie}
+\subsection{Définitions sur les calculs des séquents}
+\frame{
+
+\tableofcontents[
+	currentsubsection,
+	sectionstyle=show/hide,
+	subsectionstyle=show/shaded/hide
+]
+
+\vspace{3em}
+
+Définitions sur les calculs des séquents à travers l'exemple du calcul \LK\ puis celui du calcul \LJ. Ces deux calculs ont été définis par Gentzen. \LK\ correspond à la logique classique et \LJ\ à la logique intuitionniste.
+
+\vspace{3em}
 
 
+
+
+
+}
 \frame{
 \frametitle{Les séquents}
 
@@ -255,7 +335,7 @@ Règles de la forme :
 \	
 %\vspace{.5em}
 
-%Signification :
+Signification :
 
 \qquad
 Si les prémisses sont valides, alors la conclusion est aussi valide.
@@ -268,30 +348,31 @@ Si les prémisses sont valides, alors la conclusion est aussi valide.
 
 Exemples de règles de \LK\ :
 
-{
+
 \center
-%	\AXC{$\G,A \To \D$}
-%	\AXC{$\G,B \To \D$}
-%	\RightLabel{$(\lor L)$}
-%	\BIC{$\G,A\lor B \To \D$}
-%	\DP
+	\AXC{}
+	\RightLabel{$(id)$}
+	\UIC{$A \To A$}
+	\DP
+\qquad\qquad
 	\AXC{$\G \To A,\D$}
 	\AXC{$\G \To B,\D$}
 	\RightLabel{$(\land R)$}
 	\BIC{$\G \To A\land B,\D$}
 	\DP
-\qquad\qquad	
-	\AXC{}
-	\RightLabel{$(id)$}
-	\UIC{$A \To A$}
-	\DP
+%
+%	\AXC{$\G,A \To \D$}
+%	\AXC{$\G,B \To \D$}
+%	\RightLabel{$(\lor L)$}
+%	\BIC{$\G,A\lor B \To \D$}
+%	\DP
 %\qquad\qquad
 %	\AXC{}
 %	\RightLabel{$(\bot L)$}
 %	\UIC{$\G,\bot \To \D$}
 %	\DP
+%
 
-}
 
 %\vspace{1.5em}
 %
@@ -326,6 +407,7 @@ Coupure :
 	\DP
 
 
+\vspace{2em}
 
 
 
@@ -370,9 +452,9 @@ Règles logiques
 	\UIC{$\G \To A\to B,\D$}
 	\DP
 
-\flushleft
-%Une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion.
-Introduction dans la conclusion d'une constante ou d'un connecteur n'apparaissant pas dans les prémisses.
+%\flushleft
+%%Une constante ou un connecteur n'apparaissant pas dans les prémisses est introduit(e) dans la conclusion.
+%Introduction dans la conclusion d'une constante ou d'un connecteur n'apparaissant pas dans les prémisses.
 
 \end{column}
 
@@ -405,8 +487,8 @@ Règles structurelles
 	\UIC{$\G_{1},B,A,\G_{2} \To \D$}
 	\DP
 
-\flushleft
-Modification du nombre d'occurrences ou déplacement de formules dont on ne connaît pas la structure.
+%\flushleft
+%Modification du nombre d'occurrences ou déplacement de formules dont on ne connaît pas la structure.
 
 \end{column}
 
@@ -418,11 +500,25 @@ Modification du nombre d'occurrences ou déplacement de formules dont on ne conna
 
 }
 \frame{
-%\frametitle{Prouvabilité}
+\frametitle{Preuve d'un séquent}
 
-Une \emph{preuve}, ou \emph{arbre de preuve}, est un arbre dont chaque n\oe ud est étiqueté par un séquent et une règle,
-% de sorte que lorsqu'on considère les fils de ce n\oe ud, on obtient une application de la règle.
-tel que les séquents associés à un n\oe ud et à ses fils forment une application de la règle associée au n\oe ud.
+Une \textbf{preuve}, ou \textbf{arbre de preuve}, est un arbre tel que
+\begin{itemize}
+\item
+chaque n\oe ud est étiqueté par un séquent et une règle ;
+\item
+les séquents associés à un n\oe ud donné et à ses fils forment une application de la règle associée à ce n\oe ud.
+\end{itemize}
+
+\
+
+Un \textbf{preuve d'un séquent} donné est une preuve telle que la racine est étiquetée par ce séquent.
+
+\
+
+%Une \emph{preuve}, ou \emph{arbre de preuve}, est un arbre dont chaque n\oe ud est étiqueté par un séquent et une règle,
+%% de sorte que lorsqu'on considère les fils de ce n\oe ud, on obtient une application de la règle.
+%tel que les séquents associés à un n\oe ud et à ses fils forment une application de la règle associée au n\oe ud.
 
 
 
@@ -442,14 +538,32 @@ tel que les séquents associés à un n\oe ud et à ses fils forment une application
 	\RightLabel{$(\land R)$}
 	\BIC{$A,B \To A\land B$}
 	\DP
+	
+\vspace{.7em}
 
-\vspace{.5em}
+\emph{Preuve du séquent $A,B \To A\land B$}
 
-%\flushleft
+}
+\frame{
+\frametitle{Prouvabilité d'un séquent dans un calcul}
+
+
+%\vspace{.5em}
+%
+%%\flushleft
+%
+%\begin{df}
+%Un séquent est \textbf{prouvable dans un calcul} s'il existe un arbre de preuve dont la racine est étiquetée par ce séquent. On dit alors que l'arbre est une \textbf{preuve de ce séquent}.
+%\end{df}
+
 
 \begin{df}
-Un séquent est \textbf{prouvable dans un calcul} s'il existe un arbre de preuve dont la racine est étiquetée par ce séquent. On dit alors que l'arbre est une \textbf{preuve de ce séquent}.
+Un séquent est \textbf{prouvable dans un calcul} s'il existe une preuve de ce séquent.
 \end{df}
+
+\
+
+\
 
 \begin{prop}
 Une formule $A$ est valide en logique classique si, et seulement si, le séquent $\; \To A$ est prouvable dans \LK.
@@ -492,20 +606,50 @@ Une formule $A$ est valide en logique classique si, et seulement si, le séquent 
 }
 \frame{
 \frametitle{Calcul \LJ\ et logique intuitionniste}
+%\frametitle{Les séquents de \LJ}
 
-On obtient le calcul \LJ\ à partir de \LK\ en se restreignant à des séquents avec exactement une formule à droite.
-
-\begin{df}
-Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ et une formule $D$. On le note $\G \vdash D$. 
-\end{df}
-
-Un séquent $\G \To D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
+Calcul \LJ\ obtenu à partir de \LK\ en se restreignant à des séquents avec exactement une formule à droite.
 
 \
 
-Les règles sont adaptées en conséquence :
+%\begin{df}
+%Un \textbf{\emph{séquent}} de \LJ\ consiste en une liste de formules $\G$ et une formule $D$. On le note $\G \vdash D$. 
+%\end{df}
+%
+%
+%Un séquent $\G \To D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
 
-\vspace{.5em}
+\textbf{Séquent} de \LJ\ : une liste de formules $\G$ et une formule $D$ ; noté $\G \vdash D$.
+Correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intuitionniste.
+
+\
+
+\begin{dfprop}
+Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
+\end{dfprop}
+
+\
+
+\
+
+Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+
+
+
+
+}
+\frame{
+\frametitle{Les règles de \LJ}
+
+
+%Les règles sont adaptées à des séquents avec exactement une formule à droite.
+
+Règles de \LJ\ : adaptation de celles de \LK\ à des séquents avec exactement une formule à droite.
+
+%\vspace{.5em}
+\
+
+\
 
 \begin{tabular}{ccc}
 	\AXC{$\G \To A,\D$}
@@ -545,14 +689,12 @@ Les règles sont adaptées en conséquence :
 	\DP
 \end{tabular}
 
+\
 
-}
+\
 
-
-\frame{
-\frametitle{Calcul \LJ\ et logique intuitionniste}
-
-Les règles structurelles à droite disparaissent :
+%Les règles structurelles à droite disparaissent :
+Disparition des règles structurelles à droite :
 	\AXC{$\G \To \D$}
 	\RightLabel{$(weakening\ R)$}
 	\UIC{$\G \To A,\D$}
@@ -569,21 +711,65 @@ Les règles structurelles à droite disparaissent :
 	\UIC{$\G \To \D_{1},B,A,\D_{2}$}
 	\DP
 
-\
+%}
+%\frame{
+%\frametitle{Calcul \LJ\ et logique intuitionniste}
+%
+%
+%%\flushleft
+%\begin{dfprop}
+%Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
+%\end{dfprop}
+%
+%\
+%
+%\
+%
+%\
+%
+%%Cette restriction à des séquents avec exactement une formule à droite explique qu'il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste, par exemple le principe du tiers exclu $A \lor \lnot A$ : pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+%
+%Il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste.
+%
+%\vspace{.5em}
+%
+%Exemple : principe du tiers exclu $A \lor \lnot A$
+%
+%\vspace{.5em}
+%
+%Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+%
 
-\flushleft
-\begin{dfprop}
-Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
-\end{dfprop}
 
-\
 
-Cette restriction à des séquents avec exactement une formule à droite explique qu'il existe des formules vraies en logique classique mais non prouvables en logique intuitionniste, par exemple le principe du tiers exclu $A \lor \lnot A$ : pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+
+
+}
+\subsection{Construction d'une catégorie à partir d'un calcul de séquents}
+\frame{
+
+\tableofcontents[
+	currentsubsection,
+	sectionstyle=show/hide,
+	subsectionstyle=show/shaded/hide
+]
+
+
+\vspace{1em}
+
+Construction d'une catégorie à partir d'un calcul de séquents
+correspondant à la logique linéaire intuitionniste, en s'appuyant sur une preuve constructive du théorème d'élimination de la coupure détaillée par P.-A. Melliès.
+
+Ce calcul sera appelé \LLI.
+
+Les séquents de \LLI\ sont les mêmes que ceux de \LJ.
+
+%\vspace{1em}
 
 
 }
 \frame{
-\frametitle{\'Elimination de la coupure}
+\frametitle{Le théorème d'élimination de la coupure}
 
 \begin{tabular}{lcc}
 \hspace{-.6em}Règle de coupure : &
@@ -599,134 +785,139 @@ Cette restriction à des séquents avec exactement une formule à droite explique q
 	\RightLabel{$(cut)$}
 	\BIC{$\G,\G' \To D$}
 	\DP
-& dans \LJ
+& dans \LJ\ ou \LLI
 \end{tabular}
 
 \
 
-Signification importante : si on prouve $A$, on peut ensuite se servir de $A$ comme hypothèse.
+Signification importante : 
 
+\qquad Si on prouve $A$, on peut ensuite se servir de $A$ comme hypothèse.
 
+\vspace{2em}
+
+\begin{theoelimcoupure}
+Si on enlève la règle de coupure du calcul \LLI, on obtient un calcul des séquents équivalent, c'est-à-dire que les séquents prouvables restent les mêmes.
+\end{theoelimcoupure}
+
+Ce théorème est également vérifié pour \LK\ et \LJ.
+
+\vspace{.5em}
+
+Théorème très important en recherche automatisée de preuves.
+
+%\begin{cadre}
+%Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, lorsqu'on enlève la règle de coupure, on obtient un calcul des séquents équivalent, c'est-à-dire que les séquents prouvables sont les mêmes.
+%\end{cadre}
+%
+%\begin{theo}
+%\LK\ et \LJ\ vérifient la propriété d'élimination de la coupure.
+%\end{theo}
+%
+
+}
+\frame{
+\frametitle{Procédé d'élimination de la coupure pour \LLI}
+
+Reformulation du théorème d'élimination de la coupure :
 \begin{cadre}
-Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, lorsqu'on enlève la règle de coupure, on obtient un calcul des séquents équivalent, c'est-à-dire que les séquents prouvables sont les mêmes.
+Pour toute preuve d'un séquent, il existe une preuve du même séquent dans laquelle la règle de coupure n'apparaît pas.
 \end{cadre}
 
-\begin{theo}
-\LK\ et \LJ\ vérifient la propriété d'élimination de la coupure.
-\end{theo}
+\
+
+\
+
+Preuve constructive (pour \LLI) %détaillée par P.-A. Melliès
+ : définition précise d'un \textbf{procédé d'élimination de la coupure}.% permettant de transformer une preuve donnée d'un séquent en une preuve du même séquent sans la règle de coupure.
+
+\ %vspace{.5em}
+
+Relation binaire sur les preuves : $p \triangleright p'$ si ce procédé permet de transformer $p$ en $p'$.
+
+\ %vspace{.5em}
+
+Clôture symétrique et transitive de $\triangleright$ : relation d'équivalence appelée \textbf{équivalence selon le procédé d'élimination de la coupure}.
+
+
+%Il existe des preuves constructives qui proposent un procédé précis pour transformer une preuve donnée d'un séquent en une preuve du même séquent sans la règle de coupure.
+%
+%\vspace{.5em}
+%
+%Relation binaire sur les preuves : $p \triangleright p'$ si ce procédé permet de transformer $p$ en $p'$.
+%
+%\vspace{.5em}
+%
+%La clôture symétrique et transitive de $\triangleright$ définit une relation d'équivalence appelée \emph{équivalence selon le procédé d'élimination de la coupure}.
+%%On peut alors définir une relation d'équivalence, appelée \emph{équivalence selon le procédé d'élimination de la coupure}, en considérant la clôture symétrique et transitive de la relation : 
+
 
 
 }
 \frame{
-\frametitle{\'Elimination de la coupure}
-
-Formulation équivalente :
-\begin{cadre}
-%Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, pour tout arbre de preuve, il existe un arbre de preuve qui a la même conclusion (i.e. le même séquent étiquetant la racine) et dans lequel la règle de coupure n'apparaît pas.
-Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, pour toute preuve d'un séquent, il existe une preuve du même séquent dans laquelle la règle de coupure n'apparaît pas.
-\end{cadre}
-
-Il existe des preuves constructives qui proposent un procédé précis pour transformer une preuve donnée d'un séquent en une preuve du même séquent sans la règle de coupure.
-
-\vspace{.5em}
-
-Relation binaire sur les preuves : $p \triangleright p'$ si le procédé permet de transformer $p$ en $p'$.
-
-\vspace{.5em}
-
-La clôture symétrique et transitive de $\triangleright$ définit une relation d'équivalence appelée \emph{équivalence selon le procédé d'élimination de la coupure}.
-%On peut alors définir une relation d'équivalence, appelée \emph{équivalence selon le procédé d'élimination de la coupure}, en considérant la clôture symétrique et transitive de la relation : 
-
-
-
-}
-\frame{
-\frametitle{Catégorie : définition}
+%\frametitle{Catégorie : définition}
 
 \begin{df}
 Une \textbf{\emph{catégorie}} consiste en des \textbf{objets} (notés $A$,$B$,...) et des \textbf{morphismes} (notés $f$,$g$,...), avec une loi binaire partielle $\circ$ sur les morphismes, tels que
 
 \begin{itemize}
 \item
-à chaque morphisme $f$ est associé un couple d'objets $(A,B)$ ; \\on note $f:A\to B$.
+à chaque morphisme $f$ est associé un couple d'objets $(A,B)$ ; \\on note $f:A\to B$, et on dit que $A\to B$ est le \emph{type} de $f$.
 
 \item
 si $f:A\to B$ et $g:B\to C$, il existe un morphisme $g\circ f:A\to C$.
 
 \item
-pour tout $A$, il existe une \textbf{identité} $id_{A}:A\to A$ vérifiant $id_{A}\circ f=f$ si $f:B\to A$ et $g\circ id_{A}=g$ si $g:A\to B$.
-
-\item
 la loi $\circ$ est \textbf{associative} :
 si $f:A\to B$ et $g:B\to C$ et $h:C\to D$, alors $h\circ(g\circ f) = (h\circ g)\circ f$.
+
+\item
+pour tout $A$, il existe une \textbf{identité} $id_{A}:A\to A$ vérifiant $id_{A}\circ f=f$ si $f:B\to A$ et $g\circ id_{A}=g$ si $g:A\to B$.
+
 \end{itemize}
 
 \end{df}
 
-Exemples :
+\
 
-\qquad objets : ensembles, morphismes : fonctions
+Exemple :\hspace{3em} objets : ensembles, \quad morphismes : fonctions
 
-\qquad objets : sommets, morphismes : arêtes d'un graphe orienté
+%Représentation : graphe orienté (objets : sommets, morphismes : arêtes).
+
+%Exemples :
+%\begin{itemize}
+%\item
+%objets : ensembles, morphismes : fonctions.
+%\item
+%%objets : éléments d'un ensemble muni d'un préordre $\leq$, exactement un morphisme $x\to y$ dès que $x\leq y$.
+%Dans un ensemble muni d'un préordre $\leq$ :\\ objets : éléments, exactement un morphisme $x\to y$ dès que $x\leq y$.
+%%\item
+%%Graphe orienté : \quad objets : sommets, morphismes : arêtes.
+%\end{itemize}
+%%\qquad objets : ensembles, morphismes : fonctions
+%%
+%%\qquad objets : sommets, morphismes : arêtes d'un graphe orienté
 
 
 
 }
 \frame{
-\frametitle{Preuves et catégorie}
+%\frametitle{Construction d'une catégorie à partir du calcul \LLI}
 
-Cadre : un calcul des séquents vérifiant la propriété d'élimination de la coupure, avec une preuve constructive définissant un procédé d'élimination de la coupure et donc une relation d'équivalence.
+\`A chaque preuve $p$ on associe une \emph{dénotation} $[p]$.
 
-\
+\vspace{.5em}
 
-\`A chaque preuve $p$ on associe une \emph{dénotation} $[p]$ telle que, pour toutes preuves $p$ et $p'$ qui sont équivalentes selon le procédé d'élimination de la coupure, $[p]=[p']$. On associe aussi une dénotation $[A]$ à chaque formule $A$.
+Invariance selon le procédé d'élimination de la coupure : si $p$ et $p'$ sont équivalentes selon ce procédé alors $[p]=[p']$.
 
-\
+\vspace{.5em}
 
-On définit alors une catégorie $\CProofs$ :
-\begin{itemize}
-\item
-objets : les dénotations des formules
-
-\item
-morphismes : les dénotations des preuves de séquents avec exactement une formule de chaque côté. Si $p$ est une preuve de $A\To B$, alors $[p]:[A]\to [B]$.
-\end{itemize}
-
-}
-\frame{
-\frametitle{Preuves et catégorie}
-
-On définit alors une catégorie $\CProofs$ :
-\begin{itemize}
-\item
-objets : les dénotations des formules
-
-\item
-morphismes : les dénotations des preuves de séquents avec exactement une formule de chaque côté. Si $p$ est une preuve de $A\To B$, alors $[p]:[A]\to [B]$.
-
-
-\item
-%\begin{floatingfigure}[r]{0.4\textwidth}
-%\centering
-%	\AXC	{$p_{1}$}
-%	\dottedLine
-%	\UIC{$A\vdash B$}
-%	\AXC	{$p_{2}$}
-%	\dottedLine
-%	\UIC{$B\vdash C$}
-%	\RightLabel{$(cut)$}
-%	\BIC{$A\vdash C$}
-%	\noLine
-%	\UIC{}
-%	\noLine
-%	\UIC{$p$}
-%	\DP\\
-%\end{floatingfigure}
-
-
-composition $\circ$ sur les morphismes : si $p_{1}$ est une preuve de $A \To B$ et $p_{2}$ une preuve de $B \To C$, donc $[p_{1}]:[A]\to [B]$ et $[p_{2}]:[B]\to [C]$, alors on définit $[p_{2}]\circ[p_{1}]=[p]:[A]\to[C]$ où $p$ est la preuve de
+Composition : si $p_{1}$ preuve de $A \To B$ et $p_{2}$ preuve de $B \To C$, alors on pose $[p_{2}]\circ[p_{1}]=[p]$ où $p$ est la preuve de
 $A \To C$ suivante :
-\hspace{4em}
+
+\vspace{-1em}
+
+\center
 $p$\;:\qquad
 	\AXC	{$p_{1}$}
 	\dottedLine
@@ -737,43 +928,274 @@ $p$\;:\qquad
 	\RightLabel{$(cut)$}
 	\BIC{$A\vdash C$}
 	\DP
-	
-	
-%\begin{columns}[t]
-%\column[t]{.4\linewidth}
-%\end{columns}
 
-%
-%}
+\flushleft
+On associe aussi une dénotation $[A]$ à chaque formule $A$.
 
 
+\
 
-\vspace{1em}
+\begin{columns}[t]
 
+\column{.2\linewidth}
+Catégorie $\CProofs$ :
+
+\column{.77\linewidth}
+\vspace{-1.5em}
+\begin{itemize}
+\item
+objets : dénotations des formules
+\item
+morphismes : dénotations des preuves de séquents de la forme $A \To B$, de type $[A] \to [B]$
 \item
 identité sur $[A]$ : dénotation de
 	\AXC	{}
 	\RightLabel{$(id)$}
 	\UIC{$A\vdash A$}
 	\DP
+\end{itemize}
+
+\end{columns}
+
+
+
+
+}
+\frame{
+%\frametitle{Construction d'une catégorie à partir du calcul \LLI}
+
+\begin{columns}[t]
+
+\column{.2\linewidth}
+Catégorie $\CProofs$ :
+
+\column{.77\linewidth}
+\vspace{-1.5em}
+\begin{itemize}
+\item
+objets : dénotations des formules
+\item
+morphismes : dénotations des preuves de séquents de la forme $A \To B$, de type $[A] \to [B]$
+\item
+identité sur $[A]$ : dénotation de
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\DP
+\end{itemize}
+
+\end{columns}
+
+\vspace{.5em}
+
+
+
+Associativité :
+
+\vspace{-1.5em}
+
+\begin{center}
+\resizebox{\linewidth}{!}{
+	\AXC	{$p_{1}$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\AXC	{$p_{2}$}
+	\dottedLine
+	\UIC{$B\vdash C$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash C$}
+	\AXC	{$p_{3}$}
+	\dottedLine
+	\UIC{$C\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash D$}
+	\DP
+%\quad$\leftrightsquigarrow$\quad
+\hspace{2em}
+	\AXC	{$p_{1}$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\AXC	{$p_{2}$}
+	\dottedLine
+	\UIC{$B\vdash C$}
+	\AXC	{$p_{3}$}
+	\dottedLine
+	\UIC{$C\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$B\vdash D$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash D$}
+	\DP
+}
+
+\vspace{.5em}
+
+\hspace{2.2em}
+$[p_{3}]\circ([p_{2}]\circ[p_{1}]) = ([p_{3}]\circ[p_{2}])\circ[p_{1}]$
+
+\end{center}
+
+%\vspace{.5em}
+
+
+Propriétés de l'identité sur $A$ :
+\begin{columns}
+
+\column{.5\linewidth}
+\resizebox{.9\linewidth}{!}{
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$A\vdash A$}
+	\AXC	{$p$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\RightLabel{$(cut)$}
+	\BIC{$A\vdash B$}
+	\DP
+\quad
+	\AXC	{$p$}
+	\dottedLine
+	\UIC{$A\vdash B$}
+	\DP
+}
+
+\vspace{-.5em}
+
+\center
+$[p]\circ id_{A}=[p]$
+
+\column{.45\linewidth}
+De même pour $id_{A}\circ[p']=[p']$\\ si $p'$ est une preuve de $B \To A$.
+
+\end{columns}
+
+
+
+
+
+
+
+
+
+
+%}
+%\frame{
+%\frametitle{Preuves et catégorie}
+%
+%
+%Cadre : un calcul des séquents vérifiant la propriété d'élimination de la coupure, avec une preuve constructive définissant un procédé d'élimination de la coupure et donc une relation d'équivalence.
+%
+%\
+%
+%\`A chaque preuve $p$ on associe une \emph{dénotation} $[p]$ telle que, pour toutes preuves $p$ et $p'$ qui sont équivalentes selon le procédé d'élimination de la coupure, $[p]=[p']$. On associe aussi une dénotation $[A]$ à chaque formule $A$.
+%
+%\
+%
+%On définit alors une catégorie $\CProofs$ :
+%\begin{itemize}
+%\item
+%objets : les dénotations des formules
+%
+%\item
+%morphismes : les dénotations des preuves de séquents avec exactement une formule de chaque côté. Si $p$ est une preuve de $A\To B$, alors $[p]:[A]\to [B]$.
+%\end{itemize}
+%
+%}
+%\frame{
+%\frametitle{Preuves et catégorie}
+%
+%On définit alors une catégorie $\CProofs$ :
+%\begin{itemize}
+%\item
+%objets : les dénotations des formules
+%
+%\item
+%morphismes : les dénotations des preuves de séquents avec exactement une formule de chaque côté. Si $p$ est une preuve de $A\To B$, alors $[p]:[A]\to [B]$.
+%
+%
+%\item
+%%\begin{floatingfigure}[r]{0.4\textwidth}
+%%\centering
+%%	\AXC	{$p_{1}$}
+%%	\dottedLine
+%%	\UIC{$A\vdash B$}
+%%	\AXC	{$p_{2}$}
+%%	\dottedLine
+%%	\UIC{$B\vdash C$}
+%%	\RightLabel{$(cut)$}
+%%	\BIC{$A\vdash C$}
+%%	\noLine
+%%	\UIC{}
+%%	\noLine
+%%	\UIC{$p$}
+%%	\DP\\
+%%\end{floatingfigure}
+%
+%
+%composition $\circ$ sur les morphismes : si $p_{1}$ est une preuve de $A \To B$ et $p_{2}$ une preuve de $B \To C$, donc $[p_{1}]:[A]\to [B]$ et $[p_{2}]:[B]\to [C]$, alors on définit $[p_{2}]\circ[p_{1}]=[p]:[A]\to[C]$ où $p$ est la preuve de
+%$A \To C$ suivante :
+%\hspace{4em}
+%$p$\;:\qquad
+%	\AXC	{$p_{1}$}
+%	\dottedLine
+%	\UIC{$A\vdash B$}
+%	\AXC	{$p_{2}$}
+%	\dottedLine
+%	\UIC{$B\vdash C$}
+%	\RightLabel{$(cut)$}
+%	\BIC{$A\vdash C$}
+%	\DP
+%	
+%	
+%%\begin{columns}[t]
+%%\column[t]{.4\linewidth}
+%%\end{columns}
+%
+%%
+%%}
+%
+%
+%
+%\vspace{1em}
+%
+%\item
+%identité sur $[A]$ : dénotation de
+%	\AXC	{}
+%	\RightLabel{$(id)$}
+%	\UIC{$A\vdash A$}
+%	\DP
+%
+%\end{itemize}
+%
+%
+
+
+}
+\frame{
+\frametitle{Perspectives}
+
+\begin{itemize}
+\item
+\`A partir de certains connecteurs binaires de la logique linéaire intuitionniste, on peut munir cette catégorie $\CProofs$ d'opérateurs afin qu'elle corresponde à des définitions importantes en théorie des catégories (catégorie monoïdale symétrique, catégorie monoïdale fermée, catégorie cartésienne...).
+
+\
+
+\item
+Analogie importante avec la théorie des n\oe uds.
+
+\
+
+\item
+Construction similaire d'une catégorie associée à d'autres calculs de séquents. Notamment, on peut le faire pour \LK, mais on obtient une catégorie dégénérée.
 
 \end{itemize}
 
 
-
-
-}
-\frame{
-\frametitle{Preuves et catégorie}
-
-associativité, propriétés de l'identité
-
-
-}
-\frame{
-\frametitle{Tenseur et catégorie monoïdale ?}
-
-sans donner le détail des définitions, dire qu'on veut des morphismes $\alpha$, $\lambda$, $\rho$ de type donné vérifiant certaines propriétés, et qu'on les obtient comme dénotations de preuves explicites
+%}
+%\frame{
+%\frametitle{Tenseur et catégorie monoïdale ?}
+%
+%sans donner le détail des définitions, dire qu'on veut des morphismes $\alpha$, $\lambda$, $\rho$ de type donné vérifiant certaines propriétés, et qu'on les obtient comme dénotations de preuves explicites
 
 
 
@@ -793,50 +1215,250 @@ sans donner le détail des définitions, dire qu'on veut des morphismes $\alpha$, 
 
 
 }
+\section{Stage : Recherche de preuves certifiée en logique intuitionniste}
 \frame{
-\frametitle{Algorithme de recherche de preuve}
 
-Prouveur
-
-
-}
-\frame{
-\frametitle{}
-
-Règle de coupure
+\tableofcontents[currentsection]
 
 \
 
-Règle de contraction
-
-
-}
-\frame{
-\frametitle{}
-
-Inversibilité
+%(à reformuler)
+%
+%\
+%
+%Recherche de preuves en logique intuitionniste : complexe
 
 \
 
-Localité
-
-
-
-}
-\frame{
-\frametitle{\LSJ}
-
-séquents
+Plusieurs prouveurs existants basés sur des calculs des séquents, mais emploi de structures de données complexes
 
 \
 
-exemples de règles
+Calcul \LSJ\ (M. Ferrari, C. Fiorentini et G. Fiorino, 2012) : propriétés intéressantes permettant d'utiliser des structures de données relativement simples, ce qui est favorable à une certification.
+
+
+
+
+
+
+%}
+%%\subsection{Le calcul \LSJ}
+%\subsection{...}
+%\subsection{...}
+%\subsection{...}
+%\frame{
+%%\frametitle{Algorithme de recherche de preuve}
+
+}
+\subsection{Prouveur de logique intuitionniste basé sur le calcul \LSJ}
+\frame{
+
+\tableofcontents[
+	currentsubsection,
+	sectionstyle=show/hide,
+	subsectionstyle=show/shaded/hide
+]
+
+
+Implémentation d'un prouveur de logique intuitionniste basé sur une légère variante du calcul \LSJ, à partir du pseudo-code donné dans l'article de M. Ferrari, C. Fiorentini et G. Fiorino.
+
+Comparaison avec des prouveurs existants.
+
+Langage utilisé : OCaml.
+%Présentation du calcul \LSJ\ puis d'une légère variante \LSJn.
+
+
+
+}
+
+\frame{
+\frametitle{Les séquents de \LSJ}
+
+\emph{Multiensembles} : collections où le nombre d'éléments est pris en compte, mais non l'ordre des éléments.
+
+
+
+\begin{df}
+Un \textbf{\emph{séquent}} de \LSJ\ consiste en trois multiensembles de formules $\Th$, $\G$ et $\D$. 
+On le note $\Th\,; \G \vdash \D$. 
+\end{df}
+
+Un séquent $\emptyset\,; \G \To \D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique intuitionniste.
+
+\begin{prop}
+Une formule $A$ est prouvable en logique intuitionniste si, et seulement si, le séquent $\emptyset\,;\emptyset \To A$ est prouvable dans \LSJ.
+\end{prop}
+
+\
+
+Un séquent $\Th\,; \G \To \D$ ne correspond pas toujours à une formule.
+
+Interprétation d'un tel séquent en termes de modèles de Kripke.
+
 
 
 
 }
 \frame{
-\frametitle{\LSJn}
+\frametitle{Les règles de \LSJ}
+
+Huit règles : $id$, $\bot L$, $\land L$, $\land R$, $\lor L$, $\lor R$, $\imp L$, $\imp R$.
+
+\vspace{.5em}
+
+Seules les règles $\imp L$ et $\imp R$ agissent sur $\Th$.
+
+\
+
+\center
+	\AXC	{}
+	\RightLabel{$(id)$}
+	\UIC{$\Th\,; A,\G \To A,\D$}
+	\DP
+\quad
+	\AXC	{}
+	\RightLabel{$(\bot L)$}
+	\UIC{$\Th\,; \bot, \G \To \D$}
+	\DP
+%
+%\vspace{1em}
+%
+\quad
+	\AXC{$\Th\,; \G \To A,B,\D$}
+	\RightLabel{$(\lor R)$}
+	\UIC{$\Th\,; \G \To A\lor B,\D$}
+	\DP
+	
+
+
+\vspace{2em}
+
+\flushleft
+
+Pas de règle de coupure, pas de règles structurelles.
+
+
+
+
+
+}
+\frame{
+\frametitle{Le calcul \LSJn, légère variante de \LSJ}
+
+Séquent de \LSJn\ : deux multiensembles $\G$ et $\D$ de couples ``\emph{indice\!:\,formule}'', et un indice $n$, les indices étant des entiers naturels. 
+
+On note $\G \To_{n} \D$.
+
+
+
+$\G' \To_{n} \D'$ représente $\Th\,; \G \To \D$ où
+$\left\{
+\begin{array}{c}
+	\Th = \G'_{n+1} \\
+	\G = \G'_{\leq n} \\
+	\D = \D'_{n}
+\end{array}
+\right.$
+
+\ %vspace{2em}
+
+%	\AXC{$\Th\,; B,\G \To \D$}
+%	\AXC{$B,\Th\,; \G \To A,\D$}
+%	\AXC{$B\,; \Th,\G \To A$}
+%	\RightLabel{$(\to L)$}
+%	\TIC{$\Th\,; A\to B,\G \To \D$}
+%	\DP
+
+\center
+
+	\AXC{$\Th\,; A,\G \To B,\D$}
+	\AXC{$\emptyset\,; A,\Th,\G \To B$}
+	\RightLabel{$(\to R)$}
+	\BIC{$\Th\,; \G \To A\to B,\D$}
+	\DP
+	
+%\vspace{.5em}
+%
+%\hspace{2em}
+%$\dashrightarrow$
+%\quad
+
+\vspace{1em}
+
+	\AXC{$0\!:\!A,\G' \To_{n} n\!:\!B,\D'$}
+	\AXC{$0\!:\!A,\G' \To_{n+1} n+1\!:\!B,\D'$}
+	\RightLabel{$(\to R)$}
+	\BIC{$\G' \To_{n} n\!:\!A\to B,\D'$}
+	\DP
+
+\
+
+\flushleft
+
+$A$ est prouvable en logique intuitionniste si et seulement si $\emptyset\,; \emptyset \To A$ est prouvable dans \LSJ, c'est-à-dire $\emptyset \To_{0} 0\!:\!A$ est prouvable dans \LSJn.
+
+
+
+
+
+
+
+}
+\frame{
+\frametitle{Idée de l'algorithme de recherche de preuve}
+
+Récursivement, pour déterminer si un séquent $\s$ est prouvable :
+
+pour toute application de règle possible de la forme 
+{\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	%\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+}, on détermine si chaque $\s_{i}$ est prouvable.
+
+S'il y en a une telle que toutes les prémisses sont prouvables (notamment si la règle n'a pas de prémisse), $\s$ est prouvable (on a un arbre de preuve de $\s$). Sinon, $\s$ n'est pas prouvable.
+
+\
+
+Terminaison %: ordre bien fondé sur les séquents tel que $\s_{i} < \s$.
+assurée par des propriétés de \LSJ.
+
+\
+
+\
+
+Une prémisse $\s_{i}$ d'une règle
+{\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+} est \textbf{inversible} si on a : si la conclusion $\s$ est prouvable, alors $\s_{i}$ est aussi prouvable.
+
+Une règle est \textbf{inversible} si toutes ses prémisses sont inversibles.
+
+%\
+%
+%Une règle 
+%{\def\defaultHypSeparation{\hskip .05in}
+%	\AXC	{$\s_{1}$}
+%	\AXC	{...}
+%	\AXC	{$\s_{p}$}
+%	\RightLabel{$(\mathcal R)$}
+%	\TIC{$\s$}
+%	\DP
+%} est \textbf{locale} si on peut retrouver $\s$ à partir de n'importe quelle prémisse $\s_{i}$ et d'une information de taille ``raisonnable''.
+
+%Règle de coupure
+%
+%\
+%
+%Règle de contraction
 
 
 
@@ -846,58 +1468,477 @@ exemples de règles
 \frame{
 \frametitle{Priorités}
 
+Une prémisse $\s_{i}$ d'une règle
+{\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+} est \textbf{inversible} si on a : si la conclusion $\s$ est prouvable, alors $\s_{i}$ est aussi prouvable.
+
+Une règle est \textbf{inversible} si toutes ses prémisses sont inversibles.
+
+\
+
+\
+
+De la règle la plus prioritaire à la moins prioritaire :
+\begin{itemize}
+\item
+les axiomes $id$ et $\bot L$ : pas de prémisse.
+\item
+$\land L$ et $\lor R$ : règles inversibles à une seule prémisse.
+\item
+$\land R$ et $\lor L$ : règles inversibles à deux prémisses.
+\item
+$\imp L$ et $\imp R$ : règles non inversibles. $\imp L$ a trois prémisses dont deux sont inversibles ; $\imp R$ a deux prémisses dont une est inversible.
+\end{itemize}
+
+}
+\frame{
+\frametitle{Localité des règles}
+
+
+Une règle 
+{\def\defaultHypSeparation{\hskip .05in}
+	\AXC	{$\s_{1}$}
+	\AXC	{...}
+	\AXC	{$\s_{p}$}
+	\RightLabel{$(\mathcal R)$}
+	\TIC{$\s$}
+	\DP
+} est \textbf{locale} si on peut retrouver $\s$ à partir de n'importe quelle prémisse $\s_{i}$ et d'une information de taille ``raisonnable''.
+
+
+\
+
+Si toutes les règles sont locales, on peut effectuer l'algorithme de recherche de preuve en conservant un seul séquent en mémoire à tout moment.
+
+\
+
+Intérêt de \LSJn\ par rapport à \LSJ\ : toutes les règles sont locales.
+
+
+\center
+
+	\AXC{$\Th\,; A,\G \To B,\D$}
+	\AXC{$\emptyset\,; A,\Th,\G \To B$}
+	\RightLabel{$(\to R)$}
+	\BIC{$\Th\,; \G \To A\to B,\D$}
+	\DP
+
+\vspace{1em}
+
+	\AXC{$0\!:\!A,\G' \To_{n} n\!:\!B,\D'$}
+	\AXC{$0\!:\!A,\G' \To_{n+1} n+1\!:\!B,\D'$}
+	\RightLabel{$(\to R)$}
+	\BIC{$\G' \To_{n} n\!:\!A\to B,\D'$}
+	\DP
+
+
+
+
+
+
 
 
 
 }
 \frame{
-\frametitle{Indexation}
+\frametitle{Propriété de la sous-formule et indexation}
+
+Récursivement, $A$ est une \textbf{sous-formule} de $B$ si $A=B$ ou si $B=B_{1}cB_{2}$ avec $c$ un connecteur et $A$ est une sous-formule de $B_{1}$ ou de $B_{2}$.
+
+\
+
+\LSJ\ donc aussi \LSJn\ vérifient la propriété de la sous-formule : toute formule apparaissant dans une preuve d'un séquent $\s$ est une sous-formule d'une formule de $\s$.
+
+\
+
+Conséquence : toute formule rencontrée dans une recherche de preuve sur une formule $A$ (i.e. sur le séquent $\emptyset \To_{0} 0\!:\!A$) est une sous-formule de $A$.
 
 
 
 }
 \frame{
-\frametitle{Efficacité 1}
+\frametitle{Propriété de la sous-formule et indexation}
 
-ILTP, tableau avec quelques temps
+Conséquence : toute formule rencontrée dans une recherche de preuve sur une formule $A$ (i.e. sur le séquent $\emptyset \To_{0} 0\!:\!A$) est une sous-formule de $A$.
+
+\
+
+\
+
+Représentation des formules par des entiers grâce à une phase préliminaire d'indexation.
+
+\
+
+
+\begin{columns}[c]
+
+\column{.3\linewidth}
+\center
+\def\mycolor{blue}
+\begin{tikzpicture}[xscale=1,yscale=1]
+% Styles (MODIFIABLES)
+%\tikzstyle{fleche}=[->,>=latex,thick]
+%\tikzstyle{noeud}=[fill=yellow,circle,draw]
+%\tikzstyle{feuille}=[fill=yellow,circle,draw]
+% Dimensions (MODIFIABLES)
+\def\DistanceInterNiveaux{1}
+\def\DistanceInterFeuilles{1}
+% Dimensions calculées (NON MODIFIABLES)
+\def\NiveauA{(-0)*\DistanceInterNiveaux}
+\def\NiveauB{(-1)*\DistanceInterNiveaux}
+\def\NiveauC{(-2)*\DistanceInterNiveaux}
+\def\InterFeuilles{(1)*\DistanceInterFeuilles}
+% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$^{\textcolor{\mycolor}{4}\,}\imp\hspace{.9em}$};
+\node (Ra) at ({(0.5)*\InterFeuilles},{\NiveauB}) {$^{\textcolor{\mycolor}{2}\,}\land\hspace{.55em}$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$^{\textcolor{\mycolor}{0}\,}a\hspace{.7em}$};
+\node (Rab) at ({(1)*\InterFeuilles},{\NiveauC}) {$\hspace{.7em}\bot^{\,\textcolor{\mycolor}{1}}$};
+\node (Rb) at ({(1.7)*\InterFeuilles},{\NiveauB}) {$\hspace{.7em}b^{\;\textcolor{\mycolor}{3}}$};
+% Arcs (MODIFIABLES : Styles)
+\draw (R)--(Ra);
+\draw (Ra)--(Raa);
+\draw (Ra)--(Rab);
+\draw (R)--(Rb);
+\end{tikzpicture}
+
+\column{.7\linewidth}
+\begin{tabular}{lccccc}
+	Numéro&0&1&2&3&4\\[.5em]
+	Description&$\hspace{.7em}a\hspace{.7em}$&$\bot$&$0\land 1$&$b$&$2\to 3$
+\end{tabular}
+
+\end{columns}
+
 
 
 }
 \frame{
-\frametitle{Efficacité 2}
+\frametitle{Efficacité de \LSJ}
 
-SYJ209
+Prouveur testé sur les formules de la bibliothèque ILTP\footnote{\url{http://www.cs.uni-potsdam.de/ti/iltp/}}.
+
+\
+
+Quatre prouveurs de logique intuitionniste propositionnelle sont répertoriés sur ILTP.
+
+Difficulté d'une formule : 0.25 * nombre de prouveurs ne terminant pas en moins de cinq minutes
+
+\
+
+(tableau : comparaison de quelques temps
+\footnote{
+Tests effectués sous MacOS avec un processeur 2.7 GHz Intel Core i7.
+} avec les difficultés données par ILTP. Notamment, SYJ209 : difficulté 1, notre prouveur termine en moins d'une milliseconde : grâce à l'inversibilité d'une prémisse de $\imp R$, linéaire en la taille de la formule initiale au lieu de factoriel)
+%deux fois : même limite que le plus faible
+%
+%y arrive alors que deux non (SYJ207 et aussi SYJ211)
+%
+%alors qu'un non (SYJ212)
+
+%}
+%\frame{
+%\frametitle{Efficacité de \LSJ}
+%
+%SYJ209 : famille de formules non prouvables d'ILTP sur lesquelles aucun prouveur d'ILTP ne termine en moins de cinq minutes, alors que celui basé sur \LSJ\ termine en moins d'une milliseconde.
+%
+%\
+%
+%Formule de taille $m$ de cette famille : obtention rapide d'un séquent avec à droite $m$ formules de la forme $A\to B$, qui sont les seules formules composées.
+%
+%Prouveur basé sur \LSJ\ : à chaque appel récursif, on obtient que la prémisse inversible de $\imp R$ est non prouvable. Nombre d'appels linéaire en $m$.
+%
+%Autres calculs des séquents connus : 
+%
+
+
+
+}
+\subsection{Perspective de certification : comparaison d'implémentations}
+\frame{
+
+\tableofcontents[
+	currentsubsection,
+	sectionstyle=show/hide,
+	subsectionstyle=show/shaded/hide
+]
+
+
+Objectif à long terme : certification en Coq d'un prouveur de logique intuitionniste propositionnelle.
+
+Certification elle-même non abordée, mais modifications d'implémentation visant à faciliter une telle certification. Comparaison des différents prouveurs ainsi implémentés.
+
+
+%Implémentation de différents prouveurs afin d'étudier 
 
 
 
 }
 \frame{
-\frametitle{Langage \T}
+\frametitle{Le langage \T}
+
+\T\ : langage simple pour faciliter la certification. 
+
+Petit langage fonctionnel ; seul type de données : des arbres binaires construits à partir d'un arbre vide et de feuilles étiquetées par des entiers naturels.
+
+\
+
+Réalisation par D. Larchey-Wendling d'un compilateur certifié en Coq de \T\ vers un langage exécutable par une machine abstraite assez simple, et d'un programme certifié simulant l'exécution de cette machine abstraite.
+
+\M\ : langage associé à cette machine abstraite.
+
+\
+
+\
 
 
+Mettre cette image ? (avec une meilleure qualité) Décoratif, mais %risque de soulever des questions qu'on n'a pas le temps de poser
+je n'ai pas le temps d'en parler et certains pourraient trouver cela frustrant...
+\includegraphics[width=.6\linewidth]{Tmem}
 
 
 }
 \frame{
 \frametitle{Compilation de fonctions adaptées à la formule}
 
+%	\AXC{$\Th\,; A,\G \To \D$}
+%	\AXC{$\Th\,; B,\G \To \D$}
+%	\RightLabel{$(\lor L)$}
+%	\BIC{$\Th\,; A\lor B,\G \To \D$}
+%	\DP
+	
+	\AXC{$i\!:\!A,\G \To_{n} \D$}
+	\AXC{$i\!:\!B,\G \To_{n} \D$}
+	\RightLabel{$(\lor L)$}
+	\BIC{$i\!:\!A\lor B,\G \To_{n} \D$}
+	\DP
+\hspace{3em}
+formule principale : $A\lor B$
+
+\vspace{2em}
+
+
+Juste après la phase d'indexation : compilation, pour chaque numéro de formule, de fonctions de transformation du séquent dans le cas où cette formule est la formule principale. Entre 0 et 6 fonctions pour chaque numéro de formule.
+
+\
+
+Par exemple, compilation en \T\ de ces fonctions pour chaque numéro de formule, puis ajout de code en \T\ fixe : on obtient un programme en \T\ adapté à la formule donnée en entrée.
+%Pour chaque formule susceptible d'apparaître (i.e. chaque sous-formule de la formule initiale), compilation de fonctions transformant un séquent
+%Transformations à apporter au séquent ne dépendent que de la formule principale et de son indice.
+
+
+
 
 }
 \frame{
-\frametitle{Différents prouveurs}
+\frametitle{Différents prouveurs implémentés}
 
-où mettre la structure du code avec le nombre de lignes
+\begin{itemize}
+
+\item
+``\textbf{Prouveur simple}'' : le plus simple et le plus efficace, intégralemen en OCaml. Structures de données élaborées pour représenter les multiensembles du séquent.
+
+\item
+``\textbf{Prouveur simple avec listes}'' : comme le précédent, mais structures élaborées remplacées par simples listes.
+
+\item
+``\textbf{Prouveur \T}'' : compilation d'un programme en \T\ adapté à la formule en entrée, exécution à l'aide d'un interpréteur.
+
+\item
+``\textbf{Prouveur \T\ \M}'' : compilation du même programme en \T, compilation de \T\ vers \M, simulation de l'exécution par la machine abstraite à laquelle \M\ correspond.
+
+\item
+``\textbf{Prouveur compilé Caml}'' : compilation d'un programme en OCaml adapté à la formule en entrée, compilation par ocamlc, lancement de l'exécutable.
+
+\end{itemize}
 
 
 }
 \frame{
-\frametitle{Pistes d'amélioration}
+\frametitle{Répartition du code ?}
 
+(Indiquer nombre de lignes de code)
+
+\
+
+Utilitaires (gestion des tests)
+
+\quad Analyseur ILTP
+
+Indexation
+
+Prouveur simple (sauf l'indexation)
+
+\quad Strutures de données  pour le séquent
+
+Autres prouveurs (sauf l'indexation)
+
+\quad Compilation de fonctions selon la formule
+
+\quad Code trees fixe
+
+\
+
+Total
 
 
 }
 \frame{
-\frametitle{}
+\frametitle{Comparaison des différents prouveurs implémentés}
+
+\center
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\cline{2-6}
+%\multicolumn{1}{c|}{}&``simple listes''&``compilé\\caml''&``\T''&``\T\ \M''\\
+\multicolumn{1}{c|}{}&\multirow{2}{*}{``simple''}&``simple&``compilé&\multirow{2}{*}{``\T''}&\multirow{2}{*}{``\T\ \M''}\\
+\multicolumn{1}{c|}{}&&listes''&Caml''&&\\
+\hline
+total&$0.05$ s&$0.08$ s&$.61$ s&$14$ s&$57$ s\\
+$1$\ts{ère} compil.& ---  & ---  &$0.01$ s&$0.02$ s&$0.02$ s\\
+$2$\ts{ème} compil.& --- & ---  &$0.28$ s&---&$0.02$ s\\
+exécution& --- & ---  &$0.32$ s&$14$ s&$57$ s\\
+\hline
+\end{tabular}
+
+\vspace{.3em}
+
+SYJ201+1.002 \qquad taille 99 \qquad environ 70 000 appels
+
+\
+
+\begin{tabular}{|c|c|c|c|c|c|}
+\cline{2-6}
+%\multicolumn{1}{c|}{}&``simple listes''&``compilé\\caml''&``\T''&``\T\ \M''\\
+\multicolumn{1}{c|}{}&\multirow{2}{*}{``simple''}&``simple&``compilé&\multirow{2}{*}{``\T''}&\multirow{2}{*}{``\T\ \M''}\\
+\multicolumn{1}{c|}{}&&listes''&Caml''&&\\
+\hline
+total&$0.30$ s&$1.4$ s&$5.0$ s&$250$ s&$>300$ s\\
+$1$\ts{ère} compil.& ---  & ---  &$0.03$ s&$0.05$ s&$0.06$ s\\
+$2$\ts{ème} compil.& --- & ---  &$0.8$ s&---&$0.12$ s\\
+exécution& --- & ---  &$4.1$ s&$250$ s&$>300$ s\\
+\hline
+\end{tabular}
+
+\vspace{.3em}
+
+SYJ207+1.004 \qquad taille 213 \qquad environ 500 000 appels
+
+%Problems_SYJ_SYJ207x1_004_p
+%0.301380s, 463716 appels à prouvable
+%
+%Problems_SYJ_SYJ207x1_004_p
+%1.389353s, 479867 appels à prouvable
+%
+%Problems_SYJ_SYJ207x1_004_p
+%compilation vers caml : 0.028796s
+%compilation par ocamlc : 0.823817s
+%exécution : 4.127598s
+%4.980842s, 479867 appels à prouvable
+%
+%Problems_SYJ_SYJ207x1_004_p
+%compilation vers trees : 0.048739s
+%exécution du .trees : 250.506958s
+%250.589372s, 479867 appels à prouvable
+%
+%Problems_SYJ_SYJ207x1_004_p
+%compilation vers trees : 0.059861s
+%compilation du binaire : 0.115579s
+%exécution du binaire : timeout (temps mis : 300.997257s, max. autorise : 300.000000s)
+%timeout (temps mis : 301.225449s, max. autorise : 300.000000s)
+
+%Problems_SYJ_SYJ208x1_003_p
+%0.244316s, 229446 appels à prouvable
+%
+%Problems_SYJ_SYJ208x1_003_p
+%compilation vers caml : 0.020226s
+%compilation par ocamlc : 0.486729s
+%exécution : 0.917004s
+%1.424565s, 229446 appels à prouvable
+%
+%Problems_SYJ_SYJ208x1_003_p
+%compilation vers trees : 0.032817s
+%exécution du .trees : 50.349790s
+%50.410638s, 229446 appels à prouvable
+%
+%Problems_SYJ_SYJ208x1_003_p
+%compilation vers trees : 0.026136s
+%compilation du binaire : 0.036234s
+%exécution du binaire : 204.247626s
+%204.330612s
+
+%Problems_SYJ_SYJ201x1_003_p
+%4.856819s, 2966228 appels à prouvable
+%
+%Problems_SYJ_SYJ201x1_003_p
+%compilation vers caml : 0.018000s
+%compilation par ocamlc : 0.452395s
+%exécution : 16.195883s
+%16.667091s, 2966228 appels à prouvable
+%
+%Problems_SYJ_SYJ201x1_003_p
+%compilation vers trees : 0.038011s
+%exécution du .trees : timeout (temps mis : 300.000027s, max. autorise : 300.000000s), 1007400 appels à prouvable vus
+%timeout (temps mis : 300.059220s, max. autorise : 300.000000s), 1007400 appels à prouvable vus
+%
+%Problems_SYJ_SYJ201x1_003_p
+%compilation vers trees : 0.051994s
+%compilation du binaire : 0.043708s
+%exécution du binaire : timeout (temps mis : 300.994190s, max. autorise : 300.000000s)
+%timeout (temps mis : 301.119678s, max. autorise : 300.000000s)
+
+
+}
+\subsection*{}
+\frame{
+\frametitle{Bilan}
+
+\begin{itemize}
+
+\item
+Confirmation de l'intérêt du calcul \LSJ\ en recherche de preuves en logique intuitioinniste propositionnelle, en termes d'efficacité comme de perspective de certification.
+
+\
+
+\item
+Impact fort des méthodes employées pour faciliter la certification sur l'efficacité, mais améliorations à envisager : par exemple, ajout d'effets de bords (même limités à une seule variable globale) au langage \T.
+
+\end{itemize}
+
+
+}
+\section*{}
+\frame[allowframebreaks]{
+\frametitle{Références}
+
+\setbeamertemplate{bibliography item}{}
+
+\nocite{panorama}
+\nocite{LSJ}
+
+\nocite{troelstra}
+\nocite{synsem}
+\nocite{theseDLW}
+\nocite{STRIP}
+\nocite{LJT}
+\nocite{ILTP}
+\nocite{LJloop}
+
+
+
+
+
+\bibliographystyle{plain}
+\bibliography{memoire_stage}
+
+%}
+%\frame{
+%\frametitle{}
 
 }
 \end{document}

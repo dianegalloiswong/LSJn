@@ -10,10 +10,11 @@ OCAMLBUILD=ocamlbuild -classic-display \
 			-I prouveurs/prouveur_simple/sequent \
 			-I prouveurs/prouveur_simple/sequent/structures \
 			-I prouveurs/prouveur_simple/preuve_contre_modele \
-		-I prouveurs/prouveurs_autres/fonctions_compilees \
-		-I prouveurs/prouveurs_autres/prouveurs_T_et_TM \
-			-I prouveurs/prouveurs_autres/prouveurs_T_et_TM/analyseur_trees \
-			-I prouveurs/prouveurs_autres/prouveurs_T_et_TM/exec_trees_via_machine \
+		-I prouveurs/prouveurs_autres \
+			-I prouveurs/prouveurs_autres/fonctions_compilees \
+			-I prouveurs/prouveurs_autres/prouveurs_T_et_TM \
+				-I prouveurs/prouveurs_autres/prouveurs_T_et_TM/analyseur_trees \
+				-I prouveurs/prouveurs_autres/prouveurs_T_et_TM/exec_trees_via_machine \
 		-I prouveurs/prouveurs_autres/prouveur_compile_caml \
 	-use-menhir
 TARGET=native
@@ -21,12 +22,6 @@ TARGET=native
 
 main:
 	$(OCAMLBUILD) main.$(TARGET)
-
-bin:
-	$(OCAMLBUILD) exec_bin.$(TARGET)
-
-trees:
-	$(OCAMLBUILD) main_trees.$(TARGET)
 
 clean:
 	$(OCAMLBUILD) -clean
