@@ -23,6 +23,8 @@
 \usepackage{xcolor}
 \usepackage{changepage}
 \usepackage{multirow}
+%\usepackage{multicol}
+
 
 
 \newcounter{moncompteur}
@@ -179,36 +181,65 @@
 %}
 
 
-\title{Calcul des séquents}
+\title{Calcul des séquents, catégorie et prouveurs}
 \author{Diane Gallois-Wong}
 %\institute{TIPE}
 \date{2014}
-\frame{\titlepage}
+\frame{
+%\titlepage
+page de titre à faire
+}
 
 
 
 \frame{
 \frametitle{Introduction}
 
-Théorie de la preuve (fin XIX\textsuperscript{e}s.) : formalisation mathématique d'un exposé d'arguments visant à convaincre un interlocuteur de la validité d'une assertion.
+%Théorie de la preuve (fin XIX\textsuperscript{e}s.) : formalisation mathématique d'un exposé d'arguments visant à convaincre un interlocuteur de la validité d'une assertion.
+%
+%\vspace{2em}
+%
+%Calcul des séquents (Gentzen, 1936) :
+%
+%\begin{adjustwidth}{2.5em}{0em}
+%
+%\vspace{.5em}
+%
+%
+%Intérêt informatique : algorithme de recherche de preuves
+%
+%\vspace{.5em}
+%
+%
+%Exemple d'approche mathématique : transfert vers la théorie des catégories
 
-\vspace{2em}
 
-Calcul des séquents (Gentzen, 1936) :
+Calcul des séquents (Gentzen, 1936)
 
-\begin{adjustwidth}{2.5em}{0em}
+\begin{itemize}
 
-\vspace{.5em}
+\item
+Intérêt pratique : algorithme de recherche de preuves
 
-
-Intérêt informatique : algorithme de recherche de preuves
-
-\vspace{.5em}
-
-
+\item
 Exemple d'approche mathématique : transfert vers la théorie des catégories
 
-\end{adjustwidth}
+\end{itemize}
+
+\tableofcontents[
+%	currentsubsection,
+%	sectionstyle=show/hide,
+	subsectionstyle=hide/hide/hide
+]
+
+
+
+
+
+%\
+%
+%\tableofcontents
+
 %Automates d'arbres introduits pour la vérification de circuits logiques.
 % 
 %Vers 1960 : Church, Trakhtenbrot, B\"uchi, Rabin, Doner, Thatcher, ...
@@ -243,8 +274,8 @@ Logique classique propositionnelle : même construction, en ajoutant la constante
 
 
 
-}\frame{
-\tableofcontents
+%}\frame{
+%\tableofcontents
 
 %}
 %\section{Mémoire : calcul des séquents et catégorie}
@@ -283,7 +314,11 @@ Logique classique propositionnelle : même construction, en ajoutant la constante
 
 \vspace{3em}
 
-Définitions sur les calculs des séquents à travers l'exemple du calcul \LK\ puis celui du calcul \LJ. Ces deux calculs ont été définis par Gentzen. \LK\ correspond à la logique classique et \LJ\ à la logique intuitionniste.
+Définitions sur les calculs des séquents à travers l'exemple du calcul \LK\ puis celui du calcul \LJ.
+
+Ces deux calculs ont été définis par Gentzen (années 1930).
+
+\LK\ correspond à la logique classique, \LJ\ à la logique intuitionniste.
 
 \vspace{3em}
 
@@ -314,11 +349,13 @@ On le note $\G \vdash \D$.
 
 \
 
-Formules de $\G$ : ``hypothèses'' \qquad Formules de $\D$ : ``conclusions''
+Formules de $\G$ : ``hypothèses''.
+\qquad 
+Formules de $\D$ : ``conclusions''.
 
 \
 
-Un séquent $\G \To \D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique classique.
+Un séquent $\G \To \D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$\\ en logique classique.
 
 
 
@@ -628,11 +665,11 @@ Correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to D$ en logique intui
 Une formule $A$ est \textbf{prouvable en logique intuitionniste} si, et seulement si, le séquent $\; \To A$ est prouvable dans \LJ.
 \end{dfprop}
 
-\
-
-\
-
-Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
+%\
+%
+%\
+%
+%Pour prouver le séquent $\; \To A\lor \lnot A$ dans \LK, on passe par un séquent $\; \To A\,, \!\lnot A$ qui n'existe pas dans \LJ.
 
 
 
@@ -757,12 +794,21 @@ Disparition des règles structurelles à droite :
 
 \vspace{1em}
 
-Construction d'une catégorie à partir d'un calcul de séquents
-correspondant à la logique linéaire intuitionniste, en s'appuyant sur une preuve constructive du théorème d'élimination de la coupure détaillée par P.-A. Melliès.
+%Construction d'une catégorie à partir d'un calcul de séquents
+%correspondant à la logique linéaire intuitionniste, en s'appuyant sur une preuve constructive du théorème d'élimination de la coupure détaillée par P.-A. Melliès.
+%
+%Ce calcul sera appelé \LLI.
+%
+%Les séquents de \LLI\ sont les mêmes que ceux de \LJ.
 
-Ce calcul sera appelé \LLI.
+Construction d'une catégorie à partir d'un calcul de séquents
+correspondant à la logique linéaire intuitionniste, qui sera appelé \LLI.
 
 Les séquents de \LLI\ sont les mêmes que ceux de \LJ.
+
+Construction basée sur une preuve constructive du théorème d'élimination de la coupure.
+
+
 
 %\vspace{1em}
 
@@ -802,9 +848,9 @@ Si on enlève la règle de coupure du calcul \LLI, on obtient un calcul des séquen
 
 Ce théorème est également vérifié pour \LK\ et \LJ.
 
-\vspace{.5em}
-
-Théorème très important en recherche automatisée de preuves.
+%\vspace{.5em}
+%
+%Théorème très important en recherche automatisée de preuves.
 
 %\begin{cadre}
 %Un calcul des séquents comportant une règle de coupure vérifie la propriété d'\textbf{élimination de la coupure} si, lorsqu'on enlève la règle de coupure, on obtient un calcul des séquents équivalent, c'est-à-dire que les séquents prouvables sont les mêmes.
@@ -880,7 +926,7 @@ pour tout $A$, il existe une \textbf{identité} $id_{A}:A\to A$ vérifiant $id_{A}
 
 \
 
-Exemple :\hspace{3em} objets : ensembles, \quad morphismes : fonctions
+Exemple :\hspace{3em} objets : ensembles, \quad morphismes : fonctions.
 
 %Représentation : graphe orienté (objets : sommets, morphismes : arêtes).
 
@@ -932,6 +978,7 @@ $p$\;:\qquad
 \flushleft
 On associe aussi une dénotation $[A]$ à chaque formule $A$.
 
+\pause
 
 \
 
@@ -1218,7 +1265,12 @@ Construction similaire d'une catégorie associée à d'autres calculs de séquents. 
 \section{Stage : Recherche de preuves certifiée en logique intuitionniste}
 \frame{
 
-\tableofcontents[currentsection]
+\tableofcontents[
+	currentsection,
+	sectionstyle=show/hide,
+	subsectionstyle=show/show/hide
+]
+
 
 \
 
@@ -1230,11 +1282,11 @@ Construction similaire d'une catégorie associée à d'autres calculs de séquents. 
 
 \
 
-Plusieurs prouveurs existants basés sur des calculs des séquents, mais emploi de structures de données complexes
+Plusieurs prouveurs existants basés sur des calculs des séquents, mais emploi de structures de données complexes.
 
 \
 
-Calcul \LSJ\ (M. Ferrari, C. Fiorentini et G. Fiorino, 2012) : propriétés intéressantes permettant d'utiliser des structures de données relativement simples, ce qui est favorable à une certification.
+Calcul \LSJ\ (M. Ferrari, C. Fiorentini et G. Fiorino, 2012) : propriétés intéressantes permettant d'utiliser des structures de données relativement simples : favorable à une certification.
 
 
 
@@ -1262,7 +1314,11 @@ Calcul \LSJ\ (M. Ferrari, C. Fiorentini et G. Fiorino, 2012) : propriétés intére
 
 Implémentation d'un prouveur de logique intuitionniste basé sur une légère variante du calcul \LSJ, à partir du pseudo-code donné dans l'article de M. Ferrari, C. Fiorentini et G. Fiorino.
 
+\vspace{.5em}
+
 Comparaison avec des prouveurs existants.
+
+\vspace{.5em}
 
 Langage utilisé : OCaml.
 %Présentation du calcul \LSJ\ puis d'une légère variante \LSJn.
@@ -1276,24 +1332,30 @@ Langage utilisé : OCaml.
 
 \emph{Multiensembles} : collections où le nombre d'éléments est pris en compte, mais non l'ordre des éléments.
 
+\
 
+\textbf{Séquent} de \LSJ\ : trois multiensembles de formules $\Th$, $\G$ et $\D$. 
 
-\begin{df}
-Un \textbf{\emph{séquent}} de \LSJ\ consiste en trois multiensembles de formules $\Th$, $\G$ et $\D$. 
-On le note $\Th\,; \G \vdash \D$. 
-\end{df}
+Notation : $\Th\,; \G \vdash \D$. 
 
-Un séquent $\emptyset\,; \G \To \D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$ en logique intuitionniste.
+%\begin{df}
+%Un \textbf{\emph{séquent}} de \LSJ\ consiste en trois multiensembles de formules $\Th$, $\G$ et $\D$. 
+%On le note $\Th\,; \G \vdash \D$. 
+%\end{df}
+
+\vspace{.8em}
+
+Un séquent $\emptyset\,; \G \To \D$ correspond à la formule $\left(\bigwedge_{G\in\G}G\right)\to\left(\bigvee_{D\in\D}D\right)$\\ en logique intuitionniste.
 
 \begin{prop}
 Une formule $A$ est prouvable en logique intuitionniste si, et seulement si, le séquent $\emptyset\,;\emptyset \To A$ est prouvable dans \LSJ.
 \end{prop}
 
-\
+\vspace{1.5em}
 
 Un séquent $\Th\,; \G \To \D$ ne correspond pas toujours à une formule.
 
-Interprétation d'un tel séquent en termes de modèles de Kripke.
+Sémantique d'un tel séquent en termes de modèles de Kripke.
 
 
 
@@ -1304,7 +1366,7 @@ Interprétation d'un tel séquent en termes de modèles de Kripke.
 
 Huit règles : $id$, $\bot L$, $\land L$, $\land R$, $\lor L$, $\lor R$, $\imp L$, $\imp R$.
 
-\vspace{.5em}
+\ %vspace{.5em}
 
 Seules les règles $\imp L$ et $\imp R$ agissent sur $\Th$.
 
@@ -1347,7 +1409,7 @@ Pas de règle de coupure, pas de règles structurelles.
 
 Séquent de \LSJn\ : deux multiensembles $\G$ et $\D$ de couples ``\emph{indice\!:\,formule}'', et un indice $n$, les indices étant des entiers naturels. 
 
-On note $\G \To_{n} \D$.
+Notation : $\G \To_{n} \D$.
 
 
 
@@ -1438,7 +1500,7 @@ Une prémisse $\s_{i}$ d'une règle
 	\RightLabel{$(\mathcal R)$}
 	\TIC{$\s$}
 	\DP
-} est \textbf{inversible} si on a : si la conclusion $\s$ est prouvable, alors $\s_{i}$ est aussi prouvable.
+} est \textbf{inversible} si on a : \\si la conclusion $\s$ est prouvable, alors $\s_{i}$ est aussi prouvable.
 
 Une règle est \textbf{inversible} si toutes ses prémisses sont inversibles.
 
@@ -1476,7 +1538,7 @@ Une prémisse $\s_{i}$ d'une règle
 	\RightLabel{$(\mathcal R)$}
 	\TIC{$\s$}
 	\DP
-} est \textbf{inversible} si on a : si la conclusion $\s$ est prouvable, alors $\s_{i}$ est aussi prouvable.
+} est \textbf{inversible} si on a : \\si la conclusion $\s$ est prouvable, alors $\s_{i}$ est aussi prouvable.
 
 Une règle est \textbf{inversible} si toutes ses prémisses sont inversibles.
 
@@ -1509,8 +1571,8 @@ Une règle
 	\RightLabel{$(\mathcal R)$}
 	\TIC{$\s$}
 	\DP
-} est \textbf{locale} si on peut retrouver $\s$ à partir de n'importe quelle prémisse $\s_{i}$ et d'une information de taille ``raisonnable''.
-
+} est \textbf{locale} si %on peut retrouver $\s$ à partir de n'importe quelle prémisse $\s_{i}$ et d'une information de taille ``raisonnable''.
+la différence d'information entre $\s$ et n'importe quelle prémisse $\s_{i}$ est de taille ``raisonnable''.
 
 \
 
@@ -1549,15 +1611,15 @@ Intérêt de \LSJn\ par rapport à \LSJ\ : toutes les règles sont locales.
 \frame{
 \frametitle{Propriété de la sous-formule et indexation}
 
-Récursivement, $A$ est une \textbf{sous-formule} de $B$ si $A=B$ ou si $B=B_{1}cB_{2}$ avec $c$ un connecteur et $A$ est une sous-formule de $B_{1}$ ou de $B_{2}$.
+Récursivement, $A$ est une \textbf{sous-formule} de $B$ si $A=B$ ou si $B=B_{1}\,c\,B_{2}$ avec $c$ un connecteur binaire et $A$ est une sous-formule de $B_{1}$ ou de $B_{2}$.
 
 \
 
-\LSJ\ donc aussi \LSJn\ vérifient la propriété de la sous-formule : toute formule apparaissant dans une preuve d'un séquent $\s$ est une sous-formule d'une formule de $\s$.
+\LSJ\ donc aussi \LSJn\ vérifient la propriété de la sous-formule : \\toute formule apparaissant dans une preuve d'un séquent $\s$ est une sous-formule d'une formule de $\s$.
 
 \
 
-Conséquence : toute formule rencontrée dans une recherche de preuve sur une formule $A$ (i.e. sur le séquent $\emptyset \To_{0} 0\!:\!A$) est une sous-formule de $A$.
+Conséquence : toute formule rencontrée dans une recherche de preuve \\sur une formule $A$ (i.e. sur le séquent $\emptyset \To_{0} 0\!:\!A$) est une sous-formule de $A$.
 
 
 
@@ -1581,6 +1643,7 @@ Représentation des formules par des entiers grâce à une phase préliminaire d'ind
 \column{.3\linewidth}
 \center
 \def\mycolor{blue}
+\def\mysize{\textstyle}
 \begin{tikzpicture}[xscale=1,yscale=1]
 % Styles (MODIFIABLES)
 %\tikzstyle{fleche}=[->,>=latex,thick]
@@ -1595,11 +1658,11 @@ Représentation des formules par des entiers grâce à une phase préliminaire d'ind
 \def\NiveauC{(-2)*\DistanceInterNiveaux}
 \def\InterFeuilles{(1)*\DistanceInterFeuilles}
 % Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$^{\textcolor{\mycolor}{4}\,}\imp\hspace{.9em}$};
-\node (Ra) at ({(0.5)*\InterFeuilles},{\NiveauB}) {$^{\textcolor{\mycolor}{2}\,}\land\hspace{.55em}$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$^{\textcolor{\mycolor}{0}\,}a\hspace{.7em}$};
-\node (Rab) at ({(1)*\InterFeuilles},{\NiveauC}) {$\hspace{.7em}\bot^{\,\textcolor{\mycolor}{1}}$};
-\node (Rb) at ({(1.7)*\InterFeuilles},{\NiveauB}) {$\hspace{.7em}b^{\;\textcolor{\mycolor}{3}}$};
+\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$^{\textcolor{\mycolor}{\mysize{4}}}\to\hspace{.6em}$};
+\node (Ra) at ({(0.5)*\InterFeuilles},{\NiveauB}) {$^{\textcolor{\mycolor}{\mysize{2}}\,}\land\hspace{.55em}$};
+\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$^{\textcolor{\mycolor}{\mysize{0}}\,}a\hspace{.7em}$};
+\node (Rab) at ({(1)*\InterFeuilles},{\NiveauC}) {$\hspace{.7em}\bot^{\,\textcolor{\mycolor}{\mysize{1}}}$};
+\node (Rb) at ({(1.7)*\InterFeuilles},{\NiveauB}) {$\hspace{.7em}b^{\;\textcolor{\mycolor}{\mysize{3}}}$};
 % Arcs (MODIFIABLES : Styles)
 \draw (R)--(Ra);
 \draw (Ra)--(Raa);
@@ -1625,13 +1688,15 @@ Prouveur testé sur les formules de la bibliothèque ILTP\footnote{\url{http://www
 
 \
 
-Quatre prouveurs de logique intuitionniste propositionnelle sont répertoriés sur ILTP.
+Quatre prouveurs de logique intuitionniste propositionnelle sont répertoriés par ILTP.
 
-Difficulté d'une formule : 0.25 * nombre de prouveurs ne terminant pas en moins de cinq minutes
+Difficulté d'une formule : \\0.25 * nombre de prouveurs ne terminant pas en moins de cinq minutes.
 
 \
 
-(tableau : comparaison de quelques temps
+(à faire :
+
+tableau : comparaison de quelques temps
 \footnote{
 Tests effectués sous MacOS avec un processeur 2.7 GHz Intel Core i7.
 } avec les difficultés données par ILTP. Notamment, SYJ209 : difficulté 1, notre prouveur termine en moins d'une milliseconde : grâce à l'inversibilité d'une prémisse de $\imp R$, linéaire en la taille de la formule initiale au lieu de factoriel)
@@ -1671,7 +1736,9 @@ Tests effectués sous MacOS avec un processeur 2.7 GHz Intel Core i7.
 
 Objectif à long terme : certification en Coq d'un prouveur de logique intuitionniste propositionnelle.
 
-Certification elle-même non abordée, mais modifications d'implémentation visant à faciliter une telle certification. Comparaison des différents prouveurs ainsi implémentés.
+Certification elle-même non abordée, mais modifications d'implémentation visant à faciliter une telle certification. 
+
+Comparaison des différents prouveurs ainsi implémentés.
 
 
 %Implémentation de différents prouveurs afin d'étudier 
@@ -1698,7 +1765,8 @@ Réalisation par D. Larchey-Wendling d'un compilateur certifié en Coq de \T\ vers
 
 
 Mettre cette image ? (avec une meilleure qualité) Décoratif, mais %risque de soulever des questions qu'on n'a pas le temps de poser
-je n'ai pas le temps d'en parler et certains pourraient trouver cela frustrant...
+je n'ai pas le temps d'en parler...
+
 \includegraphics[width=.6\linewidth]{Tmem}
 
 
@@ -1723,11 +1791,13 @@ formule principale : $A\lor B$
 \vspace{2em}
 
 
-Juste après la phase d'indexation : compilation, pour chaque numéro de formule, de fonctions de transformation du séquent dans le cas où cette formule est la formule principale. Entre 0 et 6 fonctions pour chaque numéro de formule.
+Juste après la phase d'indexation : compilation, pour chaque numéro de formule, de fonctions de transformation du séquent dans le cas où cette formule est la formule principale. 
+
+Entre 0 et 6 fonctions pour chaque numéro de formule.
 
 \
 
-Par exemple, compilation en \T\ de ces fonctions pour chaque numéro de formule, puis ajout de code en \T\ fixe : on obtient un programme en \T\ adapté à la formule donnée en entrée.
+Par exemple, compilation en \T\ de ces fonctions pour chaque numéro \\de formule, puis ajout de code en \T\ fixe : on obtient un programme en \T\ adapté à la formule donnée en entrée.
 %Pour chaque formule susceptible d'apparaître (i.e. chaque sous-formule de la formule initiale), compilation de fonctions transformant un séquent
 %Transformations à apporter au séquent ne dépendent que de la formule principale et de son indice.
 
@@ -1741,13 +1811,13 @@ Par exemple, compilation en \T\ de ces fonctions pour chaque numéro de formule, 
 \begin{itemize}
 
 \item
-``\textbf{Prouveur simple}'' : le plus simple et le plus efficace, intégralemen en OCaml. Structures de données élaborées pour représenter les multiensembles du séquent.
+``\textbf{Prouveur simple}'' : le premier implémenté et le plus efficace, intégralement en OCaml. Structures de données élaborées \\pour représenter les multiensembles du séquent.
 
 \item
-``\textbf{Prouveur simple avec listes}'' : comme le précédent, mais structures élaborées remplacées par simples listes.
+``\textbf{Prouveur simple avec listes}'' : comme le précédent, \\mais structures élaborées remplacées par simples listes.
 
 \item
-``\textbf{Prouveur \T}'' : compilation d'un programme en \T\ adapté à la formule en entrée, exécution à l'aide d'un interpréteur.
+``\textbf{Prouveur \T}'' : compilation d'un programme en \T\ adapté \\à la formule en entrée, exécution à l'aide d'un interpréteur.
 
 \item
 ``\textbf{Prouveur \T\ \M}'' : compilation du même programme en \T, compilation de \T\ vers \M, simulation de l'exécution par la machine abstraite à laquelle \M\ correspond.
@@ -1762,29 +1832,53 @@ Par exemple, compilation en \T\ de ces fonctions pour chaque numéro de formule, 
 \frame{
 \frametitle{Répartition du code ?}
 
-(Indiquer nombre de lignes de code)
+\def\myindent{\qquad}
 
-\
+\begin{tabular}{lrc}
+	Utilitaires (gestion des tests)
+		&950&22\%\\
+	\myindent Analyseur ILTP
+		&170&\\
+	Commun aux prouveurs (93\% : indexation)
+		&190&\\
+	Prouveur simple (sauf commun)
+		&1000&\\
+	\myindent Strutures de données  pour le séquent
+		&330&\\
+%	Autres prouveurs (sauf commun)
+%		&2200&\\
+	Compilation de fonctions selon la formule
+		&300&\\
+	Prouveur compilé Caml (sauf commun 
+		&400&\\
+	\hfill et compilation fonctions formule)
+		&&\\
+	Prouveurs \T\ et \T\ \M\ (sauf commun 
+		&1400&\\
+	\hfill et compilation fonctions formule)
+		&&\\
+	\myindent Code en \T\ fixe
+		&560&\\
+	\myindent Analyseur \T
+		&220&\\[1em]
+	Total
+		&4200&
+		%4240
+\end{tabular}
 
-Utilitaires (gestion des tests)
+%	Autres prouveurs (sauf commun)
+%		&2200&\\
+%	\myindent Compilation de fonctions selon la formule
+%		&300&\\
+%	\myindent Prouveur compilé Caml (sauf commun 
+%		&&\\
+%	\myindent \quad et compilation fonctions formule)
+%		&&\\
+%	\myindent Code en \T\ fixe
+%		&560&\\[1em]
 
-\quad Analyseur ILTP
 
-Indexation
 
-Prouveur simple (sauf l'indexation)
-
-\quad Strutures de données  pour le séquent
-
-Autres prouveurs (sauf l'indexation)
-
-\quad Compilation de fonctions selon la formule
-
-\quad Code trees fixe
-
-\
-
-Total
 
 
 }
@@ -1901,19 +1995,21 @@ SYJ207+1.004 \qquad taille 213 \qquad environ 500 000 appels
 \begin{itemize}
 
 \item
-Confirmation de l'intérêt du calcul \LSJ\ en recherche de preuves en logique intuitioinniste propositionnelle, en termes d'efficacité comme de perspective de certification.
+Confirmation de l'intérêt du calcul \LSJ\ en recherche de preuves \\en logique intuitioinniste propositionnelle, en termes d'efficacité \\comme de perspective de certification.
 
 \
 
 \item
-Impact fort des méthodes employées pour faciliter la certification sur l'efficacité, mais améliorations à envisager : par exemple, ajout d'effets de bords (même limités à une seule variable globale) au langage \T.
+Impact fort des méthodes employées pour faciliter la certification \\sur l'efficacité, mais améliorations à envisager : par exemple, ajout d'effets de bords (même limités à une seule variable globale) \\au langage \T.
 
 \end{itemize}
 
 
 }
 \section*{}
-\frame[allowframebreaks]{
+\frame
+%[allowframebreaks]
+{
 \frametitle{Références}
 
 \setbeamertemplate{bibliography item}{}
@@ -1921,20 +2017,25 @@ Impact fort des méthodes employées pour faciliter la certification sur l'efficac
 \nocite{panorama}
 \nocite{LSJ}
 
-\nocite{troelstra}
-\nocite{synsem}
-\nocite{theseDLW}
-\nocite{STRIP}
-\nocite{LJT}
-\nocite{ILTP}
-\nocite{LJloop}
-
+%\nocite{troelstra}
+%\nocite{synsem}
+%\nocite{theseDLW}
+%\nocite{STRIP}
+%\nocite{LJT}
+%\nocite{ILTP}
+%\nocite{LJloop}
 
 
 
 
 \bibliographystyle{plain}
 \bibliography{memoire_stage}
+
+\
+
+Ce sont les références principales du stage et du mémoire respectivement.
+
+Autres références : cf. document écrit.
 
 %}
 %\frame{
@@ -1943,728 +2044,10 @@ Impact fort des méthodes employées pour faciliter la certification sur l'efficac
 }
 \end{document}
 
-%%%%%%%%%%%%%%%
-\section{Définitions}
-\subsection{Alphabet gradué et termes}
-\frame{
 
-\begin{df}
-Un \textbf{alphabet gradué} consiste en $\F$ un ensemble fini, et $Arit\acute{e}$ une application de $\F$ dans $\N$.
-L'\textbf{arité} d'un élément $f\in\F$ est l'entier $Arit\acute{e}(f)$.
-\end{df}
-$\F_{p}$ : l'ensemble des éléments de $\F$ d'arité $p$
 
-Un élément d'arité $0$, $1$, ... ,$p$ est appelé respectivement \textit{constante}, \textit{terme unaire}, ... , \textit{terme $p$-aire}.
+29 : tableau mes temps / difficulté ILTP à faire
 
-\
+31 : image mem ?
 
-\begin{df}
-Soit $\F$ un alphabet gradué. On suppose que $\F$ contient au moins une constante.
-L'ensemble $\TF$ des \textbf{termes} sur $\F$ est le plus petit ensemble contenant $\F_{0}$ et vérifiant :
-
-pour tous $p\in\N^{*}$, $\: f\in\F_{p}$, $\: t_{1},...,t_{p}\in\TF$, $\; f(t_{1},...,t_{p})\in\TF$.
-\end{df}
-
-
-
-
-
-
-
-
-}\subsection{Automates d'arbres}
-\frame{
-
-\begin{df}
-Un \textbf{automate d'arbres} finis (non déterministe) sur l'alphabet gradué $\F$ est un uplet $\A = (Q,\F,Q_{f},\Delta)$ avec $Q$ un ensemble d'états, $Q_{f}\subset Q$ un ensemble d'états finals, et $\Delta$ une fonction de transition i.e. un ensemble de règles de la forme $f(q_{1},...,q_{p}) \rightarrow q$ avec $q, q_{i} \in Q$ et $f \in \F_{p}$.
-\end{df}
-
-$\F'=\F \cup Q$ (on suppose $\F$ et $Q$ disjoints) avec $\forall q \in Q, Arit\acute{e}(q)=0$
-
-\
-
-Pour $t,t'\in\TFp$ : $\qquad t \rightarrow_{\A} t' \qquad$ si $t'$ s'obtient en rempla\c cant un sous-arbre $f(q_{1},...,q_{p})$ de $t$ par $q$ tel que la règle $f(q_{1},...,q_{p}) \rightarrow q$ est dans $\Delta$.
-
-\
-
-$\rightarrow_{\A}^{*}$ : clôture réflexive et transitive de $\rightarrow_{\A}$
-
-\begin{cadre}
-$t \in \TF$ \textbf{accepté par} $\A$ s'il existe $q\in Q_{f}$ tel que $t \rightarrow_{\A}^{*} q$
-\end{cadre}
-
-\
-
-pas d'état initial : on commence aux constantes ($a \rightarrow q$ avec $a \in \F_{0}$)
-
-
-
-
-}\frame{
-\frametitle{Exemple}
-
-$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
-
-\
-
-$\A = (Q,\F,Q_{f},\Delta) \qquad Q=\{q_{0},q_{1}\} \qquad Q_{f}=\{q_{1}\}$
-
-$\Delta = \{ \quad 0 \rightarrow q_{0} \:,\;  1 \rightarrow q_{1} \:,\;  non(q_{0}) \rightarrow q_{1} \:,\; non(q_{1}) \rightarrow q_{0} \:,$
-
-$\quad 
-et(q_{0},q_{0}) \rightarrow q_{0} \:,\;
-et(q_{0},q_{1}) \rightarrow q_{0} \:,\;
-et(q_{1},q_{0}) \rightarrow q_{0} \:,\;$
-
-$\quad
-et(q_{1},q_{1}) \rightarrow q_{1} \:,\;
-ou(q_{0},q_{0}) \rightarrow q_{0} \:,\;
-ou(q_{0},q_{1}) \rightarrow q_{1} \:,\;$
-
-$\quad 
-ou(q_{1},q_{0}) \rightarrow q_{1} \:,\;
-ou(q_{1},q_{1}) \rightarrow q_{1}
-\quad \}$
-
-\
-
-\def\DistanceInterNiveaux{1}
-\def\DistanceInterFeuilles{1}
-\def\NiveauA{(-0)*\DistanceInterNiveaux}
-\def\NiveauB{(-1)*\DistanceInterNiveaux}
-\def\NiveauC{(-2)*\DistanceInterNiveaux}
-\def\InterFeuilles{(1)*\DistanceInterFeuilles}
-\def\arbreA{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$0$};
-\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
-\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$1$};
-\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$0$};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (R)--(Rb);
-\draw (Rb)--(Rba);
-\draw (Rb)--(Rbb);
-\end{tikzpicture}
-}
-\def\arbreB{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$q_{0}$};
-\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
-\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$q_{1}$};
-\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$q_{0}$};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (R)--(Rb);
-\draw (Rb)--(Rba);
-\draw (Rb)--(Rbb);
-\end{tikzpicture}
-}
-\def\arbreC{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$q_{1}$};
-\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$q_{1}$};
-\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {};
-\draw (R)--(Ra);
-\draw (R)--(Rb);
-\end{tikzpicture}
-}
-\def\arbreD{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$q_{1}$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {};
-\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {};
-\end{tikzpicture}
-}
-\begin{tabular}{cccc}
-   \arbreA & \arbreB & \arbreC & \arbreD \\
-\end{tabular}
-
-
-
-}\frame{
-
-\begin{df}
-Le \textbf{langage d'arbres reconnu} par l'automate d'arbres $\A$, noté $L(\A)$, est l'ensemble des termes de $\TF$ acceptés par $\A$.
-\end{df}
-
-\
-
-On dit ``$\A$ reconnaît $L$'' pour $L=L(\A)$ (et pas seulement ``tout terme de $L$ est reconnu par $\A$'').
-
-\
-
-\begin{df}
-Un langage d'arbres $L$ est \textbf{reconnaissable} s'il existe un automate d'arbres qui reconnaît $L$.
-\end{df}
-
-
-
-
-}\subsection{Lien avec les automates de mots}
-\frame{
-
-\frametitle{Lien avec les automates habituels (de mots)}
-
-Le mot $abbab$ sur l'aphabet $\Sigma = \{ a,b \}$ peut être vu comme le terme $a(b(b(a(b(\#)))))$ sur $\F =  \{ a,b,\# \}$ avec $a$ et $b$ unaire et $\#$ constante, ou plutôt $b(a(b(b(a(\#)))))$ (à l'envers) pour ce qui suit.
-
-\
-
-À un automate de mots $(Q,\Sigma,Q_{i},Q_{f},\Delta_{0})$ on peut associer l'automate d'arbres $(Q,\F,Q_{f},\Delta)$ suivant :
-
-$\F = \Sigma \cup  \{ \# \}$ où les éléments de $\Sigma$ sont d'arité 1 et $\#$ d'arité $0$ ;
-
-$\Delta$ obtenu à partir de $\Delta_{0}$ en transformant $(q,a) \rightarrow q'$ en $a(q) \rightarrow q'$, et en ajoutant $\# \rightarrow q$ pour chaque $q \in Q_{i}$ .
-
-
-
-%}\frame{
-%\frametitle{Et les $\epsi$-transitions ?}
-%
-%\begin{theo}
-%Soit un automate d'arbres $\A = (Q,\F,Q_{f},\Delta)$ avec des $\epsi$-transitions ($\Delta$ contient des règles de la forme $q \rightarrow^{\epsi} q',\quad q,q' \in Q$), il existe un automate d'arbres $\A'$ sans $\epsi$-transition tel que $L(\A)=L(\A')$.
-%\end{theo}
-%
-%\begin{dem}
-%$\A' = (Q,\F,Q_{f},\Delta')$, où $\Delta'$ contient les éléments de $\Delta$ qui ne sont pas des $\epsi$-transitions, ainsi que tous les $f(q_{1},...,q_{p}) \rightarrow q'$ tels qu'il existe $q$ tel que $f(q_{1},...,q_{p}) \rightarrow q \in \Delta$ et $q \rightarrow^{\epsi} q' \in \Delta$
-%\end{dem}
-
-
-
-%%%
-
-
-
-}\section{Quelques propriétés}
-\subsection{Automates déterministes}
-\frame{
-\frametitle{Automates déterministes}
-
-Automate d'arbres déterministe : définition habituelle (maximum une transition dans $\Delta$ pour chaque membre gauche).
-
-\begin{theo}
-Soit $L$ un langage d'arbres reconnaissable, alors il existe $\A$ automate d'arbres déterministe tel que $L=L(\A)$.
-\end{theo}
-
-Preuve similaire à celle pour les automates de mots
-
-\
-
-$\A = (Q,\F,Q_{f},\Delta)$ reconnaissant $L$, on construit $\A' = (Q',\F,Q_{f}',\Delta')$ où :
-
-$Q'=\mathcal{P}(Q)$
-
-$Q_{f}'=\{ s \in Q', s \cap Q_{f} \neq \emptyset \}$
-
-$\Delta' = \{ \; f(s_{1},...,s_{p}) \rightarrow s \;|$
-
-$\qquad\qquad\quad s = \{ \; q \; | \quad \exists q_{1} \in s_{1}, \;...\; ,\: \exists q_{p} \in s_{p}, \; f(q_{1},...,q_{p}) \rightarrow q \in \Delta \} \quad \}$
-
-\
-
-preuve que $\A'$ convient : induction
-
-
-
-%
-
-
-}\subsection{Propriétés de clôture}
-\frame{
-\frametitle{Propriétés de clôture}
-
-\begin{theo}
-La classe des langages reconnaissables par automate d'arbres est close par union, complémentaire, intersection.
-\end{theo}
-
-Preuves similaires à celle pour les automates de mots
-
-\
-
-\begin{itemize}
-    \item union : $\A_{1} = (Q_{1},\F,Q_{f1},\Delta_{1}), \A_{2} = (Q_{2},\F,Q_{f2},\Delta_{2})$
-    
-    $\A = (Q_{1}\sqcup Q_{2},\F,Q_{f1}\sqcup Q_{f2},\Delta_{1}\sqcup\Delta_{2})$
-    
-    \
-    
-    \item complémentaire : $\A = (Q,\F,Q_{f},\Delta)$ \underline{déterministe complet}
-    
-    $Q'_{f}=Q\backslash Q_{f}$
-        
-    \
-    
-    \item intersection : union + complémentaire
-\end{itemize}
-
-
-%
-
-
-}\subsection{Lemme de pompage}
-\frame{
-\frametitle{Lemme de pompage}
-
-\begin{df}
-Soit $\F$ un alphabet gradué. Soit $x$ un symbole de variable ($x \notin \F$). On appellera \textbf{contexte} un élément de $T(\F \cup \{ x \})$ (avec $x$ d'arité $0$) dans lequel $x$ apparaît exactement une fois.
-
-On appelle \textbf{contexte trivial} le contexte $x$.
-\end{df}
-
-$C$ un contexte, $t \in T(\F \cup \{ x \})$, on note $C[t]=C\{x\leftarrow t\} \in T(\F \cup \{ x \})$.
-
-$t \in \TF \Rightarrow C[t] \in \TF\;\,$ ; $\;t \text{ contexte} \Rightarrow C[t] \text{ contexte}$.
-
-\
-
-$C$ un contexte, on pose : $C^{0}=x$ %$C^{1}=C$, 
-et pour $n\in\N$, $C^{n+1}=C^{n}[C]$ %(en particulier $C^{1}=C$)
-
-
-
-}\frame{
-\frametitle{Lemme de pompage}
-
-\begin{theo}
-Soit $L$ un langage d'arbres reconnaissable sur $\F$, alors il existe $k \in \N$ tel que pour tout terme $t\in L$ de hauteur $>k$, il existe des contextes $C$ et $D$ avec $D$ non trivial et $s \in \TF$ tels que 
-$$t=C[D[s]] \quad\text{et}\quad \forall n \in\N,\: C[D^{n}[s]] \in L$$
-\end{theo}
-
-
-%
-
-
-
-
-}\subsection{Complexité}
-\frame{
-\frametitle{Complexité}
-
-$\A = (Q,\F,Q_{f},\Delta)$
-
-taille de la transition $f(q_{1},...,q_{p}) \rightarrow q$   :   $Arit\acute{e}(f)+2$
-
-taille de $\A$   :   $||\A|| = \card Q + \sum_{f(q_{1},...,q_{p}) \rightarrow q \in \Delta}(Arit\acute{e}(f)+2)$
-
-\
-
-taille $||t||$ d'un terme $t$ : ``nombre de noeuds''
-
-\
-
-savoir si un terme $t$ est reconnu par un automate $\A$ :
-
-\begin{tabular}{clc}
-\quad - & $\A$ déterministe : &\quad$O(||t||+||\A||)$ \\
-\quad - & $\A$ non déterministe : &\quad$O(||t||\times||\A||)$
-\end{tabular}
-
-
-
-
-%%%
-
-
-
-}\section{Automates d'arbres ``top-down''}
-\subsection{Définition}
-\frame{
-
-
-\begin{df}
-Un \textbf{automate d'arbres ``top-down''} (non déterministe) sur un alphabet gradué $\F$ est un uplet $\A = (Q,\F,Q_{i},\Delta)$ avec $Q$ un ensemble d'états, $Q_{i}\subset Q$ un ensemble d'états initiaux, et $\Delta$ une fonction de transition i.e. un ensemble de règles de la forme $q(f(x_{1},...,x_{p})) \rightarrow f(q_{1}(x_{1}),...,q_{p}(x_{p}))$ avec $q, q_{i} \in Q$ et $f \in \F_{p}$ (les $x_{i}$ sont des symboles de variables).% ; de plus on impose que pour $a \in \F_{0}$, les transitions faisant intervenir $a$ sont de type $q(a) \rightarrow a$.
-\end{df}
-
-$\F'=\F \cup Q$ (on suppose $\F$ et $Q$ disjoints) avec $\forall q \in Q, Arit\acute{e}(q)=1$
-
-\
-
-Pour $t,t'\in\TFp$ : $\qquad t \rightarrow_{\A} t' \qquad$ si $t'$ s'obtient en rempla\c cant un sous-arbre $q(f(t_{1},...,t_{p}))$ de $t$ par $f(q_{1}(t_{1}),...,q_{p}(t_{p}))$ tel que la règle $q(f(x_{1},...,x_{p})) \rightarrow f(q_{1}(x_{1}),...,q_{p}(x_{p}))$ est dans $\Delta$.
-
-\
-
-$\rightarrow_{\A}^{*}$ : clôture réflexive et transitive de $\rightarrow_{\A}$
-
-\begin{cadre}
-$t \in \TF$ \textbf{accepté par $\A$} s'il existe $q\in Q_{i}$ tel que $q(t) \rightarrow_{\A}^{*} t$
-\end{cadre}
-
-pour $a \in \F_{0}$, transitions de type $q(a) \rightarrow a$
-
-
-
-}\frame{
-\frametitle{Exemple}
-
-$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
-
-\
-
-$\A = (Q,\F,Q_{i},\Delta) \qquad Q=\{q_{1},q_{2}\} \qquad Q_{i}=\{q_{1}\}$
-
-$\Delta = \{ \; q_{0}(0) \rightarrow 0 \:,\;  q_{1}(1) \rightarrow 1 \:,\;  q_{0}(non(x)) \rightarrow q_{1}(x) \:,\;
-q_{1}(non(x)) \rightarrow q_{0}(x),$
-
-$\quad  q_{0}(and(x,y)) \rightarrow et(q_{0}(x),q_{0}(y)) \:,$
-
-$\quad q_{0}(and(x,y)) \rightarrow et(q_{0}(x),q_{1}(y)) \:,$
-
-$\quad  q_{0}(and(x,y)) \rightarrow et(q_{1}(x),q_{0}(y)) \:,$
-
-$\quad  q_{1}(and(x,y)) \rightarrow et(q_{1}(x),q_{1}(y)) \:,$
-
-$\quad  q_{0}(or(x,y)) \rightarrow ou(q_{0}(x),q_{0}(y)) \:,$
-
-$\quad q_{1}(or(x,y)) \rightarrow ou(q_{0}(x),q_{1}(y)) \:,$
-
-$\quad  q_{1}(or(x,y)) \rightarrow ou(q_{1}(x),q_{0}(y)) \:,$
-
-$\quad  q_{1}(or(x,y)) \rightarrow ou(q_{1}(x),q_{1}(y)) \quad \}$
-
-
-
-}\frame{
-\frametitle{Exemple}
-
-$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
-
-\
-
-$\A = (Q,\F,Q_{i},\Delta) \qquad Q=\{q_{0},q_{1}\} \qquad Q_{i}=\{q_{1}\}$
-
-$\Delta = \{ \quad q_{1}(et(x,y)) \rightarrow ou(q_{1}(x),q_{1}(y))\:,\; q_{1}(non(x)) \rightarrow q_{0}(x)\:,$
-
-$\quad q_{1}(ou(x,y)) \rightarrow ou(q_{1}(x),q_{0}(y)) \:,\; q_{0}(0) \rightarrow 0 \:,\;  q_{1}(1) \rightarrow 1 \:,\; \text{etc.} \quad \}$
-
-\
-
-\def\DistanceInterNiveaux{1}
-\def\DistanceInterFeuilles{1}
-\def\NiveauA{(-0)*\DistanceInterNiveaux}
-\def\NiveauB{(-1)*\DistanceInterNiveaux}
-\def\NiveauC{(-2)*\DistanceInterNiveaux}
-\def\NiveauD{(-3)*\DistanceInterNiveaux}
-\def\InterFeuilles{(1)*\DistanceInterFeuilles}
-\def\arbreA{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$q_1$};
-\node (Ra) at ({(1)*\InterFeuilles},{\NiveauB}) {$et$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$non$};
-\node (Raaa) at ({(0)*\InterFeuilles},{\NiveauD}) {$0$};
-\node (Rab) at ({(1.5)*\InterFeuilles},{\NiveauC}) {$ou$};
-\node (Raba) at ({(1)*\InterFeuilles},{\NiveauD}) {$1$};
-\node (Rbab) at ({(2)*\InterFeuilles},{\NiveauD}) {$0$};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (Raa)--(Raaa);
-\draw (Ra)--(Rab);
-\draw (Rab)--(Raba);
-\draw (Rab)--(Rbab);
-\end{tikzpicture}
-}
-\def\arbreB{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$q_1$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$non$};
-\node (Raaa) at ({(0)*\InterFeuilles},{\NiveauD}) {$0$};
-\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$q_1$};
-\node (Rba) at ({(1.5)*\InterFeuilles},{\NiveauC}) {$ou$};
-\node (Rbaa) at ({(1)*\InterFeuilles},{\NiveauD}) {$1$};
-\node (Rbab) at ({(2)*\InterFeuilles},{\NiveauD}) {$0$};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (Raa)--(Raaa);
-\draw (R)--(Rb);
-\draw (Rb)--(Rba);
-\draw (Rba)--(Rbaa);
-\draw (Rba)--(Rbab);
-\end{tikzpicture}
-}
-\def\arbreC{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$q_0$};
-\node (Raaa) at ({(0)*\InterFeuilles},{\NiveauD}) {$0$};
-\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
-\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$q_1$};
-\node (Rbaa) at ({(1)*\InterFeuilles},{\NiveauD}) {$1$};
-\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$q_0$};
-\node (Rbba) at ({(2)*\InterFeuilles},{\NiveauD}) {$0$};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (Raa)--(Raaa);
-\draw (R)--(Rb);
-\draw (Rb)--(Rba);
-\draw (Rba)--(Rbaa);
-\draw (Rb)--(Rbb);
-\draw (Rbb)--(Rbba);
-\end{tikzpicture}
-}
-\def\arbreD{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$0$};
-\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
-\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$1$};
-\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$0$};
-\node () at ({(2)*\InterFeuilles},{\NiveauD}) {};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (R)--(Rb);
-\draw (Rb)--(Rba);
-\draw (Rb)--(Rbb);
-\end{tikzpicture}
-}
-\begin{tabular}{cccc}
-   \arbreA & \arbreB & \arbreC & \arbreD \\
-\end{tabular}
-
-\
-
-$\exists q\in Q_{i}, q(t) \rightarrow_{\A}^{*} t$
-
-
-
-
-}\subsection{Équivalence}
-\frame{
-
-
-
-\begin{theo}
-Les automates d'arbres ``down-top'' et ``top-down'' ont le même pouvoir expressif, i.e. tout langage reconnaissable par un automate d'un type est reconnaissable par un automate de l'autre type.
-\end{theo}
-
-
-
-
-
-}\frame{
-
-\def\DistanceInterNiveaux{1}
-\def\DistanceInterFeuilles{1}
-\def\NiveauA{(-0)*\DistanceInterNiveaux}
-\def\NiveauB{(-1)*\DistanceInterNiveaux}
-\def\NiveauC{(-2)*\DistanceInterNiveaux}
-\def\InterFeuilles{(1)*\DistanceInterFeuilles}
-\def\arbreA{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuilles},{\NiveauA}) {$et$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$non$};
-\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$0$};
-\node (Rb) at ({(1.5)*\InterFeuilles},{\NiveauB}) {$ou$};
-\node (Rba) at ({(1)*\InterFeuilles},{\NiveauC}) {$1$};
-\node (Rbb) at ({(2)*\InterFeuilles},{\NiveauC}) {$0$};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (R)--(Rb);
-\draw (Rb)--(Rba);
-\draw (Rb)--(Rbb);
-\end{tikzpicture}
-}
-\def\InterFeuillesB{(2)*\DistanceInterFeuilles}
-\def\arbreB{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(1)*\InterFeuillesB},{\NiveauA}) {\textcolor{orange}{$\epsi$}   $et$   \textcolor{blue}{$q_{1}$}};
-\node (Ra) at ({(0)*\InterFeuillesB},{\NiveauB}) {\textcolor{orange}{$0$}   $non$   \textcolor{blue}{$q_{1}$}};
-\node (Raa) at ({(0)*\InterFeuillesB},{\NiveauC}) {\textcolor{orange}{$00$}   $0$   \textcolor{blue}{$q_{0}$}};
-\node (Rb) at ({(1.5)*\InterFeuillesB},{\NiveauB}) {\textcolor{orange}{$1$}   $ou$   \textcolor{blue}{$q_{1}$}};
-\node (Rba) at ({(1)*\InterFeuillesB},{\NiveauC}) {\textcolor{orange}{$10$}   $1$   \textcolor{blue}{$q_{1}$}};
-\node (Rbb) at ({(2)*\InterFeuillesB},{\NiveauC}) {\textcolor{orange}{$11$}   $0$   \textcolor{blue}{$q_{0}$}};
-\draw (R)--(Ra);
-\draw (Ra)--(Raa);
-\draw (R)--(Rb);
-\draw (Rb)--(Rba);
-\draw (Rb)--(Rbb);
-\end{tikzpicture}
-}
-
-
-
-$\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \}$
-
-\
-
-$\A_{d-t} = (Q,\F,Q_{f},\Delta_{d-t}) \qquad \A_{t-d} = (Q,\F,Q_{i},\Delta_{t-d})$
-
-$Q=\{q_{0},q_{1}\} \qquad Q_{f}=Q_{i}=\{q_{1}\}$
-
-%$\Delta_{d-t} = \{ \; 0 \rightarrow q_{0} \:,\;  1 \rightarrow q_{1} \:,\;  not(q_{0}) \rightarrow q_{1} \:,\; and(q_{0},q_{0}) \rightarrow q_{0} \:,\; \text{etc.} \; \}$
-
-%$\A_{t-d} = (Q,\F,Q_{i},\Delta_{t-d}) \qquad Q=\{q_{1},q_{2}\} \qquad Q_{i}=\{q_{1}\}$
-
-%$\Delta_{t-d} = \{ \; q_{0}(0) \rightarrow 0 \:,\;  q_{1}(1) \rightarrow 1 \:,\;  q_{0}(not(x)) \rightarrow q_{1}(x) \:,\; $
-%q_{1}(not(x)) \rightarrow q_{0}(x)$
-
-%$\quad  q_{0}(and(x,y)) \rightarrow and(q_{0}(x),q_{0}(y)) 
-%\:,$
-%
-%$\quad q_{0}(and(x,y)) \rightarrow and(q_{0}(x),q_{1}(y)) \:,$
-%
-%$\quad  q_{0}(and(x,y)) \rightarrow and(q_{1}(x),q_{0}(y)) 
-%\:,\; \text{etc.} \; \}$
-
-\
-
-\begin{tabular}{cc}
-   \arbreA & \arbreB \\
-\end{tabular}
-
-\
-
-\textbf{arbre} : une fonction $tree : \N^{*} \rightarrow \F$
-
-reconnaissable s'il existe $run : Pos(t) \rightarrow Q$ 
-
-si $tree(pos)=f(t_{1},...,t_{p})$ \quad:\quad $q=run(pos),q_{i}=run(pos.i)$
-
-\quad$f(q_{1},...,q_{p}) \rightarrow q \in \Delta_{d-t}$
-
-\quad$q(f(x_{1},...,x_{p})) \rightarrow f(q_{1}(x_{1}),...,q_{p}(x_{p})) \in \Delta_{t-d}$
-
-
-
-
-
-
-}\subsection{Non-équivalence : les automates déterministes}
-\frame{
-
-\def\DistanceInterNiveaux{1}
-\def\DistanceInterFeuilles{1}
-\def\NiveauA{(-0)*\DistanceInterNiveaux}
-\def\NiveauB{(-1)*\DistanceInterNiveaux}
-\def\InterFeuilles{(1)*\DistanceInterFeuilles}
-\def\arbreA{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$ou$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$0$};
-\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$1$};
-\draw (R)--(Ra);
-\draw (R)--(Rb);
-\end{tikzpicture}
-}
-\def\arbreB{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$ou$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$1$};
-\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$0$};
-\draw (R)--(Ra);
-\draw (R)--(Rb);
-\end{tikzpicture}
-}
-\def\arbreC{
-\begin{tikzpicture}[xscale=1,yscale=1]
-\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$ou$};
-\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$0$};
-\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$0$};
-\draw (R)--(Ra);
-\draw (R)--(Rb);
-\end{tikzpicture}
-}
-
-\begin{theo}
-Les automates ``top-down'' déterministes sont strictement moins expressifs que les automates ``top-down'' non déterministes (qui sont équivalents aux automates ``down-top'' non déterministes comme déterministes) ; i.e. il existe des langages reconnaissables par automate ``top-down'' non déterministe mais pas par automate ``down-top'' déterministe.
-\end{theo}
-
-\
-
-Par exemple $\F = \{ 1(0), 0(0), non(1), et(2), ou(2) \} \; \longrightarrow \; L$ habituel
-
-par l'absurde : $\A = (Q,\F,q_{i},\Delta)$ déterministe reconnaissant $L$
-
-\
-
-$q_{i}(ou(x,y)) \rightarrow ou(q(x),q'(y)) \in \Delta$
-
-\
-
-\begin{tabular}{ccc}
-   \arbreA & \arbreB & \qquad\qquad\qquad\arbreC \\ 
-   $q(0)\rightarrow 0 \in \Delta$ & $q'(0)\rightarrow 0 \in \Delta$ &
-\end{tabular}
-
-\
-
-
-
-
-
-%}\frame{
-%
-%\begin{center}
-%\begin{tikzpicture}[xscale=1,yscale=1]
-%% Styles (MODIFIABLES)
-%\tikzstyle{fleche}=[->,>=latex,thick]
-%\tikzstyle{noeud}=[fill=yellow,circle,draw]
-%\tikzstyle{feuille}=[fill=yellow,circle,draw]
-%% Dimensions (MODIFIABLES)
-%\def\DistanceInterNiveaux{1}
-%\def\DistanceInterFeuilles{1}
-%% Dimensions calculées (NON MODIFIABLES)
-%\def\NiveauA{(-0)*\DistanceInterNiveaux}
-%\def\NiveauB{(-1)*\DistanceInterNiveaux}
-%\def\NiveauC{(-2)*\DistanceInterNiveaux}
-%\def\InterFeuilles{(1)*\DistanceInterFeuilles}
-%% Noeuds (MODIFIABLES : Styles et Coefficients d'InterFeuilles)
-%\node (R) at ({(0.5)*\InterFeuilles},{\NiveauA}) {$f$};
-%\node (Ra) at ({(0)*\InterFeuilles},{\NiveauB}) {$g$};
-%\node (Raa) at ({(0)*\InterFeuilles},{\NiveauC}) {$a$};
-%\node (Rb) at ({(1)*\InterFeuilles},{\NiveauB}) {$a$};
-%% Arcs (MODIFIABLES : Styles)
-%\draw (R)--(Ra);
-%\draw (Ra)--(Raa);
-%\draw (R)--(Rb);
-%\end{tikzpicture}
-%\end{center}
-%%:-+-+-+-+- Fin
-
-
-
-
-
-
-}\section*{Conclusion}
-\frame{
-\frametitle{Conclusion}
-
-Beaucoup d'autres propriétés des automates qu'on connaît (par exemple Myhill-Nerode).
-
-Des spécificités comme l'interaction avec les morphismes d'arbres.
-
-Grammaires d'arbres...
-
-
-
-\
-
-Lien important avec la logique
-
-\
-
-\
-
-\
-
-\
-
-\
-
-Bibliographie :
-
-H. Comon, Florent Jacquemard, M. Dauchet, R. Gilleron, D. Lugiez, C. L\"oding, S. Tison, M. Tommasi,
-
-\quad\textit{Tree Automata Techniques and Applications}, chapitre 1
-
-
-
-
-}\end{document}
+34 : nombre de lignes
